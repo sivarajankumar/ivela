@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : repository.xml
+    Created on : June 11, 2008, 4:27 PM
+    Author     : marcus
+    Description:
+        Purpose of the document follows.
+-->
+<repository  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+   xmlns='http://www.ivela.com/schema/repository'
+   xsi:schemaLocation='http://www.ivela.com/schema/repository repository.xsd'>
+    <id>1</id>
+    <next_value>3</next_value>
+    <created_at>today</created_at>
+    <directory>
+        <id>1</id>
+        <name>diretorio 1</name>
+        <created_by>marcus</created_by>
+        <created_at>today</created_at>
+        <file>
+            <id>1</id>
+            <name>arquivo1</name>
+            <title>arquivo 1</title>
+            <mimetype>text/plain</mimetype>
+        </file>
+    </directory>
+    <directory>
+        <id>2</id>
+        <name>diretorio 2</name>
+        <created_by>marcus</created_by>
+        <created_at>today</created_at>
+        <file>
+            <id>2</id>
+            <name>arquivo1</name>
+            <title>arquivo 1</title>
+            <mimetype>text/plain</mimetype>
+        </file>
+    </directory>
+</repository>
