@@ -333,7 +333,6 @@ public class MessageAction extends GenericAction {
         html += "</ul>";        
         setInputStream(new ByteArrayInputStream(html.getBytes()));
         return "text";
-
     }
 
     
@@ -347,6 +346,11 @@ public class MessageAction extends GenericAction {
         // verifies if the title is empty
         if (!StringUtils.hasText(message.getTitle())) {
             addActionError(getText("message.input.validation.title"));
+        }
+
+        // verifies if the description is empty
+        if (!StringUtils.hasText(message.getDescription())) {
+            addActionError(getText("message.input.validation.description"));
         }
 
         // verifies if the recipient is empty

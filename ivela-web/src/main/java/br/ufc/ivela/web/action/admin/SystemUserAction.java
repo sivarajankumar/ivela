@@ -57,6 +57,11 @@ public class SystemUserAction extends GenericAction {
     private Long[] userIds;
     private InputStream inputStream;   
     
+    private String usernameAdmin;
+    private String usernameTutor;
+    private String usernameCoordinator;
+    private String username;
+
     public String show() {
      
         listAdmin = systemUserRemote.getByAuthentication(Constants.ROLE_ADMIN);
@@ -88,7 +93,6 @@ public class SystemUserAction extends GenericAction {
             SystemUser su = systemUserRemote.get(new Long(ids[i]));
             su.setEnabled(false);
             resul = resul && systemUserRemote.update(su);
-            
         }
         XStream xStream = new XStream(new JettisonMappedXmlDriver());
         xStream.alias("result", boolean.class);
@@ -115,10 +119,6 @@ public class SystemUserAction extends GenericAction {
     }
     
     public String getReport(){
-        
-       // System.out.println("st: " + studentId);
-       // System.out.println("cr: " + courseId);
-       // System.out.println("gr: " + gradeId);
                 
         XStream xStream = new XStream(new JettisonMappedXmlDriver());
                 
@@ -237,16 +237,12 @@ public class SystemUserAction extends GenericAction {
         Map<Double, Integer> map = new HashMap<Double, Integer>();
         
         for(int i=0;i<userIds.length;i++){
-           
             double pTemp = workers[i].res;
-            //System.out.println("--"+pTemp);
             if(map.containsKey(pTemp)){
                 map.put(pTemp, map.get(pTemp) + 1);
-            }
-            else{
+            }else{
                 map.put(pTemp, 1);
             }
-            
         }
         
         xStream.alias("percent", double.class);
@@ -294,6 +290,64 @@ public class SystemUserAction extends GenericAction {
         return "json";
     }
 
+    public String searchUsersProfessor() {
+        logger.log("nam:"+username);
+        List<SystemUser> systemUserList = systemUserRemote.getByUsernameByAuthentication(username, Constants.ROLE_PROFESSOR);
+        logger.log("fsdfds:"+systemUserList.size());
+        String html = "";
+        html += "<ul>";
+        if (!systemUserList.isEmpty()) {
+            for (SystemUser su : systemUserList) {
+                html += "<li id=\"" + su.getId() + "\">" + su.getUsername() + "</li>";
+            }
+        }
+        html += "</ul>";        
+        setInputStream(new ByteArrayInputStream(html.getBytes()));
+        return "text";
+    }
+    
+    public String searchUsersTutor() {
+        List<SystemUser> systemUserList = systemUserRemote.getByUsernameByAuthentication(username,Constants.ROLE_TUTOR);
+        String html = "";
+        html += "<ul>";
+        if (!systemUserList.isEmpty()) {
+            for (SystemUser su : systemUserList) {
+                html += "<li id=\"" + su.getId() + "\">" + su.getUsername() + "</li>";
+            }
+        }
+        html += "</ul>";        
+        setInputStream(new ByteArrayInputStream(html.getBytes()));
+        return "text";
+    }
+    
+    public String searchUsersStudent() {
+        List<SystemUser> systemUserList = systemUserRemote.getByUsernameByAuthentication(username,Constants.ROLE_USER);
+        String html = "";
+        html += "<ul>";
+        if (!systemUserList.isEmpty()) {
+            for (SystemUser su : systemUserList) {
+                html += "<li id=\"" + su.getId() + "\">" + su.getUsername() + "</li>";
+            }
+        }
+        html += "</ul>";        
+        setInputStream(new ByteArrayInputStream(html.getBytes()));
+        return "text";
+    }
+    
+    public String searchUsers() {
+        List<SystemUser> systemUserList = systemUserRemote.getUsersByUsername(username);
+        String html = "";
+        html += "<ul>";
+        if (!systemUserList.isEmpty()) {
+            for (SystemUser su : systemUserList) {
+                html += "<li id=\"" + su.getId() + "\">" + su.getUsername() + "</li>";
+            }
+        }
+        html += "</ul>";        
+        setInputStream(new ByteArrayInputStream(html.getBytes()));
+        return "text";
+    }
+    
     public List<SystemUser> getListAdmin() {
         return listAdmin;
     }
@@ -447,7 +501,40 @@ public class SystemUserAction extends GenericAction {
         this.userIds = userIds;
     }
  
+    public String getUsernameAdmin() {
+        return usernameAdmin;
+    }
+
+    public void setUsernameAdmin(String usernameAdmin) {
+        this.usernameAdmin = usernameAdmin;
+    }
+
+    public String getUsernameCoordinator() {
+        return usernameCoordinator;
+    }
+
+    public void setUsernameCoordinator(String usernameCoordinator) {
+        this.usernameCoordinator = usernameCoordinator;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsernameTutor() {
+        return usernameTutor;
+    }
+
+    public void setUsernameTutor(String usernameTutor) {
+        this.usernameTutor = usernameTutor;
+    }
+    
 }
+
 class ThreadToResolve extends Thread{
 
     public Long studentId;

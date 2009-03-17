@@ -51,4 +51,7 @@
     <decorator name="main" page="main.jsp">
         <pattern>/*</pattern>
     </decorator>
+</decorators>rator name="main" page="main.jsp">
+        <pattern>/*</pattern>
+    </decorator>
 </decorators>

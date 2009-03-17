@@ -176,7 +176,12 @@
           <version>1.0</version>
           <scope>compile</scope>
         </dependency>        
-        
+
+        <dependency>
+          <groupId>jmimemagic</groupId>
+          <artifactId>jmimemagic</artifactId>
+          <version>0.1.1</version>
+        </dependency>
        
     </dependencies>
     <build>

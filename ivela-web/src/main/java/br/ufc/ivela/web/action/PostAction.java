@@ -84,11 +84,14 @@ public class PostAction extends GenericAction {
             post.setCreatedBy(getAuthenticatedUser());
             post.setCreatedAt(new Date());
             Long result = postRemote.add(post);
-            if (result != null) {
+            if (result != null && result.longValue() > 0) {
                 post = new Post();
                 return list();
             }
         }
+        topic = post.getTopic();
+        topic = topicRemote.get(topic.getId());
+        forum = forumRemote.get(topic.getForum().getId());        
         return list();
     }
 
@@ -172,6 +175,7 @@ public class PostAction extends GenericAction {
         // verifies if topicId is set
         forum = forumRemote.get(forum.getId());
         topic = topicRemote.get(topic.getId());
+        post = null;
         
         if (topic.getId() != null) {
             boolean isAdministrator = ! (getAuthenticatedUser().getAuthentication().getId().equals(Constants.ROLE_USER));

@@ -869,3 +869,81 @@
 <script  language="JavaScript" type="text/javascript" src="../js/tooltip/wz_tooltip.js"></script>
 <!-- end content -->
 <br class="clear" />
+ut.tutor.newsflash.message.len'),250);" name="input.tutor.newsflash.message" id="input.tutor.newsflash.message"></textarea><br />
+                        <s:text name="message.remaining" /><input readonly type=text id="input.tutor.newsflash.message.len" name="input.tutor.newsflash.message.len" size=3 maxlength=3 value="250"/><br/>
+                        <input type="button" value="Submit" onclick="sendNewsFlashTutor($('input.tutor.newsflash.message'));" />
+                    </div>                     
+                    
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+
+<div id="showForum" style="display: none;">
+    <div id="col-2-home">
+        <div class="container-grades">
+            <div class="content-grades">
+                <h1><span id="forum.grade.course.name"></span></h1>
+                <h2 style="float:left; width:400px; padding-top:45px;"><span id="forum.grade.name"></span></h2>
+                <h2 style="float:left; width:400px; padding-top:7px;"><s:text name="grade.show.forums" /></h2>
+                <br class="clear" />
+                <form action="" class="form-edit">
+                    <input type="hidden" id="forum.show.grade.id" name="forum.show.grade.id" value="" />
+                    <input type="hidden" id="forum.grade.course.id" name="forum.grade.course.id" value="" />
+                </form>
+                <br class="clear" />
+                <div class="actions-box">
+                    <h2><s:text name="grade.show.actions" /></h2>
+                    <div class="edit-tools">
+                        <ul>
+                            <li><a class="icon-new" href="javascript:showEntryForum(document.getElementById('forum.show.grade.id').value);"><s:text name= "forum.grade.new.forum" /></a></li>
+                            <li><a class="icon-delete" href="javascript:deleteForum();"><s:text name= "forum.grade.delete.forum" /></a></li>
+                            <br class="clear" />
+                        </ul>
+                    </div>
+                    <div class="edit-box" id="forum.grade.forums">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+
+<div id="showForumId" style="display: none;">
+    <div id="col-2-home">
+        <div class="container-grades">
+            <div class="content-grades">
+                <h1><span id="forumId.grade.course.name"></span></h1>
+                <h2 style="float:left; width:400px; padding-top:45px;"><span id="forumId.grade.name"></span></h2>
+                <h2 style="float:left; width:400px; padding-top:7px;"><s:text name="grade.show.forums" /></h2>
+                <h2 style="float:left; width:400px; padding-top:7px;"><span id="forumId.grade.forum.title"></span></h2>
+                <br class="clear" />
+                <form action="" class="form-edit">
+                    <input type="hidden" id="forumId.show.grade.id" name="forumId.show.grade.id" value="" />
+                    <input type="hidden" id="forumId.grade.course.id" name="forumId.grade.course.id" value="" />
+                    <input type="hidden" id="forumId.grade.forum.id" name="forumId.grade.forum.id" value="" />
+                </form>
+                <br class="clear" />
+                <div class="actions-box">
+                    <h2><s:text name="grade.show.actions" /></h2>
+                    <div class="edit-tools">
+                        <ul>
+                            <li><a class="icon-new" href="javascript:showEntryTopic(document.getElementById('forumId.grade.forum.id').value);"><s:text name= "forumId.grade.new.topic" /></a></li>
+                            <li><a class="icon-delete" href="javascript:deleteTopic();"><s:text name= "forumId.grade.delete.topic" /></a></li>
+                            <br class="clear" />
+                        </ul>
+                    </div>
+                    <div class="edit-box" id="forumId.grade.topics">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+
+<!-- end col-2-home -->
+<br class="clear" />
+<script  language="JavaScript" type="text/javascript" src="../js/tooltip/wz_tooltip.js"></script>
+<!-- end content -->
+<br class="clear" />

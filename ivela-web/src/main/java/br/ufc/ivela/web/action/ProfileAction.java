@@ -33,6 +33,13 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jmimemagic.Magic;
+import net.sf.jmimemagic.MagicException;
+import net.sf.jmimemagic.MagicMatch;
+import net.sf.jmimemagic.MagicMatchNotFoundException;
+import net.sf.jmimemagic.MagicParseException;
 
 /**
  *
@@ -70,6 +77,8 @@ public class ProfileAction extends GenericAction implements Preparable {
     private String path = Constants.FILE_UPLOAD_PATH + "profiles/";
     private XStream xStream = new XStream(new JettisonMappedXmlDriver());
     private InputStream inputStream;
+    
+    private String error = "";
 
     public void prepare() throws Exception {
         //retrieves the honorific list
@@ -80,13 +89,11 @@ public class ProfileAction extends GenericAction implements Preparable {
 
         // retrieves the ethnicity list
         ethnicityList = ethnicityRemote.getAll();
-
-
+        
         // retrieves the locationType list
         locationTypeList = locationTypeRemote.getAll();
         // retrieves the country list
         countryList = countryRemote.getAll();
-
     }
 
     /**
@@ -191,16 +198,42 @@ public class ProfileAction extends GenericAction implements Preparable {
 
             profile.setPhoto(path + profile.getId() + "/" + uploadFileName);
             logger.log("file" + profile.getPhoto());
-
-            profileRemote.savePhoto(profile, fileIo);
+            
+            MagicMatch match;            
+            try {
+                match = Magic.getMagicMatch(fileIo, true);
+                // verify if the file is an image
+                if(match.getMimeType().startsWith("image")){
+                    if(!profileRemote.savePhoto(profile, fileIo)){
+                        setError(getText("profile.upload.error"));
+                        resul = false;
+                    }
+                }else{
+                    setError(getText("profile.upload.invalidType"));
+                    resul = false;
+                }
+            } catch (MagicParseException ex) {
+                Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
+                setError(getText("profile.upload.invalidType"));
+                resul = false;
+            } catch (MagicMatchNotFoundException ex) {
+                Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
+                setError(getText("profile.upload.invalidType"));
+                resul = false;
+            } catch (MagicException ex) {
+                Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
+                setError(getText("profile.upload.invalidType"));
+                resul = false;
+            }            
         }
-        resul = resul && profileRemote.edit(profile);
+        
+        resul = (resul) ? profileRemote.edit(profile) : false;
 
-        resul = resul && addressRemote.update(inAddress);
+        resul = (resul) ? addressRemote.update(inAddress) : false;
 
-        resul = resul && phoneRemote.update(listPhones.get(0));
+        resul = (resul) ? phoneRemote.update(listPhones.get(0)) : false;
 
-        resul = resul && phoneRemote.update(listPhones.get(1));
+        resul = (resul) ? phoneRemote.update(listPhones.get(1)) : false;
 
         setSucess(resul);
 
@@ -208,7 +241,6 @@ public class ProfileAction extends GenericAction implements Preparable {
     }
 
     public String getStatesByCountry() {
-
         List<State> l = stateRemote.getByCountry(country.getId());
         logger.log(l.toString());
         xStream.alias("state", State.class);
@@ -557,5 +589,13 @@ public class ProfileAction extends GenericAction implements Preparable {
 
     public void setLocationTypeRemote(LocationTypeRemote locationTypeRemote) {
         this.locationTypeRemote = locationTypeRemote;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }

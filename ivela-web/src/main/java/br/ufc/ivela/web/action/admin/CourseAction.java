@@ -10,10 +10,12 @@ import br.ufc.ivela.web.action.*;
 import org.springframework.util.StringUtils;
 import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Discipline;
+import br.ufc.ivela.commons.model.Enrollment;
 import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.ejb.interfaces.CourseRemote;
 import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
+import br.ufc.ivela.ejb.interfaces.EnrollmentRemote;
 import br.ufc.ivela.ejb.interfaces.GradeRemote;
 import br.ufc.ivela.ejb.interfaces.RepositoryRemote;
 import com.thoughtworks.xstream.XStream;
@@ -22,6 +24,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,6 +36,7 @@ public class CourseAction extends GenericAction {
     private CourseRemote courseRemote;
     private RepositoryRemote repositoryRemote;
     private DisciplineRemote disciplineRemote;
+    private EnrollmentRemote enrollmentRemote;
     private GradeRemote gradeRemote;
     private Course course;
     private List<Course> courseList;
@@ -104,8 +109,7 @@ public class CourseAction extends GenericAction {
 
     /**
      * Add a new course, performs a validate to the add method, 
-     * if hasn't errors.
-     * if has erros return a message of error
+     * if it does not have errors. if it has error return an error message
      * @return
      */
     public String addCourse() {
@@ -246,6 +250,7 @@ public class CourseAction extends GenericAction {
     /**
      * Sets the variables to be used on the input course
      */
+    @Override
     public String input() {
         return INPUT;
     }
@@ -337,6 +342,43 @@ public class CourseAction extends GenericAction {
 
         json = json.replaceAll("int", "count");
 
+        setInputStream(new ByteArrayInputStream(json.getBytes()));
+        return "json";
+    }
+    
+     public String getGraduatedStudents(){
+        int tResult = 0;
+        String json ="";
+        List<Grade> l = (List<Grade>) gradeRemote.getByCourse(course.getId());
+         for (Grade grade : l) {
+            List<Enrollment> list = enrollmentRemote.getByGrade(grade.getId());
+            ThreadToResolve[] workers = new ThreadToResolve[list.size()];
+        
+            for(int i=0;i<list.size();i++){
+                workers[i] = new ThreadToResolve();
+                workers[i].courseId = grade.getCourseId();
+                workers[i].gradeId = grade.getId();
+                workers[i].studentId = list.get(i).getSystemUser().getId();
+                workers[i].courseRemote = courseRemote;
+                workers[i].setPriority(Thread.MAX_PRIORITY);
+                workers[i].start();
+            }
+            for(int i=0;i<list.size();i++){
+                try {
+                    workers[i].join();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(SystemUserAction.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        
+            for(int i=0;i<list.size();i++){
+                if(workers[i].res == 10)
+                tResult++;
+            }
+        
+            
+         }
+        json = "{\"result\":"+tResult+"}";
         setInputStream(new ByteArrayInputStream(json.getBytes()));
         return "json";
     }
@@ -528,7 +570,7 @@ public class CourseAction extends GenericAction {
         List<Grade> grades = gradeRemote.getByCourse(course.getId());
         String studentsCount = String.valueOf(courseRemote.getStudentsCount(course.getId()));
         String gradesCount = String.valueOf(courseRemote.getGradesCount(course.getId()));
-        String graduatedStudentCount = String.valueOf(courseRemote.getGraduatedStudentsCount(course.getId()));
+       // String graduatedStudentCount = String.valueOf(courseRemote.getGraduatedStudentsCount(course.getId()));
         StringBuilder json = new StringBuilder();
         json.append("{");
             json.append("\"course\":{");
@@ -537,9 +579,11 @@ public class CourseAction extends GenericAction {
                 json.append("\"description\":\"" + course.getDescription() + "\",");
                 json.append("\"targetAudience\":\"" + course.getTargetAudience() + "\",");
                 json.append("\"image\":\"" + course.getImage() + "\",");
+                json.append("\"updloadPackageEnabled\":\"" + course.getUploadPackageEnabled() + "\",");
+                json.append("\"challengeItensEnabled\":\"" + course.getChallengeItensEnabled() + "\",");
                 json.append("\"studentsCount\":\"" + studentsCount + "\",");
                 json.append("\"gradesCount\":\"" + gradesCount + "\",");
-                json.append("\"graduatedStudentCount\":\"" + graduatedStudentCount + "\",");
+                //json.append("\"graduatedStudentCount\":\"" + graduatedStudentCount + "\",");
                 json.append("\"disciplines\":[");
                     for (Discipline d : disciplines) {
                     json.append("{");        
@@ -585,7 +629,16 @@ public class CourseAction extends GenericAction {
         setInputStream(new ByteArrayInputStream(json.toString().getBytes()));
         return "json";
     }
+
+    public EnrollmentRemote getEnrollmentRemote() {
+        return enrollmentRemote;
+    }
+
+    public void setEnrollmentRemote(EnrollmentRemote enrollmentRemote) {
+        this.enrollmentRemote = enrollmentRemote;
+    }
  
+    
     public Long getChatUId() {
         return chatUId;
     }

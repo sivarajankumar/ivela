@@ -90,4 +90,4 @@
 
 </script>
 
-<jsp:include page="paginator.jsp"/>
+<jsp:include page="paginator.jsp"/>inator.jsp"/>

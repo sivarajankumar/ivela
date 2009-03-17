@@ -46,7 +46,7 @@ public class DisciplineAction extends GenericAction {
 
     /**
      * Remove a discipline, perform a validation.
-     * @return if hasn't error return a string in the json format
+     * @return if it does not have any error, return a string in the json format
      */
     public String removeDiscipline() {
         discipline = disciplineRemote.get(discipline.getId());
@@ -70,7 +70,7 @@ public class DisciplineAction extends GenericAction {
 
     /**
      * Add a new discipline, perform a validation.
-     * @return if hasn't error return a string in the json format
+     * @return if it does not have any error, return a string in the json format
      */
     public String addDiscipline() {
         //validates the add
@@ -93,7 +93,7 @@ public class DisciplineAction extends GenericAction {
 
     /**
      * Updated a new discipline, perform a validation.
-     * @return if hasn't error return a string in the json format
+     * @return if it does not have any error, return a string in the json format
      */
     public String updateDiscipline() {
         performValidateAdd();
@@ -183,7 +183,7 @@ public class DisciplineAction extends GenericAction {
 
     /**
      * Add a new Discipline
-     * @return returna  list of discipline
+     * @return a list of disciplines
      */
     public String add() {
         // validates the add

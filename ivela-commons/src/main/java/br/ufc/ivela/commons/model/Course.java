@@ -54,6 +54,10 @@ public class Course implements Serializable {
     private Collection<Grade> grades;
     @Column(name = "active")
     private boolean active;
+    @Column(name = "upload_package_enabled")
+    private boolean uploadPackageEnabled;
+    @Column(name = "challenge_itens_enabled")
+    private boolean challengeItensEnabled;
 
     public Course() {
     }
@@ -153,6 +157,22 @@ public class Course implements Serializable {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+    
+    public boolean getUploadPackageEnabled() {
+        return uploadPackageEnabled;
+    }
+
+    public void setUploadPackageEnabled(boolean uploadPackageEnabled) {
+        this.uploadPackageEnabled = uploadPackageEnabled;
+    }
+    
+    public boolean getChallengeItensEnabled() {
+        return challengeItensEnabled;
+    }
+
+    public void setChallengeItensEnabled(boolean challengeItensEnabled) {
+        this.challengeItensEnabled = challengeItensEnabled;
     }
     
     @Override

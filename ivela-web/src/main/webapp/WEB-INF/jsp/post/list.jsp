@@ -185,3 +185,31 @@
 <%--
 </body>
 </html>--%>
+uotes( msgs[i].innerHTML );
+    }
+    
+    function replaceQuotes( quotedText )
+    {
+       var out = replaceAll( quotedText, '[quote]', '<div class=\"quote-answer\">' );
+       out = replaceAll( out, '[/quote]', '</div>' );
+
+//       alert('quotedText=' + quotedText + "\n" + "out=" + out);
+
+       return out;
+    }
+    
+    function replaceAll(string, token, newtoken) 
+    {
+	while (string.indexOf(token) != -1) 
+        {
+		string = string.replace(token, newtoken);
+	}
+
+        return string;
+    }
+
+</script>
+
+<%--
+</body>
+</html>--%>

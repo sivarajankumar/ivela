@@ -773,4 +773,91 @@
             <!-- End content-courses -->
         </div>  
     </div>
+</div> type="text" id="input.user.message.title" size="55" maxlength="50" /><br />
+                        <s:text name="message.type"/> <br /> <textarea cols="62" rows="4" onKeyDown="textCounter(this,$('input.user.message.description.len'),250);" onKeyUp="textCounter(this,$('input.user.message.description.len'),250);" id="input.user.message.description"></textarea><br />
+                        <s:text name="message.remaining" /><input readonly type=text id="input.user.message.description.len" name="input.user.message.description.len" size=3 maxlength=3 value="250"/><br/>
+                        <input type="button" value="Submit" onclick="sendMessage($('input.user.message.title'), $('input.user.message.description'));" />
+                    </div>
+                    <div id="user.newsflash" style="display:none;">
+                        <h4><s:text name="student.send.newsflash"/></h4><br />
+                        <s:text name="message.type" /><br /> <textarea cols="62" rows="4" onKeyDown="textCounter(this,$('input.user.newsflash.message.len'),250);" onKeyUp="textCounter(this,$('input.user.newsflash.message.len'),250);" id="input.user.newsflash.message"></textarea><br />
+                        <s:text name="message.remaining" /><input readonly type=text id="input.user.newsflash.message.len" name="input.user.newsflash.message.len" size=3 maxlength=3 value="250"/><br/>
+                        <input type="button" value="Submit" onclick="sendNewsFlash($('input.user.newsflash.message'));" />
+                    </div>
+                    <div id="user.change" style="display:block;">
+                        <br /><s:text name="systemUser.show.changeType"/><br /> <br />
+                        <s:text name="systemUser.show.type" />
+                        <select id="user.change.types">
+                        </select>
+                        <br />
+                        <input type="button" value="<s:text name="systemUser.input.btnSave" />" onclick="change($('user.change.types').value)" />
+                    </div>
+                </div>
+                <!-- end actions-box -->
+            </div>
+            <!-- End content-courses -->
+        </div>  
+    </div>
+</div>
+
+<div id="multipleUsers" style="display:none;" >
+    <div id="col-2-home">
+        <div class="container-courses">
+            <div class="content-courses">
+                
+                <h1>Múltiplos Usuários</h1>
+                <br class="clear" />
+                
+                <s:iterator value="allUsers" status="stat">   
+                    <div id="div.inner.user.id_<s:property value="id" />" class="member-info" style="display: none;">
+                        <img class="picture" src="../images/foto_profile.jpg" width="80" height="80" />
+                        <div>
+                            <div>                                
+                                <p><s:text name="systemUser.input.username"/>: <span><s:property value="username" /></span></p>
+                                <p><s:text name="systemUser.input.email"/>: <span><s:property value="email" /></span></p>
+                                <p><s:text name="systemUser.input.memberSince"/>: <span><s:date name="createdAt" format="MM/dd/yyyy"/> </span></p>
+                            </div>
+                        </div>
+                        <br class="clear" />
+                        
+                    </div>
+                </s:iterator>
+                
+                <div class="actions-box">
+                    <h2><s:text name="course.show.actions"/>:</h2>
+                    <div class="edit-tools">
+                        <ul>
+                            <li><a class="icon-edit" href="#" onclick="closeAllMessages(); $('multiple.message').style.display = 'block';"><s:text name="course.send.message"/></a></li>
+                            <li><a class="icon-message"  href="#" onclick="closeAllMessages(); $('multiple.newsflash').style.display = 'block';"><s:text name="course.send.newsflash" /></a></li>
+                            <li><a class="icon-newsFlash" href="#" onclick="closeAllMessages(); $('multiple.change').style.display = 'block';"><s:text name="course.show.perfil" /></a></li>
+                            <br class="clear" />
+                        </ul>                        
+                    </div>
+                    <div id="multiple.message" style="display:none;">
+                        <h4><s:text name ="student.send.message" /></h4><br />
+                        <s:text name="message.title" /><br /> <input type="text" id="input.multiple.message.title" size="55" maxlength="50" /><br />
+                        <s:text name="message.type"/><br /> <textarea cols="62" rows="4" onKeyDown="textCounter(this,$('input.multiple.message.description.len'),250);" onKeyUp="textCounter(this,$('input.multiple.message.description.len'),250);" id="input.multiple.message.description"></textarea><br />
+                        <s:text name="message.remaining" /><input readonly type=text id="input.multiple.message.description.len" name="input.multiple.message.description.len" size=3 maxlength=3 value="250"/><br/>
+                        <input type="button" value="Submit" onclick="sendMessage($('input.multiple.message.title'), $('input.multiple.message.description'));" />
+                    </div>
+                    <div id="multiple.newsflash" style="display:none;">
+                        <h4><s:text name="student.send.newsflash"/></h4><br />
+                        <s:text name="message.type" /><br /> <textarea cols="62" rows="4" onKeyDown="textCounter(this,$('input.multiple.newsflash.message.len'),250);" onKeyUp="textCounter(this,$('input.multiple.newsflash.message.len'),250);" id="input.multiple.newsflash.message"></textarea><br />
+                        <s:text name="message.remaining" /><input readonly type=text id="input.multiple.newsflash.message.len" name="input.multiple.newsflash.message.len" size=3 maxlength=3 value="250"/><br/>
+                        <input type="button" value="Submit" onclick="sendNewsFlash($('input.multiple.newsflash.message'));" />
+                    </div>
+                    <div id="multiple.change" style="display:none;">
+                        <br /><s:text name="systemUser.show.changeType"/><br /> <br />
+                        <s:text name="systemUser.show.type" />
+                        <select id="multiple.change.types">
+                        </select>
+                        <br />
+                        <input type="button" value="<s:text name="systemUser.input.btnSave" />" onclick="change($('multiple.change.types').value)" />
+                    </div>
+                </div>
+                <!-- end actions-box -->
+            </div>
+            <!-- End content-courses -->
+        </div>  
+    </div>
 </div>

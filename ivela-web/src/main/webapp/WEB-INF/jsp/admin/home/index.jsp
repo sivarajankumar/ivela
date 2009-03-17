@@ -569,3 +569,26 @@
 
 <!-- end content -->
 <br class="clear" />
+itle" id="input.student.message.title" size="55" maxlength="50" /><br />
+                        <s:text name="message.type"/><br /><textarea name="input.student.message.description" id="input.student.message.description" cols="62" rows="4"onKeyDown="textCounter(this,$('input.student.message.description.len'),250);" onKeyUp="textCounter(this,$('input.student.message.description.len'),250);"></textarea><br />
+                        <s:text name="message.remaining" /><input readonly type=text id="input.student.message.description.len" name="input.student.message.description.len" size=3 maxlength=3 value="250"/><br/>                        
+                        <input type="button" value="<s:text name="systemUser.input.btnSave" />" onclick="sendMessageStudent($('input.student.message.title'), $('input.student.message.description'));" />
+                    </div>
+                    <div id="student.newsflash" style="display:none;" class="course-message">
+                        <h4><s:text name="course.send.newsflash"/></h4><br />
+                        <s:text name="message.type"/><br /><textarea name="input.student.newsflash.message" id="input.student.newsflash.message" cols="62" rows="4"onKeyDown="textCounter(this,$('input.student.newsflash.message.len'),250);" onKeyUp="textCounter(this,$('input.student.newsflash.message.len'),250);"></textarea><br />
+                        <s:text name="message.remaining" /><input readonly type=text id="input.student.newsflash.message.len" name="input.student.newsflash.message.len" size=3 maxlength=3 value="250"/><br/>                        
+                        <input type="button" value="<s:text name="systemUser.input.btnSave" />" onclick="sendNewsFlashStudent($('input.student.newsflash.message'));" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>       
+</div>
+
+<!-- end col-2-home -->
+<br class="clear" />
+
+<!-- end content -->
+<br class="clear" />

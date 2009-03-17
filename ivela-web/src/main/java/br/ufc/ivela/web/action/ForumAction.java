@@ -49,6 +49,7 @@ public class ForumAction extends GenericAction {
     private int count;
     private String forumTitle;
     private java.io.InputStream inputStream;
+    private boolean back = false;
 
     public Discipline getDiscipline() {
         return discipline;
@@ -74,6 +75,16 @@ public class ForumAction extends GenericAction {
         this.grade = grade;
     }
 
+    public boolean isBack() {
+        return back;
+    }
+
+    public void setBack(boolean back) {
+        this.back = back;
+    }
+ 
+    
+
     /**
      * List all forum by user in session
      */
@@ -83,6 +94,10 @@ public class ForumAction extends GenericAction {
         }
         if (forumTitle == null) {
             forumTitle = "";
+           
+        }
+        else{
+             this.back = true;
         }
         boolean isAdministrator = ! (getAuthenticatedUser().getAuthentication().getId().equals(Constants.ROLE_USER));
         Page  p = forumRemote.getForumList(getAuthenticatedUser().getId(), isAdministrator, true, forumTitle, page, pageSize);

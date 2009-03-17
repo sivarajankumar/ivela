@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufc.ivela.web.action;
+package br.ufc.ivela.web.action.admin;
 
+import br.ufc.ivela.web.action.*;
 import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.File;
 import br.ufc.ivela.commons.model.SystemUser;
@@ -43,10 +44,50 @@ public class RepositoryAction extends GenericAction {
     private String contentLength;
     private String contentDisposition;
 
+    public String add() {
+        repositoryRemote.newDirectory(courseId, dirId, dirName);
 
+        dirId = null;
+        dirName = null;
 
+        return show();
+    }
 
+    /**
+     * Remove a repository
+     * @return listRepository
+     */
+    public String remove() {
+        repositoryRemote.removeDirectory(courseId, dirId);
 
+        return show();
+    }
+
+    /**
+     * Upload a repository
+     * @return listRepository
+     */
+    public String upload() {
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal != null) {
+            file.setSentBy((SystemUser) principal);
+        }
+
+        file.setCourseId(courseId);
+        file.setFilename(uploadFileName);
+        file.setMimetype(uploadContentType);
+        logger.log("sd "+ courseId);
+        logger.log("sd1 "+ uploadFileName);
+        logger.log("sd "+ uploadContentType);
+        logger.log("sd "+ dirId);
+        repositoryRemote.addFile(upload, file, dirId);
+
+        file = null;
+
+        return show();
+    }
 
     public String show(){
         XMLRepository xmlr = repositoryRemote.getStructure(courseId);
@@ -82,8 +123,8 @@ public class RepositoryAction extends GenericAction {
         XStream xStream = new XStream(new JettisonMappedXmlDriver());
         xStream.alias("directory", XMLDirectory.class);
         xStream.alias("file", XMLFile.class);
-        logger.log(xmld.getName());
-        logger.log(xmld.toString());
+        //logger.log(xmld.getName());
+        //logger.log(xmld.toString());
         setInputStream(new ByteArrayInputStream(xStream.toXML(xmld).getBytes()));
 
         return "json";
@@ -110,22 +151,33 @@ public class RepositoryAction extends GenericAction {
         return "download";
     }
     
+    public String rmfile() {
+
+        repositoryRemote.removeFile(courseId, fileId);
+
+        return show();
+    }
 
     public XMLDirectory getDirectory(List<XMLDirectory> directories, String dirId) {
 
-        XMLDirectory result = null;
-
-        for (XMLDirectory directory : directories) {
-            if (directory.getId().equals(dirId)) {
-                result = directory;
-            } else {
-                if (directory.getDirectories() != null) {
-                    result = getDirectory(directory.getDirectories(), dirId);
+        for (XMLDirectory xMLDirectory : directories) {
+            if(xMLDirectory.getId().equals(dirId)){
+                return xMLDirectory;
+            }
+            else{
+                if(xMLDirectory.getDirectories()!=null){
+                   List<XMLDirectory> list = xMLDirectory.getDirectories();
+                    for (XMLDirectory xMLDirectory1 : list) {
+                        if(xMLDirectory1.getId().equals(dirId)){
+                            return xMLDirectory1;
+                        }
+                    }
+                    
                 }
             }
         }
-
-        return result;
+        return null;
+        
     }
 
     public void setRepository(XMLRepository repository) {

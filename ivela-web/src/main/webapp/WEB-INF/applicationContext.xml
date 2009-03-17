@@ -239,4 +239,8 @@
        
        
            
+</beans>bean id="aboutUsAction" class="br.ufc.ivela.web.action.AboutUsAction" scope="prototype"/>
+       
+       
+           
 </beans>

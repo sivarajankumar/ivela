@@ -31,10 +31,14 @@ import br.ufc.ivela.ejb.interfaces.StateRemote;
 import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 import com.opensymphony.xwork2.Preparable;
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
+import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.util.StringUtils;
@@ -78,25 +82,16 @@ public class SystemUserAction extends GenericAction implements Preparable {
     private String password;
     private String newPassword;
     private int locatioType;
-    private int scorePassword;
-    
-     //personal
-      private String honorific;
-      private String birthDate;
+    private int scorePassword;    //personal
+    private String honorific;
+    private String birthDate;    //language and ethnicity
+    private String language;
+    private String ethnicity;    //phone
+    private String mainPhone;
+    private String mobile;    //location
+    private Address inAddress;
+    private String country;
 
-      //language and ethnicity
-      private String language;
-      private String ethnicity;
-      
-      //phone
-      private String mainPhone;
-      private String mobile;
-      
-      //location
-      private Address inAddress;
-      private String country;
-       
-      
     public String inputChange() {
         return "change";
     }
@@ -106,24 +101,24 @@ public class SystemUserAction extends GenericAction implements Preparable {
         boolean ok = true;
 
         if (!StringUtils.hasText(password)) {
-            addActionMessage(getText("systemUser.password.noactual"));
+            addActionError(getText("systemUser.password.noactual"));
             ok = false;
         }
         if (!StringUtils.hasText(newPassword)) {
-            addActionMessage(getText("systemUser.password.nonew"));
+            addActionError(getText("systemUser.password.nonew"));
             ok = false;
         }
         if (!StringUtils.hasText(retypePassword)) {
-            addActionMessage(getText("systemUser.password.noretype"));
+            addActionError(getText("systemUser.password.noretype"));
             ok = false;
         }
 
         if (ok) {
             if (!systemUserRemote.encrypt(password).equals(getAuthenticatedUser().getPassword())) {
-                addActionMessage(getText("systemUser.password.error"));
+                addActionError(getText("systemUser.password.error"));
             } else {
                 if (!newPassword.equals(retypePassword)) {
-                    addActionMessage(getText("systemUser.password.match"));
+                    addActionError(getText("systemUser.password.match"));
                 } else {
                     setSystemUser(systemUserRemote.get(getAuthenticatedUser().getId()));
                     getSystemUser().setPassword(systemUserRemote.encrypt(newPassword));
@@ -185,7 +180,19 @@ public class SystemUserAction extends GenericAction implements Preparable {
             su.setPassword(systemUserRemote.encrypt(pwd));
             result = systemUserRemote.update(su);
             if (result) {
-                MailSender.send(new String[]{su.getEmail()}, "[ivela] Request password", "Your new password is: " + pwd);
+                String body = "Your new password is: <b>" + pwd + "</b>";
+
+                HttpServletRequest request = ServletActionContext.getRequest();
+                String url = "http://" + request.getServerName() + ":" + request.getServerPort() + Constants.WEB_PATH;
+                if (!url.endsWith("/")) {
+                    url += "/";
+                }
+
+                System.out.println("body: " + body);
+                System.out.println("url: " + url);
+                System.out.println("server: " + request.getRequestURL().toString());
+
+                MailSender.send(new String[]{su.getEmail()}, "[ivela] Request password", getLayoutEmail(body, url));
             }
         } else {
             message = "inconsistence";
@@ -198,6 +205,39 @@ public class SystemUserAction extends GenericAction implements Preparable {
         json.append("}");
         setInputStream(new ByteArrayInputStream(json.toString().getBytes()));
         return "json";
+    }
+
+    public String getLayoutEmail(String body, String url) {
+        System.out.println("entrei");
+        
+        Properties properties = new Properties();
+            try {
+                properties.load(new FileInputStream("layout.properties"));
+                return properties.getProperty("layout.email").replaceAll("[--body--]", body).replaceAll("[--linkSite--]", url);
+            } catch (IOException e) {
+                return body;
+            }
+        
+        
+        /*
+        try {
+            
+
+
+
+        System.out.println("antes de criar");
+        ResourceBundle layout = ResourceBundle.getBundle("resources/layout");
+        System.out.println("depois de criar");
+        if(layout == null){
+        System.out.println("layout eh null");
+        }
+        return layout.getString("layout.email").replaceAll("[--body--]", body).replaceAll("[--linkSite--]", url);
+         
+        } catch (NullPointerException e) {
+            System.out.println("Error while retrieving layout property file");
+            e.printStackTrace();
+            return body;
+        }*/
     }
 
     public CalendarRemote getCalendarRemote() {
@@ -242,70 +282,71 @@ public class SystemUserAction extends GenericAction implements Preparable {
             systemUser.setPassword(password);
             systemUser.setAuthentication(new Authentication(Constants.ROLE_USER));
 
-            
-            
+
+
             //*******PROFILE*******
             //---personal info
-            if(honorific!=null && !honorific.equals("")){
-             
+            if (honorific != null && !honorific.equals("")) {
+
                 Integer honoroficId = new Integer(honorific);
-                Honorific honor = honorificList.get(honoroficId.intValue()-1);
-                
+                Honorific honor = honorificList.get(honoroficId.intValue() - 1);
+
                 profile.setHonorific(honor);
-                //System.out.println("honorific: " + profile.getHonorific().getTitle());
+            //System.out.println("honorific: " + profile.getHonorific().getTitle());
             }
-            
-            if(birthDate!=null && !birthDate.equals("")){
+
+            if (birthDate != null && !birthDate.equals("")) {
                 Date date = this.generateDate(birthDate);
                 profile.setBirthDate(date);
             }
-            
-            
+
+
             //System.out.println("birthDate: " + profile.getBirthDate());
-            
-            
+
+
             //language and enth
-            if(language!=null && !language.equals("")){
+            if (language != null && !language.equals("")) {
                 Integer languageId = new Integer(language);
-                LanguageInternationalization li = languageInternationalizationList.get(languageId-1);
+                LanguageInternationalization li = languageInternationalizationList.get(languageId - 1);
                 profile.setLanguage(li);
-                //System.out.println("language: " + profile.getLanguage().getLanguage().getName());
+            //System.out.println("language: " + profile.getLanguage().getLanguage().getName());
             }
-            
-            if(ethnicity!=null && !ethnicity.equals("")){
+
+            if (ethnicity != null && !ethnicity.equals("")) {
                 Integer ethId = new Integer(ethnicity);
-                Ethnicity ethnicityObj = ethnicityList.get(ethId-1);
+                Ethnicity ethnicityObj = ethnicityList.get(ethId - 1);
                 profile.setEthnicity(ethnicityObj);
-                //System.out.println("language: " + profile.getEthnicity().getName());
+            //System.out.println("language: " + profile.getEthnicity().getName());
             }
-            
-            
+
+
             //SAVING PROFILE, GENERATING ID
             Long profileId = null;
-            if(profile!=null){
-               if(systemUser.getSocialNumber()!=null)
-                profile.setSocialNumber(systemUser.getSocialNumber());
+            if (profile != null) {
+                if (systemUser.getSocialNumber() != null) {
+                    profile.setSocialNumber(systemUser.getSocialNumber());
+                }
                 profileId = profileRemote.add(profile);
                 profile = profileRemote.get(profileId);
-               
-               
-               systemUser.setProfileId(profileId);
-               
+
+
+                systemUser.setProfileId(profileId);
+
             }
             //END SAVING PROFILE
-            
-            //--location
-           
-           if(profileId!=null){
-               
-                        if(inAddress.getState()==null){
-                            inAddress.setState(stateRemote.get(1L));
-                        }
-                        inAddress.setProfileId(profile.getId());
-                        inAddress.setProfile(profile);
-                        addressRemote.add(inAddress);
 
-               
+            //--location
+
+            if (profileId != null) {
+
+                if (inAddress.getState() == null) {
+                    inAddress.setState(stateRemote.get(1L));
+                }
+                inAddress.setProfileId(profile.getId());
+                inAddress.setProfile(profile);
+                addressRemote.add(inAddress);
+
+
 //               if(country!=null && !country.equals("")){
 //                 
 //                Integer coId = new Integer(country);
@@ -333,22 +374,22 @@ public class SystemUserAction extends GenericAction implements Preparable {
 //                }
 //            
 //            }
-           }
-            
-            if(profileId!=null && mainPhone!=null ){
+            }
+
+            if (profileId != null && mainPhone != null) {
                 Phone mPhone = new Phone();
                 mPhone.setNumber(mainPhone);
-                mPhone.setProfileId(profileId); 
+                mPhone.setProfileId(profileId);
                 phoneRemote.add(mPhone);
             }
-            
-            if(profileId!=null && mobile!=null ){
+
+            if (profileId != null && mobile != null) {
                 Phone mPhone = new Phone();
                 mPhone.setNumber(mobile);
-                mPhone.setProfileId(profileId); 
+                mPhone.setProfileId(profileId);
                 phoneRemote.add(mPhone);
             }
-            
+
             //SAVING USER!
             Long id = systemUserRemote.add(systemUser);
             systemUser = systemUserRemote.get(id);
@@ -358,12 +399,12 @@ public class SystemUserAction extends GenericAction implements Preparable {
             logger.log(String.valueOf(request.getServerPort()));
             calendarRemote.addInfo(request.getServerName(), String.valueOf(request.getServerPort()), systemUser.getUsername());
             //System.out.println("#### usuario criado");
-           // boolean result = calendarRemote.addInfo("200.17.41.215", String.valueOf(8080), systemUser.getUsername());
-            
+            // boolean result = calendarRemote.addInfo("200.17.41.215", String.valueOf(8080), systemUser.getUsername());
+
             //*****HISTORY****
             addHistory("history.createuser.title", "history.createuser.description", systemUser, systemUser.getUsername());
             return "login";
-            
+
         } else {
             return INPUT;
         }
@@ -374,7 +415,7 @@ public class SystemUserAction extends GenericAction implements Preparable {
      * @return edit
      */
     public String edit() {
-        
+
 
         setSystemUser(systemUserRemote.get(getSystemUser().getId()));
 
@@ -404,10 +445,9 @@ public class SystemUserAction extends GenericAction implements Preparable {
 //        }
 
         // email
-        if(scorePassword < 24){
+        if (scorePassword < 24) {
             addActionMessage(getText("systemUser.validation.scorePassword"));
-        }else
-        if (!StringUtils.hasText(systemUser.getEmail())) {
+        } else if (!StringUtils.hasText(systemUser.getEmail())) {
             addActionMessage(getText("systemUser.validation.email"));
         }
         if (!Validators.validateEmail(systemUser.getEmail())) {
@@ -755,7 +795,7 @@ public class SystemUserAction extends GenericAction implements Preparable {
     public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
-    
+
     public String getHonorific() {
         return honorific;
     }
@@ -812,7 +852,6 @@ public class SystemUserAction extends GenericAction implements Preparable {
         this.inAddress = inAddress;
     }
 
-      
     public String getCountry() {
         return country;
     }
@@ -893,15 +932,15 @@ public class SystemUserAction extends GenericAction implements Preparable {
         SystemUserAction.r = r;
     }
 
-    private Date generateDate(String dateStr){
+    private Date generateDate(String dateStr) {
         String tokens[] = dateStr.split("/");
         int day = Integer.parseInt(tokens[0]);
-        int month = Integer.parseInt(tokens[1])-1;
+        int month = Integer.parseInt(tokens[1]) - 1;
         int year = Integer.parseInt(tokens[2]);
         Date date = new Date();
         date.setDate(day);
         date.setMonth(month);
-        date.setYear(year);        
+        date.setYear(year);
         return date;
     }
 }

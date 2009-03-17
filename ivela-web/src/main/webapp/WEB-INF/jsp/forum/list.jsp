@@ -76,3 +76,17 @@
 
 
 
+arch-forum" action="forum!search" method="post" theme="simple">
+        <s:hidden name="page" value="%{page}" />
+        <s:textfield cssClass="field" name="forumTitle" />
+        <s:submit cssClass="button" src="images/bottons/btn-search.gif" type="image" />
+    </s:form>
+    --%>      
+    
+    <jsp:include page="paginatorBottom.jsp"/>        
+    
+</s:else>
+
+<script  language="JavaScript" type="text/javascript" src="js/tooltip/wz_tooltip.js"></script>
+
+

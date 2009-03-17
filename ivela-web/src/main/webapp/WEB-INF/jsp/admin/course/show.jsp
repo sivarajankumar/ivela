@@ -1231,3 +1231,35 @@
 <script  language="JavaScript" type="text/javascript" src="../js/tooltip/wz_tooltip.js"></script>
 <!-- end content -->
 <br class="clear" />
+mp" name="challengeItens.timestamp" />
+                    <table>
+                        <tr>
+                            <td><s:text name="show.challenge.name"/></td>
+                            <td><input type="text" id="challengeItens.name" name="challengeItens.name" /></td>
+                        </tr>
+                        <tr>
+                            <td><s:text name="show.challenge.xml"/></td>
+                            <td><textarea id="challengeItens.xml" name="challengeItens.xml" label="show.challenge.xml" cols="70" rows="25"></textarea></td>
+                        </tr>    
+                        <tr>
+                            <td><s:text name="show.challenge.dependency"/></td>
+                            <td><select id="challengeItens.dependency" ></select></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input id="submitChall" type="button" value="Add" onclick="submitChallenge()"/>
+                                <div id="removeCha" style="display:none"><input id="removeChall" type="button" value="Remove" onclick="removeChallenge()"/></div>
+                            </td>
+                        </tr>
+                    </table>
+                </s:form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end col-2-home -->
+<br class="clear" />
+<script  language="JavaScript" type="text/javascript" src="../js/tooltip/wz_tooltip.js"></script>
+<!-- end content -->
+<br class="clear" />

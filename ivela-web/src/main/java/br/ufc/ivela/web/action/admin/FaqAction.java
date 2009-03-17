@@ -33,9 +33,12 @@ public class FaqAction extends GenericAction {
             Long result = faqRemote.add(faq);
             if (result != null) {
                 return list();
+            }else{
+                return input();
             }
+        }else{
+            return input();
         }
-        return list();
     }
 
     /**
@@ -69,6 +72,7 @@ public class FaqAction extends GenericAction {
     public String update() {
         faq.setCreatedBy(getAuthenticatedUser());
         faq.setDate(new Date());
+        performValidateEdit();
         if (hasActionErrors()) {
             return edit();
         }
@@ -109,6 +113,13 @@ public class FaqAction extends GenericAction {
         if (!StringUtils.hasText(faq.getAnswer())) {
             addActionError(getText("faq.input.validation.answer"));
         }
+    }
+    
+    /**
+     * 
+     */
+    private void performValidateEdit() {
+        performValidateAdd();
     }
 
     /**
