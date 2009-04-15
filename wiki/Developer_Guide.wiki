@@ -2,11 +2,11 @@
 
 = Technical Pre-requisites =
 
-  * Install OpenJDK 1.6
-  * Install Netbeans 6.5
+  * Install OpenJDK 1.6 [http://openjdk.java.net/]
+  * Install Netbeans 6.5 [http://www.netbeans.org/downloads/index.html]
   * Create /opt/sws folder
   * Create /opt/sws/localRepo folder
-  * Download Maven 2.09
+  * Download Maven 2.09 [http://maven.apache.org/download.html]
   * Extract Maven to /opt/sws (The result must be /opt/sws/apache-maven-2.0.9)
 
 = Workstation Setup: Maven =
