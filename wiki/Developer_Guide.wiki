@@ -56,3 +56,4 @@
   * Click _Next_ button
   * At _Repository Folder(s)_ field type *ivela-commons, ivela-ear, ivela-ejb, ivela-services, ivela-web*
   * Click the _Finish_ button
+  * Check the option _Scan for Netbeans Projects after Checkout_
