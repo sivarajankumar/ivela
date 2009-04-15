@@ -55,5 +55,7 @@
   * At _Password_ field type your Google Code password (from [http://code.google.com/hosting/settings])
   * Click _Next_ button
   * At _Repository Folder(s)_ field type *ivela-commons, ivela-ear, ivela-ejb, ivela-services, ivela-web*
-  * Click the _Finish_ button
   * Check the option _Scan for Netbeans Projects after Checkout_
+  * Click the _Finish_ button
+  * After all these steps, Netbeans will make a checkout from Google Code's SVN repository
+  * Once checkout is finished Netbeans will ask to select projects to open, select: 
