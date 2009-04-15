@@ -8,6 +8,12 @@
     <name>ivela</name>
     <url>http://maven.apache.org</url>
     <developers>
+	<developer>
+            <id>jd.comment</id>
+            <name>Jose Ricardo de Oliveira Damico</name>
+            <email>jd.comment@gmail.com</email>
+            <organization>IBM</organization>
+        </developer>
         <developer>
             <id>marcus</id>
             <name>Marcus Holanda</name>
@@ -32,18 +38,17 @@
         <url>http://200.19.176.65/trac/projibm</url>
     </issueManagement>
     <scm>
-        <connection>scm:svn:http://maven:maven@200.19.176.65/svn/projibm/ivela</connection>
-        <developerConnection>scm:svn:http://200.19.176.65/svn/projibm/ivela</developerConnection>
-        <url>http://200.19.176.65/svn/projibm/ivela</url>
+        <connection>scm:svn:http://maven:maven@https://ivela.googlecode.com/svn/</connection>
+        <developerConnection>scm:svn:https://ivela.googlecode.com/svn/</developerConnection>
+        <url>https://ivela.googlecode.com/svn/</url>
     </scm>
     <modules>
-        <module>ivela-web</module>
-        <module>ivela-ejb</module>
+        <module>../ivela-web</module>
+        <module>../ivela-ejb</module>
         <!--module>ivela-services</module-->
-        <module>ivela-commons</module>
-        <module>ivela-ear</module>
-        <!--module>ivela-portal</module-->
-        <module>ivela-voice</module>
+        <module>../ivela-commons</module>
+        <module>../ivela-ear</module>
+        <module>../ivela-voice</module>
     </modules>
     <build>
         <plugins>
