@@ -28,6 +28,20 @@
   * At _Local Repository_ write /opt/sws/localRepo
   * At _Index_ write _Once a week_
   * Click the _Ok_ button
+  * Open the file _/home/${MYUSER}/.m2/settings.xml_
+  * Fill _settings.xml_ with the following content:
+{{{<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+	<mirrors>
+		<mirror>
+		<id>artifactory</id>
+		<mirrorOf>*</mirrorOf>
+		<url>http://repo1.maven.org/maven2</url>
+		<name>Artifactory</name>
+		</mirror>
+	</mirrors>
+	<localRepository>/opt/sws/localRepo</localRepository>
+</settings>}}}
 
 
 = Workstation Setup: Versioning =
@@ -39,3 +53,4 @@
   * At _Password_ field type your Google Code password (from [http://code.google.com/hosting/settings])
   * Click _Next_ button
   * At _Repository Folder(s)_ field type ivela-commons, ivela-ear, ivela-ejb, ivela-services, ivela-web
+  * Click the _Finish_ button
