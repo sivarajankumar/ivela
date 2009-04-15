@@ -30,7 +30,8 @@
   * Click the _Ok_ button
   * Open the file _/home/${MYUSER}/.m2/settings.xml_
   * Fill _settings.xml_ with the following content:
-{{{<?xml version="1.0" encoding="UTF-8"?>
+{{{
+<?xml version="1.0" encoding="UTF-8"?>
 <settings>
 	<mirrors>
 		<mirror>
@@ -41,7 +42,8 @@
 		</mirror>
 	</mirrors>
 	<localRepository>/opt/sws/localRepo</localRepository>
-</settings>}}}
+</settings>
+}}}
 
 
 = Workstation Setup: Versioning =
