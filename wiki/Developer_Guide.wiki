@@ -9,7 +9,7 @@
   * Download Maven 2.09
   * Extract Maven to /opt/sws (The result must be /opt/sws/apache-maven-2.0.9)
 
-= Workstation Setup =
+= Workstation Setup: Maven =
 
 
   * Start Netbeans
@@ -26,3 +26,4 @@
   * Check _No Global policy_ twice
   * At _Local Repository_ write /opt/sws/localRepo
   * At _Index_ write _Once a week_
+  * Click the _Ok_ button
