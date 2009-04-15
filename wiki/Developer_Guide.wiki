@@ -37,3 +37,5 @@
   * At _Repository URL_ field type https://ivela.googlecode.com/svn/
   * At _User_ field type with you Gmail user (without @gmail.com)
   * At _Password_ field type your Google Code password (from [http://code.google.com/hosting/settings])
+  * Click _Next_ button
+  * At _Repository Folder(s)_ field type 
