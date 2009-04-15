@@ -1,0 +1,22 @@
+#summary Instructions to start Ivela Development
+
+= Technical Pre-requisites =
+
+  * Install OpenJDK 1.6
+  * Install Netbeans 6.5
+  * Create /opt/sws folder
+  * Download Maven 2.09
+  * Extract Maven to /opt/sws (The result must be /opt/sws/apache-maven-2.0.9)
+
+= Workstation Setup =
+
+
+  * Start Netbeans
+  * Go to _Tools > Plugins_
+  * Go to _Available Plugins_
+  * Select _Maven_ and click the _Install_ button
+  * Once _Maven_ plugin is installed click the _Close_ button
+  * Go to _Tools > Options_
+  * Go to _Miscellaneous_ tab
+  * Click on _Maven_ tab
+  * At _External Maven Home_ write /opt/sws/apache-maven-2.0.9
