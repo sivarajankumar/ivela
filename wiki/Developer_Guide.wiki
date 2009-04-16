@@ -78,3 +78,8 @@
   $ psql -f /opt/sws/sql/ivela_structure.sql
   $ psql -f /opt/sws/sql/ivela_basic_data.sql
 }}}
+
+= Workstation Setup: Glassfish =
+
+  * Go to [http://jdbc.postgresql.org/download.html] and get JDBC type 4 .jar driver
+  * Save the downloaded jar archive (postgresql-8.3-604.jdbc4.jar) to _/usr/local/glassfish-v2ur2/lib_
