@@ -58,4 +58,12 @@
   * Check the option _Scan for Netbeans Projects after Checkout_
   * Click the _Finish_ button
   * After all these steps, Netbeans will make a checkout from Google Code's SVN repository
-  * Once checkout is finished Netbeans will ask to select projects to open, select: 
+  * Once checkout is finished Netbeans will ask to select projects to open, select: *ivela, ivela-commons, ivela-ear, ivela-ejb, ivela-web*
+
+= Workstation Setup: Database =
+
+  * Install PostgreSQL 8.3
+  $ createdb ivela
+  $ psql ivela
+  $ psql -f /opt/sws/sql/ivela_structure.sql
+  $ psql -f /opt/sws/sql/ivela_basic_data.sql
