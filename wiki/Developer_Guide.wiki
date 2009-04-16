@@ -66,6 +66,7 @@
   * Create database, structure tables and import basic data:
 {{{
   $ createdb ivela
+  $ su postgres
   $ psql ivela
   $ psql -f /opt/sws/sql/ivela_structure.sql
   $ psql -f /opt/sws/sql/ivela_basic_data.sql
