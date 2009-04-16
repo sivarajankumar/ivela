@@ -6,6 +6,7 @@
   * Install Netbeans 6.5 [http://www.netbeans.org/downloads/index.html]
   * Create /opt/sws folder
   * Create /opt/sws/localRepo folder
+  * Create /opt/sws/sql folder
   * Download Maven 2.09 [http://maven.apache.org/download.html]
   * Extract Maven to /opt/sws (The result must be /opt/sws/apache-maven-2.0.9)
   * Install Subversion
@@ -64,6 +65,7 @@
 
   * Install PostgreSQL 8.3
   * Go to [http://code.google.com/p/ivela/downloads/list] and donwload _ivela_structure.sql & ivela_basic_data.sql_
+  * Save downloaded sql files into _/opt/sws/sql_
   * Create database, structure tables and import basic data:
 {{{
   $ adduser ivela
