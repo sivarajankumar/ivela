@@ -65,8 +65,11 @@
   * Install PostgreSQL 8.3
   * Create database, structure tables and import basic data:
 {{{
-  $ createdb ivela
+  $ adduser ivela
   $ su postgres
+  $ createuser -s ivela
+  $ su ivela
+  $ createdb ivela
   $ psql ivela
   $ psql -f /opt/sws/sql/ivela_structure.sql
   $ psql -f /opt/sws/sql/ivela_basic_data.sql
