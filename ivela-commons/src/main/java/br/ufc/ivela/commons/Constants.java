@@ -101,6 +101,7 @@ public class Constants {
      
      public static final String MAIL_SMTP_HOST = "smtp.ufc.br";
      public static final int MAIL_SMTP_PORT = 25;
-     public static final String MAIL_FROM = "no-reply@ivela.ufc.br";     
+     public static final String MAIL_FROM = "no-reply@ivela.ufc.br";
+    public static String DEFAULT_LOCALE = "en_US";
              
 }
