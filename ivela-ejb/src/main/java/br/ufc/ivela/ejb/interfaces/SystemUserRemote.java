@@ -78,4 +78,6 @@ public interface SystemUserRemote {
     
     public List<SystemUser> getUsersByUsername(String username);
     
+    public List<SystemUser> getByUsernameByAuthentication(String username,Long authenticationId);
+    
 }

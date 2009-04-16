@@ -107,11 +107,15 @@ public class SystemUserBean implements SystemUserRemote {
     }
 
     public List<SystemUser> getByUsername(String username) {
-        return (List<SystemUser>) daoSystemUser.find("select su from SystemUser su where su.username = ? and su.enabled = true", new Object[] { username });
+        return (List<SystemUser>) daoSystemUser.find("select su from SystemUser su where upper(su.username) = ? and su.enabled = true", new Object[] { username.toUpperCase() });
+    }
+    
+    public List<SystemUser> getByUsernameByAuthentication(String username,Long authenticationId) {
+        return (List<SystemUser>) daoSystemUser.find("select su from SystemUser su where upper(su.username) LIKE  ? and su.authentication.id  = ? and su.enabled = true", new Object[] { username.toUpperCase()+ "%",authenticationId });
     }
     
     public List<SystemUser> getUsersByUsername(String username) {
-        return (List<SystemUser>) daoSystemUser.find("select su from SystemUser su where su.username LIKE ? and su.enabled = true", new Object[] { username + "%" });
+        return (List<SystemUser>) daoSystemUser.find("select su from SystemUser su where upper(su.username) LIKE ? and su.enabled = true", new Object[] { username.toUpperCase() + "%" });
     }
     
 }

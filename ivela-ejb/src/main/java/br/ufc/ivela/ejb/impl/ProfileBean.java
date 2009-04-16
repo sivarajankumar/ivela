@@ -9,6 +9,7 @@ import br.ufc.ivela.commons.dao.GenericDao;
 import br.ufc.ivela.commons.model.Profile;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.util.Thumbnail;
+import br.ufc.ivela.commons.util.Thumbnail2;
 import br.ufc.ivela.ejb.interfaces.ProfileRemote;
 import br.ufc.ivela.ejb.*;
 import java.io.File;
@@ -51,7 +52,7 @@ public class ProfileBean implements ProfileRemote {
         return daoProfile.getAll();
     }
 
-    public void savePhoto(Profile p, File file) {
+    public Boolean savePhoto(Profile p, File file) {
         InputStream data = null;
         try {
             java.io.File f = new java.io.File(p.getPhoto());
@@ -64,9 +65,11 @@ public class ProfileBean implements ProfileRemote {
             }
             out.close();
             data.close();
-            //Thumbnail.createThumbnail(p.getPhoto(), p.getPhoto(), 100);            
+            Thumbnail2.processSquareThumbnail(f.getPath(), f.getPath(), 80, "80");
+            return true;      
         } catch (Exception ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 

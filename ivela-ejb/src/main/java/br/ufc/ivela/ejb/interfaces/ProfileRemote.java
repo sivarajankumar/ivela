@@ -62,7 +62,7 @@ public interface ProfileRemote {
      * 
      * @return
      */
-    public void savePhoto(Profile p, File fileIo);
+    public Boolean savePhoto(Profile p, File fileIo);
     
     public Profile getBySystemUserId(Long systemUserId);
 }
