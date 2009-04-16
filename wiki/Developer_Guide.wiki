@@ -72,6 +72,9 @@
   $ adduser ivela
   $ su postgres
   $ createuser -s ivela
+  $ psql
+  postgres=# ALTER USER ivela WITH PASSWORD 'mypasswd';
+  postgres=# \q
   $ su ivela
   $ createdb ivela
   $ psql ivela
