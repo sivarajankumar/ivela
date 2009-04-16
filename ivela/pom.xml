@@ -33,10 +33,6 @@
             <organization>Universidade Federal do Ceara</organization>
         </developer>
     </developers>
-<issueManagement>
-        <system>Trac</system>
-        <url>http://200.19.176.65/trac/projibm</url>
-    </issueManagement>
     <scm>
         <connection>scm:svn:http://maven:maven@https://ivela.googlecode.com/svn/</connection>
         <developerConnection>scm:svn:https://ivela.googlecode.com/svn/</developerConnection>
@@ -45,10 +41,8 @@
     <modules>
         <module>../ivela-web</module>
         <module>../ivela-ejb</module>
-        <!--module>ivela-services</module-->
         <module>../ivela-commons</module>
         <module>../ivela-ear</module>
-        <module>../ivela-voice</module>
     </modules>
     <build>
         <plugins>
