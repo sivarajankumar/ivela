@@ -63,6 +63,7 @@
 = Workstation Setup: Database =
 
   * Install PostgreSQL 8.3
+  * Go to [http://code.google.com/p/ivela/downloads/list] and donwload _ivela_structure.sql & ivela_basic_data.sql_
   * Create database, structure tables and import basic data:
 {{{
   $ adduser ivela
