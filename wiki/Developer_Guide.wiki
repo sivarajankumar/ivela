@@ -5,7 +5,7 @@
   * Install OpenJDK 1.6 [http://openjdk.java.net/]
   * Install Netbeans 6.5 [http://www.netbeans.org/downloads/index.html]
   * Create /opt/sws folder
-  * Go to [http://code.google.com/p/ivela/downloads/list] and donwload _localRepo.tar.gz_
+  * Go to [http://code.google.com/p/ivela/downloads/list] and download _localRepo.tar.gz_
   * Extract the content of _localRepo.tar.gz_ at _/opt/sws_
   * Create /opt/sws/sql folder
   * Download Maven 2.09 [http://maven.apache.org/download.html]
