@@ -95,3 +95,6 @@
   * Select _Start_
   * After started, Right click of mouse at _Glassfish V2_ and select _View Admin Console_
   * Enter as admin (admin / adminadmin)
+  * After login, go to _Resources > Connection Pools_
+  * Create a new _Connection Pool_ with name _ivela.postgresql_
+  * 
