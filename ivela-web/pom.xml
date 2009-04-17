@@ -204,7 +204,7 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <copy file="${project.build.directory}/${project.artifactId}.war" todir="/home/ivela/glassfish/domains/domain1/autodeploy/" overwrite="true" failonerror="false" />
+                                <copy file="${project.build.directory}/${project.artifactId}.war" todir="/usr/local/glassfish-v2ur2/domains/domain1/autodeploy/" overwrite="true" failonerror="false" />
                             </tasks>
                         </configuration>
                         <goals>
