@@ -19,7 +19,7 @@ try and register the EJB twice. we exclude it here so that we don't run into thi
         <fileSet>
 <!-- include the code for the EJB -->
             <directory>target/classes</directory>
-            <outputDirectory></outputDirectory>
+            <outputDirectory>/tmp</outputDirectory>
         </fileSet>
     </fileSets>
 </assembly>

@@ -103,7 +103,7 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <copy file="${project.build.directory}/${project.artifactId}-${project.version}-with-dependencies.jar" todir="/home/ivela/glassfish/domains/domain1/autodeploy/" overwrite="true" failonerror="false" />
+                                <copy file="${project.build.directory}/${project.artifactId}-${project.version}-with-dependencies.jar" todir="/usr/local/glassfish-v2ur2/domains/domain1/autodeploy/" overwrite="true" failonerror="false" />
                             </tasks>
                         </configuration>
                         <goals>
