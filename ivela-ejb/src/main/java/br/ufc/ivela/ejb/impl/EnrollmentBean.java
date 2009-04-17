@@ -67,7 +67,7 @@ public class EnrollmentBean implements EnrollmentRemote {
     public List<Enrollment> getByGrade(Long idGrade) {
         //return daoEnrollment.getByFK("grade.id", idGrade);
         Object[] params = new Object[]{idGrade};
-        return daoEnrollment.find("select e from Enrollment e, Grade g, Course c WHERE e.grade.id = ? and e.grade.id = g.id and g.courseId = c.id and c.active = true", params);
+        return daoEnrollment.find("select e from Enrollment e, Grade g, Course c, SystemUser su WHERE e.grade.id = ? and e.grade.id = g.id and g.courseId = c.id and c.active = true and e.systemUser.id = su.id and su.enabled = true", params);
 
     }
 

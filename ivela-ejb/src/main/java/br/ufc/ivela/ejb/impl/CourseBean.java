@@ -17,6 +17,7 @@ import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.model.Unit;
 import br.ufc.ivela.commons.model.UnitContent;
+import br.ufc.ivela.commons.util.Thumbnail2;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -246,8 +247,6 @@ public class CourseBean implements CourseRemote {
     }
 
     public List<Course> getStructure() {
-
-
         List<Course> list = getAll();
 
         for (Course course : list) {
@@ -397,35 +396,18 @@ public class CourseBean implements CourseRemote {
                 "and u.disciplineId = d.id " +
                 "and d.courseId = ? and f.systemUser = ?", new Object[]{courseId, systemUserId});
 
-        //System.out.println("%%%%%%%%%%%%%%%%%%%%%%%");
         int cUnitContents = (allUnitContents != null) ? allUnitContents.size() : 0;
         int cExercises = (allExercises != null) ? allExercises.size() : 0;
         int cExams = (allExams != null) ? allExams.size() : 0;
-        
-        //System.out.println(cUnitContents);
-        //System.out.println(cExercises);
-        //System.out.println(cExams);
         
         int cFinishedUnitContents = (finishedUnitContents != null) ? finishedUnitContents.size() : 0;
         int cFinishedExercises = (finishedExercises != null) ? finishedExercises.size() : 0;
         int cFinishedExams = (finishedExams != null) ? finishedExams.size() : 0;
 
-        //System.out.println(cFinishedUnitContents);
-        //System.out.println(cFinishedExercises);
-        //System.out.println(cFinishedExams);
-        
-        //System.out.println("%%%%%%%%%%%%%%%%%%%%%%%");
-
         int all =  cUnitContents + cExercises + cExams;
         int done = cFinishedUnitContents + cFinishedExercises + cFinishedExams;
         
-        //System.out.println("all " + all);
-        //System.out.println("done " + done);
-        
         double rate = (double) ((double) done / (double) all) * 100;
-        
-        //System.out.println("rate double: " + rate);
-        //System.out.println("rate int: " + ((int) rate));
         
         return (int) rate;
     }
@@ -443,7 +425,7 @@ public class CourseBean implements CourseRemote {
             }
             out.close();
             data.close();
-            //Thumbnail.createThumbnail(p.getImage(), p.getImage(), 100);
+            Thumbnail2.processSquareThumbnail(f.getPath(), f.getPath(), 80, "80");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -462,8 +444,7 @@ public class CourseBean implements CourseRemote {
             if(disciplineBean.isDisciplineFinished(studentId, disciplineId, gradeId))
                finished++; 
         }
-        //System.out.println(finished);
-        //System.out.println(total);
+        
         double resd = finished/(double)total;
         res = (int)(resd*10);
         return res;

@@ -132,7 +132,7 @@ public class GradeBean implements GradeRemote {
         for (Course course : list) {
             course.setGrades(daoGrade.getByFK("courseId", course.getId()));
             for (Grade grade : course.getGrades()) {
-                grade.setEnrollments(daoEnroll.getByFK("grade.id", grade.getId()));
+                grade.setEnrollments(daoEnroll.find("select e from Enrollment e, SystemUser su where e.grade.id = ? and e.systemUser.id = su. id and su.enabled = true", new Object[]{grade.getId()}));
                 List<SystemUser> professors = getProfessors(grade.getId());
                 List<SystemUser> tutors = getTutors(grade.getId());
                 List<Forum> forums = daoForum.getByFK("grade.id", grade.getId());
