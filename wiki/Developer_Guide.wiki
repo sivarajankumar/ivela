@@ -97,4 +97,4 @@
   * Enter as admin (admin / adminadmin)
   * After login, go to _Resources > Connection Pools_
   * Create a new _Connection Pool_ with name _ivela.postgresql_
-  * 
+  * Make sure that _Datasource Classname_ is _org.postgresql.ds.PGSimpleDataSource_ and _Resource Type_ is _javax.sql.DataSource_
