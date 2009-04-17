@@ -142,16 +142,4 @@
         </action>
         
     </package>
-</struts>      
-            <result name="searchInbox" type="redirect">{1}!inbox.action?page=${page}&amp;messageTitle=${messageTitle}</result>  
-            <result name="searchOutbox" type="redirect">{1}!outbox.action?page=${page}&amp;messageTitle=${messageTitle}</result>  
-            
-            <result name="listRedirect" type="redirect">{1}!list.action</result>
-            <result name="listRepository" type="redirect">{1}!list.action?courseId=${courseId}&amp;dirId=${dirId}</result>
-            
-            
-            
-        </action>
-        
-    </package>
 </struts>

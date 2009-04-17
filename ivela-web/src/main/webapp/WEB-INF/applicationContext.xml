@@ -165,6 +165,8 @@
         -->        
         <bean id="admin_challengeAction" class="br.ufc.ivela.web.action.admin.ChallengeAction" scope="prototype"/>
         
+        <bean id="admin_repositoryAction" class="br.ufc.ivela.web.action.admin.RepositoryAction" scope="prototype"/>
+        
         <bean id="admin_scorecardAction" class="br.ufc.ivela.web.action.admin.ScorecardAction" scope="prototype"/>
         
        <bean id="admin_homeAction" class="br.ufc.ivela.web.action.admin.HomeAction" scope="prototype"/>
@@ -236,10 +238,6 @@
        <bean id="faqAction" class="br.ufc.ivela.web.action.FaqAction" scope="prototype"/>
        
        <bean id="aboutUsAction" class="br.ufc.ivela.web.action.AboutUsAction" scope="prototype"/>
-       
-       
-           
-</beans>bean id="aboutUsAction" class="br.ufc.ivela.web.action.AboutUsAction" scope="prototype"/>
        
        
            
