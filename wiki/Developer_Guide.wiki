@@ -99,3 +99,5 @@
   * Create a new _Connection Pool_ with name _ivela.postgresql_
   * Make sure that _Datasource Classname_ is _org.postgresql.ds.PGSimpleDataSource_ and _Resource Type_ is _javax.sql.DataSource_
   * At _Additional Properties_ set the follow properties: _User = ivela, DatabaseName = ivela, Password = mypasswd, Ssl = false, ServerName = 127.0.0.1, PortNumber = 5432_
+  * Go to _Resources > JDBC Resources_ and create a new resource
+  * Make sure that the _JNDI Name_ is _jdbc/ivelaDataSource_ and the _Pool Name_ is _ivela.postgresql_
