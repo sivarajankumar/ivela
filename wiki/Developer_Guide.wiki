@@ -89,3 +89,8 @@
 
   * Go to [http://jdbc.postgresql.org/download.html] and get JDBC type 4 .jar driver
   * Save the downloaded jar archive (postgresql-8.3-604.jdbc4.jar) to _/usr/local/glassfish-v2ur2/lib_
+  * Open Netbeans and go to _Services_ tab
+  * At _Servers_ choose _Glassfish V2_
+  * Right click of mouse at _Glassfish V2_
+  * Select _Start_
+  * After started, Right click of mouse at _Glassfish V2_ and select _View Admin Console_
