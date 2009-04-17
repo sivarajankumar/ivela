@@ -22,7 +22,7 @@
                 <configuration>
                     <displayName>Ivela Enterprise Archive</displayName>
                     <description>includes EJBS and War file</description>
-                    <earSourceDirectory>EarContent</earSourceDirectory>
+                    <earSourceDirectory>/tmp</earSourceDirectory>
                     <modules>
                         <!--javaModule>
                             <groupId>br.ufc.ivela</groupId>
