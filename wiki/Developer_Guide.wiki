@@ -127,3 +127,10 @@
   * Set _Digest Algorithm_ as _none_
   * Go to [http://code.google.com/p/ivela/downloads/list] and download _webical.war_
   * Install _webical.war_ into Glassfish
+  * Go to terminal and execute the following commands:
+{{{
+  $ su ivela
+  $ psql ivela
+  ivela=# INSERT INTO application_settings VALUES (1, NULL, '${java.io.tmpdir}', '.zip', 5000, true, 'webical', 'webical');
+  ivela=# \q
+}}}
