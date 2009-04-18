@@ -125,3 +125,5 @@
   * Set _Group Table_ as _ `_auth_userrole`_
   * Set _Group Name Column_ as _role_
   * Set _Digest Algorithm_ as _none_
+  * Go to [http://code.google.com/p/ivela/downloads/list] and download _webical.war_
+  * Install _webical.war_ into Glassfish
