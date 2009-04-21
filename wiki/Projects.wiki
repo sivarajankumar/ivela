@@ -1,6 +1,9 @@
-#summary Open source projects used by Ivela
+#summary Main Open source projects used by Ivela
 
 || GlasshFish || GPL v2 / CDDL || 2 ||
 || Hibernate || LGPL || 3.2.1 ||
 || Jersey || GPL v2 / CDDL || 1.0 ||
 || Julius: Large Vocabulary Continuous Speech Recognition Engine || BSD || 4.0.2 ||
+|| Maven || Apache License 2.0 || 2.0.9 ||
+|| OpenJDK || GPL v2 || 1.6 ||
+|| PostgreSQL || BSD || 8.3.1 ||
