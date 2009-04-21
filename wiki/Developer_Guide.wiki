@@ -14,7 +14,7 @@
   * Extract Maven to /opt/sws (The result must be /opt/sws/apache-maven-2.0.9)
   * Install Subversion
   * Subscribe our group [http://groups.google.com.br/group/ivela/]
-  * Stay on in our IRC
+  * Stay on in our [http://code.google.com/p/ivela/wiki/IRC IRC]
 
 = Workstation Setup: Maven =
 
