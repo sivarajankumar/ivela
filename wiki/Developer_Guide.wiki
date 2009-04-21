@@ -4,12 +4,12 @@
 
 <table><tr><td>
 The project maintainer strongly recommends the use of Linux as main Operating System for Ivela development. The most used distributions were:
-  * Debian Lenny (i386)
-  * Ubuntu Hardy Heron (amd64 / i386)
+   Debian Lenny (i386)
+   Ubuntu Hardy Heron (amd64 / i386)
 
 For tests in other platforms the recommendation is the use of [http://www.virtualbox.org/ VirtualBox]. For IE testing inside Linux the recommendation is the use of [http://www.tatanka.com.br/ies4linux/page/Main_Page IE4Linux] under Wine.
-</tr>
-</td></table>
+</td></tr>
+</table>
 
   * Install OpenJDK 1.6 [http://openjdk.java.net/]
   * Install Netbeans 6.5 [http://www.netbeans.org/downloads/index.html]
