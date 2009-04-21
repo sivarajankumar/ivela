@@ -2,7 +2,7 @@
 
 || [https://glassfish.dev.java.net/ GlasshFish] || GPL v2 / CDDL || 2 ||
 || [http://www.hibernate.org/ Hibernate] || LGPL || 3.2.1 ||
-|| [Jersey] || GPL v2 / CDDL || 1.0 ||
+|| [http://jersey.dev.java.net/ Jersey] || GPL v2 / CDDL || 1.0 ||
 || [http://julius.sourceforge.jp/en_index.php Julius: Large Vocabulary Continuous Speech Recognition Engine] || BSD || 4.0.2 ||
 || [http://maven.apache.org/ Maven] || Apache License 2.0 || 2.0.9 ||
 || [http://openjdk.java.net/projects/jdk6/ OpenJDK] || GPL v2 || 1.6 ||
