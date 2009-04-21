@@ -3,10 +3,10 @@
 = Technical Pre-requisites =
 
 *The project maintainer strongly recommends the use of Linux as main Operating System for Ivela development. The most used distributions were:
-  * Debian Lenny
-  * Ubuntu Hardy Heron
+  * Debian Lenny (i386)
+  * Ubuntu Hardy Heron (amd64 / i386)
 
-For tests in other platforms the recommendation is the use of [http://www.virtualbox.org/ VirtualBox]. For IE testing inside Linux the recommendation is the use of [http://www.tatanka.com.br/ies4linux/page/Main_Page IE4Linux] under Wine.* 
+*For tests in other platforms the recommendation is the use of [http://www.virtualbox.org/ VirtualBox]. For IE testing inside Linux the recommendation is the use of [http://www.tatanka.com.br/ies4linux/page/Main_Page IE4Linux] under Wine.* 
 
   * Install OpenJDK 1.6 [http://openjdk.java.net/]
   * Install Netbeans 6.5 [http://www.netbeans.org/downloads/index.html]
@@ -19,6 +19,7 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
   * Download Maven 2.09 [http://maven.apache.org/download.html]
   * Extract Maven to /opt/sws (The result must be /opt/sws/apache-maven-2.0.9)
   * Install Subversion
+  * Install [https://addons.mozilla.org/en-US/firefox/addon/1843 Firebug] add-on into Firefox
   * Subscribe our group [http://groups.google.com.br/group/ivela/]
   * Stay on in our [http://code.google.com/p/ivela/wiki/IRC IRC]
 
