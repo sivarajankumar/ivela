@@ -2,7 +2,7 @@
 
 = Technical Pre-requisites =
 
-*The project maintainer strongly recommends the use of Linux as main Operating System for Ivela development* 
+*"The project maintainer strongly recommends the use of Linux as main Operating System for Ivela development"* 
 
   * Install OpenJDK 1.6 [http://openjdk.java.net/]
   * Install Netbeans 6.5 [http://www.netbeans.org/downloads/index.html]
