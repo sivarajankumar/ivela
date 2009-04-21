@@ -7,3 +7,5 @@
 || Maven || Apache License 2.0 || 2.0.9 ||
 || OpenJDK || GPL v2 || 1.6 ||
 || PostgreSQL || BSD || 8.3.1 ||
+|| Spring || Apache License 2.0 || 2.5.4 ||
+|| Struts || Apache License 2.0 || 2.0.11.1 ||
