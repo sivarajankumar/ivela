@@ -14,3 +14,8 @@
 || [http://voxforge.org/home VoxForge] || GPL v2 || 3.5.2 ||
 
 == New projects ==
+
+|| [http://code.google.com/p/ivelavoice/ ivelavoice] || GPL v2 || 2.0.1 ||
+|| [http://code.google.com/p/ircivelaclient/ ircivelaclient] || GPL v2 || 3.5.2 ||
+|| [http://code.google.com/p/gaugeapplet/ gaugeapplet] || GPL v2 || 0.0.1 ||
+|| [http://code.google.com/p/javaquerybuilder/ javaquerybuilder] || GPL v2 || 0.0.1 ||
