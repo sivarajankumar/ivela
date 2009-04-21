@@ -1,5 +1,7 @@
 #summary Main Open source projects used by Ivela
 
+== Existent projects ==
+
 || [https://glassfish.dev.java.net/ GlasshFish] || GPL v2 / CDDL || 2 ||
 || [http://www.hibernate.org/ Hibernate] || LGPL || 3.2.1 ||
 || [http://jersey.dev.java.net/ Jersey] || GPL v2 / CDDL || 1.0 ||
@@ -10,3 +12,5 @@
 || [http://www.springframework.org/ Spring] || Apache License 2.0 || 2.5.4 ||
 || [http://struts.apache.org/2.x/index.html Struts] || Apache License 2.0 || 2.0.11.1 ||
 || [http://voxforge.org/home VoxForge] || GPL v2 || 3.5.2 ||
+
+== New projects ==
