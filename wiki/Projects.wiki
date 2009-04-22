@@ -13,6 +13,7 @@
 || [http://www.springframework.org/ Spring] || Apache License 2.0 || 2.5.4 ||
 || [http://struts.apache.org/2.x/index.html Struts] || Apache License 2.0 || 2.0.11.1 ||
 || [http://voxforge.org/home VoxForge] || GPL v2 || 3.5.2 ||
+|| [http://code.google.com/p/webical/ Webical] || GPL v3 || 4.0 ||
 
 == New projects ==
 
