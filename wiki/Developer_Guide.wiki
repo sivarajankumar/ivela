@@ -92,6 +92,7 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
   $ createdb ivela
   $ psql ivela
   postgres=# \q
+  $ su ivela
   $ psql -f /opt/sws/sql/ivela_structure.sql
   $ psql -f /opt/sws/sql/ivela_basic_data.sql
 }}}
