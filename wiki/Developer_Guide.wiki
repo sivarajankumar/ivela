@@ -11,7 +11,7 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
 
 
   * Install OpenJDK 1.6 [http://openjdk.java.net/]
-  * Install Netbeans 6.5 [http://www.netbeans.org/downloads/index.html]
+  * Install Netbeans 6.5 [http://www.netbeans.org/downloads/index.html]. From Netbeans site, download the _Java Web and EE_ bundle
   * Create /opt/sws folder (Remember to grant read/write access to your user for this folder)
   * Go to [http://code.google.com/p/ivela/downloads/list] and download _localRepo.tar.gz_
   * Extract the content of _localRepo.tar.gz_ at _/opt/sws_ (The result must be /opt/sws/localRepo)
