@@ -12,13 +12,13 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
 
   * Install OpenJDK 1.6 [http://openjdk.java.net/]
   * Install Netbeans 6.5 [http://www.netbeans.org/downloads/index.html]
-  * Create /opt/sws folder
+  * Create /opt/sws folder (Remember to grant read/write access to your user for this folder)
   * Go to [http://code.google.com/p/ivela/downloads/list] and download _localRepo.tar.gz_
   * Extract the content of _localRepo.tar.gz_ at _/opt/sws_ (The result must be /opt/sws/localRepo)
-  * Create /opt/sws/sql folder
+  * Create /opt/sws/sql folder 
   * Go to [http://code.google.com/p/ivela/downloads/list] and download _ivela_fileSystem.tar.gz_
-  * Extract the content of _ivela_fileSystem.tar.gz_ at _/opt/_ (The result must be /opt/ivela)
-  * Download Maven 2.09 [http://maven.apache.org/download.html]
+  * Extract the content of _ivela_fileSystem.tar.gz_ at _/opt/_ . The result must be /opt/ivela (Remember to grant read/write access to your user for this folder)
+  * Download Maven 2.09 [http://maven.apache.org/download.html
   * Extract Maven to /opt/sws (The result must be /opt/sws/apache-maven-2.0.9)
   * Install Subversion
   * Install [https://addons.mozilla.org/en-US/firefox/addon/1843 Firebug] add-on into Firefox
