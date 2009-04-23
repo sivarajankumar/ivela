@@ -25,11 +25,14 @@
 
     <h1><s:text name="profile.edit"/></h1> <br />
     <br />
+    
+    <s:actionerror />
+    
     <s:if test="sucess==true"><h2> <s:text name="profile.updateSucess" /></h2> </s:if>
     <s:form action="profile!update.action" method="post" cssClass="form"enctype="multipart/form-data" theme="simple">
 
         <p><a href="systemUser!inputChange.action"><s:text name="profile.edit.password" /></a></p>
-        <br />
+        
         <s:hidden name="profile.id" value="%{profile.id}"/>
         <s:hidden name="address.state.id" value="%{inAddress.state.id}"/>
         <fieldset><legend><s:text name="systemUser.input.personalInfo"/></legend>

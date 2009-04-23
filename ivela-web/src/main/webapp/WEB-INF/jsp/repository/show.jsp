@@ -23,7 +23,7 @@
 <h1><s:text name="repository.list.title"/></h1>
 
 <div id="col-1-home">
-    <p><a href="#" onclick="newDir();">Add Directory</a></p>
+    <!--p><a href="#" onclick="newDir();">Add Directory</a></p-->
 
     <div id="category_container" >
         <s:iterator value="repository.directories">
@@ -72,7 +72,7 @@
 
                 <input type="hidden" id="file.id"/>
                 <p><a href="#" onclick="download();">Download file</a></p>
-                <p><a href="#" onclick="removeFile();">Remove file</a></p>
+                <!--p><a href="#" onclick="removeFile();">Remove file</a></p-->
 
                 <br class="clear" />
             </div>
@@ -88,11 +88,11 @@
 
                 <p><span id="dirInfo.count"></span></p>
 
-                <p><a href="#" onclick="openUpload();">Add File</a></p>
+                <!--p><a href="#" onclick="openUpload();">Add File</a></p>
                 <div id="subdir" style="display:none;">
                     <p><a href="#" onclick="openSubDir();">Add Sub-Directory</a></p>
                 </div>
-                <p><a href="#" onclick="removeDir();">Remove Directory</a></p>
+                <p><a href="#" onclick="removeDir();">Remove Directory</a></p-->
 
                 <br class="clear" />
             </div>
@@ -100,7 +100,7 @@
     </div>
 </div>
 
-<div id="upload" style="display:none;">
+<%--div id="upload" style="display:none;">
     <div id="col-2-home">
         <div class="container-courses">
             <div class="content-courses">
@@ -144,7 +144,5 @@
                 <br class="clear" />
             </div>
         </div>
-    </div>
-</div>
     </div>
 </div--%>

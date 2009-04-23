@@ -16,12 +16,15 @@
 
         <s:head />
     </head>
-
-    <s:actionmessage/>
     
     <div class="register">
         <h1><s:text name="systemUser.password.change"/></h1> <br />
         <br />
+
+        <a href="profile!edit.action"><img src="images/arrow-left.gif" /> <s:text name="systemUser.input.btnBack" /></a>
+        
+        <s:actionerror/>
+        <s:actionmessage/>
 
         <s:form action="systemUser!change.action" method="post" cssClass="form">
 
@@ -45,8 +48,5 @@
             <span><s:submit cssClass="btn-save" key="systemUser.input.btnSave" theme="simple"/></span>
 
         </s:form>
-    </div>
-</html>
-</s:form>
     </div>
 </html>

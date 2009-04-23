@@ -17,8 +17,9 @@
     <s:textfield cssClass="field" name="topicTitle" />
     <s:submit cssClass="button" src="images/bottons/btn-search.gif" type="image" />
 </s:form>
-
+<br />
 <jsp:include page="paginator.jsp"/>
+<br />
 <s:actionmessage />
 <div id="breadcrumb">
     <s:url id="listForum" action="forum" method="list">
@@ -90,4 +91,4 @@
 
 </script>
 
-<jsp:include page="paginator.jsp"/>inator.jsp"/>
+<jsp:include page="paginator.jsp"/>

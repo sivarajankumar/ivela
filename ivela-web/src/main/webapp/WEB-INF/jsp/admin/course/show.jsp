@@ -57,7 +57,7 @@
 <div id="breadcrumb">
     <p><s:text name="breadcrumb.youAreHere"/></p>
     <ul>
-        <li><a href="home.action"><s:text name="admin.home"/></a></li>
+        <li><a href="index.action"><s:text name="admin.home"/></a></li>
         <li class="current"><s:text name="admin.courses" /></li>
     </ul>
 </div>
@@ -75,7 +75,7 @@
             <h3 class="no_grades"><s:text name="admin.nocourses" /></h3>
         </s:if>
         <s:else>
-            <s:iterator value="courseList">
+            <s:iterator value="courseList" id="courseList">
                 <s:if test="name.length() > 22">
                     <h3 class="accordion_toggle_course2" title="<s:property value="name" />"><s:property value="name.substring(0, 22)" />...</h3>
                 </s:if>
@@ -109,7 +109,7 @@
                                                 <s:else>
                                                     <h5 class="vertical_accordion_toggle2"><s:property value="name" /></h5>
                                                 </s:else>                                    
-                                                <div class="vertical_accordion_content2" id="<s:property value="id" />">
+                                                <div class="vertical_accordion_content2" id="<s:property value="id" />_<s:property value="#courseList.uploadPackageEnabled.toString()" />_<s:property value="#courseList.challengeItensEnabled.toString()" />">
                                                     <div id="vertical_nested_container3">
                                                         <s:if test="(unitContents == null || unitContents.size() == 0)">
                                                             <h4 class="no_grades"><s:text name="admin.nounitcontents" /></h4>
@@ -122,7 +122,7 @@
                                                                 <s:else>
                                                                     <h6 class="vertical_accordion_toggle3"><s:property value="title" /></h6>
                                                                 </s:else>                                    
-                                                                <div class="vertical_accordion_content3" id="<s:property value="id" />">
+                                                                <div class="vertical_accordion_content3" id="<s:property value="id" />_<s:property value="id" />_<s:property value="id" />">
                                                                     <div id="vertical_nested_container4">
                                                                         
                                                                         <h6 class="vertical_accordion_toggle4" id="exercises" >Exercises</h6>
@@ -172,6 +172,7 @@
 </div>
 <!-- end col-1-home -->
 
+<!-- block to add a new course -->
 <div id="showEntryCourse" style="display: none;">
     <div id="col-2-home">
         <div class="container-courses">
@@ -180,12 +181,12 @@
                 <h1><s:text name="home.course" /></h1><br/><br/><br/>
                 <label><s:text name="course.input.name" /></label><br/>
                 <input type="hidden" name="input.course.repository" id="input.course.repository" value=""/>
-                <input type="text" name="input.course.name" id="input.course.name" value="" size="61" maxlength="35" /><a href="#" class="tooltip" onmouseover="return escape('Entre com o nome do curso')"></a><br/>
+                <input type="text" name="input.course.name" id="input.course.name" value="" size="61" maxlength="35" /><img class="tooltip" onmouseover="return escape('Entre com o nome do curso')" /><br/>
                 <label><s:text name="course.input.description" /></label><br/>
-                <textarea onKeyDown="textCounter(this,$('remLen'),250);" onKeyUp="textCounter(this,$('remLen'),250);" rows="4" name="input.course.description" id="input.course.description" cols="70" ></textarea><a href="#" class="tooltip" onmouseover="return escape('Entre com uma breve descrição do curso')"></a><br/>
+                <textarea onKeyDown="textCounter(this,$('remLen'),250);" onKeyUp="textCounter(this,$('remLen'),250);" rows="4" name="input.course.description" id="input.course.description" cols="70" ></textarea><img class="tooltip" onmouseover="return escape('Entre com uma breve descrição do curso')" /><br/>
                 <s:text name="course.show.remaining" /><input readonly type=text id="remLen" name=remLen size=3 maxlength=3 value="250"/><br/>
                 <label><s:text name="course.input.targetAudience" /></label><br/>
-                <textarea onKeyDown="textCounter(this,$('remLenTargetAudience'),250);" onKeyUp="textCounter(this,$('remLenTargetAudience'),250);" rows="3" name="input.course.targetAudience" id="input.course.targetAudience" cols="70"></textarea><a href="#" class="tooltip" onmouseover="return escape('Entre com o público alvo do curso')"></a><br/>
+                <textarea onKeyDown="textCounter(this,$('remLenTargetAudience'),250);" onKeyUp="textCounter(this,$('remLenTargetAudience'),250);" rows="3" name="input.course.targetAudience" id="input.course.targetAudience" cols="70"></textarea><img class="tooltip" onmouseover="return escape('Entre com o público alvo do curso')" /><br/>
                 <s:text name="course.show.remaining" /><input readonly type=text id="remLenTargetAudience" name=remLenTargetAudience size=3 maxlength=3 value="250"/><br/>
                 <s:form action="course!updateImage" id="updateImage" method="post" enctype="multipart/form-data">
                     <label><s:text name="course.input.image" /></label><br/>
@@ -194,14 +195,24 @@
                 </s:form>
                 <label><s:text name="course.input.contents" /></label><br/>
                 <!--<input type="text" name="input.course.contents" id="input.course.contents" value="" /><br />-->
-                <textarea onKeyDown="textCounter(this,$('remLenContents'),500);" rows="6" onKeyUp="textCounter(this,$('remLenContents'),500);" name="input.course.contents" id="input.course.contents" cols="70"></textarea><a href="#" class="tooltip" onmouseover="return escape('Entre com a ementa do curso')"></a><br/>
+                <textarea onKeyDown="textCounter(this,$('remLenContents'),500);" rows="6" onKeyUp="textCounter(this,$('remLenContents'),500);" name="input.course.contents" id="input.course.contents" cols="70"></textarea><img class="tooltip" onmouseover="return escape('Entre com a ementa do curso')" /><br/>
                 <s:text name="course.show.remaining" /><input readonly type=text id="remLenContents" name=remLen size=3 maxlength=3 value="500"/><br/>
+                
+                <label><s:text name="course.input.uploadPackage" /></label> <img class="tooltip" onmouseover="return escape('Entre com uma breve descrição do curso')" /><br />
+                <label><input type="radio" name="input.course.uploadPackageEnabled" id="input.course.uploadPackageEnabled.yes" value="true"> <s:text name="course.input.yes" /></label> 
+                <label><input type="radio" name="input.course.uploadPackageEnabled" id="input.course.uploadPackageEnabled.no" value="false" checked="checked"> <s:text name="course.input.no" /></label> <br/>
+                
+                <label><s:text name="course.input.challengeItens" /></label> <img class="tooltip" onmouseover="return escape('Entre com uma breve descrição do curso')" /><br />
+                <label><input type="radio" name="input.course.challengeItensEnabled" id="input.course.challengeItensEnabled.yes" value="true"> <s:text name="course.input.yes" /></label> 
+                <label><input type="radio" name="input.course.challengeItensEnabled" id="input.course.challengeItensEnabled.no" value="false" checked="checked"> <s:text name="course.input.no" /></label> <br/>
+                
                 <input type="button" name="input.course.submit" id="input.course.submit" value="<s:text name="systemUser.input.btnSave" />" onclick="submitCourse($('input.course.id').value)" />
             </div>
         </div>
     </div>
 </div>
 
+<!-- block to add a new discipline -->
 <div id="showEntryDiscipline" style="display: none;">
     <div id="col-2-home">
         <div class="container-courses">
@@ -212,7 +223,7 @@
                 <br />
                 <br />
                 <label><s:text name="discipline.input.name" /></label><br />
-                <input type="text" name="input.discipline.name" id="input.discipline.name" value="" size="61" maxlength="35" /><a href="#" onmouseover="return escape('Entre com o nome da disciplina')">?</a><br />
+                <input type="text" name="input.discipline.name" id="input.discipline.name" value="" size="61" maxlength="35" /><img class="tooltip" onmouseover="return escape('Entre com o nome da disciplina')"></img><br />
                 <input type="button" name="input.discipline.submit" id="input.discipline.submit" value="<s:text name="systemUser.input.btnSave" />" onclick="submitDiscipline($('input.discipline.id').value);" /><br />    
             </div>
         </div>
@@ -229,7 +240,7 @@
                 <br />
                 <br />
                 <label><s:text name="unit.input.name" /></label><br />
-                <input type="text" name="input.unit.name" id="input.unit.name" value="" maxlength="35" size="61" /><a href="#" onmouseover="return escape('Entre com o nome da unidade')">?</a><br />
+                <input type="text" name="input.unit.name" id="input.unit.name" value="" maxlength="35" size="61" /><img class="tooltip" onmouseover="return escape('Entre com o nome da unidade')"></img><br />
                 <input type="button" name="input.discipline.submit" id="input.discipline.submit" value="<s:text name ="systemUser.input.btnSave" /> " onclick="submitUnit($('input.unit.id').value);" /><br />        
             </div>
         </div>
@@ -248,9 +259,9 @@
                     <br />
                     <br />
                     <label><s:text name="unitContent.input.title" /></label><br />
-                    <input type="text" name="unitContent.title" id="input.unitContent.title" value="" maxlength="35" size="61" /><a href="#" onmouseover="return escape('Entre com o nome da aula')">?</a><br />                
+                    <input type="text" name="unitContent.title" id="input.unitContent.title" value="" maxlength="35" size="61" /><img class="tooltip" onmouseover="return escape('Entre com o nome da aula')"></img><br />                
                     <label><s:text name="unitContent.input.order_n" /></label><br />
-                    <select style="width: 80px;" name="unitContent.orderN" id="input.unitContent.order_n"></select><a href="#" onmouseover="return escape('Entre com a ordem da aula')">?</a><br />                                    
+                    <select style="width: 80px;" name="unitContent.orderN" id="input.unitContent.order_n"></select><img class="tooltip" onmouseover="return escape('Entre com a ordem da aula')"></img><br />                                    
                     <label><s:text name="unitContent.input.type" /></label><br/>
                     <%-- v1 --%>
                     <input type="radio" id="input.unitContent.type1" name="unitContent.type" value="1" checked>Pdf</input>
@@ -292,8 +303,6 @@
                 <br class="clear" />
                 <p style=" font-family:Arial,Helvetica,sans-serif; font-size:15px;font-weight:bold; color:#444;"><span id="course.description"></span></p>
                 <div class="images">
-                    
-                    <%--<h2><s:text name="course.input.image" /><br /><img id="course.image" src="../images/foto_profile.jpg" width="80" height="80" /></h2>--%>
                     <h2><s:text name="course.input.partner" /><br /><img id="course.image" src="../images/foto_profile.jpg" width="80" height="80" /></h2>
                     <br class="clear" />
                 </div>
@@ -307,11 +316,10 @@
                 </div>
                 <h2 style="margin-bottom:10px;"><s:text name="course.input.professor" />:</h2>
                 <div id="course.professors">
-                    <p></p>
+                
                 </div>
                 <h2 style="margin-bottom:10px;"><s:text name="course.input.tutor" />:</h2>
                 <div id="course.tutors">
-                    <p></p>
                 </div>
                 <h2 style="margin-bottom:10px;"><s:text name="course.input.requisites" /></h2>
                 <div id="course.requirements">
@@ -326,7 +334,8 @@
                             <li><a class="icon-new" href="javascript:showEntryDiscipline($('course.id').value);"><s:text name= "course.show.new" /></a></li>
                             <li><a class="icon-edit" href="javascript:showEditDiscipline();"><s:text name= "course.show.edit" /></a></li>
                             <li><a class="icon-delete" href="javascript:deleteDiscipline();"><s:text name= "course.show.remove" /></a></li>
-                            <li><a class="icon-new" href="javascript:showDictionary();"><s:text name= "dictionary.show" /></a></li>
+                            <li><a class="icon-dictionary" href="javascript:showDictionary();"><s:text name= "dictionary.show" /></a></li>
+                            <li><a id="pnlRepositorio" href="#" id="btn-goto-avaliacao" class="icon-multimedia lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024" ><s:text name="discipline.show.biblioteca"/></a></li>
                             <br class="clear" />
                         </ul>
                         
@@ -440,33 +449,22 @@
                     <div class="edit-tools">
                         <ul>
                             <li><a class="icon-new" href="javascript:showEntryUnitContent($('unit.id').value);"><s:text name="unitContent.input.add" /></a></li>
-                            <li><a class="icon-new" href="javascript:showUploadUnitContent($('unit.id').value);"><s:text name="unitContent.input.upload" /></a></li>
+                            <li id="unit.upload" style="display:list-item;"><a class="icon-new" href="javascript:showUploadUnitContent($('unit.id').value);"><s:text name="unitContent.input.upload" /></a></li>
                             <li><a class="icon-edit" href="javascript:showEditUnitContent();"><s:text name="unitContent.input.edit" /></a></li>                            
                             <li><a class="icon-delete" href="javascript:deleteUnitContent();"><s:text name="unitContent.input.remove" /></a></li>
-                            <li><a class="icon-message"href="javascript:showNewsChallenge();"><s:text name= "course.add.challenge" /></a></li>
-                            <li><a id="chatId" class="icon-chat" href="#" target="_blank" onmouseover="javascript:vaiabri();"><s:text name= "course.show.chat" /></a></li>
+                            <li id="unit.challenge" style="display:list-item;"><a class="icon-message"href="javascript:showNewsChallenge();"><s:text name= "course.add.challenge" /></a></li>
+                            <li><a id="chatId" class="icon-chat" href="#" target="_blank" onmouseover="javascript:openChat();"><s:text name= "course.show.chat" /></a></li>
                             
                             <br class="clear" />
                         </ul>
-                        
                     </div>
                     <div class="edit-box" id="unit.unitsContent">
                     </div>
-                    
-                   
                 </div>
             </div>
         </div>
     </div>    
 </div>
-
-<script>
-    function vaiabri() {
-         
-        $('chatId').href = 'course!showChat.action?course.id=' + $('course.id').value; 
-        
-    }
-    </script>
 
 <div id="showUnitContent" style="display: none;">
     <div id="col-2-home">
@@ -519,23 +517,22 @@
                     <s:hidden name="unitContent.type" value="2" />
                     <s:hidden name="unitContent.unitId" id="upload.unit.id" value="" />
                     <s:hidden name="unitContent.description" value="none" />
-                    <h1><s:text name="unitContent.input.add" /></h1><br />
                     <br />
                     <br />
-                    <label><s:text name="unitContent.input.add" /></label><br />
-                    <s:textfield name="unitContent.title" id="upload.unitContent.title" maxLength="35" size="61" /><a href="#" onmouseover="return escape('Entre com o nome da aula')">?</a>
+                    <label><s:text name="unitContent.input.title" /></label><br />
+                    <s:textfield name="unitContent.title" id="upload.unitContent.title" maxLength="35" size="61" /><img class="tooltip" onmouseover="return escape('Entre com o nome da aula')"></img>
                     <br />               
                     <label><s:text name="unitContent.input.order_n" /></label><br />
-                    <select style="width: 80px;" name="unitContent.orderN" id="upload.unitContent.order_n"></select><a href="#" onmouseover="return escape('Entre com a ordem da aula')">?</a><br />                                    
+                    <select style="width: 80px;" name="unitContent.orderN" id="upload.unitContent.order_n"></select><img  class="tooltip"onmouseover="return escape('Entre com a ordem da aula')"></img><br />                                    
                     <br />
                     <label><s:text name="unitContent.input.package" /></label><br />
-                    <s:file name="upload" key="repository.input.file" theme="simple" /><a href="#" onmouseover="return escape('Entre com o pacote da aula')">?</a>
+                    <s:file name="upload" key="repository.input.file" theme="simple" /><img class="tooltip" onmouseover="return escape('Entre com o pacote da aula')"></img>
                     <br />
                     <br />
                     <label><s:text name="unitContent.input.width" /></label><br />
-                    <s:textfield name="unitContent.width" id="upload.unitContent.width" maxLength="4" size="8" /><a href="#" onmouseover="return escape('Entre com a largura do frame da aula')">?</a><br />
+                    <s:textfield name="unitContent.width" id="upload.unitContent.width" maxLength="4" size="8" /><img class="tooltip"  onmouseover="return escape('Entre com a largura do frame da aula')"></img><br />
                     <label><s:text name="unitContent.input.height" /></label><br />
-                    <s:textfield name="unitContent.height" id="upload.unitContent.height" maxLength="4" size="8" /><a href="#" onmouseover="return escape('Entre com a altura do frame da aula')">?</a><br />
+                    <s:textfield name="unitContent.height" id="upload.unitContent.height" maxLength="4" size="8" /><img class="tooltip" onmouseover="return escape('Entre com a altura do frame da aula')"></img><br /><br />
                     <s:submit key="systemUser.input.btnSave" />
                 </s:form>
             </div>
@@ -1207,39 +1204,7 @@
                         </tr>
                         <tr>
                             <td><s:text name="show.challenge.xml"/></td>
-                            <td><textarea id="challengeItens.xml" name="challengeItens.xml" label="show.challenge.xml" cols="70" rows="25"></textarea></td>
-                        </tr>    
-                        <tr>
-                            <td><s:text name="show.challenge.dependency"/></td>
-                            <td><select id="challengeItens.dependency" ></select></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><input id="submitChall" type="button" value="Add" onclick="submitChallenge()"/>
-                                <div id="removeCha" style="display:none"><input id="removeChall" type="button" value="Remove" onclick="removeChallenge()"/></div>
-                            </td>
-                        </tr>
-                    </table>
-                </s:form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- end col-2-home -->
-<br class="clear" />
-<script  language="JavaScript" type="text/javascript" src="../js/tooltip/wz_tooltip.js"></script>
-<!-- end content -->
-<br class="clear" />
-mp" name="challengeItens.timestamp" />
-                    <table>
-                        <tr>
-                            <td><s:text name="show.challenge.name"/></td>
-                            <td><input type="text" id="challengeItens.name" name="challengeItens.name" /></td>
-                        </tr>
-                        <tr>
-                            <td><s:text name="show.challenge.xml"/></td>
-                            <td><textarea id="challengeItens.xml" name="challengeItens.xml" label="show.challenge.xml" cols="70" rows="25"></textarea></td>
+                            <td><textarea id="challengeItens.xml" name="challengeItens.xml" label="show.challenge.xml" cols="50" rows="25"></textarea></td>
                         </tr>    
                         <tr>
                             <td><s:text name="show.challenge.dependency"/></td>

@@ -12,7 +12,7 @@
 <div id="breadcrumb">
     <p><s:text name="breadcrumb.youAreHere"/></p>
     <ul>
-        <li><a href="home.action"><s:text name="home.name"/></a></li>
+        <li><a href="index.action"><s:text name="home.name"/></a></li>
         <li><a href="course!list.action"><s:text name="front.courses.title"/></a></li>
         <li class="current"><s:text name="front.grade"/></li>
     </ul>
@@ -58,4 +58,4 @@
             
         </s:else>
     </table> 
-</div>>
+</div>

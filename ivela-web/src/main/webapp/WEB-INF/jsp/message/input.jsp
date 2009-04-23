@@ -60,6 +60,7 @@
     
     <div id="col-2-messages">
         <h2><s:text name="message.input.sessionTitle" /></h2>
+        <s:actionerror />
         <s:form theme="simple" action="message!add.action" name="create-new-message">
             <p>
                 <label><s:text name="message.input.recipient"/>:</label>
@@ -94,14 +95,12 @@
                 <s:textarea cssClass="field-message" name="message.description" cols="45" rows="5"></s:textarea>
             </p>
             <p>
-                <s:submit cssClass="btn-send-message" key="message.input.submit" />
+                
                 <s:reset cssClass="btn-cancel-message" key="message.input.reset" />
+                <s:submit cssClass="btn-send-message" key="message.input.submit" />
             </p>
         </s:form>
     </div>               
-    <br  class="clear"/> 
-    
-</html>    
     <br  class="clear"/> 
     
 </html>

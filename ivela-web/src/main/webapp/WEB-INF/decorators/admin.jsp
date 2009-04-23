@@ -12,8 +12,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html>
     <head>
@@ -27,6 +26,7 @@
         <script type="text/javascript" src="../js/prototype/prototype.js"></script>
         <script type="text/javascript" src="../js/scriptaculous/scriptaculous.js"></script>
         <script type="text/javascript" src="../js/scriptaculous/effects.js"></script>
+        <script type="text/javascript" src="../js/resourceBundle.js"></script>
         <script type="text/javascript" src="../js/admin/lightwindow.js"></script>
         <script type="text/javascript" src="../js/accordion.js"></script>
         <script type="text/javascript" src="../js/admin/ajax.js"></script>
@@ -37,8 +37,7 @@
 
             Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             SystemUser systemUser = null;
-
-
+            
             if (obj instanceof UserDetails) {
                 systemUser = (SystemUser) obj;
             }
@@ -64,7 +63,7 @@
                         (<s:text name="systemUser.type.admin"/>)
                     <% } %>
                     </p>                    
-                    <a  href="../profile!edit.action?systemUser.id=<%= systemUser.getId()%>" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"><s:text name="front.editProfile" /></a>
+                    <a  href="../profile!edit.action" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"><s:text name="front.editProfile" /></a>
                     <a href="../j_spring_security_logout" class="logout" title="<s:property value="front.logout" /><s:text name="home.logout" />"><s:property value="front.logout" /></a>
                 </div>
                 <!-- end profile -->
@@ -91,7 +90,7 @@
 
             <div id="menu">
                 <ul>
-                    <li id="menu_1" ><a href="home.action" title="<s:property value="admin.home" />"><s:text name="admin.home" /></a></li>
+                    <li id="menu_1" ><a href="home.action" title="<s:property value="admin.controlPanel" />"><s:text name="admin.controlPanel" /></a></li>
                     <li id="menu_4" ><a href="systemUser!show.action" title="<s:property value="back.people.title" />"><s:text name="admin.people" /></a></li>
                     <li id="menu_2" ><a href="course!show.action" title="<s:property value="back.courses.title" />"><s:text name="admin.courses" /></a></li>
                     <li id="menu_3" ><a href="grade!show.action" title="<s:property value="back.grades.title" />"><s:text name="admin.grade" /></a></li>
@@ -104,16 +103,21 @@
                     var action = get.substring(get.lastIndexOf('/') + 1);                
                     var tab = 1;
 
-                    if(action.startsWith("home") /*|| action.startsWith("discipline")*/){
+                    if(action.startsWith("home")){
                         tab = 1;
-                    } else if(action.startsWith("course") /*|| action.startsWith("enrollment")*/) {
+                    } else if(action.startsWith("course")) {
                         tab = 2;
                     } else if(action.startsWith("grade")){
                         tab = 3;
                     } else if(action.startsWith("systemUser")){
                         tab = 4;
+                    } else if(action.startsWith("index")){
+                        tab = 0;
                     }
-                    $('menu_'+tab).setAttribute(classCss(),"current");
+                    
+                    if(tab != 0){
+                        $('menu_'+tab).setAttribute(classCss(),"current");
+                    }
                 -->
             </script>
             
@@ -131,7 +135,7 @@
             <div id="content-footer">
                 <img class="logo" src="../images/logo-footer.gif" alt="<s:property value="front.logo.footer" />" />
                 <ul>
-                    <li><a href="home.action" title="<s:property value="back.home.title" />"><s:text name="admin.home" /></a></li>
+                    <li><a href="home.action" title="<s:property value="back.home.title" />"><s:text name="admin.controlPanel" /></a></li>
                     <li><a href="systemUser!show.action" title="<s:property value="back.people.title" />"><s:text name="admin.people" /></a></li>
                     <li><a href="course!show.action" title="<s:property value="back.courses.title" />"><s:text name="admin.courses" /></a></li>
                     <li><a href="grade!show.action" class="last" title="<s:property value="back.grades.title" />"><s:text name="admin.grade" /></a></li>

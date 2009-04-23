@@ -15,7 +15,7 @@
 <div id="breadcrumb">
     <p><s:text name="breadcrumb.youAreHere"/></p>
     <ul>
-        <li><a href="home.action"><s:text name="home.name"/></a></li>
+        <li><a href="index.action"><s:text name="home.name"/></a></li>
         <li class="current"><s:text name="front.courses"/></li>
     </ul>
 </div>
@@ -49,4 +49,3 @@
     
         
 </div>
-

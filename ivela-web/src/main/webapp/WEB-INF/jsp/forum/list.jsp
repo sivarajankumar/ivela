@@ -23,8 +23,9 @@
         <s:textfield cssClass="field" name="forumTitle" />
         <s:submit cssClass="button" src="images/bottons/btn-search.gif" type="image" />
     </s:form>
-    
-    <jsp:include page="paginator.jsp"/>
+    <br />
+    <jsp:include page="paginatorTop.jsp"/>
+    <br />
     <s:actionmessage/>
     <div id="breadcrumb">
         <s:url id="listForum" action="forum" method="list">
@@ -50,33 +51,24 @@
                 <td>
                     <h3><s:a href="%{listTopicUrl}"><s:property value="forum.title"/></s:a></h3>
                     <p><s:property value="forum.description"/></p>
-                    <span class="font-orange-td"><s:text name="forum.list.createdBy" /></span><span class="name-user"><a href=""><s:property value="forum.createdBy.username"/></a></span>		
+                    <span class="font-orange-td"><s:text name="forum.list.createdBy" /></span><span class="name-user"><a href="#" class="tooltip" onmouseover="return escape('<s:property value="forum.createdBy.email"/>')"><s:property value="forum.createdBy.username"/></a></span>		
                 </td>
                 <td class="topics-views"><s:property value="forumReplies"/></td>
                 <td class="topics-views"><s:property value="forumViews"/></td>
                 <td>
                     <p><a href="post!list.action?forum.id=<s:property value="forum.id" />&topic.id=<s:property value="lastTopic.id" />"><s:property value="lastTopic.title"/></a>
                     </p><span class="font-orange-td"><s:text name="forum.list.postedBy" /></span>
-                    <span class="name-user"><a href=""><s:property value="lastTopic.createdBy.username"/></a></span><br />
+                    <span class="name-user"><a href="#" class="tooltip" onmouseover="return escape('<s:property value="forum.createdBy.email"/>')"><s:property value="lastTopic.createdBy.username"/></a></span><br />
                     <span class="font-orange-td"><s:text name="forum.list.date" /></span>&nbsp;<s:date name="lastTopic.createdAt" format="%{getText('formatDateLanguage1')}" />
                 </td>
             </tr>
         </s:iterator>
     </table>
+    <s:if test="back">
+        <span class="name-user"> <a href="forum!list.action"><s:text name="forum.list.seeAll"/></a></span>
+    </s:if>   
      <%--
     <s:form cssClass="form-search-forum" action="forum!search" method="post" theme="simple">
-        <s:hidden name="page" value="%{page}" />
-        <s:textfield cssClass="field" name="forumTitle" />
-        <s:submit cssClass="button" src="images/bottons/btn-search.gif" type="image" />
-    </s:form>
-    --%>
-    <jsp:include page="paginator.jsp"/>        
-    
-</s:else>
-
-
-
-arch-forum" action="forum!search" method="post" theme="simple">
         <s:hidden name="page" value="%{page}" />
         <s:textfield cssClass="field" name="forumTitle" />
         <s:submit cssClass="button" src="images/bottons/btn-search.gif" type="image" />

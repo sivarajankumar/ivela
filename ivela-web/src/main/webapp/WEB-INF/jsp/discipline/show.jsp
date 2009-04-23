@@ -140,7 +140,7 @@
                         html += '<iframe id="html" scrolling="no" frameborder="0" width="' + _width + '" height="' + _height + '" src="RenderServlet?file=' + courseId + '/' + disciplineId + '/' + unitId + "/" + unitContentId + '/index.html' + '"></iframe> <br class="clear"/>';
                     }
                     $('unitContent').innerHTML = html;
-                    $('pnlChat').href = 'IRCIvelaClientServlet?course.id=' + courseId +'&discipline.id='+disciplineId;
+                   // $('pnlChat').href = 'IRCIvelaClientServlet?course.id=' + courseId +'&discipline.id='+disciplineId;
 
                 }
 
@@ -288,7 +288,7 @@ a:active{outline: none;}
 <div id="breadcrumb">
     <p><s:text name="breadcrumb.youAreHere"/></p>
     <ul>
-        <li><a href="home.action"><s:text name="home.name"/></a></li>
+        <li><a href="index.action"><s:text name="home.name"/></a></li>
         <li class="current"><s:text name="home.discipline"/></li>
     </ul>
 </div>
@@ -440,4 +440,4 @@ a:active{outline: none;}
 </div>
 </td>
 </tr>
-</table>le>
+</table>

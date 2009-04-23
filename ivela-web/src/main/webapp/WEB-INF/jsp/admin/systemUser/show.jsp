@@ -8,21 +8,46 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<head>
-    <link href="../css/accordion_people.css"  rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="../js/admin/people.js"></script>
-    <script type="text/javascript" src="../js/admin/tools.js"></script>
-    <script type="text/javascript">
+<link href="../css/accordion_people.css"  rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/admin/people.js"></script>
+<script type="text/javascript" src="../js/admin/tools.js"></script>
+<script type="text/javascript">
+    <!--
         var actualAuth = <sec:authentication property="principal.authentication.id"/>;
-    </script>
-</head>
+    -->
+</script>
+<style>
 
+    div.autocomplete {
+      position:absolute;
+      width:250px;
+      background-color:white;
+      border:1px solid #888;
+      margin:0px;
+      padding:0px;
+    }
+    div.autocomplete ul {
+      list-style-type:none;
+      margin:0px;
+      padding:0px;
+    }
+    div.autocomplete ul li.selected { background-color: #ffb;}
+    div.autocomplete ul li {
+      list-style-type:none;
+      display:block;
+      margin:0;
+      padding:2px;
+      height:20px;
+      cursor:pointer;
+    }
+
+</style>   
 <s:actionerror />
 
 <div id="breadcrumb">
     <p><s:text name="breadcrumb.youAreHere"/></p>
     <ul>
-        <li><a href="home.action"><s:text name="admin.home"/></a></li>
+        <li><a href="index.action"><s:text name="admin.home"/></a></li>
         <li class="current"><s:text name="admin.people" /></li>
     </ul>
 </div>
@@ -40,15 +65,20 @@
                            onClick="unCheckAllFieldsByName('adminCheck','adminData')">
                 </s:if>
                 
-                <ul class="list-students">
-                    <s:iterator value="listAdmin" status="stat">                
-                        <li title="<s:property value="username" />" id="li.admin.id_<s:property value="#stat.index"/>" onMouseOver="mouseOverPerson('admin.id_<s:property value="#stat.index"/>');" onMouseOut="mouseOutPerson('admin.id_<s:property value="#stat.index"/>');">
-                            <img src="../images/icon/icon-person.gif" /><br />
-                            <s:if test="username.length() > 8"><s:property value="username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br />
-                            <input type="checkbox" name="adminCheck" id="admin.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
-                        </li>                
-                    </s:iterator>
-                </ul>
+                <s:if test="(listAdmin != null && listAdmin.size() > 0)">                 
+                    <ul class="list-students">
+                        <s:iterator value="listAdmin" status="stat">                
+                            <li title="<s:property value="username" />" id="li.admin.id_<s:property value="#stat.index"/>" onMouseOver="mouseOverPerson('admin.id_<s:property value="#stat.index"/>');" onMouseOut="mouseOutPerson('admin.id_<s:property value="#stat.index"/>');">
+                                <img src="../images/icon/icon-person.gif" /><br />
+                                <s:if test="username.length() > 8"><s:property value="username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br />
+                                <input type="checkbox" name="adminCheck" id="admin.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
+                            </li>                
+                        </s:iterator>
+                    </ul>
+                </s:if>
+                <s:else>
+                    <span class="no_grades"><s:text name="admin.noAdmins" /></span>
+                </s:else>
                 
                 <!-- Início : Divs com características do administrador -->
                 <s:iterator value="listAdmin" status="stat">
@@ -90,15 +120,20 @@
                            onClick="unCheckAllFieldsByName('coordCheck','coordData')">
                 </s:if>
                 
-                <ul class="list-students">
-                    <s:iterator value="listCoord" status="stat">                
-                        <li title="<s:property value="username" />" id="li.coord.id_<s:property value="#stat.index"/>" onMouseOver="mouseOverPerson('coord.id_<s:property value="#stat.index"/>');" onMouseOut="mouseOutPerson('coord.id_<s:property value="#stat.index"/>');">
-                            <img src="../images/icon/icon-person.gif" /><br />
-                            <s:if test="username.length() > 8"><s:property value="username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br />
-                            <input type="checkbox"  name="coordCheck" id="coord.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
-                        </li>                
-                    </s:iterator>
-                </ul>
+                <s:if test="(listCoord != null && listCoord.size() > 0)"> 
+                    <ul class="list-students">
+                        <s:iterator value="listCoord" status="stat">                
+                            <li title="<s:property value="username" />" id="li.coord.id_<s:property value="#stat.index"/>" onMouseOver="mouseOverPerson('coord.id_<s:property value="#stat.index"/>');" onMouseOut="mouseOutPerson('coord.id_<s:property value="#stat.index"/>');">
+                                <img src="../images/icon/icon-person.gif" /><br />
+                                <s:if test="username.length() > 8"><s:property value="username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br />
+                                <input type="checkbox"  name="coordCheck" id="coord.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
+                            </li>                
+                        </s:iterator>
+                    </ul>
+                </s:if>
+                <s:else>
+                    <span class="no_grades"><s:text name="admin.noCoordinators" /></span>
+                </s:else>
                 
                 <!-- Início : Divs com características do coordenador -->
                 <s:iterator value="listCoord" status="stat">
@@ -139,15 +174,20 @@
                            onClick="unCheckAllFieldsByName('profCheck','profData')">
                 </s:if>
                 
-                <ul class="list-students">
-                    <s:iterator value="listProf" status="stat">                
-                        <li title="<s:property value="username" />" id="li.prof.id_<s:property value="#stat.index"/>" onMouseOver="mouseOverPerson('prof.id_<s:property value="#stat.index"/>');" onMouseOut="mouseOutPerson('prof.id_<s:property value="#stat.index"/>');">
-                            <img src="../images/icon/icon-person.gif" /><br />
-                            <s:if test="username.length() > 8"><s:property value="username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br />
-                            <input type="checkbox"  name="profCheck" id="prof.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
-                        </li>                
-                    </s:iterator>
-                </ul>
+                <s:if test="(listProf != null && listProf.size() > 0)"> 
+                    <ul class="list-students">
+                        <s:iterator value="listProf" status="stat">                
+                            <li title="<s:property value="username" />" id="li.prof.id_<s:property value="#stat.index"/>" onMouseOver="mouseOverPerson('prof.id_<s:property value="#stat.index"/>');" onMouseOut="mouseOutPerson('prof.id_<s:property value="#stat.index"/>');">
+                                <img src="../images/icon/icon-person.gif" /><br />
+                                <s:if test="username.length() > 8"><s:property value="username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br />
+                                <input type="checkbox"  name="profCheck" id="prof.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
+                            </li>                
+                        </s:iterator>
+                    </ul>
+                </s:if>
+                <s:else>
+                    <span class="no_grades"><s:text name="admin.noProfessors" /></span>
+                </s:else>
                 
                 <!-- Início : Divs com características do professor -->
                 <s:iterator value="listProf" status="stat">
@@ -190,15 +230,20 @@
                            onClick="unCheckAllFieldsByName('tutorCheck','tutorData')">
                 </s:if>
                 
-                <ul class="list-students">
-                    <s:iterator value="listTutor" status="stat">                
-                        <li title="<s:property value="username" />" id="li.tutor.id_<s:property value="#stat.index"/>" onMouseOver="mouseOverPerson('tutor.id_<s:property value="#stat.index"/>');" onMouseOut="mouseOutPerson('tutor.id_<s:property value="#stat.index"/>');">
-                            <img src="../images/icon/icon-person.gif" /><br />
-                            <s:if test="username.length() > 8"><s:property value="username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br />
-                            <input type="checkbox"  name="tutorCheck" id="tutor.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
-                        </li>                
-                    </s:iterator>
-                </ul>
+                <s:if test="(listTutor != null && listTutor.size() > 0)"> 
+                    <ul class="list-students">
+                        <s:iterator value="listTutor" status="stat">                
+                            <li title="<s:property value="username" />" id="li.tutor.id_<s:property value="#stat.index"/>" onMouseOver="mouseOverPerson('tutor.id_<s:property value="#stat.index"/>');" onMouseOut="mouseOutPerson('tutor.id_<s:property value="#stat.index"/>');">
+                                <img src="../images/icon/icon-person.gif" /><br />
+                                <s:if test="username.length() > 8"><s:property value="username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br />
+                                <input type="checkbox"  name="tutorCheck" id="tutor.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
+                            </li>                
+                        </s:iterator>
+                    </ul>
+                </s:if>
+                <s:else>
+                    <span class="no_grades"><s:text name="admin.noTutors" /></span>
+                </s:else>
                 
                 <!-- Início : Divs com características do tutor -->
                 <s:iterator value="listTutor" status="stat">
@@ -239,15 +284,20 @@
                        onClick="unCheckAllFieldsByName('studentCheck','studentData')">
             </s:if>
             
-            <ul class="list-students">
-                <s:iterator value="listUser" status="stat">                
-                    <li title="<s:property value="username" />" id="li.student.id_<s:property value="#stat.index"/>" onMouseOver="mouseOverPerson('student.id_<s:property value="#stat.index"/>');" onMouseOut="mouseOutPerson('student.id_<s:property value="#stat.index"/>');">
-                        <img src="../images/icon/icon-person.gif" /><br />
-                        <s:if test="username.length() > 8"><s:property value="username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br />
-                        <input type="checkbox"  name="studentCheck" id="student.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
-                    </li>                
-                </s:iterator>
-            </ul>
+            <s:if test="(listUser != null && listUser.size() > 0)"> 
+                <ul class="list-students">
+                    <s:iterator value="listUser" status="stat">                
+                        <li title="<s:property value="username" />" id="li.student.id_<s:property value="#stat.index"/>" onMouseOver="mouseOverPerson('student.id_<s:property value="#stat.index"/>');" onMouseOut="mouseOutPerson('student.id_<s:property value="#stat.index"/>');">
+                            <img src="../images/icon/icon-person.gif" /><br />
+                            <s:if test="username.length() > 8"><s:property value="username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br />
+                            <input type="checkbox"  name="studentCheck" id="student.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
+                        </li>                
+                    </s:iterator>
+                </ul>
+            </s:if>
+            <s:else>
+                <span class="no_grades"><s:text name="admin.noStudents" /></span>
+            </s:else>
             
             <!-- Início : Divs com características do aluno -->
             <s:iterator value="listUser" status="stat">
@@ -300,6 +350,27 @@
                     <div id="admin.add" style="display:none;" class="course-message">
                         <br /><s:text name="systemUser.show.add" /><br /> <br />
                         <s:text name="systemUser.show.name" />
+                <s:hidden name="message.recipient.id" id="input.admin.add.user" />
+                <input type="text" name="username" id="username" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
+                <div id="recipientDivAutoCompleter2" class="autocomplete"></div>
+                    <script type="text/javascript">
+                    new Ajax.Autocompleter("username","recipientDivAutoCompleter2","systemUser!searchUsers.action", {afterUpdateElement : getSelectionId});
+
+                    function getSelectionId(text, li) 
+                    {
+                      $('input.admin.add.user').value=li.id;
+                      $('adminButton').disabled = false;
+                    }
+                   
+                        function validateUsername() {
+                       var id = $('input.admin.add.user').value;
+                       if (id == null || id == '') {
+                           $('username').value = '';
+                           $('username').focus();
+                       }
+                        }
+                        </script>
+                        <%--
                         <select id="input.admin.add.user">
                             <s:iterator value="systemUsers" status="stat">                                
                                 <s:if test="!listAdmin.contains(systemUsers[#stat.index])">
@@ -307,8 +378,9 @@
                                 </s:if>
                             </s:iterator>
                         </select>
+                        --%>
                         <br /><br />
-                        <input type="button" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.admin.add.user').value)" />
+                        <input type="button" disabled id="adminButton" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.admin.add.user').value)" />
                     </div>
                 </div>   
                 <!-- end actions-box -->
@@ -320,7 +392,7 @@
                             <li><a class="icon-edit" href="javascript:showDiv('multiple.message.admin');"><s:text name="course.send.message"/></a></li>
                             <li><a class="icon-message"  href="javascript:showDiv('multiple.newsflash.admin');"><s:text name="course.send.newsflash" /></a></li>
                             <li><a class="icon-newsFlash" href="javascript:showDiv('multiple.change.admin');"><s:text name="course.show.perfil" /></a></li>
-                            <li><a class="icon-newsFlash" href="javascript:showDiv('multiple.delete.admin');"><s:text name="course.show.deleteAdmin" /></a></li>
+                            <li><a class="icon-delete" href="javascript:showDiv('multiple.delete.admin');"><s:text name="course.show.deleteAdmin" /></a></li>
                             <br class="clear" />
                         </ul>                        
                     </div>
@@ -380,6 +452,27 @@
                     <div id="coord.add" style="display:none;" class="course-message">
                         <br /><s:text name="systemUser.show.add" /><br /> <br />
                         <s:text name="systemUser.show.name" />
+                                    <s:hidden name="message.recipient.id" id="input.coord.add.user" />
+                <input type="text" name="username" id="username" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
+                <div id="recipientDivAutoCompleter2" class="autocomplete"></div>
+                    <script type="text/javascript">
+                    new Ajax.Autocompleter("username","recipientDivAutoCompleter2","systemUser!searchUsers.action", {afterUpdateElement : getSelectionId});
+
+                    function getSelectionId(text, li) 
+                    {
+                      $('input.coord.add.user').value=li.id;
+                      $('coordinatorButton').disabled = false;
+                    }
+                   
+                        function validateUsername() {
+                       var id = $('input.coord.add.user').value;
+                       if (id == null || id == '') {
+                           $('username').value = '';
+                           $('username').focus();
+                       }
+                        }
+                        </script>
+                        <%--
                         <select id="input.coord.add.user">
                             <s:iterator value="systemUsers" status="stat">                                
                                 <s:if test="!listCoord.contains(systemUsers[#stat.index]) && authentication.id != 1">
@@ -387,8 +480,9 @@
                                 </s:if>
                             </s:iterator>
                         </select>
+                        --%>
                         <br /><br />
-                        <input type="button" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.coord.add.user').value)" />
+                        <input type="button" disabled id="coordinatorButton" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.coord.add.user').value)" />
                     </div>
                 </div>
                 <!-- end actions-box -->
@@ -400,7 +494,7 @@
                             <li><a class="icon-edit" href="javascript:showDiv('multiple.message.coord');"><s:text name="course.send.message"/></a></li>
                             <li><a class="icon-message"  href="javascript:showDiv('multiple.newsflash.coord');"><s:text name="course.send.newsflash" /></a></li>
                             <li><a class="icon-newsFlash" href="javascript:showDiv('multiple.change.coord');"><s:text name="course.show.perfil" /></a></li>
-                            <li><a class="icon-newsFlash" href="javascript:showDiv('multiple.delete.coord');"><s:text name="course.show.deleteCoor" /></a></li>
+                            <li><a class="icon-delete" href="javascript:showDiv('multiple.delete.coord');"><s:text name="course.show.deleteCoor" /></a></li>
                             <br class="clear" />
                         </ul>                        
                     </div>
@@ -460,6 +554,27 @@
                     <div id="prof.add" style="display:none;" class="course-message">
                         <br /><s:text name="systemUser.show.add" /><br /> <br />
                         <s:text name="systemUser.show.name" />
+                        <s:hidden name="message.recipient.id" id="input.prof.add.user" />
+                <input type="text" name="username" id="username" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
+                <div id="recipientDivAutoCompleter2" class="autocomplete"></div>
+                    <script type="text/javascript">
+                    new Ajax.Autocompleter("username","recipientDivAutoCompleter2","systemUser!searchUsers.action", {afterUpdateElement : getSelectionId});
+
+                    function getSelectionId(text, li) 
+                    {
+                      $('input.prof.add.user').value=li.id;
+                      $('professorButton').disabled = false;
+                    }
+                   
+                        function validateUsername() {
+                       var id = $('input.prof.add.user').value;
+                       if (id == null || id == '') {
+                           $('username').value = '';
+                           $('username').focus();
+                       }
+                        }
+                        </script>
+                        <%--
                         <select id="input.prof.add.user">
                             <s:iterator value="systemUsers" status="stat">                                
                                 <s:if test="!listProf.contains(systemUsers[#stat.index]) && authentication.id != 1 && authentication.id != 2">
@@ -467,8 +582,9 @@
                                 </s:if>
                             </s:iterator>
                         </select>
+                        --%>
                         <br /><br />
-                        <input type="button" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.prof.add.user').value)" />
+                        <input type="button" disabled id="professorButton" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.prof.add.user').value)" />
                     </div>
                 </div>
                 <!-- end actions-box -->
@@ -481,7 +597,7 @@
                             <li><a class="icon-edit" href="javascript:showDiv('multiple.message.prof');"><s:text name="course.send.message"/></a></li>
                             <li><a class="icon-message"  href="javascript:showDiv('multiple.newsflash.prof');"><s:text name="course.send.newsflash" /></a></li>
                             <li><a class="icon-newsFlash" href="javascript:showDiv('multiple.change.prof');"><s:text name="course.show.perfil" /></a></li>
-                            <li><a class="icon-newsFlash" href="javascript:showDiv('multiple.delete.prof');"><s:text name="course.show.deleteProf" /></a></li>
+                            <li><a class="icon-delete" href="javascript:showDiv('multiple.delete.prof');"><s:text name="course.show.deleteProf" /></a></li>
                             <br class="clear" />
                         </ul>                        
                     </div>
@@ -540,6 +656,27 @@
                     <div id="tutor.add" style="display:none;" class="course-message">
                         <br /><s:text name="systemUser.show.add" /><br /> <br />
                         <s:text name="systemUser.show.name" />
+                        <s:hidden name="message.recipient.id" id="input.tutor.add.user" />
+                <input type="text" name="username" id="username" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
+                <div id="recipientDivAutoCompleter2" class="autocomplete"></div>
+                    <script type="text/javascript">
+                    new Ajax.Autocompleter("username","recipientDivAutoCompleter2","systemUser!searchUsers.action", {afterUpdateElement : getSelectionId});
+
+                    function getSelectionId(text, li) 
+                    {
+                      $('input.tutor.add.user').value=li.id;
+                      $('tutorButton').disabled = false;
+                    }
+                   
+                        function validateUsername() {
+                       var id = $('input.tutor.add.user').value;
+                       if (id == null || id == '') {
+                           $('username').value = '';
+                           $('username').focus();
+                       }
+                        }
+                        </script>
+                        <%--
                         <select id="input.tutor.add.user">
                             <s:iterator value="systemUsers" status="stat">                                
                                 <s:if test="!listTutor.contains(systemUsers[#stat.index]) && authentication.id != 1 && authentication.id != 2 && authentication.id != 6">
@@ -547,8 +684,9 @@
                                 </s:if>
                             </s:iterator>
                         </select>
+                        --%>
                         <br /><br />
-                        <input type="button" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.tutor.add.user').value)" />
+                        <input type="button" disabled id="tutorButton" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.tutor.add.user').value)" />
                     </div>
                 </div>
                 <!-- end actions-user -->
@@ -560,7 +698,7 @@
                             <li><a class="icon-edit" href="javascript:showDiv('multiple.message.tutor');"><s:text name="course.send.message"/></a></li>
                             <li><a class="icon-message"  href="javascript:showDiv('multiple.newsflash.tutor');"><s:text name="course.send.newsflash" /></a></li>
                             <li><a class="icon-newsFlash" href="javascript:showDiv('multiple.change.tutor');"><s:text name="course.show.perfil" /></a></li>
-                            <li><a class="icon-newsFlash" href="javascript:showDiv('multiple.delete.tutor');"><s:text name="course.show.deleteTutor" /></a></li>
+                            <li><a class="icon-delete" href="javascript:showDiv('multiple.delete.tutor');"><s:text name="course.show.deleteTutor" /></a></li>
                             <br class="clear" />
                         </ul>                        
                     </div>
@@ -615,7 +753,7 @@
                             <li><a class="icon-edit" href="javascript:showDiv('multiple.message.student');"><s:text name="course.send.message"/></a></li>
                             <li><a class="icon-message"  href="javascript:showDiv('multiple.newsflash.student');"><s:text name="course.send.newsflash" /></a></li>
                             <li><a class="icon-newsFlash" href="javascript:showDiv('multiple.change.student');"><s:text name="course.show.perfil" /></a></li>
-                            <li><a class="icon-newsFlash" href="javascript:showDiv('multiple.delete.student');"><s:text name="course.show.deleteStudent" /></a></li>
+                            <li><a class="icon-delete" href="javascript:showDiv('multiple.delete.student');"><s:text name="course.show.deleteStudent" /></a></li>
                             <br class="clear" />
                         </ul>                        
                     </div>
@@ -687,93 +825,6 @@
                     <div id="user.message" style="display:none;">
                         <h4><s:text name ="student.send.message" /></h4><br />
                         <s:text name="message.title" /><br /> <input type="text" id="input.user.message.title" size="55" maxlength="50" /><br />
-                        <s:text name="message.type"/> <br /> <textarea cols="62" rows="4" onKeyDown="textCounter(this,$('input.user.message.description.len'),250);" onKeyUp="textCounter(this,$('input.user.message.description.len'),250);" id="input.user.message.description"></textarea><br />
-                        <s:text name="message.remaining" /><input readonly type=text id="input.user.message.description.len" name="input.user.message.description.len" size=3 maxlength=3 value="250"/><br/>
-                        <input type="button" value="Submit" onclick="sendMessage($('input.user.message.title'), $('input.user.message.description'));" />
-                    </div>
-                    <div id="user.newsflash" style="display:none;">
-                        <h4><s:text name="student.send.newsflash"/></h4><br />
-                        <s:text name="message.type" /><br /> <textarea cols="62" rows="4" onKeyDown="textCounter(this,$('input.user.newsflash.message.len'),250);" onKeyUp="textCounter(this,$('input.user.newsflash.message.len'),250);" id="input.user.newsflash.message"></textarea><br />
-                        <s:text name="message.remaining" /><input readonly type=text id="input.user.newsflash.message.len" name="input.user.newsflash.message.len" size=3 maxlength=3 value="250"/><br/>
-                        <input type="button" value="Submit" onclick="sendNewsFlash($('input.user.newsflash.message'));" />
-                    </div>
-                    <div id="user.change" style="display:block;">
-                        <br /><s:text name="systemUser.show.changeType"/><br /> <br />
-                        <s:text name="systemUser.show.type" />
-                        <select id="user.change.types">
-                        </select>
-                        <br />
-                        <input type="button" value="<s:text name="systemUser.input.btnSave" />" onclick="change($('user.change.types').value)" />
-                    </div>
-                </div>
-                <!-- end actions-box -->
-            </div>
-            <!-- End content-courses -->
-        </div>  
-    </div>
-</div>
-
-<div id="multipleUsers" style="display:none;" >
-    <div id="col-2-home">
-        <div class="container-courses">
-            <div class="content-courses">
-                
-                <h1>Múltiplos Usuários</h1>
-                <br class="clear" />
-                
-                <s:iterator value="allUsers" status="stat">   
-                    <div id="div.inner.user.id_<s:property value="id" />" class="member-info" style="display: none;">
-                        <img class="picture" src="../images/foto_profile.jpg" width="80" height="80" />
-                        <div>
-                            <div>                                
-                                <p><s:text name="systemUser.input.username"/>: <span><s:property value="username" /></span></p>
-                                <p><s:text name="systemUser.input.email"/>: <span><s:property value="email" /></span></p>
-                                <p><s:text name="systemUser.input.memberSince"/>: <span><s:date name="createdAt" format="MM/dd/yyyy"/> </span></p>
-                            </div>
-                        </div>
-                        <br class="clear" />
-                        
-                    </div>
-                </s:iterator>
-                
-                <div class="actions-box">
-                    <h2><s:text name="course.show.actions"/>:</h2>
-                    <div class="edit-tools">
-                        <ul>
-                            <li><a class="icon-edit" href="#" onclick="closeAllMessages(); $('multiple.message').style.display = 'block';"><s:text name="course.send.message"/></a></li>
-                            <li><a class="icon-message"  href="#" onclick="closeAllMessages(); $('multiple.newsflash').style.display = 'block';"><s:text name="course.send.newsflash" /></a></li>
-                            <li><a class="icon-newsFlash" href="#" onclick="closeAllMessages(); $('multiple.change').style.display = 'block';"><s:text name="course.show.perfil" /></a></li>
-                            <br class="clear" />
-                        </ul>                        
-                    </div>
-                    <div id="multiple.message" style="display:none;">
-                        <h4><s:text name ="student.send.message" /></h4><br />
-                        <s:text name="message.title" /><br /> <input type="text" id="input.multiple.message.title" size="55" maxlength="50" /><br />
-                        <s:text name="message.type"/><br /> <textarea cols="62" rows="4" onKeyDown="textCounter(this,$('input.multiple.message.description.len'),250);" onKeyUp="textCounter(this,$('input.multiple.message.description.len'),250);" id="input.multiple.message.description"></textarea><br />
-                        <s:text name="message.remaining" /><input readonly type=text id="input.multiple.message.description.len" name="input.multiple.message.description.len" size=3 maxlength=3 value="250"/><br/>
-                        <input type="button" value="Submit" onclick="sendMessage($('input.multiple.message.title'), $('input.multiple.message.description'));" />
-                    </div>
-                    <div id="multiple.newsflash" style="display:none;">
-                        <h4><s:text name="student.send.newsflash"/></h4><br />
-                        <s:text name="message.type" /><br /> <textarea cols="62" rows="4" onKeyDown="textCounter(this,$('input.multiple.newsflash.message.len'),250);" onKeyUp="textCounter(this,$('input.multiple.newsflash.message.len'),250);" id="input.multiple.newsflash.message"></textarea><br />
-                        <s:text name="message.remaining" /><input readonly type=text id="input.multiple.newsflash.message.len" name="input.multiple.newsflash.message.len" size=3 maxlength=3 value="250"/><br/>
-                        <input type="button" value="Submit" onclick="sendNewsFlash($('input.multiple.newsflash.message'));" />
-                    </div>
-                    <div id="multiple.change" style="display:none;">
-                        <br /><s:text name="systemUser.show.changeType"/><br /> <br />
-                        <s:text name="systemUser.show.type" />
-                        <select id="multiple.change.types">
-                        </select>
-                        <br />
-                        <input type="button" value="<s:text name="systemUser.input.btnSave" />" onclick="change($('multiple.change.types').value)" />
-                    </div>
-                </div>
-                <!-- end actions-box -->
-            </div>
-            <!-- End content-courses -->
-        </div>  
-    </div>
-</div> type="text" id="input.user.message.title" size="55" maxlength="50" /><br />
                         <s:text name="message.type"/> <br /> <textarea cols="62" rows="4" onKeyDown="textCounter(this,$('input.user.message.description.len'),250);" onKeyUp="textCounter(this,$('input.user.message.description.len'),250);" id="input.user.message.description"></textarea><br />
                         <s:text name="message.remaining" /><input readonly type=text id="input.user.message.description.len" name="input.user.message.description.len" size=3 maxlength=3 value="250"/><br/>
                         <input type="button" value="Submit" onclick="sendMessage($('input.user.message.title'), $('input.user.message.description'));" />

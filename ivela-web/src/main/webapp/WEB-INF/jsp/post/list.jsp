@@ -27,16 +27,31 @@
     %>
     
 <script>
+    function validate(){
+       var validate = true;
+        if(document.getElementById('post.input.title').value==''){
+            alert("Title is required");
+            validate = false
+        }
+        
+        if(document.getElementById('post.input.message').value==''){
+            alert("Message is required");
+            validate = false
+        }
+        if(validate){
+            document.getElementById('form-answer').submit();
+        }
+    }
     function addQuote(postId, topicId, message) {
         var hform = '';
         //hform += '<h2><s:text name="post.input.sessionTitle" /></h2><br />';
         hform += '<form id="form-answer" style="padding-left: 170px; text-aling: right; width: 800px; position: relative;" name="post" onsubmit="return true;" action="/ivela-web/post!add.action" method="POST" enctype="multipart/form-data">';
         hform += '<div style="border:1px solid #ccc; background: #f3f3f3; padding: 20px; margin-top: 0px; width: 405px; height: auto;" >';
         hform += '<s:hidden name="post.topic.id" value="' + topicId + '" />';
-            hform += '<label><s:text name="post.input.title" />:</label><br />';
-            hform += '<s:textfield name="post.title" theme="simple" cssStyle="width: 400px;" /><br />';
+            hform += '<label><s:text name="post.input.title"  />:</label><br />';
+            hform += '<s:textfield name="post.title" theme="simple" cssStyle="width: 400px;"  id="post.input.title"/><br />';
             hform += '<label><s:text name="post.input.message" />:</label><br />';
-            hform += '<s:textarea name="post.message" cssStyle="width:400px;" theme="simple" value="' + '[quote]' + message + '[/quote]' + '" /><br />';
+            hform += '<s:textarea id="post.input.message" name="post.message" cssStyle="width:400px;" theme="simple" value="' + '[quote]' + message + '[/quote]' + '" /><br />';
         hform += '</div>';
 
         hform += '<div style="display: block; position: absolute; top: 0; right: 0px; border:1px solid #ccc; background: #f3f3f3; padding: 20px; width: 300px; height: auto;" >';
@@ -48,7 +63,7 @@
             hform += '<label><s:text name="repository.input.file" />:</label><br />';
             hform += '<s:file name="upload" theme="simple"/><br />';
         hform += '</div>';
-        hform += '<input type="submit" id="form-answer_0" value="Send" class="btn-send"/>';
+        hform += '<input type="button" id="form-answer_0" value="Send" class="btn-send" onclick="validate();"/>';
         hform += '</form>';
         document.getElementById('addQuote_' + postId).innerHTML = hform;
         document.getElementById('addQuote_' + postId).style.display = 'block';
@@ -138,9 +153,8 @@
     </s:iterator>                
 </div>
 <div id="quick-answer">
-    
     <h3>Quick Answer</h3>
-    
+    <s:actionerror />    
     <s:form action="post!addQuickAnswer.action" method="POST" id="form-answer" theme="simple">
         <s:hidden name="post.topic.id" value="%{topic.id}" />
         <label>Title:</label><br /><br />
@@ -158,34 +172,6 @@
     for ( var i = 0; i < msgs.length; i++ )
     {
         msgs[i].innerHTML = replaceQuotes( msgs[i].innerHTML );
-    }
-    
-    function replaceQuotes( quotedText )
-    {
-       var out = replaceAll( quotedText, '[quote]', '<div class=\"quote-answer\">' );
-       out = replaceAll( out, '[/quote]', '</div>' );
-
-//       alert('quotedText=' + quotedText + "\n" + "out=" + out);
-
-       return out;
-    }
-    
-    function replaceAll(string, token, newtoken) 
-    {
-	while (string.indexOf(token) != -1) 
-        {
-		string = string.replace(token, newtoken);
-	}
-
-        return string;
-    }
-
-</script>
-
-<%--
-</body>
-</html>--%>
-uotes( msgs[i].innerHTML );
     }
     
     function replaceQuotes( quotedText )
