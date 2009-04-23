@@ -35,11 +35,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.sf.jmimemagic.Magic;
-import net.sf.jmimemagic.MagicException;
-import net.sf.jmimemagic.MagicMatch;
-import net.sf.jmimemagic.MagicMatchNotFoundException;
-import net.sf.jmimemagic.MagicParseException;
+import org.apache.struts2.components.ActionError;
 
 /**
  *
@@ -66,6 +62,7 @@ public class ProfileAction extends GenericAction implements Preparable {
     private Phone[] phone;
     private boolean sucess = false;
     private java.io.File upload;
+    private String uploadContentType;
     private String uploadFileName;
     private String oldPhoto;
     private List<Country> countryList;
@@ -77,8 +74,6 @@ public class ProfileAction extends GenericAction implements Preparable {
     private String path = Constants.FILE_UPLOAD_PATH + "profiles/";
     private XStream xStream = new XStream(new JettisonMappedXmlDriver());
     private InputStream inputStream;
-    
-    private String error = "";
 
     public void prepare() throws Exception {
         //retrieves the honorific list
@@ -182,11 +177,10 @@ public class ProfileAction extends GenericAction implements Preparable {
         logger.log("oldPhoto: ->" + oldPhoto + "<-");
         logger.log("upload: ->" + upload + "<-");
 
+        String oldFromSession = (String) this.getSession().get("OLD_PHOTO");
         if (upload == null || upload.equals(" ")) {
-            String oldFromSession = (String) this.getSession().get("OLD_PHOTO");
             profile.setPhoto(oldFromSession);
             this.getSession().remove("OLD_PHOTO");
-
         } else {
             if (!new File(path).exists()) {
                 ContentPackageUtils.createDir(new File(Constants.FILE_UPLOAD_PATH), "profiles");
@@ -197,34 +191,21 @@ public class ProfileAction extends GenericAction implements Preparable {
             }
 
             profile.setPhoto(path + profile.getId() + "/" + uploadFileName);
-            logger.log("file" + profile.getPhoto());
+            logger.log("file: " + profile.getPhoto());
             
-            MagicMatch match;            
-            try {
-                match = Magic.getMagicMatch(fileIo, true);
-                // verify if the file is an image
-                if(match.getMimeType().startsWith("image")){
-                    if(!profileRemote.savePhoto(profile, fileIo)){
-                        setError(getText("profile.upload.error"));
-                        resul = false;
-                    }
-                }else{
-                    setError(getText("profile.upload.invalidType"));
+            // verify if the file is an image
+            logger.log(uploadContentType);
+            if(uploadContentType.startsWith("image")){
+                if(!profileRemote.savePhoto(profile, fileIo)){
+                    addActionError(getText("profile.upload.error"));
+                    profile.setPhoto(oldFromSession);
                     resul = false;
                 }
-            } catch (MagicParseException ex) {
-                Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
-                setError(getText("profile.upload.invalidType"));
+            }else{
+                addActionError(getText("profile.upload.invalidType"));
+                profile.setPhoto(oldFromSession);
                 resul = false;
-            } catch (MagicMatchNotFoundException ex) {
-                Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
-                setError(getText("profile.upload.invalidType"));
-                resul = false;
-            } catch (MagicException ex) {
-                Logger.getLogger(ProfileAction.class.getName()).log(Level.SEVERE, null, ex);
-                setError(getText("profile.upload.invalidType"));
-                resul = false;
-            }            
+            }    
         }
         
         resul = (resul) ? profileRemote.edit(profile) : false;
@@ -236,6 +217,8 @@ public class ProfileAction extends GenericAction implements Preparable {
         resul = (resul) ? phoneRemote.update(listPhones.get(1)) : false;
 
         setSucess(resul);
+        
+        addActionMessage(NONE);
 
         return edit();
     }
@@ -591,11 +574,13 @@ public class ProfileAction extends GenericAction implements Preparable {
         this.locationTypeRemote = locationTypeRemote;
     }
 
-    public String getError() {
-        return error;
+    public String getUploadContentType() {
+        return uploadContentType;
     }
 
-    public void setError(String error) {
-        this.error = error;
+    public void setUploadContentType(String uploadContentType) {
+        this.uploadContentType = uploadContentType;
     }
+    
+    
 }

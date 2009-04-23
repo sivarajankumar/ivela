@@ -31,12 +31,9 @@ import br.ufc.ivela.ejb.interfaces.StateRemote;
 import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 import com.opensymphony.xwork2.Preparable;
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
@@ -184,13 +181,10 @@ public class SystemUserAction extends GenericAction implements Preparable {
 
                 HttpServletRequest request = ServletActionContext.getRequest();
                 String url = "http://" + request.getServerName() + ":" + request.getServerPort() + Constants.WEB_PATH;
+                // String url = "http://200.17.41.212:8080" + Constants.WEB_PATH;
                 if (!url.endsWith("/")) {
                     url += "/";
                 }
-
-                System.out.println("body: " + body);
-                System.out.println("url: " + url);
-                System.out.println("server: " + request.getRequestURL().toString());
 
                 MailSender.send(new String[]{su.getEmail()}, "[ivela] Request password", getLayoutEmail(body, url));
             }
@@ -208,36 +202,15 @@ public class SystemUserAction extends GenericAction implements Preparable {
     }
 
     public String getLayoutEmail(String body, String url) {
-        System.out.println("entrei");
-        
-        Properties properties = new Properties();
-            try {
-                properties.load(new FileInputStream("layout.properties"));
-                return properties.getProperty("layout.email").replaceAll("[--body--]", body).replaceAll("[--linkSite--]", url);
-            } catch (IOException e) {
-                return body;
-            }
-        
-        
-        /*
         try {
-            
-
-
-
-        System.out.println("antes de criar");
-        ResourceBundle layout = ResourceBundle.getBundle("resources/layout");
-        System.out.println("depois de criar");
-        if(layout == null){
-        System.out.println("layout eh null");
-        }
-        return layout.getString("layout.email").replaceAll("[--body--]", body).replaceAll("[--linkSite--]", url);
-         
+            ResourceBundle layout = ResourceBundle.getBundle("layout");
+            System.out.println(layout.getString("layout.email").replaceAll("__body__", body).replaceAll("__linkSite__", url));
+            return layout.getString("layout.email").replaceAll("__body__", body).replaceAll("__linkSite__", url);
         } catch (NullPointerException e) {
             System.out.println("Error while retrieving layout property file");
             e.printStackTrace();
             return body;
-        }*/
+        }
     }
 
     public CalendarRemote getCalendarRemote() {
@@ -275,14 +248,11 @@ public class SystemUserAction extends GenericAction implements Preparable {
 //            systemUser.getProfile().setEthnicity(1);
 //            systemUser.getProfile().setLanguage(1L);
 
-
             systemUser.setEnabled(true);
             String password = systemUser.getPassword();
             password = systemUserRemote.encrypt(password);
             systemUser.setPassword(password);
             systemUser.setAuthentication(new Authentication(Constants.ROLE_USER));
-
-
 
             //*******PROFILE*******
             //---personal info
@@ -292,7 +262,6 @@ public class SystemUserAction extends GenericAction implements Preparable {
                 Honorific honor = honorificList.get(honoroficId.intValue() - 1);
 
                 profile.setHonorific(honor);
-            //System.out.println("honorific: " + profile.getHonorific().getTitle());
             }
 
             if (birthDate != null && !birthDate.equals("")) {
@@ -300,23 +269,17 @@ public class SystemUserAction extends GenericAction implements Preparable {
                 profile.setBirthDate(date);
             }
 
-
-            //System.out.println("birthDate: " + profile.getBirthDate());
-
-
             //language and enth
             if (language != null && !language.equals("")) {
                 Integer languageId = new Integer(language);
                 LanguageInternationalization li = languageInternationalizationList.get(languageId - 1);
                 profile.setLanguage(li);
-            //System.out.println("language: " + profile.getLanguage().getLanguage().getName());
             }
 
             if (ethnicity != null && !ethnicity.equals("")) {
                 Integer ethId = new Integer(ethnicity);
                 Ethnicity ethnicityObj = ethnicityList.get(ethId - 1);
                 profile.setEthnicity(ethnicityObj);
-            //System.out.println("language: " + profile.getEthnicity().getName());
             }
 
 
@@ -328,7 +291,6 @@ public class SystemUserAction extends GenericAction implements Preparable {
                 }
                 profileId = profileRemote.add(profile);
                 profile = profileRemote.get(profileId);
-
 
                 systemUser.setProfileId(profileId);
 
@@ -390,21 +352,31 @@ public class SystemUserAction extends GenericAction implements Preparable {
                 phoneRemote.add(mPhone);
             }
 
-            //SAVING USER!
+            // saving user
             Long id = systemUserRemote.add(systemUser);
             systemUser = systemUserRemote.get(id);
-            //--- create the user in webical application
+            
+            // create the user in webical application
             HttpServletRequest request = ServletActionContext.getRequest();
             logger.log(request.getServerName());
             logger.log(String.valueOf(request.getServerPort()));
             calendarRemote.addInfo(request.getServerName(), String.valueOf(request.getServerPort()), systemUser.getUsername());
-            //System.out.println("#### usuario criado");
-            // boolean result = calendarRemote.addInfo("200.17.41.215", String.valueOf(8080), systemUser.getUsername());
+            
+            // send a confirmation mail
+            String body = "Dear <b>" + systemUser.getUsername() + "</b>, <br /><br />" + 
+                          "&nbsp;&nbsp;&nbsp;&nbsp;You are now register and you can access the iVeLA system.<br /><br /><br />";
 
-            //*****HISTORY****
+            String url = "http://" + request.getServerName() + ":" + request.getServerPort() + Constants.WEB_PATH;
+            //String url = "http://200.17.41.212:8080" + Constants.WEB_PATH;
+            if (!url.endsWith("/")) {
+                url += "/";
+            }
+
+            MailSender.send(new String[]{systemUser.getEmail()}, "[ivela] You were successfully registered", getLayoutEmail(body, url));
+            
+            // create a history register
             addHistory("history.createuser.title", "history.createuser.description", systemUser, systemUser.getUsername());
             return "login";
-
         } else {
             return INPUT;
         }
@@ -415,10 +387,7 @@ public class SystemUserAction extends GenericAction implements Preparable {
      * @return edit
      */
     public String edit() {
-
-
         setSystemUser(systemUserRemote.get(getSystemUser().getId()));
-
         return "edit";
     }
 
@@ -427,7 +396,6 @@ public class SystemUserAction extends GenericAction implements Preparable {
      */
     @Override
     public String input() {
-
         return INPUT;
     }
 
