@@ -59,7 +59,7 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
 	<localRepository>/opt/sws/localRepo</localRepository>
 </settings>
 }}}
-  * <font color='blue'>If your network uses http proxy, add the following configuration after _`<localRepository>/opt/sws/localRepo</localRepository>`_ into _settings.xml_ </font>
+  * <font color='red'>If your network uses http proxy, add the following configuration after _`<localRepository>/opt/sws/localRepo</localRepository>`_ into _settings.xml_ </font>
 {{{
 <proxies>
    <proxy>
@@ -126,6 +126,7 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
   * At _Additional Properties_ set the follow properties: _User = ivela, DatabaseName = ivela, Password = mypasswd, Ssl = false, ServerName = 127.0.0.1, PortNumber = 5432_
   * Go to _Resources > JDBC Resources_ and create a new resource
   * Make sure that the _JNDI Name_ is _jdbc/ivelaDataSource_ and the _Pool Name_ is _ivela.postgresql_
+  * <font color='red'>Even if your network uses http proxy, you MUST set Glassfish to ignore it: Go to _Services_ tab, then go to option _Properties_ then go to _Connection_ tab then UNCHECK _Use IDE Proxy settings_ option </font>
 
 
 = Workstation Setup: Compilation =
