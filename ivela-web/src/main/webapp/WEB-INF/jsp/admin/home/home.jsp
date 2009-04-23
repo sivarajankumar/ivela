@@ -20,7 +20,7 @@
 <div id="col-1-home">
     <h2><s:text name="admin.pageTitle" /></h2>
     <div id="vertical_container2" >
-        <h3 class="no_grades"><a href="home.action" title="<s:property value="admin.home" />"><s:text name="admin.home" /></a></h3>
+        <h3 class="no_grades"><a href="home.action" title="<s:property value="admin.controlPanel" />"><s:text name="admin.controlPanel" /></a></h3>
         <h3 class="no_grades"><a href="systemUser!show.action" title="<s:property value="back.people.title" />"><s:text name="admin.people" /></a></h3>
         <h3 class="no_grades"><a href="course!show.action" title="<s:property value="back.courses.title" />"><s:text name="admin.courses" /></a></h3>
         <h3 class="no_grades"><a href="grade!show.action" title="<s:property value="aback.grades.title" />"><s:text name="admin.grade" /></a></h3>   
@@ -30,7 +30,7 @@
 
 <div id="showCourse">
     <div id="col-2-home">
-        Seja bem-vindo
+        <s:text name="home.welcome"/>
     </div>    
 </div>
 
@@ -38,6 +38,4 @@
 <br class="clear" />
 
 <!-- end content -->
-<br class="clear" />
-ntent -->
 <br class="clear" />
