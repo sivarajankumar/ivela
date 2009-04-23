@@ -11,14 +11,14 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
 
 
   * Install OpenJDK 1.6 [http://openjdk.java.net/]
-  * Install Netbeans 6.5 [http://www.netbeans.org/downloads/index.html]. From Netbeans site, download the _Java Web and EE_ bundle
+  * Install Netbeans 6.5.1 [http://www.netbeans.org/downloads/index.html]. From Netbeans site, download the _Java Web and EE_ bundle
   * Create /opt/sws folder (Remember to grant read/write access to your user for this folder)
   * Go to [http://code.google.com/p/ivela/downloads/list] and download _localRepo.tar.gz_
   * Extract the content of _localRepo.tar.gz_ at _/opt/sws_ (The result must be /opt/sws/localRepo)
   * Create /opt/sws/sql folder 
   * Go to [http://code.google.com/p/ivela/downloads/list] and download _ivela_fileSystem.tar.gz_
   * Extract the content of _ivela_fileSystem.tar.gz_ at _/opt/_ . The result must be /opt/ivela (Remember to grant read/write access to your user for this folder)
-  * Download Maven 2.09 [http://maven.apache.org/download.html
+  * Download Maven 2.09 [http://maven.apache.org/download.html]
   * Extract Maven to /opt/sws (The result must be /opt/sws/apache-maven-2.0.9)
   * Install Subversion
   * Install [https://addons.mozilla.org/en-US/firefox/addon/1843 Firebug] add-on into Firefox
@@ -114,6 +114,12 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
   * Go to _Resources > JDBC Resources_ and create a new resource
   * Make sure that the _JNDI Name_ is _jdbc/ivelaDataSource_ and the _Pool Name_ is _ivela.postgresql_
 
+
+= Workstation Setup: Compilation =
+  * Open Netbeans and go to _Projects_ tab
+  * Click with the right button of mouse at _ivela (pom)_ then select option _Clean and Build_
+  * After that all projects will be compiled in the right sequence (ivela-commons, ivela-ejb, ivela-war, ivela-ear)
+  * The *.ear, .jar and .war* packages will be generated at _target_ folder of each project
 
 = Workstation Setup: Webical =
 
