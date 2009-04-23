@@ -59,7 +59,20 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
 	<localRepository>/opt/sws/localRepo</localRepository>
 </settings>
 }}}
-
+  * If your network uses http proxy, add the following configuration after _<localRepository>/opt/sws/localRepo</localRepository>_
+{{{
+<proxies>
+   <proxy>
+      <active>true</active>
+      <protocol>http</protocol>
+      <host>proxy.somewhere.com</host>
+      <port>8080</port>
+      <username>proxyuser</username>
+      <password>somepassword</password>
+      <nonProxyHosts>www.google.com|*.somewhere.com</nonProxyHosts>
+    </proxy>
+  </proxies>
+}}}
 
 = Workstation Setup: Versioning =
 
