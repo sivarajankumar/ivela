@@ -7,6 +7,7 @@
         <pattern>/include/*</pattern>
         <pattern>/accessDenied**</pattern>
         <pattern>/admin/unitContent!**</pattern>
+        <pattern>/admin/repository!**</pattern>
         <pattern>/admin/question!**</pattern>
         <pattern>/admin/course!showChat**</pattern>
         <pattern>/course!showChatStd**</pattern>
@@ -39,6 +40,7 @@
         <pattern>/systemUser!inputChange**</pattern>
         <pattern>/systemUser!change**</pattern>
         <pattern>/admin/profile**</pattern>
+        <pattern>/admin/repository**</pattern>
         <pattern>/message**</pattern>
         <pattern>/exam**</pattern>
         <pattern>/exercise**</pattern>
@@ -49,9 +51,6 @@
         <pattern>/admin/*</pattern>
     </decorator>
     <decorator name="main" page="main.jsp">
-        <pattern>/*</pattern>
-    </decorator>
-</decorators>rator name="main" page="main.jsp">
         <pattern>/*</pattern>
     </decorator>
 </decorators>
