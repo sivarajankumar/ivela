@@ -7,8 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%--@ taglib prefix="cal" uri="/jscalendar" --%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
 
 <head>
     <link href="../css/lightbox.css"  rel="stylesheet" type="text/css" />
@@ -26,7 +24,8 @@
 <div id="breadcrumb">
     <p><s:text name="breadcrumb.youAreHere"/></p>
     <ul>
-        <li class="current"><s:text name="admin.home" /></li>
+        <li><a href="index.action"><s:text name="admin.home"/></a></li>
+        <li class="current"><s:text name="admin.controlPanel" /></li>
     </ul>
 </div>
 
@@ -51,6 +50,9 @@
                 <div id="professors.course.<s:property value="id" />" style="display: none;"></div>
                 <div id="tutors.course.<s:property value="id" />" style="display: none;"></div>
                 <div id="studentsCount.course.<s:property value="id" />" style="display: none;"></div>
+                <div id="countCoordinators.course.<s:property value="id" />" style="display: none;"></div>
+                <div id="countProfessors.course.<s:property value="id" />" style="display: none;"></div>
+                <div id="countTutor.course.<s:property value="id" />" style="display: none;"></div>
                 <div id="course.grades.<s:property value="id" />" style="display: none;"></div>                
                 <script language="JavaScript">
                     var professors = ',';
@@ -58,18 +60,27 @@
                     var grades = '';
                     var coordinators = ',';
                     var studentsCount = 0;
+                    var professorsCount = 0;
+                    var tutorCount = 0;
+                    var coordinatorCount =0;
                     <s:iterator value="grades">
                         grades += '<s:property value="id" />' + ';';
-                        if (coordinators.indexOf(',<s:property value="coordinator.username" />,') == -1)
-                        coordinators += '<s:property value="coordinator.username" />' + ','; 
+                        if (coordinators.indexOf(',<s:property value="coordinator.username" />,') == -1){
+                            coordinators += '<s:property value="coordinator.username" />' + ',';
+                            coordinatorCount++ ;
+                        }
                         <s:iterator value="professors">
-                            if (professors.indexOf(',<s:property value="username" />,') == -1)
-                            professors += '<s:property value="username" />' + ','; 
+                            if (professors.indexOf(',<s:property value="username" />,') == -1){
+                                professors += '<s:property value="username" />' + ',';
+                            }
                         </s:iterator>
+                            professorsCount += <s:property value="professors.size()" />;
                         <s:iterator value="tutors">
-                            if (tutors.indexOf(',<s:property value="username" />,') == -1)
-                            tutors += '<s:property value="username" />' + ','; 
+                            if (tutors.indexOf(',<s:property value="username" />,') == -1){
+                                tutors += '<s:property value="username" />' + ',';
+                            }
                         </s:iterator>
+                            tutorCount += <s:property value="tutors.size()" />;
                             studentsCount += <s:property value="enrollments.size()" />;
                     </s:iterator>
                         if (grades.length > 0) {
@@ -102,7 +113,10 @@
                         $('course.grades.<s:property value="id" />').innerHTML = grades;
                         $('coordinators.course.<s:property value="id" />').innerHTML = coordinators;
                         $('professors.course.<s:property value="id" />').innerHTML = professors;
+                        $('countProfessors.course.<s:property value="id" />').innerHTML = "("+ professorsCount+"):";
+                        $('countTutor.course.<s:property value="id" />').innerHTML = "("+ tutorCount+"):";
                         $('tutors.course.<s:property value="id" />').innerHTML = tutors;
+                        $('countCoordinators.course.<s:property value="id" />').innerHTML = "("+coordinatorCount+"):";
                         $('studentsCount.course.<s:property value="id" />').innerHTML = studentsCount;
                 </script>
                 <div id="vertical_nested_container">
@@ -122,6 +136,8 @@
                             <div id="professors.grade.<s:property value="id" />" style="display: none;"></div>
                             <div id="tutors.grade.<s:property value="id" />" style="display: none;"></div>
                             <div id="studentsCount.grade.<s:property value="id" />" style="display: none;"></div>
+                            <div id="countProfessors.grade.<s:property value="id" />" style="display: none;"></div>
+                            <div id="countTutor.grade.<s:property value="id" />" style="display: none;"></div>
                             <div id="startdate.grade.<s:property value="id" />" style="display: none;"></div>
                             <div id="enddate.grade.<s:property value="id" />" style="display: none;"></div>
                             <div id="vertical_nested_container2">
@@ -132,16 +148,20 @@
                                         var tutors = ',';
                                         var coordinators = ',';
                                         var studentsCount = 0;
+                                        var professorsCount = 0;
+                                        var tutorCount = 0;
                                         if (coordinators.indexOf(',<s:property value="coordinator.username" />,') == -1)
                                         coordinators += '<s:property value="coordinator.username" />' + ','; 
                                     <s:iterator value="professors">
                                         if (professors.indexOf(',<s:property value="username" />,') == -1)
                                         professors += '<s:property value="username" />' + ','; 
                                     </s:iterator>
+                                        professorsCount += <s:property value="professors.size()" />;
                                     <s:iterator value="tutors">
                                         if (tutors.indexOf(',<s:property value="username" />,') == -1)
                                         tutors += '<s:property value="username" />' + ','; 
                                     </s:iterator>
+                                        tutorCount += <s:property value="tutors.size()" />;
                                         studentsCount += <s:property value="enrollments.size()" />;
                                         if (coordinators.length > 1) {
                                             coordinators = coordinators.substring(0, coordinators.length - 1);
@@ -169,83 +189,67 @@
                                             tutors = 'none.';
                                         $('coordinators.grade.<s:property value="id" />').innerHTML = coordinators;
                                         $('professors.grade.<s:property value="id" />').innerHTML = professors;
+                                        $('countProfessors.grade.<s:property value="id" />').innerHTML = "("+ professorsCount+") :";
+                                        $('countTutor.grade.<s:property value="id" />').innerHTML = "("+ tutorCount+") :";
                                         $('tutors.grade.<s:property value="id" />').innerHTML = tutors;
                                         $('studentsCount.grade.<s:property value="id" />').innerHTML = studentsCount;
                                         $('startdate.grade.<s:property value="id" />').innerHTML = '<s:property value="startDatetime" />';
                                         $('enddate.grade.<s:property value="id" />').innerHTML = '<s:property value="endDatetime" />';
                                     </script>
-                                    <ul class="list-students">
-                                        <s:if test="(enrollments != null && enrollments.size() > 0)"> 
-                                            <input type="button" value="<s:text name="home.mark" />"  class="btn-check-all" onclick="setCheckedAllStudents('<s:property value="grades[#gstat.index].id" />', true);" />
-                                            <input type="button" value="<s:text name="home.unmark" />" class="btn-uncheck-all" onclick="setCheckedAllStudents('<s:property value="grades[#gstat.index].id" />', false);" />
-                                        </s:if>
-                                        <s:iterator value="enrollments" status="stat"> 
-                                            <s:if test="enrollments[#stat.index].status == 0">
-                                                <li title="<s:property value="systemUser.username" />" id="li.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="box-person">
-                                                    <img src="../images/icon/icon-person-yellow.gif" /><br />
-                                                    <s:if test="systemUser.username.length() > 8">
-                                                        <s:property value="systemUser.username.substring(0,8)+ \"...\"" />
-                                                    </s:if>
-                                                    <s:else>
-                                                        <s:property value="systemUser.username" />
-                                                    </s:else>
-                                                        <br /><input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" 
-                                                                     name="studentsCheck" onclick="updateStudents(this,'student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />', '<s:property value="systemUser.id" />');" />
-                                                </li>
+                                    
+                                    <s:if test="(enrollments != null && enrollments.size() > 0)"> 
+                                        <ul class="list-students">
+                                            <input type="button" value="<s:text name="home.mark" />"  class="btn-check-all" onclick="setCheckedAllStudents(this);" />
+                                            <input type="button" value="<s:text name="home.unmark" />" class="btn-uncheck-all" onclick="setUncheckedAllStudents(this);" />
+                                        
+                                            <s:iterator value="enrollments" status="stat"> 
+                                                <s:if test="enrollments[#stat.index].status == 0">
+                                                    <li title="<s:property value="systemUser.username" />" id="li.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="box-person">
+                                                        <img id="img_<s:property value="grades[#gstat.index].id" />_<s:property value="systemUser.id" />" src="../images/icon/icon-person-yellow.gif" /><br />
+                                                        <s:if test="systemUser.username.length() > 8">
+                                                            <s:property value="systemUser.username.substring(0,8)+ \"...\"" />
+                                                        </s:if>
+                                                        <s:else>
+                                                            <s:property value="systemUser.username" />
+                                                        </s:else>
+                                                            <br /><input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" 
+                                                                         name="studentsCheck" onclick="updateStudents(<s:property value="systemUser.id" />, '<s:property value="systemUser.username" />', '<s:property value="systemUser.email" />', '<s:property value="systemUser.createdAt" />', '<s:text name="student.input.username"/>', '<s:text name="student.input.email"/>', '<s:text name="student.input.createdAt"/>');" />
+                                                    </li>
+                                                </s:if>
+                                                <s:if test="enrollments[#stat.index].status == 1">
+                                                    <li title="<s:property value="systemUser.username" />" id="li.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="box-person">
+                                                        <img id="img_<s:property value="grades[#gstat.index].id" />_<s:property value="systemUser.id" />" src="../images/icon/icon-person-green.gif" /><br />
+                                                        <s:if test="systemUser.username.length() > 8">
+                                                            <s:property value="systemUser.username.substring(0,8)+ \"...\"" />
+                                                        </s:if>
+                                                        <s:else>
+                                                            <s:property value="systemUser.username" />
+                                                        </s:else> 
+                                                            <br /><input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" 
+                                                                         name="studentsCheck" onclick="updateStudents(<s:property value="systemUser.id" />, '<s:property value="systemUser.username" />', '<s:property value="systemUser.email" />', '<s:property value="systemUser.createdAt" />', '<s:text name="student.input.username"/>', '<s:text name="student.input.email"/>', '<s:text name="student.input.createdAt"/>');" />
+                                                    </li>
+                                                </s:if>
+                                                <s:if test="enrollments[#stat.index].status == 2">
+                                                    <li title="<s:property value="systemUser.username" />" id="li.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="box-person">
+                                                        <img id="img_<s:property value="grades[#gstat.index].id" />_<s:property value="systemUser.id" />" src="../images/icon/icon-person-red.gif" /><br />
+                                                        <s:if test="systemUser.username.length() > 8">
+                                                            <s:property value="systemUser.username.substring(0,8)+ \"...\"" />
+                                                        </s:if>
+                                                        <s:else>
+                                                            <s:property value="systemUser.username" />
+                                                        </s:else>
+                                                            <br /><input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />"
+                                                                         name="studentsCheck" onclick="updateStudents(<s:property value="systemUser.id" />, '<s:property value="systemUser.username" />', '<s:property value="systemUser.email" />', '<s:property value="systemUser.createdAt" />', '<s:text name="student.input.username"/>', '<s:text name="student.input.email"/>', '<s:text name="student.input.createdAt"/>');" />
+                                                    </li>
+                                                </s:if>
+                                            </s:iterator>
                                             </s:if>
-                                            <s:if test="enrollments[#stat.index].status == 1">
-                                                <li title="<s:property value="systemUser.username" />" id="li.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="box-person">
-                                                    <img src="../images/icon/icon-person-green.gif" /><br />
-                                                    <s:if test="systemUser.username.length() > 8">
-                                                        <s:property value="systemUser.username.substring(0,8)+ \"...\"" />
-                                                    </s:if>
-                                                    <s:else>
-                                                        <s:property value="systemUser.username" />
-                                                    </s:else> 
-                                                        <br /><input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" 
-                                                                     name="studentsCheck" onclick="updateStudents(this,'student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />', '<s:property value="systemUser.id" />');" />
-                                                </li>
-                                            </s:if>
-                                            <s:if test="enrollments[#stat.index].status == 2">
-                                                <li title="<s:property value="systemUser.username" />" id="li.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="box-person">
-                                                    <img src="../images/icon/icon-person-red.gif" /><br />
-                                                    <s:if test="systemUser.username.length() > 8">
-                                                        <s:property value="systemUser.username.substring(0,8)+ \"...\"" />
-                                                    </s:if>
-                                                    <s:else>
-                                                        <s:property value="systemUser.username" />
-                                                    </s:else>
-                                                        <br /><input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />"
-                                                                     name="studentsCheck" onclick="updateStudents(this,'student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />', '<s:property value="systemUser.id" />');" />
-                                                </li>
-                                            </s:if>
-                                        </s:iterator>
-                                        <br class="clear" />
-                                    </ul>
-                                    <!-- Início : Divs com características do aluno -->
-                                    <s:iterator value="enrollments" status="stat">                             
-                                        <div id="div.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" style="display: none;">
-                                            <div id="div.inner.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="member-info" style="display: none;">
-                                                <img class="picture" id="image_student_<s:property value="systemUser.id" />" src="../images/foto_profile.jpg" width="80" height="80" />
-                                                <div>
-                                                    <div>
-                                                        <p><s:text name="student.input.username"/>: <span><s:property value="systemUser.username" /></span></p>
-                                                        <p><s:text name="student.input.email"/>: <span><s:property value="systemUser.email" /></span></p>
-                                                        <p><s:text name="student.input.createdAt"/>: <span><s:property value="systemUser.createdAt" /></span></p>
-                                                    </div>
-                                                </div>
-                                                <br class="clear" />
-                                                
-                                            </div>
-                                        </div>
-                                    </s:iterator>
-                                    <s:iterator value="enrollments" status="stat">                             
-                                        <div id="div.multiple.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" style="display: none;">
-                                            <div id="div.multiple.inner.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="member-info" style="display: none; float: left;">
-                                                <img class="picture" id="image_student_<s:property value="systemUser.id" />" src="../images/foto_profile.jpg" width="80" height="80" /><br /><span><s:property value="systemUser.username" /></span>
-                                            </div>
-                                        </div>
-                                    </s:iterator>
+                                        
+                                            <br class="clear" />
+                                        </ul>
+                                    <s:else>
+                                        <span class="no_grades"><s:text name="admin.noStudents" /></span>
+                                    </s:else>
                                     <br />
                                     <!-- Fim : Divs com caracterísitcas do aluno -->
                                 </div>
@@ -284,9 +288,9 @@
                 <br/>
                 <div>
                     <p><s:text name="admin.show.studentsCount" /> <span id="admin.course.student.count"></span></p>
-                    <p><s:text name="admin.show.coordinators" /> <span id="admin.course.coordinators"></span></p>
-                    <p><s:text name="admin.show.professors" /> <span id="admin.course.professors"></span></p>
-                    <p><s:text name="admin.show.tutors" /> <span id="admin.course.tutors"></span></p>
+                    <p><s:text name="admin.show.coordinators" /> <span id="admin.course.coordinators"></span>show<span></span></p>
+                    <p><s:text name="admin.show.professors" /> <span id="admin.course.professors"></span>show<span></span></p>
+                    <p><s:text name="admin.show.tutors" /> <span id="admin.course.tutors"></span>show<span></span></p>
                 </div>
                 <div class="actions-box">
                     <h2><s:text name="course.show.actions" /></h2>
@@ -316,12 +320,10 @@
                         <input type="button" value="<s:text name="systemUser.input.btnSave" />" onclick="sendNewsFlashGrade($('input.course.newsflash.message'));" />
                     </div>
                 </div>
-                
                 <!-- end actions-box -->
             </div>
             <!-- End content-grades -->
         </div>
-        
     </div>    
 </div>
 
@@ -343,8 +345,8 @@
                 <div>
                     <p><s:text name="admin.show.studentsCount" /> <span id="admin.grade.student.count"></span></p>
                     <p><s:text name="admin.show.coordinators" /> <span id="admin.grade.coordinators"></span></p>
-                    <p><s:text name="admin.show.professors" /> <span id="admin.grade.professors"></span></p>
-                    <p><s:text name="admin.show.tutors" /> <span id="admin.grade.tutors"></span></p>
+                    <p><s:text name="admin.show.professors" />  <span id="admin.grade.professors"></span>show<span></span></p>
+                    <p><s:text name="admin.show.tutors" /> <span id="admin.grade.tutors"></span>show<span></span></p>
                     <p><s:text name="admin.show.startDate" /> <span id="admin.grade.startdate"></span></p>
                     <p><s:text name="admin.show.endDate" /> <span id="admin.grade.enddate"></span></p>
                 </div>
@@ -385,7 +387,6 @@
     </div>    
 </div>
 
-
 <div id="showScorecard" style="display: none;">
     <div id="col-2-home">
         <div class="container-grades">
@@ -417,16 +418,16 @@
                <table class="table-exercises-info" width="568" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td width="100" class="titulo"><s:text name="scorecard.course" />:</td>
-                        <td width="468" id="show.transcript.course">Inglês para Negócios</td>
+                        <td width="468" id="show.transcript.course"> </td>
                         
                     </tr>
                     <tr>
                         <td class="titulo"><s:text name="scorecard.grade" />:</td>
-                        <td id="show.transcript.grade">Turma de Inglês</td>
+                        <td id="show.transcript.grade"> </td>
                     </tr>
                     <tr>
                         <td class="titulo"><s:text name="scorecard.student" />:</td>
-                        <td id="show.transcript.student">jeferson</td>
+                        <td id="show.transcript.student"> </td>
                     </tr>
                 </table>
                 <div id="show.transcript.notes"></div>
@@ -464,6 +465,23 @@
                         </div>
                     </div>
                     <div class="tip-step"><s:text name="enrollment.message.index"/></div>
+                    <div class="tip-step">
+                        <s:text name="enrollment.message.example"/>
+                        <span class="xml-example"><br />
+                            <b>&lt;students&gt;</b><br />
+                                <b>&nbsp;&nbsp;&nbsp;&nbsp;&lt;student&gt;</b><br />
+                                    <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;firstName&gt;</b>Andrew<b>&lt;/firstName&gt;</b><br />
+                                    <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;lastName&gt;</b>Klerk<b>&lt;/lastName&gt;</b><br />
+                                    <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;email&gt;</b>andrew@company.com<b>&lt;/email&gt;</b><br />
+                                <b>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/student&gt;</b><br />
+                                <b>&nbsp;&nbsp;&nbsp;&nbsp;&lt;student&gt;</b><br />
+                                    <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;firstName&gt;</b>Joseph<b>&lt;/firstName&gt;</b><br />
+                                    <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;lastName&gt;</b>Schnider<b>&lt;/lastName&gt;</b><br />
+                                    <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;email&gt;</b>joseph@mycompany.net<b>&lt;/email&gt;</b><br />
+                                <b>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/student&gt;</b><br />
+                                <b>&lt;/students&gt;</b><br />
+                        </span>
+                    </div>
                 </div>
                 <s:form name="formUpload" id="formUpload" action="grade!enrollmentStudents.action" method="post" enctype="multipart/form-data" target="iframeStudents">
                       <s:hidden  id="show.enrollementList.grade" name="grade.id" value=""/>
@@ -471,7 +489,7 @@
                        <s:file id="idFile" name="fileStudents" theme="simple" value="" onchange="validateFile(this.value)" />
                       <br>
                       <br>
-                      <input type="button" value="Enviar" cssClass="create-question" onclick="submitList()"/>  
+                      <input type="button" value="<s:text name="message.input.submit" />" class="create-question" onclick="submitList()"/>  
                 </s:form>
                  <iframe id="studentsUp" name="iframeStudents" src="" style="width:0;height:0;border:0px solid #fff;" >
                  </iframe>
@@ -479,7 +497,6 @@
         </div>
     </div>
 </div>
-
 
 
 <div id="showResultEnrollment" style="display:none;">
@@ -521,6 +538,7 @@
                 </form>
                 <br class="clear" />
                 <div id="studentData"></div>
+                <br class="clear" />
                 <div id="reportData"></div> 
                 <div id="pieCanvas" style="overflow: auto; position:relative;height:330px;width:570px; display:none"></div>
                 <div class="actions-box">
@@ -547,29 +565,6 @@
                     <div id="student.message" style="display:none;" class="course-message">
                         <h4><s:text name ="course.send.message" /></h4><br />
                         <s:text name="message.title" /><br /> <input type="text" name="input.student.message.title" id="input.student.message.title" size="55" maxlength="50" /><br />
-                        <s:text name="message.type"/><br /><textarea name="input.student.message.description" id="input.student.message.description" cols="62" rows="4"onKeyDown="textCounter(this,$('input.student.message.description.len'),250);" onKeyUp="textCounter(this,$('input.student.message.description.len'),250);"></textarea><br />
-                        <s:text name="message.remaining" /><input readonly type=text id="input.student.message.description.len" name="input.student.message.description.len" size=3 maxlength=3 value="250"/><br/>                        
-                        <input type="button" value="<s:text name="systemUser.input.btnSave" />" onclick="sendMessageStudent($('input.student.message.title'), $('input.student.message.description'));" />
-                    </div>
-                    <div id="student.newsflash" style="display:none;" class="course-message">
-                        <h4><s:text name="course.send.newsflash"/></h4><br />
-                        <s:text name="message.type"/><br /><textarea name="input.student.newsflash.message" id="input.student.newsflash.message" cols="62" rows="4"onKeyDown="textCounter(this,$('input.student.newsflash.message.len'),250);" onKeyUp="textCounter(this,$('input.student.newsflash.message.len'),250);"></textarea><br />
-                        <s:text name="message.remaining" /><input readonly type=text id="input.student.newsflash.message.len" name="input.student.newsflash.message.len" size=3 maxlength=3 value="250"/><br/>                        
-                        <input type="button" value="<s:text name="systemUser.input.btnSave" />" onclick="sendNewsFlashStudent($('input.student.newsflash.message'));" />
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>       
-</div>
-
-<!-- end col-2-home -->
-<br class="clear" />
-
-<!-- end content -->
-<br class="clear" />
-itle" id="input.student.message.title" size="55" maxlength="50" /><br />
                         <s:text name="message.type"/><br /><textarea name="input.student.message.description" id="input.student.message.description" cols="62" rows="4"onKeyDown="textCounter(this,$('input.student.message.description.len'),250);" onKeyUp="textCounter(this,$('input.student.message.description.len'),250);"></textarea><br />
                         <s:text name="message.remaining" /><input readonly type=text id="input.student.message.description.len" name="input.student.message.description.len" size=3 maxlength=3 value="250"/><br/>                        
                         <input type="button" value="<s:text name="systemUser.input.btnSave" />" onclick="sendMessageStudent($('input.student.message.title'), $('input.student.message.description'));" />
