@@ -163,5 +163,6 @@
     </build>
     <properties>
         <netbeans.hint.useExternalMaven>true</netbeans.hint.useExternalMaven>
-    </properties>
+    	<maven.test.skip>true</maven.test.skip>
+	</properties>
 </project>
