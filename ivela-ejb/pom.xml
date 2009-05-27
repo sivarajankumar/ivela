@@ -103,7 +103,7 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <copy file="${project.build.directory}/${project.artifactId}-${project.version}-with-dependencies.jar" todir="/usr/local/glassfish-v2ur2/domains/domain1/autodeploy/" overwrite="true" failonerror="false" />
+                                <copy file="${project.build.directory}/${project.artifactId}-${project.version}-with-dependencies.jar" todir="/opt/sws/glassfish/domains/domain1/autodeploy/" overwrite="true" failonerror="false" />
                             </tasks>
                         </configuration>
                         <goals>
@@ -116,5 +116,6 @@
     </build>
     <properties>
         <netbeans.hint.useExternalMaven>true</netbeans.hint.useExternalMaven>
-    </properties>
+    	<maven.test.skip>true</maven.test.skip>
+	</properties>
 </project>
