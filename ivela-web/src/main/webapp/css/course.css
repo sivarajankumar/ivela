@@ -1,0 +1,119 @@
+@charset "utf-8";
+/* CSS Document */
+
+#container{margin-bottom:80px;}
+#container a:hover{color:#ff7202;}
+
+#content h1, #content h2{font:30px Arial, Helvetica, sans-serif; color:#ff7202; width:300px; font-weight:bold;}
+#content h2{font:20px Arial, Helvetica, sans-serif; font-weight:bold; margin-bottom: 20px;width:auto;}
+#content h3{font:15px Arial, Helvetica, sans-serif; color:#033d7d; font-weight:bold; margin-top:20px;}
+#content h4{font:20px Arial, Helvetica, sans-serif; color:#033d7d; font-weight:bold; margin-bottom:30px; width:650px;}
+
+#content #col-1-courses {width: 633px; height: auto; float:left;}
+#content #col-2-courses {width: 305px; height: auto; float:left; padding-left:20px;}
+
+.table-filter{width:305px; font:11px Arial, Helvetica, sans-serif; margin-top:10px; margin-bottom:10px;}
+.table-filter td.checkbox{width:30px;}
+.table-filter td.name-checkbox{float:left; width:110px; text-align:left;}
+
+.table-courses{width:960px; margin-top:25px; margin-bottom:15px;}
+.table-courses tr td p{font:15px Arial, Helvetica, sans-serif; color:#444; text-align:left; border: 1px solid #fff; border-bottom:#cdcdcd solid 1px; padding: 10px 0px 15px 0px; width:100%; margin-bottom:15px;}
+
+.table-courses tr td a{
+    font:22px Arial, Helvetica, sans-serif; 
+    color:#033d7d; 
+    font-weight:bold;}
+.table-courses tr td span{
+    font:20px Arial, Helvetica, sans-serif; 
+    color:#033d7d; 
+    font-weight:bold; 
+    text-align:left;  
+    border: 1px solid #fff; 
+    padding:10px 10px 10px; 
+    background:url(../images/icon/icon-courses.gif) no-repeat left;
+    padding:0 0 0 30px;}
+
+.table-grades{width:960px; margin-top:25px; margin-bottom:15px;}
+.table-grades tr td p{font:15px Arial, Helvetica, sans-serif; color:#444; text-align:left; border: 1px solid #fff; border-bottom:#cdcdcd solid 1px; padding: 10px 0px 15px 0px; width:100%; margin-bottom:15px;}
+
+.table-grades tr td a{
+    font:22px Arial, Helvetica, sans-serif; 
+    color:#033d7d; 
+    font-weight:bold;}
+.table-grades tr td span{
+    font:20px Arial, Helvetica, sans-serif; 
+    color:#033d7d; 
+    font-weight:bold; 
+    text-align:left;  
+    border: 1px solid #fff; 
+    padding:10px 10px 10px; 
+    background:url(../images/icon/icon-grade.gif) no-repeat left;
+    padding:0 0 0 30px;}
+
+.table-grades .title-enrollment{
+    font: bold 13px Arial, Helvetica, sans-serif; 
+    color:#fff; 
+    background:#033d7d;
+    padding:3px;
+    border-right:2px solid #999;
+    border-bottom:2px solid #999;
+    text-decoration:none;
+    
+}
+
+.table-grades .title-enrollment:hover{background:#ffe79c;}
+
+.no-courses{
+    width:615px;
+    margin-top:25px; 
+    margin-bottom:15px; 
+    font:20px Arial, Helvetica, sans-serif;
+    color:#444; }
+
+.table-courses .title-enrollment{
+    font: bold 13px Arial, Helvetica, sans-serif; 
+    color:#fff; 
+    background:#033d7d;
+    padding:3px;
+    border-right:2px solid #999;
+    border-bottom:2px solid #999;
+    text-decoration:none;
+    
+}
+
+.table-courses .title-enrollment:hover{background:#ffe79c;}
+
+#box-search{
+    background:url(../images/bg_boxes-repository.jpg) repeat-x; 
+    width:645px; 
+    height:auto; 
+    border:1px solid #ccc;
+    margin-top:5px;}
+#box-search .form-list-courses{
+    text-align:center;
+    margin-top:10px;}
+#box-search .form-list-courses .name-search{
+    font:11px Arial, Helvetica, sans-serif; 
+    width:280px; 
+    padding-top:2px; 
+    height:18px;} 
+#box-search .form-list-courses .button{margin-top:10px; margin-bottom:10px; margin-left:232px; font:12px Arial, Helvetica, sans-serif;}
+#box-search .form-list-courses p{text-align:left; margin-left:10px; font:12px Arial, Helvetica, sans-serif; color:#033d7d; font-weight:bold;}
+#box-search .form-list-courses .list-filter{list-style-type:none; margin-top:15px; margin-bottom:5px;}
+#box-search .form-list-courses li{font:11px Arial, Helvetica, sans-serif; margin-top:5px; text-align:left; margin-left:10px;}
+#box-search{width:305px;}
+
+.page-courses{font:11px Arial, Helvetica, sans-serif; color:#033d7d; float:left;}
+.courses-listed{color:#ff7202; font-weight:bold;}
+
+.navegation{display:block; width: 960px; text-align:right; margin-right:20px; margin-bottom:5px; font:12px Arial, Helvetica, sans-serif; font-weight:bold;}
+.navegation a{color:#033d7d; margin-left:15px;}
+.navegation a.previous{background:url(../images/bottons/btn-previous.gif) no-repeat left; padding:0 0 0 10px;}
+.navegation a.next{background:url(../images/bottons/btn-next.gif) no-repeat right; padding:0 10px 0 0;}
+
+.timeline-default {
+    font-family: Trebuchet MS, Helvetica, Arial, sans serif;
+    font-size: 8pt;
+    height: 300px;
+    border: 1px solid #aaa;
+}
