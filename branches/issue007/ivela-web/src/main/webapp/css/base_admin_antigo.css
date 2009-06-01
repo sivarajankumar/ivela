@@ -1,0 +1,60 @@
+@charset "utf-8";
+/* CSS Document */
+
+* {margin:0; padding:0;}
+.clear {clear:both; height:0; font-size: 1px; line-height: 0px;}
+
+html, body {height: 100%; background: url(../images/bg_standard_back_end.jpg) repeat-x 0 0 #fff;}
+
+body {padding-top: 15px;}
+
+input, textarea{border:#CCC solid; border-width:1px; padding:2px; color:#222;}
+
+.btn-save, .btn-cancel{font:14px Arial, Helvetica, sans-serif; color:#454545; text-decoration:none; font-weight:bold; padding:0 0 0 20px; margin-top: 10px; border-width:0;}
+.btn-save{background:url(../images/icon/icon-save.gif) no-repeat left; margin-right:20px;}
+.btn-cancel{background:url(../images/icon/icon-cancel.gif) no-repeat left;}
+
+#container {width: 970px; height:auto; min-height:100%; margin:0 auto; text-align:left; font-family:Arial, Helvetica, sans-serif;}
+
+#header {width: 960px; height: 165px; padding-top: 20px; background: url(../images/bg-ballons_admin.jpg) no-repeat top left;}
+#header h1 a{width: 178px; height: 118px; float:left; background: url(../images/ivela-logo-admin.gif) no-repeat 0 0; text-indent: -999px; overflow: hidden;}
+#header .profile {width: 300px; height:auto; position:relative; margin-top:7px; float:left; margin-left: 150px;}
+#header .profile img {float: left; margin-right: 11px; padding: 5px; background:#fff; border: 1px solid #003366;}
+#header .profile h2 {color:#cc0000; font-size: 110%;}
+#header .profile a {display: block; color: #003399; font-weight: bold; font-size: 11px;}
+#header .profile a:hover {color: #ff6600;}
+#header .profile .logout{float: left; width: 56px; height:23px; position: absolute; bottom: 0; right: 130px; background: url(../images/bottons/btn-logout-admin.gif) no-repeat top left; text-indent: -999px; overflow: hidden;}
+#header .profile .logout:hover{background: url(../images/bottons/btn-logout-on.gif) no-repeat top left;}
+.administration{font-size:13px; color:#000000;}
+
+#content {width: 100%; height: auto; margin-bottom: 100px;}
+
+#menu {width: 960px; height: 35px; border-bottom: 3px solid #ffe79c;}
+#menu ul{list-style-type: none;}
+#menu ul li{float: left; margin:0 5px 0 0; padding:0; height: 35px;}
+#menu li a{display: block; padding: 10px 20px 3px 20px; color:#454545; font-size: 15px; font-weight:bold; text-decoration: none;}
+#menu li a:hover{color:#ff6600;}
+#menu ul .current {background:url(../images/menu/tab-right.gif) no-repeat right top;}
+#menu ul .current a{background: url(../images/menu/tab-left.gif) left top no-repeat; color:#ff6600;}
+
+#breadcrumb {width: 860px; height: 22px; margin: 10px 0 20px 0; padding: 8px 0 0 100px; position:relative;}
+#breadcrumb p {width: 90px; height: 17px; padding: 2px 0 0 8px; position: absolute; top:6px; left:0; background: url(../images/arrow-breadcrumb-admin.gif) no-repeat top right #454545; font: 11px Arial, Helvetica, sans-serif; color:#fff;}
+#breadcrumb ul {list-style-type:none; font-size: 11px;}
+#breadcrumb ul li{display:inline; float:left; padding: 0 20px 0 0; margin: 0 0 0 15px; background: url(../images/arrow-breadcrumb2-admin.gif) no-repeat top right;}
+#breadcrumb ul .current {color:#ed6400; font-weight:bold; background: none;}
+#breadcrumb ul li a{display:inline; color:#033d7d;}
+#breadcrumb ul li a:hover{color:#ed6400;}
+
+#footer {width:100%; height: 100px; background: url(../images/bg-footer.jpg) #696969 repeat-x top left;}
+#footer #content-footer {margin:0 auto; width:960px; height: auto; padding-top: 20px;}
+#footer #content-footer .logo{float: left;}
+#footer #content-footer ul {list-style-type:none; float: left; margin: 30px 0 0 30px;}
+#footer #content-footer ul li{display: inline;}
+#footer #content-footer ul li a{display: block; float: left; padding: 0 10px 0 10px; color:#fff; font:11px Arial, Helvetica, sans-serif; border-right: 1px solid #fff;}
+#footer #content-footer ul li a.last {border:none;}
+#footer #content-footer ul li a:hover {color: #999999;}
+
+.box-error {height:auto; background:#FFFFCC; border:1px solid #ff7202; padding: 10px;}
+.box-error h4 {width: 500px; height:auto; margin-bottom: 20px; font: bold 17px Arial, Helvetica, sans-serif; color:#ff3333; background: url(../images/icon/icon-error.gif) no-repeat 0 3px; padding-left: 20px;}
+.box-error ul {list-style-type: none; color:#333333; font: 11px Arial, Helvetica, sans-serif;}
+.box-error ul li{ background: url(../images/icon/icon-item-error.gif) no-repeat 0 5px; padding-left: 20px; margin-bottom: 10px;}
