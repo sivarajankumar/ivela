@@ -70,9 +70,9 @@
                 <br class="clear" />
             </div>
             <!-- end header -->
-            <div class="tools">
-                <span class="btn-faq" onclick="document.location = 'faq!list.action';"><img src="../images/icon/icon-faq-home.gif" /></span>
+            <div class="tools">                
                 <span class="btn-tools" onclick="Effect.toggle('hidden', 'blind')" title="<s:text name="main.tools" />"><img src="../images/icon/icon-tools.gif" /><s:text name="main.tools"/><img src="../images/icon/icon-tools-arrow.gif" /></span>
+                <span class="btn-faq" onclick="document.location = 'faq!list.action';"><img src="../images/icon/icon-faq-home.gif" /></span>
                 
                 <div class="container-tools" id="hidden" style="display:none;">
                     <div class="content-tools">                        
@@ -95,6 +95,9 @@
                     <li id="menu_2" ><a href="course!show.action" title="<s:property value="back.courses.title" />"><s:text name="admin.courses" /></a></li>
                     <li id="menu_3" ><a href="grade!show.action" title="<s:property value="back.grades.title" />"><s:text name="admin.grade" /></a></li>
                 </ul>
+            </div>
+            
+            <div class="horizontal-line-t">                 
             </div>
             
             <script type="text/javascript">
