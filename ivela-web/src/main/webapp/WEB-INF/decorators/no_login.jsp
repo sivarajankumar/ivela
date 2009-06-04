@@ -17,7 +17,7 @@
     <head>
         <title><s:text name="front.pageTitle" /></title>
         <!-- Colocar a logo para aparecer no navegador <link rel="icon" href="../logotipo/logo.jpg" type="image/gif" /> -->
-        <link href="css/base.css" rel="stylesheet" type="text/css" />
+        <link href="css/base_no_login.css" rel="stylesheet" type="text/css" />
                    
         <decorator:head/>
     </head>
