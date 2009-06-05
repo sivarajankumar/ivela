@@ -450,11 +450,6 @@ function unCheckAllFieldsByName(fieldName,divId)
         $('action.add.tutor').style.display = 'block';
         $('actions.all.tutor').style.display = 'none';
     }
-    else if ( checks[0].id.indexOf("student") > -1 )
-    {
-        $('action.add.student').style.display = 'block';
-        $('actions.all.student').style.display = 'none';
-    }
 
 }
 
