@@ -5,7 +5,7 @@ var fileExtOk = true;
 var checkedStudents = new Array();
 
 Event.observe(window, 'load', loadAccordions, false);
-Event.observe(window, 'click', click, false);
+Event.observe(window, 'load', function() {Event.observe(content, 'click', click, false);}, false);
 
 
 function validateFile(fileName){
@@ -49,12 +49,16 @@ function textCounter(field, countfield, maxlimit) {
 }
 
 function click(e){ 
-    if(e.target.getAttribute('class') != null){       
-        var clazz = e.target.getAttribute('class').toString();
+    if (!e) e = window.event;
+    var evt;
+    if (e.target) evt = e.target;
+        else if (e.srcElement) evt = e.srcElement;
+    if ((evt.className) != null) {       
+        var clazz = evt.className.toString();
 
         if(clazz == 'accordion_toggle_grade2 accordion_toggle_active_grade2'){
 
-            var course = e.target.next(0).getAttribute('id');
+            var course = evt.next(0).getAttribute('id');
 
             if(course != current_course){
                 //eh um curso    
@@ -62,12 +66,12 @@ function click(e){
                 showCourse(course);
             }
         } else if(clazz == 'vertical_accordion_toggle vertical_accordion_toggle_active'){
-            var grade = e.target.next(0).getAttribute('id');
+            var grade = evt.next(0).getAttribute('id');
 
             //eh uma grade
             showGrade(grade);
         } else if(clazz == 'vertical_accordion_toggle2 vertical_accordion_toggle_active2'){
-            var element = e.target.getAttribute('id');
+            var element = evt.getAttribute('id');
             
             //eh uma unidade
             //if (element == 'professors')

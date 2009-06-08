@@ -1,5 +1,5 @@
 Event.observe(window, 'load', loadAccordions, false);
-Event.observe(window, 'click', click, false);
+Event.observe(window, 'load', function() {Event.observe(content, 'click', click, false);}, false);
 
 var actualType = '';
 
@@ -8,12 +8,16 @@ function isArray(o){
 }
 
 function click(e){ 
-    if(e.target.getAttribute('class') != null){       
-        var clazz = e.target.getAttribute('class').toString();
+    if (!e) e = window.event;
+    var evt;
+    if (e.target) evt = e.target;
+        else if (e.srcElement) evt = e.srcElement;  
+    if ((evt.className) != null){       
+        var clazz = evt.className.toString();
 
         if(clazz == 'category_toggle category_active'){
 
-            var type = e.target.next(0).getAttribute('id');   
+            var type = evt.next(0).getAttribute('id');   
             actualType = type;
             unCheckAll();
             closeAllMessages();
