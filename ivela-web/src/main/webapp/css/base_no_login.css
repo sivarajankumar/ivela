@@ -30,3 +30,13 @@ a:hover{color:#ff6600;}
 .btn-back{background:url(../images/arrow-left.gif) no-repeat left;}
 .tip-login{color:#666;font-size:16px;margin-bottom:20px;}
 .form-user{font-weight:bold;color:#666;font-family:Arial, Helvetica, sans-serif;margin:0 0 10px;}
+
+#footer{width:100%;height:32px;background:url(../images/bg-footer.jpg) #696969 repeat-x top left;}
+#footer #content-footer{margin:0 auto;width:960px;height:auto;padding-top:8px;}
+#footer #content-footer .logo{float:right;}
+#footer #content-footer ul{list-style-type:none;float:left;margin:0;}
+#footer #content-footer ul li{display:inline;}
+#footer #content-footer ul li a{display:block;float:left;padding:0 10px;color:#fff;font:11px Arial, Helvetica, sans-serif;border-right:1px solid #fff;}
+#footer #content-footer p{display:block;float:left;padding:0 10px;color:#fff;font:11px Arial, Helvetica, sans-serif;}
+#footer #content-footer ul li a.last{border:none;}
+#footer #content-footer ul li a:hover{color:#999999;}
