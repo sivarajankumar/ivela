@@ -1,14 +1,32 @@
-<%--
-    Document   : input
-    Created on : Jun 5, 2008, 9:14:56 AM
-    Author     : leoomoreira
---%>
+<%/*
+####################################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                                  #
+# This file is part of ivela project, an open-source                                               #
+# Program URL   : http://code.google.com/p/ivela/                                                  #
+#                                                                                                  #
+# This program is free software; you can redistribute it and/or modify it under the terms          #
+# of the GNU General Public License as published by the Free Software Foundation; either           #
+# version 3 of the License, or (at your option) any later version.                                 #
+#                                                                                                  #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;        #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.        #
+# See the GNU General Public License for more details.                                             #
+#                                                                                                  #
+####################################################################################################
+# File:     no_login.jsp                                                                           #
+# Document: Decorator                                                                              #
+# Date        - Author(Company)                    - Issue# - Summary                              #
+# 05-JUN-2008 - Leonardo Moreira                   - XXXXXX - Initial Version                      #
+# 08-JUN-2009 - Mileine Assato(Instituto Eldorado) - 000007 - SYSTEM_VERSION value reference added #
+####################################################################################################
+*/ %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//ENhttp://www.w3.org/TR/html4/loose.dtd">
 
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="org.springframework.security.context.SecurityContextHolder"%>
 <%@ page import="org.springframework.security.userdetails.UserDetails"%>
 <%@ page import="br.ufc.ivela.commons.model.SystemUser"%>
+<%@ page import="br.ufc.ivela.commons.Constants"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
 
@@ -40,5 +58,13 @@
                 <br class="clear" />
             </div>
         </div> 
-    </body>
+        <div id="footer">
+            <div id="content-footer">
+               <p id="copyright"> &copy; 2009 Ivela <%= Constants.SYSTEM_VERSION %> - All rights reserved.</p>
+           
+                <img class="logo" src="RenderServlet?file=/globals/images/logo-footer.png" alt="<s:property value="front.logo.footer" />" />
+            </div>
+  
+        </div>
+      </body>
 </html>
