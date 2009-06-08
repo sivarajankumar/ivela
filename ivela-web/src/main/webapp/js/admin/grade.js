@@ -436,7 +436,7 @@ function updateTutor(obj,id)
             
             var divContent = document.getElementById("div" + multiple + "." + checks[i].id).innerHTML;
 
-            divContent = divContent.replace("display: none;","display: block;");
+            divContent = divContent.replace(new RegExp("display: none", "i"),"display: block");
             tutorDataHtml += divContent;
         }
     }
@@ -486,7 +486,7 @@ function updateProfessor(obj,id)
             checkedProfessors[arrayIndex++] = checks[i].value;
             
             var divContent = document.getElementById("div" + multiple + "." + checks[i].id).innerHTML;
-            divContent = divContent.replace("display: none;","display: block;");
+            divContent = divContent.replace(new RegExp("display: none", "i"),"display: block");
             professorDataHtml += divContent;
         }
     }
@@ -535,7 +535,7 @@ function updateStudents(obj,id)
             showImage("img_div" + multiple + "." + checks[i].id);
             checkedStudents[arrayIndex++] = checks[i].value;
             var divContent = document.getElementById("div" + multiple + "." + checks[i].id).innerHTML;
-            divContent = divContent.replace("display: none;","display: block;");
+            divContent = divContent.replace(new RegExp("display: none", "i"),"display: block");
             studentDataHtml += divContent;
         }
     }

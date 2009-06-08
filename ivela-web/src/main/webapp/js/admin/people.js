@@ -503,7 +503,7 @@ function updatePerson(obj,id)
             // acrescenta o id do tutor numa variável global se estiver marcado
             checkedPerson[arrayIndex++] = checks[i].value;
             var divContent = document.getElementById("div" + multiple + "." + checks[i].id).innerHTML;
-            divContent = divContent.replace("display: none;","display: block;");
+            divContent = divContent.replace(new RegExp("display: none", "i"),"display: block");
             personDataHtml += divContent;
         }
     }
