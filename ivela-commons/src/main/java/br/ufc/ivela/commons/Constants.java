@@ -1,16 +1,34 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #
+#                                                                                           #
+#############################################################################################
+# File:     Constants.java                                                                  #
+# Document: Constants                                                                       #
+# Date        - Author(Company)                    - Issue# - Summary                       #
+# XX-XXX-XXXX - Rodrigo                            - XXXXXX - Initial Version               #
+# 08-JUN-2009 - Mileine Assato(Instituto Eldorado) - 000007 - SYSTEM_VERSION constant added #
+#############################################################################################
+*/ 
 
 package br.ufc.ivela.commons;
 
-/**
- *
- * @author rodrigo
- */
+
 public class Constants {
     
+	//SYSTEM VERSION
+	public static final String SYSTEM_VERSION = "V01.01";
+	
     //TYPE OF GENDER
     public static final int GENDER_FEMALE = 0;
     public static final int GENDER_MALE = 1;
@@ -59,8 +77,7 @@ public class Constants {
     public static final int LIST_BY_WEEK = 1;
     public static final int LIST_BY_MONTH = 2;
     
-
-    
+  
     public static final String FILE_UPLOAD_PATH = "/uploads/";
     
     public static final String FILE_UPLOAD_PARTNERS = "/opt/ivela/upload/";
