@@ -50,7 +50,7 @@
             
             <tr>
                 <td><span><s:property value="name" /></span></td>
-                <td align="right"><a class="title-enrollment" href="enrollment!listGrades.action?course.id=<s:property value="id" />"><s:text name="enrollment.add.action"/></a></td>
+                <td align="right"><table><tr><td><a class="title-enrollment" href="enrollment!listGrades.action?course.id=<s:property value="id" />"><s:text name="enrollment.add.action"/></a></td></tr></table></td>
             </tr>
             <tr>
                 <td colspan="2"><p><s:property value="description" /></p></td>
