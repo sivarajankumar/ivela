@@ -255,9 +255,8 @@ function change(type) {
         falhas++;
     }        
     if (enviadas > 0) {
-        alert('Perfil atualizado!');
-      
-        document.location = '';
+        alert('Perfil atualizado!');      
+        document.location = './systemUser!show.action';
     }
     else{
         alert('Perfil não atualizado!');
@@ -279,7 +278,7 @@ function add(userId) {
         alert('Perfil não adicionado!');
     }       
         
-    document.location = '';
+    document.location = './systemUser!show.action';
 }
 
 function sendNewsFlash(message) {
