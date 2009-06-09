@@ -1,11 +1,3 @@
-// accordion.js
-//
-// Copyright (c) 2007 stickmanlabs
-// Author: Kevin P Miller | http://www.stickmanlabs.com
-// 
-// Accordion is freely distributable under the terms of an MIT-style license.
-/*-----------------------------------------------------------------------------------------------*/
-
 if (typeof Effect == "undefined") {
     throw ("accordion.js requires including script.aculo.us' effects.js library!")
 }
@@ -38,12 +30,8 @@ accordion.prototype = {
         this.duration = ((11 - this.options.resizeSpeed) * 0.15);
         var a;
         if (Prototype.Browser.IE) {
-            //accordions = document.all(container);
-            // + ' .' + this.options.classNames.toggle);
-            var r = document, h = Selector.handlers, c = true, n;
-            //n = h.id(n, r, container, c); c = false;
-
-            var n = new Array()
+            var r = document, h = Selector.handlers, c = true;
+            var n = new Array();
             var elementCount = document.all(b).length;
             if (!elementCount) elementCount = 1;            
             for (var i = 0; i < elementCount; i++) {
