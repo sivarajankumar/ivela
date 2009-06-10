@@ -7,7 +7,7 @@ body{padding-top:0;}
 a{color:#033d7d;}
 a:hover{color:#ff6600;}
 #header{width:960px;height:130px;background:url(../images/bg_ballons_admin2.jpg) no-repeat -12px 0;padding-top:19px;}
-#header .logotipo{width:178px;height:118px;float:left;background:url(../images/ivela-logo2.gif) no-repeat 0 0;text-indent:-999px;overflow:hidden;}
+#header .logotipo{width:178px;height:118px;float:left;background:url(../images/ivela-logo-full.gif) no-repeat 0 0;text-indent:-999px;overflow:hidden;}
 #header .profile{width:213px;height:110px;position:relative;float:right;margin-top:-12px;padding:10px 0 0 25px;background:url(../images/bg_profile.jpg) no-repeat top left;}
 #header .profile p{font:bold 11px Arial, Helvetica, sans-serif;color:#033d7d;}
 #header .profile img{float:left;margin-right:11px;padding:2px;background:#fff;border:none;}
@@ -166,7 +166,7 @@ classe comentada porque o ul estava global
 #col-2-home .content-courses .form-edit input:hover{cursor:pointer;color:#ff6600;}
 #col-2-home .content-courses .actions-box h2{margin:20px 0 10px;}
 #col-2-home .content-courses .actions-box .edit-tools{height:auto;margin:0;}
-#col-2-home .content-courses .actions-box .edit-tools ul{list-style-type:none;height:auto;padding:0;border:1px solid #ccc;padding:5px;margin:0;background:#D7D7D7;}
+#col-2-home .content-courses .actions-box .edit-tools ul{list-style-type:none;min-height:30px;height:auto;padding:0;border:1px solid #ccc;padding:5px;margin:0;background:#D7D7D7;}
 #col-2-home .content-courses .actions-box .edit-tools ul li{display:inline;}
 #col-2-home .content-courses .actions-box .edit-tools ul li a{display:block;float:left;height:20px;text-align:center;padding:30px 5px 0;margin-right:5px;border:1px solid #ccc;font-size:10px;}
 #col-2-home .content-courses .actions-box .edit-tools ul li a:hover{border-color:#ff7202;background-color:#fffadd;}
@@ -239,7 +239,7 @@ ul global
 #col-2-home .content-grades label{color:#444;padding-bottom:10px;}
 #col-2-home .content-grades .actions-box h2{margin:20px 0 10px;font-size:25px;color:#ff6600;}
 #col-2-home .content-grades .actions-box .edit-tools{height:auto;margin:0;}
-#col-2-home .content-grades .actions-box .edit-tools ul{list-style-type:none;height:auto;padding:0;border:1px solid #ccc;padding:5px;margin:0;background:#D7D7D7;}
+#col-2-home .content-grades .actions-box .edit-tools ul{list-style-type:none;min-height:30px;height:auto;padding:0;border:1px solid #ccc;padding:5px;margin:0;background:#D7D7D7;}
 #col-2-home .content-grades .actions-box .edit-tools ul li{display:inline;}
 #col-2-home .content-grades .actions-box .edit-tools ul li a{display:block;float:left;height:40px;text-align:center;padding:30px 5px 0;margin-right:5px;border:1px solid #ccc;font-size:10px;}
 #col-2-home .content-grades .actions-box .edit-tools ul li a:hover{border-color:#ff7202;background-color:#fffadd;}

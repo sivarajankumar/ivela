@@ -1,8 +1,24 @@
-<%-- 
-    Document   : show course
-    Created on : Sep 15, 2008, 2:07:13 PM
-    Author     : marcus
+<%--    
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: show.jsp                                                                            #
+# Document: Display course information for Administrators                                   # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 15-SEP-2008 - marcus                            - XXXXXX - Initial Version                #
+# 09-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
@@ -449,10 +465,10 @@
                     <div class="edit-tools">
                         <ul>
                             <li><a class="icon-new" href="javascript:showEntryUnitContent($('unit.id').value);"><s:text name="unitContent.input.add" /></a></li>
-                            <li id="unit.upload" style="display:list-item;"><a class="icon-new" href="javascript:showUploadUnitContent($('unit.id').value);"><s:text name="unitContent.input.upload" /></a></li>
+                            <li id="unit.upload"><a class="icon-new" href="javascript:showUploadUnitContent($('unit.id').value);"><s:text name="unitContent.input.upload" /></a></li>
                             <li><a class="icon-edit" href="javascript:showEditUnitContent();"><s:text name="unitContent.input.edit" /></a></li>                            
                             <li><a class="icon-delete" href="javascript:deleteUnitContent();"><s:text name="unitContent.input.remove" /></a></li>
-                            <li id="unit.challenge" style="display:list-item;"><a class="icon-message"href="javascript:showNewsChallenge();"><s:text name= "course.add.challenge" /></a></li>
+                            <li id="unit.challenge"><a class="icon-message"href="javascript:showNewsChallenge();"><s:text name= "course.add.challenge" /></a></li>
                             <li><a id="chatId" class="icon-chat" href="#" target="_blank" onmouseover="javascript:openChat();"><s:text name= "course.show.chat" /></a></li>
                             
                             <br class="clear" />
