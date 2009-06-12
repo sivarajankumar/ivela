@@ -22,7 +22,7 @@ function vaiLightWindow(url) {
 function getTopics() {
     new Ajax.Request('home!getToolsTopics.action',
     {
-        method:'get',
+        method:'post',
         requestHeaders: {
             Accept: 'application/json'
         },
@@ -64,7 +64,7 @@ function getTopics() {
 function getMessages() {
     new Ajax.Request('home!getToolsMessages.action',
     {
-        method:'get',
+        method:'post',
         requestHeaders: {
             Accept: 'application/json'
         },
@@ -110,7 +110,7 @@ function getMessages() {
 function getLastUnitContent() {
     new Ajax.Request('home!getToolsLastUnitContent.action',
     {
-        method:'get',
+        method:'post',
         requestHeaders: {
             Accept: 'application/json'
         },
@@ -131,7 +131,7 @@ function getLastUnitContent() {
 function getCourseProgress(courseId) {
     new Ajax.Request('home!getCourseProgress.action?courseId=' + courseId,
     {
-        method:'get',
+        method:'post',
         requestHeaders: {
             Accept: 'application/json'
         },
