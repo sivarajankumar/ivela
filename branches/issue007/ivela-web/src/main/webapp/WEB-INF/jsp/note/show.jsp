@@ -53,64 +53,24 @@
 </div>
 
 <script>
+    function webicalAuthentication(url) {
+        var req = new XMLHttpRequest();  
+        req.open('GET', url, true, '<%= systemUser.getUsername()%>', '<%= systemUser.getUsername()%>');  
+        req.onreadystatechange = function (aEvt) {  
+            if (req.readyState == 4) {  
+                if(req.status == 200) {
+                    // if success, do nothing  
+                } else {
+                    // if fail, do nothing
+                }
+            }  
+        };  
+        req.send(null);  
+    }
 
-var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-
-function encode64(input) {
-   var output = "";
-   var chr1, chr2, chr3;
-   var enc1, enc2, enc3, enc4;
-   var i = 0;
-
-   do {
-      chr1 = input.charCodeAt(i++);
-      chr2 = input.charCodeAt(i++);
-      chr3 = input.charCodeAt(i++);
-
-      enc1 = chr1 >> 2;
-      enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-      enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-      enc4 = chr3 & 63;
-
-      if (isNaN(chr2)) {
-         enc3 = enc4 = 64;
-      } else if (isNaN(chr3)) {
-         enc4 = 64;
-      }
-
-      output = output + keyStr.charAt(enc1) + keyStr.charAt(enc2) + 
-         keyStr.charAt(enc3) + keyStr.charAt(enc4);
-   } while (i < input.length);
-   
-   return output;
-}
-
-function make_base_auth(username, password) {
-    var tok = username + ':' + password;
-    var hash = encode64(tok);
-    return "Basic " + hash;
-}
-
-    function webicalAuthentication(url){
-        new Ajax.Request(url,
-        {
-            method:'get',
-            requestHeaders: {Authorization: make_base_auth('<%= systemUser.getUsername()%>', '<%= systemUser.getUsername()%>')}, 
-            asynchronous: false,
-            onSuccess: function(transport) {  },
-            onFailure: function() {  }
-        });
-    }    
     window.onload = function () {
         if (Prototype.Browser.IE) {
-        <%
-          if (!"true".equals((String)session.getAttribute("webical"))) {
-        %>
-            webicalAuthentication('http://<%= request.getServerName()%>:<%= request.getServerPort()%>/webical/app/calendar?wicket:interface=:0:headerPanel:logoutLink::ILinkListener::');
-        <%
-              session.setAttribute("webical", "true");
-          }
-        %>
+            $('calendariframe').src = 'http://<%= request.getServerName()%>:<%= request.getServerPort()%>/webical/app/calendar?wicket:interface=:0:headerPanel:logoutLink::ILinkListener::';
             webicalAuthentication('http://<%= request.getServerName()%>:<%= request.getServerPort()%>/webical/app/calendar');
             $('calendariframe').src = 'http://<%= request.getServerName()%>:<%= request.getServerPort()%>/webical/app/calendar';
         } else {
