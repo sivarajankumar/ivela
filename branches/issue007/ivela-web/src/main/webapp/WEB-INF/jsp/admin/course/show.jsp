@@ -1,5 +1,5 @@
 <%--    
-# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                           #
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                      #
 # This file is part of ivela project, an open-source                                        #
 # Program URL   : http://code.google.com/p/ivela/                                           #  
 #                                                                                           #
@@ -17,6 +17,7 @@
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 15-SEP-2008 - marcus                            - XXXXXX - Initial Version                #
 # 09-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+# 10-JUN-2009 - mileine (Instituto Eldorado)      - 000007 - waitingFrame layout fixed       # 
 --%>
 
 
@@ -1068,7 +1069,7 @@
 </div>
 
 <div id="box1" style="display:none; text-align:center;">
-    <iframe id="waitingFrame" src="../waiting.jsp" style="width:150px;height:100px;border:0px solid #fff;" scrolling="no" >
+    <iframe id="waitingFrame"  frameborder="0" src="../waiting.jsp" style="width:150px;height:100px;border:0px;background: #ddd;" scrolling="no" >
     </iframe><br/>
 </div>
 
