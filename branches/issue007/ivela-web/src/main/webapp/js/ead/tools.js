@@ -10,9 +10,7 @@ function vaiLightWindow(url) {
   //alert('true');
   myLightWindow.activateWindow({
 	href: url, 
-	//title: 'Waiting for the show to start in Las Vegas', 
-	//author: 'Jazzmatt', 
-	//caption: 'Mmmmmm Margaritas! And yes, this is me...', 
+	title: '', 
 	width: 1024
         //params: 'lightwindow_type=external,lightwindow_width=1024'
   });
