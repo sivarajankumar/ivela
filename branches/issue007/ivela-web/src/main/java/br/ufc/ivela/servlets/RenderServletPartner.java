@@ -6,6 +6,7 @@ package br.ufc.ivela.servlets;
 
 import br.ufc.ivela.commons.Constants;
 import br.ufc.ivela.commons.model.Course;
+import br.ufc.ivela.commons.model.Profile;
 import br.ufc.ivela.ejb.interfaces.CourseRemote;
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,16 +38,21 @@ public class RenderServletPartner extends HttpServlet {
         File file = null;
         Boolean err = false;
         String errMsg = "Incorrect file path or incorrect file name.";
-
+        String filename = null;
         if (id != null) {
-            
-            Course course = courseRemote.get(new Long(id));
-            String filename = course.getImage();
+            try {
+            	Course course = courseRemote.get(new Long(id));
+                if (course != null)
+                	 filename = course.getImage();            
+            }
+            catch(Exception e){
+                
+            }
             if (filename == null || filename.trim().length() == 0)
-                filename = Constants.FILE_UPLOAD_PATH + "foto_partner.jpg";
+                filename = Constants.FILE_UPLOAD_PARTNERS + "foto_partner.jpg";
             file = new File(filename);
             if (!file.exists())
-                filename = Constants.FILE_UPLOAD_PATH + "foto_partner.jpg";
+                filename = Constants.FILE_UPLOAD_PARTNERS + "foto_partner.jpg";
             try {
                 file = new File(filename);
                 if (file.exists()) {
