@@ -63,8 +63,8 @@ color:#ff7202; font-weight:bold; padding:3px 0 0 20px;}
 
 .form-search-forum {width:500px; height:5px;  padding:10px 0 30px;}
 .form-search-forum label {display:block; color:#033d7d; font-weight:bold; font-size: 14px;}
-.form-search-forum input.field {width:300px; float:left; margin:2px 5px 0 0; padding:0 0 5px; font:11px Arial, Helvetica, sans-serif;}
-.form-search-forum input.button {width:64px; height:23px; margin-top: 2px;}
+.form-search-forum input.field {width:300px; float:left; margin:2px 5px 0 0; padding:0 0 5px; font:11px Arial, Helvetica, sans-serif; *position: relative; *right: 1.7em;}
+.form-search-forum input.button {width:64px; height:23px; margin-top: 2px; *position: relative; *right: 1em;}
 
 .pages-all{background:url(../images/img-pages.gif) no-repeat top left; width:79px; height:26px; float:left; font:11px Arial, Helvetica, sans-serif; 
 color:#FFF; padding:3px 5px 2px; margin-top:15px; text-decoration:none;}
