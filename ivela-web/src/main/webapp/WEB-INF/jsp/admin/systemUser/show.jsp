@@ -18,10 +18,9 @@
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 30-SEP-2008 - Marcus                            - XXXXXX - Initial Version                #
 # 09-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000007 - IE7 compatibility              #
+# 15-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 00000X - Reverting list instead field   #
+# 															 adding user into categories    #
 #############################################################################################
-    Document   : show systemUser
-    Created on : Sep 30, 2008, 2:06:16 PM
-    Author     : marcus
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -370,27 +369,6 @@
                     <div id="admin.add" style="display:none;" class="course-message">
                         <br /><s:text name="systemUser.show.add" /><br /> <br />
                         <s:text name="systemUser.show.name" />
-                <s:hidden name="message.recipient.id" id="input.admin.add.user" />
-                <input type="text" name="username" id="username" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
-                <div id="recipientDivAutoCompleter2" style="display:none;" class="autocomplete"></div>
-                    <script type="text/javascript">
-                    new Ajax.Autocompleter("username","recipientDivAutoCompleter2","systemUser!searchUsers.action", {afterUpdateElement : getSelectionId});
-
-                    function getSelectionId(text, li) 
-                    {
-                      $('input.admin.add.user').value=li.id;
-                      $('adminButton').disabled = false;
-                    }
-                   
-                        function validateUsername() {
-                       var id = $('input.admin.add.user').value;
-                       if (id == null || id == '') {
-                           $('username').value = '';
-                           $('username').focus();
-                       }
-                        }
-                        </script>
-                        <%--
                         <select id="input.admin.add.user">
                             <s:iterator value="systemUsers" status="stat">                                
                                 <s:if test="!listAdmin.contains(systemUsers[#stat.index])">
@@ -398,9 +376,8 @@
                                 </s:if>
                             </s:iterator>
                         </select>
-                        --%>
                         <br /><br />
-                        <input type="button" disabled id="adminButton" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.admin.add.user').value)" />
+                        <input type="button" id="adminButton" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.admin.add.user').value)" />
                     </div>
                 </div>   
                 <!-- end actions-box -->
@@ -472,27 +449,6 @@
                     <div id="coord.add" style="display:none;" class="course-message">
                         <br /><s:text name="systemUser.show.add" /><br /> <br />
                         <s:text name="systemUser.show.name" />
-               <s:hidden name="message.recipient.id" id="input.coord.add.user" />
-                <input type="text" name="username" id="username" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
-                <div id="recipientDivAutoCompleter2" style="display:none;" class="autocomplete"></div>
-                    <script type="text/javascript">
-                    new Ajax.Autocompleter("username","recipientDivAutoCompleter2","systemUser!searchUsers.action", {afterUpdateElement : getSelectionId});
-
-                    function getSelectionId(text, li) 
-                    {
-                      $('input.coord.add.user').value=li.id;
-                      $('coordinatorButton').disabled = false;
-                    }
-                   
-                        function validateUsername() {
-                       var id = $('input.coord.add.user').value;
-                       if (id == null || id == '') {
-                           $('username').value = '';
-                           $('username').focus();
-                       }
-                        }
-                        </script>
-                        <%--
                         <select id="input.coord.add.user">
                             <s:iterator value="systemUsers" status="stat">                                
                                 <s:if test="!listCoord.contains(systemUsers[#stat.index]) && authentication.id != 1">
@@ -500,9 +456,8 @@
                                 </s:if>
                             </s:iterator>
                         </select>
-                        --%>
                         <br /><br />
-                        <input type="button" disabled id="coordinatorButton" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.coord.add.user').value)" />
+                        <input type="button" id="coordinatorButton" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.coord.add.user').value)" />
                     </div>
                 </div>
                 <!-- end actions-box -->
@@ -574,27 +529,6 @@
                     <div id="prof.add" style="display:none;" class="course-message">
                         <br /><s:text name="systemUser.show.add" /><br /> <br />
                         <s:text name="systemUser.show.name" />
-                        <s:hidden name="message.recipient.id" id="input.prof.add.user" />
-                <input type="text" name="username" id="username" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
-                <div id="recipientDivAutoCompleter2" style="display:none;" class="autocomplete"></div>
-                    <script type="text/javascript">
-                    new Ajax.Autocompleter("username","recipientDivAutoCompleter2","systemUser!searchUsers.action", {afterUpdateElement : getSelectionId});
-
-                    function getSelectionId(text, li) 
-                    {
-                      $('input.prof.add.user').value=li.id;
-                      $('professorButton').disabled = false;
-                    }
-                   
-                        function validateUsername() {
-                       var id = $('input.prof.add.user').value;
-                       if (id == null || id == '') {
-                           $('username').value = '';
-                           $('username').focus();
-                       }
-                        }
-                        </script>
-                        <%--
                         <select id="input.prof.add.user">
                             <s:iterator value="systemUsers" status="stat">                                
                                 <s:if test="!listProf.contains(systemUsers[#stat.index]) && authentication.id != 1 && authentication.id != 2">
@@ -602,9 +536,8 @@
                                 </s:if>
                             </s:iterator>
                         </select>
-                        --%>
                         <br /><br />
-                        <input type="button" disabled id="professorButton" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.prof.add.user').value)" />
+                        <input type="button" id="professorButton" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.prof.add.user').value)" />
                     </div>
                 </div>
                 <!-- end actions-box -->
@@ -676,27 +609,7 @@
                     <div id="tutor.add" style="display:none;" class="course-message">
                         <br /><s:text name="systemUser.show.add" /><br /> <br />
                         <s:text name="systemUser.show.name" />
-                        <s:hidden name="message.recipient.id" id="input.tutor.add.user" />
-                <input type="text" name="username" id="username" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
-                <div id="recipientDivAutoCompleter2" style="display:none;" class="autocomplete"></div>
-                    <script type="text/javascript">
-                    new Ajax.Autocompleter("username","recipientDivAutoCompleter2","systemUser!searchUsers.action", {afterUpdateElement : getSelectionId});
-
-                    function getSelectionId(text, li) 
-                    {
-                      $('input.tutor.add.user').value=li.id;
-                      $('tutorButton').disabled = false;
-                    }
-                   
-                        function validateUsername() {
-                       var id = $('input.tutor.add.user').value;
-                       if (id == null || id == '') {
-                           $('username').value = '';
-                           $('username').focus();
-                       }
-                        }
-                        </script>
-                        <%--
+                       
                         <select id="input.tutor.add.user">
                             <s:iterator value="systemUsers" status="stat">                                
                                 <s:if test="!listTutor.contains(systemUsers[#stat.index]) && authentication.id != 1 && authentication.id != 2 && authentication.id != 6">
@@ -704,9 +617,8 @@
                                 </s:if>
                             </s:iterator>
                         </select>
-                        --%>
                         <br /><br />
-                        <input type="button" disabled id="tutorButton" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.tutor.add.user').value)" />
+                        <input type="button" id="tutorButton" value="<s:text name="systemUser.input.btnSave" />" onclick="add($('input.tutor.add.user').value)" />
                     </div>
                 </div>
                 <!-- end actions-user -->
