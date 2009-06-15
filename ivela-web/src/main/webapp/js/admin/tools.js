@@ -21,7 +21,7 @@ function vaiLightWindow(url) {
 function getTopics() {
     new Ajax.Request('../home!getToolsTopics.action',
     {
-        method:'get',
+        method:'post',
         requestHeaders: {
             Accept: 'application/json'
         },
@@ -63,7 +63,7 @@ function getTopics() {
 function getMessages() {
     new Ajax.Request('../home!getToolsMessages.action',
     {
-        method:'get',
+        method:'post',
         requestHeaders: {
             Accept: 'application/json'
         },
