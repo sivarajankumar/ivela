@@ -30,6 +30,13 @@
 
 <head>
     <script type="text/javascript" src="js/ead/tools.js"></script>
+
+    <style type="text/css">
+      .box-error {height:auto; background:#FFFFCC; border:1px solid #ff7202; padding: 10px;}
+      .box-error h4 {width: 500px; height:auto; margin-bottom: 20px; font: bold 17px Arial, Helvetica, sans-serif; color:#ff3333; background: url(../images/icon/icon-error.gif) no-repeat 0 3px; padding-left: 20px;}
+      .box-error ul {list-style-type: none; color:#333333; font: 11px Arial, Helvetica, sans-serif;}
+      .box-error ul li{ background: url(../images/icon/icon-item-error.gif) no-repeat 0 5px; padding-left: 20px; margin-bottom: 10px;}
+    </style>
 </head>
 
 <%
@@ -79,6 +86,10 @@
         }
     }
 </script>
+
+<!--[if IE]>
+    <div class='box-error'><h4>Add Event operation not supported!</h4></div>
+<![endif]-->
 
 <iframe id="calendariframe"
         src =""
