@@ -1,0 +1,5 @@
+@charset "utf-8";
+/* CSS Document */
+
+.item-faq { background: url(../images/icon/icon-faq.gif) no-repeat 0px 3px; padding: 0 0 10px 20px; font-size: 12px; color: #000; margin-bottom: 30px; border-bottom: 1px solid #e0e0e0; }
+.item-faq span { padding-bottom: 10px; font-size: 15px; font-weight: bold; color: #033d7d; }
