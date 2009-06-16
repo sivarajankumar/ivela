@@ -1,7 +1,24 @@
 <%-- 
-    Document   : list Post
-    Created on : May 15, 2008, 1:38:17 PM
-    Author     : rodrigofelix
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: list.jsp                                                                            #
+# Document: List Post                                                                       #
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 15-MAY-2008 - Rodrigo Felix                     - XXXXXX - Initial Version                #
+# 16-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000010 - i18n bug fix                   #
+#############################################################################################    
 --%>
 <%@ page import="org.springframework.security.context.SecurityContextHolder"%>
 <%@ page import="org.springframework.security.userdetails.UserDetails"%>
@@ -30,13 +47,13 @@
     function validate(){
        var validate = true;
         if(document.getElementById('post.input.title').value==''){
-            alert("Title is required");
-            validate = false
+        	alert("Title is required");
+         	validate = false;
         }
         
         if(document.getElementById('post.input.message').value==''){
-            alert("Message is required");
-            validate = false
+        	alert("Message is required");
+            validate = false;
         }
         if(validate){
             document.getElementById('form-answer').submit();
