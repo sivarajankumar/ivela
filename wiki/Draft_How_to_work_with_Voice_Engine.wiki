@@ -10,7 +10,9 @@ O arquivo .grammar
 
 As regras que gorvernam as palavras permitidas são definidas no arquivo .grammar usando uma modificação do formato BNF . A gramatica espedificada no Julian usa um conjunto de regras de derivação, escritas como:
 
+{{{
 Símbolo: [expressão com simbolos]
+}}}
 
 onde:
 
@@ -103,8 +105,8 @@ Integrando com o applet
 Criando o instalador
 
 Para que o Applet possa funcionar corretamente, o mesmo necessita que as gramáticas e o executável do julian estejam instalados em seus devidos diretórios dependendo do sistema operacional. No Windows, o diretório está em C:\.julius, em uma pasta oculta. No Linux, o diretório se encontra em seu_home/.julius. Em ambos os sitemas operacionais, a estrutura de arquivos dentro da pasta .julius procede da seguinte maneira (de forma geral):
-
-|->.julius
+{{{
+->.julius
 
 -> config.properties
 
@@ -121,16 +123,16 @@ Para que o Applet possa funcionar corretamente, o mesmo necessita que as gramát
 -> grammar
 
 ->arquivos_grammar/
+}}}
+*config.properties* é o arquivo que contém a versão mais atual do instalador localizado em um servidor remoto. O applet verifica essa versão com o seu parâmetro de entrada juliusVersion . Caso sejam diferentes, o applet automaticamente irá baixar a versão localizada no servidor remoto e instalá-la nos sistema de arquivos local do cliente.
 
-config.properties é o arquivo que contém a versão mais atual do instalador localizado em um servidor remoto. O applet verifica essa versão com o seu parâmetro de entrada juliusVersion . Caso sejam diferentes, o applet automaticamente irá baixar a versão localizada no servidor remoto e instalá-la nos sistema de arquivos local do cliente.
+*nome_conf.jconf* é o arquivo de configuração. Neste arquivo devem estar explicitados os caminhos para o modelo acústico, e para a gramática a ser carregada pelo applet. Tanto no windows quanto no linux, este arquivo deve possuir particularidades. Nas próximas seções iremos apresentar um exemplo simples de montagem de instalador. Não entraremos em detalhes agora.
 
-nome_conf.jconf é o arquivo de configuração. Neste arquivo devem estar explicitados os caminhos para o modelo acústico, e para a gramática a ser carregada pelo applet. Tanto no windows quanto no linux, este arquivo deve possuir particularidades. Nas próximas seções iremos apresentar um exemplo simples de montagem de instalador. Não entraremos em detalhes agora.
+ * *julian* é o programa excutável para o reconhecimento de voz. Roda no cliente.
 
-julian é o programa excutável para o reconhecimento de voz. Roda no cliente.
+ * *acoustic_model_files_build726* é o modelo acústico para a língua inglesa. Atualmente no build 726.
 
-acoustic_model_files_build726 é o modelo acústico para a língua inglesa. Atualmente no build 726.
-
-grammar é a pasta onde ficam os arquivos relacionados a uma gramática.
+ * *grammar* é a pasta onde ficam os arquivos relacionados a uma gramática.
 Exemplo de instalador (linux)
 
 Vamos demonstrar um pequeno exemplo de como criar um instalador para o julius no linux. Inicialmente, o desenvolvedor deve estar de posse do executável do julian e do modelo acústico. Ambos podem ser encontrados no site do Voxforge. O desenvolvedor deve também explicitar no arquivo config.properties a versão do instalador. Para isto, basta adcionar a linha "version=1.1.7", por exemplo. Este mesmo número deverá servir de parâmetro de entrada para o Applet em seu HTML, como veremos mais adiante.
