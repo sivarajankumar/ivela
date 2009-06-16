@@ -133,7 +133,8 @@ Para que o Applet possa funcionar corretamente, o mesmo necessita que as gramát
  * *acoustic_model_files_build726* é o modelo acústico para a língua inglesa. Atualmente no build 726.
 
  * *grammar* é a pasta onde ficam os arquivos relacionados a uma gramática.
-Exemplo de instalador (linux)
+
+== Exemplo de instalador (linux) ==
 
 Vamos demonstrar um pequeno exemplo de como criar um instalador para o julius no linux. Inicialmente, o desenvolvedor deve estar de posse do executável do julian e do modelo acústico. Ambos podem ser encontrados no site do Voxforge. O desenvolvedor deve também explicitar no arquivo config.properties a versão do instalador. Para isto, basta adcionar a linha "version=1.1.7", por exemplo. Este mesmo número deverá servir de parâmetro de entrada para o Applet em seu HTML, como veremos mais adiante.
 
@@ -166,19 +167,13 @@ Passando parâmetros ao Applet
 
 Os parâmetros a serem passadas, na cláusula parâmetro, são:
 
-question Onde o value="Some title". Título simples.
-
-exe Onde o value="My name is Bob.#I am from Canada.#" são frases separadas por # e que são reconhecidas pela gramática.
-
-conf Onde o value="sample.jconf" é o arquivo de configuração que serve para a gramática que reconhece as frases acima.
-
-audio Onde o Value="bob.ogg#canada.ogg". São arquivos e audio, não obrigatórios referentes a cada frase acima. Devem também ser intaladas e disponíveis em um servidor http.
-
-chances Onde o value poderia ser = "5#3#", dando 5 chances de repetição para a frase 1 e 3 chances de repetição para a frase 2
-
-audioHost Onde o value poderia ser = "192.168.0.1:8080/public_sound/". Este valor será concatenada com os valores de audio, dando o caminho relativo aos arquivos de audio
-
-installerHost Onde o value poderia ser = "192.168.0.1:8080/public_installer". Neste caminho estariam as pastas windows e linux. Dentro destas pastas o arquivo julius.zip explicitado na seção anterior.
+ # *question* Onde o value="Some title". Título simples.
+ # *exe* Onde o value="My name is Bob.#I am from Canada.#" são frases separadas por # e que são reconhecidas pela gramática.
+ # *conf* Onde o value="sample.jconf" é o arquivo de configuração que serve para a gramática que reconhece as frases acima.
+ # *audio* Onde o Value="bob.ogg#canada.ogg". São arquivos e audio, não obrigatórios referentes a cada frase acima. Devem também ser intaladas e disponíveis em um servidor http.
+ # *chances* Onde o value poderia ser = "5#3#", dando 5 chances de repetição para a frase 1 e 3 chances de repetição para a frase 2
+ # *audioHost* Onde o value poderia ser = "192.168.0.1:8080/public_sound/". Este valor será concatenada com os valores de audio, dando o caminho relativo aos arquivos de audio
+ # *installerHost* Onde o value poderia ser = "192.168.0.1:8080/public_installer". Neste caminho estariam as pastas windows e linux. Dentro destas pastas o arquivo julius.zip explicitado na seção anterior.
 Rodando o Applet
 
 Uma vez criando o instalador e definido os parâmetros, basta criar o html que irá suportar o applet. Os arquivos jar necessários são:
