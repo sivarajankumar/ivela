@@ -1,5 +1,5 @@
 Event.observe(window, 'load', loadAccordions, false);
-Event.observe(window, 'click', click, false);
+Event.observe(window, 'load', function() {Event.observe(content, 'click', click, false);}, false);
 
 var actualDir;
 
@@ -8,16 +8,20 @@ function isArray(o){
 }
 
 function click(e){ 
-    if(e.target.getAttribute('class') != null){       
-        var clazz = e.target.getAttribute('class').toString();
+    if (!e) e = window.event;
+    var evt;
+    if (e.target) evt = e.target;
+        else if (e.srcElement) evt = e.srcElement;
+    if ((evt.className) != null) {          
+        var clazz = evt.className.toString();
 
         if(clazz == 'category_toggle category_active' || clazz == 'category_toggle'){
-            actualDir = e.target.next(0).getAttribute('id');
+            actualDir = evt.next(0).getAttribute('id');
             showDirInfo(actualDir, true);
         }
 
         if(clazz == 'category_toggle2 category_active2' || clazz == 'category_toggle2'){
-            actualDir = e.target.next(0).getAttribute('id');
+            actualDir = evt.next(0).getAttribute('id');
             showDirInfo(actualDir, false);
         }
     }

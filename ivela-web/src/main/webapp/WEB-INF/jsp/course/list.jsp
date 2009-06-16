@@ -1,7 +1,24 @@
 <%-- 
-    Document   : list Course
-    Created on : Jun 26, 2008, 3:59:45 PM
-    Author     : Maristella Myrian
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: list.jsp                                                                            #
+# Document: List Course                                                             #
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 26-JUN-2008 - Maristella Myrian                 - XXXXXX - Initial Version                #
+# 01-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000007 - IE7 compatibility              #
+#############################################################################################
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,7 +32,7 @@
 <div id="breadcrumb">
     <p><s:text name="breadcrumb.youAreHere"/></p>
     <ul>
-        <li><a href="index.action"><s:text name="home.name"/></a></li>
+        <li><a href="index.jsp"><s:text name="home.name"/></a></li>
         <li class="current"><s:text name="front.courses"/></li>
     </ul>
 </div>
@@ -33,7 +50,7 @@
             
             <tr>
                 <td><span><s:property value="name" /></span></td>
-                <td align="right"><a class="title-enrollment" href="enrollment!listGrades.action?course.id=<s:property value="id" />"><s:text name="enrollment.add.action"/></a></td>
+                <td align="right"><table><tr><td><a class="title-enrollment" href="enrollment!listGrades.action?course.id=<s:property value="id" />"><s:text name="enrollment.add.action"/></a></td></tr></table></td>
             </tr>
             <tr>
                 <td colspan="2"><p><s:property value="description" /></p></td>

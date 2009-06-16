@@ -1,7 +1,22 @@
-<%--
-    Document   : show grade
-    Created on : Sep 15, 2008, 2:07:13 PM
-    Author     : marcus
+<%--    
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: show.jsp                                                                            #
+# Document: Display grade information for Administrators                                    # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 15-SEP-2008 - marcus                            - XXXXXX - Initial Version                #
+# 09-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -317,16 +332,16 @@
                     <s:iterator value="courseList">
                         <option value="<s:property value="id" />"><s:property value="name" /></option>
                     </s:iterator>
-                </select><img class="tooltip" onmouseover="return escape('Selecione o curso da turma')"/><br />
+                </select><span class="tooltip" onmouseover="return escape('Selecione o curso da turma')"/></span><br />
 
                 <label for="input.grade.name"><s:text name="grade.input.name" /></label>
-                <input type="text" name="input.grade.name" id="input.grade.name" value="" maxlength="20" size="25"/><img class="tooltip" onmouseover="return escape('Entre com o nome da turma')"/><br />
+                <input type="text" name="input.grade.name" id="input.grade.name" value="" maxlength="20" size="25"/><span class="tooltip" onmouseover="return escape('Entre com o nome da turma')"></span><br />
 
                 <label for="input.grade.period"><s:text name="grade.input.period" /></label>
-                <input type="text" name="input.grade.period" id="input.grade.period" value="" maxlength="6" size="11" /><img class="tooltip" onmouseover="return escape('Entre com o período do turma (Exemplo: 2008.1 para turma que iniciou no primeiro semestre de 2008')"/><br />
+                <input type="text" name="input.grade.period" id="input.grade.period" value="" maxlength="6" size="11" /><span class="tooltip" onmouseover="return escape('Entre com o período do turma (Exemplo: 2008.1 para turma que iniciou no primeiro semestre de 2008')"></span><br />
 
                 <label for="input.grade.maxstudents"><s:text name="grade.input.maxstudents" /></label>
-                <input type="text" name="input.grade.maxstudents" id="input.grade.maxstudents" value="" maxlength="4" size="7" /><img class="tooltip" onmouseover="return escape('Entre com o número máximo de estudantes nesta turma')"/><br />
+                <input type="text" name="input.grade.maxstudents" id="input.grade.maxstudents" value="" maxlength="4" size="7" /><span class="tooltip" onmouseover="return escape('Entre com o número máximo de estudantes nesta turma')"></span><br />
 
                 <label for="input.grade.coordinator"><s:text name="grade.input.coordinator" /></label>
                 <select name="input.grade.coordinator" id="input.grade.coordinator">
@@ -334,14 +349,14 @@
                     <s:iterator value="coordinatorList">
                         <option value="<s:property value="id" />"><s:property value="username" /></option>
                     </s:iterator>
-                </select><img class="tooltip" onmouseover="return escape('Selecione o coordenador da turma')"/><br />
+                </select><span class="tooltip" onmouseover="return escape('Selecione o coordenador da turma')"/></span><br />
 
                 <label for="input.grade.maxduration"><s:text name="grade.input.maxduration" /></label>
-                <input type="text" name="input.grade.maxduration" id="input.grade.maxduration" value="" maxlength="4" size="7" /><img class="tooltip" onmouseover="return escape('Entre com o tempo máximo (em dias) de duração da turma')"/><br />
+                <input type="text" name="input.grade.maxduration" id="input.grade.maxduration" value="" maxlength="4" size="7" /><span class="tooltip" onmouseover="return escape('Entre com o tempo máximo (em dias) de duração da turma')"></span><br />
 
                 <label><s:text name="grade.input.requiresEnrollmentValidation" /></label>
                 <label class="label-boxfield"><input type="radio" name="input.grade.requires" id="input.grade.requires.yes" value="true"> &nbsp;<s:text name="course.input.yes" /></label>
-                <label class="label-boxfield"><input type="radio" name="input.grade.requires" id="input.grade.requires.no" value="false" checked="checked"> &nbsp;<s:text name="course.input.no" /></label> <img class="tooltip" onmouseover="return escape('Matrícula sujeita a aprovação')"/><br/>
+                <label class="label-boxfield"><input type="radio" name="input.grade.requires" id="input.grade.requires.no" value="false" checked="checked"> &nbsp;<s:text name="course.input.no" /></label> <span class="tooltip" onmouseover="return escape('Matrícula sujeita a aprovação')"></span><br/>
 
                 <label for="input.grade.status"><s:text name="grade.input.status" /></label>
                 <select id="input.grade.status">
@@ -349,14 +364,14 @@
                     <option value="1">Period of Enrollment</option>
                     <option value="3">In Progress</option>
                     <option value="2">Registration Finished</option>
-                </select><img class="tooltip" onmouseover="return escape('Escolha o estatus da Turma')"/><br />
+                </select><span class="tooltip" onmouseover="return escape('Escolha o estatus da Turma')"></span><br />
 
                 <label for="input.grade.startdatetime"><s:text name="grade.input.startdatetime" /></label>
                 <!--input type="text" name="input.grade.startdatetime" id="input.grade.startdatetime" value="" /><img id="startdatetime" src="../images/icon/icon-agenda.gif" /-->
-                <cal:jscalendar format="%d/%m/%Y" name="input.grade.startdatetime" id="input.grade.startdatetime"/><img class="tooltip" onmouseover="return escape('Entre com a data de início da turma')"/><br />
+                <cal:jscalendar format="%d/%m/%Y" name="input.grade.startdatetime" id="input.grade.startdatetime"/><span class="tooltip" onmouseover="return escape('Entre com a data de início da turma')"></span><br />
 
                 <label for="input.grade.enddatetime"><s:text name="grade.input.enddatetime" /></label>
-                <cal:jscalendar format="%d/%m/%Y" name="input.grade.enddatetime" id="input.grade.enddatetime"/><img class="tooltip" onmouseover="return escape('Entre com a data de término da turma')"/><br />
+                <cal:jscalendar format="%d/%m/%Y" name="input.grade.enddatetime" id="input.grade.enddatetime"/><span class="tooltip" onmouseover="return escape('Entre com a data de término da turma')"></span><br />
 
                 <label>&nbsp;</label>
                 <input class="btn-save-courses" type="button" name="input.grade.submit" id="input.grade.submit" value="<s:text name="grade.submit" />" onclick="submitGrade(document.getElementById('input.grade.id').value)" /><br />
@@ -666,7 +681,7 @@
                     </li>
                     <br class="clear"/>
                 </ul>
-
+                <br class="clear" />
                 <div class="actions-box">
                     <h2><s:text name="grade.show.actions" /></h2>
                     <div class="edit-tools">
@@ -751,10 +766,10 @@
                         <s:text name="note.what"/><br /><input type="text" name="input.student.note.what" id="input.student.note.what" maxlength="50" size="55" /><br />
                         <s:text name="note.where" /><br /><input type="text" name="input.student.note.where" id="input.student.note.where" maxlength="50" size="55" /><br />
                         <s:text name="note.dtStart" /><br />
-                        <cal:jscalendar format="%d/%m/%Y %H:%M:%S" name="input.student.note.dtStart" id="input.student.note.dtStart"/><img class="tooltip" onmouseover="return escape('Entre com a data de início do compromisso')"/><br />
+                        <cal:jscalendar format="%d/%m/%Y %H:%M:%S" name="input.student.note.dtStart" id="input.student.note.dtStart"/><span class="tooltip" onmouseover="return escape('Entre com a data de início do compromisso')"></span><br />
                         <br />
                         <s:text name="note.dtEnd" /><br />
-                        <cal:jscalendar format="%d/%m/%Y %H:%M:%S" name="input.student.note.dtEnd" id="input.student.note.dtEnd"/><img class="tooltip" onmouseover="return escape('Entre com a data de término do compromisso')"/><br />
+                        <cal:jscalendar format="%d/%m/%Y %H:%M:%S" name="input.student.note.dtEnd" id="input.student.note.dtEnd"/><span class="tooltip" onmouseover="return escape('Entre com a data de término do compromisso')"></span><br />
                         <br />
                         <s:text name="note.description"/><br /><textarea cols="65" rows="8" name="input.student.note.description" id="input.student.note.description"></textarea><br />
                         <input type="button" value="Submit" onclick="sendNoteStudent($('input.student.note.dtStart'), $('input.student.note.dtEnd'), $('input.student.note.where'), $('input.student.note.what'), $('input.student.note.description'));" />

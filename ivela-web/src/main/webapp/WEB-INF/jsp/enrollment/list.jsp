@@ -33,9 +33,9 @@
                         <s:param name="grade.id" value="id"/>
                     </s:url>
                     
-                    <td align="right">
+                    <td align="right"><table><tr><td>
                         <s:a href="%{enrollUrl}" cssClass="title-enrollment" ><s:text name="enrollment.add.action"/></s:a>
-                    </td>
+                    </td></tr></table></td>
                 </tr>
                 <tr>
                     <td colspan="2">

@@ -1,5 +1,5 @@
 Event.observe(window, 'load', loadAccordions, false);
-Event.observe(window, 'click', click, false);
+Event.observe(window, 'load', function() {Event.observe(content, 'click', click, false);}, false);
 
 var actualType = '';
 
@@ -8,12 +8,16 @@ function isArray(o){
 }
 
 function click(e){ 
-    if(e.target.getAttribute('class') != null){       
-        var clazz = e.target.getAttribute('class').toString();
+    if (!e) e = window.event;
+    var evt;
+    if (e.target) evt = e.target;
+        else if (e.srcElement) evt = e.srcElement;  
+    if ((evt.className) != null){       
+        var clazz = evt.className.toString();
 
         if(clazz == 'category_toggle category_active'){
 
-            var type = e.target.next(0).getAttribute('id');   
+            var type = evt.next(0).getAttribute('id');   
             actualType = type;
             unCheckAll();
             closeAllMessages();
@@ -251,9 +255,8 @@ function change(type) {
         falhas++;
     }        
     if (enviadas > 0) {
-        alert('Perfil atualizado!');
-      
-        document.location = '';
+        alert('Perfil atualizado!');      
+        document.location = './systemUser!show.action';
     }
     else{
         alert('Perfil não atualizado!');
@@ -275,7 +278,7 @@ function add(userId) {
         alert('Perfil não adicionado!');
     }       
         
-    document.location = '';
+    document.location = './systemUser!show.action';
 }
 
 function sendNewsFlash(message) {
@@ -450,11 +453,6 @@ function unCheckAllFieldsByName(fieldName,divId)
         $('action.add.tutor').style.display = 'block';
         $('actions.all.tutor').style.display = 'none';
     }
-    else if ( checks[0].id.indexOf("student") > -1 )
-    {
-        $('action.add.student').style.display = 'block';
-        $('actions.all.student').style.display = 'none';
-    }
 
 }
 
@@ -504,7 +502,7 @@ function updatePerson(obj,id)
             // acrescenta o id do tutor numa variável global se estiver marcado
             checkedPerson[arrayIndex++] = checks[i].value;
             var divContent = document.getElementById("div" + multiple + "." + checks[i].id).innerHTML;
-            divContent = divContent.replace("display: none;","display: block;");
+            divContent = divContent.replace(new RegExp("display: none", "i"),"display: block");
             personDataHtml += divContent;
         }
     }
