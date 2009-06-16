@@ -1,4 +1,3 @@
-
 == Criar um novo exercício de voz ==
 
 Para criar um novo exercício no ivela-voice, é necessário primeiramente fazer o download do julius no site VoxForge.
@@ -38,7 +37,7 @@ O arquivo ".voca" contém Definição de palavras para cada Categoria de palavra
 Cada categoria de palavra deve ser definida com % na frente da definição. Each Word Category must be defined with "%" preceding it. Em cada categoria de palavras, a definição das palavras é feita uma a cada linha. A primeira coluna é a string que será escrita na tela pelo reconhecedor, e o resto é a pronuncia da palavra. Espaços e tabs atuam como separador de campos.
 
 Formato:
-{{
+{{{
 %[Word Category]
 
 [Word Definition] [pronunciation ...]
