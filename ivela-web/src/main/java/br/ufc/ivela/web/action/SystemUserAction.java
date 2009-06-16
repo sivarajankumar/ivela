@@ -1,7 +1,24 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*##################################################################################################
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                             #
+# This file is part of ivela project, an open-source                                               #
+# Program URL   : http://code.google.com/p/ivela/                                                  #   
+#                                                                                                  #
+# This program is free software; you can redistribute it and/or modify it under the terms          #
+# of the GNU General Public License as published by the Free Software Foundation; either           #
+# version 3 of the License, or (at your option) any later version.                                 #
+#                                                                                                  #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;        #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.        #
+# See the GNU General Public License for more details.                                             #  
+#                                                                                                  #
+####################################################################################################
+# File: SystemUserAction.java                                                                      #
+# Document: Controller that offers the logic of the process of creation users of the portal        #                                
+# Date        - Author(Company)                   - Issue# - Summary                               #
+# XX-XXX-XXXX - Leonardo Oliveira Moreira         - XXXXXX - Initial Version                       #
+# 16-JUN-2009 - mileine (Instituto Eldorado)      - 000010 - Password strength validation disabled #
+##################################################################################################*/
+
 package br.ufc.ivela.web.action;
 
 import br.ufc.ivela.commons.Constants;
@@ -40,12 +57,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.util.StringUtils;
 
-/**
- *
- * @author Leonardo Oliveira Moreira
- * 
- * Controller that offers the logic of the process of creation users of the portal
- */
+
 public class SystemUserAction extends GenericAction implements Preparable {
 
     private CalendarRemote calendarRemote;
@@ -412,10 +424,13 @@ public class SystemUserAction extends GenericAction implements Preparable {
 //            addActionMessage(getText("systemUser.validation.captcha"));
 //        }
 
-        // email
-        if (scorePassword < 24) {
+        // scorePassord low value should not stop user from signing in 
+        /*if (scorePassword < 24) {
             addActionMessage(getText("systemUser.validation.scorePassword"));
-        } else if (!StringUtils.hasText(systemUser.getEmail())) {
+        } else */
+    	
+    	//email
+        if (!StringUtils.hasText(systemUser.getEmail())) {
             addActionMessage(getText("systemUser.validation.email"));
         }
         if (!Validators.validateEmail(systemUser.getEmail())) {
