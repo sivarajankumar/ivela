@@ -1,0 +1,34 @@
+@charset "utf-8";
+/* CSS Document */
+
+#container{margin-bottom:80px; margin-left:auto; margin-right:auto;}
+
+#content h1, #content h2{font:35px Arial, Helvetica, sans-serif; color:#ff7202; margin-top:15px; padding:0 0 10px; font-weight:bold;}
+#content h2{font:20px Arial, Helvetica, sans-serif; font-weight:bold; padding-top:10px;}
+#content .add-bulletin{background:url(../images/icon/icon-add-admin.gif) no-repeat left; padding:0 0 0 25px; font:11px Arial, Helvetica, sans-serif; 
+color:#454545; font-weight:bold;}
+#content a:hover{color:#ff7202;}
+
+#bulletins{width:100%; border-collapse: collapse;}
+#bulletins td.title-bulletin, #bulletins td.edit-bulletin, #bulletins td.delete-bulletin{ padding-top:30px;}
+#bulletins td.title-bulletin a{font:20px Arial, Helvetica, sans-serif; color:#454545; font-weight:bold; text-align:left;
+border: 1px solid #fff; padding:10px 10px 10px; background:url(../images/icon-bulletinboard.gif) no-repeat left; padding:0 0 0 30px;}
+#bulletins td.edit-bulletin, #bulletins td.delete-bulletin{width:100px;}
+#bulletins td.edit-bulletin a{background:url(../images/icon/icon-edit-admin.gif) no-repeat left; font:11px Arial, Helvetica, sans-serif; color:#454545; 
+padding:3px 0 0 25px; width:22px; height:22px;}
+#bulletins td.delete-bulletin a{background:url(../images/icon/icon-delete-admin.gif) no-repeat left; font:11px Arial, Helvetica, sans-serif; color:#454545; 
+padding:0 0 0 18px; width:12px; height:6px;}
+#bulletins td a:hover{color:#ff7202;}
+#bulletins tr td.bulletin-description p{width:100%; font:11px Arial, Helvetica, sans-serif; color:#000; text-align:left; border-width: 0; padding: 10px 0px 10px 0px; border-bottom:#cdcdcd solid 1px;}
+
+#navegation{float:right; margin-top:30px; margin-right:30px; font:12px Arial, Helvetica, sans-serif;}
+#navegation a{color:#454545; margin-left:15px;}
+#navegation a.previous{background:url(../images/bottons/btn-previous.gif) no-repeat left; padding:0 0 0 10px;  }
+#navegation a.next{background:url(../images/bottons/btn-next.gif) no-repeat right; padding:0 10px 0 0;}
+
+#form-bulletin{margin-top:20px; margin-left:2px;}  
+#form-bulletin label{font:14px Arial, Helvetica, sans-serif; color:#454545; font-weight:bold;}
+#form-bulletin .name-bulletin, #form-bulletin .textarea-bulletin{font:11px Arial, Helvetica, sans-serif; margin-top:5px;}
+#form-bulletin .name-bulletin{margin-bottom:15px; width:700px;}
+#form-bulletin .textarea-bulletin{width:700px; height:80px;}
+#form-bulletin .button{margin-top:25px; margin-left:30px;}
