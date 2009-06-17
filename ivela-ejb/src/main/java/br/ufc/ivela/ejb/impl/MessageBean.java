@@ -1,7 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: MessageBean.java                                                                    #
+# Document: Class of ejb which implements the interface MessageLocal                        # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - Leonardo Oliveira Moreira         - XXXXXX - Initial Version                #
+# 15-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Fixes                  #
+*/
 
 package br.ufc.ivela.ejb.impl;
 
@@ -15,10 +31,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 /**
- *
- * @author Leonardo Oliveira Moreira
- * 
- * Class of ejb which implements the interface MessageLocal
+ * Class of ejb which implements the interface MessageLocal 
  */
 @Stateless(mappedName="MessageBean")
 public class MessageBean implements MessageRemote {
@@ -45,7 +58,7 @@ public class MessageBean implements MessageRemote {
         return daoMessage.getByFK("recipient.id", systemUserId);
     }
 
-    public List<Message> getBySystemUserSender(Long systemUserId) {
+    public List<Message> getBySystemUserSender(Long systemUserId) {        
         return daoMessage.getByFK("sender.id", systemUserId);
     }
 
@@ -61,7 +74,7 @@ public class MessageBean implements MessageRemote {
         title = "%" + title + "%";
         Object[] params = new Object[] { systemUser, title };
         String countQuery = "select count(id) from Message m where m.recipient.id = ? and m.title LIKE ?";
-        String query = "from Message m where m.recipient.id = ? and m.title LIKE ? order by m.datetime desc";
+        String query = "from Message m where m.recipient.id = ? and m.title LIKE ? and m.recipientDeleted = false order by m.datetime desc";
         
         Page p = new Page(query, countQuery, params, params, page, pageSize);
                
@@ -76,7 +89,7 @@ public class MessageBean implements MessageRemote {
         title = "%" + title + "%";
         Object[] params = new Object[] { systemUser, title };
         String countQuery = "select count(id) from Message m where m.sender.id = ? and m.title LIKE ?";
-        String query = "from Message m where m.sender.id = ? and m.title LIKE ? order by m.datetime desc";
+        String query = "from Message m where m.sender.id = ? and m.title LIKE ? and m.senderDeleted = false order by m.datetime desc";
         
         Page p = new Page(query, countQuery, params, params, page, pageSize);
                
@@ -84,7 +97,7 @@ public class MessageBean implements MessageRemote {
     }
 
     public List<Message> getLastMessagesBySystemUserRecipient(Long systemUserId) {
-        return daoMessage.find("from Message m where m.recipient.id = ? order by m.datetime desc", new Object[] { systemUserId });
+        return daoMessage.find("from Message m where m.recipient.id = ? and m.recipientDeleted = false order by m.datetime desc", new Object[] { systemUserId });
     }
 
     public List<Message> getBySystemUserSender(Long systemUser, String title, int page, int pageSize) {
@@ -94,7 +107,7 @@ public class MessageBean implements MessageRemote {
             title = "";
         title = "%" + title + "%";
         Object[] params = new Object[] { systemUser, title };
-        String query = "from Message m where m.sender.id = ? and m.title LIKE ? order by m.datetime desc";
+        String query = "from Message m where m.sender.id = ? and m.title LIKE ? and m.senderDeleted = false order by m.datetime desc";
         List<Message> list = daoMessage.paginatedFind(query, params, pageSize, page);
         return list;
     }
@@ -106,7 +119,7 @@ public class MessageBean implements MessageRemote {
             title = "";
         title = "%" + title + "%";
         Object[] params = new Object[] { systemUser, title };
-        String query = "select count(id) from Message m where m.sender.id = ? and m.title LIKE ?";
+        String query = "select count(id) from Message m where m.sender.id = ? and m.title LIKE ? and m.senderDeleted = false";
         int result = daoMessage.getCount(query, params);
         return result;
     }
@@ -118,7 +131,7 @@ public class MessageBean implements MessageRemote {
             title = "";
         title = "%" + title + "%";
         Object[] params = new Object[] { systemUser, title };
-        String query = "from Message m where m.recipient.id = ? and m.title LIKE ? order by m.datetime desc";
+        String query = "from Message m where m.recipient.id = ? and m.title LIKE ? and m.recipientDeleted = false order by m.datetime desc";
         List<Message> list = daoMessage.paginatedFind(query, params, pageSize, page);
         return list;
     }
@@ -130,7 +143,7 @@ public class MessageBean implements MessageRemote {
             title = "";
         title = "%" + title + "%";
         Object[] params = new Object[] { systemUser, title };
-        String query = "select count(id) from Message m where m.recipient.id = ? and m.title LIKE ?";
+        String query = "select count(id) from Message m where m.recipient.id = ? and m.title LIKE ? and m.recipientDeleted = false ";
         int result = daoMessage.getCount(query, params);
         return result;
     }    
