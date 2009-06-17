@@ -1,6 +1,8 @@
 @charset "utf-8";
 /* CSS Document */
 
+body {background-color: transparent; background: url(../images/bg_standard2.jpg) #fff repeat-x 0 0;}
+
 #breadcrumb {width: auto; height: 22px; margin: 10px 0 20px 0; padding: 8px 0 0 100px; position:relative;}
 #breadcrumb p {width: auto; height: 17px; padding: 2px 20px 0px 8px; position: absolute; top:6px; left:0; background: url(../images/arrow-breadcrumb.gif) no-repeat top right #033d7d; font: 11px Arial, Helvetica, sans-serif; color:#fff; }
 #breadcrumb ul {list-style-type:none; font-size: 12px; font-weight:bold; margin-left:15px;}
@@ -61,8 +63,8 @@ color:#ff7202; font-weight:bold; padding:3px 0 0 20px;}
 
 .form-search-forum {width:500px; height:5px;  padding:10px 0 30px;}
 .form-search-forum label {display:block; color:#033d7d; font-weight:bold; font-size: 14px;}
-.form-search-forum input.field {width:300px; float:left; margin:2px 5px 0 0; padding:0 0 5px; font:11px Arial, Helvetica, sans-serif;}
-.form-search-forum input.button {width:64px; height:23px; margin-top: 2px;}
+.form-search-forum input.field {width:300px; float:left; margin:2px 5px 0 0; padding:0 0 5px; font:11px Arial, Helvetica, sans-serif; *position: relative; *right: 1.7em;}
+.form-search-forum input.button {width:64px; height:23px; margin-top: 2px; *position: relative; *right: 1em;}
 
 .pages-all{background:url(../images/img-pages.gif) no-repeat top left; width:79px; height:26px; float:left; font:11px Arial, Helvetica, sans-serif; 
 color:#FFF; padding:3px 5px 2px; margin-top:15px; text-decoration:none;}

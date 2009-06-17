@@ -4,7 +4,7 @@ back-end_cadastro_de_avaliacao.html,
 back-end_criar_editar_curso.html
 
 */
-#col-2-home .tooltip{background:url(../images/icon-tip.gif) no-repeat 0 center; padding-left: 25px;}
+#col-2-home .tooltip{background:url(../images/icon-tip.gif) no-repeat 0 center; padding-left: 25px; *display: inline-block;}
 #col-2-home .container-courses .content-courses .cadastro-avaliacao,
 #col-2-home .container-courses .content-courses .cadastro-curso {margin-bottom: 30px;}
 
