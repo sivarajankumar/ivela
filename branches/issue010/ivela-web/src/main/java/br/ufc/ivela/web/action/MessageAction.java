@@ -354,7 +354,7 @@ public class MessageAction extends GenericAction {
         html += "<ul>";
         if (!systemUserList.isEmpty()) {
             for (SystemUser su : systemUserList) {
-                html += "<li id=\"" + su.getId() + "\">" + su.getUsername() + "</li>";
+                html += "<li>" + su.getUsername() + "</li>";
             }
         }
         html += "</ul>";        
@@ -362,6 +362,17 @@ public class MessageAction extends GenericAction {
         return "text";
     }
 
+    public String retrieveUsers() {
+        List<SystemUser> suList = systemUserRemote.getByUsername(username);
+        String html = "";
+        if (!suList.isEmpty() && suList.size() == 1) {
+            for (SystemUser su : suList) {
+                html += su.getId();
+            }
+        }
+        setInputStream(new ByteArrayInputStream(html.getBytes()));
+        return "text";
+    }
     
     /**
      * Perform a validate to the add method

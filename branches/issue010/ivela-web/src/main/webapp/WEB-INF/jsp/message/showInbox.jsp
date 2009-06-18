@@ -1,7 +1,22 @@
-<%-- 
-    Document   : showInbox message
-    Created on : Jul 31, 2008, 8:47:43 AM
-    Author     : leoomoreira
+<%--    
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: showInbox.jsp                                                                       #
+# Document: Messages Inbox Show                                                             # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 31-JUL-2008 - leoomoreira                       - XXXXXX - Initial Version                #
+# 08-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -23,7 +38,9 @@
                 document.getElementById(div_id).style.display = 'block';
                 document.getElementById('message.recipient.id').value = to;
                 document.getElementById('message.title').value = 'Re: ' + title;
-                document.getElementById('message.description').value = '\n\n' + '---' + '\n' + description;
+                var desc = document.getElementById('message.ori.description').textContent;
+                if (desc == undefined) desc = document.getElementById('message.ori.description').innerText;                                
+                document.getElementById('message.description').value = '\n\n' + '---' + '\n' + desc;
                 document.getElementById('reply.username').value = username;                    
                 document.getElementById('message.description').focus();
             }
@@ -62,10 +79,10 @@
             <span class="topic-message"><s:text name="message.list.sender" />:</span><br /><s:property value="message.sender.username" />
         </p>
         <p class="message-reply">
-            <span class="topic-message"><s:text name="message.list.description" />:</span><br /><s:property value="message.description" />
+            <span class="topic-message"><s:text name="message.list.description" />:</span><br /><span id="message.ori.description" > <s:property value="message.description" /> </span>
         </p>
         
-        <a class="btn-reply-message" href="#" onclick="reply('div-reply', '<s:property value="message.sender.id" />', '<s:property value="message.sender.username" />', '<s:property value="message.title" />', '<s:property value="message.description" />')"><s:text name="message.input.reply" /></a>
+        <a class="btn-reply-message" href="#" onclick="reply('div-reply', '<s:property value="message.sender.id" />', '<s:property value="message.sender.username" />', '<s:property value="message.title" />')"><s:text name="message.input.reply" /></a>
         <s:a cssClass="btn-delete-message" href="%{removeMessage}"><s:text name="message.input.delete" /></s:a>
         
         <div class="div-reply" id="div-reply" style="display: none;">
