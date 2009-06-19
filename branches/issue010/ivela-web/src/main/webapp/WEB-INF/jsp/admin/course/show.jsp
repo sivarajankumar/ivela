@@ -19,7 +19,8 @@
 # 15-SEP-2008 - marcus                            - XXXXXX - Initial Version                #
 # 09-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
 # 10-JUN-2009 - mileine (Instituto Eldorado)      - 000007 - waitingFrame layout fixed      #
-# 15-JUN-2009 - fantato (Instituto Eldorado)      - 000007 - broken icons                   #
+# 15-JUN-2009 - fantato (Instituto Eldorado)      - 000010 - broken icons                   #
+# 17-JUN-2009 - fantato (Instituto Eldorado)      - 000010 - multimidia link was wrong      #
 #############################################################################################
 --%>
 
@@ -61,6 +62,10 @@
         }
     </script>
     <script>
+		function getRepository(value) {
+			return "repository!show.action?courseId="+value; 
+		}
+    
         function textCounter(field, countfield, maxlimit) {
             if (field.value.length > maxlimit) // if too long...trim it!
                 field.value = field.value.substring(0, maxlimit);
@@ -218,11 +223,11 @@
                 <textarea onKeyDown="textCounter(this,$('remLenContents'),500);" rows="6" onKeyUp="textCounter(this,$('remLenContents'),500);" name="input.course.contents" id="input.course.contents" cols="70"></textarea><span class="tooltip" onmouseover="return escape('Entre com a ementa do curso')"></span><br/>
                 <s:text name="course.show.remaining" /><input readonly type=text id="remLenContents" name=remLen size=3 maxlength=3 value="500"/><br/>
                 
-                <label><s:text name="course.input.uploadPackage" /></label> <span class="tooltip" onmouseover="return escape('Entre com uma breve descrição do curso')" ></span><br />
+                <label><s:text name="course.input.uploadPackage" /></label> <span class="tooltip" onmouseover="return escape('Carregar o conteúdo do curso de um pacote')" ></span><br />
                 <label><input type="radio" name="input.course.uploadPackageEnabled" id="input.course.uploadPackageEnabled.yes" value="true"> <s:text name="course.input.yes" /></label> 
                 <label><input type="radio" name="input.course.uploadPackageEnabled" id="input.course.uploadPackageEnabled.no" value="false" checked="checked"> <s:text name="course.input.no" /></label> <br/>
                 
-                <label><s:text name="course.input.challengeItens" /></label> <span class="tooltip" onmouseover="return escape('Entre com uma breve descrição do curso')" ></span><br />
+                <label><s:text name="course.input.challengeItens" /></label> <span class="tooltip" onmouseover="return escape('Habilitar itens de quiz')" ></span><br />
                 <label><input type="radio" name="input.course.challengeItensEnabled" id="input.course.challengeItensEnabled.yes" value="true"> <s:text name="course.input.yes" /></label> 
                 <label><input type="radio" name="input.course.challengeItensEnabled" id="input.course.challengeItensEnabled.no" value="false" checked="checked"> <s:text name="course.input.no" /></label> <br/>
                 
@@ -355,10 +360,9 @@
                             <li><a class="icon-edit" href="javascript:showEditDiscipline();"><s:text name= "course.show.edit" /></a></li>
                             <li><a class="icon-delete" href="javascript:deleteDiscipline();"><s:text name= "course.show.remove" /></a></li>
                             <li><a class="icon-dictionary" href="javascript:showDictionary();"><s:text name= "dictionary.show" /></a></li>
-                            <li><a id="pnlRepositorio" href="#" id="btn-goto-avaliacao" class="icon-multimedia lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024" ><s:text name="discipline.show.biblioteca"/></a></li>
+                            <li><a id="pnlRepositorio" href="javascript:getRepository($('course.id').value);" id="btn-goto-avaliacao" class="icon-multimedia lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024" ><s:text name="discipline.show.biblioteca"/></a></li>
                             <br class="clear" />
-                        </ul>
-                        
+                        </ul>                                                
                     </div>
                     <div class="edit-box" id="course.disciplines">
                     </div>
