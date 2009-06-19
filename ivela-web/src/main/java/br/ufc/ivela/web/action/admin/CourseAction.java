@@ -142,7 +142,7 @@ public class CourseAction extends GenericAction {
         performValidateAdd();
         XStream xStream = new XStream(new JettisonMappedXmlDriver());
         if (!hasActionErrors()) {
-            course.setActive(true);            
+            course.setActive(true);
             boolean result = courseRemote.update(course);
             course = courseRemote.get(course.getId());
             xStream.alias("course", Course.class);
