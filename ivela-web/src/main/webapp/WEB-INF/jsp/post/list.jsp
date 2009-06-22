@@ -15,9 +15,10 @@
 #############################################################################################
 # File: list.jsp                                                                            #
 # Document: List Post                                                                       #
-# Date        - Author(Company)                   - Issue# - Summary                        #
-# 15-MAY-2008 - Rodrigo Felix                     - XXXXXX - Initial Version                #
-# 16-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000010 - i18n bug fix                   #
+# Date        - Author(Company)                    - Issue# - Summary                       #
+# 15-MAY-2008 - Rodrigo Felix                      - XXXXXX - Initial Version               #
+# 16-JUN-2009 - Fabio Fantato(Instituto Eldorado)  - 000010 - i18n bug fix                  #
+# 19-JUN-2009 - Mileine Assato (Instituto Eldorado)- 000010 - Post author username added    #
 #############################################################################################    
 --%>
 <%@ page import="org.springframework.security.context.SecurityContextHolder"%>
@@ -112,7 +113,7 @@
     <s:iterator value="postList" status="pstat">
         <table id="forum">
             <tr>
-                <th><s:text name="post.list.author"/></th>
+                <th><s:text name="topic.list.postedBy" />: <span class="name-user"><a href=""><s:property value="createdBy.username"/></a></span></th>
                 <th><s:property value="title" /></th>
             </tr>
             
@@ -121,12 +122,6 @@
                     <img src="RenderServletProfile?id=<s:property value="createdBy.id" />" /><br/>
                     <a href=""><s:property value="createdBy.name" /></a><br/>
                     <s:text name="post.list.stateSince"/><s:date name="createdAt" format="%{getText('formatDateLanguage1')}" /><br />
-                    <%--<s:text name="post.list.messages"/><br />--%>
-                    <!--
-                            Location: Fortaleza-CE<br/>
-                            <span class="offline">offline</span>
-                            <span class="online">online</span>
-                    -->
                 </td>
                 <td>
                     
@@ -154,15 +149,16 @@
                                     <s:param name="post.id" value="id"/>
                                     <s:param name="post.topic.id" value="topic.id"/>
                                 </s:url>
-                        <%--<li><s:a cssClass="btn-answer" href="">Answer</s:a></li>--%>
+                        <!-- <li><s:a cssClass="btn-answer" href="">Answer</s:a></li>-->
                         <li><a class="btn-quote" href="javascript:addQuote(<s:property value="id" />, <s:property value="topic.id" />, '<s:property value="message" />');">Quote</a></li>
-                        <li><s:a cssClass="btn-remove" href="%{urlRemove}">Remove</s:a></li>
-                        <!--
-                     <li><a class="print" href="">Print</a></li>
-                        -->
+                        <s:if test="createdBy.username==#session.username">
+                            <li><s:a cssClass="btn-remove" href="%{urlRemove}">Remove</s:a></li> 
+                        </s:if>
+                        <s:elseif test="#session.role=='admin'">
+                            <li><s:a cssClass="btn-remove" href="%{urlRemove}">Remove</s:a></li> 
+                        </s:elseif>
                     </ul>
-                    
-                </td>
+              </td>
             </tr>
         </table>
         <div style="display: none; width: 940px;" id="addQuote_<s:property value="id" />">45456546456
