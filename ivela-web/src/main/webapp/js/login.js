@@ -84,27 +84,70 @@ function verifyDependencies() {
     var dependenciesBROWSER = document.getElementById('dependenciesBROWSER'); /* located at login.jsp page */
     var dependenciesJRE = document.getElementById('dependenciesJRE'); /* located at login.jsp page */
 
+    dependenciesWarning.style.cursor = 'default';
     if (result1 == ok && result2 == ok && result3 == ok) {
         dependenciesWarning.innerHTML = dependenciesOK.innerHTML;
-        dependenciesWarning.style.backgroundColor = '#00ff00';
+        dependenciesWarning.style.backgroundImage = 'url(images/login/buton-warning-ok.gif)';
     } else {
         dependenciesWarning.innerHTML = dependenciesERROR.innerHTML;
-        dependenciesWarning.style.backgroundColor = '#ff0000';
+        dependenciesWarning.style.backgroundImage = 'url(images/login/buton-warning-error.gif)';
         if (result3 == error) {
             dependenciesWarning.onclick = function() {deployJava.installLatestJRE();};
+            dependenciesWarning.style.cursor = 'pointer';
         }
     }
 
     dependenciesTooltip.style.position = 'absolute';
     dependenciesTooltip.style.display = 'none';
-    dependenciesTooltip.innerHTML = '<table border="1">' +
-                                    '<tr><td>'+dependenciesSCREEN.innerHTML+'</td><td>'+viewportwidth+'x'+viewportheight+'</td><td>'+result1+'</td></tr>' +
-                                    '<tr><td>'+dependenciesBROWSER.innerHTML+'</td><td>'+x.appCodeName+' '+x.appVersion+'</td><td>'+result2+'</td></tr>' +
-                                    '<tr><td>'+dependenciesJRE.innerHTML+'</td><td>'+deployJava.getJREs()+'</td><td>'+result3+'</td></tr>' +
+    dependenciesTooltip.innerHTML = '<table>' +
+                                    (result1==error?'<tr><td colspan="3"><b>'+dependenciesSCREEN.innerHTML.split('|')[1]+'</b></td></tr><tr><td colspan="3" height="3px"></td></tr>':'') +
+                                    (result2==error?'<tr><td colspan="3"><b>'+dependenciesBROWSER.innerHTML.split('|')[1]+'</b></td></tr><tr><td colspan="3" height="3px"></td></tr>':'') +
+                                    (result3==error?'<tr><td colspan="3"><b>'+dependenciesJRE.innerHTML.split('|')[1]+'</b></td></tr><tr><td colspan="3" height="3px"></td></tr>':'') +
+                                    '<tr><td>'+dependenciesSCREEN.innerHTML.split('|')[0]+':&nbsp;</td><td>'+viewportwidth+'x'+viewportheight+'</td><td>&nbsp;'+result1+'</td></tr>' +
+                                    '<tr><td>'+dependenciesBROWSER.innerHTML.split('|')[0]+':&nbsp;</td><td>'+x.appCodeName+' '+x.appVersion+'</td><td>&nbsp;'+result2+'</td></tr>' +
+                                    '<tr><td>'+dependenciesJRE.innerHTML.split('|')[0]+':&nbsp;</td><td>'+deployJava.getJREs()+'</td><td>&nbsp;'+result3+'</td></tr>' +
                                     '</table>';
+
+    dependenciesWarning.style.position = 'relative';
+    dependenciesWarning.style.left = dependenciesWarning.offsetLeft + 25 + 'px';
+    dependenciesWarning.style.top = dependenciesWarning.offsetTop + 'px';
     dependenciesWarning.onmouseover = function() {
         document.getElementById('dependenciesTooltip').style.display = 'inline';
-        document.getElementById('dependenciesTooltip').style.left = '300px';
-        document.getElementById('dependenciesTooltip').style.top = '300px';};
+        document.getElementById('dependenciesTooltip').style.left = getXY(document.getElementById('dependenciesWarning'))['x'] + document.getElementById('dependenciesWarning').offsetWidth - 5 + 'px';
+        document.getElementById('dependenciesTooltip').style.top = getXY(document.getElementById('dependenciesWarning'))['y'] - 10 + 'px';};
     dependenciesWarning.onmouseout = function() {document.getElementById('dependenciesTooltip').style.display = 'none'};
+}
+
+/**
+ * Returns the absolute X and Y positions of an object.
+ * @param {HTMLObject} obj HTML Object.
+ * @return {Object} Returns an accessor with .x and .y values.
+ */
+function getXY(obj) {
+    var curleft = 0;
+    var curtop = obj.offsetHeight + 5;
+    var border;
+    if (obj.offsetParent) {
+        do {
+            curleft += obj.offsetLeft;
+            curtop += obj.offsetTop;
+        } while (obj = obj.offsetParent)
+    } else if (obj.x) {
+        curleft += obj.x;
+        curtop += obj.y;
+    }
+    return {'x': curleft, 'y': curtop};
+}
+
+/**
+ * Returns the specified computed style on an object.
+ * @param {HTMLObject} obj HTML Object
+ * @param {String} styleProp Property name.
+ * @return {Mixed} Computed style on object.
+ */
+function getStyle(obj, styleProp) {
+    if (obj.currentStyle)
+        return obj.currentStyle[styleProp];
+    else if (window.getComputedStyle)
+        return document.defaultView.getComputedStyle(obj,null).getPropertyValue(styleProp);
 }

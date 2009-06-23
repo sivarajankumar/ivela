@@ -39,6 +39,7 @@
 </c:if>
 
 <div class="login-container">
+    <div id="dependenciesWarning" style="width:100px ; height:30px; text-align:center; font:15px Arial, Helvetica, Sans-Serif; color:white; font-weight:bold; line-height: 30px"></div>
     <form name="f" class="form-login-index" action="<c:url value='j_spring_security_check'/>" method="POST">
         <div class="box-user-index">
             <label><s:text name="login.user"/></label>
@@ -66,8 +67,7 @@
     </div>
     <br class="clear" />
 </div>
-<div id="dependenciesWarning" style="width:100px ; height:30px; text-align:center"></div>
-<div id="dependenciesTooltip"></div>
+<div id="dependenciesTooltip" style="display:none; background:#efefef; border:1px solid #999; padding:5px; font:11px Arial, Helvetica, Sans-Serif"></div>
 <div id="dependenciesOK" style="display:none"><s:text name="login.check.ok"/></div>
 <div id="dependenciesERROR" style="display:none"><s:text name="login.check.error"/></div>
 <div id="dependenciesSCREEN" style="display:none"><s:text name="login.check.screen"/></div>
