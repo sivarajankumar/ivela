@@ -13,11 +13,12 @@
 # See the GNU General Public License for more details.                                      #  
 #                                                                                           #
 #############################################################################################
-# File: list.jsp                                                                            #
-# Document: List Course                                                                     #
+# File: input.jsp                                                                           #
+# Document: Input                                                                           #
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 05-JUN-2008 - Leo Moreira                       - XXXXXX - Initial Version                #
 # 08-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000007 - IE7 compatibility              #
+# 22-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Issues: i18n           #
 #############################################################################################
 --%>
 
@@ -31,17 +32,11 @@
     <script type="text/javascript" src="js/prototype/prototype.js"></script>
     <script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>
     <script type="text/javascript" src="js/scriptaculous/effects.js"></script>
-    <script type="text/javascript" src="js/systemUser/base.js"></script>
-    <script type="text/javascript" src="js/systemUser/events.js"></script>
-    <script type="text/javascript" src="js/password/passwordmeter.js"></script>
+    <script type="text/javascript" src="js/systemUser/base.js"></script>    
+    <script type="text/javascript" src="js/password/passwordmeter.js"></script>       
     <script type="text/javascript">
-        <!--
         var labelShowFields = "<s:text name="systemUser.input.showFields"/>";
         var labelHideFields = "<s:text name="systemUser.input.hideFields"/>";
-        -->
-    </script>
-    <script type="text/javascript">
-
         var r={'special':/[\W]/g}
         function valid(o,w)
         {
@@ -75,7 +70,7 @@
         <fieldset>
             <legend><s:text name="systemUser.input.loginPassTitle"/></legend>
             <p>
-                <label class="required-field">Login:</label>
+                <label class="required-field"><s:text name="systemUser.input.login" />:</label>
                 <s:textfield name="systemUser.username" cssClass="field-full-name" theme="simple" onkeyup="valid(this,'special')" onblur="valid(this,'special')" />
             </p>
             <p>
@@ -100,11 +95,7 @@
         
         <div id="hidden" style="display:none;">            
             <fieldset>
-                <legend><s:text name="systemUser.input.personalInfo"/></legend>
-                <p>
-                    <label><s:text name="systemUser.input.honorific"/>:</label>
-                    <s:select list="honorificList" listKey="id" listValue="title" name="honorific" id="honorific"></s:select>
-                </p>
+                <legend><s:text name="systemUser.input.personalInfo"/></legend>                
                 <p>
                     <label><s:text name="systemUser.input.name"/>:</label>
                     <s:textfield name="profile.firstName" cssClass="field-full-name" theme="simple"/>
@@ -131,8 +122,7 @@
             <fieldset>
                 <legend><s:text name="systemUser.input.addressTitle"/></legend>
                 <p>
-                    <label><s:text name="systemUser.input.addSt"/>:</label>
-                    <s:select list="locationTypeList" listKey="id" listValue="description" name="inAddress.locationType.id" id="locationType"></s:select>
+                    <label><s:text name="systemUser.input.addSt"/>:</label>                    
                     <input name="inAddress.location" id="location" type="text" />
                 </p>
                 <p>
@@ -145,11 +135,11 @@
                 </p>
                 <p>     
                     <label><s:text name="systemUser.input.country"/>:</label>
-                    <s:select list="countryList" listKey="id"  onchange="selectStates(this.value)" listValue="name" name="country" id="country"></s:select>                  
+                    <s:select list="countryList" onchange="selectStates(this.value)" name="inAddress.country" id="country"></s:select>                  
                 </p>
                 <p>
                     <label><s:text name="systemUser.input.state"/>:</label>
-                    <select id="stateId" name="inAddress.state.id" ></select>
+                    <select id="stateId" name="inAddress.state" ></select>
                 </p>
                 <p>
                     <label><s:text name="systemUser.input.city"/>:</label>
@@ -171,14 +161,10 @@
             </fieldset>
             
             <fieldset>
-                <legend><s:text name="systemUser.input.otherTitle"/></legend>
-                <p>
-                    <label><s:text name="systemUser.input.language"/>:</label>
-                    <s:select list="languageInternationalizationList" listKey="id" listValue="language.name" name="language" id="language"></s:select>
-                </p>
-                <p>
+                <legend><s:text name="systemUser.input.otherTitle"/></legend>                
+                <p>                    
                     <label><s:text name="systemUser.input.ethnicity"/>:</label>
-                    <s:select list="ethnicityList" listKey="id" listValue="name" name="ethnicity" id="ethnicity"></s:select>
+                    <s:select list="ethnicityList" name="ethnicity" id="ethnicity"></s:select>
                 </p>
             </fieldset>
             

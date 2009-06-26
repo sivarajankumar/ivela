@@ -1,7 +1,23 @@
-<%--
-    Document   : show library
-    Created on : Nov 4, 2008, 2:06:16 PM
-    Author     : marcus
+<%--    
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: show.jsp                                                                            #
+# Document: Show Library Page                                                               # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 04-NOV-2008 - Marcus (UFC)                      - XXXXXX - Initial Version                #
+# 24-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General i18n Issues            #
+#############################################################################################
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -62,16 +78,16 @@
             <div class="content-courses">
                 <h1><span id="fileInfo.name"></span></h1>
 
-                <p>Title: <span id="fileInfo.title"></span></p>
-                <p>Author: <span id="fileInfo.author"></span></p>
-                <p>Description: <span id="fileInfo.description"></span></p>
-                <p>Keywords: <span id="fileInfo.keywords"></span></p>
-                <p>Sent By: <span id="fileInfo.sentby"></span></p>
+                <p><s:text name="repository.input.title" />: <span id="fileInfo.title"></span></p>
+                <p><s:text name="repository.input.author" />: <span id="fileInfo.author"></span></p>
+                <p><s:text name="repository.input.description" />: <span id="fileInfo.description"></span></p>
+                <p><s:text name="repository.input.keywords" />: <span id="fileInfo.keywords"></span></p>
+                <p><s:text name="repository.list.sentby" />: <span id="fileInfo.sentby"></span></p>
 
                 <p></p>
 
                 <input type="hidden" id="file.id"/>
-                <p><a href="#" onclick="download();">Download file</a></p>
+                <p><a href="#" onclick="download();"><s:text name="repository.list.download"/> <s:text name="repository.input.file"/> </a></p>
                 <!--p><a href="#" onclick="removeFile();">Remove file</a></p-->
 
                 <br class="clear" />

@@ -21,6 +21,7 @@
 # 10-JUN-2009 - mileine (Instituto Eldorado)      - 000007 - waitingFrame layout fixed      #
 # 15-JUN-2009 - fantato (Instituto Eldorado)      - 000010 - broken icons                   #
 # 17-JUN-2009 - fantato (Instituto Eldorado)      - 000010 - multimidia link was wrong      #
+# 25-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - i18n support                   #
 #############################################################################################
 --%>
 
@@ -150,7 +151,7 @@
                                                                 <div class="vertical_accordion_content3" id="<s:property value="id" />_<s:property value="id" />_<s:property value="id" />">
                                                                     <div id="vertical_nested_container4">
                                                                         
-                                                                        <h6 class="vertical_accordion_toggle4" id="exercises" >Exercises</h6>
+                                                                        <h6 class="vertical_accordion_toggle4" id="exercises" ><s:text name="course.show.exercise"/></h6>
                                                                         <div class="vertical_accordion_content4" id="<s:property value="id" />">
                                                                             <ul id="ulExerciseAccordeon_<s:property value="id" />">
                                                                                 <s:if test="(exercises == null || exercises.size() == 0)">
@@ -163,7 +164,7 @@
                                                                                 </s:else>
                                                                             </ul>
                                                                         </div>
-                                                                        <h6 class="vertical_accordion_toggle4" id="exams">Exams</h6>
+                                                                        <h6 class="vertical_accordion_toggle4" id="exams"><s:text name="course.show.exam"/></h6>
                                                                         <div class="vertical_accordion_content4" id="<s:property value="id" />">
                                                                             <ul id="ulExamAccordeon_<s:property value="id" />">
                                                                                 <s:if test="(exams == null || exams.size() == 0)">
@@ -206,12 +207,12 @@
                 <h1><s:text name="home.course" /></h1><br/><br/><br/>
                 <label><s:text name="course.input.name" /></label><br/>
                 <input type="hidden" name="input.course.repository" id="input.course.repository" value=""/>
-                <input type="text" name="input.course.name" id="input.course.name" value="" size="61" maxlength="35" /><span class="tooltip" onmouseover="return escape('Entre com o nome do curso')"></span><br/>
+                <input type="text" name="input.course.name" id="input.course.name" value="" size="61" maxlength="35" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.01"/>')"> </span><br/>
                 <label><s:text name="course.input.description" /></label><br/>
-                <textarea onKeyDown="textCounter(this,$('remLen'),250);" onKeyUp="textCounter(this,$('remLen'),250);" rows="4" name="input.course.description" id="input.course.description" cols="70" ></textarea><span class="tooltip" onmouseover="return escape('Entre com uma breve descrição do curso')"></span><br/>
+                <textarea onKeyDown="textCounter(this,$('remLen'),250);" onKeyUp="textCounter(this,$('remLen'),250);" rows="4" name="input.course.description" id="input.course.description" cols="70" ></textarea><span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.02"/>')"></span><br/>
                 <s:text name="course.show.remaining" /><input readonly type=text id="remLen" name=remLen size=3 maxlength=3 value="250"/><br/>
                 <label><s:text name="course.input.targetAudience" /></label><br/>
-                <textarea onKeyDown="textCounter(this,$('remLenTargetAudience'),250);" onKeyUp="textCounter(this,$('remLenTargetAudience'),250);" rows="3" name="input.course.targetAudience" id="input.course.targetAudience" cols="70"></textarea><span class="tooltip" onmouseover="return escape('Entre com o público alvo do curso')"></span><br/>
+                <textarea onKeyDown="textCounter(this,$('remLenTargetAudience'),250);" onKeyUp="textCounter(this,$('remLenTargetAudience'),250);" rows="3" name="input.course.targetAudience" id="input.course.targetAudience" cols="70"></textarea><span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.03"/>')"></span><br/>
                 <s:text name="course.show.remaining" /><input readonly type=text id="remLenTargetAudience" name=remLenTargetAudience size=3 maxlength=3 value="250"/><br/>
                 <s:form action="course!updateImage" id="updateImage" method="post" enctype="multipart/form-data">
                     <label><s:text name="course.input.image" /></label><br/>
@@ -220,14 +221,14 @@
                 </s:form>
                 <label><s:text name="course.input.contents" /></label><br/>
                 <!--<input type="text" name="input.course.contents" id="input.course.contents" value="" /><br />-->
-                <textarea onKeyDown="textCounter(this,$('remLenContents'),500);" rows="6" onKeyUp="textCounter(this,$('remLenContents'),500);" name="input.course.contents" id="input.course.contents" cols="70"></textarea><span class="tooltip" onmouseover="return escape('Entre com a ementa do curso')"></span><br/>
+                <textarea onKeyDown="textCounter(this,$('remLenContents'),500);" rows="6" onKeyUp="textCounter(this,$('remLenContents'),500);" name="input.course.contents" id="input.course.contents" cols="70"></textarea><span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.04"/>')"></span><br/>
                 <s:text name="course.show.remaining" /><input readonly type=text id="remLenContents" name=remLen size=3 maxlength=3 value="500"/><br/>
                 
-                <label><s:text name="course.input.uploadPackage" /></label> <span class="tooltip" onmouseover="return escape('Carregar o conteúdo do curso de um pacote')" ></span><br />
+                <label><s:text name="course.input.uploadPackage" /></label> <span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.05"/>')" ></span><br />
                 <label><input type="radio" name="input.course.uploadPackageEnabled" id="input.course.uploadPackageEnabled.yes" value="true"> <s:text name="course.input.yes" /></label> 
                 <label><input type="radio" name="input.course.uploadPackageEnabled" id="input.course.uploadPackageEnabled.no" value="false" checked="checked"> <s:text name="course.input.no" /></label> <br/>
                 
-                <label><s:text name="course.input.challengeItens" /></label> <span class="tooltip" onmouseover="return escape('Habilitar itens de quiz')" ></span><br />
+                <label><s:text name="course.input.challengeItens" /></label> <span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.06"/>')" ></span><br />
                 <label><input type="radio" name="input.course.challengeItensEnabled" id="input.course.challengeItensEnabled.yes" value="true"> <s:text name="course.input.yes" /></label> 
                 <label><input type="radio" name="input.course.challengeItensEnabled" id="input.course.challengeItensEnabled.no" value="false" checked="checked"> <s:text name="course.input.no" /></label> <br/>
                 
@@ -248,7 +249,7 @@
                 <br />
                 <br />
                 <label><s:text name="discipline.input.name" /></label><br />
-                <input type="text" name="input.discipline.name" id="input.discipline.name" value="" size="61" maxlength="35" /><span class="tooltip" onmouseover="return escape('Entre com o nome da disciplina')"></span><br />
+                <input type="text" name="input.discipline.name" id="input.discipline.name" value="" size="61" maxlength="35" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.discipline.tip.01"/>')"></span><br />
                 <input type="button" name="input.discipline.submit" id="input.discipline.submit" value="<s:text name="systemUser.input.btnSave" />" onclick="submitDiscipline($('input.discipline.id').value);" /><br />    
             </div>
         </div>
@@ -265,7 +266,7 @@
                 <br />
                 <br />
                 <label><s:text name="unit.input.name" /></label><br />
-                <input type="text" name="input.unit.name" id="input.unit.name" value="" maxlength="35" size="61" /><span class="tooltip" onmouseover="return escape('Entre com o nome da unidade')"></span><br />
+                <input type="text" name="input.unit.name" id="input.unit.name" value="" maxlength="35" size="61" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.unit.tip.01"/>')"></span><br />
                 <input type="button" name="input.discipline.submit" id="input.discipline.submit" value="<s:text name ="systemUser.input.btnSave" /> " onclick="submitUnit($('input.unit.id').value);" /><br />        
             </div>
         </div>
@@ -284,9 +285,9 @@
                     <br />
                     <br />
                     <label><s:text name="unitContent.input.title" /></label><br />
-                    <input type="text" name="unitContent.title" id="input.unitContent.title" value="" maxlength="35" size="61" /><span class="tooltip" onmouseover="return escape('Entre com o nome da aula')"></span><br />                
+                    <input type="text" name="unitContent.title" id="input.unitContent.title" value="" maxlength="35" size="61" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.unitContent.tip.01"/>')"></span><br />                
                     <label><s:text name="unitContent.input.order_n" /></label><br />
-                    <select style="width: 80px;" name="unitContent.orderN" id="input.unitContent.order_n"></select><span class="tooltip" onmouseover="return escape('Entre com a ordem da aula')"></span><br />                                    
+                    <select style="width: 80px;" name="unitContent.orderN" id="input.unitContent.order_n"></select><span class="tooltip" onmouseover="return escape('<s:text name="admin.unitContent.tip.02"/>')"></span><br />                                    
                     <label><s:text name="unitContent.input.type" /></label><br/>
                     <%-- v1 --%>
                     <input type="radio" id="input.unitContent.type1" name="unitContent.type" value="1" checked>Pdf</input>
@@ -544,19 +545,19 @@
                     <br />
                     <br />
                     <label><s:text name="unitContent.input.title" /></label><br />
-                    <s:textfield name="unitContent.title" id="upload.unitContent.title" maxLength="35" size="61" /><span class="tooltip" onmouseover="return escape('Entre com o nome da aula')"></span>
+                    <s:textfield name="unitContent.title" id="upload.unitContent.title" maxLength="35" size="61" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.unitContent.tip.01"/>')"></span>
                     <br />               
                     <label><s:text name="unitContent.input.order_n" /></label><br />
-                    <select style="width: 80px;" name="unitContent.orderN" id="upload.unitContent.order_n"></select><span  class="tooltip"onmouseover="return escape('Entre com a ordem da aula')"></span><br />                                    
+                    <select style="width: 80px;" name="unitContent.orderN" id="upload.unitContent.order_n"></select><span  class="tooltip"onmouseover="return escape('<s:text name="admin.unitContent.tip.01"/>')"></span><br />                                    
                     <br />
                     <label><s:text name="unitContent.input.package" /></label><br />
                     <s:file name="upload" key="repository.input.file" theme="simple" /><span class="tooltip" onmouseover="return escape('Entre com o pacote da aula')"></span>
                     <br />
                     <br />
                     <label><s:text name="unitContent.input.width" /></label><br />
-                    <s:textfield name="unitContent.width" id="upload.unitContent.width" maxLength="4" size="8" /><span class="tooltip"  onmouseover="return escape('Entre com a largura do frame da aula')"></span><br />
+                    <s:textfield name="unitContent.width" id="upload.unitContent.width" maxLength="4" size="8" /><span class="tooltip"  onmouseover="return escape('<s:text name="admin.unitContent.tip.03"/>')"></span><br />
                     <label><s:text name="unitContent.input.height" /></label><br />
-                    <s:textfield name="unitContent.height" id="upload.unitContent.height" maxLength="4" size="8" /><span class="tooltip" onmouseover="return escape('Entre com a altura do frame da aula')"></span><br /><br />
+                    <s:textfield name="unitContent.height" id="upload.unitContent.height" maxLength="4" size="8" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.unitContent.tip.03"/>')"></span><br /><br />
                     <s:submit key="systemUser.input.btnSave" />
                 </s:form>
             </div>

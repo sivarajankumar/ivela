@@ -1,7 +1,24 @@
-<%-- 
-    Document   : list Question
-    Created on : Jun 20, 2008, 9:11:55 AM
-    Author     : emanuelle
+<%--  
+#############################################################################################  
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: list.jsp                                                                            #
+# Document: Question List Page                                                              # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 20-JUN-2008 - Emanuelle (UFC)                   - XXXXXX - Initial Version                #
+# 22-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - i18n Issues                    #
+#############################################################################################
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -41,10 +58,10 @@
                 <s:url id="deleteUrl" action="question" method="remove">
                     <s:param name="question.id" value="id"/>
                 </s:url>
-                <td><s:a href="%{editUrl}">Edit</s:a>/<s:a href="%{deleteUrl}" onclick="return confirm('Are you sure?')">Delete</s:a></td>                    
+                <td><s:a href="%{editUrl}"><s:text name="general.edit"/></s:a>/<s:a href="%{deleteUrl}" onclick="return confirm('<s:text name="general.areyousure"/>')"><s:text name="general.delete"/></s:a></td>                    
             </tr>
         </s:iterator>
     </table>
-    <s:a href="question!input.action">Create a new question</s:a>
+    <s:a href="question!input.action"><s:text name="question.input.createnew"/></s:a>
     
 </html>

@@ -13,8 +13,7 @@
     <link href="css/profile.css" rel="stylesheet" type="text/css" />
         
     <script type="text/javascript" src="js/prototype/prototype.js"></script>
-    <script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>
-    <script type="text/javascript" src="js/systemUser/profile.js"></script>
+    <script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>    
     <script type="text/javascript" src="js/systemUser/base.js"></script>
         <cal:head/>
         <s:head />

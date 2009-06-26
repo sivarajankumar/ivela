@@ -1,7 +1,26 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: GradeAction.java                                                                    #
+# Document: Action for the Grades                                                           # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - nelson                            - XXXXXX - Initial Version                #
+# 24-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Fixes                  #
+#############################################################################################
+*/
+
 package br.ufc.ivela.web.action;
 
 import br.ufc.ivela.commons.model.Course;
@@ -42,51 +61,6 @@ public class GradeAction extends GenericAction implements Preparable {
         gradeList = gradeRemote.getAll();
 
         return "list";
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public String input() {
-        return INPUT;
-    }
-
-    /**
-     * Add a new grade
-     * @return a list of the grades
-     */
-    public String add() {
-        gradeRemote.add(grade);
-        return list();
-    }
-
-    /**
-     * Edit a grade
-     * @return edit grade
-     */
-    public String edit() {
-        Grade g = gradeRemote.get(grade.getId());
-        setGrade(g);
-        return "edit";
-    }
-
-    /**
-     * Update a grade
-     * @return
-     */
-    public String update() {
-        gradeRemote.update(grade);
-        return list();
-    }
-
-    /**
-     * Remove a grade
-     * @return
-     */
-    public String remove() {
-        gradeRemote.remove(grade.getId());
-        return list();
     }
 
     /**

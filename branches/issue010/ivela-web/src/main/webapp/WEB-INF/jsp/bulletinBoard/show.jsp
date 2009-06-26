@@ -1,7 +1,27 @@
+<%--    
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: show.jsp                                                                            #
+# Document: Bulletin Board Show                                                             # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 31-JUL-2008 - leomoreira (UFC)                  - XXXXXX - Initial Version                #
+# 24-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+#############################################################################################
+--%>
+
 <%-- 
-    Document   : show BulletinBoard
-    Created on : Jul 31, 2008, 8:47:43 AM
-    Author     : leoomoreira
+    Bulletin Board has not been implemented yet, this page is a prototype.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,9 +37,9 @@
         <s:head />
     </head>
     <div id="breadcrumb">
-        <p>you are here</p>
+        <p><s:text name="breadcrumb.youAreHere" /></p>
         <ul>
-            <li><a href="home.action" title="Back to home">Home</a></li>
+            <li><a href="home.action" title="Back to home"><s:text name="front.home" /></a></li>
             <li class="current"><s:text name="bulletin.pageTitle"/></li>
         </ul>
     </div>

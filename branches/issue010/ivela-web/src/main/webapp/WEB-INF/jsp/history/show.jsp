@@ -1,8 +1,25 @@
-<%-- 
-    Document   : input Disciplina
-    Created on : Jul 15, 2008, 1:48:54 PM
-    Author     : nelson
+<%--    
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: input.jsp                                                                           #
+# Document: My Score show page                                                              # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 15-JUL-2008 - nelson                            - XXXXXX - Initial Version                #
+# 17-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+#############################################################################################
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
@@ -71,7 +88,7 @@
 <div id="breadcrumb">
     <p><s:text name="breadcrumb.youAreHere"/></p>
     <ul>
-        <li><a href="index.action"><s:text name="home.name"/></a></li>
+        <li><a href="index.jsp"><s:text name="home.name"/></a></li>
         <li class="current"><s:text name="home.history"/></li>
     </ul>
 </div>
@@ -83,21 +100,21 @@
         <td align="right">
             <a id="pnlAvaliacao" href="history!showPrintVersion.action" id="btn-goto-avaliacao" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"  
                style="text-decoration: none;">
-                <img src="/ivela-web/images/icon/icon-printer.gif" border="0" /> <font style="font-family:arial;font-size: 12px;">Printer Version</font>
+                <img src="/ivela-web/images/icon/icon-printer.gif" border="0" /> <font style="font-family:arial;font-size: 12px;"><s:text name="history.print"/></font>
             </a>
         </td>
     </tr>
     
 </table>
-  <h1>My Scores</h1>
+  <h1><s:text name="history.title"/></h1>
     <table class="table-exercises-result" width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-            <td width="368" class="titulo"><center>Course</center></td>
-            <td width="368" class="titulo"><center>Grade</center></td>
-            <td width="368" class="titulo"><center>Average Exercise</center></td>
-            <td width="368" class="titulo"><center>Average Exam</center></td>
-            <td width="368" class="titulo"><center>Final Average</center></td>
-            <td width="368" class="titulo"><center>Result</center></td>
+            <td width="368" class="titulo"><center><s:text name="history.table.course"/></center></td>
+            <td width="368" class="titulo"><center><s:text name="history.table.grade"/></center></td>
+            <td width="368" class="titulo"><center><s:text name="history.table.average.exercise"/></center></td>
+            <td width="368" class="titulo"><center><s:text name="history.table.average.exam"/></center></td>
+            <td width="368" class="titulo"><center><s:text name="history.table.average"/></center></td>
+            <td width="368" class="titulo"><center><s:text name="history.table.result"/></center></td>
         </tr>
         
         <s:iterator value="transcriptList">
@@ -121,13 +138,13 @@
                     <s:else><s:property value="score"/></s:else>
                 </td>
                 <s:if test="status==0">
-                    <td class="manual-mark">FAILED</td>
+                    <td class="manual-mark"><s:text name="history.status.failed"/></td>
                 </s:if>
                 <s:if test="status ==1">
-                    <td class="manual-mark">APPROVED</td>
+                    <td class="manual-mark"><s:text name="history.status.approved"/></td>
                 </s:if>
                 <s:if test="status==3">
-                    <td class="manual-mark">IN PROGRESS</td>
+                    <td class="manual-mark"><s:text name="history.status.inprogress"/></td>
                 </s:if>
             </tr> 
         </s:iterator>

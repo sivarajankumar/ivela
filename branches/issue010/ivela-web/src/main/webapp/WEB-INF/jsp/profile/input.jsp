@@ -1,7 +1,24 @@
-<%-- 
-    Document   : input Profile
-    Created on : Jun 5, 2008, 9:14:56 AM
-    Author     : leoomoreira
+<%--    
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: input.jsp                                                                           #
+# Document: Input Profile Page                                                              # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 05-JUN-2008 - leoomoreira (UFC      )           - XXXXXX - Initial Version                #
+# 22-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Issues                 #
+#############################################################################################
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -29,13 +46,9 @@
             <s:hidden name="profile.id" />
             <fieldset><legend><s:text name="systemUser.input.personalInfo"/></legend>
                 <p>
-                    <label><s:text name="profile.disabilities" />:</label>
-                    <span><s:radio name="profile.disabilities" list="#{'true':'yes','false':'no'}" theme="simple"/></span>
-                </p>
-                <p>
-                    <label><s:text name="profile.honorific" />:</label>
-                    <s:select list="honorificList" listKey="id" listValue="title" name="profile.honorific.id" id="honorific" theme="simple"/>
-                </p>
+                    <label><s:text name="profile.disabilities" />:</label>                    
+                    <span><s:radio name="profile.disabilities" list="disabilitiesList" theme="simple"/></span>
+                </p>                
                 <p>
                     <label><s:text name="profile.firstName" />:</label>
                     <s:textfield name="profile.firstName" theme="simple" />
@@ -46,7 +59,7 @@
                 </p>
                 <p>
                     <label><s:text name="profile.gender" />:</label>
-                    <span><s:radio name="profile.gender" list="#{'1':'masculino','0':'feminino'}"  theme="simple"/></span>
+                    <span><s:radio name="profile.gender" list="genderList"  theme="simple"/></span>
                 </p>
                 <p>
                     <label><s:text name="profile.initials" />:</label>
@@ -65,11 +78,7 @@
                 <p>
                     <label><s:text name="profile.ethnicity" />:</label>
                     <s:select list="ethnicityList" listKey="id" listValue="name" name="profile.ethnicity.id" id="ethnicity" theme="simple"></s:select>
-                </p>
-                <p>
-                    <label><s:text name="profile.language" />:</label>
-                    <s:select list="languageInternationalizationList" listKey="id" listValue="language.name" name="profile.language.id" id="language" theme="simple"></s:select>
-                </p>
+                </p>                
                 <p>
                     <label><s:text name="profile.birthDate" />:</label>
                     <cal:jscalendar name="profile.birthDate"  format="%m/%d/%Y" showstime="true" theme="simple"/>
