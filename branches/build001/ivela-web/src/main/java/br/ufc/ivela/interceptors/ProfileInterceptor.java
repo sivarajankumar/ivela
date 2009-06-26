@@ -167,7 +167,7 @@ public class ProfileInterceptor extends AbstractInterceptor {
         if (null == countryList) {
             synchronized (countriesMap) {
                 // get Default Countries in the Default language
-                countryList = PropertiesUtil.getPropertiesUtil().getCountries();
+                countryList = new LinkedHashMap<Integer,String>(PropertiesUtil.getPropertiesUtil().getCountries());
                 // New Country List that will hold the countries in alphabetical order.
                 Map<Integer, String> newCountryList = new LinkedHashMap<Integer,String>();                
                 for (Integer key :countryList.keySet()) {
