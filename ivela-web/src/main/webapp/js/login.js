@@ -28,17 +28,11 @@ var viewportwidth = getWidth();
 var viewportheight = getHeight();
 
 function getWidth() {
-    return window.innerWidth ? window.innerWidth : /* For non-IE */
-    document.documentElement ? document.documentElement.clientWidth : /* IE 6+ (Standards Compilant Mode) */
-    document.body ? document.body.clientWidth : /* IE 4 Compatible */
-    window.screen.width; /* Others (It is not browser window size, but screen size) */
+    return window.screen.width;
 }
 
 function getHeight() {
-    return window.innerHeight ? window.innerHeight : /* For non-IE */  
-    document.documentElement ? document.documentElement.clientHeight : /* IE 6+ (Standards Compilant Mode) */  
-    document.body ? document.body.clientHeight : /* IE 4 Compatible */  
-    window.screen.height; /* Others (It is not browser window size, but screen size) */  
+    return window.screen.height;
 }  
 
 if (viewportwidth >= 1024) {
