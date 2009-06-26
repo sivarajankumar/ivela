@@ -20,6 +20,7 @@
 # 09-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000007 - IE7 compatibility              #
 # 15-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 00000X - Reverting list instead field   #
 # 															 adding user into categories    #
+# 26-JUN-2009 - Otofuji(Instituto Eldorado)       - 000010 - i18n Issues                    #
 #############################################################################################
 --%>
 
@@ -78,9 +79,9 @@
             <div class="category_content" id="1">
                 
                 <s:if test="(listAdmin != null && listAdmin.size() > 0)">                                   
-                    <input type="button" name="CheckAllAdmins" value="Marcar Todos" class="btn-check-all"
+                    <input type="button" name="CheckAllAdmins" value="<s:text name="general.markall"/>" class="btn-check-all"
                            onClick="checkAllFieldsByName('adminCheck', '<s:property value="id" />','admins')">
-                    <input type="button" name="UnCheckAllAdmins" value="Desmarcar Todos" class="btn-uncheck-all"
+                    <input type="button" name="UnCheckAllAdmins" value="<s:text name="general.unmarkall"/>" class="btn-uncheck-all"
                            onClick="unCheckAllFieldsByName('adminCheck','adminData')">
                 </s:if>
                 
@@ -133,9 +134,9 @@
             <div class="category_content" id="2">
                 
                 <s:if test="(listCoord != null && listCoord.size() > 0)">                                   
-                    <input type="button" name="CheckAllCoords" value="Marcar Todos" class="btn-check-all"
+                    <input type="button" name="CheckAllCoords" value="<s:text name="general.markall"/>" class="btn-check-all"
                            onClick="checkAllFieldsByName('coordCheck', '<s:property value="id" />','coords')">
-                    <input type="button" name="UnCheckAllCoords" value="Desmarcar Todos" class="btn-uncheck-all"
+                    <input type="button" name="UnCheckAllCoords" value="<s:text name="general.unmarkall"/>" class="btn-uncheck-all"
                            onClick="unCheckAllFieldsByName('coordCheck','coordData')">
                 </s:if>
                 
@@ -187,9 +188,9 @@
             <div class="category_content" id="6">
                 
                 <s:if test="(listProf != null && listProf.size() > 0)">                                   
-                    <input type="button" name="CheckAllProfs" value="Marcar Todos" class="btn-check-all"
+                    <input type="button" name="CheckAllProfs" value="<s:text name="general.markall"/>" class="btn-check-all"
                            onClick="checkAllFieldsByName('profCheck', '<s:property value="id" />','profs')">
-                    <input type="button" name="UnCheckAllProfs" value="Desmarcar Todos" class="btn-uncheck-all"
+                    <input type="button" name="UnCheckAllProfs" value="<s:text name="general.unmarkall"/>" class="btn-uncheck-all"
                            onClick="unCheckAllFieldsByName('profCheck','profData')">
                 </s:if>
                 
@@ -243,9 +244,9 @@
             <div class="category_content" id="3">
                 
                 <s:if test="(listTutor != null && listTutor.size() > 0)">                                   
-                    <input type="button" name="CheckAllTutors" value="Marcar Todos" class="btn-check-all"
+                    <input type="button" name="CheckAllTutors" value="<s:text name="general.markall"/>" class="btn-check-all"
                            onClick="checkAllFieldsByName('tutorCheck', '<s:property value="id" />','tutors')">
-                    <input type="button" name="UnCheckAllTutors" value="Desmarcar Todos" class="btn-uncheck-all"
+                    <input type="button" name="UnCheckAllTutors" value="<s:text name="general.unmarkall"/>" class="btn-uncheck-all"
                            onClick="unCheckAllFieldsByName('tutorCheck','tutorData')">
                 </s:if>
                 
@@ -297,9 +298,9 @@
         <div class="category_content" id="5">
             
             <s:if test="(listUser != null && listUser.size() > 0)">                                   
-                <input type="button" name="CheckAllStudents" value="Marcar Todos" class="btn-check-all"
+                <input type="button" name="CheckAllStudents" value="<s:text name="general.markall"/>" class="btn-check-all"
                        onClick="checkAllFieldsByName('studentCheck', '<s:property value="id" />','students')">
-                <input type="button" name="UnCheckAllStudents" value="Desmarcar Todos" class="btn-uncheck-all"
+                <input type="button" name="UnCheckAllStudents" value="<s:text name="general.unmarkall"/>" class="btn-uncheck-all"
                        onClick="unCheckAllFieldsByName('studentCheck','studentData')">
             </s:if>
             

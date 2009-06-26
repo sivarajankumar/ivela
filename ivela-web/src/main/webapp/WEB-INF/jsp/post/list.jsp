@@ -19,6 +19,7 @@
 # 15-MAY-2008 - Rodrigo Felix                      - XXXXXX - Initial Version               #
 # 16-JUN-2009 - Fabio Fantato(Instituto Eldorado)  - 000010 - i18n bug fix                  #
 # 19-JUN-2009 - Mileine Assato (Instituto Eldorado)- 000010 - Post author username added    #
+# 24-JUN-2009 - Mileine Assato (Instituto Eldorado)- 000010 - i18n bug fix part II          #
 #############################################################################################    
 --%>
 <%@ page import="org.springframework.security.context.SecurityContextHolder"%>
@@ -150,12 +151,12 @@
                                     <s:param name="post.topic.id" value="topic.id"/>
                                 </s:url>
                         <!-- <li><s:a cssClass="btn-answer" href="">Answer</s:a></li>-->
-                        <li><a class="btn-quote" href="javascript:addQuote(<s:property value="id" />, <s:property value="topic.id" />, '<s:property value="message" />');">Quote</a></li>
+                        <li><a class="btn-quote" href="javascript:addQuote(<s:property value="id" />, <s:property value="topic.id" />, '<s:property value="message" />');"><s:text name="post.list.quote"/></a></li>
                         <s:if test="createdBy.username==#session.username">
-                            <li><s:a cssClass="btn-remove" href="%{urlRemove}">Remove</s:a></li> 
+                            <li><s:a cssClass="btn-remove" href="%{urlRemove}"><s:text name="post.list.remove"/></s:a></li> 
                         </s:if>
                         <s:elseif test="#session.role=='admin'">
-                            <li><s:a cssClass="btn-remove" href="%{urlRemove}">Remove</s:a></li> 
+                            <li><s:a cssClass="btn-remove" href="%{urlRemove}"><s:text name="post.list.remove"/></s:a></li> 
                         </s:elseif>
                     </ul>
               </td>
@@ -166,13 +167,13 @@
     </s:iterator>                
 </div>
 <div id="quick-answer">
-    <h3>Quick Answer</h3>
+    <h3><s:text name="post.input.quickanswer"/></h3>
     <s:actionerror />    
     <s:form action="post!addQuickAnswer.action" method="POST" id="form-answer" theme="simple">
         <s:hidden name="post.topic.id" value="%{topic.id}" />
-        <label>Title:</label><br /><br />
+        <label><s:text name="post.input.title"/>:</label><br /><br />
         <s:textfield name="post.title" cssStyle="width: 960px;" /><br/> 
-        <label>Description:</label><br />
+        <label><s:text name="post.input.description"/>:</label><br />
         <s:textarea name="post.message" />
         <s:submit cssClass="btn-send" value="Send" />
     </s:form>

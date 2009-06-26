@@ -17,6 +17,7 @@
 # Date        - Author(Company)                   - Issue# - Summary                               #
 # XX-XXX-XXXX - Leonardo Oliveira Moreira         - XXXXXX - Initial Version                       #
 # 16-JUN-2009 - mileine (Instituto Eldorado)      - 000010 - Password strength validation disabled #
+# 22-JUN-2009 - mileine (Instituto Eldorado)      - 000010 - General Issues Initial Fix            #
 ##################################################################################################*/
 
 package br.ufc.ivela.web.action;
@@ -25,32 +26,24 @@ import br.ufc.ivela.commons.Constants;
 import br.ufc.ivela.commons.mail.MailSender;
 import br.ufc.ivela.commons.model.Address;
 import br.ufc.ivela.commons.model.Authentication;
-import br.ufc.ivela.commons.model.Country;
-import br.ufc.ivela.commons.model.Ethnicity;
-import br.ufc.ivela.commons.model.Honorific;
-import br.ufc.ivela.commons.model.LanguageInternationalization;
-import br.ufc.ivela.commons.model.LocationType;
 import br.ufc.ivela.commons.model.Phone;
 import br.ufc.ivela.commons.model.Profile;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.util.Validators;
 import br.ufc.ivela.ejb.interfaces.AddressRemote;
 import br.ufc.ivela.ejb.interfaces.CalendarRemote;
-import br.ufc.ivela.ejb.interfaces.CountryRemote;
-import br.ufc.ivela.ejb.interfaces.EthnicityRemote;
-import br.ufc.ivela.ejb.interfaces.HonorificRemote;
-import br.ufc.ivela.ejb.interfaces.LanguageInternationalizationRemote;
 import br.ufc.ivela.ejb.interfaces.LanguageRemote;
-import br.ufc.ivela.ejb.interfaces.LocationTypeRemote;
 import br.ufc.ivela.ejb.interfaces.PhoneRemote;
 import br.ufc.ivela.ejb.interfaces.ProfileRemote;
-import br.ufc.ivela.ejb.interfaces.StateRemote;
 import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
+import br.ufc.ivela.interceptors.interfaces.ProfileDataProvider;
+
 import com.opensymphony.xwork2.Preparable;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
@@ -58,7 +51,7 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.util.StringUtils;
 
 
-public class SystemUserAction extends GenericAction implements Preparable {
+public class SystemUserAction extends GenericAction implements ProfileDataProvider {
 
     private CalendarRemote calendarRemote;
     private SystemUserRemote systemUserRemote;
@@ -67,21 +60,15 @@ public class SystemUserAction extends GenericAction implements Preparable {
     private PhoneRemote phoneRemote;
     private Profile profile;
     private Address[] address;
-    private Phone[] phone;
-    private HonorificRemote honorificRemote;
-    private LocationTypeRemote locationTypeRemote;
-    private CountryRemote countryRemote;
-    private LanguageInternationalizationRemote languageInternationalizationRemote;
-    private EthnicityRemote ethnicityRemote;
-    private LanguageRemote languageRemote;
-    private AddressRemote addressRemote;
-    private StateRemote stateRemote;
-    private List<SystemUser> systemUserList;
-    private List<Honorific> honorificList;
-    private List<LocationType> locationTypeList;
-    private List<Country> countryList;
-    private List<LanguageInternationalization> languageInternationalizationList;
-    private List<Ethnicity> ethnicityList;
+    private Phone[] phone;               
+//    private LanguageRemote languageRemote;
+    private AddressRemote addressRemote;    
+    private List<SystemUser> systemUserList;    
+    private Map<Integer, String> countryList;
+//    private List<Language> languageList;
+    private Map<Integer, String> ethnicityList;
+    private Map<String, String> genderList;
+    private Map<Boolean, String> disabilitiesList;
     private String captchaValue;
     private String retypePassword;
     private String retypeEmail;
@@ -99,7 +86,7 @@ public class SystemUserAction extends GenericAction implements Preparable {
     private String mainPhone;
     private String mobile;    //location
     private Address inAddress;
-    private String country;
+    private Integer country;
 
     public String inputChange() {
         return "change";
@@ -267,31 +254,22 @@ public class SystemUserAction extends GenericAction implements Preparable {
             systemUser.setAuthentication(new Authentication(Constants.ROLE_USER));
 
             //*******PROFILE*******
-            //---personal info
-            if (honorific != null && !honorific.equals("")) {
-
-                Integer honoroficId = new Integer(honorific);
-                Honorific honor = honorificList.get(honoroficId.intValue() - 1);
-
-                profile.setHonorific(honor);
-            }
-
+            
             if (birthDate != null && !birthDate.equals("")) {
                 Date date = this.generateDate(birthDate);
                 profile.setBirthDate(date);
             }
 
             //language and enth
-            if (language != null && !language.equals("")) {
-                Integer languageId = new Integer(language);
-                LanguageInternationalization li = languageInternationalizationList.get(languageId - 1);
-                profile.setLanguage(li);
-            }
+//            if (language != null && !language.equals("")) {
+//                Integer languageId = new Integer(language);
+//                Language li = languageList.get(languageId - 1);
+//                profile.setLanguage(li);
+//            }
 
             if (ethnicity != null && !ethnicity.equals("")) {
-                Integer ethId = new Integer(ethnicity);
-                Ethnicity ethnicityObj = ethnicityList.get(ethId - 1);
-                profile.setEthnicity(ethnicityObj);
+                Integer ethId = new Integer(ethnicity);                
+                profile.setEthnicity(ethId);
             }
 
 
@@ -313,9 +291,6 @@ public class SystemUserAction extends GenericAction implements Preparable {
 
             if (profileId != null) {
 
-                if (inAddress.getState() == null) {
-                    inAddress.setState(stateRemote.get(1L));
-                }
                 inAddress.setProfileId(profile.getId());
                 inAddress.setProfile(profile);
                 addressRemote.add(inAddress);
@@ -505,90 +480,6 @@ public class SystemUserAction extends GenericAction implements Preparable {
     }
 
     /**
-     * Retrieves the value of systemUserRemote variable
-     * 
-     * @return systemUserRemote
-     */
-    public CountryRemote getCountryRemote() {
-        return countryRemote;
-    }
-
-    /**
-     *Sets the value of systemUserRemote variable
-     * @param systemUserRemote
-     */
-    public void setCountryRemote(CountryRemote countryRemote) {
-        this.countryRemote = countryRemote;
-    }
-
-    /**
-     * Retrieves the value of systemUserRemote variable
-     * 
-     * @return systemUserRemote
-     */
-    public EthnicityRemote getEthnicityRemote() {
-        return ethnicityRemote;
-    }
-
-    /**
-     *Sets the value of systemUserRemote variable
-     * @param systemUserRemote
-     */
-    public void setEthnicityRemote(EthnicityRemote ethnicityRemote) {
-        this.ethnicityRemote = ethnicityRemote;
-    }
-
-    /**
-     * Retrieves the value of honorificRemote variable
-     * 
-     * @return honorificRemote
-     */
-    public HonorificRemote getHonorificRemote() {
-        return honorificRemote;
-    }
-
-    /**
-     *Sets the value of honorificRemote variable
-     * @param honorificRemote
-     */
-    public void setHonorificRemote(HonorificRemote honorificRemote) {
-        this.honorificRemote = honorificRemote;
-    }
-
-    /**
-     * Retrieves the value of systemUserRemote variable
-     * 
-     * @return systemUserRemote
-     */
-    public LanguageInternationalizationRemote getLanguageInternationalizationRemote() {
-        return languageInternationalizationRemote;
-    }
-
-    /**
-     *Sets the value of systemUserRemote variable
-     * @param systemUserRemote
-     */
-    public void setLanguageInternationalizationRemote(LanguageInternationalizationRemote languageInternationalizationRemote) {
-        this.languageInternationalizationRemote = languageInternationalizationRemote;
-    }
-
-    /**
-     * Retrieves the value of systemUserRemote variable
-     * @return systemUserRemote
-     */
-    public LocationTypeRemote getLocationTypeRemote() {
-        return locationTypeRemote;
-    }
-
-    /**
-     *Sets the value of systemUserRemote variable
-     * @param systemUserRemote
-     */
-    public void setLocationTypeRemote(LocationTypeRemote locationTypeRemote) {
-        this.locationTypeRemote = locationTypeRemote;
-    }
-
-    /**
      * Retrieves the value of systemUserList variable
      * 
      * @return systemUserList
@@ -657,7 +548,7 @@ public class SystemUserAction extends GenericAction implements Preparable {
      * Retrieves the list of country
      * @return countryList
      */
-    public List<Country> getCountryList() {
+    public Map<Integer,String> getCountryList() {
         return countryList;
     }
 
@@ -665,15 +556,21 @@ public class SystemUserAction extends GenericAction implements Preparable {
      * Sets the list of country
      * @param countryList
      */
-    public void setCountryList(List<Country> countryList) {
-        this.countryList = countryList;
+    public void setCountryList(Map<Integer,String> countryList) {
+        if (this.countryList == null) {
+            if ((countryList == null)||(countryList.isEmpty())) {            
+                
+            } else {
+                this.countryList = countryList;
+            }
+        }
     }
 
     /**
      * Retrieves a list of ethnicity 
      * @return ethnicityList
      */
-    public List<Ethnicity> getEthnicityList() {
+    public Map<Integer, String> getEthnicityList() {
         return ethnicityList;
     }
 
@@ -681,70 +578,25 @@ public class SystemUserAction extends GenericAction implements Preparable {
      * Sets a list of ethnicity 
      * @param ethnicityList
      */
-    public void setEthnicityList(List<Ethnicity> ethnicityList) {
+    public void setEthnicityList(Map<Integer, String> ethnicityList) {
         this.ethnicityList = ethnicityList;
     }
 
-    /**
-     * Retrieves a list of honorific
-     * @return honorificList
-     */
-    public List<Honorific> getHonorificList() {
-        return honorificList;
-    }
-
-    /**
-     * Sets a list of honorific
-     * @param honorificList
-     */
-    public void setHonorificList(List<Honorific> honorificList) {
-        this.honorificList = honorificList;
-    }
-
-    /**
-     * Retrieves a list of language
-     * @return languageInternationalizationList
-     */
-    public List<LanguageInternationalization> getLanguageInternationalizationList() {
-        return languageInternationalizationList;
-    }
-
-    /**
-     * Sets a list of language
-     * @param languageInternationalizationList
-     */
-    public void setLanguageInternationalizationList(List<LanguageInternationalization> languageInternationalizationList) {
-        this.languageInternationalizationList = languageInternationalizationList;
-    }
-
-    /**
-     * Retrieves the list of the type of location
-     * @return locationTypeList
-     */
-    public List<LocationType> getLocationTypeList() {
-        return locationTypeList;
-    }
-
-    /**
-     * Sets the list of the type of location
-     * @param locationTypeList
-     */
-    public void setLocationTypeList(List<LocationType> locationTypeList) {
-        this.locationTypeList = locationTypeList;
-    }
-
-    public void prepare() throws Exception {
-        // retrieves the honorific list
-        honorificList = honorificRemote.getAll();
-        // retrieves the locationType list
-        locationTypeList = locationTypeRemote.getAll();
-        // retrieves the country list
-        countryList = countryRemote.getAll();
-        // retrieves the language internationalization list
-        languageInternationalizationList = languageInternationalizationRemote.getAll();
-        // retrieves the ethnicity list
-        ethnicityList = ethnicityRemote.getAll();
-    }
+//    /**
+//     * Retrieves a list of language
+//     * @return languageInternationalizationList
+//     */
+//    public List<Language> getLanguageList() {
+//        return languageInternationalizationList;
+//    }
+//
+//    /**
+//     * Sets a list of language
+//     * @param languageInternationalizationList
+//     */
+//    public void setLanguageList(List<Language> languageList) {
+//        this.languageList = languageList;
+//    }
 
     public String getPassword() {
         return password;
@@ -803,13 +655,13 @@ public class SystemUserAction extends GenericAction implements Preparable {
         this.language = language;
     }
 
-    public LanguageRemote getLanguageRemote() {
-        return languageRemote;
-    }
-
-    public void setLanguageRemote(LanguageRemote languageRemote) {
-        this.languageRemote = languageRemote;
-    }
+//    public LanguageRemote getLanguageRemote() {
+//        return languageRemote;
+//    }
+//
+//    public void setLanguageRemote(LanguageRemote languageRemote) {
+//        this.languageRemote = languageRemote;
+//    }
 
     public String getMainPhone() {
         return mainPhone;
@@ -835,11 +687,11 @@ public class SystemUserAction extends GenericAction implements Preparable {
         this.inAddress = inAddress;
     }
 
-    public String getCountry() {
+    public Integer getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(Integer country) {
         this.country = country;
     }
 
@@ -865,14 +717,6 @@ public class SystemUserAction extends GenericAction implements Preparable {
 
     public void setPhoneRemote(PhoneRemote phoneRemote) {
         this.phoneRemote = phoneRemote;
-    }
-
-    public StateRemote getStateRemote() {
-        return stateRemote;
-    }
-
-    public void setStateRemote(StateRemote stateRemote) {
-        this.stateRemote = stateRemote;
     }
 
     public Address[] getAddress() {
@@ -925,5 +769,21 @@ public class SystemUserAction extends GenericAction implements Preparable {
         date.setMonth(month);
         date.setYear(year);
         return date;
+    }
+
+    public void setGenderList(Map<String, String> genderList) {
+        this.genderList = genderList;        
+    }
+
+    public Map<Boolean, String> getDisabilitiesList() {        
+        return disabilitiesList;
+     }
+     
+     public void setDisabilitiesList(Map<Boolean, String> disabilitiesList) {
+         this.disabilitiesList = disabilitiesList;
+     }
+
+    public Map<String, String> getGenderList() {
+        return this.genderList;
     }
 }

@@ -17,6 +17,7 @@
 # Date        - Author(Company)                    - Issue# - Summary                       #
 # XX-XXX-XXX -  marcus                             - XXXXXX - Initial Version               #
 # 19-JUN-2009 - Mileine Assato (Instituto Eldorado)- 000010 - Post owner username/role added#
+# 26-JUN-2009 - otofuji (Instituto Eldorado)       - 000010 - General Fixes                 #
 #############################################################################################    
  */
 package br.ufc.ivela.web.action;
@@ -30,6 +31,7 @@ import br.ufc.ivela.ejb.interfaces.HistoryRemote;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.naming.InitialContext;
@@ -238,4 +240,18 @@ public abstract class GenericAction extends ActionSupport {
             }
         }
     }
+    
+    /**
+     * Gets a List to be used in a Radio Boolean Button
+     *  
+     * @return a Map with the proper translations for the current language.
+     */
+    public Map<Boolean, String> getRadioBooleanList() {
+        Map<Boolean, String> radioBooleanList = new LinkedHashMap<Boolean, String>();
+        radioBooleanList.put(Boolean.TRUE, getText("general.true", "true"));
+        radioBooleanList.put(Boolean.FALSE, getText("general.false", "false"));
+        
+        return radioBooleanList;
+    }
+    
 }

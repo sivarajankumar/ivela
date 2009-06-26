@@ -1,7 +1,25 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: QuestionAction.java                                                                 #
+# Document: Action for the Questions                                                        # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - ??????                            - XXXXXX - Initial Version                #
+# 24-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Fixes                  #
+#############################################################################################
+*/
 package br.ufc.ivela.web.action;
 
 import br.ufc.ivela.commons.Constants;
@@ -49,117 +67,7 @@ public class QuestionAction extends GenericAction {
     private int radioTense;
     private String fileConf;
     private String path = Constants.FILE_UPLOAD_PATH;
-
-    /**
-     * Add a new question
-     * @return
-     */
-    public String add() {
-        // performValidates the add
-        //performValidateAdd();
-
-        if (!hasActionErrors()) {
-            Long idQuestion;
-            Long idQuestionText;
-            Question q;
-           
-            //add questionText
-            if (questionText != null) {
-                questionText.setAudio("qqqq");
-                logger.log("text" + questionText.getText());
-                idQuestionText = questionRemote.addQuestionText(questionText,null,"");
-                HashSet hashset = new HashSet();
-                hashset.add(questionRemote.getQuestionText(idQuestionText));
-               question.setQuestionText(hashset);
-            }
-            
-            //add question
-            question.setCreatedBy(getAuthenticatedUser());
-            idQuestion = questionRemote.add(question);
-            q = questionRemote.get(idQuestion);
-            logger.log("q" + q.getType());
-
-            //add question objective
-            if (question.getType() == Constants.QUESTION_OBJECTIVE) {
-                ObjectiveAnswer oa;
-                for (int i = 0; i < answerOption.length; i++) {
-                    oa = new ObjectiveAnswer();
-                    oa.setAnswer(answerOption[i]);
-                    oa.setQuestion(q);
-                    Long idAnswer = objectiveAnswerRemote.add(oa);
-                    if (i == radio) {
-                        ObjectiveQuestion oq = new ObjectiveQuestion();
-                        oq.setCorrectAnswer(objectiveAnswerRemote.get(idAnswer));
-                        oq.setQuestion(q);
-                        objectiveQuestionRemote.add(oq);
-                    }
-
-                }
-            }
-            //add question auditive
-            if (question.getType() == Constants.QUESTION_AUDITIVE) {
-                logger.log("\n\n\n\n\n\n\nquestionauditive");
-                AuditiveQuestion aq = new AuditiveQuestion();
-                aq.setQuestion(q);
-                aq.setConfFile("");
-                Long idQA = auditiveQuestionRemote.add(aq);
-                aq = auditiveQuestionRemote.get(idQA);
-                SentenceAuditiveQuestion saq;
-                for (int i = 0; i < sentence.length; i++) {
-                    java.io.File fileIo = upload[i];
-                    saq = new SentenceAuditiveQuestion();
-                    saq.setSentence(sentence[i]);
-                    saq.setFile(path + uploadFileName[i]);
-                    logger.log("file" + saq.getFile());
-                    saq.setSequence(i);
-                    saq.setQuestion(aq);
-                    auditiveQuestionRemote.addSentence(saq, fileIo);
-                }
-                logger.log("fim");
-            }
-
-
-            return list();
-        }
-        addActionError("Unable to add question");
-        return list();
-    }
-
-    /**
-     * Edit a question
-     * @return
-     */
-    public String edit() {
-        setQuestion(questionRemote.get(question.getId()));
-        if (question.getType() == Constants.QUESTION_OBJECTIVE) {
-            setListObjectiveAnswer(objectiveAnswerRemote.getByQuestion(question.getId()));
-            setObjectiveQuestion(objectiveQuestionRemote.getByQuestion(question.getId()));
-        }
-        return "edit";
-    }
-
-    /**
-     * Update a question
-     * @return
-     */
-    public String update() {
-        // performValidates the update
-        performValidateUpdate();
-
-        if (!hasActionErrors()) {
-            questionRemote.edit(question);
-            if (question.getType() == Constants.QUESTION_OBJECTIVE) {
-                for (int i = 0; i < listObjectiveAnswer.size(); i++) {
-                    objectiveAnswerRemote.edit(listObjectiveAnswer.get(i));
-                }
-                objectiveQuestion.setCorrectAnswer(listObjectiveAnswer.get(radio));
-                objectiveQuestionRemote.edit(objectiveQuestion);
-            }
-            return list();
-        }
-        addActionError("Unable to update a question");
-        return list();
-    }
+  
 
     /**
      * Show the questions
@@ -202,62 +110,6 @@ public class QuestionAction extends GenericAction {
 
 
         return "auditive";
-    }
-
-    /**
-     * Remove a question
-     * @return
-     */
-    public String remove() {
-        //performValidates the remove
-        performValidateRemove();
-        if (!hasActionErrors()) {
-            questionRemote.remove(getQuestion().getId());
-            return list();
-        }
-        addActionError("Unable to remove a question");
-        return list();
-    }
-
-    /**
-     * Sets the variables to be used on the input form
-     * @return
-     */
-    @Override
-    public String input() {
-
-        return INPUT;
-    }
-
-    /**
-     * Perform a validate in to the add method
-     */
-    private void performValidateAdd() {
-        // verifies if the question is null
-        if (question == null) {
-            addActionError(getText("question.input.validation.required"));
-        }
-    }
-
-    /**
-     * Perform a validate in to the remove method
-     */
-    private void performValidateRemove() {
-    }
-
-    /**
-     * Perform a validate in to the update method
-     */
-    private void performValidateUpdate() {
-        // verifies if the category is null
-        if (question == null || !Validators.isPositive(question.getId())) {
-            addActionError(getText("question.edit.validation.requiredId"));
-        } else {
-            // verifies if this id is valid
-            if (questionRemote.get(question.getId()) == null) {
-                addActionError(getText("question.edit.validation.invalidId"));
-            }
-        }
     }
 
     /**
