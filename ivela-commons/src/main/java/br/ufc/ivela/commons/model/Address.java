@@ -1,11 +1,28 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: Address.java                                                                        #
+# Document: Address Model                                                                   # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - leoomoreira (UFC)                 - XXXXXX - Initial Version                #
+# 22-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Initial Fixes          #
+*/
 
 package br.ufc.ivela.commons.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,10 +37,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 
-/**
- *
- * @author leoomoreira
- */
 @Entity
 @Table(name = "address")
 @NamedQueries({@NamedQuery(name = "Address.findById", query = "SELECT a FROM Address a WHERE a.id = :id"), @NamedQuery(name = "Address.findByLocation", query = "SELECT a FROM Address a WHERE a.location = :location"), @NamedQuery(name = "Address.findByNumber", query = "SELECT a FROM Address a WHERE a.number = :number"), @NamedQuery(name = "Address.findByAdditionalInformation", query = "SELECT a FROM Address a WHERE a.additionalInformation = :additionalInformation"), @NamedQuery(name = "Address.findByNeighborhood", query = "SELECT a FROM Address a WHERE a.neighborhood = :neighborhood"), @NamedQuery(name = "Address.findByZipCode", query = "SELECT a FROM Address a WHERE a.zipCode = :zipCode"), @NamedQuery(name = "Address.findByCity", query = "SELECT a FROM Address a WHERE a.city = :city")})
@@ -47,15 +60,14 @@ public class Address implements Serializable {
     private String zipCode;
     @Column(name = "city", nullable = false)
     private String city;
+    @Column(name = "state", nullable = true)
+    private String state;        
+    @Column(name="country", nullable = false)    
+    private Integer country;
+    
     @JoinColumn(name = "address_type", referencedColumnName = "id")
     @ManyToOne
-    private AddressType addressType;
-    @JoinColumn(name = "location_type", referencedColumnName = "id")
-    @ManyToOne
-    private LocationType locationType;
-    @JoinColumn(name = "state", referencedColumnName = "id")
-    @ManyToOne
-    private State state;
+    private AddressType addressType;          
     
     @Column(name="profile")
     private Long profileId;    
@@ -69,7 +81,7 @@ public class Address implements Serializable {
         this.id = id;
     }
 
-    public Address(Long id, String location, String number, String additionalInformation, String neighborhood, String zipCode, String city) {
+    public Address(Long id, String location, String number, String additionalInformation, String neighborhood, String zipCode, String city, Integer country) {
         this.id = id;
         this.location = location;
         this.number = number;
@@ -77,6 +89,7 @@ public class Address implements Serializable {
         this.neighborhood = neighborhood;
         this.zipCode = zipCode;
         this.city = city;
+        this.country = country;        
     }
 
     public Long getId() {
@@ -143,19 +156,11 @@ public class Address implements Serializable {
         this.addressType = addressType;
     }
 
-    public LocationType getLocationType() {
-        return locationType;
-    }
-
-    public void setLocationType(LocationType locationType) {
-        this.locationType = locationType;
-    }
-
-    public State getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(State state) {
+    public void setState(String state) {
         this.state = state;
     }
 
@@ -175,7 +180,13 @@ public class Address implements Serializable {
         this.profileId = profileId;
     }
 
+    public Integer getCountry() {
+        return this.country;
+    }
     
+    public void setCountry(Integer country) {
+        this.country = country;
+    }
     
     @Override
     public int hashCode() {
