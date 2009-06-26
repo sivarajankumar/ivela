@@ -1,12 +1,31 @@
-<%-- 
-    Document   : show grade
-    Created on : Sep 15, 2008, 2:07:13 PM
-    Author     : marcus
+<%--    
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: home.jsp                                                                            #
+# Document: Home Page for Administrators                                                    # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 15-SEP-2008 - marcus                            - XXXXXX - Initial Version                #
+# 17-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%--@ taglib prefix="cal" uri="/jscalendar" --%>
+
+<head>
+    <script type="text/javascript" src="../js/admin/tools.js"></script>
+</head>
 
 <s:actionerror />
 

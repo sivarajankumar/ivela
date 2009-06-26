@@ -1,30 +1,33 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: AnswerStudentExerciseBeanTest.java                                                  #
+# Document: Answer Student Exercise Unit Testl                                              # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - jefferson (UFC)                   - XXXXXX - Initial Version                #
+# 22-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Initial Fixes          #
+*/
 package br.ufc.ivela.ejb.impl;
 
-import br.ufc.ivela.commons.dao.DaoFactory;
-import br.ufc.ivela.commons.dao.GenericDao;
-import br.ufc.ivela.commons.model.AnswerStudentExercise;
-import br.ufc.ivela.commons.model.AnswerSubjectiveQuestionStudentExercise;
-import br.ufc.ivela.commons.model.State;
-import br.ufc.ivela.commons.model.StudentExercise;
-import br.ufc.ivela.commons.model.Transcript;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
-/**
- *
- * @author jefferson
- */
+import br.ufc.ivela.commons.dao.DaoFactory;
+import br.ufc.ivela.commons.dao.GenericDao;
+import br.ufc.ivela.commons.model.Transcript;
+
 public class AnswerStudentExerciseBeanTest {
 
     private AnswerStudentExerciseBean aseb;
@@ -106,7 +109,7 @@ public class AnswerStudentExerciseBeanTest {
 
         @Test
     public void testAddStudentExercise() {
-           StateBean sb = new StateBean();
+//           StateBean sb = new StateBean();
            
             
             // PhoneBean pb = new PhoneBean();

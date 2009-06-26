@@ -75,7 +75,7 @@
     </div>
     
     <div id="col-2-repository">
-        <h2>Files</h2>
+        <h2><s:text name="repository.list.files"/></h2>
         <div id="box-files">
             <!--div class="action-repository">
                     <a class="add-file" href="#" onclick="addFile();">Add File</a>

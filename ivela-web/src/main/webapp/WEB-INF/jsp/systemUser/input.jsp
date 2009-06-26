@@ -1,7 +1,25 @@
 <%-- 
-    Document   : input System User
-    Created on : Jun 5, 2008, 9:14:56 AM
-    Author     : leoomoreira
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: input.jsp                                                                           #
+# Document: Input                                                                           #
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 05-JUN-2008 - Leo Moreira                       - XXXXXX - Initial Version                #
+# 08-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000007 - IE7 compatibility              #
+# 22-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Issues: i18n           #
+#############################################################################################
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,17 +32,11 @@
     <script type="text/javascript" src="js/prototype/prototype.js"></script>
     <script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>
     <script type="text/javascript" src="js/scriptaculous/effects.js"></script>
-    <script type="text/javascript" src="js/systemUser/base.js"></script>
-    <script type="text/javascript" src="js/systemUser/events.js"></script>
-    <script type="text/javascript" src="js/password/passwordmeter.js"></script>
+    <script type="text/javascript" src="js/systemUser/base.js"></script>    
+    <script type="text/javascript" src="js/password/passwordmeter.js"></script>       
     <script type="text/javascript">
-        <!--
         var labelShowFields = "<s:text name="systemUser.input.showFields"/>";
         var labelHideFields = "<s:text name="systemUser.input.hideFields"/>";
-        -->
-    </script>
-    <script type="text/javascript">
-
         var r={'special':/[\W]/g}
         function valid(o,w)
         {
@@ -58,12 +70,12 @@
         <fieldset>
             <legend><s:text name="systemUser.input.loginPassTitle"/></legend>
             <p>
-                <label class="required-field">Login:</label>
+                <label class="required-field"><s:text name="systemUser.input.login" />:</label>
                 <s:textfield name="systemUser.username" cssClass="field-full-name" theme="simple" onkeyup="valid(this,'special')" onblur="valid(this,'special')" />
             </p>
             <p>
                 <label class="required-field"><s:text name="systemUser.input.password"/>:</label>
-                <s:password name="systemUser.password" cssClass="field-full-name" theme="simple" onkeyup="testPassword(this.value)" /> <span><img id="img_password" /> <span id="verdict_msg"></span></span>
+                <s:password name="systemUser.password" cssClass="field-full-name" theme="simple" onkeyup="testPassword(this.value)" /> <span><img id="img_password" src="images/progress-bar/password/empty.jpg" /> <span id="verdict_msg"></span></span>
                 <input id="score_password" name="scorePassword" type="hidden" value="0" />
                 
             </p>
@@ -83,11 +95,7 @@
         
         <div id="hidden" style="display:none;">            
             <fieldset>
-                <legend><s:text name="systemUser.input.personalInfo"/></legend>
-                <p>
-                    <label><s:text name="systemUser.input.honorific"/>:</label>
-                    <s:select list="honorificList" listKey="id" listValue="title" name="honorific" id="honorific"></s:select>
-                </p>
+                <legend><s:text name="systemUser.input.personalInfo"/></legend>                
                 <p>
                     <label><s:text name="systemUser.input.name"/>:</label>
                     <s:textfield name="profile.firstName" cssClass="field-full-name" theme="simple"/>
@@ -114,8 +122,7 @@
             <fieldset>
                 <legend><s:text name="systemUser.input.addressTitle"/></legend>
                 <p>
-                    <label><s:text name="systemUser.input.addSt"/>:</label>
-                    <s:select list="locationTypeList" listKey="id" listValue="description" name="inAddress.locationType.id" id="locationType"></s:select>
+                    <label><s:text name="systemUser.input.addSt"/>:</label>                    
                     <input name="inAddress.location" id="location" type="text" />
                 </p>
                 <p>
@@ -128,11 +135,11 @@
                 </p>
                 <p>     
                     <label><s:text name="systemUser.input.country"/>:</label>
-                    <s:select list="countryList" listKey="id"  onchange="selectStates(this.value)" listValue="name" name="country" id="country"></s:select>                  
+                    <s:select list="countryList" onchange="selectStates(this.value)" name="inAddress.country" id="country"></s:select>                  
                 </p>
                 <p>
                     <label><s:text name="systemUser.input.state"/>:</label>
-                    <select id="stateId" name="inAddress.state.id" ></select>
+                    <select id="stateId" name="inAddress.state" ></select>
                 </p>
                 <p>
                     <label><s:text name="systemUser.input.city"/>:</label>
@@ -154,14 +161,10 @@
             </fieldset>
             
             <fieldset>
-                <legend><s:text name="systemUser.input.otherTitle"/></legend>
-                <p>
-                    <label><s:text name="systemUser.input.language"/>:</label>
-                    <s:select list="languageInternationalizationList" listKey="id" listValue="language.name" name="language" id="language"></s:select>
-                </p>
-                <p>
+                <legend><s:text name="systemUser.input.otherTitle"/></legend>                
+                <p>                    
                     <label><s:text name="systemUser.input.ethnicity"/>:</label>
-                    <s:select list="ethnicityList" listKey="id" listValue="name" name="ethnicity" id="ethnicity"></s:select>
+                    <s:select list="ethnicityList" name="ethnicity" id="ethnicity"></s:select>
                 </p>
             </fieldset>
             

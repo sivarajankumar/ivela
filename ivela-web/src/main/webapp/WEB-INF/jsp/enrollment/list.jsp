@@ -12,7 +12,7 @@
 <div id="breadcrumb">
     <p><s:text name="breadcrumb.youAreHere"/></p>
     <ul>
-        <li><a href="index.action"><s:text name="home.name"/></a></li>
+        <li><a href="index.jsp"><s:text name="home.name"/></a></li>
         <li><a href="course!list.action"><s:text name="front.courses.title"/></a></li>
         <li class="current"><s:text name="front.grade"/></li>
     </ul>
@@ -33,9 +33,9 @@
                         <s:param name="grade.id" value="id"/>
                     </s:url>
                     
-                    <td align="right">
+                    <td align="right"><table><tr><td>
                         <s:a href="%{enrollUrl}" cssClass="title-enrollment" ><s:text name="enrollment.add.action"/></s:a>
-                    </td>
+                    </td></tr></table></td>
                 </tr>
                 <tr>
                     <td colspan="2">

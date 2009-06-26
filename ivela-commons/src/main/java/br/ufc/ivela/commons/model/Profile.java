@@ -1,7 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: Profile.java                                                                        #
+# Document: User Profile Model                                                              # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - leoomoreira (UFC)                 - XXXXXX - Initial Version                #
+# 22-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Initial Fixes          #
+*/
 
 package br.ufc.ivela.commons.model;
 
@@ -25,10 +41,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author leoomoreira
- */
 @Entity
 @Table(name = "profile")
 @NamedQueries({@NamedQuery(name = "Profile.findById", query = "SELECT p FROM Profile p WHERE p.id = :id"), @NamedQuery(name = "Profile.findByFirstName", query = "SELECT p FROM Profile p WHERE p.firstName = :firstName"), @NamedQuery(name = "Profile.findByInitials", query = "SELECT p FROM Profile p WHERE p.initials = :initials"), @NamedQuery(name = "Profile.findByLastName", query = "SELECT p FROM Profile p WHERE p.lastName = :lastName"), @NamedQuery(name = "Profile.findByBirthDate", query = "SELECT p FROM Profile p WHERE p.birthDate = :birthDate"), @NamedQuery(name = "Profile.findBySocialNumber", query = "SELECT p FROM Profile p WHERE p.socialNumber = :socialNumber"), @NamedQuery(name = "Profile.findByPhoto", query = "SELECT p FROM Profile p WHERE p.photo = :photo"), @NamedQuery(name = "Profile.findByGender", query = "SELECT p FROM Profile p WHERE p.gender = :gender"), @NamedQuery(name = "Profile.findByDisabilities", query = "SELECT p FROM Profile p WHERE p.disabilities = :disabilities")})
@@ -56,15 +68,11 @@ public class Profile implements Serializable {
     private Integer gender;
     @Column(name = "disabilities")
     private Boolean disabilities;
-    @JoinColumn(name = "ethnicity", referencedColumnName = "id")
-    @ManyToOne
-    private Ethnicity ethnicity;
-    @JoinColumn(name = "honorific", referencedColumnName = "id")
-    @ManyToOne
-    private Honorific honorific;
+    @Column(name = "ethnicity")    
+    private Integer ethnicity;    
     @JoinColumn(name = "language", referencedColumnName = "id")
     @ManyToOne
-    private LanguageInternationalization language;
+    private Language language;
     @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="id", targetEntity=Address.class)
     private Set<Address> addresses;
     @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="id", targetEntity=Phone.class)
@@ -155,27 +163,19 @@ public class Profile implements Serializable {
         this.disabilities = disabilities;
     }
 
-    public Ethnicity getEthnicity() {
+    public Integer getEthnicity() {
         return ethnicity;
     }
 
-    public void setEthnicity(Ethnicity ethnicity) {
+    public void setEthnicity(Integer ethnicity) {
         this.ethnicity = ethnicity;
     }
 
-    public Honorific getHonorific() {
-        return honorific;
-    }
-
-    public void setHonorific(Honorific honorific) {
-        this.honorific = honorific;
-    }
-
-    public LanguageInternationalization getLanguage() {
+    public Language getLanguage() {
         return language;
     }
 
-    public void setLanguage(LanguageInternationalization language) {
+    public void setLanguage(Language language) {
         this.language = language;
     }
 

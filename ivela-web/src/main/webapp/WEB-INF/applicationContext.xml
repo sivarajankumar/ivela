@@ -104,22 +104,7 @@
         
         <jee:jndi-lookup resource-ref="false" jndi-name="AnswerStudentExamBean#br.ufc.ivela.ejb.interfaces.AnswerStudentExamRemote"
         id="answerStudentExamRemote" expected-type="br.ufc.ivela.ejb.interfaces.AnswerStudentExamRemote"/>
-
-        <jee:jndi-lookup resource-ref="false" jndi-name="HonorificBean#br.ufc.ivela.ejb.interfaces.HonorificRemote"
-        id="honorificRemote" expected-type="br.ufc.ivela.ejb.interfaces.HonorificRemote"/>
-        
-        <jee:jndi-lookup resource-ref="false" jndi-name="LocationTypeBean#br.ufc.ivela.ejb.interfaces.LocationTypeRemote"
-        id="locationTypeRemote" expected-type="br.ufc.ivela.ejb.interfaces.LocationTypeRemote"/>
-        
-        <jee:jndi-lookup resource-ref="false" jndi-name="CountryBean#br.ufc.ivela.ejb.interfaces.CountryRemote"
-        id="countryRemote" expected-type="br.ufc.ivela.ejb.interfaces.CountryRemote"/>
-        
-        <jee:jndi-lookup resource-ref="false" jndi-name="LanguageInternationalizationBean#br.ufc.ivela.ejb.interfaces.LanguageInternationalizationRemote"
-        id="languageInternationalizationRemote" expected-type="br.ufc.ivela.ejb.interfaces.LanguageInternationalizationRemote"/>
-        
-        <jee:jndi-lookup resource-ref="false" jndi-name="EthnicityBean#br.ufc.ivela.ejb.interfaces.EthnicityRemote"
-        id="ethnicityRemote" expected-type="br.ufc.ivela.ejb.interfaces.EthnicityRemote"/>
-        
+                                               
         <jee:jndi-lookup resource-ref="false" jndi-name="AddressBean#br.ufc.ivela.ejb.interfaces.AddressRemote"
         id="addressRemote" expected-type="br.ufc.ivela.ejb.interfaces.AddressRemote"/>
         
@@ -151,10 +136,7 @@
         id="finishedExerciseRemote" expected-type="br.ufc.ivela.ejb.interfaces.FinishedExerciseRemote"/>
 
         <jee:jndi-lookup resource-ref="false" jndi-name="FaqBean#br.ufc.ivela.ejb.interfaces.FaqRemote"
-        id="faqRemote" expected-type="br.ufc.ivela.ejb.interfaces.FaqRemote"/>
-        
-        <jee:jndi-lookup resource-ref="false" jndi-name="StateBean#br.ufc.ivela.ejb.interfaces.StateRemote"
-        id="stateRemote" expected-type="br.ufc.ivela.ejb.interfaces.StateRemote"/>
+        id="faqRemote" expected-type="br.ufc.ivela.ejb.interfaces.FaqRemote"/>        
 
         <jee:jndi-lookup resource-ref="false" jndi-name="WsEnabledBean#br.ufc.ivela.ejb.interfaces.WsEnabledRemote"
         id="wsEnabledRemote" expected-type="br.ufc.ivela.ejb.interfaces.WsEnabledRemote"/>

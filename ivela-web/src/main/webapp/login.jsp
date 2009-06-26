@@ -38,8 +38,8 @@
     <div class="tools-login">
         
         <a href="faq!list.action" title="FAQ">FAQ</a>
-        <a href="aboutUs!list.action" title="About us"><s:text name="login.about.us"/></a>
-        <a href="systemUser!input.action" title="Join now!"><s:text name="login.join.now"/></a>
+        <a href="aboutUs!list.action" title=<s:text name="login.about.us"/>><s:text name="login.about.us"/></a>
+        <a href="systemUser!input.action" title=<s:text name="login.join.now"/>><s:text name="login.join.now"/></a>
     </div>
     <br class="clear" />
 </div>

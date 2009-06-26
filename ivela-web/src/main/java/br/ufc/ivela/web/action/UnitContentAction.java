@@ -1,7 +1,24 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: UnitContentAction.java                                                              #
+# Document: Unit Content Action                                                             # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - Emanuelle                         - XXXXXX - Initial Version                #
+# 22-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Fixes                  #
+#############################################################################################
+*/
 package br.ufc.ivela.web.action;
 
 import br.ufc.ivela.commons.model.Course;
@@ -27,10 +44,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Emanuelle
- */
 public class UnitContentAction extends GenericAction {
 
     private DisciplineRemote disciplineRemote;
@@ -100,26 +113,6 @@ public class UnitContentAction extends GenericAction {
         return "list";
     }
 
-    /**
-     * Sets the variables to be used on the input UnitContent
-     * @return
-     */
-    @Override
-    public String input() {
-        return "input";
-    }
-
-    /**
-     * Add a new unitContent to a discipline
-     * @return a list of unit
-     */
-    public String add() {
-        grade = gradeRemote.get(grade.getId());
-        unit = unitRemote.get(unit.getId());
-        unitContent.setUnit(unit);
-        unitContentRemote.add(unitContent);
-        return listByUnit();
-    }
 
     /**
      * Retrieves a unitContent of one json structure
@@ -148,15 +141,6 @@ public class UnitContentAction extends GenericAction {
         user.setLastUnitContentId(unitContent.getId());
         systemUserRemote.update(user);
         return "json";
-    }
-
-    /**
-     * Edit a unitContent
-     * @return edit
-     */
-    public String edit() {
-        setUnitContent(unitContentRemote.get(unitContent.getId()));
-        return "edit";
     }
 
     /**
