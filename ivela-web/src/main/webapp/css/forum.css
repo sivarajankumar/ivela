@@ -30,7 +30,7 @@ body {background-color: transparent; background: url(../images/bg_standard2.jpg)
 #forum th{font:13px Arial, Helvetica, sans-serif; color:#ff7202; font-weight:bold; background-color:#ffe79c; text-align:left; font-weight:bold; border: 1px solid #fff; padding:10px 10px 10px;}
 #forum td{font:11px Arial, Helvetica, sans-serif; color:#000; background-color:#f2f2f2; text-align:left; border: 1px solid #fff; padding: 10px;}
 #forum td.topics-views{text-align:center;}
-.quote-answer{border:#ccc 1px dashed; background:#FFFFFF; margin: 5px 5px 10px 5px; padding:10px; font:11px Arial, Helvetica, sans-serif;}
+.quote-answer{display: block; border:#ccc 1px dashed; background:#FFFFFF; margin: 5px 5px 10px 5px; padding:10px; font:11px Arial, Helvetica, sans-serif;}
 .head-quote{color:#033d7d; font-weight:bold;}
 table a{color:#033d7d; font-weight:bold;}
 table .name-user{margin-left:3px;}
