@@ -190,8 +190,8 @@
     
     function replaceQuotes( quotedText )
     {
-       var out = replaceAll( quotedText, '[quote]', '<div class=\"quote-answer\">' );
-       out = replaceAll( out, '[/quote]', '</div>' );
+       var out = replaceAll( quotedText, '[quote]', '<span class=\"quote-answer\">' );
+       out = replaceAll( out, '[/quote]', '</span>' );
 
 //       alert('quotedText=' + quotedText + "\n" + "out=" + out);
 
