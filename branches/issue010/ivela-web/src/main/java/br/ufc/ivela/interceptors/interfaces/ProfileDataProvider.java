@@ -77,4 +77,18 @@ public interface ProfileDataProvider {
      * Retrieves the Disabilities List
      */
     public Map<Boolean, String> getDisabilitiesList();
+    
+    /**
+     * Sets the Date format.
+     * 
+     * @param dateFormat a String in the format %d/%m/%Y
+     */
+    public void setDateFormat(String dateFormat);
+    
+    /**
+     * Returns the Date Format being used.
+     * 
+     * @return a String in the format %d/%m/%Y
+     */
+    public String getDateFormat();
 }

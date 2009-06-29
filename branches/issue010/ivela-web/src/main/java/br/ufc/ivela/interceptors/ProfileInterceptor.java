@@ -81,6 +81,7 @@ public class ProfileInterceptor extends AbstractInterceptor {
             provider.setGenderList(getGenderList(locale, action));   
             provider.setDisabilitiesList(getDisabilitiesList(locale, action));
             provider.setCountryList(getCountriesList(locale, action));
+            provider.setDateFormat(action.getText("general.dateformat", "%m/%d/%Y"));
         }
 
         return invocation.invoke();

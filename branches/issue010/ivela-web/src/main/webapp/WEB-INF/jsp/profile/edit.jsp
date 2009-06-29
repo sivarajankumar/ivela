@@ -86,7 +86,7 @@
             </p>            
             <p>
                 <label><s:text name="profile.birthDate" />:</label>
-                <cal:jscalendar name="profile.birthDate"  format="%m/%d/%Y" showstime="true" theme="simple"/>
+                <cal:jscalendar name="profile.birthDate"  format="%{dateFormat}" showstime="true" theme="simple"/>
             </p>
 
         </fieldset>

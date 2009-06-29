@@ -145,32 +145,54 @@
     
     <package name="profiles" extends="default">
         <interceptors>
-          <interceptor name="profile" class="br.ufc.ivela.interceptors.ProfileInterceptor"/>
-          <interceptor-stack name="profileStack">                        
-            <interceptor-ref name="defaultStack" />
-            <interceptor-ref name="profile"/>
-        </interceptor-stack>                          
+        <interceptor name="profile" class="br.ufc.ivela.interceptors.ProfileInterceptor"/>
+          <interceptor-stack name="profileStack">                                                                  
+                <interceptor-ref name="exception"/>
+                <interceptor-ref name="alias"/>
+                <interceptor-ref name="servletConfig"/>
+                <interceptor-ref name="prepare"/>
+                <interceptor-ref name="i18n"/>
+                <interceptor-ref name="profile"/>                
+                <interceptor-ref name="chain"/>
+                <interceptor-ref name="debugging"/>
+                <interceptor-ref name="profiling"/>
+                <interceptor-ref name="scopedModelDriven"/>
+                <interceptor-ref name="modelDriven"/>
+                <interceptor-ref name="fileUpload"/>
+                <interceptor-ref name="checkbox"/>
+                <interceptor-ref name="staticParams"/>
+                <interceptor-ref name="params">
+                  <param name="excludeParams">dojo\..*</param>
+                </interceptor-ref>                
+                <interceptor-ref name="conversionError"/>
+                <interceptor-ref name="validation">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>
+                <interceptor-ref name="workflow">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>                       
+        </interceptor-stack>                             
         </interceptors>
-        
-        <default-interceptor-ref name="profileStack" />
-                              
-        <action name="systemUser" class="systemUserAction">                        
+                                     
+        <action name="systemUser" class="systemUserAction">  
+            <interceptor-ref name="profileStack" />                      
             <result name="change">WEB-INF/jsp/systemUser/change.jsp</result>
             <result name="input">WEB-INF/jsp/systemUser/input.jsp</result>            
             <result name="edit">WEB-INF/jsp/systemUser/edit.jsp</result>
             <result name="json" type="stream">  
                 <param name="contentType">application/json</param>    
                 <param name="inputName">inputStream</param>  
-            </result>             
+            </result>                                        
         </action>
         
-        <action name="profile" class="profileAction">                                  
+        <action name="profile" class="profileAction"> 
+            <interceptor-ref name="profileStack" />                                                       
             <result name="input">WEB-INF/jsp/profile/input.jsp</result>            
             <result name="edit">WEB-INF/jsp/profile/edit.jsp</result>
             <result name="json" type="stream">  
                 <param name="contentType">application/json</param>    
                 <param name="inputName">inputStream</param>  
-            </result>             
+            </result>                        
         </action> 
         
     </package>
