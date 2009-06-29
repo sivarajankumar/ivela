@@ -74,7 +74,8 @@ public class ProfileAction extends GenericAction implements ProfileDataProvider 
     private String path = Constants.FILE_UPLOAD_PATH + "profiles/";
     private XStream xStream = new XStream(new JettisonMappedXmlDriver());
     private InputStream inputStream;
-
+    private String dateFormat;
+    
     public void prepare() throws Exception {        
         // retrieves the country list
         
@@ -512,5 +513,14 @@ public class ProfileAction extends GenericAction implements ProfileDataProvider 
     
     public void setDisabilitiesList(Map<Boolean, String> disabilitiesList) {
         this.disabilitiesList = disabilitiesList;
+    }
+
+    public String getDateFormat() {
+       return this.dateFormat; 
+    }
+    
+    public void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
+        
     }
 }
