@@ -60,7 +60,7 @@ function init(course) {
                  });                  
       
         var st = new ST(canvas, {
-            orientation: 'top',
+            orientation: 'left',
             //set duration for the animation
             duration: 400,
             //set animation transition type
