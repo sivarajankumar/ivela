@@ -18,6 +18,7 @@
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 15-JUL-2008 - Nelson                            - XXXXXX - Initial Version                #
 # 08-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000007 - IE7 compatibility              #
+# 30-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000010 - JS no IE/FF opening repository #
 ############################################################################################# 
 --%>
 
@@ -418,7 +419,7 @@ a:active{outline: none;}
                 
                 <td>
                     <div id="repositorioOpened" style="display:block;height:40px;min-height:35px">
-                    <li ><a id="pnlRepositorio" href="#" id="btn-goto-avaliacao" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024" ><s:text name="discipline.show.biblioteca"/></a></li>
+                    <li ><a id="pnlRepositorio" href="repository!show.action?courseId=<s:property value="discipline.course.id" />" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024" ><s:text name="discipline.show.biblioteca"/></a></li>
                     </div>
                 </td>
                 
