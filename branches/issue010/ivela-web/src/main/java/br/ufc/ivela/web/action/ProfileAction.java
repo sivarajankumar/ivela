@@ -76,11 +76,6 @@ public class ProfileAction extends GenericAction implements ProfileDataProvider 
     private InputStream inputStream;
     private String dateFormat;
     
-    public void prepare() throws Exception {        
-        // retrieves the country list
-        
-    }
-    
     /**
      * Add a new profile
      * @return a list of profiles
@@ -185,6 +180,14 @@ public class ProfileAction extends GenericAction implements ProfileDataProvider 
                     addActionError(getText("profile.upload.error"));
                     profile.setPhoto(oldFromSession);
                     resul = false;
+                } else {                    
+                    try {                         
+                        if (!oldFromSession.equals(profile.getPhoto())) {
+                            java.io.File oldFile = new File(oldFromSession);
+                            oldFile.delete();
+                        }
+                    } catch (Exception e) {
+                    }
                 }
             }else{
                 addActionError(getText("profile.upload.invalidType"));
@@ -228,7 +231,7 @@ public class ProfileAction extends GenericAction implements ProfileDataProvider 
         }
         
         String json = xStream.toXML(stateKeyValueList);
-        logger.log(json);
+        //logger.log(json);
         setInputStream(new ByteArrayInputStream(json.getBytes()));
         return "json";
     }
@@ -522,5 +525,6 @@ public class ProfileAction extends GenericAction implements ProfileDataProvider 
     public void setDateFormat(String dateFormat) {
         this.dateFormat = dateFormat;
         
-    }
+    }        
+    
 }
