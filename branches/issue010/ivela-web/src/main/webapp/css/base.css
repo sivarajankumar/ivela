@@ -101,7 +101,7 @@ a:hover{color:#ff6600;}
 .btn-save{background:url(../images/icon/icon-save.gif) no-repeat left;}
 .btn-cancel{background:url(../images/icon/icon-cancel.gif) no-repeat left;}
 .btn-back{background:url(../images/arrow-left.gif) no-repeat left;}
-#footer{width:100%;height:32px;background:url(../images/bg-footer.jpg) #696969 repeat-x top left;}
+#footer{clear: both; position: relative; z-index: 10; height: 32px; margin-top: -32px; width:100%; background: url(../images/bg-footer.jpg) #696969 repeat-x top left;}
 #footer #content-footer{margin:0 auto;width:960px;height:auto;padding-top:8px;}
 #footer #content-footer .logo{float:right;}
 #footer #content-footer ul{list-style-type:none;float:left;margin:0;}
