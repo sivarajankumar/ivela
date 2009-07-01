@@ -64,7 +64,7 @@
                 },
                 direction : 'vertical'
             });
-            // Open first one
+            //Open first one
             <s:iterator value="disciplineUnitList" status="stat">
                     if (unitId == '<s:property value="id" />') {
                         bottomAccordion.activate($$('#vertical_container_course .accordion_toggle_course')[<s:property value="%{#stat.index}" />]);
@@ -137,7 +137,7 @@
                             _width = jsonUnitContent.unitContent.width;
                         if (jsonUnitContent.unitContent.height != null && jsonUnitContent.unitContent.height != '')
                             _height = jsonUnitContent.unitContent.height;
-                        html += '<iframe id="html" scrolling="no" frameborder="0"  width="' + _width + '" height="' + _height + '" src="RenderDynamicHtml?unitContent.id=' + unitContentId + '&gradeId=' + gradeId + '"></iframe> <br class="clear"/>';
+                        html += '<iframe id="html" name="UnitContentFrame" scrolling="no" frameborder="0"  width="' + _width + '" height="' + _height + '" src="RenderDynamicHtml?unitContent.id=' + unitContentId + '&gradeId=' + gradeId + '"></iframe> <br class="clear"/>';
 
 
                     } else {
@@ -152,11 +152,12 @@
                             _width = jsonUnitContent.unitContent.width;
                         if (jsonUnitContent.unitContent.height != null && jsonUnitContent.unitContent.height != '')
                             _height = jsonUnitContent.unitContent.height;
-                        html += '<iframe id="html" scrolling="no" frameborder="0" width="' + _width + '" height="' + _height + '" src="RenderServlet?file=' + courseId + '/' + disciplineId + '/' + unitId + "/" + unitContentId + '/index.html' + '"></iframe> <br class="clear"/>';
+                        html += '<iframe id="html" name="UnitContentFrame" scrolling="no" frameborder="0" width="' + _width + '" height="' + _height + '" src="RenderServlet?file=' + courseId + '/' + disciplineId + '/' + unitId + "/" + unitContentId + '/index.html' + '"></iframe> <br class="clear"/>';
                     }
                     $('unitContent').innerHTML = html;
                    // $('pnlChat').href = 'IRCIvelaClientServlet?course.id=' + courseId +'&discipline.id='+disciplineId;
 
+                    addUnitContentListener();
                 }
 
                 function showUnitContentJson(unitContentId, gradeId, courseId, unitName, disciplineName) {

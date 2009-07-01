@@ -20,3 +20,23 @@ function classCss(){
     }
     return css;
 }
+
+function addUnitContentListener() {    
+    
+    var iFrame = window.frames['UnitContentFrame'];    
+    if (iFrame.attachEvent) {                
+        iFrame.attachEvent('DOMNodeInserted', nodeInserted);  
+    } else {
+        iFrame.addEventListener("DOMNodeInserted", nodeInserted, false);    
+    }       
+}
+
+
+function nodeInserted(e) {    
+    if (!e) e = window.event;              
+    // Content Lesson is a unit-specific class.... checking by length only for now then 
+    if ((e.target.innerHTML != undefined) && (e.target.innerHTML.length > 300)) {        
+        var scrollx = (document.all)?document.body.scrollLeft:window.pageXOffset;        
+        window.scrollTo(scrollx, 0); 
+    }
+}
