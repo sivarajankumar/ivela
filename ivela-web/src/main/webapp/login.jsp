@@ -32,7 +32,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <link href="css/login-index.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/prototype/prototype.js"></script>
-<script type="text/javascript" src="js/util/deployJava.js"></script>
+<script type="text/javascript" src="http://java.com/js/deployJava.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
  
 <c:if test="${param.success == true}">
