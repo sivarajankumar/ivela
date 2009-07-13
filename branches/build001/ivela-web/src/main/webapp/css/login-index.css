@@ -13,19 +13,21 @@ html, body {height: 100%; background: url(../images/bg_standard_small.jpg) #fff 
 .language img:hover {border-color:#ff9c00;}
 
 
-
 .form-login-index .box-user-index {height: 40px; margin-left: 54px;}
 .form-login-index .box-user-index label, .form-login-index .box-pass-index label {font-weight: bold; font-size: 15px; color:#033d7d;}
 .form-login-index .box-user-index .field-user-index, .form-login-index .box-pass-index .field-pass-index  { background:url(../images/login/bg-field-user-index.gif) no-repeat top left; width: 185px; height: 22px; padding: 8px 10px 3px 5px; border:none;}
 .form-login-index .box-pass-index {width: 300px; margin: 0 0 0 33px; height: auto;}
 
-.form-login-index .box-pass-index .buton-login-index {position: absolute; top: 92px; left: 280px; border:0;}
+.form-login-index .box-pass-index .buton-login-index {position: relative; left: -10px;/*position: absolute; top: 92px; left: 280px; border:0;*/ align: bottom}
 .form-login-index .box-pass-index .check {width: 220px; height: 20px; margin: 8px 0 0 90px; font: 11px Arial, Helvetica, sans-serif; color:#000}
 
-.form-login-index .box-pass-index .forgot {display: block; margin-top: 15px; margin-left:8px; font: 12px Arial, Helvetica, sans-serif; color:#033d7d;}
+.form-login-index .box-pass-index .forgot {display: block;  font: 10px Arial, Helvetica, sans-serif; color:#033d7d;}
 .form-login-index .box-pass-index .forgot:hover {color:#ff9c00;}
 
-.error {margin-top: 20px; text-align: center; color:#FF0000; font: bold 12px Arial, Helvetica, sans-serif;}
+.form-login-index table {position:relative; left:40px; top:20px;}
+.form-login-index table .forgot {width:auto;}
+
+.error {position:relative; top:10px;text-align: center; color:#FF0000; font: bold 12px Arial, Helvetica, sans-serif;}
 
 .sucess {padding-left:210px; color:#FF7202; padding-bottom: 5px; font: bold 14px Arial, Helvetica, sans-serif;}
 
@@ -33,6 +35,8 @@ html, body {height: 100%; background: url(../images/bg_standard_small.jpg) #fff 
 
 .tools-login {
     margin-left:150px;
+    position: relative;
+    left: -45px;
     width: 50px; 
     height: 50px; 
     float: right; 
@@ -40,7 +44,6 @@ html, body {height: 100%; background: url(../images/bg_standard_small.jpg) #fff 
     font: bold 11px Arial, Helvetica, sans-serif; }
 .tools-login a {
     display: block;
-    float: right; 
     width:80px; 
     text-align:justify; 
     height: 26px; 

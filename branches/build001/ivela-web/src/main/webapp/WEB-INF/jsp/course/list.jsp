@@ -14,10 +14,11 @@
 #                                                                                           #
 #############################################################################################
 # File: list.jsp                                                                            #
-# Document: List Course                                                             #
+# Document: List Course                                                                     #
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 26-JUN-2008 - Maristella Myrian                 - XXXXXX - Initial Version                #
 # 01-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000007 - IE7 compatibility              #
+# 30-JUN-2009 - Mileine Assato(Instituto Eldorado)- 000010 - Courses available color fixed  # 
 #############################################################################################
 --%>
 
@@ -60,7 +61,7 @@
         </s:iterator>
     </table>
     
-    <p class="page-courses"><span class="courses-listed"><s:property value="%{courseList.size()}" />&nbsp;<s:text name="front.courses" /> </span><s:text name="front.of" /> <s:property value="count" /></p>
+    <p class="page-courses"><span class="courses-listed"><s:property value="%{courseList.size()}" />&nbsp;<s:text name="front.courses" /> <s:text name="front.of" /> <s:property value="count" /></span></p>
     
     <jsp:include page="paginator.jsp"/>            
     

@@ -74,11 +74,7 @@ public class ProfileAction extends GenericAction implements ProfileDataProvider 
     private String path = Constants.FILE_UPLOAD_PATH + "profiles/";
     private XStream xStream = new XStream(new JettisonMappedXmlDriver());
     private InputStream inputStream;
-
-    public void prepare() throws Exception {        
-        // retrieves the country list
-        
-    }
+    private String dateFormat;
     
     /**
      * Add a new profile
@@ -184,6 +180,14 @@ public class ProfileAction extends GenericAction implements ProfileDataProvider 
                     addActionError(getText("profile.upload.error"));
                     profile.setPhoto(oldFromSession);
                     resul = false;
+                } else {                    
+                    try {                         
+                        if (!oldFromSession.equals(profile.getPhoto())) {
+                            java.io.File oldFile = new File(oldFromSession);
+                            oldFile.delete();
+                        }
+                    } catch (Exception e) {
+                    }
                 }
             }else{
                 addActionError(getText("profile.upload.invalidType"));
@@ -227,7 +231,7 @@ public class ProfileAction extends GenericAction implements ProfileDataProvider 
         }
         
         String json = xStream.toXML(stateKeyValueList);
-        logger.log(json);
+        //logger.log(json);
         setInputStream(new ByteArrayInputStream(json.getBytes()));
         return "json";
     }
@@ -513,4 +517,14 @@ public class ProfileAction extends GenericAction implements ProfileDataProvider 
     public void setDisabilitiesList(Map<Boolean, String> disabilitiesList) {
         this.disabilitiesList = disabilitiesList;
     }
+
+    public String getDateFormat() {
+       return this.dateFormat; 
+    }
+    
+    public void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
+        
+    }        
+    
 }

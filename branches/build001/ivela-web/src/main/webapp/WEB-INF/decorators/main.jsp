@@ -1,4 +1,5 @@
 <%--    
+#############################################################################################
 # Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
 # This file is part of ivela project, an open-source                                        #
 # Program URL   : http://code.google.com/p/ivela/                                           #  
@@ -17,6 +18,7 @@
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 05-JUN-2008 - leoomoreira                       - XXXXXX - Initial Version                #
 # 08-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+#############################################################################################
 --%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
@@ -66,11 +68,11 @@
                 <div class="profile">
 
                     <%--<s:property value="profilePhoto" />--%>
-                    <span><!--img src="RenderServletProfile?id=<%= systemUser.getId()%>" title="Perfil" height="54px" width="54px" /--></span>
+                    <span><img src="RenderServletProfile?id=<%= systemUser.getId()%>" title="Perfil" style="height: auto; width:auto; max-height: 43px; max-width: 43px;"/></span>
                     <h2><%= (systemUser.getProfile() != null && !systemUser.getProfile().getFirstName().isEmpty()) ? systemUser.getProfile().getFirstName() : systemUser.getUsername()%></h2>
                     <p></p>
 
-                    <a  href="profile!edit.action" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"><s:text name="front.editProfile" /></a>
+                    <a  href="profile!edit.action" style="font-size: 11px; float: left;" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"><s:text name="front.editProfile" /></a>
                     <a href="j_spring_security_logout" class="logout" title="<s:property value="front.logout" />"><s:property value="front.logout" /></a>
                 </div>
                 <!-- end profile -->

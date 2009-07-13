@@ -17,6 +17,7 @@
 # Document: Login page                                                                      # 
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # XX-XXX-XXXX - X                                 - XXXXXX - Initial Version                #
+# 03-JUL-2009 - mileine (Instituto Eldorado)      - 000010 - Login fields position fixed    #
 # 10-JUN-2009 - Rafael Lagoa (Instituto Eldorado) - 000011 - System pre-requisites check    #
 #############################################################################################
 --%>
@@ -41,24 +42,36 @@
 <div class="login-container">
     <div id="dependenciesWarning" style="width:100px ; height:30px; text-align:center; font:15px Arial, Helvetica, Sans-Serif; color:white; font-weight:bold; line-height: 30px"></div>
     <form name="f" class="form-login-index" action="<c:url value='j_spring_security_check'/>" method="POST">
-        <div class="box-user-index">
-            <label><s:text name="login.user"/></label>
-            <input class="field-user-index" id="loginfield" type="text" name="j_username" value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>' maxlength="33" onkeyup="valid(this,'special')" onblur="valid(this,'special')" />
-        </div>
-        <div class="box-pass-index">
-            <label><s:text name="login.password"/></label>
-            <input class="field-pass-index" type="password" name="j_password" maxlength="17" />
-            <input class="buton-login-index" type="image" src="images/login/buton-login-index.gif" /> <br /> 
-            <p class="check">             
-                <%--input type="checkbox" name="_spring_security_remember_me" id="checkbox" /><s:text name="login.remember"/--%>
-                <a href="forgotPassword.action" class="forgot"><s:text name="login.forgot.password"/></a> <br />
-            </p>
-            <c:if test="${not empty param.login_error}">
-               <p class="error"><s:text name="login.fail"/></p>
-            </c:if>            
-        </div>
+      <table border="0"  cellpadding="1" >
+      <tr class="box-user-index" valign = "middle" >
+      	<td align="right"><label><s:text name="login.user"/></label></td>
+      	<td colspan="4"><input class="field-user-index" id="loginfield" type="text" name="j_username" value='<c:if test="${not empty param.login_error}"><c:out value="${SPRING_SECURITY_LAST_USERNAME}"/></c:if>' maxlength="33" onkeyup="valid(this,'special')" onblur="valid(this,'special')" /></td>
+      </tr>
+      
+      <tr class="box-pass-index" valign = "middle" >
+      	<td><label><s:text name="login.password"/></label></td>
+      	<td><input class="field-pass-index" type="password" name="j_password" maxlength="17" /></td>
+      	<td><input class="buton-login-index" type="image" src="images/login/buton-login-index.gif" /> </td>
+      </tr>
+      
+      <tr class="box-pass-index" valign = "top">
+            <td></td>
+      		<td class="forgot">
+           		<table border="0" style="position:relative;top:0px;left:0px"><tr><td><a href="forgotPassword.action" class="forgot"><s:text name="login.forgot.password"/></a></td></tr></table> 
+           	</td>
+            <td></td>
+      </tr>
+      <tr>
+      		<td colspan="3"  valign = "bottom"> 
+      			<p class="error"><c:if test="${not empty param.login_error}">
+               		<s:text name="login.fail"/>
+            	</c:if>  </p>
+            </td>
+      </tr>
+      </table>
+     
+         
     </form>
-    
     <div class="tools-login">
         
         <a href="faq!list.action" title="FAQ">FAQ</a>

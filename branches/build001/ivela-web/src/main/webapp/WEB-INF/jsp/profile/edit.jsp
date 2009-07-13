@@ -42,7 +42,7 @@
     <br />
     
     <s:actionerror />
-    
+    <s:fielderror/>
     <s:if test="sucess==true"><h2> <s:text name="profile.updateSucess" /></h2> </s:if>
     <s:form action="profile!update.action" method="post" cssClass="form"enctype="multipart/form-data" theme="simple">
 
@@ -86,7 +86,7 @@
             </p>            
             <p>
                 <label><s:text name="profile.birthDate" />:</label>
-                <cal:jscalendar name="profile.birthDate"  format="%m/%d/%Y" showstime="true" theme="simple"/>
+                <cal:jscalendar name="profile.birthDate"  format="%{dateFormat}" showstime="true" theme="simple"/>
             </p>
 
         </fieldset>

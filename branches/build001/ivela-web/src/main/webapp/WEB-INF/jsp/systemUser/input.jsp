@@ -111,7 +111,7 @@
                 
                 <p>
                     <label><s:text name="systemUser.input.birthdate"/>:</label>
-                    <cal:jscalendar name="profile.birthDate"  format="%m/%d/%Y" showstime="true" theme="simple"/>
+                    <cal:jscalendar name="profile.birthDate"  format="%{dateFormat}" showstime="true" theme="simple"/>
                 </p>
                 <p>
                     <label><s:text name="systemUser.input.socialNumber"/>:</label>
