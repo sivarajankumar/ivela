@@ -87,6 +87,7 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
     private String mobile;    //location
     private Address inAddress;
     private Integer country;
+    private String dateFormat;
 
     public String inputChange() {
         return "change";
@@ -786,4 +787,13 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
     public Map<String, String> getGenderList() {
         return this.genderList;
     }
+    
+    public String getDateFormat() {
+        return this.dateFormat; 
+     }
+     
+     public void setDateFormat(String dateFormat) {
+         this.dateFormat = dateFormat;
+         
+     }
 }

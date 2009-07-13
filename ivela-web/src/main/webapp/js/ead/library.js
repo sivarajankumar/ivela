@@ -1,3 +1,27 @@
+/*
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: library.js                                                                          #
+# Document: Library JavaScript                                                              #
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# Unknown     - Unknown                           - XXXXXX - Initial Version                #
+# 30-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000010 - JS no IE/FF opening repository #
+############################################################################################# 
+*/
+
+
 Event.observe(window, 'load', loadAccordions, false);
 Event.observe(window, 'load', function() {Event.observe(content, 'click', click, false);}, false);
 
@@ -83,9 +107,11 @@ function showDirInfo(dir, showSub) {
         $('dirInfo.name').innerHTML = json.directory.name;
 
         if(showSub) {
-            $('subdir').style.display = 'block';
+        	if ($('subdir'))
+        		$('subdir').style.display = 'block';
         } else {
-            $('subdir').style.display = 'none';
+        	if ($('subdir'))
+        		$('subdir').style.display = 'none';
         }
     }
 
@@ -152,11 +178,14 @@ function download() {
 }
 
 function closeAll() {
-
-    $('dirInfo').style.display = 'none';
-    $('fileInfo').style.display = 'none';
-    $('upload').style.display = 'none';
-    $('addDir').style.display = 'none';
+	if ($('dirInfo'))   
+		$('dirInfo').style.display = 'none';
+    if ($('fileInfo')) 
+        $('fileInfo').style.display = 'none';
+    if ($('upload')) 
+    	$('upload').style.display = 'none';
+    if ($('addDir'))       
+    	$('addDir').style.display = 'none';
 }
 function validateDir(){
     if($('dirName').value==''){

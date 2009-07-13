@@ -18,6 +18,7 @@
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 15-JUL-2008 - Nelson                            - XXXXXX - Initial Version                #
 # 08-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000007 - IE7 compatibility              #
+# 30-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000010 - JS no IE/FF opening repository #
 ############################################################################################# 
 --%>
 
@@ -63,7 +64,7 @@
                 },
                 direction : 'vertical'
             });
-            // Open first one
+            //Open first one
             <s:iterator value="disciplineUnitList" status="stat">
                     if (unitId == '<s:property value="id" />') {
                         bottomAccordion.activate($$('#vertical_container_course .accordion_toggle_course')[<s:property value="%{#stat.index}" />]);
@@ -136,7 +137,7 @@
                             _width = jsonUnitContent.unitContent.width;
                         if (jsonUnitContent.unitContent.height != null && jsonUnitContent.unitContent.height != '')
                             _height = jsonUnitContent.unitContent.height;
-                        html += '<iframe id="html" scrolling="no" frameborder="0"  width="' + _width + '" height="' + _height + '" src="RenderDynamicHtml?unitContent.id=' + unitContentId + '&gradeId=' + gradeId + '"></iframe> <br class="clear"/>';
+                        html += '<iframe id="html" name="UnitContentFrame" scrolling="no" frameborder="0"  width="' + _width + '" height="' + _height + '" src="RenderDynamicHtml?unitContent.id=' + unitContentId + '&gradeId=' + gradeId + '"></iframe> <br class="clear"/>';
 
 
                     } else {
@@ -151,11 +152,12 @@
                             _width = jsonUnitContent.unitContent.width;
                         if (jsonUnitContent.unitContent.height != null && jsonUnitContent.unitContent.height != '')
                             _height = jsonUnitContent.unitContent.height;
-                        html += '<iframe id="html" scrolling="no" frameborder="0" width="' + _width + '" height="' + _height + '" src="RenderServlet?file=' + courseId + '/' + disciplineId + '/' + unitId + "/" + unitContentId + '/index.html' + '"></iframe> <br class="clear"/>';
+                        html += '<iframe id="html" name="UnitContentFrame" scrolling="no" frameborder="0" width="' + _width + '" height="' + _height + '" src="RenderServlet?file=' + courseId + '/' + disciplineId + '/' + unitId + "/" + unitContentId + '/index.html' + '"></iframe> <br class="clear"/>';
                     }
                     $('unitContent').innerHTML = html;
                    // $('pnlChat').href = 'IRCIvelaClientServlet?course.id=' + courseId +'&discipline.id='+disciplineId;
 
+                    addUnitContentListener();
                 }
 
                 function showUnitContentJson(unitContentId, gradeId, courseId, unitName, disciplineName) {
@@ -418,7 +420,7 @@ a:active{outline: none;}
                 
                 <td>
                     <div id="repositorioOpened" style="display:block;height:40px;min-height:35px">
-                    <li ><a id="pnlRepositorio" href="#" id="btn-goto-avaliacao" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024" ><s:text name="discipline.show.biblioteca"/></a></li>
+                    <li ><a id="pnlRepositorio" href="repository!show.action?courseId=<s:property value="discipline.course.id" />" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024" ><s:text name="discipline.show.biblioteca"/></a></li>
                     </div>
                 </td>
                 
