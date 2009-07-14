@@ -1,0 +1,78 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {background-color: transparent; background: url(../images/bg_standard2.jpg) #fff repeat-x 0 0;}
+
+#breadcrumb {width: auto; height: 22px; margin: 10px 0 20px 0; padding: 8px 0 0 100px; position:relative;}
+#breadcrumb p {width: auto; height: 17px; padding: 2px 20px 0px 8px; position: absolute; top:6px; left:0; background: url(../images/arrow-breadcrumb.gif) no-repeat top right #033d7d; font: 11px Arial, Helvetica, sans-serif; color:#fff; }
+#breadcrumb ul {list-style-type:none; font-size: 12px; font-weight:bold; margin-left:15px;}
+#breadcrumb ul li{display:inline; float:left; padding: 0 20px 0 0; margin: 0 0 0 15px; background: url(../images/arrow-breadcrumb2.gif) no-repeat top right;}
+#breadcrumb ul .current {color:#ed6400; font-weight:bold; background: none;}
+#breadcrumb ul li a{display:inline; color:#033d7d;}
+#breadcrumb ul li a:hover{color:#ed6400;}
+
+* {margin:0px; padding:0;}
+#container{margin-bottom:80px;}
+#container a:hover{color:#ff7202;}
+#content{
+    margin: 20px 0 0 20px;
+}
+
+#content h1, #content h2{font:30px Arial, Helvetica, sans-serif; color:#ff7202; margin-top:15px; width:600px; padding:0 0 10px; font-weight:bold;}
+#content h2{font:20px Arial, Helvetica, sans-serif; font-weight:bold; padding-top:10px; width: 970px;}
+#content h3{font:14px Arial, Helvetica, sans-serif; color:#033d7d; font-weight:bold; text-decoration:underline; margin:0 0 3px;}
+#content h4{font:20px Arial, Helvetica, sans-serif; color:#033d7d; font-weight:bold; margin-bottom:30px; width:650px;}
+
+#content p{margin-bottom:3px;}
+.font-orange-td{font:11px Arial, Helvetica, sans-serif; color:#ff7202; font-weight:bold;}
+
+#forum{border-collapse:collapse; margin-bottom:0px; width:970px;}
+#forum th{font:13px Arial, Helvetica, sans-serif; color:#ff7202; font-weight:bold; background-color:#ffe79c; text-align:left; font-weight:bold; border: 1px solid #fff; padding:10px 10px 10px;}
+#forum td{font:11px Arial, Helvetica, sans-serif; color:#000; background-color:#f2f2f2; text-align:left; border: 1px solid #fff; padding: 10px;}
+#forum td.topics-views{text-align:center;}
+.quote-answer{display: block; border:#ccc 1px dashed; background:#FFFFFF; margin: 5px 5px 10px 5px; padding:10px; font:11px Arial, Helvetica, sans-serif;}
+.head-quote{color:#033d7d; font-weight:bold;}
+table a{color:#033d7d; font-weight:bold;}
+table .name-user{margin-left:3px;}
+
+#post a.annex{background:url(../images/icon/icon-annex.gif) no-repeat top left; font:11px Arial, Helvetica, sans-serif; width:17px; height:17px; 
+color:#ff7202; font-weight:bold; padding:3px 0 0 20px;}
+#post .offline{float:left; background:url(../images/icon/icon-offline.gif) no-repeat top left; width:17px; height:19px; padding:3px 0 0 20px; font:11px Arial, Helvetica, sans-serif; color:#a1a0a0; display:block; margin-right:20px;}
+#post .online{float:left; background:url(../images/icon/icon-online.gif) no-repeat top left; width:19px; height:19px; padding:3px 0 0 20px; font-weight:bold; color:#ff7202; font:11px Arial, Helvetica, sans-serif; display:block;}
+#post img{border:1px solid #033d7d; margin-bottom:10px; width:54px; height:54px; }
+#post td.profile-user{width:150px; vertical-align:top; font-size:10px;} 
+
+#attachments{list-style-type:none; margin-top:85px; float:left; width:750px;}
+#attachments li {display:block; float:left; width:7em; }
+#attachments li a{float:left; background-color:#000000;}
+#attachments .btn-perfil{background:url(../images/icon/icon-perfil.gif) no-repeat top left; width:20px; height:15px; }
+#attachments .btn-private-message{background:url(../images/icon/icon-private-message.gif) no-repeat left; width:19; height:20px;}
+#attachments .btn-answer{background:url(../images/icon/icon-answer.gif) no-repeat left; width:20px; height:18px; padding:0 30px 0 20px;}
+#attachments .btn-quote{background:url(../images/icon/icon-quote.gif) no-repeat left; width:16px; height:12px; padding:0 30px 0 18px;}
+#attachments .btn-remove{background:url(../images/icon/icon-delete.gif) no-repeat left; height:12px;  padding:0 30px 0 15px;}
+#attachments .btn-answer:hover, #attachments .btn-quote:hover, #attachments .btn-remove:hover, #attachments .btn-print {color:#ff7202;}
+#attachments .btn-print{background:url(../images/icon/icon-print.gif) no-repeat left; width:20px; height:20px;}
+
+#quick-answer{margin-top:15px;}
+#quick-answer h3{font:15px Arial, Helvetica, sans-serif; color:#ff7202; font-weight:bold; text-decoration:none; margin-bottom:10px;}
+#form-answer{margin-top:20px;}
+#form-answer label{font:14px Arial, Helvetica, sans-serif; color:#454545; font-weight:bold;}
+#form-answer textarea{width:960px; height:125px;} 
+#form-answer .name-title, #form-answer .textarea-forum{font:11px Arial, Helvetica, sans-serif; margin-top:5px;}
+#form-answer .name-title{margin-bottom:15px; width:700px;}
+#form-answer .btn-send{background:url(../images/icon/icon-save.gif) no-repeat top left; padding: 0 0 0 20px; margin-bottom:20px; margin-top:10px; width:auto; height:auto; display:block; font:11px Arial, Helvetica, sans-serif; color:#033d7d;}
+
+.form-search-forum {width:500px; height:5px;  padding:10px 0 30px;}
+.form-search-forum label {display:block; color:#033d7d; font-weight:bold; font-size: 14px;}
+.form-search-forum input.field {width:300px; float:left; margin:2px 5px 0 0; padding:0 0 5px; font:11px Arial, Helvetica, sans-serif; *position: relative; *right: 1.7em;}
+.form-search-forum input.button {width:64px; height:23px; margin-top: 2px; *position: relative; *right: 1em;}
+
+.pages-all{background:url(../images/img-pages.gif) no-repeat top left; width:79px; height:26px; float:left; font:11px Arial, Helvetica, sans-serif; 
+color:#FFF; padding:3px 5px 2px; margin-top:15px; text-decoration:none;}
+
+.pagination {list-style-type:none; margin-top:17px; margin-bottom:15px; font-weight: bold; font:10px Arial, Helvetica, sans-serif; }
+.pagination li{display:block; margin:2px; margin-right:-5px;  font-weight: bold; font:10px Arial, Helvetica, sans-serif; float:left;}
+.pagination a {padding: 2px 5px 2px 5px; margin-right: 2px; text-decoration: underline; color: #033d7d; font-weight:bold;}
+.pagination a:hover, #pagination a:active {color: #000; text-decoration: none;}
+.pagination .current {padding: 2px 5px 2px 5px; margin-right: 2px; font-weight: bold; background-color: #ff7202; color: #FFF;}
+.pages{float:right; width:170px;}

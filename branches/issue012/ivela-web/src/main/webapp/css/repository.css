@@ -1,0 +1,55 @@
+@charset "utf-8";
+/* CSS Document */
+
+#container{margin-bottom:80px;}
+#container a:hover{color:#ff7202;}
+#content{
+    margin: 20px 0 0 20px;
+}
+#content h1, #content h2{font:30px Arial, Helvetica, sans-serif; color:#ff7202; margin-top:15px; width:300px; font-weight:bold;}
+#content h2{
+    font:20px Arial, Helvetica, sans-serif; 
+    font-weight:bold;}
+#content h3{
+    font:14px Arial, Helvetica, sans-serif;
+    color:#033d7d;
+    font-weight:bold; 
+    text-decoration:underline; 
+    margin:0 0 3px;}
+#content h4{
+    font:20px Arial, Helvetica, sans-serif; 
+    color:#033d7d;
+    font-weight:bold;
+    margin-bottom:30px;
+    width:650px;}
+
+#content #col-1-repository {
+    width: 295px; 
+    height: auto; 
+    float:left;}
+#content #col-2-repository {
+    width: 645px; 
+    height: auto; 
+    float:left;
+    margin-left:30px;
+    font:18px Arial, Helvetica, sans-serif, bold;
+    color:#033d7d;}
+
+#box-files{
+    background:url(../images/bg_boxes-repository.jpg) repeat-x;
+    width:645px;
+    height:auto; 
+    border:1px solid #ccc;
+    font:18px Arial, Helvetica, sans-serif, bold;}
+#box-directory{
+    background:url(../images/bg_boxes-repository.jpg) repeat-x; 
+    height:auto; 
+    border:1px solid #ccc;
+    font:18px Arial, Helvetica, sans-serif, bold;
+    color:#033d7d;}
+
+#box-files #files{width: 600px;} 
+
+#box-files #files .table-files-repository{margin-left:15px; margin-top:30px; border-spacing: 15px;}
+#box-files #files .table-files-repository a{font:11px Arial, Helvetica, sans-serif; font-weight:bold; color:#003d93;}
+#box-files #files .table-files-repository td.file{border:1px solid #033d7d; background:#fff; width:150px; height:100px; text-align:center;}
