@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.5.xsd"
+       
+       default-autowire="byName">
+           
+        <bean id="logger" class="br.ufc.ivela.commons.Logger" scope="singleton">
+            <constructor-arg index="0" value="true"/> <!-- log on console -->
+            <constructor-arg index="1" value="false"/> <!-- log on file -->
+            <constructor-arg index="2" value="/home/marcus/log.txt"/> <!-- path to log -->
+            
+            <property name="active" value="true"/>
+        </bean>
+
+        <jee:jndi-lookup resource-ref="false"  jndi-name="CalendarBean#br.ufc.ivela.ejb.interfaces.CalendarRemote"
+        id="calendarRemote" expected-type="br.ufc.ivela.ejb.interfaces.CalendarRemote"/>
+
+        <jee:jndi-lookup resource-ref="false" jndi-name="SystemUserBean#br.ufc.ivela.ejb.interfaces.SystemUserRemote"
+        id="systemUserRemote" expected-type="br.ufc.ivela.ejb.interfaces.SystemUserRemote"/>
+
+        <jee:jndi-lookup resource-ref="false" jndi-name="ForumBean#br.ufc.ivela.ejb.interfaces.ForumRemote"
+        id="forumRemote" expected-type="br.ufc.ivela.ejb.interfaces.ForumRemote"/>
+
+         <jee:jndi-lookup resource-ref="false" jndi-name="CourseBean#br.ufc.ivela.ejb.interfaces.CourseRemote"
+        id="courseRemote" expected-type="br.ufc.ivela.ejb.interfaces.CourseRemote"/>
+                
+        <jee:jndi-lookup resource-ref="false" jndi-name="TopicBean#br.ufc.ivela.ejb.interfaces.TopicRemote"
+        id="topicRemote" expected-type="br.ufc.ivela.ejb.interfaces.TopicRemote"/>
+    
+        <jee:jndi-lookup resource-ref="false" jndi-name="PostBean#br.ufc.ivela.ejb.interfaces.PostRemote"
+        id="postRemote" expected-type="br.ufc.ivela.ejb.interfaces.PostRemote"/>        
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="RepositoryBean#br.ufc.ivela.ejb.interfaces.RepositoryRemote"
+        id="repositoryRemote" expected-type="br.ufc.ivela.ejb.interfaces.RepositoryRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="ExamBean#br.ufc.ivela.ejb.interfaces.ExamRemote"
+        id="examRemote" expected-type="br.ufc.ivela.ejb.interfaces.ExamRemote"/>
+
+        <jee:jndi-lookup resource-ref="false" jndi-name="NoteBean#br.ufc.ivela.ejb.interfaces.NoteRemote"
+        id="noteRemote" expected-type="br.ufc.ivela.ejb.interfaces.NoteRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="ExerciseBean#br.ufc.ivela.ejb.interfaces.ExerciseRemote"
+        id="exerciseRemote" expected-type="br.ufc.ivela.ejb.interfaces.ExerciseRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="QuestionBean#br.ufc.ivela.ejb.interfaces.QuestionRemote"
+        id="questionRemote" expected-type="br.ufc.ivela.ejb.interfaces.QuestionRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="ObjectiveAnswerBean#br.ufc.ivela.ejb.interfaces.ObjectiveAnswerRemote"
+        id="objectiveAnswerRemote" expected-type="br.ufc.ivela.ejb.interfaces.ObjectiveAnswerRemote"/>
+
+        <jee:jndi-lookup resource-ref="false" jndi-name="ObjectiveQuestionBean#br.ufc.ivela.ejb.interfaces.ObjectiveQuestionRemote"
+        id="objectiveQuestionRemote" expected-type="br.ufc.ivela.ejb.interfaces.ObjectiveQuestionRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="QuestionExamBean#br.ufc.ivela.ejb.interfaces.QuestionExamRemote"
+        id="questionExamRemote" expected-type="br.ufc.ivela.ejb.interfaces.QuestionExamRemote"/>
+                
+        <jee:jndi-lookup resource-ref="false" jndi-name="QuestionExerciseBean#br.ufc.ivela.ejb.interfaces.QuestionExerciseRemote"
+        id="questionExerciseRemote" expected-type="br.ufc.ivela.ejb.interfaces.QuestionExerciseRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="ProfileBean#br.ufc.ivela.ejb.interfaces.ProfileRemote"
+        id="profileRemote" expected-type="br.ufc.ivela.ejb.interfaces.ProfileRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="DisciplineBean#br.ufc.ivela.ejb.interfaces.DisciplineRemote"
+        id="disciplineRemote" expected-type="br.ufc.ivela.ejb.interfaces.DisciplineRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="GradeBean#br.ufc.ivela.ejb.interfaces.GradeRemote"
+        id="gradeRemote" expected-type="br.ufc.ivela.ejb.interfaces.GradeRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="EnrollmentBean#br.ufc.ivela.ejb.interfaces.EnrollmentRemote"
+        id="enrollmentRemote" expected-type="br.ufc.ivela.ejb.interfaces.EnrollmentRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="UnitBean#br.ufc.ivela.ejb.interfaces.UnitRemote"
+        id="unitRemote" expected-type="br.ufc.ivela.ejb.interfaces.UnitRemote"/>
+
+        <jee:jndi-lookup resource-ref="false" jndi-name="MessageBean#br.ufc.ivela.ejb.interfaces.MessageRemote"
+        id="messageRemote" expected-type="br.ufc.ivela.ejb.interfaces.MessageRemote"/>
+
+        <jee:jndi-lookup resource-ref="false" jndi-name="HistoryBean#br.ufc.ivela.ejb.interfaces.HistoryRemote"
+        id="historyRemote" expected-type="br.ufc.ivela.ejb.interfaces.HistoryRemote"/>
+
+        <jee:jndi-lookup resource-ref="false" jndi-name="HistoryParamsBean#br.ufc.ivela.ejb.interfaces.HistoryParamsRemote"
+        id="historyParamsRemote" expected-type="br.ufc.ivela.ejb.interfaces.HistoryParamsRemote"/>
+           
+        <jee:jndi-lookup resource-ref="false" jndi-name="AuditiveQuestionBean#br.ufc.ivela.ejb.interfaces.AuditiveQuestionRemote"
+        id="auditiveQuestionRemote" expected-type="br.ufc.ivela.ejb.interfaces.AuditiveQuestionRemote"/>
+
+        <jee:jndi-lookup resource-ref="false" jndi-name="UnitContentBean#br.ufc.ivela.ejb.interfaces.UnitContentRemote"
+        id="unitContentRemote" expected-type="br.ufc.ivela.ejb.interfaces.UnitContentRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="ExternalQuestionBean#br.ufc.ivela.ejb.interfaces.ExternalQuestionRemote"
+        id="externalQuestionRemote" expected-type="br.ufc.ivela.ejb.interfaces.ExternalQuestionRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="AnswerStudentExerciseBean#br.ufc.ivela.ejb.interfaces.AnswerStudentExerciseRemote"
+        id="answerStudentExerciseRemote" expected-type="br.ufc.ivela.ejb.interfaces.AnswerStudentExerciseRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="AnswerStudentExamBean#br.ufc.ivela.ejb.interfaces.AnswerStudentExamRemote"
+        id="answerStudentExamRemote" expected-type="br.ufc.ivela.ejb.interfaces.AnswerStudentExamRemote"/>
+                                               
+        <jee:jndi-lookup resource-ref="false" jndi-name="AddressBean#br.ufc.ivela.ejb.interfaces.AddressRemote"
+        id="addressRemote" expected-type="br.ufc.ivela.ejb.interfaces.AddressRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="PhoneBean#br.ufc.ivela.ejb.interfaces.PhoneRemote"
+        id="phoneRemote" expected-type="br.ufc.ivela.ejb.interfaces.PhoneRemote"/>
+
+        <jee:jndi-lookup resource-ref="false" jndi-name="NewsFlashBean#br.ufc.ivela.ejb.interfaces.NewsFlashRemote"
+        id="newsFlashRemote" expected-type="br.ufc.ivela.ejb.interfaces.NewsFlashRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="DictionaryBean#br.ufc.ivela.ejb.interfaces.DictionaryRemote"
+        id="dictionaryRemote" expected-type="br.ufc.ivela.ejb.interfaces.DictionaryRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="ChallengeItemsBean#br.ufc.ivela.ejb.interfaces.ChallengeItemsRemote"
+        id="challengeItemsRemote" expected-type="br.ufc.ivela.ejb.interfaces.ChallengeItemsRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="ChallengeBean#br.ufc.ivela.ejb.interfaces.ChallengeRemote"
+        id="challengeRemote" expected-type="br.ufc.ivela.ejb.interfaces.ChallengeRemote"/>
+
+        <jee:jndi-lookup resource-ref="false" jndi-name="UserVoiceBean#br.ufc.ivela.ejb.interfaces.UserVoiceRemote"
+        id="userVoiceRemote" expected-type="br.ufc.ivela.ejb.interfaces.UserVoiceRemote"/>
+
+        <jee:jndi-lookup resource-ref="false" jndi-name="FinishedUnitContentBean#br.ufc.ivela.ejb.interfaces.FinishedUnitContentRemote"
+        id="finishedUnitContentRemote" expected-type="br.ufc.ivela.ejb.interfaces.FinishedUnitContentRemote"/>
+
+        <jee:jndi-lookup resource-ref="false" jndi-name="FinishedExamBean#br.ufc.ivela.ejb.interfaces.FinishedExamRemote"
+        id="finishedExamRemote" expected-type="br.ufc.ivela.ejb.interfaces.FinishedExamRemote"/>
+
+        <jee:jndi-lookup resource-ref="false" jndi-name="FinishedExerciseBean#br.ufc.ivela.ejb.interfaces.FinishedExerciseRemote"
+        id="finishedExerciseRemote" expected-type="br.ufc.ivela.ejb.interfaces.FinishedExerciseRemote"/>
+
+        <jee:jndi-lookup resource-ref="false" jndi-name="FaqBean#br.ufc.ivela.ejb.interfaces.FaqRemote"
+        id="faqRemote" expected-type="br.ufc.ivela.ejb.interfaces.FaqRemote"/>        
+
+        <jee:jndi-lookup resource-ref="false" jndi-name="WsEnabledBean#br.ufc.ivela.ejb.interfaces.WsEnabledRemote"
+        id="wsEnabledRemote" expected-type="br.ufc.ivela.ejb.interfaces.WsEnabledRemote"/>
+
+        <!-- 
+            Actions para Admin 
+            iniciar o id com "admin."
+        -->        
+        <bean id="admin_challengeAction" class="br.ufc.ivela.web.action.admin.ChallengeAction" scope="prototype"/>
+        
+        <bean id="admin_repositoryAction" class="br.ufc.ivela.web.action.admin.RepositoryAction" scope="prototype"/>
+        
+        <bean id="admin_scorecardAction" class="br.ufc.ivela.web.action.admin.ScorecardAction" scope="prototype"/>
+        
+       <bean id="admin_homeAction" class="br.ufc.ivela.web.action.admin.HomeAction" scope="prototype"/>
+       
+       <bean id="admin_questionAction" class="br.ufc.ivela.web.action.admin.QuestionAction" scope="prototype"/>
+              
+       <bean id="admin_forumAction" class="br.ufc.ivela.web.action.admin.ForumAction" scope="prototype"/>
+       
+       <bean id="admin_topicAction" class="br.ufc.ivela.web.action.admin.TopicAction" scope="prototype"/>
+        
+       <bean id="admin_courseAction" class="br.ufc.ivela.web.action.admin.CourseAction" scope="prototype"/>
+       
+       <bean id="admin_gradeAction" class="br.ufc.ivela.web.action.admin.GradeAction" scope="prototype"/>
+       
+       <bean id="admin_disciplineAction" class="br.ufc.ivela.web.action.admin.DisciplineAction" scope="prototype"/>
+              
+       <bean id="admin_unitAction" class="br.ufc.ivela.web.action.admin.UnitAction" scope="prototype"/>
+       
+       <bean id="admin_unitContentAction" class="br.ufc.ivela.web.action.admin.UnitContentAction" scope="prototype"/>
+       
+       <bean id="admin_exerciseAction" class="br.ufc.ivela.web.action.admin.ExerciseAction" scope="prototype"/>
+       
+       <bean id="admin_examAction" class="br.ufc.ivela.web.action.admin.ExamAction" scope="prototype"/>
+       
+       <bean id="admin_systemUserAction" class="br.ufc.ivela.web.action.admin.SystemUserAction" scope="prototype"/>
+       
+       <bean id="admin_dictionaryAction" class="br.ufc.ivela.web.action.admin.DictionaryAction" scope="prototype"/>
+       
+       <bean id="admin_faqAction" class="br.ufc.ivela.web.action.admin.FaqAction" scope="prototype"/>
+              
+       <bean id="systemUserAction" class="br.ufc.ivela.web.action.SystemUserAction" scope="prototype"/>
+       
+       <bean id="noteAction" class="br.ufc.ivela.web.action.NoteAction" scope="prototype"/>
+        
+       <bean id="forumAction" class="br.ufc.ivela.web.action.ForumAction" scope="prototype"/>
+       
+       <bean id="topicAction" class="br.ufc.ivela.web.action.TopicAction" scope="prototype"/>
+       
+       <bean id="postAction" class="br.ufc.ivela.web.action.PostAction" scope="prototype"/>
+       
+       <bean id="repositoryAction" class="br.ufc.ivela.web.action.RepositoryAction" scope="prototype"/>
+       
+       <bean id="examAction" class="br.ufc.ivela.web.action.ExamAction" scope="prototype"/>
+       
+       <bean id="questionAction" class="br.ufc.ivela.web.action.QuestionAction" scope="prototype"/>
+       
+       <bean id="exerciseAction" class="br.ufc.ivela.web.action.ExerciseAction" scope="prototype"/>
+       
+       <bean id="courseAction" class="br.ufc.ivela.web.action.CourseAction" scope="prototype"/>
+       
+       <bean id="historyAction" class="br.ufc.ivela.web.action.HistoryAction" scope="prototype"/>
+       
+       <bean id="unitAction" class="br.ufc.ivela.web.action.UnitAction" scope="prototype"/>
+       
+       <bean id="profileAction" class="br.ufc.ivela.web.action.ProfileAction" scope="prototype"/>
+       
+       <bean id="disciplineAction" class="br.ufc.ivela.web.action.DisciplineAction" scope="prototype"/>
+       
+       <bean id="gradeAction" class="br.ufc.ivela.web.action.GradeAction" scope="prototype"/>
+       
+       <bean id="enrollmentAction" class="br.ufc.ivela.web.action.EnrollmentAction" scope="prototype"/>
+       
+       <bean id="messageAction" class="br.ufc.ivela.web.action.MessageAction" scope="prototype"/>
+       
+       <bean id="homeAction" class="br.ufc.ivela.web.action.HomeAction" scope="prototype"/>
+       
+       <bean id="unitContentAction" class="br.ufc.ivela.web.action.UnitContentAction" scope="prototype"/>
+       
+       <bean id="faqAction" class="br.ufc.ivela.web.action.FaqAction" scope="prototype"/>
+       
+       <bean id="aboutUsAction" class="br.ufc.ivela.web.action.AboutUsAction" scope="prototype"/>
+       
+       
+           
+</beans>

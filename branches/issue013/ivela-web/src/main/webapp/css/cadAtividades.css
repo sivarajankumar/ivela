@@ -1,0 +1,128 @@
+/*@ Código para as páginas:
+
+back-end_cadastro_de_avaliacao.html,
+back-end_criar_editar_curso.html
+
+*/
+#col-2-home .tooltip{background:url(../images/icon-tip.gif) no-repeat 0 center; padding-left: 25px; *display: inline-block;}
+#col-2-home .container-courses .content-courses .cadastro-avaliacao,
+#col-2-home .container-courses .content-courses .cadastro-curso {margin-bottom: 30px;}
+
+#col-2-home .container-courses .content-courses .cadastro-avaliacao h2,
+#col-2-home .container-courses .content-courses .cadastro-curso h2{margin-top: 20px;}
+
+#col-2-home .container-courses .content-courses .cadastro-avaliacao input,
+#col-2-home .container-courses .content-courses .cadastro-curso input {padding: 3px;}
+
+#col-2-home .container-courses .content-courses .cadastro-avaliacao .lista-peso,
+#col-2-home .container-courses .content-courses .cadastro-avaliacao .lista-hora{width: 100px;}
+
+#col-2-home .container-courses .content-courses .cadastro-avaliacao .example{color:#999; font-size: 11px;}
+#col-2-home .container-courses .content-courses .cadastro-avaliacao .validation{color:#F00; font-size: 11px; display:none;}
+
+#col-2-home .container-courses .content-courses .cadastro-avaliacao .example2{display: block; float: left; color:#999; font-size: 11px; margin-bottom:10px;}
+#col-2-home .container-courses .content-courses .cadastro-avaliacao .titulo-avaliacao{width: 400px;}
+#col-2-home .container-courses .content-courses .navega-teste a{display:block; float: left; background:#FF9966; margin-right: 30px; cursor:pointer;}
+#col-2-home .container-courses .content-courses .navega-teste a.cancel{background:url(../images/icon/icon-cancel.gif) no-repeat top left; padding-left: 20px;}
+#col-2-home .container-courses .content-courses .navega-teste a.previous{background:url(../images/arrow-left.gif) no-repeat 0 center; padding-left: 13px;}
+#col-2-home .container-courses .content-courses .navega-teste a.next{background: url(../images/arrow-right.gif) no-repeat right center; padding-right: 13px;}
+#col-2-home .container-courses .content-courses .navega-teste a.finish{background: url(../images/icon/icon-save.gif) no-repeat left center; padding-left: 20px;}
+#col-2-home .container-courses .content-courses .navega-teste a.create-question{background: url(../images/icon/icon-edit-courses.gif) no-repeat left center; padding-left: 25px;}
+
+#col-2-home .container-courses .content-courses .cadastro-curso .titulo-curso{width: 400px;}
+#col-2-home .container-courses .content-courses .cadastro-curso .curso-descricao,
+#col-2-home .container-courses .content-courses .cadastro-avaliacao .questao-descricao,
+#col-2-home .container-courses .content-courses .cadastro-avaliacao .questao-texto  {width: 400px; padding: 3px; font: 12px Arial, Helvetica, sans-serif;} 
+
+#col-2-home .container-courses .content-courses .questoes  {margin-top: 30px; border-top: 3px solid #eee;} 
+#col-2-home .container-courses .content-courses .questoes h2 {padding-top: 5px; margin-bottom: 10px; color:#FF6600; font-size: 20px;}
+#col-2-home .container-courses .content-courses .questoes ol{ list-style-type: decimal; padding-left: 20px;}
+#col-2-home .container-courses .content-courses .questoes ol li{ margin: 0 0 10px 0}  
+#col-2-home .container-courses .content-courses .questoes ol li span {font: bold 14px Arial, Helvetica, sans-serif;}
+
+
+#col-2-home .container-courses .content-courses .cadastro-avaliacao .adiciona-audio {margin-top: 5px;}
+#col-2-home .container-courses .content-courses .cadastro-avaliacao .adiciona-audio label { float: left; margin-right: 15px;}
+#col-2-home .container-courses .content-courses .cadastro-avaliacao .adiciona-audio label .frase{ width: 300px; height: 13px;}
+#col-2-home .container-courses .content-courses .cadastro-avaliacao .adiciona-audio label .arquivo-audio{width: 100px; height: 25px;}
+#col-2-home .container-courses .content-courses .cadastro-avaliacao .adiciona-audio .campo-1 { width: 200px;}
+
+
+
+
+/* estilo do passo-a-passo */
+
+.steps-box {width:566px; height:auto; background-color:#ffe79c; padding:1px; margin-bottom:30px;}
+.steps-box div {width:500px; height: 30px;}
+.steps-box div div {width: 480px; height: 20px; float: left;}
+.steps-box div div #step {width:30px; height:20px; padding:2px 0 0 5px; background:none; text-align:left; font-weight:bold; color:#ff7202; font-size: 14px; margin: 5px 20px 0 5px;}
+.steps-box div div span{display: block; float: left; width: 20px; height: 20px; margin: 2px 3px 0 0; padding: 5px 8px 0 7px; text-align: center; font-weight: bold; font-size: 13px; color:#ff7202;}
+.steps-box div div span#current {background: url(../images/step.gif) no-repeat 0 0; color: #ff7202;}
+
+.steps-box div.tip-step {width: 546px; height: auto; color:#000; background: #fff; padding: 10px; font-size: 11px; line-height: 16px;}
+
+
+
+.tool-tip {position: absolute; top:0; right:5px; padding: 5px; display:block; float: left; width:140px; height:auto; background:#fff8e1; border:2px solid #ffe79c;}
+.arrow-tip {width: 20px; height: 50px; background:url(../images/arrow-tool-tip.gif) 0 0 no-repeat; position:absolute; top:10px; left:-7px;}
+.tool-tip2 {display: none; position: absolute; top:0; right:5px; padding: 5px; display:block; float: left; width:140px; height:auto; background:#ffa300; border:2px solid #ffe79c;}
+
+
+
+/*hints*/
+
+
+.show_hints {
+    font: 11px Arial, Helvetica, sans-serif;
+}
+
+
+.show_hints input {
+    width: 200px;
+}
+
+.show_hints input.input_radio {
+    width: 12px;
+    height: 12px;
+}
+
+.show_hints p {
+    font: bold 12px Arial, Helvetica, sans-serif;
+    color: #033d7d;
+}
+.show_hints td{
+    padding:0px 5px 0px 5px;
+}
+
+.show_hints td span.hint {
+    background:transparent url(../images/hint/cinza.gif) no-repeat 0px 10px;
+    color:#444;
+    padding:9px 0px 0px 25px;
+    width:150px;
+    height:150px;
+    position:absolute;
+    /*margin: -10px 0px 0px 0px;*/
+    display:none;
+}
+
+.show_hints td.welldone span.hint {
+    
+    background:transparent url(../images/hint/verde.gif) no-repeat 0px 10px;
+    border-color:#749e5c;
+    color:#000;
+}
+
+.show_hints td.kindagood span.hint {
+    background:transparent url(../images/hint/bg-fieldset-kindagood.gif) no-repeat 0px 10px;
+    border-color:#cc9933;
+}
+
+.show_hints td.error span.hint {
+    background:transparent url(../images/hint/vermelho.gif) no-repeat 0px 10px;
+    border-color:#c85e5c;
+}
+
+/*por favor, não retire estas classes em branco, elas podem não ser nada pra vc mas são tudo pra mim*/
+.show_hints td.welldone {}
+.show_hints td.kindagood {}
+.show_hints td.error {}
