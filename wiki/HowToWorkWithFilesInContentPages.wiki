@@ -1,0 +1,60 @@
+== Colocando arquivos diversos numa página de conteúdo  (draft) ==
+
+Para criar um conteúdo novo no ivela, é necessário definir a árvore do curso desejado 
+incluindo: disciplinas, modulos e unidades. 
+
+Usaremos o exemplo abaixo para esse tutorial.
+
+Curso de Ingles (curso id= 1)
+  + Modulo 1 (modulo id= 1)
+     + Unidade 1 (unidade id= 1)
+        + Licao 1    (licao id= 1)
+
+
+Será gerado um arquivo zip que representa o diretorio raiz da Lição 1. Esse
+diretório será reconhecido pelo ivela como:  1/1/1/1 (curso/modulo/unidade/licao).
+
+Nesse diretório iremos colocar todos os arquivos referentes a lição 1 do curso
+de ingles , modulo 1 , unidade 1.
+
+Colocaremos os arquivos dentro de pastas de acordo com a sua finalidade:
+{{{
+/css  - CSS especifico das paginas da Licao 1
+/js   - Java script especifico das paginas da Licao 1
+
+/julius  - arquivos do Julius para a Licão 1
+/xml     - arquivos xml para contabilizar o score da Licao 1
+
+/images  - todas as imagens da Licao 1
+/audio   - todos os arquivos de audio (ogg) da Licao 1
+/video   - todos os videos da Licao 1
+}}}
+
+Para usar esses arquivos use o endereco:
+    RenderServlet?file=curso/modulo/unidade/licao/<diretorio>/<arquivo>
+    RenderServlet?file=/1/1/1/1/image/1.jpg
+
+Para muitas lições os arquivos de css, js ou as imagens serão os mesmos. Apenas coloque
+no seu pacote os arquivos diferentes.Para os arquivos comuns crie um pacote separado e submeta para os administradores do sistema, Haverá um mdulo automático para subir esse pacote.
+
+Para usar esses arquivos comuns coloque no seu html o endereco na forma:
+    RenderServlet?file=curso/modulo/<diretorio>/<arquivo>
+    RenderServlet?file=/1/image/1.jpg
+
+
+Cada licao contém um arquivo index.html com o seguinte código:
+{{{
+RenderServlet?file=/1/1/1/1/part1.html
+
+}}}
+
+Essa página carrega a primeira pagina da lição que será o arquivo part1.html
+A partir dela part1.html irá chamar a próxima parte e assim por diante. 
+
+
+Para os modulos de audio, score e julius deve-se utilizar os seguintes endereços:
+
+RenderServlet?file=/globals/applets/?????????
+RenderServlet?file=/globals/applets/?????????
+RenderServlet?file=/globals/applets/?????????
+RenderServlet?file=/globals/applets/?????????
