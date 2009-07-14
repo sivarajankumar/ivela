@@ -38,6 +38,7 @@
         <label><s:text name="course.input.contents" /></label><br/>
         <s:textarea name="course.contents" cssClass="textarea-course"/><br/>
         
+        
         <s:submit key="course.edit.submit" cssClass="btn-save"/>
         <s:a href="course!list.action" cssClass="btn-cancel"><s:text name="course.edit.cancel" /></s:a>
     </s:form>

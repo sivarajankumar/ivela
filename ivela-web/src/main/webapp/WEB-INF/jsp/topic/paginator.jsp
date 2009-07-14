@@ -9,7 +9,7 @@
 
 <div class="pages" >
     <s:if test="pageCount > 1" > 
-        <a href="" class="pages-all"><s:property value="pageCount"/> page(s)</a>
+        <a href="" class="pages-all"><s:property value="pageCount"/> <s:text name="forum.page"/> </a>
         <ul class="pagination">
             
             <s:if test="page == 1 && pageCount >= 3">

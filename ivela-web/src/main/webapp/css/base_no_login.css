@@ -1,0 +1,43 @@
+@charset utf-8;
+/* CSS Document */*{margin:0;padding:0;}
+.clear{clear:both;height:0;font-size:1px;line-height:0;}
+html,body{overflow-x: hidden; background:url(../images/bg_standard2.jpg) #fff repeat-x top left;}
+#container{width:960px;height:auto; min-height:100%;margin:0 auto;text-align:left;font-family:Arial, Helvetica, sans-serif;}
+a{color:#033d7d;}
+a:hover{color:#ff6600;}
+#header{width:960px;height:130px;background:url(../images/bg-ballons2-small.jpg) no-repeat top left;padding-top:19px;}
+#header .logotipo{width:178px;height:118px;float:left;background:url(../images/ivela-logo-full.gif) no-repeat 0 0;text-indent:-999px;overflow:hidden;}
+#header .profile{width:213px;height:110px;position:relative;float:right;margin-top:-12px;padding:10px 0 0 25px;background:url(../images/bg_profile.jpg) no-repeat top left;}
+#header .profile p{font:bold 11px Arial, Helvetica, sans-serif;color:#033d7d;}
+#header .profile img{float:left;margin-right:11px;padding:1px;background:#fff;border:none;}
+#header .profile h2{color:#cc0000;font-size:15px;}
+#header .profile a{display:block;color:#003399;width:100px;font-weight:bold;font-size:11px;}
+#header .profile a:hover{color:#ff6600;}
+#header .profile .logout{float:left;width:56px;height:23px;position:absolute;top:25px;right:25px;background:url(../images/bottons/btn-logout-admin.gif) no-repeat top left;text-indent:-999px;overflow:hidden;}
+#header .profile .logout:hover{background:url(../images/bottons/btn-logout-on.gif) no-repeat top left;}
+.language{width:960px;height:20px;text-align:right;}
+.language img{margin-left:10px;border:2px solid #fff;}
+.language img:hover{border-color:#ff9c00;}
+.first-access{font:bold 11px Arial, Helvetica, sans-serif;color:#666;margin-bottom:157px;}
+#content{width:100%;height:auto;margin-bottom:50px;padding-top:0;}
+#content h1{font:30px Arial, Helvetica, sans-serif;color:#ff7202;font-weight:bold;}
+#content h5{font:20px Arial, Helvetica, sans-serif;color:#ff7202;font-weight:bold;}
+.horizontal-line-t{border-top:3px solid #ffe79c;}
+.btn-save,.btn-cancel,.btn-back{font:14px Arial, Helvetica, sans-serif;color:#454545;text-decoration:none;font-weight:bold;padding:0 0 0 20px;margin:10px;}
+.btn-save:hover,.btn-cancel:hover,.btn-back:hover{cursor:pointer;color:#ff7202;}
+.btn-save{background:url(../images/icon/icon-save.gif) no-repeat left;}
+.btn-cancel{background:url(../images/icon/icon-cancel.gif) no-repeat left;}
+.btn-back{background:url(../images/arrow-left.gif) no-repeat left;}
+.tip-login{color:#666;font-size:16px;margin-bottom:20px;}
+.form-user{font-weight:bold;color:#666;font-family:Arial, Helvetica, sans-serif;margin:0 0 10px;}
+
+
+#footer{clear: both; position: relative; z-index: 10; height: 32px; margin-top: -32px; width:100%; background:url(../images/bg-footer.jpg) #696969 repeat-x top left;}
+#footer #content-footer{margin:0 auto;width:960px;height:auto;padding-top:8px;}
+#footer #content-footer .logo{float:right;}
+#footer #content-footer ul{list-style-type:none;float:left;margin:0;}
+#footer #content-footer ul li{display:inline;}
+#footer #content-footer ul li a{display:block;float:left;padding:0 10px;color:#fff;font:11px Arial, Helvetica, sans-serif;border-right:1px solid #fff;}
+#footer #content-footer p{display:block;float:left;padding:0 10px;color:#fff;font:11px Arial, Helvetica, sans-serif;}
+#footer #content-footer ul li a.last{border:none;}
+#footer #content-footer ul li a:hover{color:#999999;}

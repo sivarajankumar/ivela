@@ -51,7 +51,8 @@
     padding:0 0 0 30px;}
 
 .table-grades .title-enrollment{
-    font: bold 13px Arial, Helvetica, sans-serif; 
+    display: block;
+	font: bold 13px Arial, Helvetica, sans-serif; 
     color:#fff; 
     background:#033d7d;
     padding:3px;
@@ -71,7 +72,8 @@
     color:#444; }
 
 .table-courses .title-enrollment{
-    font: bold 13px Arial, Helvetica, sans-serif; 
+    display: block;
+	font: bold 13px Arial, Helvetica, sans-serif; 
     color:#fff; 
     background:#033d7d;
     padding:3px;

@@ -34,16 +34,16 @@
     font-size: 12px; 
     padding: 3px 3px 3px 13px;
     cursor: pointer;
-    border-bottom: 1px solid #fff;
-    margin:auto;}
+    border-bottom: 1px solid #fff;    
+    margin:0px;}
 .vertical_accordion_toggle_active{
     background:url(../images/arrow-downer.gif) #FFF no-repeat 0;
     color: #FF7202;
     font-size: 12px; 
     font-weight:bolder;
     padding: 3px 3px 3px 13px; 
-    cursor: pointer;
-    margin:auto;}
+    cursor: pointer;    
+    margin:0px;}
 .vertical_accordion_content{
     padding: 10px;
     overflow: hidden;
@@ -57,6 +57,7 @@
     padding: 3px 3px 3px 15px; 
     border-bottom: 1px solid #fff;
     cursor: pointer;
+    margin:0px;
 }
 .vertical_accordion_toggle_active2{
     background:url(../images/icon/btn-less-small.gif) #FFF no-repeat 0;  

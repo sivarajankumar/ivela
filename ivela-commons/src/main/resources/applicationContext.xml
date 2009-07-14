@@ -54,14 +54,12 @@
                 <value>br.ufc.ivela.commons.model.Chat</value>
                 <value>br.ufc.ivela.commons.model.Challenge</value>
                 <value>br.ufc.ivela.commons.model.ChallengeItems</value>
-                <value>br.ufc.ivela.commons.model.ChallengerResult</value>
-                <value>br.ufc.ivela.commons.model.Country</value>
+                <value>br.ufc.ivela.commons.model.ChallengerResult</value>                
                 <value>br.ufc.ivela.commons.model.Course</value>
                 <value>br.ufc.ivela.commons.model.CourseRequisite</value>
                 <value>br.ufc.ivela.commons.model.Dictionary</value>
                 <value>br.ufc.ivela.commons.model.Discipline</value>
-                <value>br.ufc.ivela.commons.model.Enrollment</value>
-                <value>br.ufc.ivela.commons.model.Ethnicity</value>
+                <value>br.ufc.ivela.commons.model.Enrollment</value>                
                 <value>br.ufc.ivela.commons.model.Exam</value>
                 <value>br.ufc.ivela.commons.model.Exercise</value>
                 <value>br.ufc.ivela.commons.model.ExternalAnswerStudentExam</value>
@@ -77,12 +75,9 @@
                 <value>br.ufc.ivela.commons.model.Grade</value>
                 <value>br.ufc.ivela.commons.model.GradeNote</value>
                 <value>br.ufc.ivela.commons.model.History</value>
-                <value>br.ufc.ivela.commons.model.HistoryParams</value>
-                <value>br.ufc.ivela.commons.model.Honorific</value>
-                <value>br.ufc.ivela.commons.model.LanguageInternationalization</value>
+                <value>br.ufc.ivela.commons.model.HistoryParams</value>                                
                 <value>br.ufc.ivela.commons.model.Language</value>
-                <value>br.ufc.ivela.commons.model.LanguageSystemUser</value>
-                <value>br.ufc.ivela.commons.model.LocationType</value>
+                <value>br.ufc.ivela.commons.model.LanguageSystemUser</value>                
                 <value>br.ufc.ivela.commons.model.Message</value>
                 <value>br.ufc.ivela.commons.model.Note</value>
                 <value>br.ufc.ivela.commons.model.NpdUser</value>
@@ -101,8 +96,7 @@
                 <value>br.ufc.ivela.commons.model.QuestionExercise</value>
                 <value>br.ufc.ivela.commons.model.Question</value>
                 <value>br.ufc.ivela.commons.model.QuestionText</value>
-                <value>br.ufc.ivela.commons.model.SentenceAuditiveQuestion</value>
-                <value>br.ufc.ivela.commons.model.State</value>
+                <value>br.ufc.ivela.commons.model.SentenceAuditiveQuestion</value>                
                 <value>br.ufc.ivela.commons.model.StudentExam</value>
                 <value>br.ufc.ivela.commons.model.StudentExercise</value>
                 <value>br.ufc.ivela.commons.model.SystemUserChat</value>

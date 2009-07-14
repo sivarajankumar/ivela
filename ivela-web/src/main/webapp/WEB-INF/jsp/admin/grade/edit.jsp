@@ -1,7 +1,24 @@
-<%-- 
-    Document   : edit Grade
-    Created on : Aug 7, 2008, 9:14:56 AM
-    Author     : leoomoreira
+<%--    
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: edit.jsp                                                                            #
+# Document: Admin Grade Edit Page                                                           # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 07-AUG-2008 - Leonardo Oliveira Moreira         - XXXXXX - Initial Version                #
+# 26-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - i18n fix                       #
+#############################################################################################
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -38,11 +55,11 @@
         <label><s:text name="grade.input.maxStudents" /></label><br />
         <s:textfield name="grade.maxStudents" cssClass="name-grade" /><br />
         <label><s:text name="grade.input.status" /></label><br />
-        <s:select name="grade.status" list="#{'0':'Inactive', '1':'Period of enrollment', '2':'Registration finished'}" /><br />
+        <s:select name="grade.status" list="gradeStatusList" /><br />
         <label><s:text name="grade.input.coordinator" /></label><br />
         <s:select list="systemUserList" listKey="id" listValue="username" name="grade.coordinator.id" /><br />
         <label><s:text name="grade.input.requiresEnrollmentValidation" /></label><br />
-        <s:radio name="grade.requiresEnrollmentValidation" value="false" list="#{'true':'true','false':'false'}" /><br />
+        <s:radio name="grade.requiresEnrollmentValidation" value="false" list="radioBooleanList" /><br />
         <label><s:text name="grade.input.startDatetime" /></label><br/>
         <cal:jscalendar name="grade.startDatetime" title="grade.input.startDatetime" /><br />
         <label><s:text name="grade.input.endDatetime" /></label><br />
