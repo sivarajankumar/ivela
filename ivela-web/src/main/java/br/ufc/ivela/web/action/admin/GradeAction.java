@@ -1,6 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/*###########################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: GradeAction.java                                                                    #
+# Document: Grade Admin Action                                                              #
+# Date        - Author(Company)                    - Issue# - Summary                       #
+# XX-XXX-XXX -  nelson                             - XXXXXX - Initial Version               #
+# 26-JUN-2009 - otofuji (Instituto Eldorado)       - 000010 - General i18n Fixes            #
+#############################################################################################    
  */
 package br.ufc.ivela.web.action.admin;
 
@@ -40,7 +57,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,10 +71,6 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
-/**
- *
- * @author nelson
- */
 public class GradeAction extends GenericAction {
 
     private List<Grade> gradeList;
@@ -1592,6 +1607,20 @@ public class GradeAction extends GenericAction {
 
     public void setText(String text) {
         this.text = text;
+    }
+    
+    /**
+     * Retrieve the possible Grade Status Value properly translated.
+     * 
+     * @return A Map with the options for the Grade Status
+     */
+    public Map<Integer, String> getGradeStatusList() {
+        Map<Integer, String> gradeStatusList = new LinkedHashMap<Integer, String>();
+        gradeStatusList.put(0, getText("grade.input.inactive", "Inactive"));
+        gradeStatusList.put(1, getText("grade.input.periodOfEnrollment", "Period of enrollment"));
+        gradeStatusList.put(2, getText("grade.input.finished", "Registration finished"));
+        
+        return gradeStatusList;
     }
 }
 

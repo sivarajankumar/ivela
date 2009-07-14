@@ -1,6 +1,8 @@
 @charset "utf-8";
 /* Tabela para exibir notas no boletim */
 
+body {background-color: transparent; background: url(../images/bg_standard2.jpg) #fff repeat-x 0 0;}
+
 .titulo-exercises-result {font: bold 20px Arial, Helvetica, sans-serif; color:#ff7202; margin-top:20px;}
 .legend-correct {font: bold 10px Arial, Helvetica, sans-serif; color:#ff7202; margin-top:20px;}
 

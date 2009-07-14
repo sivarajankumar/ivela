@@ -1,63 +1,66 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: ProfileAction.java                                                                  #
+# Document: Profile Action                                                                  # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - Leonardo Moreira                  - XXXXXX - Initial Version                #
+# 22-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Fixes                  #
+#############################################################################################
+*/
+
 package br.ufc.ivela.web.action;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import br.ufc.ivela.commons.Constants;
 import br.ufc.ivela.commons.ContentPackageUtils;
 import br.ufc.ivela.commons.model.Address;
-import br.ufc.ivela.commons.model.Country;
-import br.ufc.ivela.commons.model.Ethnicity;
-import br.ufc.ivela.commons.model.Honorific;
-import br.ufc.ivela.commons.model.LanguageInternationalization;
-import br.ufc.ivela.commons.model.LocationType;
 import br.ufc.ivela.commons.model.Phone;
 import br.ufc.ivela.commons.model.Profile;
-import br.ufc.ivela.commons.model.State;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.ejb.interfaces.AddressRemote;
-import br.ufc.ivela.ejb.interfaces.CountryRemote;
-import br.ufc.ivela.ejb.interfaces.EthnicityRemote;
-import br.ufc.ivela.ejb.interfaces.HonorificRemote;
-import br.ufc.ivela.ejb.interfaces.LanguageInternationalizationRemote;
-import br.ufc.ivela.ejb.interfaces.LocationTypeRemote;
 import br.ufc.ivela.ejb.interfaces.PhoneRemote;
 import br.ufc.ivela.ejb.interfaces.ProfileRemote;
-import br.ufc.ivela.ejb.interfaces.StateRemote;
 import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
-import com.opensymphony.xwork2.Preparable;
+import br.ufc.ivela.interceptors.interfaces.ProfileDataProvider;
+import br.ufc.ivela.services.PropertiesUtil;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.struts2.components.ActionError;
 
-/**
- *
- * @author Leonardo Moreira
- */
-public class ProfileAction extends GenericAction implements Preparable {
+public class ProfileAction extends GenericAction implements ProfileDataProvider {
 
     private ProfileRemote profileRemote;
-    private Profile profile;
-    private Country country;
+    private Profile profile;    
     private SystemUserRemote systemUserRemote;
     private SystemUser systemUser;
-    private List<Profile> profileList;
-    private HonorificRemote honorificRemote;
+    private List<Profile> profileList;    
     private AddressRemote addressRemote;
     private PhoneRemote phoneRemote;
-    private StateRemote stateRemote;
-    private List<Honorific> honorificList;
-    private List<LanguageInternationalization> languageInternationalizationList;
-    private LanguageInternationalizationRemote languageInternationalizationRemote;
-    private EthnicityRemote ethnicityRemote;
-    private List<Ethnicity> ethnicityList;
+    private Map<String, String> stateList;
+    private Map<Integer, String> ethnicityList;
+    private Map<String, String> genderList;
+    private Map<Boolean, String> disabilitiesList;
+//    private List<Language> languageList;
     private Address[] address;
     private Phone[] phone;
     private boolean sucess = false;
@@ -65,32 +68,14 @@ public class ProfileAction extends GenericAction implements Preparable {
     private String uploadContentType;
     private String uploadFileName;
     private String oldPhoto;
-    private List<Country> countryList;
-    private List<LocationType> locationTypeList;
-    private List<Phone> listPhones;
-    private LocationTypeRemote locationTypeRemote;
-    private CountryRemote countryRemote;
+    private Map<Integer, String> countryList;    
+    private List<Phone> listPhones;    
     private Address inAddress;
     private String path = Constants.FILE_UPLOAD_PATH + "profiles/";
     private XStream xStream = new XStream(new JettisonMappedXmlDriver());
     private InputStream inputStream;
-
-    public void prepare() throws Exception {
-        //retrieves the honorific list
-        honorificList = honorificRemote.getAll();
-
-        // retrieves the language internationalization list
-        languageInternationalizationList = languageInternationalizationRemote.getAll();
-
-        // retrieves the ethnicity list
-        ethnicityList = ethnicityRemote.getAll();
-        
-        // retrieves the locationType list
-        locationTypeList = locationTypeRemote.getAll();
-        // retrieves the country list
-        countryList = countryRemote.getAll();
-    }
-
+    private String dateFormat;
+    
     /**
      * Add a new profile
      * @return a list of profiles
@@ -137,15 +122,10 @@ public class ProfileAction extends GenericAction implements Preparable {
         if (systemUser.getProfileId() != null) {
             profile = profileRemote.get(systemUser.getProfileId());
             inAddress = addressRemote.getByProfile(profile.getId());
-            if (inAddress == null) {
-                inAddress = new Address();
-                inAddress.setState(stateRemote.get(1L));
-            }
-            inAddress.getState().getCountry().setStates(stateRemote.getByCountry(inAddress.getState().getCountry().getId()));
+       
             listPhones = phoneRemote.getByProfile(profile.getId());
         } else {
-            profile = new Profile();
-
+            profile = new Profile();            
             Long profileId = profileRemote.add(profile);
 
             profile.setId(profileId);
@@ -200,6 +180,14 @@ public class ProfileAction extends GenericAction implements Preparable {
                     addActionError(getText("profile.upload.error"));
                     profile.setPhoto(oldFromSession);
                     resul = false;
+                } else {                    
+                    try {                         
+                        if (!oldFromSession.equals(profile.getPhoto())) {
+                            java.io.File oldFile = new File(oldFromSession);
+                            oldFile.delete();
+                        }
+                    } catch (Exception e) {
+                    }
                 }
             }else{
                 addActionError(getText("profile.upload.invalidType"));
@@ -224,23 +212,28 @@ public class ProfileAction extends GenericAction implements Preparable {
     }
 
     public String getStatesByCountry() {
-        List<State> l = stateRemote.getByCountry(country.getId());
-        logger.log(l.toString());
-        xStream.alias("state", State.class);
+        stateList = PropertiesUtil.getPropertiesUtil().getStates(
+                this.inAddress.getCountry());                      
+        xStream.alias("state", String.class);
         xStream.alias("list", List.class);
-        xStream.omitField(Country.class, "country");
-        String json = xStream.toXML(l);
-        logger.log(json);
+        if (stateList.containsKey("")) {
+            stateList.put("", getText("profile.state", stateList.get("")));
+        }
+        
+        // Returns a List where odd numbers are the values for the select
+        // and even are the text to show for the user.
+        
+        List<String> stateKeyValueList = new ArrayList<String>(
+                stateList.size() * 2);
+        for (Entry<String, String> entry : stateList.entrySet()) {
+            stateKeyValueList.add(entry.getKey());
+            stateKeyValueList.add(entry.getValue());
+        }
+        
+        String json = xStream.toXML(stateKeyValueList);
+        //logger.log(json);
         setInputStream(new ByteArrayInputStream(json.getBytes()));
         return "json";
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
     }
 
     public InputStream getInputStream() {
@@ -249,14 +242,6 @@ public class ProfileAction extends GenericAction implements Preparable {
 
     public void setInputStream(InputStream inputStream) {
         this.inputStream = inputStream;
-    }
-
-    public StateRemote getStateRemote() {
-        return stateRemote;
-    }
-
-    public void setStateRemote(StateRemote stateRemote) {
-        this.stateRemote = stateRemote;
     }
 
     public XStream getXStream() {
@@ -331,21 +316,21 @@ public class ProfileAction extends GenericAction implements Preparable {
         this.address = address;
     }
 
-    public List<Ethnicity> getEthnicityList() {
+    public Map<Integer, String> getEthnicityList() {
         return ethnicityList;
     }
 
-    public void setEthnicityList(List<Ethnicity> ethnicityList) {
+    public void setEthnicityList(Map<Integer, String> ethnicityList) {
         this.ethnicityList = ethnicityList;
     }
 
-    public List<LanguageInternationalization> getLanguageInternationalizationList() {
-        return languageInternationalizationList;
-    }
+//    public List<Language> getLanguageList() {
+//        return languageList;
+//    }
 
-    public void setLanguageInternationalizationList(List<LanguageInternationalization> languageInternationalizationList) {
-        this.languageInternationalizationList = languageInternationalizationList;
-    }
+//    public void setLanguageList(List<Language> languageList) {
+//        this.languageList = languageList;
+//    }
 
     public Phone[] getPhone() {
         return phone;
@@ -361,73 +346,6 @@ public class ProfileAction extends GenericAction implements Preparable {
      */
     public void setProfileList(List<Profile> profileList) {
         this.profileList = profileList;
-    }
-
-    /**
-     * Retrieves the value of systemUserRemote variable
-     * 
-     * @return systemUserRemote
-     */
-    public EthnicityRemote getEthnicityRemote() {
-        return ethnicityRemote;
-    }
-
-    /**
-     *Sets the value of systemUserRemote variable
-     * @param systemUserRemote
-     */
-    public void setEthnicityRemote(EthnicityRemote ethnicityRemote) {
-        this.ethnicityRemote = ethnicityRemote;
-    }
-
-    /**
-     * Retrieves the value of honorificRemote variable
-     * 
-     * @return honorificRemote
-     */
-    public HonorificRemote getHonorificRemote() {
-        return honorificRemote;
-    }
-
-    /**
-     *Sets the value of honorificRemote variable
-     * @param honorificRemote
-     */
-    public void setHonorificRemote(HonorificRemote honorificRemote) {
-        this.honorificRemote = honorificRemote;
-    }
-
-    /**
-     * Retrieves the value of systemUserRemote variable
-     * 
-     * @return systemUserRemote
-     */
-    public LanguageInternationalizationRemote getLanguageInternationalizationRemote() {
-        return languageInternationalizationRemote;
-    }
-
-    /**
-     *Sets the value of systemUserRemote variable
-     * @param systemUserRemote
-     */
-    public void setLanguageInternationalizationRemote(LanguageInternationalizationRemote languageInternationalizationRemote) {
-        this.languageInternationalizationRemote = languageInternationalizationRemote;
-    }
-
-    /**
-     * Retrieves a list of honorific
-     * @return honorificList
-     */
-    public List<Honorific> getHonorificList() {
-        return honorificList;
-    }
-
-    /**
-     * Sets a list of honorific
-     * @param honorificList
-     */
-    public void setHonorificList(List<Honorific> honorificList) {
-        this.honorificList = honorificList;
     }
 
     /**
@@ -542,36 +460,18 @@ public class ProfileAction extends GenericAction implements Preparable {
         this.systemUserRemote = systemUserRemote;
     }
 
-    public List<Country> getCountryList() {
+    public Map<Integer, String> getCountryList() {        
         return countryList;
     }
 
-    public void setCountryList(List<Country> countryList) {
-        this.countryList = countryList;
-    }
-
-    public CountryRemote getCountryRemote() {
-        return countryRemote;
-    }
-
-    public void setCountryRemote(CountryRemote countryRemote) {
-        this.countryRemote = countryRemote;
-    }
-
-    public List<LocationType> getLocationTypeList() {
-        return locationTypeList;
-    }
-
-    public void setLocationTypeList(List<LocationType> locationTypeList) {
-        this.locationTypeList = locationTypeList;
-    }
-
-    public LocationTypeRemote getLocationTypeRemote() {
-        return locationTypeRemote;
-    }
-
-    public void setLocationTypeRemote(LocationTypeRemote locationTypeRemote) {
-        this.locationTypeRemote = locationTypeRemote;
+    public void setCountryList(Map<Integer, String> countryList) {
+        if (this.countryList == null) {
+            if ((countryList == null)||(countryList.isEmpty())) {            
+                
+            } else {
+                this.countryList = countryList;
+            }
+        }
     }
 
     public String getUploadContentType() {
@@ -582,5 +482,49 @@ public class ProfileAction extends GenericAction implements Preparable {
         this.uploadContentType = uploadContentType;
     }
     
+    /**
+     * Retrieves the Map of Gender based on the Current Set Language;
+     * 
+     * @return a Map instance with the genders for the current language.
+     */
+    public Map<String,String> getGenderList() {
+        
+        return genderList;
+    }
+
+    public void setGenderList(Map<String, String> genderList) {
+        this.genderList = genderList;
+        
+    }
+    
+    public Map<String, String> getStateList() {
+        if (null == stateList) {
+            if (inAddress != null) {
+            stateList = PropertiesUtil.getPropertiesUtil().getStates(
+                    inAddress.getCountry());
+            } else {
+                stateList = PropertiesUtil.getPropertiesUtil().getStates(1);
+            }
+        }
+        
+        return stateList;
+    }
+
+    public Map<Boolean, String> getDisabilitiesList() {        
+       return disabilitiesList;
+    }
+    
+    public void setDisabilitiesList(Map<Boolean, String> disabilitiesList) {
+        this.disabilitiesList = disabilitiesList;
+    }
+
+    public String getDateFormat() {
+       return this.dateFormat; 
+    }
+    
+    public void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
+        
+    }        
     
 }

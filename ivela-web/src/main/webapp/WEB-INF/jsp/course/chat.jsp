@@ -13,12 +13,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ivela Chat</title>
+        <title><s:text name="chat.title"/>t</title>
     </head>
     <body>
         
 <center>
-    <h2>Chat</h2>
+    <h2><s:text name="chat.name"/></h2>
 <applet code="org.jdamico.ircivelaclient.view.HandleApplet"
 	archive="http://200.17.41.212/public_content/chatlib/ivela_chat.jar, http://200.17.41.212/public_content/chatlib/jerklib.jar"
 	

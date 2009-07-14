@@ -1,7 +1,24 @@
-<%--
-    Document   : input
-    Created on : Jun 5, 2008, 9:14:56 AM
-    Author     : leoomoreira
+<%--    
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: main.jsp                                                                            #
+# Document: Decorator for main pages                                                        # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 05-JUN-2008 - leoomoreira                       - XXXXXX - Initial Version                #
+# 08-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+#############################################################################################
 --%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
@@ -51,11 +68,11 @@
                 <div class="profile">
 
                     <%--<s:property value="profilePhoto" />--%>
-                    <span><!--img src="RenderServletProfile?id=<%= systemUser.getId()%>" title="Perfil" height="54px" width="54px" /--></span>
+                    <span><img src="RenderServletProfile?id=<%= systemUser.getId()%>" title="Perfil" style="height: auto; width:auto; max-height: 43px; max-width: 43px;"/></span>
                     <h2><%= (systemUser.getProfile() != null && !systemUser.getProfile().getFirstName().isEmpty()) ? systemUser.getProfile().getFirstName() : systemUser.getUsername()%></h2>
                     <p></p>
 
-                    <a  href="profile!edit.action" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"><s:text name="front.editProfile" /></a>
+                    <a  href="profile!edit.action" style="font-size: 11px; float: left;" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"><s:text name="front.editProfile" /></a>
                     <a href="j_spring_security_logout" class="logout" title="<s:property value="front.logout" />"><s:property value="front.logout" /></a>
                 </div>
                 <!-- end profile -->
@@ -64,7 +81,7 @@
             <!-- end header -->
 
             <div class="tools">
-                <span class="btn-tools" onclick="Effect.toggle('hidden', 'blind')" title="<s:text name="main.tools" />"><!--img src="images/icon/icon-tools.gif" /--><!--s:text name="main.tools"/--><!--img src="images/icon/icon-tools-arrow.gif" /--></span>
+                <span class="btn-tools" onclick="Effect.toggle('hidden', 'slide')" title="<s:text name="main.tools" />"><!--img src="images/icon/icon-tools.gif" /--><!--s:text name="main.tools"/--><!--img src="images/icon/icon-tools-arrow.gif" /--></span>
 
                 <div class="container-tools" id="hidden" style="display:none;">
                     <div class="content-tools">
@@ -99,6 +116,9 @@
                 </ul>
             </div>
 
+            <div class="horizontal-line-t">                 
+            </div>
+            
             <script>
                 var get = "<%=request.getRequestURI()%>";
                 var action = get.substring(get.lastIndexOf('/') + 1);

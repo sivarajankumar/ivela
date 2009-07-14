@@ -1,6 +1,24 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/*###########################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: GenericAction.java                                                                  #
+# Document: Generic Action                                                                  #
+# Date        - Author(Company)                    - Issue# - Summary                       #
+# XX-XXX-XXX -  marcus                             - XXXXXX - Initial Version               #
+# 19-JUN-2009 - Mileine Assato (Instituto Eldorado)- 000010 - Post owner username/role added#
+# 26-JUN-2009 - otofuji (Instituto Eldorado)       - 000010 - General Fixes                 #
+#############################################################################################    
  */
 package br.ufc.ivela.web.action;
 
@@ -13,12 +31,14 @@ import br.ufc.ivela.ejb.interfaces.HistoryRemote;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.springframework.security.context.SecurityContextHolder;
 import org.springframework.security.userdetails.UserDetails;
+import org.springframework.security.GrantedAuthority;
 
 /**
  *
@@ -49,10 +69,34 @@ public abstract class GenericAction extends ActionSupport {
     public SystemUser getAuthenticatedUser() {
 
         Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
+        SystemUser systemUser = null;
         if (obj != null) {
             if (obj instanceof UserDetails) {
-                return (SystemUser) obj;
+            	systemUser	= (SystemUser)obj;
+            	GrantedAuthority[] authorities = ((SystemUser) obj).getAuthorities();
+
+                for (GrantedAuthority authority : authorities) {
+                    
+                    String authentication = authority.getAuthority();
+                    
+                    if (authentication.equals("ROLE_ADMIN") || 
+                        authentication.equals("ROLE_COORD") || 
+                        authentication.equals("ROLE_TUTOR") ||
+                        authentication.equals("ROLE_PROFESSOR") ) {
+                    	Map<String,String> session = ActionContext.getContext().getSession();
+                		session.put("role","admin");break;
+                        
+                    }
+                    else {
+                    	Map<String,String> session = ActionContext.getContext().getSession();
+                    	session.put("role","student");
+                    }
+                }
+            	Map<String,String> session = ActionContext.getContext().getSession();
+            		session.put("username",systemUser.getUsername());
+            	
+            	return systemUser ;
+            
             } else {
                 return null;
             }
@@ -196,4 +240,18 @@ public abstract class GenericAction extends ActionSupport {
             }
         }
     }
+    
+    /**
+     * Gets a List to be used in a Radio Boolean Button
+     *  
+     * @return a Map with the proper translations for the current language.
+     */
+    public Map<Boolean, String> getRadioBooleanList() {
+        Map<Boolean, String> radioBooleanList = new LinkedHashMap<Boolean, String>();
+        radioBooleanList.put(Boolean.TRUE, getText("general.true", "true"));
+        radioBooleanList.put(Boolean.FALSE, getText("general.false", "false"));
+        
+        return radioBooleanList;
+    }
+    
 }

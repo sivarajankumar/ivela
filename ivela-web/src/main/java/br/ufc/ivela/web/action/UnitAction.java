@@ -1,7 +1,25 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: UnitAction.java                                                                     #
+# Document: Action for Units                                                                # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - Maristella Myrian                 - XXXXXX - Initial Version                #
+# 24-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Fixes                  #
+#############################################################################################
+*/
 package br.ufc.ivela.web.action;
 
 import br.ufc.ivela.commons.model.Discipline;
@@ -14,10 +32,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
 
-/**
- *
- * @author Maristella Myrian
- */
 public class UnitAction extends GenericAction {
 
     private UnitRemote unitRemote;
@@ -27,47 +41,12 @@ public class UnitAction extends GenericAction {
     private InputStream inputStream;
 
     /**
-     * Add a new Unit by discipline
-     */
-    public String add() {
-        discipline = unit.getDiscipline();
-        unitRemote.add(unit);
-        return listByDiscipline();
-    }
-
-    /**
-     * Remove a Unit of one discipline
-     */
-    public String remove() {
-        unitRemote.remove(unit.getId());
-        return listByDiscipline();
-    }
-
-    /**
-     * Sets the variables to be used on the input Unit
-     */
-    @Override
-    public String input() {
-        return INPUT;
-    }
-
-    /**
      * List all Unit of 
      */
     public String list() {
         List<Unit> unitList = unitRemote.getAll();
         setUnitList(unitList);
         return "list";
-    }
-
-    /**
-     * Edit a unit
-     * @return edit
-     */
-    public String edit() {
-        Unit aux = unitRemote.get(unit.getId());
-        setUnit(aux);
-        return "edit";
     }
 
     /**

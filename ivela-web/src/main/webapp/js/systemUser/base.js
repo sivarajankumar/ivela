@@ -3,6 +3,24 @@
  * and open the template in the editor.
  */
 
+
+
+Event.observe(window, 'load', function() {
+    if(isAvailable('toolsUser')){
+        Event.observe($('toolsUser'), 'click', function(){
+            hideFields('hidden', 'blind');
+            selectStates($('country').value);
+        })
+    }
+});
+
+// If an Element with an specific id is available
+function isAvailable(element) {
+    if ($(element)) {
+        return true;
+    }
+}
+
 var hide = true;
 function hideFields(s1, s2){
     Effect.toggle(s1, s2);
@@ -13,6 +31,7 @@ function hideFields(s1, s2){
     }else{
         $('toolsUser').innerHTML = labelHideFields;
     }
+    
 }
 
 function mascara(o,field){
@@ -47,7 +66,7 @@ function doDate(pStr)
     if (reDate.test(pStr)) {
                    
     } else if (pStr != null && pStr != "") {
-        alert(pStr + " NÃO é uma data válida.");
+        alert(pStr + " Not a valid date.");
     }
 } // doDate
 
@@ -56,23 +75,37 @@ function doDate(pStr)
  * Remove
  */
 function phone(v){
+    // Temp Solution so it will only format Brazilian Phones
+    var countrySel = $("country");    
+    var countrySelected =countrySel[countrySel.selectedIndex];
+    if (countrySelected.value == "1") {
     v=v.replace(/\D/g,"")
     v=v.replace(/^(\d\d)(\d)/g,"($1) $2") 
-    v=v.replace(/(\d{4})(\d)/,"$1-$2") 
+    v=v.replace(/(\d{4})(\d)/,"$1-$2")
+    }
     return v
 }
 
 function socialnumber(v){
+    // Temp Solution so it will only format Brazilian social numbers
+    var countrySel = $("country");    
+    var countrySelected =countrySel[countrySel.selectedIndex];
+    if (countrySelected.value == "1") {
     v=v.replace(/\D/g,"") 
     v=v.replace(/(\d{3})(\d)/,"$1.$2") 
     v=v.replace(/(\d{3})(\d)/,"$1.$2") 
     v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
+    }
     return v
 }
 
 function zipcode(v){
-    v=v.replace(/\D/g,"") 
-    v=v.replace(/^(\d{5})(\d)/,"$1-$2")
+    var countrySel = $("country");    
+    var countrySelected =countrySel[countrySel.selectedIndex];
+    if (countrySelected.value == "1") {
+        v=v.replace(/\D/g,"") 
+        v=v.replace(/^(\d{5})(\d)/,"$1-$2")
+    }
     return v
 }
  
@@ -99,4 +132,51 @@ function showUnits(disciplineId) {
         onFailure: function() { alert('Message: Something went wrong...') }
     });          
     return html;
+}
+
+function selectStates(countryId) {
+    var url = "profile!getStatesByCountry.action";
+    var params = "inAddress.country=" + countryId;
+    var json = getJsonFromUrlPost(url, params);    
+    var html = "";      
+    var i;            
+    // IE has a known bug where is not possible to set the innerHtml of a select
+    if (Prototype.Browser.IE) {
+        html = '<SELECT id="stateId" name="inAddress.state">';
+    }
+    if ((json != undefined) && (json.list != "")) {
+        for (i = 0; i < json.list.state.length; i += 2) {
+            if (i == 0)
+                html += "<option value='" + json.list.state[i] + "' selected>"
+                        + json.list.state[i + 1] + "</option>";
+            else
+                html += "<option value='" + json.list.state[i] + "'>"
+                        + json.list.state[i + 1] + "</option>";
+        }        
+    } else {
+        html += "<option value='' selected> </option>";
+    }
+    
+    if (Prototype.Browser.IE) {
+        html += "</SELECT>";            
+        $('stateId').outerHTML = html;
+    } else {
+        $('stateId').innerHTML = html;
+    }        
+}
+
+function getJsonFromUrlPost(url, params){
+    var json = '';
+    new Ajax.Request(url,
+    {
+        method:'post',
+        parameters: params,
+        requestHeaders: {Accept: 'application/json'},
+        asynchronous: false,
+        onSuccess: function(transport) {
+            json = transport.responseText.evalJSON(true);
+        },
+        onFailure: function() { alert('Message: Something went wrong...') }
+    });
+    return json;
 }

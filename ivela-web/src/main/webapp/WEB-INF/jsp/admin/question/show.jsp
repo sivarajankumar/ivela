@@ -74,11 +74,11 @@
                 </applet> 
             </center>
             
-            <b>Listen and read the text bellow:</b> <br /> <br />
+            <b><s:text name="question.list.listread"/></b> <br /> <br />
             
             <p>"<s:property value="question.question" />" </p><br />
             
-            <b>Mark the correct answer:</b> <br /> <br />
+            <b><s:text name="question.edit.markanswer"/></b> <br /> <br />
             
             <p>
                 <s:iterator value="listReading">
@@ -152,7 +152,7 @@
             <s:url id="editUrl" action="question" method="edit">
                 <s:param name="question.id" value="question.id"/>
             </s:url>
-            <s:a href="%{editUrl}">Edit Question</s:a>
+            <s:a href="%{editUrl}"><s:text name="question.edit.sessionTitle"/></s:a>
         </s:else>
     </s:else>
     
