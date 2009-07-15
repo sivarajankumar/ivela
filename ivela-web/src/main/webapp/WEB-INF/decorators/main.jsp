@@ -16,8 +16,10 @@
 # File: main.jsp                                                                            #
 # Document: Decorator for main pages                                                        # 
 # Date        - Author(Company)                   - Issue# - Summary                        #
-# 05-JUN-2008 - leoomoreira                       - XXXXXX - Initial Version                #
-# 08-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+# 05-JUN-2008 - Leoo Moreira                      - XXXXXX - Initial Version                #
+# 08-JUN-2009 - Otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+# 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area and     # 
+#                                                            menu repositioning             #
 #############################################################################################
 --%>
 
@@ -64,7 +66,8 @@
         <div id="container">
 
             <div id="header">
-                <h1><a href="/ivela-web/index.jsp" class="logotipo" title="<s:property value="front.home.title" />"><s:text name="front.pageTitle" /></a></h1>
+                <h1><a href="/ivela-web/index.jsp" class="logotipo"  style="position:relative;top:-10px" title="<s:property value="front.home.title" />"><s:text name="front.pageTitle" /></a></h1>
+
                 <div class="profile">
 
                     <%--<s:property value="profilePhoto" />--%>
@@ -80,30 +83,10 @@
             </div>
             <!-- end header -->
 
+<div style="width:620px;position:relative;left:107px;top:-56px">
             <div class="tools">
                 <span class="btn-tools" onclick="Effect.toggle('hidden', 'slide')" title="<s:text name="main.tools" />"><!--img src="images/icon/icon-tools.gif" /--><!--s:text name="main.tools"/--><!--img src="images/icon/icon-tools-arrow.gif" /--></span>
 
-                <div class="container-tools" id="hidden" style="display:none;">
-                    <div class="content-tools">
-                        <div id="last_unit_content_div" style="display:none;">
-                            <p class="last-action">
-                                <span><s:text name="main.tools.lastLesson"/></span>
-
-                                <a href="discipline!showLastContent.action">
-                                    <span id="last_unit_content_title"></span>
-                                </a>
-                            </p>
-                        </div>
-
-                        <jsp:include page="../jsp/message/tools.jsp"/>
-                        
-                        <jsp:include page="../jsp/forum/tools.jsp"/>
-
-                        <br class="clear" />
-                    </div>
-                    <!-- end content-tools-->
-                </div>
-                <!-- end container-tools-->
             </div>
             <!-- end tools-->
 
@@ -137,9 +120,33 @@
                 $('menu_'+tab).setAttribute(classCss(),"current");
 
             </script>
-
             <!-- end menu -->
-            <div id="content">
+</div>
+
+<div class="tools" style="position:relative;top:-56px;left:-5px">
+                <div class="container-tools" id="hidden" style="display:none;">
+                    <div class="content-tools">
+                        <div id="last_unit_content_div" style="display:none;">
+                            <p class="last-action">
+                                <span><s:text name="main.tools.lastLesson"/></span>
+
+                                <a href="discipline!showLastContent.action">
+                                    <span id="last_unit_content_title"></span>
+                                </a>
+                            </p>
+                        </div>
+
+                        <jsp:include page="../jsp/message/tools.jsp"/>
+                        
+                        <jsp:include page="../jsp/forum/tools.jsp"/>
+
+                        <br class="clear" />
+                    </div>
+                    <!-- end content-tools-->
+                </div>
+                <!-- end container-tools-->
+</div>
+            <div id="content" style="position:relative;top:-50px;margin-bottom: 0px">
                 <s:actionmessage/>
 
                 <decorator:body/>
