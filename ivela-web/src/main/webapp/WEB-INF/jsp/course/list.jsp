@@ -19,6 +19,7 @@
 # 26-JUN-2008 - Maristella Myrian                 - XXXXXX - Initial Version                #
 # 01-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000007 - IE7 compatibility              #
 # 30-JUN-2009 - Mileine Assato(Instituto Eldorado)- 000010 - Courses available color fixed  # 
+# 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
 #############################################################################################
 --%>
 
@@ -29,14 +30,6 @@
 <link href="css/course.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/ead/tools.js"></script>
 </head>
-
-<div id="breadcrumb">
-    <p><s:text name="breadcrumb.youAreHere"/></p>
-    <ul>
-        <li><a href="index.jsp"><s:text name="home.name"/></a></li>
-        <li class="current"><s:text name="front.courses"/></li>
-    </ul>
-</div>
 
 <h1><s:text name="course.list.title"/></h1>
 <s:actionerror />

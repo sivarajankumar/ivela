@@ -1,5 +1,6 @@
-<%--    
-# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+<%--
+#############################################################################################
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                      #
 # This file is part of ivela project, an open-source                                        #
 # Program URL   : http://code.google.com/p/ivela/                                           #  
 #                                                                                           #
@@ -12,14 +13,14 @@
 # See the GNU General Public License for more details.                                      #  
 #                                                                                           #
 #############################################################################################
-# File: input.jsp                                                                           #
-# Document: My Score show page                                                              # 
+# File: list.jsp                                                                            #
+# Document: list Forum                                                                      # 
 # Date        - Author(Company)                   - Issue# - Summary                        #
-# 15-JUL-2008 - nelson                            - XXXXXX - Initial Version                #
-# 17-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+# 15-JUL-2008 - Nelson                            - XXXXXX - Initial Version                #
+# 17-JUN-2009 - Otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+# 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
 #############################################################################################
 --%>
-
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
@@ -85,13 +86,6 @@
     </script>
 </head>
 
-<div id="breadcrumb">
-    <p><s:text name="breadcrumb.youAreHere"/></p>
-    <ul>
-        <li><a href="index.jsp"><s:text name="home.name"/></a></li>
-        <li class="current"><s:text name="home.history"/></li>
-    </ul>
-</div>
 <br>
 <br> 
 <s:if test="!transcriptList.isEmpty()">

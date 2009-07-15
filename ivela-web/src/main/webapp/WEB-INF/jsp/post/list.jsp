@@ -20,6 +20,7 @@
 # 16-JUN-2009 - Fabio Fantato(Instituto Eldorado)  - 000010 - i18n bug fix                  #
 # 19-JUN-2009 - Mileine Assato (Instituto Eldorado)- 000010 - Post author username added    #
 # 24-JUN-2009 - Mileine Assato (Instituto Eldorado)- 000010 - i18n bug fix part II          #
+# 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
 #############################################################################################    
 --%>
 <%@ page import="org.springframework.security.context.SecurityContextHolder"%>
@@ -92,24 +93,6 @@
 <h1><s:property value="topic.forum.title" /></h1>
 <h4><s:property value="topic.title" /></h4>
 <s:actionmessage />
-<div id="breadcrumb">
-    <s:url id="listForum" includeParams="false" action="forum" method="list">
-        <s:param name="forum.id" value="forum.id"/>
-    </s:url>    
-    <s:url id="listTopic" includeParams="false" action="topic" method="listByForum">
-        <s:param name="forum.id" value="forum.id"/>
-    </s:url>        
-    <s:url id="listPost" includeParams="false" action="post" method="list">
-        <s:param name="forum.id" value="forum.id"/>
-        <s:param name="topic.id" value="topic.id"/>
-    </s:url>        
-    <p><s:text name="breadcrumb.youAreHere"/></p>
-    <ul>
-        <li><s:a href="%{listForum}"><s:text name="forum.breadcrumb"/></s:a></li>
-        <li><s:a href="%{listTopic}"><s:text name="topic.breadcrumb"/></s:a></li>
-        <li class="current"><s:a href="%{listPost}"><s:text name="post.breadcrumb"/></s:a></li>
-    </ul>
-</div>
 <div id="post">
     <s:iterator value="postList" status="pstat">
         <table id="forum">

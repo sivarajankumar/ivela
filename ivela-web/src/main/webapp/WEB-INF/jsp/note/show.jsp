@@ -18,6 +18,7 @@
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 22-OCT-2008 - Marcus                            - XXXXXX - Initial Version                #
 # 10-JUN-2009 - Rafael Lagoa (Instituto Eldorado) - 000007 - IE7 compatibility              #
+# 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
 #############################################################################################
 --%>
 
@@ -50,14 +51,6 @@
             }
 
 %>
-
-<div id="breadcrumb">
-    <p><s:text name="breadcrumb.youAreHere"/></p>
-    <ul>
-        <li><a href="index.jsp"><s:text name="home.name"/></a></li>
-        <li class="current"><s:text name="front.calendar"/></li>
-    </ul>
-</div>
 
 <script>
     function webicalAuthentication(url) {
