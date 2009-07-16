@@ -1,4 +1,4 @@
-== Colocando arquivos diversos numa página de conteúdo  (draft) ==
+== Colocando arquivos diversos numa página de conteúdo ==
 ----
 
 ===Estrutura de diretórios===
