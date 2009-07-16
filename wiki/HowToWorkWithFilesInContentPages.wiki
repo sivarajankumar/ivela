@@ -74,9 +74,9 @@ Crie o arquivo contentpackage.ivela.xml com o seguinte conteudo:
 Use o index.html conforme o modelo abaixo:
 * lição é 1//1//1//1
 * todos os arquivos estão nos subdiretorios apropriados (js, audio , images)
-* Para acessar esses arquivos utilize RenderServlet?file=1//1//1//1//<diretorio>//<arquivo> 
-* Ex: RenderServlet?file=1//1//1//1//images//img.jpg
-* Substitua em showPage('RenderServlet?file=1//1//1//1//part1.html') o nome do html que
+* Para acessar esses arquivos utilize !RenderServlet?file=1//1//1//1//<diretorio>//<arquivo> 
+* Ex: !RenderServlet?file=1//1//1//1//images//img.jpg
+* Substitua em showPage('!RenderServlet?file=1//1//1//1//part1.html') o nome do html que
 será carregado como a primeira página do conteúdo
 {{{
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
