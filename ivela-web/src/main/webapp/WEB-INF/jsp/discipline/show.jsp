@@ -338,7 +338,6 @@ a:active{outline: none;}
 
             <h2 style="display:none"><span id="disciplineName">&nbsp;</span><br /><span id="unitName">&nbsp;</span></h2>
 
-<div id="vertical_container_course">
     <div class="units-container">
         <div class="units-content" style="padding-left: 0px; padding-right: 0px; width: 105px;>
             <div class="accordion_content_course">
@@ -397,7 +396,6 @@ a:active{outline: none;}
             </div>
         </div>
     </div>
-</div>
 
 
 <div id="vertical_container_course" style="margin-top:10px">
@@ -445,15 +443,13 @@ a:active{outline: none;}
                   
     %>
 </td>
-<td>
+<td style="vertical-align:top">
 <div class="current-course">
     <span class="corner-left">.</span>
     <span class="corner-right">.</span>
     <h1><s:text name="discipline.show.course" /><s:property value="discipline.course.name" /></h1>
     <h2><s:text name="discipline.show.discipline" /><s:property value="discipline.name" /></h2>
     <div class="partner">
-        
-        
         <img src="RenderServletPartner?id=<s:property value="discipline.course.id" />" width="100"  />
     </div>
 </div>
