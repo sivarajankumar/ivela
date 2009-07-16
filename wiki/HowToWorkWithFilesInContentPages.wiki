@@ -3,11 +3,9 @@
 
 ===Estrutura de diretórios===
 ----
-A aplicação utiliza uma pasta do servidor para gerenciar os conteúdos das lições. O acesso a essa pasta é feito internamente pela aplicação para garantir a segurança dos
-arquivos localizados nessas pastas.
+A aplicação utiliza uma pasta do servidor para gerenciar os conteúdos das lições. O acesso a essa pasta é feito internamente pela aplicação para garantir a segurança dos arquivos localizados nessas pastas.
 
-A estrutura de diretórios abaixo fica dentro dessa pasta no servidor e pode ser
-utilizada pelos conteúdos através de servlts especificos, como veremos posteriormente.
+A estrutura de diretórios abaixo fica dentro dessa pasta no servidor e pode ser utilizada pelos conteúdos através de servlts especificos, como veremos posteriormente 
 
 {{{
 /curso (id) 
@@ -26,8 +24,8 @@ utilizada pelos conteúdos através de servlts especificos, como veremos posteri
 +---/images  - Imagens comuns para todas as paginas do curso
 }}}
 
-Para criar um conteúdo do ivela é necessário saber os id´s que compoem a lição.
-Por exemplo: 
+Para criar um conteúdo do ivela é necessário saber os id´s que compoem a lição. Por exemplo: 
+
 {{{
 Curso de Inglês --> Modulo 1 --> Unidade 1 --> Lição 1
     (1)                (1)          (1)          (1)
@@ -38,8 +36,7 @@ Curso Exemplo --> Modulo 1 -->  Unidade 1 -->  Lição 1
 diretorio desta lição => 12/23/58/184
 }}}
 
-Coloque todo o conteúdo da lição em uma pasta que será zipada em um arquivo para ser enviada pro Ivela.
-Essa pasta deve conter os seguintes arquivos e subdiretórios
+Coloque todo o conteúdo da lição em uma pasta que será zipada em um arquivo para ser enviada pro Ivela. Essa pasta deve conter os seguintes arquivos e subdiretórios
 
 {{{
 +---/css     - CSS especifico das paginas da lição
@@ -75,11 +72,11 @@ Crie o arquivo contentpackage.ivela.xml com o seguinte conteudo:
 }}}
 
 Use o index.html conforme o modelo abaixo:
-* lição é 1/1/1/1
+* lição é 1//1//1//1
 * todos os arquivos estão nos subdiretorios apropriados (js, audio , images)
-* Para acessar esses arquivos utilize RenderServlet?file=1/1/1/1/<diretorio>/<arquivo> 
-* Ex: RenderServlet?file=1/1/1/1/images/img.jpg
-* Substitua em showPage('RenderServlet?file=1/1/1/1/part1.html') o nome do html que
+* Para acessar esses arquivos utilize RenderServlet?file=1//1//1//1//<diretorio>//<arquivo> 
+* Ex: RenderServlet?file=1//1//1//1//images//img.jpg
+* Substitua em showPage('RenderServlet?file=1//1//1//1//part1.html') o nome do html que
 será carregado como a primeira página do conteúdo
 {{{
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
