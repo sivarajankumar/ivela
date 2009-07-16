@@ -342,54 +342,57 @@ a:active{outline: none;}
     <div class="units-container">
         <div class="units-content" style="padding-left: 0px; padding-right: 0px; width: 105px;>
             <div class="accordion_content_course">
+            <ul>
                 <div class="list-class">
             <ul>
-                <table>
-                <tr>
                 <li><a><s:text name="home.progress" /> <span class="label" id="course.<s:property value="discipline.course.id" />.progress">0%</span></a></li>
                     <p class="progress">
                         <span class="box-bar"><img id="course.<s:property value="discipline.course.id" />.image" height="11" width="35" src="images/progress-bar/bar.gif" alt="progress bar" /></span>
                     </p>
-                </tr>
-                <tr>
+            </ul>
                     <div id="exerciseWithQuestions" style="display:block">
+            <ul>
                     <li><a id="pnlExercicios" href="" id="btn-goto-exercicios" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"><s:text name ="discipline.show.exercise"/></a></li>
+            </ul>
                     </div>
 
                     <div id="exerciseWithNoQuestions" style="display:none">
+            <ul>
                     <li><a style="color:#ccc;"><s:text name ="discipline.show.exercise"/></a></li>
+            </ul>
                     </div>
-                </tr>
-                <tr>
                     <div id="examWithQuestions" style="display:block">
+            <ul>
                     <li><a id="pnlAvaliacao" href="" id="btn-goto-avaliacao" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024" ><s:text name ="discipline.show.exam"/></a></li>
+            </ul>
                     </div>
 
                     <div id="examWithNoQuestions" style="display:none">
+            <ul>
                     <li><a style="color:#ccc;"><s:text name ="discipline.show.exam"/></a></li>
+            </ul>
                     </div>
-                </tr>
-                <tr>
                     <div id="repositorioOpened" style="display:block;height:40px;min-height:35px">
+            <ul>
                     <li ><a id="pnlRepositorio" href="repository!show.action?courseId=<s:property value="discipline.course.id" />" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024" ><s:text name="discipline.show.biblioteca"/></a></li>
+            </ul>
                     </div>
-                </tr>
-                <tr>
                     <div id="forumOpened" style="display:block">
+            <ul>
                     <li><a id="pnlForum" href="forum!listByCourse.action?course.id=<s:property value="discipline.course.id" />" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"><s:text name ="discipline.show.forum"/></a></li>
+            </ul>
                     </div>
 
                     <div id="forumNotOpened" style="display:none">
+            <ul>
                     <li><a style="color:#ccc;"><s:text name ="discipline.show.forum"/></a></li>
-                    </div>
-                </tr>
-                <tr>
-                   <div id="chatOpened" style="display:block">
-                    <li><a href="course!showChatStd.action?course.id=<s:property value="discipline.course.id" />&discipline.id?=<s:property value="discipline.id" />" target="blank"><s:text name="discipline.show.chat" /></a></li>
-                    </div>
-                </tr>
-                </table>
             </ul>
+                    </div>
+                   <div id="chatOpened" style="display:block">
+            <ul>
+                    <li><a href="course!showChatStd.action?course.id=<s:property value="discipline.course.id" />&discipline.id?=<s:property value="discipline.id" />" target="blank"><s:text name="discipline.show.chat" /></a></li>
+            </ul>
+                    </div>
                 </div>
             </div>
         </div>
