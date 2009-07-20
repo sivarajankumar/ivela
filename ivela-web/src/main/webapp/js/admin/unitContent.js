@@ -6,10 +6,11 @@ function showUnitContent(unitContentId) {
     $('showUnitContent').style.display = 'block';              
 
     var i = 0;
-            
-    var jsonUnitContent = getJsonFromUrl('unit!getUnitContentInfo.action?unitContent.id=' + unitContentId);
-    var jsonExercises = getJsonFromUrl('unitContent!getExercisesInfo.action?unitContent.id=' + unitContentId);
-    var jsonExams = getJsonFromUrl('unitContent!getExamsInfo.action?unitContent.id=' + unitContentId);
+    
+    jsonUnitContentId = unitContentId.split("_",1)[0];
+    var jsonUnitContent = getJsonFromUrl('unit!getUnitContentInfo.action?unitContent.id=' + jsonUnitContentId);
+    var jsonExercises = getJsonFromUrl('unitContent!getExercisesInfo.action?unitContent.id=' + jsonUnitContentId);
+    var jsonExams = getJsonFromUrl('unitContent!getExamsInfo.action?unitContent.id=' + jsonUnitContentId);
     
     var id = jsonUnitContent.unitContent.id;
     var title = jsonUnitContent.unitContent.title;
@@ -260,7 +261,8 @@ function showEditUnitContent() {
             
     var oEditor = FCKeditorAPI.GetInstance('FCKeditor1');
             
-    var jsonUnitContent = getJsonFromUrl('unit!getUnitContentInfo.action?unitContent.id=' + unitContentId);
+    jsonUnitContentId = unitContentId.split("_",1)[0];
+    var jsonUnitContent = getJsonFromUrl('unit!getUnitContentInfo.action?unitContent.id=' + jsonUnitContentId);
     
     $('input.unitContent.id').value = jsonUnitContent.unitContent.id;
     $('input.unitContent.unit.id').value = jsonUnitContent.unitContent.unitId
@@ -327,7 +329,8 @@ function showUploadUnitContent(unitId) {
     $('showUploadUnitContent').style.display = 'block';
     $('upload.unit.id').value = unitId;
     
-        var jsonUnitContentOrders = getJsonFromUrl('unitContent!getUnitContentOrdersJson.action?unit.id=' + unitId);
+    	jsonUnitId = unitId.split("_",1)[0];
+        var jsonUnitContentOrders = getJsonFromUrl('unitContent!getUnitContentOrdersJson.action?unit.id=' + jsonUnitId);
         $('upload.unitContent.order_n').length = 0;
         var item = 1;
         for (var i = 0; jsonUnitContentOrders != '' && 
@@ -385,7 +388,9 @@ function showEntryUnitContent(unitId) {
     $('input.unitContent.unit.id').value = unitId;
     $('input.unitContent.title').value = '';
     
-    var jsonUnitContentOrders = getJsonFromUrl('unitContent!getUnitContentOrdersJson.action?unit.id=' + unitId);
+    jsonUnitId = unitId.split("_",1)[0];
+    
+    var jsonUnitContentOrders = getJsonFromUrl('unitContent!getUnitContentOrdersJson.action?unit.id=' + jsonUnitId);
     
     $('input.unitContent.order_n').length = 0;
         var item = 1;
