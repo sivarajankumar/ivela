@@ -603,7 +603,7 @@ public class GradeAction extends GenericAction {
         List<Grade> grades = gradeRemote.getByCourse(course.getId());
         String studentsCount = String.valueOf(courseRemote.getStudentsCount(course.getId()));
         String gradesCount = String.valueOf(courseRemote.getGradesCount(course.getId()));
-       // String graduatedStudentCount = String.valueOf(courseRemote.getGraduatedStudentsCount(course.getId()));
+        String graduatedStudentCount = String.valueOf(courseRemote.getGraduatedStudentsCount(course.getId()));
         StringBuilder json = new StringBuilder();
         json.append("{");
         json.append("\"course\":{");
@@ -613,7 +613,7 @@ public class GradeAction extends GenericAction {
         json.append("\"targetAudience\":\"" + course.getTargetAudience() + "\",");
         json.append("\"studentsCount\":\"" + studentsCount + "\",");
         json.append("\"gradesCount\":\"" + gradesCount + "\",");
-       // json.append("\"graduatedStudentCount\":\"" + graduatedStudentCount + "\",");
+        json.append("\"graduatedStudentCount\":\"" + graduatedStudentCount + "\",");
         json.append("\"grades\":[");
         List<Grade> gradeList = gradeRemote.getByCourse(course.getId());
         for (Grade g : gradeList) {
@@ -1476,6 +1476,7 @@ public class GradeAction extends GenericAction {
     public String getGradeIds() {
         return gradeIds;
     }
+    
 
     public void setGradeIds(String gradeIds) {
         this.gradeIds = gradeIds;

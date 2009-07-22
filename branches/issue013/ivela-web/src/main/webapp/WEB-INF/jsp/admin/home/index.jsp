@@ -288,9 +288,9 @@
                 <br/>
                 <div>
                     <p><s:text name="admin.show.studentsCount" /> <span id="admin.course.student.count"></span></p>
-                    <p><s:text name="admin.show.coordinators" /> <span id="admin.course.coordinators"></span>show<span></span></p>
-                    <p><s:text name="admin.show.professors" /> <span id="admin.course.professors"></span>show<span></span></p>
-                    <p><s:text name="admin.show.tutors" /> <span id="admin.course.tutors"></span>show<span></span></p>
+                    <p><s:text name="admin.show.coordinators" /> <span id="admin.course.coordinators"></span></p>
+                    <p><s:text name="admin.show.professors" /> <span id="admin.course.professors"></span></p>
+                    <p><s:text name="admin.show.tutors" /> <span id="admin.course.tutors"></span></p>
                 </div>
                 <div class="actions-box">
                     <h2><s:text name="course.show.actions" /></h2>
@@ -345,8 +345,8 @@
                 <div>
                     <p><s:text name="admin.show.studentsCount" /> <span id="admin.grade.student.count"></span></p>
                     <p><s:text name="admin.show.coordinators" /> <span id="admin.grade.coordinators"></span></p>
-                    <p><s:text name="admin.show.professors" />  <span id="admin.grade.professors"></span>show<span></span></p>
-                    <p><s:text name="admin.show.tutors" /> <span id="admin.grade.tutors"></span>show<span></span></p>
+                    <p><s:text name="admin.show.professors" />  <span id="admin.grade.professors"></span></p>
+                    <p><s:text name="admin.show.tutors" /> <span id="admin.grade.tutors"></span></p>
                     <p><s:text name="admin.show.startDate" /> <span id="admin.grade.startdate"></span></p>
                     <p><s:text name="admin.show.endDate" /> <span id="admin.grade.enddate"></span></p>
                 </div>
