@@ -337,7 +337,7 @@
                     <p><s:text name="course.input.students" /><br  /><span id="course.student.count"></span></p>
                     
                     <p><s:text name="course.input.grade" /><br  /><span id="course.grade.count"></span></p>
-                    <p><s:text name="course.input.graduated" /> <br  /><span id="course.graduated.count"></span></p>
+                    <!--p><s:text name="course.input.graduated" /> <br  /><span id="course.graduated.count"></span></p-->
                     <br class="clear" />
                 </div>
                 <h2 style="margin-bottom:10px;"><s:text name="course.input.professor" />:</h2>
