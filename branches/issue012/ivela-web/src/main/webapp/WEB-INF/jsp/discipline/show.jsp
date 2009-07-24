@@ -13,18 +13,20 @@
 # See the GNU General Public License for more details.                                      #  
 #                                                                                           #
 #############################################################################################
-# File: list.jsp                                                                            #
-# Document: List Discipline                                                                 #
+# File: show.jsp                                                                            #
+# Document: Show Discipline                                                                 #
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 15-JUL-2008 - Nelson                            - XXXXXX - Initial Version                #
 # 08-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000007 - IE7 compatibility              #
 # 30-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000010 - JS no IE/FF opening repository #
 # 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
+# 23-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Unicode (UTF-8) support        #
 ############################################################################################# 
 --%>
 
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%-- código para testar o layout 2 --%>
+<%-- cÃ³digo para testar o layout 2 --%>
 <%@ page import="org.springframework.security.context.SecurityContextHolder"%>
 <%@ page import="org.springframework.security.userdetails.UserDetails"%>
 <%@ page import="br.ufc.ivela.commons.model.SystemUser"%>
