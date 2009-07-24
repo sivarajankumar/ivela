@@ -29,6 +29,7 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
 
 = Workstation Setup: Env =
   * Put his lines into your .profile or .bash_profile 
+{{{
   * JAVA_HOME = <path of your jdk>
   * CLASSPATH = $JAVA_HOME/lib
   * M2_HOME = <maven-path>
@@ -36,6 +37,7 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
   * PATH = $JAVA_HOME/bin:$M2:$PATH
   * LD_LIBRARY_PATH = /usr/lib/jni 
   * EXPORT JAVA_HOME CLASSPATH M2_HOME M2 PATH LD_LIBRARY_PATH 
+}}}
 
 = Workstation Setup: Glassfish =
   * Download one of the glassfish bundles to disk
