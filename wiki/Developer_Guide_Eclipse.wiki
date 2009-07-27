@@ -56,7 +56,7 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
   * Start Eclipse
   * Go to _Help > Install new software_ menu
   * Add the following update sites and install the plugins available for each one
-  ** Subeclipse  http://subeclipse.tigris.org/update_1_6_x
+  ** Subeclipse   http://subclipse.tigris.org/update_1.6.x
   ** Maven http://m2eclipse.sonatype.org/update/
   *** Remove the ADJT package from installation, this plugin does not working in this version
   ** Glassfish server pkugin
