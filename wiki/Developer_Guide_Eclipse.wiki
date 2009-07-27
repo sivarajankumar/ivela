@@ -24,7 +24,8 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
   * Install [https://addons.mozilla.org/en-US/firefox/addon/1843 Firebug] add-on into Firefox
   * Subscribe our group [http://groups.google.com.br/group/ivela/]
   * Stay on in our [http://code.google.com/p/ivela/wiki/IRC IRC]
-  * Install Eclipse Galileo 3.5 [http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/galileo/R/eclipse-jee-galileo-win32.zip]. From Eclipse site, download the Java_EE Galileo Edition
+  * Install Eclipse Galileo 3.5 (LINUX 32) [http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/galileo/R/eclipse-jee-galileo-linux-gtk.tar.gz]
+  * Install Eclipse Galileo 3.5 (WIN 32) [http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/galileo/R/eclipse-jee-galileo-win32.zip]. From Eclipse site, download the Java_EE Galileo Edition
 
 
 = Workstation Setup: Env =
