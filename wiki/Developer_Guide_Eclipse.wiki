@@ -49,7 +49,7 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
   * If you are using a machine with an operating system that is a derivative of UNIX(tm), set the execute permission for the Ant binaries that are included with the GlassFish bundle. 
   * % chmod -R +x lib/ant/bin
   * % lib/ant/bin/ant -f setup.xml  
-  * Into AIX, Debian and Ubuntu environments it is common to found problems when ANT runs, the problem is described as:
+  * <font color='red'>Into AIX, Debian and Ubuntu environments it is common to found problems when ANT runs, the problem is described as:</font>
 
 {{{
 
@@ -58,6 +58,10 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
 BUILD FAILED
 /opt/sws/glassfish/setup.xml:177: The following error occurred while executing this line:
 /opt/sws/glassfish/setup.xml:607: exec returned: 1
+}}}
+  * To solve that run these lines:
+{{{
+keytool -genkey -keyalg RSA -keystore ~/.asadmintruststore -alias junk
 }}}
 
 = Workstation Setup: Eclipse =
