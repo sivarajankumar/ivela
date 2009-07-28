@@ -41,7 +41,7 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
 }}}
 
 = Workstation Setup: Glassfish =
-  * Download one of the glassfish bundles to disk
+  * Download [https://glassfish.dev.java.net/downloads/v2.1-b60e.html] one of the glassfish bundles to disk
   * set JAVA_HOME to the JDK you have installed on your system.
   * Run  % java -Xmx256m -jar filename.jar
   * This command will unbundle GlassFish and create a new directory structure rooted under a directory named 'glassfish'.
