@@ -58,13 +58,14 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
   * Add the following update sites and install the plugins available for each one
   ** Subeclipse   http://subclipse.tigris.org/update_1.6.x
   ** Maven http://m2eclipse.sonatype.org/update/
-  *** Remove the ADJT package from installation, this plugin does not working in this version
-  ** Glassfish server pkugin
+  ** *Remove the ADJT package from installation, this plugin does not working in this version*
+  ** Glassfish server plugin
     * Open the view Server
     * Click in New Server
     * Click in download additional adapters
     * Choose glassfish and install it
-    * To cinfirure it just choose the folder where glassfish was installed.
+    * To configure it just choose the folder where glassfish was installed.
+    * <font color='red'>Some users have experienced problems in the glassfish plugin installation.</font> For these users, theses links can help: [https://glassfishplugins.dev.java.net/download/index.html]
           
 = Workstation Setup: Maven =
   * Start Netbeans
