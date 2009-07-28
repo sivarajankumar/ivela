@@ -65,7 +65,7 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
     * Click in download additional adapters
     * Choose glassfish and install it
     * To configure it just choose the folder where glassfish was installed.
-    * <font color='red'>Some users have experienced problems in the glassfish plugin installation.</font> For these users, theses links can help: [https://glassfishplugins.dev.java.net/download/index.html]
+    * <font color='red'>Some users have experienced problems in the glassfish plugin installation.</font> For these users, theses links can help: [https://glassfishplugins.dev.java.net/download/index.html] [https://glassfishplugins.dev.java.net/issues/show_bug.cgi?id=45]
           
 = Workstation Setup: Maven =
   * Start Netbeans
