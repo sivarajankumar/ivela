@@ -51,7 +51,9 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
   * % lib/ant/bin/ant -f setup.xml  
   * Into AIX, Debian and Ubuntu environments it is common to found problems when ANT runs, the problem is described as:
 
-{{{[exec] CLI130 Could not create domain, domain1
+{{{
+
+`[exec]` CLI130 Could not create domain, domain1
 
 BUILD FAILED
 /opt/sws/glassfish/setup.xml:177: The following error occurred while executing this line:
