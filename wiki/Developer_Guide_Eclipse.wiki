@@ -49,7 +49,8 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
   * If you are using a machine with an operating system that is a derivative of UNIX(tm), set the execute permission for the Ant binaries that are included with the GlassFish bundle. 
   * % chmod -R +x lib/ant/bin
   * % lib/ant/bin/ant -f setup.xml  
-  * <font color='red'>Into AIX, Debian and Ubuntu environments it is common to found problems when ANT runs, the problem is described as:</font> {{{
+  * <font color='red'>Into AIX, Debian and Ubuntu environments it is common to found problems when ANT runs, the problem is described as:</font>
+ * {{{
 
 `[exec]` CLI130 Could not create domain, domain1
 
