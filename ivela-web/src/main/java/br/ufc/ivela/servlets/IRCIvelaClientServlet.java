@@ -8,6 +8,8 @@ package br.ufc.ivela.servlets;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -18,11 +20,13 @@ import org.springframework.security.context.SecurityContextHolder;
 
 /**
  *
- * @author jefferson
+ * @author jdamico
  */
 public class IRCIvelaClientServlet extends HttpServlet{
 
-    @Override
+	private static final long serialVersionUID = -4341295579947052433L;
+
+	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     
@@ -30,7 +34,6 @@ public class IRCIvelaClientServlet extends HttpServlet{
         Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (obj != null && obj instanceof SystemUser) {
             oid = ((SystemUser) obj).getId();
-            System.out.println("oid: " +oid);
         }
         String email = (String)request.getSession().getAttribute("USER_EMAIL");
         
@@ -40,7 +43,6 @@ public class IRCIvelaClientServlet extends HttpServlet{
             if(systemUserRemote!=null){
                SystemUser systemUser = systemUserRemote.get(oid);
                email = systemUser.getEmail();
-               System.out.println("email from db: " + email);
                request.getSession().putValue("USER_EMAIL", email);
             }
         }
@@ -51,9 +53,9 @@ public class IRCIvelaClientServlet extends HttpServlet{
             if(email.charAt(i) == at.charAt(0)) pos = i;
         }
         email = email.substring(0,pos);
-        System.out.println("nick from session: " + email);
         response.setCharacterEncoding("ISO-8859-1");
-        response.getWriter().println(   "<html>\n" +
+        PrintWriter out = response.getWriter();
+        out.println(   "<html>\n" +
                                         "<head>\n" +
                                         "<title>IRC Ivela Client - #room_dis"+request.getParameter("discipline.id")+"_course"+request.getParameter("course.id")+"</title>\n" +
                                         "</head>\n" +
@@ -62,7 +64,7 @@ public class IRCIvelaClientServlet extends HttpServlet{
                                         "<applet code=\"org.jdamico.ircivelaclient.view.HandleApplet\"\n" +
                                         "archive=\"http://"+request.getServerName()+"/public_content/ircivelaclient/ircivelaclient.jar\" \n" +
                                         "width=\"820\" height=\"480\">\n" +
-                                        "<param name=\"server\" value=\"200.17.41.212\" >\n" +
+                                        "<param name=\"server\" value=\""+request.getServerName()+"\" >\n" +
                                         "<param name=\"channel\" value=\"#room_dis"+request.getParameter("discipline.id")+"_course"+request.getParameter("course.id")+"\" >\n" +
                                         "<param name=\"nick\" value=\""+email+"\" >\n" +
                                         "<param name=\"teacher\" value=\"damico\" >\n" +
@@ -70,7 +72,7 @@ public class IRCIvelaClientServlet extends HttpServlet{
                                         "</applet> \n" +
                                         "</body>\n" +
                                         "</html>\n");
-        
+        out.close();
         
     }
     

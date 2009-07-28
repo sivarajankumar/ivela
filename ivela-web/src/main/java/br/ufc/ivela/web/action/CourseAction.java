@@ -184,19 +184,16 @@ public class CourseAction extends GenericAction {
     }
     
     public String showChatStd(){
-        System.out.println("teste chat");
         this.nick = this.getAuthenticatedUser().getUsername();
         //this.chatRoomName = "#course_"+this.course.getId();
-        this.chatRoomName = "#course_"+course.getId(); 
+        this.chatRoomName = "#course_"+course.getId()+"_"+discipline.getId()+"_"+discipline.getName(); 
         this.grade = gradeRemote.getActiveByStudentByCourse(this.getAuthenticatedUser().getId(), course.getId());
         Set<SystemUser> list = (Set<SystemUser>)grade.getProfessors();
         Iterator i = list.iterator();
         if(i.hasNext())
             this.teacherName =  ((SystemUser)i.next()).getUsername();
         else 
-            this.teacherName = "";
-        System.out.println("course id: "+course.getId());
-        System.out.println("teacher "+teacherName);
+            this.teacherName = "admin";
         
         
         return "showChatStd";
