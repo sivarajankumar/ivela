@@ -118,7 +118,7 @@ function showCourse(courseId) {
     $('course.description').innerHTML = json.course.description;
     $('course.student.count').innerHTML = studentsCount;
     $('course.grade.count').innerHTML = gradesCount;
-    $('course.graduated.count').innerHTML = graduatedStudentCount;
+    //$('course.graduated.count').innerHTML = graduatedStudentCount;
     $('course.professors').innerHTML = professors;
     $('course.tutors').innerHTML = tutors;
     $('course.requirements').innerHTML = requeriments;
@@ -137,7 +137,8 @@ function showEntryCourse() {
     $('input.course.description').value = '';
     $('input.course.targetAudience').value = '';
     $('input.course.contents').value = '';
-
+    $('input.course.uploadPackage').value = '';
+    $('input.course.challengeItens').value = '';
     $('input.course.name').focus();
 }
 
@@ -158,7 +159,32 @@ function showEditCourse(courseId) {
     
     $('input.course.contents').value = jsonCourse.course.contents;
     $('remLenContents').value = (500 - $('input.course.contents').value.length);
-        
+    
+    $('input.course.uploadPackage').value = jsonCourse.course.uploadPackageEnabled;
+    $('input.course.challengeItens').value = jsonCourse.course.challengeItensEnabled;
+    
+    var uploadPackageEnabled = false;
+    var challengeItensEnabled  = false;
+
+    
+    if ($('input.course.challengeItens').value) {
+    	challengeItensEnabled = true;
+    	$('input.course.challengeItensEnabled.yes').checked="true";
+    	$('input.course.challengeItensEnabled.no').checked="false";    	
+    } else {
+    	$('input.course.challengeItensEnabled.yes').checked="false";
+    	$('input.course.challengeItensEnabled.no').checked="true";    	
+    }
+    
+    if ($('input.course.uploadPackage').value) {
+    	uploadPackageEnabled = true;
+    	$('input.course.uploadPackageEnabled.yes').checked="true";
+    	$('input.course.uploadPackageEnabled.no').checked="false";
+    } else {
+    	$('input.course.uploadPackageEnabled.yes').checked="false";
+    	$('input.course.uploadPackageEnabled.no').checked="true";
+    }
+    	
     $('input.course.name').focus();
 }
         
@@ -189,6 +215,32 @@ function submitCourse(courseId) {
         $('input.course.contents').focus();
         return;
     }        
+    if ($('input.course.challengeItens').value == '' || $('input.course.challengeItens').value.length < 1) {
+        Lightbox.hideAll();
+        alert('Informe se o curso tem challenge');
+        $('input.course.challengeItens').focus();
+        return;
+    }    
+    if ($('input.course.uploadPackage').value == '' || $('input.course.uploadPackage').value.length < 1) {
+        Lightbox.hideAll();
+        alert('Informe se o curso tem upload content');
+        $('input.course.uploadPackage').focus();
+        return;
+    }    
+    
+    var challengeItensEnabled = false;
+    var uploadPackageEnabled = false;
+    $('uploadPackageV').value="checked";
+    
+    if ($('input.course.challengeItensEnabled.yes').checked) {
+    	challengeItensEnabled = true;
+    	
+    }
+    
+    if ($('input.course.uploadPackageEnabled.yes').checked) {
+    	uploadPackageEnabled = true;
+    }
+    
     if (courseId != null && courseId.length > 0) {
         url += 'course!updateCourse.action?';
         url += 'course.id=' + courseId;
@@ -197,6 +249,8 @@ function submitCourse(courseId) {
         url += '&course.description=' + $('input.course.description').value;
         url += '&course.targetAudience=' + $('input.course.targetAudience').value;
         url += '&course.contents=' + $('input.course.contents').value;
+        url += '&course.challengeItensEnabled=' + challengeItensEnabled;
+        url += '&course.uploadPackageEnabled=' + uploadPackageEnabled;
 
     }
     else {
@@ -205,6 +259,8 @@ function submitCourse(courseId) {
         url += '&course.description=' + $('input.course.description').value;
         url += '&course.targetAudience=' + $('input.course.targetAudience').value;
         url += '&course.contents=' + $('input.course.contents').value;
+        url += '&course.challengeItensEnabled=' + challengeItensEnabled;
+        url += '&course.uploadPackageEnabled=' + uploadPackageEnabled;
     }
             
     var jsonCourse = getJsonFromUrl(url);
