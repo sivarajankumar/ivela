@@ -266,7 +266,7 @@
 <!-- end col-1-home -->
 
 <div id="box1" style="display:none; text-align:center;">
-    <iframe id="waitingFrame" src="../waiting.jsp" style="width:150px;height:100px;border:0px solid #fff;" scrolling="no" >
+    <iframe id="waitingFrame" frameborder="0" src="../waiting.jsp" style="width:150px;height:100px;border:0px solid #fff;" scrolling="no" >
     </iframe><br/>
 </div>
 
