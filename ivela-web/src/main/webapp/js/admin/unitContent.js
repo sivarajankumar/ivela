@@ -54,32 +54,26 @@ function showUnitContent(unitContentId) {
     
     
     $('unitContent.id').value = id;
-    $('unitContent.title').innerHTML = title;
+    $('unitContent.title').innerText = title;
     $('unitContent.exercises').innerHTML = exercises;
     $('unitContent.exams').innerHTML = exams;
     //$('unitContent.html').innerHTML = description;    
     //var oEditor = FCKeditorAPI.GetInstance('FCKeditor1');
     //oEditor.SetHTML(description);
     if (type == 1) {
-        $('unitContent.pdf').innerHTML = '<iframe id="html" frameborder="0" width="100%" height="100%" src="discipline!showPdf.action?unitContent.id=' + unitContentId + '"></iframe>';
+        $('unitContent.pdf').innerHTML = '<iframe id="html" frameborder="0" width="100%" height="100%" src="discipline!showPdf.action?unitContent.id=' + jsonUnitContentId + '"></iframe>';
         $('unitContent.html').style.display = 'none';
         $('unitContent.pdf').style.display = 'block';
     }
     else {
         if(type==2){
-        var jsonUnitContent = getJsonFromUrl('unitContent!getContentPackageJson.action?unitContent.id=' + unitContentId);
+        var jsonUnitContent = getJsonFromUrl('unitContent!getContentPackageJson.action?unitContent.id=' + jsonUnitContentId);
         var unitId = jsonUnitContent.info.unit;
         var disciplineId = jsonUnitContent.info.discipline;
         var courseId = jsonUnitContent.info.course;
         //width: 665 height: 1000
          
-        if(courseId==1){
-          $('seeUnitContent').href = '../RenderServlet?file=' + courseId + '/' + disciplineId + '/' + unitId + '/' + unitContentId + '/index.html';
-        }else{
-           var html = '<iframe id="html" frameborder="0" width="' + jsonUnitContent.info.unitContentWidth + '" height="' + jsonUnitContent.info.unitContentHeight + '" src="../RenderServlet?file=' + courseId + '/' + disciplineId + '/' + unitId + "/" + unitContentId + '/index.html' + '"></iframe> <br class="clear"/>';        
-           $('unitContent.html').innerHTML = html;
-        
-        }
+        $('seeUnitContent').href = '../RenderServlet?file=' + courseId + '/' + disciplineId + '/' + unitId + '/' + jsonUnitContentId + '/index.html';
         $('unitContent.pdf').style.display = 'none';
         $('unitContent.html').style.display = 'block';
         }
