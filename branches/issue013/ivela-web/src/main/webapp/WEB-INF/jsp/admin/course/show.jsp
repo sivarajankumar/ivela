@@ -229,31 +229,15 @@
 
   				<label><s:text name="course.input.uploadPackage" /></label> <img class="tooltip" onmouseover="return escape('Entre com uma breve descrição do curso')" /><br />
 
-   					  <input type="hidden"  name="input.course.uploadPackage" id="input.course.uploadPackage" value="" />
-     
-                   
-                   
-
-     		<s:if test="%{#input.course.uploadPackage=='true'}">
-        		<div>checked</div>
-      		</s:if>
-
-      		<s:if test="%{#input.course.uploadPackage=='false'}">
-        		<div>unchecked</div>
-      		</s:if>
-            	
-                   
-                   
-                
- 				<label><input type="radio" name="input.course.uploadPackageEnabled" id="input.course.uploadPackageEnabled.yes" value="true"  checked="" /> <s:text name="course.input.yes" /></label> 
-                <label><input type="radio" name="input.course.uploadPackageEnabled" id="input.course.uploadPackageEnabled.no"  value="false" checked="" />  <s:text name="course.input.no" /></label> <br/>
+  					  
+ 				<label><input type="radio" name="input.course.uploadPackage" id="input.course.uploadPackage.yes" value="true"  /> <s:text name="course.input.yes" /></label> 
+                <label><input type="radio" name="input.course.uploadPackage" id="input.course.uploadPackage.no"  value="false" checked="checked" />  <s:text name="course.input.no" /></label> <br/>
 
                <label><s:text name="course.input.challengeItens" /></label> <img class="tooltip" onmouseover="return escape('Entre com uma breve descrição do curso')" /><br />
 
-					<input type="hidden"  name="input.course.challengeItens" id="input.course.challengeItens" value="" />
 
-                	<label><input type="radio" name="input.course.challengeItensEnabled" value="true" id="input.course.challengeItensEnabled.yes" checked="" /> <s:text name="course.input.yes" /></label> 
-                	<label><input type="radio" name="input.course.challengeItensEnabled" value="false" id="input.course.challengeItensEnabled.no" checked="" /> <s:text name="course.input.no" /></label> <br/>
+                	<label><input type="radio" name="input.course.challengeItens" value="true" id="input.course.challengeItens.yes"  /> <s:text name="course.input.yes" /></label> 
+                	<label><input type="radio" name="input.course.challengeItens" value="false" id="input.course.challengeItens.no" checked="checked" /> <s:text name="course.input.no" /></label> <br/>
 					
 
                 <input type="button" name="input.course.submit" id="input.course.submit" value="<s:text name="systemUser.input.btnSave" />" onclick="submitCourse($('input.course.id').value)" />
