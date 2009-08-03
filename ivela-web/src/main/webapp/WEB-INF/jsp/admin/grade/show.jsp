@@ -19,6 +19,7 @@
 # 15-SEP-2008 - marcus                            - XXXXXX - Initial Version                #
 # 09-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
 # 26-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - i18n general fixes             #
+# 30-JUL-2009 - fantato (Instituto Eldorado)      - 000013 - bug fixes                      #
 #############################################################################################
 --%>
 
@@ -384,7 +385,7 @@
 </div>
 
 <div id="box1" style="display:none; text-align:center;">
-    <iframe id="waitingFrame" frameborder="0" src="../waiting.jsp" style="width:150px;height:100px;border:0px solid #fff;" scrolling="no" >
+    <iframe id="waitingFrame" src="../waiting.jsp" style="width:150px;height:100px;border:0px solid #fff;" scrolling="no" >
     </iframe><br/>
 </div>
 
@@ -406,7 +407,7 @@
                 <br />
 
                 <label><s:text name="student.input.student" /></label><br />
-                <s:hidden name="message.recipient.id" id="input.student.grade.student.id" />
+                <s:hidden name="message.recipient.id" id="input.student.grade.student" />
                 <input type="text" name="username" id="username" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
                 <div id="recipientDivAutoCompleter2" class="autocomplete"></div>
                 <script type="text/javascript">
@@ -414,11 +415,11 @@
 
                    function getSelectionId(text, li)
                    {
-                      $('input.student.grade.student.id').value=li.id;
+                      $('input.student.grade.student.').value=li.id;
                    }
 
                    function validateUsername() {
-                       var id = $('input.student.grade.student.id').value;
+                       var id = $('input.student.grade.student').value;
                        if (id == null || id == '') {
                            $('username').value = '';
                            $('username').focus();
@@ -427,7 +428,7 @@
                 </script>
                 <br />
 
-                <input class="bbtn-new-one" type="button" name="input.student.submit" id="input.student.submit" value="<s:text name="grade.submit" />" onclick="submitStudent(document.getElementById('input.student.grade.id').value, document.getElementById('input.student.grade.student.id').value);" /><br />
+                <input class="bbtn-new-one" type="button" name="input.student.submit" id="input.student.submit" value="<s:text name="grade.submit" />" onclick="submitStudent(document.getElementById('input.student.grade.id').value, document.getElementById('input.student.grade.student').value);" /><br />
             </div>
         </div>
     </div>
@@ -450,7 +451,7 @@
                 <br />
 
                 <label><s:text name="professor.input.professor" /></label><br />
-                 <s:hidden name="message.recipient.id" id="input.professor.grade.professor.id" />
+                 <s:hidden name="message.recipient.id" id="input.professor.grade.professor" />
                 <input type="text" name="username" id="username1" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
                 <div id="recipientDivAutoCompleter21" class="autocomplete"></div>
                 <script type="text/javascript">
@@ -458,11 +459,11 @@
 
                    function getSelectionId(text, li)
                    {
-                      $('input.professor.grade.professor.id').value=li.id;
+                      $('input.professor.grade.professor').value=li.id;
                    }
 
                    function validateUsername() {
-                       var id = $('input.professor.grade.professor.id').value;
+                       var id = $('input.professor.grade.professor').value;
                        if (id == null || id == '') {
                            $('username1').value = '';
                            $('username1').focus();
@@ -471,7 +472,7 @@
                 </script>
                 <br />
 
-                <input class="bbtn-new-one" type="button" name="input.professor.submit" id="input.professor.submit" value="<s:text name="grade.submit" />" onclick="submitProfessor(document.getElementById('input.professor.grade.id').value, document.getElementById('input.professor.grade.professor.id').value);" /><br />
+                <input class="bbtn-new-one" type="button" name="input.professor.submit" id="input.professor.submit" value="<s:text name="grade.submit" />" onclick="submitProfessor(document.getElementById('input.professor.grade.id').value, document.getElementById('input.professor.grade.professor').value);" /><br />
             </div>
         </div>
     </div>

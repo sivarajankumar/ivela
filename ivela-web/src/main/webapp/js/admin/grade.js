@@ -218,7 +218,9 @@ function showGrade(gradeId) {
 
     var i = 0;
     
-    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + gradeId);
+    jsonGradeId = gradeId.split("_",1)[0];
+    
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
     var courseId = jsonGrade.grade.courseId;
     var jsonGraduatedStudentsInfo = getJsonFromUrl('course!getGraduatedStudentsInfo.action?course.id=' + courseId);
 
@@ -266,8 +268,10 @@ function showStudent(gradeId, courseId) {
     $('showStudent').style.display = 'block';
             
     var i = 0;
+    
+    jsonGradeId = gradeId.split("_",1)[0];
             
-    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + gradeId);
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
     var jsonCourse = getJsonFromUrl('course!getCourseInfo.action?course.id=' + courseId);
     //var jsonStudents = getJsonFromUrl('grade!getStudentsInfo.action?grade.id=' + gradeId);
     
@@ -302,8 +306,10 @@ function showProfessor(gradeId, courseId) {
     $('showProfessor').style.display = 'block';
             
     var i = 0;
+    
+    jsonGradeId = gradeId.split("_",1)[0];
             
-    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + gradeId);
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
     var jsonCourse = getJsonFromUrl('course!getCourseInfo.action?course.id=' + courseId);
     //var jsonProfessors = getJsonFromUrl('grade!getProfessorsInfo.action?grade.id=' + gradeId);
     
@@ -337,8 +343,10 @@ function showProfessor(gradeId, courseId) {
 function showForum(gradeId, courseId) {
     closeAll();
     $('showForum').style.display = 'block';
+    
+    jsonGradeId = gradeId.split("_",1)[0];
 
-    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + gradeId);
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
     var jsonCourse = getJsonFromUrl('course!getCourseInfo.action?course.id=' + courseId);
 
     $('forum.show.grade.id').value = gradeId;
@@ -370,7 +378,9 @@ function showForumId(gradeId, courseId, forumId) {
     closeAll();
     $('showForumId').style.display = 'block';
 
-    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + gradeId);
+    jsonGradeId = gradeId.split("_",1)[0];
+    
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
     var jsonCourse = getJsonFromUrl('course!getCourseInfo.action?course.id=' + courseId);
     var jsonForum = getJsonFromUrl('forum!getForumInfo.action?forum.id=' + forumId);
 
