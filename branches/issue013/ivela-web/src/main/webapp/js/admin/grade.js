@@ -607,8 +607,7 @@ function showTutor(gradeId, courseId) {
 function showEntryGrade(courseId) {
     closeAll();
     $('showEntryGrade').style.display = 'block';
-    //não sei porque o radio não ficou marcado na jsp ai tive que marca-lo aqui na linha abaixo
-    $('input.grade.requirestrue').checked = "checked";
+    $('input.grade.requires.yes').checked = "checked";
 
     $('input.grade.id').value = '';
     if (courseId == null)
@@ -818,7 +817,7 @@ function submitGrade(gradeId) {
     
     var requires = true;
     
-    if($('input.grade.requiresfalse').checked){
+    if($('input.grade.requires.no').checked){
         requires = false;
     }
         
@@ -1313,9 +1312,9 @@ function showEditGradeById(gradeId)
     $('input.grade.maxduration').value = jsonGrade.grade.maxDuration;
     $('input.grade.status').value = jsonGrade.grade.status;
     if(jsonGrade.grade.requiresEnrollmentValidation)
-        $('input.grade.requirestrue').checked = "checked";
+        $('input.grade.requires.yes').checked = "checked";
     else
-        $('input.grade.requiresfalse').checked = "checked";
+        $('input.grade.requires.no').checked = "checked";
     var startDate = '';
     if (jsonGrade.grade.startDatetime.$ != null) {
         startDate = jsonGrade.grade.startDatetime.$.substring(5, 7)  + '/' + jsonGrade.grade.startDatetime.$.substring(8, 10) + '/' + jsonGrade.grade.startDatetime.$.substring(0, 4);
@@ -1376,9 +1375,9 @@ function showEditGrade() {
     $('input.grade.coordinator').value = jsonGrade.grade.coordinatorId;
     $('input.grade.maxduration').value = jsonGrade.grade.maxDuration;
     if(jsonGrade.grade.requiresEnrollmentValidation)
-        $('input.grade.requirestrue').checked = "checked";
+        $('input.grade.requires.yes').checked = "checked";
     else
-        $('input.grade.requiresfalse').checked = "checked";
+        $('input.grade.requires.no').checked = "checked";
     var startDate = '';
     if (jsonGrade.grade.startDatetime.$ != null) {
         startDate = jsonGrade.grade.startDatetime.$.substring(5, 7)  + '/' + jsonGrade.grade.startDatetime.$.substring(8, 10) + '/' + jsonGrade.grade.startDatetime.$.substring(0, 4);
