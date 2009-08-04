@@ -199,8 +199,8 @@
                                     
                                     <s:if test="(enrollments != null && enrollments.size() > 0)"> 
                                         <ul class="list-students">
-                                            <input type="button" value="<s:text name="home.mark" />"  class="btn-check-all" onclick="setCheckedAllStudents(this);" />
-                                            <input type="button" value="<s:text name="home.unmark" />" class="btn-uncheck-all" onclick="setUncheckedAllStudents(this);" />
+                                            <input type="button" value="<s:text name="home.mark" />"  class="btn-check-all" onclick="setCheckedAllStudents('<s:property value="id" />');" />
+                                            <input type="button" value="<s:text name="home.unmark" />" class="btn-uncheck-all" onclick="setUncheckedAllStudents('<s:property value="id" />');" />
                                         
                                             <s:iterator value="enrollments" status="stat"> 
                                                 <s:if test="enrollments[#stat.index].status == 0">
