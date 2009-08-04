@@ -385,7 +385,7 @@
 </div>
 
 <div id="box1" style="display:none; text-align:center;">
-    <iframe id="waitingFrame" frameborder="0" src="../waiting.jsp" style="width:150px;height:100px;border:0px solid #fff;" scrolling="no" >
+    <iframe id="waitingFrame" src="../waiting.jsp" style="width:150px;height:100px;border:0px solid #fff;" scrolling="no" >
     </iframe><br/>
 </div>
 
@@ -409,20 +409,19 @@
                 <label><s:text name="student.input.student" /></label><br />
                 <s:hidden name="message.recipient.id" id="input.student.grade.student" />
                 <input type="text" name="username" id="username" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
-                <div id="recipientDivAutoCompleter2" class="autocomplete"></div>
+                <div id="recipientDivAutoCompleter" class="autocomplete"></div>
                 <script type="text/javascript">
-                   new Ajax.Autocompleter("username","recipientDivAutoCompleter2","systemUser!searchUsersStudent.action", {afterUpdateElement : getSelectionId});
+                   new Ajax.Autocompleter("username","recipientDivAutoCompleter","systemUser!searchUsersStudent.action", {afterUpdateElement : getSelectionId});
 
                    function getSelectionId(text, li)
                    {
-                      $('input.student.grade.student.').value=li.id;
+                      $('input.student.grade.student').value=li.id;
                    }
 
                    function validateUsername() {
-                       var id = $('input.student.grade.student').value;
+                       var id = $('input.student.grade.student').value;                       
                        if (id == null || id == '') {
                            $('username').value = '';
-                           $('username').focus();
                        }
                    }
                 </script>
@@ -452,21 +451,20 @@
 
                 <label><s:text name="professor.input.professor" /></label><br />
                  <s:hidden name="message.recipient.id" id="input.professor.grade.professor" />
-                <input type="text" name="username" id="username1" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
-                <div id="recipientDivAutoCompleter21" class="autocomplete"></div>
+                <input type="text" name="username" id="username1" onblur="validateUsername1();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
+                <div id="recipientDivAutoCompleter1" class="autocomplete"></div>
                 <script type="text/javascript">
-                   new Ajax.Autocompleter("username1","recipientDivAutoCompleter21","systemUser!searchUsersProfessor.action", {afterUpdateElement : getSelectionId});
+                   new Ajax.Autocompleter("username1","recipientDivAutoCompleter1","systemUser!searchUsersProfessor.action", {afterUpdateElement : getSelectionId1});
 
-                   function getSelectionId(text, li)
+                   function getSelectionId1(text, li)
                    {
                       $('input.professor.grade.professor').value=li.id;
                    }
 
-                   function validateUsername() {
+                   function validateUsername1() {
                        var id = $('input.professor.grade.professor').value;
                        if (id == null || id == '') {
                            $('username1').value = '';
-                           $('username1').focus();
                        }
                    }
                 </script>
@@ -496,21 +494,20 @@
 
                 <label><s:text name="grade.input.tutor" /></label><br />
                 <s:hidden name="message.recipient.id" id="input.tutor.grade.tutor" />
-                <input type="text" name="username" id="username2" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
-                <div id="recipientDivAutoCompleter22" class="autocomplete"></div>
+                <input type="text" name="username" id="username2" onblur="validateUsername2();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
+                <div id="recipientDivAutoCompleter2" class="autocomplete"></div>
                 <script type="text/javascript">
-                   new Ajax.Autocompleter("username2","recipientDivAutoCompleter22","systemUser!searchUsersTutor.action", {afterUpdateElement : getSelectionId});
+                   new Ajax.Autocompleter("username2","recipientDivAutoCompleter2","systemUser!searchUsersTutor.action", {afterUpdateElement : getSelectionId2});
 
-                   function getSelectionId(text, li)
+                   function getSelectionId2(text, li)
                    {
-                      $('input.tutor.grade.tutor').value=li.id;
+                       	$('input.tutor.grade.tutor').value=li.id;
                    }
 
-                   function validateUsername() {
+                   function validateUsername2() {
                        var id = $('input.tutor.grade.tutor').value;
                        if (id == null || id == '') {
                            $('username2').value = '';
-                           $('username2').focus();
                        }
                    }
                 </script>
@@ -586,10 +583,10 @@
                 <br/>
                 <div>
                     <p><s:text name="grade.show.gradesCount" />: <span id="course.grade.count"></span></p>
-                    <p><s:text name="grade.show.coordinatorsCount" /> <span id="course.coordinator.count"></span></p>
-                    <p><s:text name="grade.show.professorsCount" /> <span id="course.professor.count"></span></p>
-                    <p><s:text name="grade.show.tutorsCount" /><span id="course.tutor.count"></span></p>
-                    <p><s:text name="grade.show.studentsCount" /> <span id="course.student.count"></span></p>
+                    <p><s:text name="grade.show.coordinatorsCount" />: <span id="course.coordinator.count"></span></p>
+                    <p><s:text name="grade.show.professorsCount" />: <span id="course.professor.count"></span></p>
+                    <p><s:text name="grade.show.tutorsCount" />:<span id="course.tutor.count"></span></p>
+                    <p><s:text name="grade.show.studentsCount" />: <span id="course.student.count"></span></p>
                     <!--p><s:text name="grade.show.graduatedStudentsCount" />: <span id="course.graduated.count"></span></p-->
                 </div>
                 <div class="actions-box">
@@ -647,9 +644,9 @@
 
                 <div>
                     <p><s:text name="grade.input.coordinatorsCount" />: <span id="grade.coordinator.count"></span></p>
-                    <p><s:text name="grade.input.professorsCount" /><span id="grade.professor.count"></span></p>
-                    <p><s:text name="grade.input.tutorsCount" /><span id="grade.tutor.count"></span></p>
-                    <p><s:text name="grade.input.studentsCount" /> <span id="grade.student.count"></span></p>
+                    <p><s:text name="grade.input.professorsCount" />:<span id="grade.professor.count"></span></p>
+                    <p><s:text name="grade.input.tutorsCount" />:<span id="grade.tutor.count"></span></p>
+                    <p><s:text name="grade.input.studentsCount" />: <span id="grade.student.count"></span></p>
                      <!--p><s:text name="grade.input.graduatedStudentsCount" />: <span id="grade.graduated.count"></span></p-->
                 </div>
                 <br />
