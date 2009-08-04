@@ -475,7 +475,7 @@ function updateProfessor(obj,id)
     for ( var i = 0; i < checks.length; i++ )
     {
         changeCheckboxStyle(checks[i]);
-        if ( checks[i].checked )
+        if ( checks[i].checked )setInputStream
         {
             checkedElements++;
         }
@@ -654,7 +654,7 @@ function showEntryProfessor(gradeId, courseId) {
     
     $('input.professor.grade.professor').value = '';
     
-    $('input.professor.grade.professor').focus();
+   // $('input.professor.grade.professor').focus();
 }
 
 function showEntryStudent(gradeId, courseId) {
@@ -675,7 +675,7 @@ function showEntryStudent(gradeId, courseId) {
     
     $('input.student.grade.student').value = '';
     
-    $('input.student.grade.student').focus();
+   // $('input.student.grade.student').focus();
 }
 
 function showEntryTutor(gradeId, courseId) {
@@ -697,7 +697,7 @@ function showEntryTutor(gradeId, courseId) {
     
     $('input.tutor.grade.tutor').value = '';
     
-    $('input.tutor.grade.tutor').focus();
+  // $('input.tutor.grade.tutor').focus();
 }
 
 function showEntryForum(gradeId) {
@@ -1213,11 +1213,13 @@ function submitProfessor(gradeId, professorId) {
         url += 'grade.id=' + gradeId;
         url += '&systemUser.id=' + professorId;
     }
-    jsonGrade = getJsonFromUrl(url);
-    if (jsonGrade != null && jsonGrade.grade != null && jsonGrade.grade.id != '') {
+    var jsonGrade = getJsonFromUrl(url);
+    if ( (jsonGrade != null) && (jsonGrade.result == 'true') )
+    {
         document.location = 'grade!show.action';
     }
-    else {
+    else
+    {
         Lightbox.hideAll();
         alert('Não inserido');
     }
@@ -1252,11 +1254,13 @@ function submitTutor(gradeId, tutorId) {
         url += 'grade.id=' + gradeId;
         url += '&systemUser.id=' + tutorId;
     }
-    jsonGrade = getJsonFromUrl(url);
-    if (jsonGrade != null && jsonGrade.grade != null && jsonGrade.grade.id != '') {
+    var jsonGrade = getJsonFromUrl(url);
+    if ( (jsonGrade != null) && (jsonGrade.result == 'true') )
+    {
         document.location = 'grade!show.action';
     }
-    else {
+    else
+    {
         Lightbox.hideAll();
         alert('Não inserido');
     }
@@ -1277,11 +1281,13 @@ function submitStudent(gradeId, systemUserId) {
         url += 'grade.id=' + gradeId;
         url += '&systemUser.id=' + systemUserId;
     }
-    jsonGrade = getJsonFromUrl(url);
-    if (jsonGrade != null && jsonGrade.grade != null && jsonGrade.grade.id != '') {
+    var jsonGrade = getJsonFromUrl(url);
+    if ( (jsonGrade != null) && (jsonGrade.result == 'true') )
+    {
         document.location = 'grade!show.action';
     }
-    else {
+    else
+    {
         Lightbox.hideAll();
         alert('Não inserido');
     }
