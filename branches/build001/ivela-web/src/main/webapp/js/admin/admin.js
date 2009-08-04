@@ -334,8 +334,7 @@ function showStudent(gradeId, courseId, gradeName, courseName) {
 }
 
 function updateStudents(obj, id, userId)
-{
- 
+{        
     var studentDataHtml = "";
     $('reportData').innerHTML = "";
     $('pieCanvas').style.display = "none";
@@ -354,6 +353,7 @@ function updateStudents(obj, id, userId)
     
     var multiple = "";
     var divId;
+    
     if ( checkedElements > 1 ) {
         multiple = ".multiple";
     }
@@ -362,7 +362,7 @@ function updateStudents(obj, id, userId)
         if ( checks[i].checked) { 
 
             // update the div in the multiple group
-            var childs = document.getElementById("div.multiple.inner." + checks[i].id).getElementsByTagName("img");
+            var childs = document.getElementById("div" + multiple + ".inner." + checks[i].id).getElementsByTagName("img");
             for(var j = 0; j < childs.length; j++){
                 if(childs[j].src.search("images/foto_profile.jpg") != -1 && checks[i].id == id){
                     childs[j].src = "../RenderServletProfile?id=" + userId;
@@ -669,22 +669,38 @@ function setEnrollments(gradeId, status) {
     }
 }
 
-function setCheckedAllStudents(gradeId, bool)  {
-    var i = 0;
-    var inputs = document.getElementsByTagName('input');
-    var checkedStudents = new Array();
-    var checkedStudentsIndex = 0;
-    for (i = 0; i < inputs.length; i++) {
-        if (inputs[i].id.indexOf('student.id_' + gradeId + '_') > -1) {
-            checkedStudents[checkedStudentsIndex++] = inputs[i];
-            inputs[i].checked = bool;
+function setCheckedAllStudents(gradeId)  {    
+    var checks = document.getElementsByName('studentsCheck');
+    for (i = 0; i < checks.length; i++)
+    {
+        if ( checks[i].id.indexOf('_' + gradeId + '_') > 0 )
+        {
+            checks[i].checked = true ;
+            changeCheckboxStyle(checks[i]);
         }
     }
 
-    if ( checkedStudents[0] != null ) {
-        updateStudents(checkedStudents[0], checkedStudents[0].id);            
+    if ( checks[0] != null )
+    {
+       updateStudents(checks[0], checks[0].id);            
     }
     
+}
+
+function setUncheckedAllStudents(gradeId) {
+    var checks = document.getElementsByName('studentsCheck');
+    for (i = 0; i < checks.length; i++)
+    {   
+        if ( checks[i].id.indexOf('_' + gradeId + '_') > 0 ) {
+            checks[i].checked = false ;
+            changeCheckboxStyle(checks[i]);
+        }
+    }
+
+    if ( checks[0] != null )
+    {
+       updateStudents(checks[0], checks[0].id);            
+    }    
 }
 
 var col1Content = '';

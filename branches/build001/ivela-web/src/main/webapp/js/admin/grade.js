@@ -218,7 +218,9 @@ function showGrade(gradeId) {
 
     var i = 0;
     
-    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + gradeId);
+    jsonGradeId = gradeId.split("_",1)[0];
+    
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
     var courseId = jsonGrade.grade.courseId;
     var jsonGraduatedStudentsInfo = getJsonFromUrl('course!getGraduatedStudentsInfo.action?course.id=' + courseId);
 
@@ -266,8 +268,10 @@ function showStudent(gradeId, courseId) {
     $('showStudent').style.display = 'block';
             
     var i = 0;
+    
+    jsonGradeId = gradeId.split("_",1)[0];
             
-    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + gradeId);
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
     var jsonCourse = getJsonFromUrl('course!getCourseInfo.action?course.id=' + courseId);
     //var jsonStudents = getJsonFromUrl('grade!getStudentsInfo.action?grade.id=' + gradeId);
     
@@ -302,8 +306,10 @@ function showProfessor(gradeId, courseId) {
     $('showProfessor').style.display = 'block';
             
     var i = 0;
+    
+    jsonGradeId = gradeId.split("_",1)[0];
             
-    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + gradeId);
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
     var jsonCourse = getJsonFromUrl('course!getCourseInfo.action?course.id=' + courseId);
     //var jsonProfessors = getJsonFromUrl('grade!getProfessorsInfo.action?grade.id=' + gradeId);
     
@@ -337,8 +343,10 @@ function showProfessor(gradeId, courseId) {
 function showForum(gradeId, courseId) {
     closeAll();
     $('showForum').style.display = 'block';
+    
+    jsonGradeId = gradeId.split("_",1)[0];
 
-    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + gradeId);
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
     var jsonCourse = getJsonFromUrl('course!getCourseInfo.action?course.id=' + courseId);
 
     $('forum.show.grade.id').value = gradeId;
@@ -370,7 +378,9 @@ function showForumId(gradeId, courseId, forumId) {
     closeAll();
     $('showForumId').style.display = 'block';
 
-    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + gradeId);
+    jsonGradeId = gradeId.split("_",1)[0];
+    
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
     var jsonCourse = getJsonFromUrl('course!getCourseInfo.action?course.id=' + courseId);
     var jsonForum = getJsonFromUrl('forum!getForumInfo.action?forum.id=' + forumId);
 
@@ -607,8 +617,7 @@ function showTutor(gradeId, courseId) {
 function showEntryGrade(courseId) {
     closeAll();
     $('showEntryGrade').style.display = 'block';
-    //não sei porque o radio não ficou marcado na jsp ai tive que marca-lo aqui na linha abaixo
-    $('input.grade.requirestrue').checked = "checked";
+    $('input.grade.requires.yes').checked = "checked";
 
     $('input.grade.id').value = '';
     if (courseId == null)
@@ -818,7 +827,7 @@ function submitGrade(gradeId) {
     
     var requires = true;
     
-    if($('input.grade.requiresfalse').checked){
+    if($('input.grade.requires.no').checked){
         requires = false;
     }
         
@@ -1313,9 +1322,9 @@ function showEditGradeById(gradeId)
     $('input.grade.maxduration').value = jsonGrade.grade.maxDuration;
     $('input.grade.status').value = jsonGrade.grade.status;
     if(jsonGrade.grade.requiresEnrollmentValidation)
-        $('input.grade.requirestrue').checked = "checked";
+        $('input.grade.requires.yes').checked = "checked";
     else
-        $('input.grade.requiresfalse').checked = "checked";
+        $('input.grade.requires.no').checked = "checked";
     var startDate = '';
     if (jsonGrade.grade.startDatetime.$ != null) {
         startDate = jsonGrade.grade.startDatetime.$.substring(5, 7)  + '/' + jsonGrade.grade.startDatetime.$.substring(8, 10) + '/' + jsonGrade.grade.startDatetime.$.substring(0, 4);
@@ -1376,9 +1385,9 @@ function showEditGrade() {
     $('input.grade.coordinator').value = jsonGrade.grade.coordinatorId;
     $('input.grade.maxduration').value = jsonGrade.grade.maxDuration;
     if(jsonGrade.grade.requiresEnrollmentValidation)
-        $('input.grade.requirestrue').checked = "checked";
+        $('input.grade.requires.yes').checked = "checked";
     else
-        $('input.grade.requiresfalse').checked = "checked";
+        $('input.grade.requires.no').checked = "checked";
     var startDate = '';
     if (jsonGrade.grade.startDatetime.$ != null) {
         startDate = jsonGrade.grade.startDatetime.$.substring(5, 7)  + '/' + jsonGrade.grade.startDatetime.$.substring(8, 10) + '/' + jsonGrade.grade.startDatetime.$.substring(0, 4);

@@ -6,10 +6,11 @@ function showUnitContent(unitContentId) {
     $('showUnitContent').style.display = 'block';              
 
     var i = 0;
-            
-    var jsonUnitContent = getJsonFromUrl('unit!getUnitContentInfo.action?unitContent.id=' + unitContentId);
-    var jsonExercises = getJsonFromUrl('unitContent!getExercisesInfo.action?unitContent.id=' + unitContentId);
-    var jsonExams = getJsonFromUrl('unitContent!getExamsInfo.action?unitContent.id=' + unitContentId);
+    
+    jsonUnitContentId = unitContentId.split("_",1)[0];
+    var jsonUnitContent = getJsonFromUrl('unit!getUnitContentInfo.action?unitContent.id=' + jsonUnitContentId);
+    var jsonExercises = getJsonFromUrl('unitContent!getExercisesInfo.action?unitContent.id=' + jsonUnitContentId);
+    var jsonExams = getJsonFromUrl('unitContent!getExamsInfo.action?unitContent.id=' + jsonUnitContentId);
     
     var id = jsonUnitContent.unitContent.id;
     var title = jsonUnitContent.unitContent.title;
@@ -53,32 +54,26 @@ function showUnitContent(unitContentId) {
     
     
     $('unitContent.id').value = id;
-    $('unitContent.title').innerHTML = title;
+    $('unitContent.title').innerText = title;
     $('unitContent.exercises').innerHTML = exercises;
     $('unitContent.exams').innerHTML = exams;
     //$('unitContent.html').innerHTML = description;    
     //var oEditor = FCKeditorAPI.GetInstance('FCKeditor1');
     //oEditor.SetHTML(description);
     if (type == 1) {
-        $('unitContent.pdf').innerHTML = '<iframe id="html" frameborder="0" width="100%" height="100%" src="discipline!showPdf.action?unitContent.id=' + unitContentId + '"></iframe>';
+        $('unitContent.pdf').innerHTML = '<iframe id="html" frameborder="0" width="100%" height="100%" src="discipline!showPdf.action?unitContent.id=' + jsonUnitContentId + '"></iframe>';
         $('unitContent.html').style.display = 'none';
         $('unitContent.pdf').style.display = 'block';
     }
     else {
         if(type==2){
-        var jsonUnitContent = getJsonFromUrl('unitContent!getContentPackageJson.action?unitContent.id=' + unitContentId);
+        var jsonUnitContent = getJsonFromUrl('unitContent!getContentPackageJson.action?unitContent.id=' + jsonUnitContentId);
         var unitId = jsonUnitContent.info.unit;
         var disciplineId = jsonUnitContent.info.discipline;
         var courseId = jsonUnitContent.info.course;
         //width: 665 height: 1000
          
-        if(courseId==1){
-          $('seeUnitContent').href = '../RenderServlet?file=' + courseId + '/' + disciplineId + '/' + unitId + '/' + unitContentId + '/index.html';
-        }else{
-           var html = '<iframe id="html" frameborder="0" width="' + jsonUnitContent.info.unitContentWidth + '" height="' + jsonUnitContent.info.unitContentHeight + '" src="../RenderServlet?file=' + courseId + '/' + disciplineId + '/' + unitId + "/" + unitContentId + '/index.html' + '"></iframe> <br class="clear"/>';        
-           $('unitContent.html').innerHTML = html;
-        
-        }
+        $('seeUnitContent').href = '../RenderServlet?file=' + courseId + '/' + disciplineId + '/' + unitId + '/' + jsonUnitContentId + '/index.html';
         $('unitContent.pdf').style.display = 'none';
         $('unitContent.html').style.display = 'block';
         }
@@ -260,7 +255,8 @@ function showEditUnitContent() {
             
     var oEditor = FCKeditorAPI.GetInstance('FCKeditor1');
             
-    var jsonUnitContent = getJsonFromUrl('unit!getUnitContentInfo.action?unitContent.id=' + unitContentId);
+    jsonUnitContentId = unitContentId.split("_",1)[0];
+    var jsonUnitContent = getJsonFromUrl('unit!getUnitContentInfo.action?unitContent.id=' + jsonUnitContentId);
     
     $('input.unitContent.id').value = jsonUnitContent.unitContent.id;
     $('input.unitContent.unit.id').value = jsonUnitContent.unitContent.unitId
@@ -327,7 +323,8 @@ function showUploadUnitContent(unitId) {
     $('showUploadUnitContent').style.display = 'block';
     $('upload.unit.id').value = unitId;
     
-        var jsonUnitContentOrders = getJsonFromUrl('unitContent!getUnitContentOrdersJson.action?unit.id=' + unitId);
+    	jsonUnitId = unitId.split("_",1)[0];
+        var jsonUnitContentOrders = getJsonFromUrl('unitContent!getUnitContentOrdersJson.action?unit.id=' + jsonUnitId);
         $('upload.unitContent.order_n').length = 0;
         var item = 1;
         for (var i = 0; jsonUnitContentOrders != '' && 
@@ -385,7 +382,9 @@ function showEntryUnitContent(unitId) {
     $('input.unitContent.unit.id').value = unitId;
     $('input.unitContent.title').value = '';
     
-    var jsonUnitContentOrders = getJsonFromUrl('unitContent!getUnitContentOrdersJson.action?unit.id=' + unitId);
+    jsonUnitId = unitId.split("_",1)[0];
+    
+    var jsonUnitContentOrders = getJsonFromUrl('unitContent!getUnitContentOrdersJson.action?unit.id=' + jsonUnitId);
     
     $('input.unitContent.order_n').length = 0;
         var item = 1;
