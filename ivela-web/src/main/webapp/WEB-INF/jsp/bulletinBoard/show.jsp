@@ -1,4 +1,5 @@
 <%--    
+#############################################################################################
 # Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
 # This file is part of ivela project, an open-source                                        #
 # Program URL   : http://code.google.com/p/ivela/                                           #  
@@ -17,6 +18,7 @@
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 31-JUL-2008 - leomoreira (UFC)                  - XXXXXX - Initial Version                #
 # 24-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+# 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
 #############################################################################################
 --%>
 
@@ -36,13 +38,6 @@
         <cal:head/>
         <s:head />
     </head>
-    <div id="breadcrumb">
-        <p><s:text name="breadcrumb.youAreHere" /></p>
-        <ul>
-            <li><a href="home.action" title="Back to home"><s:text name="front.home" /></a></li>
-            <li class="current"><s:text name="bulletin.pageTitle"/></li>
-        </ul>
-    </div>
     <h1><s:text name="bulletin.pageTitle"/></h1>
     
     <div id="col-1-bulletins">
