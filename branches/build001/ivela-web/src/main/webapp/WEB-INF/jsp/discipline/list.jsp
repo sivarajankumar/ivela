@@ -1,7 +1,24 @@
-<%-- 
-    Document   : list Discipline
-    Created on : Jul 15, 2008, 1:48:45 PM
-    Author     : nelson
+<%--
+#############################################################################################
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                      #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: list.jsp                                                                            #
+# Document: list Discipline                                                                 # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 15-JUL-2008 - Nelson                            - XXXXXX - Initial Version                #
+# 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
+#############################################################################################
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -19,14 +36,6 @@
     <cal:head />
     
     <body>
-        <div id="breadcrumb">
-            <p><s:text name="breadcrumb.youAreHere"/></p>
-            <ul>
-                <li><a href="home.action" title="Back to home"><s:text name="home.name"/></a></li>
-                <li class="current"><s:property value="course.name"/></li>
-            </ul>
-        </div>
-              
         <h1><s:property value="course.name" /></h1>
         
         <div id="col-1-discipline">

@@ -18,6 +18,7 @@
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 15-MAY-2008 - Leonardo Moreira (UFC)            - XXXXXX - Initial Version                #
 # 27-JUN-2009 - Otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+# 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
 ############################################################################################# 
 --%>
 
@@ -38,19 +39,6 @@
 <jsp:include page="paginator.jsp"/>
 <br />
 <s:actionmessage />
-<div id="breadcrumb">
-    <s:url id="listForum" action="forum" method="list">
-        <s:param name="forum.id" value="forum.id"/>
-    </s:url>    
-    <s:url id="listTopic" action="topic" method="listByForum">
-        <s:param name="forum.id" value="forum.id"/>
-    </s:url>    
-    <p><s:text name="breadcrumb.youAreHere"/></p>
-    <ul>
-        <li><s:a href="%{listForum}"><s:text name="forum.breadcrumb"/></s:a></li>
-        <li class="current"><s:a href="%{listTopic}"><s:text name="topic.breadcrumb"/></s:a></li>
-    </ul>
-</div>
 <table id="forum">
     <tr>
         <th><s:text name="topic.list.title" /></th>

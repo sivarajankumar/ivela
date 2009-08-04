@@ -1,5 +1,6 @@
-<%--    
-# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+<%--
+#############################################################################################
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                      #
 # This file is part of ivela project, an open-source                                        #
 # Program URL   : http://code.google.com/p/ivela/                                           #  
 #                                                                                           #
@@ -13,14 +14,18 @@
 #                                                                                           #
 #############################################################################################
 # File: index.jsp                                                                           #
-# Document: Home Index page                                                                 # 
+# Document: Home Index Page                                                                 # 
 # Date        - Author(Company)                   - Issue# - Summary                        #
-# 05-JUN-2008 - leoomoreira                       - XXXXXX - Initial Version                #
-# 08-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+# 05-JUN-2008 - Leo Moreira                       - XXXXXX - Initial Version                #
+# 08-JUN-2009 - Otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+# 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
+# 23-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Unicode (UTF-8) support        #
+#############################################################################################
 --%>
 
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%-- código para testar o layout 2 --%>
+<%-- cÃ³digo para testar o layout 2 --%>
 <%@ page import="org.springframework.security.context.SecurityContextHolder"%>
 <%@ page import="org.springframework.security.userdetails.UserDetails"%>
 <%@ page import="br.ufc.ivela.commons.model.SystemUser"%>
@@ -52,13 +57,6 @@
     <script type="text/javascript" src="js/ead/index.js"></script>
     
 </head>
-
-<div id="breadcrumb">
-    <p><s:text name="breadcrumb.youAreHere"/></p>
-    <ul>
-        <li class="current"><s:text name="home.name"/></li>
-    </ul>
-</div>
 
 <s:if test="newsFlash != null">
     <div class="newsflash" id="hiddenFlash">
