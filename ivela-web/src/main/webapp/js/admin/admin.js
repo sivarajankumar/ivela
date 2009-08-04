@@ -334,8 +334,7 @@ function showStudent(gradeId, courseId, gradeName, courseName) {
 }
 
 function updateStudents(obj, id, userId)
-{
- 
+{        
     var studentDataHtml = "";
     $('reportData').innerHTML = "";
     $('pieCanvas').style.display = "none";
@@ -354,6 +353,7 @@ function updateStudents(obj, id, userId)
     
     var multiple = "";
     var divId;
+    
     if ( checkedElements > 1 ) {
         multiple = ".multiple";
     }
@@ -362,7 +362,7 @@ function updateStudents(obj, id, userId)
         if ( checks[i].checked) { 
 
             // update the div in the multiple group
-            var childs = document.getElementById("div.multiple.inner." + checks[i].id).getElementsByTagName("img");
+            var childs = document.getElementById("div" + multiple + ".inner." + checks[i].id).getElementsByTagName("img");
             for(var j = 0; j < childs.length; j++){
                 if(childs[j].src.search("images/foto_profile.jpg") != -1 && checks[i].id == id){
                     childs[j].src = "../RenderServletProfile?id=" + userId;
