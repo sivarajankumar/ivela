@@ -14,6 +14,10 @@
                 <param name="contentType">application/json</param>    
                 <param name="inputName">inputStream</param>  
             </result> 
+            <result name="text" type="stream">  
+                <param name="contentType">text/plain</param>    
+                <param name="inputName">inputStream</param>  
+            </result> 
             <result name="pdf" type="stream">  
                 <param name="contentType">application/pdf</param>    
                 <param name="inputName">inputStream</param>  
@@ -186,7 +190,11 @@
             <result name="json" type="stream">  
                 <param name="contentType">application/json</param>    
                 <param name="inputName">inputStream</param>  
-            </result>                                        
+            </result>      
+            <result name="text" type="stream">  
+                <param name="contentType">text/plain</param>    
+                <param name="inputName">inputStream</param>  
+            </result>      
         </action>
         
         <action name="profile" class="profileAction"> 
