@@ -140,7 +140,7 @@
                             _width = jsonUnitContent.unitContent.width;
                         if (jsonUnitContent.unitContent.height != null && jsonUnitContent.unitContent.height != '')
                             _height = jsonUnitContent.unitContent.height;
-                        html += '<iframe id="html" name="UnitContentFrame" scrolling="no" frameborder="0"  width="' + _width + '" height="' + _height + '" src="RenderDynamicHtml?unitContent.id=' + unitContentId + '&gradeId=' + gradeId + '"></iframe> <br class="clear"/>';
+                        html += '<iframe id="html" name="UnitContentFrame" onload="addUnitContentListener(this);" scrolling="no" frameborder="0"  width="' + _width + '" height="' + _height + '" src="RenderDynamicHtml?unitContent.id=' + unitContentId + '&gradeId=' + gradeId + '"></iframe> <br class="clear"/>';
 
 
                     } else {
@@ -155,13 +155,11 @@
                             _width = jsonUnitContent.unitContent.width;
                         if (jsonUnitContent.unitContent.height != null && jsonUnitContent.unitContent.height != '')
                             _height = jsonUnitContent.unitContent.height;
-                        html += '<iframe id="html" name="UnitContentFrame" scrolling="no" frameborder="0" width="' + _width + '" height="' + _height + '" src="RenderServlet?file=' + courseId + '/' + disciplineId + '/' + unitId + "/" + unitContentId + '/index.html' + '"></iframe> <br class="clear"/>';
+                        html += '<iframe id="html" name="UnitContentFrame" onload="addUnitContentListener(this);" scrolling="no" frameborder="0" width="' + _width + '" height="' + _height + '" src="RenderServlet?file=' + courseId + '/' + disciplineId + '/' + unitId + "/" + unitContentId + '/index.html' + '"></iframe> <br class="clear"/>';
                     }
                     $('unitContent').innerHTML = html;
                    // $('pnlChat').href = 'IRCIvelaClientServlet?course.id=' + courseId +'&discipline.id='+disciplineId;
-
-                    addUnitContentListener();
-
+                    
                     // update the progress bar
                     getCourseProgress(courseId);
                 }

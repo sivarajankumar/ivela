@@ -21,13 +21,12 @@ function classCss(){
     return css;
 }
 
-function addUnitContentListener() {    
-    
-    var iFrame = window.frames['UnitContentFrame'];    
-    if (iFrame.attachEvent) {                
-        iFrame.attachEvent('DOMNodeInserted', nodeInserted);  
-    } else {
-        iFrame.addEventListener("DOMNodeInserted", nodeInserted, false);    
+function addUnitContentListener(frame) {    
+    var iFrame = frame.contentDocument;    
+    if (iFrame.attachEvent) {        
+        iFrame.attachEvent('DOMNodeInserted', nodeInserted);        
+    } else {        
+        iFrame.addEventListener("DOMNodeInserted", nodeInserted, false);        
     }       
 }
 
