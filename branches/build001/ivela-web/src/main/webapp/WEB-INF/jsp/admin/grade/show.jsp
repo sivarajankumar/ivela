@@ -585,7 +585,7 @@
                     <p><s:text name="grade.show.gradesCount" />: <span id="course.grade.count"></span></p>
                     <p><s:text name="grade.show.coordinatorsCount" />: <span id="course.coordinator.count"></span></p>
                     <p><s:text name="grade.show.professorsCount" />: <span id="course.professor.count"></span></p>
-                    <p><s:text name="grade.show.tutorsCount" />:<span id="course.tutor.count"></span></p>
+                    <p><s:text name="grade.show.tutorsCount" />: <span id="course.tutor.count"></span></p>
                     <p><s:text name="grade.show.studentsCount" />: <span id="course.student.count"></span></p>
                     <!--p><s:text name="grade.show.graduatedStudentsCount" />: <span id="course.graduated.count"></span></p-->
                 </div>
@@ -644,8 +644,8 @@
 
                 <div>
                     <p><s:text name="grade.input.coordinatorsCount" />: <span id="grade.coordinator.count"></span></p>
-                    <p><s:text name="grade.input.professorsCount" />:<span id="grade.professor.count"></span></p>
-                    <p><s:text name="grade.input.tutorsCount" />:<span id="grade.tutor.count"></span></p>
+                    <p><s:text name="grade.input.professorsCount" />: <span id="grade.professor.count"></span></p>
+                    <p><s:text name="grade.input.tutorsCount" />: <span id="grade.tutor.count"></span></p>
                     <p><s:text name="grade.input.studentsCount" />: <span id="grade.student.count"></span></p>
                      <!--p><s:text name="grade.input.graduatedStudentsCount" />: <span id="grade.graduated.count"></span></p-->
                 </div>
