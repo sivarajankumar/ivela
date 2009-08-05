@@ -227,13 +227,13 @@
                 <textarea onKeyDown="textCounter(this,$('remLenContents'),500);" rows="6" onKeyUp="textCounter(this,$('remLenContents'),500);" name="input.course.contents" id="input.course.contents" cols="70"></textarea><span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.04"/>')"></span><br/>
                 <s:text name="course.show.remaining" /><input readonly type=text id="remLenContents" name=remLen size=3 maxlength=3 value="500"/><br/>
 
-  				<label><s:text name="course.input.uploadPackage" /></label> <img class="tooltip" onmouseover="return escape('Entre com uma breve descrição do curso')" /><br />
+  				<label><s:text name="course.input.uploadPackage" /></label> <span class="tooltip" onmouseover="return escape('Entre com uma breve descrição do curso')" /><br />
 
   					  
  				<label><input type="radio" name="input.course.uploadPackage" id="input.course.uploadPackage.yes" value="true"  /> <s:text name="course.input.yes" /></label> 
                 <label><input type="radio" name="input.course.uploadPackage" id="input.course.uploadPackage.no"  value="false" checked="checked" />  <s:text name="course.input.no" /></label> <br/>
 
-               <label><s:text name="course.input.challengeItens" /></label> <img class="tooltip" onmouseover="return escape('Entre com uma breve descrição do curso')" /><br />
+               <label><s:text name="course.input.challengeItens" /></label> <span class="tooltip" onmouseover="return escape('Entre com uma breve descrição do curso')" /><br />
 
 
                 	<label><input type="radio" name="input.course.challengeItens" value="true" id="input.course.challengeItens.yes"  /> <s:text name="course.input.yes" /></label> 
