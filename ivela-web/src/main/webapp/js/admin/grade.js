@@ -174,9 +174,8 @@ function showCourse(courseId) {
     //var jsonTutors = getJsonFromUrl('course!getTutorsInfo.action?course.id=' + courseId);
             
     var studentsCount = json.course.studentsCount;                
-    //var graduatedStudentCount = json.course.graduatedStudentCount;
-    var professorsCount = 0;
-    var tutorsCount = 0;
+    var professorsCount = json.course.professorsCount;    
+    var tutorsCount = json.course.tutorsCount;
     var gradesCount = json.course.gradesCount;
     
     var grades = '';
@@ -205,7 +204,6 @@ function showCourse(courseId) {
     $('course.professor.count').innerHTML = professorsCount;
     $('course.tutor.count').innerHTML = tutorsCount;
     $('course.student.count').innerHTML = studentsCount;
-    //$('course.graduated.count').innerHTML = graduatedStudentCount;
     $('course.grade.count').innerHTML = gradesCount;
    
     $('course.grades').innerHTML = grades;    
@@ -246,7 +244,6 @@ function showGrade(gradeId) {
         }
     }
     var coordinatorsCount = '1';
-    //var graduatedStudentCount = jsonGraduatedStudentsInfo.count;
 
     $('grade.id').value = jsonGrade.grade.id;
     $('grade.course.id').value = jsonGrade.grade.course.id;    
