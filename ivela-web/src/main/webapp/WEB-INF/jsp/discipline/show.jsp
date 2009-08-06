@@ -389,7 +389,7 @@ a:active{outline: none;}
                     </div>
                    <div id="chatOpened" style="display:block">
             <ul>
-                    <li><a href="course!showChatStd.action?course.id=<s:property value="discipline.course.id" />&discipline.id?=<s:property value="discipline.id" />" target="blank"><s:text name="discipline.show.chat" /></a></li>
+                    <li><a href="course!showChatStd.action?courseId=<s:property value="discipline.course.id" />&disciplineId=<s:property value="discipline.id" />" target="blank"><s:text name="discipline.show.chat" /></a></li>
             </ul>
                     </div>
                 </div>
