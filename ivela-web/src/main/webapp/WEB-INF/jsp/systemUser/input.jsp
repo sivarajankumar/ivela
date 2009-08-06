@@ -35,6 +35,21 @@
     <script type="text/javascript" src="js/systemUser/base.js"></script>    
     <script type="text/javascript" src="js/password/passwordmeter.js"></script>       
     <script type="text/javascript">
+        window.onload=function() {
+            var height = 860;
+            if( typeof( window.innerWidth ) == 'number' ) {
+                //Not IE <= 7
+                return;                            
+            } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {              
+                height = document.documentElement.clientHeight;
+            } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {                            
+                height = document.body.clientHeight;
+            }
+            if (height < 860) {
+               document.body.style.height = "auto";
+            }                                 
+        }
+        
         var labelShowFields = "<s:text name="systemUser.input.showFields"/>";
         var labelHideFields = "<s:text name="systemUser.input.hideFields"/>";
         var r={'special':/[\W]/g}

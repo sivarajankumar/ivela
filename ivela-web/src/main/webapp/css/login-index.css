@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 
-html, body {background: url(../images/bg_standard_small.jpg) #fff repeat-x top left;}
+html, body {height:100%; background: url(../images/bg_standard_small.jpg) #fff repeat-x top left;}
 #header {background: url(../images/bg-ballons2-small.jpg) no-repeat top left;}
 
 .login-container {width: 940px; height: auto; margin: 0 auto; position:relative;}
