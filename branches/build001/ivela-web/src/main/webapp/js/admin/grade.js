@@ -251,9 +251,9 @@ function showGrade(gradeId) {
     $('grade.name').innerHTML = jsonGrade.grade.name;
     $('grade.course.description').innerHTML = jsonGrade.grade.course.description;
     $('grade.coordinator.count').innerHTML = coordinatorsCount;
-    $('grade.professor.count').innerHTML = professorsCount;
-    $('grade.tutor.count').innerHTML = tutorsCount;
-    $('grade.student.count').innerHTML = studentsCount;
+    $('grade.professor.count').innerHTML = jsonGrade.grade.professorsCount;
+    $('grade.tutor.count').innerHTML = jsonGrade.grade.tutorsCount;
+    $('grade.student.count').innerHTML = jsonGrade.grade.studentsCount;
     //$('grade.graduated.count').innerHTML = graduatedStudentCount;
     
     checkStatusSelect(jsonGrade.grade.status);
@@ -472,7 +472,7 @@ function updateProfessor(obj,id)
     for ( var i = 0; i < checks.length; i++ )
     {
         changeCheckboxStyle(checks[i]);
-        if ( checks[i].checked )setInputStream
+        if ( checks[i].checked )
         {
             checkedElements++;
         }
@@ -1211,13 +1211,14 @@ function submitProfessor(gradeId, professorId) {
         url += '&systemUser.id=' + professorId;
     }
     var jsonGrade = getJsonFromUrl(url);
-    if ( (jsonGrade != null) && (jsonGrade.result == 'true') )
+    if ( (jsonGrade != null) && (jsonGrade.result != '-1') )
     {
         document.location = 'grade!show.action';
     }
     else
     {
         Lightbox.hideAll();
+        $('username1').value="";
         alert('Não inserido');
     }
 }
@@ -1252,13 +1253,14 @@ function submitTutor(gradeId, tutorId) {
         url += '&systemUser.id=' + tutorId;
     }
     var jsonGrade = getJsonFromUrl(url);
-    if ( (jsonGrade != null) && (jsonGrade.result == 'true') )
+    if ( (jsonGrade != null) && (jsonGrade.result != '-1') )
     {
         document.location = 'grade!show.action';
     }
     else
     {
         Lightbox.hideAll();
+        $('username2').value="";
         alert('Não inserido');
     }
 }
@@ -1279,13 +1281,14 @@ function submitStudent(gradeId, systemUserId) {
         url += '&systemUser.id=' + systemUserId;
     }
     var jsonGrade = getJsonFromUrl(url);
-    if ( (jsonGrade != null) && (jsonGrade.result == 'true') )
+    if ( (jsonGrade != null) && (jsonGrade.result != '-1') )
     {
         document.location = 'grade!show.action';
     }
     else
     {
         Lightbox.hideAll();
+        $('username0').value="";
         alert('Não inserido');
     }
 }

@@ -408,20 +408,20 @@
 
                 <label><s:text name="student.input.student" /></label><br />
                 <s:hidden name="message.recipient.id" id="input.student.grade.student" />
-                <input type="text" name="username" id="username" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
-                <div id="recipientDivAutoCompleter" class="autocomplete"></div>
+                <input type="text" name="username" id="username0" onblur="validateUsername0();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
+                <div id="recipientDivAutoCompleter0" class="autocomplete"></div>
                 <script type="text/javascript">
-                   new Ajax.Autocompleter("username","recipientDivAutoCompleter","systemUser!searchUsersStudent.action", {afterUpdateElement : getSelectionId});
+                   new Ajax.Autocompleter("username0","recipientDivAutoCompleter0","systemUser!searchUsersStudent.action", {afterUpdateElement : getSelectionId0});
 
-                   function getSelectionId(text, li)
+                   function getSelectionId0(text, li)
                    {
                       $('input.student.grade.student').value=li.id;
                    }
 
-                   function validateUsername() {
+                   function validateUsername0() {
                        var id = $('input.student.grade.student').value;                       
                        if (id == null || id == '') {
-                           $('username').value = '';
+                           $('username0').value = '';
                        }
                    }
                 </script>
