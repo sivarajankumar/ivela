@@ -3,13 +3,25 @@
  * and open the template in the editor.
  */
 
-
-
+var hide = true;
+var originalStyle;
 Event.observe(window, 'load', function() {
     if(isAvailable('toolsUser')){
         Event.observe($('toolsUser'), 'click', function(){
+            // Workaround for IE not expanding when showing hidden fields
+            if (originalStyle == undefined) {
+                originalStyle = document.body.style.height;
+            }
+            if(!(typeof( window.innerWidth ) == 'number')) {
+                if (!hide) {
+                    document.body.style.height = originalStyle;
+                } else {
+                    document.body.style.height = "auto";                    
+                }
+            }
             hideFields('hidden', 'blind');
             selectStates($('country').value);
+            
         })
     }
 });
@@ -21,7 +33,6 @@ function isAvailable(element) {
     }
 }
 
-var hide = true;
 function hideFields(s1, s2){
     Effect.toggle(s1, s2);
     hide=!hide;

@@ -22,11 +22,9 @@ function classCss(){
 }
 
 function addUnitContentListener(frame) {    
-    var iFrame = frame.contentDocument;    
-    if (iFrame.attachEvent) {        
-        iFrame.attachEvent('DOMNodeInserted', nodeInserted);        
-    } else {        
-        iFrame.addEventListener("DOMNodeInserted", nodeInserted, false);        
+    var iFrame = frame.contentDocument;
+    if (iFrame != undefined) {
+        iFrame.addEventListener("DOMNodeInserted", nodeInserted, false);
     }       
 }
 
