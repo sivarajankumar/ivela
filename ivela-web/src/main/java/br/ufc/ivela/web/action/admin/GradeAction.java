@@ -807,6 +807,8 @@ public class GradeAction extends GenericAction {
        Grade g = gradeRemote.get(grade.getId());
        g.setCourse(courseRemote.get(grade.getCourseId()));
        String studentsCount = String.valueOf(enrollmentRemote.getByGrade(grade.getId()).size());
+       String professorsCount = String.valueOf(getProfessorsJson(g.getId()).length());
+       String tutorsCount = String.valueOf( getTutorsJson(g.getId()).length());
        json.append("{\"grade\":");
             json.append("{");
             json.append("\"id\":\"" + g.getId() + "\",");
@@ -820,6 +822,9 @@ public class GradeAction extends GenericAction {
             json.append("\"maxStudents\":\"" + g.getMaxStudents() + "\",");
             json.append("\"startDatetime\":\"" + g.getStartDatetime() + "\",");
             json.append("\"endDatetime\":\"" + g.getEndDatetime() + "\",");
+            json.append("\"studentsCount\":\"" + studentsCount + "\",");
+            json.append("\"professorsCount\":\"" + professorsCount + "\",");
+            json.append("\"tutorsCount\":\"" + tutorsCount + "\",");        
             json.append("\"course\":{");
             json.append("\"id\":\"" + g.getCourse().getId() + "\",");
             json.append("\"name\":\"" + g.getCourse().getName() + "\",");

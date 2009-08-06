@@ -93,6 +93,7 @@
 <h1><s:property value="topic.forum.title" /></h1>
 <h4><s:property value="topic.title" /></h4>
 <s:actionmessage />
+<s:actionerror />
 <div id="post">
     <s:iterator value="postList" status="pstat">
         <table id="forum">
@@ -150,8 +151,7 @@
     </s:iterator>                
 </div>
 <div id="quick-answer">
-    <h3><s:text name="post.input.quickanswer"/></h3>
-    <s:actionerror />    
+    <h3><s:text name="post.input.quickanswer"/></h3>    
     <s:form action="post!addQuickAnswer.action" method="POST" id="form-answer" theme="simple">
         <s:hidden name="post.topic.id" value="%{topic.id}" />
         <label><s:text name="post.input.title"/>:</label><br /><br />

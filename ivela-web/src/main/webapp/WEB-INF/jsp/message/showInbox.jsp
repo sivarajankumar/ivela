@@ -90,7 +90,7 @@
                 <s:hidden id="message.recipient.id" name="message.recipient.id" />                    
                 <p>
                     <label><s:text name="message.list.recipient" />:</label>
-                    <input readonly class="to-message" id="reply.username" name="reply.username" type="text" />
+                    <input style="background-color: #858585;" readonly class="to-message" id="reply.username" name="reply.username" type="text" />
                 </p>
                 <p>
                     <label><s:text name="message.list.title" />:</label>
