@@ -10,6 +10,7 @@ import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.ejb.interfaces.CourseRemote;
+import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
 import br.ufc.ivela.ejb.interfaces.GradeRemote;
 import br.ufc.ivela.ejb.interfaces.ProfessorRemote;
 import java.io.ByteArrayInputStream;
@@ -27,6 +28,7 @@ public class CourseAction extends GenericAction {
     private CourseRemote courseRemote;
     private GradeRemote gradeRemote;
     private ProfessorRemote professorRemote;
+    private DisciplineRemote disciplineRemote;
     private Course course;
     private Discipline discipline;
     private List<Course> courseList;
@@ -39,6 +41,8 @@ public class CourseAction extends GenericAction {
     private String chatRoomName;
     private String teacherName;
     private Grade grade;
+    private long courseId;
+    private long disciplineId;
 
     public InputStream getInputStream() {
         return inputStream;
@@ -184,6 +188,8 @@ public class CourseAction extends GenericAction {
     }
     
     public String showChatStd(){        
+        course = courseRemote.get(courseId);
+        discipline = disciplineRemote.get(disciplineId);
         this.nick = this.getAuthenticatedUser().getUsername();
         //this.chatRoomName = "#course_"+this.course.getId();
         this.chatRoomName = "#course_"+course.getId()+"_"+discipline.getId()+"_"+discipline.getName(); 
@@ -246,6 +252,20 @@ public class CourseAction extends GenericAction {
         this.discipline = discipline;
     }
 
+    public void setCourseId(Long id) {
+        this.courseId = id;
+    }
     
+    public void setDisciplineId(Long id) {
+        this.disciplineId = id;
+    }
+    
+    public DisciplineRemote getDisciplineRemote() {
+        return disciplineRemote;
+    }
+
+    public void setDisciplineRemote(DisciplineRemote disciplineRemote) {
+        this.disciplineRemote = disciplineRemote;
+    }
     
 }

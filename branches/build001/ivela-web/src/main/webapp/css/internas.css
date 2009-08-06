@@ -3,7 +3,7 @@
 
 #content .col-1-course {width: 250px; height: auto; float:left;} /*Exceção feita para a página de curso*/
 
-#content .current-course {width: 924px; height: auto; margin-bottom: 0px; border-top: 2px solid #FFCC99; padding: 15px 20px 0 20px; position:relative; clear: both;}
+#content .current-course {width: 780px; height: auto; border-top: 2px solid #FFCC99; padding: 15px 20px 0 20px; position:relative; clear: both}
 #content .current-course .corner-left {display: block; width:5px; height: 30px; position: absolute; top:0; left:0; border-left: 2px solid #FFCC99; text-indent: -999px; overflow:hidden;}
 #content .current-course .corner-right {display: block; width:5px; height: 30px; position: absolute; top:0; right:0; border-right: 2px solid #FFCC99; text-indent: -999px; overflow:hidden;}
 
@@ -11,16 +11,15 @@
 #content .current-course h2 {margin-bottom: 10px; font-size: 15px; color:#033d7d;}
 
 
-#content .current-course .partner {width: 100px; height: 50px; position: absolute; top: 10px; right: 0px;}
+#content .current-course .partner {width: 110px; height: 50px; position: absolute; top: 10px; right: 0px;}
 #content .current-course .partner p {font: 11px Arial, Helvetica, sans-serif; color: #999;}
 
 .units-container {
-    width: 92px; 
-    height:auto;
-    background:#999;
+    width: 85px; 
+    height:auto;    
     padding: 0px;}
 .units-container .units-content {
-    width: 84px; 
+    width: 85px; 
     height:auto; 
     position: relative;
     background:#fff; 
@@ -46,8 +45,11 @@
     background:url(../images/level-less.gif) no-repeat 190px 6px;
 }
 .units-container .list-class ul{ 
-    list-style-type: none; 
-    margin-left: 10px;}
+    list-style-position: outside;
+    margin-left: 10px;
+    display: block;
+    overflow: hidden;
+}
 .units-container .list-class ul li{
     font-size: 11px; 
     padding: 13px 0 3px 0;} 
@@ -55,21 +57,20 @@
     font-weight: bold;}
 
 
-#content #col-2-course {width: 830px; height: auto; float:left; margin-left:10px;}
+#content #col-2-course {width: 800px; height: auto; float:left;}
 
-#content #col-2-course .lesson-menu {width: 820px; height: auto; border-bottom: 1px solid #BBD2EE; padding: 10px; background:#f1f8ff;}
+#content #col-2-course .lesson-menu {width: 800px; height: auto; border-bottom: 1px solid #BBD2EE; padding: 10px; background:#f1f8ff;}
 #content #col-2-course .lesson-menu h2{ width: 260px; height: auto; float:left; font-size: 16px; color:#ff6600;}
 #content #col-2-course .lesson-menu h2 span{color:#033d7d;}
 #content #col-2-course .lesson-menu ul{list-style-type: none; text-align: center; float: right;}
-#content #col-2-course .lesson-menu ul li{float: left; margin:0 15px 0 0; padding:0; height: 16px;  /*background: url(../images/menu/tab-right-course-off.gif) no-repeat right top;*/}
+#content #col-2-course .lesson-menu ul li{float: left; margin:0 15px 0 0; padding:0; height: 22px;  /*background: url(../images/menu/tab-right-course-off.gif) no-repeat right top;*/}
 #content #col-2-course .lesson-menu ul li a{display: block; padding: 3px 0px; color:#033d7d; font-size:12px; font-weight:bold; text-decoration: none; /*background: url(../images/menu/tab-left-course-off.gif) left top no-repeat;*/}
 #content #col-2-course .lesson-menu ul li a:hover{color:#ff6600;} 
 #content #col-2-course .lesson-menu ul li.current {background: #fefefe;}
 
 
 #content #col-2-course .lesson-content {
-    wwidth: 794px; 
-    width: 100px; 
+    wwidth: 700px;     
     height:auto; 
     padding: 0px; 
     margin:inherit;
