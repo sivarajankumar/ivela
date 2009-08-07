@@ -22,7 +22,7 @@ function valid(o,w) {
 var error = "<font color='red'>error</font>";
 var ok = "<font color='green'>ok</font>";
 
-// System Pre-Requisites for Browsers: Netscape version 5 or above, Mozilla v5 or above and Internet Explorer v4 or above
+// System Pre-Requisites for Screen Resolution: Minimum width of 1024 pixels
 var result1 = error;
 var viewportwidth = getWidth();
 var viewportheight = getHeight();
@@ -39,22 +39,19 @@ if (viewportwidth >= 1024) {
     result1 = ok;
 }
 
-// System Pre-Requisites for Screen Resolution: Minimum width of 1024 pixels
+// System Pre-Requisites for Browsers: Firefox v2 or above and Internet Explorer v6 and v7
 var result2 = error;
-var x = navigator
-var iVer = parseInt(x.appVersion);
-var sName = x.appName;
+var x = navigator;
+if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)){ //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);
+    var ffversion=new Number(RegExp.$1); // capture x.x portion and store as a number
+    if (ffversion>=2) {
+        result2 = ok;
+    }
+}
 
-if (sName == "Netscape") {
-    if (iVer >= 5) {
-        result2 = ok;
-    }
-} else if (sName == "Mozilla") {
-    if (iVer >= 5) {
-        result2 = ok;
-    }
-} else if (sName == "Microsoft Internet Explorer") {
-    if (iVer >= 4) {
+if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)){ //test for MSIE x.x;
+    var ieversion=new Number(RegExp.$1); // capture x.x portion and store as a number
+    if (ieversion>=6 && ieversion<8) {
         result2 = ok;
     }
 }
