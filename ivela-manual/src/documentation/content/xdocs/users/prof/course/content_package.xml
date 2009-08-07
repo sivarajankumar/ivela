@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Ivela - Upload de Pacote de Conteúdo</title>
+  </header>
+  <body>
+    <section id="intro">
+      <title>O que é? </title>
+		<p>Um pacote de conteúdo de curso é um arquivo no formato .zip que contém arquivos com todas as informações necessárias para inserir uma nova lição num determinado curso. 
+	</p>	
+   </section>
+	  
+   <section id="steps">
+   		<title>Como criar um pacote de conteúdo?</title>
+		
+		<p>Entenda nessa seção como funciona e como criar um pacote de conteúdo para sua lição.</p>
+		
+		<section id="step1">
+			<title>Passo #1: Crie uma nova lição no Ivela.</title>
+			<p>Ao executar este passo, o sistema gerará um código para sua nova lição. Este código é necessário para a configuração dos arquivos que compõem seu pacote de conteúdo.</p>
+			<p>Para criar uma nova lição no Ivela:
+				<ol>
+					<li>Logue no sistema</li>
+					<li>Entre em "Cursos"</li>
+					<li>Selecione o Curso</li>
+					<li>Selecione a Disciplina</li>
+					<li>Selecione a Unidade</li>
+					<li>Entre em "Lições"</li> 
+					<li>Clique em "Adicionar"</li>
+				</ol>
+			</p>
+		</section>
+		
+		
+		<section id="step2">
+			<title>Passo #2: Verifique códigos de identificação do curso, disciplina, unidade e da lição.</title>
+			<p>Os códigos de identificação são necessários para organizar pastas e arquivos base dentro do pacote de conteúdo. Neste tutorial, os códigos de curso, disciplina, unidade e lição serão referenciados, respectivamente, como <b>id_curso</b>, <b>id_disciplina</b>, <b>id_unidade</b>, <b>id_licao</b>.</p>
+			<p>Para ter acesso a esses códigos, entre em contato com o time de desenvolvimento do Ivela, enviando um e-mail para:</p>
+		</section>
+		
+		<section id="step3">	
+			<title>Passo #3: Entenda a organização de diretórios do Ivela</title>	
+
+			<p>Os diretórios relacionados a um curso são organizados no servidor de acordo com a estrutura abaixo:</p>
+
+	 		<source>
+			/id_curso
+			+--/id_disciplina
+			|   +--/id_da_unidade 
+			|       +--/id_licao 
+			|           +--/css     - CSS especifico das paginas da lição
+			|           +--/js      - Java script especifico das paginas da lição
+			|           +--/julius  - arquivos do Julius para a lição
+			|           +--/xml     - arquivos xml para contabilizar o score da lição
+			|           +--/images  - todas as imagens da lição
+			|           +--/audio   - todos os arquivos de audio (ogg,mp3,outros) da lição
+			|           +--/video   - todos os videos da lição
+			+-/css     - CSS para todas as paginas do curso
+			+-/js      - Java Script para todas as paginas do curso
+			+-/images  - Imagens comuns para todas as paginas do curso
+			</source>	
+		
+			<p>Obs.: A criação da estrutura dos diretórios  id_curso, id_disciplina, id_unidade e id_licao é feita automaticamente pelo sistema durante a criação de cursos, disciplinas, unidade e lições. </p>
+        </section>
+
+	<section id="step4">
+		<title>Passo #4:  Crie um diretório de trabalho para seu pacote de conteúdo</title>
+		<p>
+			Foi criado no Ivela, no passo #1, um diretório cujo o nome é o código de identificação da nova lição. Para trabalhar com seu conteúdo, em seu computador, crie uma pasta que será seu diretório raiz.
+		</p>
+	</section>
+
+	<section id="step5">
+		<title>Passo #5: Crie o arquivo index.html</title>
+		<p>O arquivo index.html carrega os javascripts utilizados pela lição e sua página principal (HTML). </p>
+			<ol>
+				<li>No diretório raiz de sua lição, crie um arquivo index.html com o conteúdo descrito no código abaixo.</li>
+				<li>Substitua id_curso, id_disciplina, id_unidade e id_licao por seus valores reais nas linhas destacadas.</li>
+			</ol>
+			<h3>index.html</h3> 
+		
+		 <source>
+&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;charset=utf-8&quot; &gt;
+&lt;!-- Arquivos externos: Javascript e css: Substitua id_curso, id_disciplina, id_unidade, id_licao por seus respectivos valores -----&gt;
+<font color="#FF6633"><b>&lt;script type=&quot;text/javascript&quot; src=&quot;RenderServlet?file=id_curso/id_disciplina/id_unidade/id_licao/js/prototype.js&quot;&gt;&lt;/script&gt;</b></font>
+<font color="#FF6633"><b>&lt;script type=&quot;text/javascript&quot; src=&quot;RenderServlet?file=id_curso/id_disciplina/id_unidade/id_licao/js/deserialize.js&quot;&gt;&lt;/script&gt;</b></font>
+&lt;!----------------------------------------------------------------------------------------------------------------------------------&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+	function showPage(page) {
+	    var html = getHtml(page);
+	    document.body.innerHTML = html;
+	}
+	function getHtml(strUrl){
+	    var html;
+	    new Ajax.Request(strUrl,
+	    {
+		method:&#x27;get&#x27;,// tipo de método
+		requestHeaders: {Accept: &#x27;text/plain&#x27;}, // tipo de consumo
+		asynchronous: false, // sincrono ou assincrono
+		onSuccess: function(transport) { // funcao de sucesso
+		    html = transport.responseText;
+		},
+		onFailure: function() { // funcao para mostrar problemas
+		    alert(&#x27;Message: Something went wrong...&#x27;)
+		}
+	    });
+	    return html;
+	}
+
+	function getJsonFromUrlByGet(strUrl){
+	    var json;
+
+	    new Ajax.Request(strUrl,
+	    {
+		method:&#x27;get&#x27;,// tipo de método
+		requestHeaders: {Accept: &#x27;application/json&#x27;}, // tipo de consumo
+		asynchronous: false, // sincrono ou assincrono
+		onSuccess: function(transport) { // funcao de sucesso
+		    json = transport.responseText.evalJSON();
+
+		},
+		onFailure: function() { // funcao para mostrar problemas
+                    alert(&#x27;Message: Something went wrong...&#x27;)
+                }
+	    });
+	    return json;
+	}
+        /* Funcao para recuperar um Json atraves de uma URL */
+	function getJsonFromUrlByPost(strUrl){
+	    var json;
+	    new Ajax.Request(strUrl,
+	    {
+		method:&#x27;post&#x27;,// tipo de método
+		requestHeaders: {Accept: &#x27;application/json&#x27;}, // tipo de consumo
+		asynchronous: false, // sincrono ou assincrono
+		onSuccess: function(transport) { // funcao de sucesso
+		    json = transport.responseText.evalJSON(true);
+		},
+		onFailure: function() { // funcao para mostrar problemas
+                    alert(&#x27;Message: Something went wrong...&#x27;)
+                }
+	    });
+	    return json;
+	}
+        /* Funcao ativada pela interface atraves de um evento onclick de um elemente input type=&quot;button&quot; passando a url para o Json */
+	function requestJson(value) {
+	    var url = value;
+        var json = getJsonFromUrlByGet(url);
+	    var name = json.name;
+		var status = json.status;
+		var div = $(name);
+		var divStyle = &quot;red&quot;;
+
+		if(status == &quot;ok&quot;) {divStyle = &quot;green&quot;;}
+
+		var html = &#x27;&lt;div id=\&quot;innercontent\&quot; style=\&quot;background: &#x27;+divStyle+&#x27;; width: 100px; height: 20px; border: 1px solid #ffe79c; margin: 20px; padding: 10px; text-align: center; font:bold 12px Arial, Helvetica, sans-serif;\&quot;&gt;&#x27;;
+        var i = 0;
+           for (i = 0; i &lt; json.list.results.length; i++) {
+	        html += &#x27;&lt;td&gt;Score: &#x27;+json.list.results[i].ret+&#x27;%&lt;br&gt;&#x27;;
+	   		}
+            html += &#x27;&lt;/div&gt;&#x27;;
+            div.innerHTML = html;
+	}
+
+	function doSubmitSerialize(form) {
+	   	var value = Form.serialize(form, $(&#x27;usejson&#x27;).checked);
+	    requestJson(&#x27;/ivela-web/ChallengeSolver?&#x27;+value);
+	}
+
+	function positionX(elem)
+	{
+		 x = elem.offsetLeft;
+		 return x;
+	}
+
+	function positionY(elem)
+	{
+		y = elem.offsetTop;
+    	return y;
+	}
+
+	function toolTip(obj){
+		text = obj.innerHTML
+		url = &quot;/ivela-web/resources/dictionary/get/&quot;+text;
+		json = getJsonFromUrlByGet(url);
+		$(&#x27;tip&#x27;).innerHTML = &quot;&lt;b&gt;&quot;+text+&quot;&lt;/b&gt;&lt;br&gt;&quot;+json.busca;
+		$(&#x27;tip&#x27;).style.position = &#x27;absolute&#x27;;
+		$(&#x27;tip&#x27;).style.left = (positionX(obj)+50)+&quot;px&quot;;
+		$(&#x27;tip&#x27;).style.top = (positionY(obj)-50)+&quot;px&quot;;
+		$(&#x27;tip&#x27;).style.display = &quot;block&quot;;
+	}
+
+	function toolBasic(name, title, obj){
+		text = name
+		url = &quot;/ivela-web/resources/dictionary/get/&quot;+text;
+		json = getJsonFromUrlByGet(url);
+		$(&#x27;tip&#x27;).innerHTML = &quot;&lt;b&gt;&quot;+title+&quot;&lt;/b&gt;&lt;br&gt;&quot;+json.busca;
+		$(&#x27;tip&#x27;).style.position = &#x27;absolute&#x27;;
+		$(&#x27;tip&#x27;).style.left = (positionX(obj)+50)+&quot;px&quot;;
+		$(&#x27;tip&#x27;).style.top = (positionY(obj)-50)+&quot;px&quot;;
+		$(&#x27;tip&#x27;).style.display = &quot;block&quot;;
+	}
+
+	function clearTip(){
+		$(&#x27;tip&#x27;).innerHTML = &quot;&quot;;
+		$(&#x27;tip&#x27;).style.display = &quot;none&quot;;
+	}
+&lt;/script&gt;
+<!--<font color="#FF6633"><b>&lt;link rel=&#x27;stylesheet&#x27; href=&#x27;RenderServlet?file=id_curso/id_disciplina/id_unidade/id_licao/css/default.css&#x27; media=&quot;screen&quot;&gt;</b></font>-->
+&lt;/head&gt;
+&lt;!----- Página Principal: ------------------------------------------------------------------------------------------------------&gt;
+&lt;!------1. Insira no lugar do '*' o nome do arquivo HTML de sua página principal -----------------------------------------------&gt;
+&lt;!----- 2. Substitua id_curso, id_disciplina, id_unidade, id_licao por seus respectivos valores --------------------------------&gt;
+<font color="#FF6633"><b>&lt;body onLoad=&quot;showPage(&#x27;RenderServlet?file=id_curso/id_disciplina/id_unidade/id_licao/*.html&#x27;);&quot;&gt;</b></font>
+&lt;!------------------------------------------------------------------------------------------------------------------------------&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </source>
+
+</section>			
+			
+							
+  
+	<section id="step6">
+      <title>Passo #6: Crie o arquivo contentpackage.ivela.xml  </title>
+   
+    	<p>O arquivo contentpackage.ivela.xml contém o mapeamento de arquivos e diretórios utilizados pela lição.</p>
+	<ol>
+	<li>Crie o arquivo contentpackage.ivela.xml no diretório raiz da lição.  </li>
+	<li>Utilize o código descrito abaixo, respeitando as seguintes condições: 
+	<ul>
+		<li>Todos os arquivos localizados no diretório raiz da lição (ex.: index.html) devem ser especificados na tag filesystem. 
+		<br>Exemplo: <b>&lt;filesystemvalue=&quot;/nome_do_arquivo&quot;/&gt;</b></br></li>
+		<li>Todos os subdiretórios devem ser listados na tag filesystem. 
+		<br>Exemplo:<b>&lt;filesystem value=&quot;/js/&quot;/&gt;</b></br></li>
+	</ul></li>
+	</ol>
+	<h3>contentpackage.ivela.xml</h3> 
+	
+	<source>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+&lt;ivela&gt;
+&lt;header doctype=&quot;plugin&quot; docsubtype=&quot;contentpackage&quot;/&gt;
+    &lt;payload&gt;
+	&lt;contentpackage course=&quot;id_curso&quot; discipline=&quot;id_disciplina&quot; unit=&quot;id_unidade&quot;&gt;
+		&lt;filesystem value=&quot;/index.html&quot;/&gt;
+		&lt;filesystem value=&quot;/css/&quot;/&gt;
+		&lt;filesystem value=&quot;/js/&quot;/&gt;
+		&lt;filesystem value=&quot;/images/&quot;/&gt;			
+		&lt;filesystem value=&quot;/julius/&quot;/&gt;
+		&lt;filesystem value=&quot;/xml/&quot;/&gt;
+		&lt;filesystem value=&quot;/audio/&quot;/&gt;
+		&lt;filesystem value=&quot;/video/&quot;/&gt;
+	&lt;/contentpackage&gt;
+   &lt;/payload&gt;
+&lt;/ivela&gt;
+	</source>
+    </section>
+    
+    <section id="step7">
+		<title>Passo #7: Crie um diretório para arquivos Javascript</title>
+		<p>O diretório 'js' deve ser utilizado para armazenar todos os arquivos javascript utilizados por HTMLs que compõem a lição.</p>
+		<ol>
+			<li>Na pasta principal da lição, crie o diretório <b>js</b>.</li>
+			<li> Insira os seguintes arquivos (ambos necessários para o funcionamento do arquivo index.html): 
+				<ul>
+				 	<li>prototype.js</li>
+					<li>deserialize.js</li>
+				</ul>
+			</li>
+		</ol>
+   </section>    
+   <section id="step8">
+		<title>Passo #8: Adicione os arquivos específicos da lição</title>	
+		<p>Insira no diretório da lição todos os arquivos específicos da lição (ex.: arquivos HTML, imagens, vídeos).</p>
+		<p>Para informações sobre construção de arquivos HTML, visite a seção: <a href="#html_tips">Dicas HTML</a>.</p>	
+    </section>
+  </section>    
+<section id="html_tips">
+      <title>Dicas HTML</title>
+ <ol>   
+     <li> O Ivela permite a utilização de qualquer componente WEB/HTML padrão. Elementos específicos de browsers não suportados pelo Ivela podem não ser visualizados corretamente se inseridos no HTML.</li>
+	
+
+	<li>Disponibilizamos neste tutorial um arquivo (seção <a href="#download">Exemplo para download</a>) que contém, além da estrutura básica de um pacote de conteúdo, um arquivo HTML que utiliza:
+	<ul>
+        		<li>Folhas de estilo</li>
+        		<li>DIVs</li>
+        		<li>Tabelas</li>
+        		<li>Listas</li>
+        		<li>Incorporação de imagens, vídeos, applets, arquivos flash</li>
+        	</ul>
+	</li>
+	
+	
+	<li>Para que arquivos da lição (imagens, applets, vídeos) sejam exibidos corretamente, utilize dentro das tags de seu no seu HTML: 			<code>RenderServlet?file=id_curso/id_disciplina/id_unidade/id_licao/nome_do_diretorio/nome_do_arquivo </code> 
+	
+	<p>Exemplo: Exibição de uma imagem em um arquivo HTML de lição.
+	<ul>
+		<li>Nome do arquivo a ser exibido: img.jpg</li>
+		<li>Diretório: images</li>	
+		<li>Código do curso: 1</li>
+		<li>Código da disciplina: 1</li>
+		<li>Código do unidade: 1</li>
+		<li>Código do lição: 1</li>
+		<li>Tag inserida no HTML: &lt;img src='RenderServlet?file=/1/1/1/1/images/img.jpg'&gt;  </li>
+	</ul></p>
+	</li>
+	</ol>
+	<note label="Importante!">Ao salvar seu arquivo HTML, certifique-se de que o formato de codificação escolhido seja Unicode (UTF-8) para garantir que caracteres especiais (acentuações, cedilha, etc.) sejam exibidos corretamente.</note>
+	
+    </section>	
+	
+	
+    <section id="download">
+	<title>Exemplo para download </title>	
+
+	<p>Nesta seção, está disponível, para ser utilizado como teste ou como base para criação de lições, um arquivo de pacote de conteúdo exemplo. Para utilizá-lo, siga as instruções abaixo:</p>
+
+	<ol>
+		<li>Faça o download do arquivo .zip <a href="/course/contentpackage/exemplo.zip">aqui</a>.</li> 
+		<li>Altere o arquivo index.html nas linhas indicadas, inserindo os valores reais para id_curso, id_disciplina, id_unidade, id_licao. </li>
+		<li>Altere no arquivo contentpackage.ivela.xml os valores de id_curso, id_disciplina, id_unidade. Observe que no arquivo já estão listados:
+			<ul>
+				<li>todos os arquivos presentes no diretório raiz da lição</li>
+				<li>todos os subdiretórios</li>
+			</ul>
+		</li>
+		<li>No Ivela:
+			<ol>
+				<li>Acesse o curso, disciplina e unidade que receberá a nova lição</li>
+				<li>Clique em "Upload"</li>
+				<li>Selecione o arquivo exemplo.zip</li>
+				<li>Após o carregamento do arquivo, a lição exemplo poderá ser acessada normalmente</li>
+			</ol>
+		</li>
+	</ol>
+	<p>O arquivo exemplo pode ser alterado para a criação de novas lições, desde que as regras descritas na seção <a href="#steps">Como criar um pacote de conteúdo?</a> sejam respeitadas.</p>
+    </section>
+  </body>
+</document>
