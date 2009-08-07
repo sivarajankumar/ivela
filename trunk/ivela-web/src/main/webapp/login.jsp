@@ -19,6 +19,7 @@
 # XX-XXX-XXXX - X                                 - XXXXXX - Initial Version                #
 # 03-JUL-2009 - mileine (Instituto Eldorado)      - 000010 - Login fields position fixed    #
 # 10-JUN-2009 - Rafael Lagoa (Instituto Eldorado) - 000011 - System pre-requisites check    #
+# 07-AGO-2009 - mileine (Instituto Eldorado)      - 000011 - Manual link                    #
 #############################################################################################
 --%>
 
@@ -73,8 +74,7 @@
          
     </form>
     <div class="tools-login">
-        
-        <a href="faq!list.action" title="FAQ">FAQ</a>
+        <a href="/ivela-manual" title="Manual">Manual</a>
         <a href="aboutUs!list.action" title=<s:text name="login.about.us"/>><s:text name="login.about.us"/></a>
         <a href="systemUser!input.action" title=<s:text name="login.join.now"/>><s:text name="login.join.now"/></a>
     </div>
