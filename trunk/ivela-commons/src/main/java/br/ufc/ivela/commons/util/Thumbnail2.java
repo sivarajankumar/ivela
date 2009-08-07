@@ -1,7 +1,25 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: ProfileAction.java                                                                  #
+# Document: Profile Action                                                                  # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - Leonardo Oliveira Moreira         - XXXXXX - Initial Version                #
+# 30-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Fixes                  #
+#############################################################################################
+*/
 package br.ufc.ivela.commons.util;
 
 import com.sun.image.codec.jpeg.JPEGCodec;
@@ -13,67 +31,38 @@ import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Leonardo Oliveira Moreira
- * 
- * 
- */
+import javax.imageio.ImageIO;
+
+
 public class Thumbnail2 {
 
-    public static void processSquareThumbnail(String fileIn, String fileOut, Integer thumbnailSide, String sQuality) throws Exception {
-        // load image from INFILE
-        Image image = Toolkit.getDefaultToolkit().getImage(fileIn);
-        MediaTracker mediaTracker = new MediaTracker(new Container());
-        mediaTracker.addImage(image, 0);
-        mediaTracker.waitForID(0);
-        
-        // determine thumbnail size from WIDTH and HEIGHT
-        Integer initialWidth = image.getWidth(null);
-        Integer initialHeight = image.getHeight(null);
-        
-        // draw a temp image to crop resizing the original image depending on the bigger dimension of the thumbnail image
-        Integer tempWidth;
-        Integer tempHeight;
-        if (initialWidth >= initialHeight) {
-            tempWidth = (int) Math.ceil(thumbnailSide * ((float)initialWidth / (float)initialHeight));
-            tempHeight = thumbnailSide;
-        }else{
-            tempWidth = thumbnailSide;
-            tempHeight = (int) Math.ceil(thumbnailSide * ((float)initialHeight / (float)initialWidth));
+    public static void processSquareThumbnail(String fileIn, String fileOut,
+            Integer thumbnailSide, String sQuality) throws Exception {
+        BufferedImage source = ImageIO.read(new File(fileIn));
+        int widerSide = source.getHeight() > source.getWidth() ? source
+                .getHeight() : source.getWidth();
+        if (widerSide <= thumbnailSide) {
+            // No Need to Resize.
+            return;
         }
-        
-        BufferedImage tempImage = new BufferedImage(tempWidth, tempHeight, BufferedImage.TYPE_INT_RGB);
-        Graphics2D tempGraphics2D = tempImage.createGraphics();
-        tempGraphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        tempGraphics2D.drawImage(image, 0, 0, tempWidth, tempHeight, null);
-        
-        // set the start points to crop
-        Integer cropX = (tempWidth != thumbnailSide) ? Math.abs((tempWidth - thumbnailSide) / 2) : 0;
-        Integer cropY = (tempHeight != thumbnailSide) ? Math.abs((tempHeight - thumbnailSide) / 2) : 0;
-        
-        // crop the temp image to get only a central part of the image according to the thumbnail dimension
-        BufferedImage thumbnailImage = new BufferedImage(thumbnailSide, thumbnailSide, BufferedImage.TYPE_INT_RGB);
-        Graphics2D graphics2D = thumbnailImage.createGraphics();
-        graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        graphics2D.drawImage(tempImage, 0, 0, thumbnailSide, thumbnailSide, cropX, cropY, (cropX + thumbnailSide), (cropY + thumbnailSide), null);
-        
-        // save thumbnail image to OUTFILE
-        BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(fileOut));
-        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-        JPEGEncodeParam param = encoder.getDefaultJPEGEncodeParam(thumbnailImage);
-        int quality = Integer.parseInt(sQuality);
-        quality = Math.max(0, Math.min(quality, 100));
-        param.setQuality((float) quality / 100.0f, false);
-        //encoder.setJPEGEncodeParam(param);
-        encoder.encode(thumbnailImage);
-        out.close();
+        double transformation = (double) thumbnailSide / widerSide;
+        BufferedImage thumbnail = new BufferedImage(
+                (int) (source.getWidth() * transformation), (int) (source
+                        .getHeight() * transformation),
+                BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = thumbnail.createGraphics();
+        AffineTransform at = AffineTransform.getScaleInstance(transformation,
+                transformation);
+        g.drawRenderedImage(source, at);
+        ImageIO.write(thumbnail, "JPG", new File(fileOut));
     }
     
     public static void process(String fileIn, String fileOut, String tWidth, String tHeight, String sQuality) throws Exception {

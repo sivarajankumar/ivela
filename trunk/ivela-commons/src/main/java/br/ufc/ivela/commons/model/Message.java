@@ -1,7 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: Message.java                                                                        #
+# Document: Message's Model                                                                 # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - rodrigo                           - XXXXXX - Initial Version                #
+# 15-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Fixes                  #
+*/
 
 package br.ufc.ivela.commons.model;
 
@@ -23,10 +39,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author rodrigo
- */
 @Entity
 @Table(name = "message")
 @NamedQueries({@NamedQuery(name = "Message.findById", query = "SELECT m FROM Message m WHERE m.id = :id"), @NamedQuery(name = "Message.findByTitle", query = "SELECT m FROM Message m WHERE m.title = :title"), @NamedQuery(name = "Message.findByDescription", query = "SELECT m FROM Message m WHERE m.description = :description"), @NamedQuery(name = "Message.findByDatetime", query = "SELECT m FROM Message m WHERE m.datetime = :datetime"), @NamedQuery(name = "Message.findByRead", query = "SELECT m FROM Message m WHERE m.read = :read")})
@@ -46,6 +58,10 @@ public class Message implements Serializable {
     private Date datetime;
     @Column(name = "read", nullable = false)
     private boolean read;
+    @Column(name = "s_delete", nullable = false)
+    private boolean senderDeleted;
+    @Column(name = "r_delete", nullable = false)
+    private boolean recipientDeleted;
     @JoinColumn(name = "sender", referencedColumnName = "id")
     @ManyToOne
     private SystemUser sender;
@@ -106,7 +122,23 @@ public class Message implements Serializable {
     public void setRead(boolean read) {
         this.read = read;
     }
+    
+    public boolean getSenderDeleted() {
+        return senderDeleted;
+    }
 
+    public void setSenderDeleted(boolean senderDeleted) {
+        this.senderDeleted = senderDeleted;
+    }
+    
+    public boolean getRecipientDeleted() {
+        return recipientDeleted;
+    }
+   
+    public void setRecipientDeleted(boolean recipientDeleted) {
+        this.recipientDeleted = recipientDeleted;
+    }
+    
     public SystemUser getSender() {
         return sender;
     }
