@@ -6,8 +6,10 @@ function showUnit(unitId) {
 
     var i = 0;
             
-    var jsonUnit = getJsonFromUrl('unit!getUnitInfo.action?unit.id=' + unitId);
-    var jsonUnitsContent = getJsonFromUrl('unit!getUnitsContentInfo.action?unit.id=' + unitId);
+    jsonUnitId = unitId.split("_",1)[0];
+    
+    var jsonUnit = getJsonFromUrl('unit!getUnitInfo.action?unit.id=' + jsonUnitId);
+    var jsonUnitsContent = getJsonFromUrl('unit!getUnitsContentInfo.action?unit.id=' + jsonUnitId);
 
     var name = jsonUnit.unit.name;
     var unitsContent = '';

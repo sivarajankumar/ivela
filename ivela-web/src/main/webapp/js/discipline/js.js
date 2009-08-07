@@ -8,15 +8,19 @@
 //  In my case I want to load them onload, this is how you do it!
 // 
 Event.observe(window, 'load', loadAccordions, false);
-Event.observe(window, 'click', click, false);
+Event.observe(window, 'load', function() {Event.observe(content, 'click', click, false);}, false);
 
 var current;
 
 function click(e){ 
-    if (e.target.getAttribute('class') != null) {
-        if (e.target.getAttribute('class').toString() == 'accordion_toggle accordion_toggle_active') {
+    if (!e) e = window.event;
+    var evt;
+    if (e.target) evt = e.target;
+        else if (e.srcElement) evt = e.srcElement;
+    if ((evt.className) != null) {
+        if (evt.className.toString() == 'accordion_toggle accordion_toggle_active') {
 
-            var course = e.target.next(0).getAttribute('id');
+            var course = evt.next(0).getAttribute('id');
 
             if (current != course) {
                 current = course;

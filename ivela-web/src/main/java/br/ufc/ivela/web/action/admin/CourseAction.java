@@ -142,7 +142,7 @@ public class CourseAction extends GenericAction {
         performValidateAdd();
         XStream xStream = new XStream(new JettisonMappedXmlDriver());
         if (!hasActionErrors()) {
-            course.setActive(true);            
+            course.setActive(true);
             boolean result = courseRemote.update(course);
             course = courseRemote.get(course.getId());
             xStream.alias("course", Course.class);
@@ -570,7 +570,9 @@ public class CourseAction extends GenericAction {
         List<Grade> grades = gradeRemote.getByCourse(course.getId());
         String studentsCount = String.valueOf(courseRemote.getStudentsCount(course.getId()));
         String gradesCount = String.valueOf(courseRemote.getGradesCount(course.getId()));
-       // String graduatedStudentCount = String.valueOf(courseRemote.getGraduatedStudentsCount(course.getId()));
+        String graduatedStudentCount = String.valueOf(courseRemote.getGraduatedStudentsCount(course.getId()));
+        Boolean uploadPackageEnabled = course.getUploadPackageEnabled();
+        Boolean challengeItensEnabled = course.getChallengeItensEnabled();
         StringBuilder json = new StringBuilder();
         json.append("{");
             json.append("\"course\":{");
@@ -579,11 +581,11 @@ public class CourseAction extends GenericAction {
                 json.append("\"description\":\"" + course.getDescription() + "\",");
                 json.append("\"targetAudience\":\"" + course.getTargetAudience() + "\",");
                 json.append("\"image\":\"" + course.getImage() + "\",");
-                json.append("\"updloadPackageEnabled\":\"" + course.getUploadPackageEnabled() + "\",");
-                json.append("\"challengeItensEnabled\":\"" + course.getChallengeItensEnabled() + "\",");
+                json.append("\"uploadPackageEnabled\":\"" + uploadPackageEnabled + "\",");
+                json.append("\"challengeItensEnabled\":\"" + challengeItensEnabled + "\",");
                 json.append("\"studentsCount\":\"" + studentsCount + "\",");
                 json.append("\"gradesCount\":\"" + gradesCount + "\",");
-                //json.append("\"graduatedStudentCount\":\"" + graduatedStudentCount + "\",");
+                json.append("\"graduatedStudentCount\":\"" + graduatedStudentCount + "\",");
                 json.append("\"disciplines\":[");
                     for (Discipline d : disciplines) {
                     json.append("{");        

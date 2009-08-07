@@ -1,7 +1,27 @@
 <%-- 
-    Document   : list Post
-    Created on : May 15, 2008, 1:38:17 PM
-    Author     : rodrigofelix
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: list.jsp                                                                            #
+# Document: List Post                                                                       #
+# Date        - Author(Company)                    - Issue# - Summary                       #
+# 15-MAY-2008 - Rodrigo Felix                      - XXXXXX - Initial Version               #
+# 16-JUN-2009 - Fabio Fantato(Instituto Eldorado)  - 000010 - i18n bug fix                  #
+# 19-JUN-2009 - Mileine Assato (Instituto Eldorado)- 000010 - Post author username added    #
+# 24-JUN-2009 - Mileine Assato (Instituto Eldorado)- 000010 - i18n bug fix part II          #
+# 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
+#############################################################################################    
 --%>
 <%@ page import="org.springframework.security.context.SecurityContextHolder"%>
 <%@ page import="org.springframework.security.userdetails.UserDetails"%>
@@ -30,13 +50,13 @@
     function validate(){
        var validate = true;
         if(document.getElementById('post.input.title').value==''){
-            alert("Title is required");
-            validate = false
+        	alert("Title is required");
+         	validate = false;
         }
         
         if(document.getElementById('post.input.message').value==''){
-            alert("Message is required");
-            validate = false
+        	alert("Message is required");
+            validate = false;
         }
         if(validate){
             document.getElementById('form-answer').submit();
@@ -73,29 +93,12 @@
 <h1><s:property value="topic.forum.title" /></h1>
 <h4><s:property value="topic.title" /></h4>
 <s:actionmessage />
-<div id="breadcrumb">
-    <s:url id="listForum" includeParams="false" action="forum" method="list">
-        <s:param name="forum.id" value="forum.id"/>
-    </s:url>    
-    <s:url id="listTopic" includeParams="false" action="topic" method="listByForum">
-        <s:param name="forum.id" value="forum.id"/>
-    </s:url>        
-    <s:url id="listPost" includeParams="false" action="post" method="list">
-        <s:param name="forum.id" value="forum.id"/>
-        <s:param name="topic.id" value="topic.id"/>
-    </s:url>        
-    <p><s:text name="breadcrumb.youAreHere"/></p>
-    <ul>
-        <li><s:a href="%{listForum}"><s:text name="forum.breadcrumb"/></s:a></li>
-        <li><s:a href="%{listTopic}"><s:text name="topic.breadcrumb"/></s:a></li>
-        <li class="current"><s:a href="%{listPost}"><s:text name="post.breadcrumb"/></s:a></li>
-    </ul>
-</div>
+<s:actionerror />
 <div id="post">
     <s:iterator value="postList" status="pstat">
         <table id="forum">
             <tr>
-                <th><s:text name="post.list.author"/></th>
+                <th><s:text name="topic.list.postedBy" />: <span class="name-user"><a href=""><s:property value="createdBy.username"/></a></span></th>
                 <th><s:property value="title" /></th>
             </tr>
             
@@ -104,12 +107,6 @@
                     <img src="RenderServletProfile?id=<s:property value="createdBy.id" />" /><br/>
                     <a href=""><s:property value="createdBy.name" /></a><br/>
                     <s:text name="post.list.stateSince"/><s:date name="createdAt" format="%{getText('formatDateLanguage1')}" /><br />
-                    <%--<s:text name="post.list.messages"/><br />--%>
-                    <!--
-                            Location: Fortaleza-CE<br/>
-                            <span class="offline">offline</span>
-                            <span class="online">online</span>
-                    -->
                 </td>
                 <td>
                     
@@ -137,15 +134,16 @@
                                     <s:param name="post.id" value="id"/>
                                     <s:param name="post.topic.id" value="topic.id"/>
                                 </s:url>
-                        <%--<li><s:a cssClass="btn-answer" href="">Answer</s:a></li>--%>
-                        <li><a class="btn-quote" href="javascript:addQuote(<s:property value="id" />, <s:property value="topic.id" />, '<s:property value="message" />');">Quote</a></li>
-                        <li><s:a cssClass="btn-remove" href="%{urlRemove}">Remove</s:a></li>
-                        <!--
-                     <li><a class="print" href="">Print</a></li>
-                        -->
+                        <!-- <li><s:a cssClass="btn-answer" href="">Answer</s:a></li>-->
+                        <li><a class="btn-quote" href="javascript:addQuote(<s:property value="id" />, <s:property value="topic.id" />, '<s:property value="message" />');"><s:text name="post.list.quote"/></a></li>
+                        <s:if test="createdBy.username==#session.username">
+                            <li><s:a cssClass="btn-remove" href="%{urlRemove}"><s:text name="post.list.remove"/></s:a></li> 
+                        </s:if>
+                        <s:elseif test="#session.role=='admin'">
+                            <li><s:a cssClass="btn-remove" href="%{urlRemove}"><s:text name="post.list.remove"/></s:a></li> 
+                        </s:elseif>
                     </ul>
-                    
-                </td>
+              </td>
             </tr>
         </table>
         <div style="display: none; width: 940px;" id="addQuote_<s:property value="id" />">45456546456
@@ -153,13 +151,12 @@
     </s:iterator>                
 </div>
 <div id="quick-answer">
-    <h3>Quick Answer</h3>
-    <s:actionerror />    
+    <h3><s:text name="post.input.quickanswer"/></h3>    
     <s:form action="post!addQuickAnswer.action" method="POST" id="form-answer" theme="simple">
         <s:hidden name="post.topic.id" value="%{topic.id}" />
-        <label>Title:</label><br /><br />
+        <label><s:text name="post.input.title"/>:</label><br /><br />
         <s:textfield name="post.title" cssStyle="width: 960px;" /><br/> 
-        <label>Description:</label><br />
+        <label><s:text name="post.input.description"/>:</label><br />
         <s:textarea name="post.message" />
         <s:submit cssClass="btn-send" value="Send" />
     </s:form>
@@ -176,8 +173,8 @@
     
     function replaceQuotes( quotedText )
     {
-       var out = replaceAll( quotedText, '[quote]', '<div class=\"quote-answer\">' );
-       out = replaceAll( out, '[/quote]', '</div>' );
+       var out = replaceAll( quotedText, '[quote]', '<span class=\"quote-answer\">' );
+       out = replaceAll( out, '[/quote]', '</span>' );
 
 //       alert('quotedText=' + quotedText + "\n" + "out=" + out);
 

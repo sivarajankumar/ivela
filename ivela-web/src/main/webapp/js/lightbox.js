@@ -42,7 +42,7 @@ Element.addClassName(this.element, this.options.lightboxClassName)
 		
 		//Tip: make sure the path to the close.gif image below is correct for your setup
 //		closer = '<img id="close" src="http://blog.feedmarker.com/wp-content/themes/feedmarker/lightbox/images/close.gif" alt="Close" title="Close this window" />'
-		closer = '<img id="close" src="" alt="" title="" />'
+		closer = '<img id="close" src="../images/leve-closed.gif" alt="" title="" />'
 
 		//insert the closer image into the div
 		new Insertion.Top(this.element, closer);

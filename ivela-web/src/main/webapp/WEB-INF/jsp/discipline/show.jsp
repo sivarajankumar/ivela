@@ -1,11 +1,32 @@
-<%-- 
-    Document   : list Discipline
-    Created on : Jul 15, 2008, 1:48:45 PM
-    Author     : nelson
+<%--
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: show.jsp                                                                            #
+# Document: Show Discipline                                                                 #
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 15-JUL-2008 - Nelson                            - XXXXXX - Initial Version                #
+# 08-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000007 - IE7 compatibility              #
+# 30-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000010 - JS no IE/FF opening repository #
+# 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
+# 23-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Unicode (UTF-8) support        #
+############################################################################################# 
 --%>
 
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%-- código para testar o layout 2 --%>
+<%-- cÃ³digo para testar o layout 2 --%>
 <%@ page import="org.springframework.security.context.SecurityContextHolder"%>
 <%@ page import="org.springframework.security.userdetails.UserDetails"%>
 <%@ page import="br.ufc.ivela.commons.model.SystemUser"%>
@@ -33,7 +54,7 @@
         
         var urlUnitContentId = '<%= ((request.getParameter("unitContentId") != null) ? request.getParameter("unitContentId") : "")%>';
         var urlGradeId = '<%= ((request.getParameter("gradeId") != null) ? request.getParameter("gradeId") : "")%>';
-        
+
         Event.observe(window, 'load', loadAccordions, false);
         Event.observe(window, 'load', viewUnitContent, false);
         
@@ -46,7 +67,7 @@
                 },
                 direction : 'vertical'
             });
-            // Open first one
+            //Open first one
             <s:iterator value="disciplineUnitList" status="stat">
                     if (unitId == '<s:property value="id" />') {
                         bottomAccordion.activate($$('#vertical_container_course .accordion_toggle_course')[<s:property value="%{#stat.index}" />]);
@@ -64,7 +85,7 @@
         
                 function showUnitContent(unitContentId, disciplineName, unitName, gradeId, type) {
                     var courseId = '<s:property value='discipline.course.id' />';
-            
+
                     $('unitName').innerHTML = unitName;
                     $('disciplineName').innerHTML = disciplineName;
                     
@@ -102,14 +123,11 @@
                                        
                         $('pnlAvaliacao').href = 'exam!listExamByUnitContent.action?unitContent.id=' + unitContentId+'&course.id='+courseId;
                      
-                    
-                    //$('pnlRepositorio').href = 'repository!list.action?courseId=' + courseId;
-
                     $('pnlRepositorio').href = 'repository!show.action?courseId=' + courseId
-
+                    
                     $('pnlForum').href = 'forum!listByCourse.action?course.id=' + courseId;
             
-                    var html = '';
+                    var html = '';                    
                     if (type == '1') {
                         
                         html += '<iframe id="pdf" scrolling="no" frameborder="0" width="820">" height="772" src="discipline!showPdf?unitContent.id=' + unitContentId + '&gradeId=' + gradeId + '"></iframe> <br class="clear"/>';
@@ -122,7 +140,7 @@
                             _width = jsonUnitContent.unitContent.width;
                         if (jsonUnitContent.unitContent.height != null && jsonUnitContent.unitContent.height != '')
                             _height = jsonUnitContent.unitContent.height;
-                        html += '<iframe id="html" scrolling="no" frameborder="0"  width="' + _width + '" height="' + _height + '" src="RenderDynamicHtml?unitContent.id=' + unitContentId + '&gradeId=' + gradeId + '"></iframe> <br class="clear"/>';
+                        html += '<iframe id="html" name="UnitContentFrame" onload="addUnitContentListener(this);" scrolling="no" frameborder="0"  width="' + _width + '" height="' + _height + '" src="RenderDynamicHtml?unitContent.id=' + unitContentId + '&gradeId=' + gradeId + '"></iframe> <br class="clear"/>';
 
 
                     } else {
@@ -137,11 +155,13 @@
                             _width = jsonUnitContent.unitContent.width;
                         if (jsonUnitContent.unitContent.height != null && jsonUnitContent.unitContent.height != '')
                             _height = jsonUnitContent.unitContent.height;
-                        html += '<iframe id="html" scrolling="no" frameborder="0" width="' + _width + '" height="' + _height + '" src="RenderServlet?file=' + courseId + '/' + disciplineId + '/' + unitId + "/" + unitContentId + '/index.html' + '"></iframe> <br class="clear"/>';
+                        html += '<iframe id="html" name="UnitContentFrame" onload="addUnitContentListener(this);" scrolling="no" frameborder="0" width="' + _width + '" height="' + _height + '" src="RenderServlet?file=' + courseId + '/' + disciplineId + '/' + unitId + "/" + unitContentId + '/index.html' + '"></iframe> <br class="clear"/>';
                     }
                     $('unitContent').innerHTML = html;
                    // $('pnlChat').href = 'IRCIvelaClientServlet?course.id=' + courseId +'&discipline.id='+disciplineId;
-
+                    
+                    // update the progress bar
+                    getCourseProgress(courseId);
                 }
 
                 function showUnitContentJson(unitContentId, gradeId, courseId, unitName, disciplineName) {
@@ -156,6 +176,9 @@
                     var html = '';
                     html += '<iframe id="pdf" scrolling="no" frameborder="0" width="<%= ((systemUser2.getUsername().equals("layout")) ? "925" : "700") %>" height="772" src="discipline!showPdf.action?unitContent.id=' + unitContentId + '&grade.id=' + gradeId + '"></iframe> <br class="clear"/>';
                     $('unitContent').innerHTML = html;
+
+                    // update the progress bar
+                    getCourseProgress(courseId);
                 }
 
 
@@ -186,6 +209,9 @@
             
                         showUnitContentJson(urlUnitContentId, urlGradeId, courseId, unitName, disciplineName);
                     }
+
+                    // update the progress bar
+                    getCourseProgress(<s:property value="discipline.course.id" />);
                 }
     </script>
     
@@ -285,25 +311,6 @@ a:active{outline: none;}
     
 </head>
 <s:actionerror />
-<div id="breadcrumb">
-    <p><s:text name="breadcrumb.youAreHere"/></p>
-    <ul>
-        <li><a href="index.action"><s:text name="home.name"/></a></li>
-        <li class="current"><s:text name="home.discipline"/></li>
-    </ul>
-</div>
-
-<div class="current-course">
-    <span class="corner-left">.</span>
-    <span class="corner-right">.</span>
-    <h1><s:text name="discipline.show.course" /><s:property value="discipline.course.name" /></h1>
-    <h2><s:text name="discipline.show.discipline" /><s:property value="discipline.name" /></h2>
-    <div class="partner">
-        
-        
-        <img src="RenderServletPartner?id=<s:property value="discipline.course.id" />" width="100"  />
-    </div>
-</div>
 
     <%
     
@@ -327,8 +334,71 @@ a:active{outline: none;}
     %>
 <table border="0">
     <tr>
-        <td valign="top">
-<div id="vertical_container_course">  
+        <td valign="top" rowspan="2" style="width:120px">
+
+            <h2 style="display:none"><span id="disciplineName">&nbsp;</span><br /><span id="unitName">&nbsp;</span></h2>
+
+    <div class="units-container">
+        <div class="units-content" style="padding-left: 0px; padding-right: 0px; width: 105px;>
+            <div class="accordion_content_course">
+            <ul>
+                <div class="list-class">
+            <ul>
+                <li><a><s:text name="home.progress" /> <span class="label" id="course.<s:property value="discipline.course.id" />.progress">0%</span></a></li>
+                    <p class="progress">
+                        <span class="box-bar"><img id="course.<s:property value="discipline.course.id" />.image" height="11" width="35" src="images/progress-bar/bar.gif" alt="progress bar" /></span>
+                    </p>
+            </ul>
+                    <div id="exerciseWithQuestions" style="display:block">
+            <ul>
+                    <li><a id="pnlExercicios" href="" id="btn-goto-exercicios" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"><s:text name ="discipline.show.exercise"/></a></li>
+            </ul>
+                    </div>
+
+                    <div id="exerciseWithNoQuestions" style="display:none">
+            <ul>
+                    <li><a style="color:#ccc;"><s:text name ="discipline.show.exercise"/></a></li>
+            </ul>
+                    </div>
+                    <div id="examWithQuestions" style="display:block">
+            <ul>
+                    <li><a id="pnlAvaliacao" href="" id="btn-goto-avaliacao" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024" ><s:text name ="discipline.show.exam"/></a></li>
+            </ul>
+                    </div>
+
+                    <div id="examWithNoQuestions" style="display:none">
+            <ul>
+                    <li><a style="color:#ccc;"><s:text name ="discipline.show.exam"/></a></li>
+            </ul>
+                    </div>
+                    <div id="repositorioOpened" style="display:block;height:40px;min-height:35px">
+            <ul>
+                    <li ><a id="pnlRepositorio" href="repository!show.action?courseId=<s:property value="discipline.course.id" />" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024" ><s:text name="discipline.show.biblioteca"/></a></li>
+            </ul>
+                    </div>
+                    <div id="forumOpened" style="display:block">
+            <ul>
+                    <li><a id="pnlForum" href="forum!listByCourse.action?course.id=<s:property value="discipline.course.id" />" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"><s:text name ="discipline.show.forum"/></a></li>
+            </ul>
+                    </div>
+
+                    <div id="forumNotOpened" style="display:none">
+            <ul>
+                    <li><a style="color:#ccc;"><s:text name ="discipline.show.forum"/></a></li>
+            </ul>
+                    </div>
+                   <div id="chatOpened" style="display:block">
+            <ul>
+                    <li><a href="course!showChatStd.action?courseId=<s:property value="discipline.course.id" />&disciplineId=<s:property value="discipline.id" />" target="blank"><s:text name="discipline.show.chat" /></a></li>
+            </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div id="vertical_container_course" style="margin-top:10px">
     <div class="units-container">
         <div class="units-content">
             <s:iterator value="disciplineUnitList" status="stat">
@@ -336,7 +406,7 @@ a:active{outline: none;}
                     <h3 class="accordion_toggle_course"><s:property value="name.substring(0, 17)" />...</h3>
                 </s:if>
                 <s:else>
-                    <h3 class="accordion_toggle_course"><s:property value="name" /></h3>                    
+                    <h3 class="accordion_toggle_course"><s:property value="name" /></h3>
                 </s:else>
                 <div class="accordion_content_course">
                     <div class="list-class">
@@ -349,7 +419,7 @@ a:active{outline: none;}
                 </div>
             </s:iterator>
         </div>
-    </div>  	
+    </div>
 </div>
 <!-- end col-1-home -->
 
@@ -373,64 +443,22 @@ a:active{outline: none;}
                   
     %>
 </td>
+<td style="vertical-align:top">
+<div class="current-course">
+    <span class="corner-left">.</span>
+    <span class="corner-right">.</span>
+    <h1><s:text name="discipline.show.course" /><s:property value="discipline.course.name" /></h1>
+    <h2><s:text name="discipline.show.discipline" /><s:property value="discipline.name" /></h2>
+    <div class="partner">
+        <img src="RenderServletPartner?id=<s:property value="discipline.course.id" />" width="100"  />
+    </div>
+</div>
+</td>
+</tr>
+<tr>
 <td>
-<div id="col-2-course">
+<div id="col-2-course"> <!--style="height:550px;width:780px;overflow:auto"-->
     <div class="lesson-content">
-        <div class="lesson-menu">
-            <h2><span id="disciplineName">&nbsp;</span><br /><span id="unitName">&nbsp;</span></h2>
-            <ul>
-                <table>
-                <tr>
-                <td>
-                    <div id="exerciseWithQuestions" style="display:block">
-                    <li><a id="pnlExercicios" href="" id="btn-goto-exercicios" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"><s:text name ="discipline.show.exercise"/></a></li>
-                    </div>
-
-                    <div id="exerciseWithNoQuestions" style="display:none">
-                    <li><a style="color:#ccc;"><s:text name ="discipline.show.exercise"/></a></li>
-                    </div>
-                </td>
-                
-                <td>
-                    <div id="examWithQuestions" style="display:block">
-                    <li><a id="pnlAvaliacao" href="" id="btn-goto-avaliacao" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024" ><s:text name ="discipline.show.exam"/></a></li>
-                    </div>
-
-                    <div id="examWithNoQuestions" style="display:none">
-                    <li><a style="color:#ccc;"><s:text name ="discipline.show.exam"/></a></li>
-                    </div>
-                    
-                </td>
-                
-                <td>
-                    <li><a id="pnlRepositorio" href="#" id="btn-goto-avaliacao" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024" ><s:text name="discipline.show.biblioteca"/></a></li>
-                </td>
-                
-                <td>
-                    <div id="forumOpened" style="display:block">
-                    <li><a id="pnlForum" href="forum!listByCourse.action?course.id=<s:property value="discipline.course.id" />" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"><s:text name ="discipline.show.forum"/></a></li>
-                    </div>
-
-                    <div id="forumNotOpened" style="display:none">
-                    <li><a style="color:#ccc;"><s:text name ="discipline.show.forum"/></a></li>
-                    </div>
-                    
-                    
-                </td>
-                
-                <td>
-                   <div id="chatOpened" style="display:block">
-                    <li><a href="course!showChatStd.action?course.id=<s:property value="discipline.course.id" />&discipline.id?=<s:property value="discipline.id" />" target="blank"><s:text name="discipline.show.chat" /></a></li>
-                    </div>
-                </td>
-                
-                </tr>
-                
-                </table>
-            </ul>
-            <br class="clear" />
-        </div>
-        
         <div id="unitContent"></div>
     </div>
     

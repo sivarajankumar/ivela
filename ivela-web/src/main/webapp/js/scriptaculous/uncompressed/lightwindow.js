@@ -10,8 +10,10 @@
 //	    http://www.thinkvitamin.com/features/webapps/serving-javascript-fast
 //      http://rakaz.nl/item/make_your_pages_load_faster_by_combining_and_compressing_javascript_and_css_files
 //
-
+// 08-JUN-2009 - Roberto Otofuji (Instituto Eldorado) - Checks the value of the previous body
+// height style before applying auto. 
 /*-----------------------------------------------------------------------------------------------*/
+var previousIEheight;
 
 if(typeof Effect == 'undefined')
   throw("lightwindow.js requires including script.aculo.us' effects.js library!");
@@ -662,15 +664,22 @@ lightwindow.prototype = {
 	//
 	_prepareIE : function(setup) {
 		if (Prototype.Browser.IE) {
+		    
 			var height, overflowX, overflowY;
 			if (setup) { 
 				var height = '100%';
 			} else {
-				var height = 'auto';
+			    if (previousIEheight) 
+                    var height = previousIEheight;
+                else
+                    var height = 'auto';
 			}
 			var body = document.getElementsByTagName('body')[0];
 			var html = document.getElementsByTagName('html')[0];
+			var currentH = previousIEheight = document.body.currentStyle.height;
 			html.style.height = body.style.height = height;
+			
+			if (!previousIEheight) previousIEheight = currentH;
 		}
 	},
 	_stopScrolling : function(e) {
