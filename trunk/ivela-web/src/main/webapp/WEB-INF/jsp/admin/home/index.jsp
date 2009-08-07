@@ -199,8 +199,8 @@
                                     
                                     <s:if test="(enrollments != null && enrollments.size() > 0)"> 
                                         <ul class="list-students">
-                                            <input type="button" value="<s:text name="home.mark" />"  class="btn-check-all" onclick="setCheckedAllStudents(this);" />
-                                            <input type="button" value="<s:text name="home.unmark" />" class="btn-uncheck-all" onclick="setUncheckedAllStudents(this);" />
+                                            <input type="button" value="<s:text name="home.mark" />"  class="btn-check-all" onclick="setCheckedAllStudents('<s:property value="id" />');" />
+                                            <input type="button" value="<s:text name="home.unmark" />" class="btn-uncheck-all" onclick="setUncheckedAllStudents('<s:property value="id" />');" />
                                         
                                             <s:iterator value="enrollments" status="stat"> 
                                                 <s:if test="enrollments[#stat.index].status == 0">
@@ -213,7 +213,7 @@
                                                             <s:property value="systemUser.username" />
                                                         </s:else>
                                                             <br /><input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" 
-                                                                         name="studentsCheck" onclick="updateStudents(<s:property value="systemUser.id" />, '<s:property value="systemUser.username" />', '<s:property value="systemUser.email" />', '<s:property value="systemUser.createdAt" />', '<s:text name="student.input.username"/>', '<s:text name="student.input.email"/>', '<s:text name="student.input.createdAt"/>');" />
+                                                                         name="studentsCheck" onclick="updateStudents(this, '<s:property value="systemUser.username" />', '<s:property value="systemUser.email" />', '<s:property value="systemUser.createdAt" />', '<s:text name="student.input.username"/>', '<s:text name="student.input.email"/>', '<s:text name="student.input.createdAt"/>');" />
                                                     </li>
                                                 </s:if>
                                                 <s:if test="enrollments[#stat.index].status == 1">
@@ -226,7 +226,7 @@
                                                             <s:property value="systemUser.username" />
                                                         </s:else> 
                                                             <br /><input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" 
-                                                                         name="studentsCheck" onclick="updateStudents(<s:property value="systemUser.id" />, '<s:property value="systemUser.username" />', '<s:property value="systemUser.email" />', '<s:property value="systemUser.createdAt" />', '<s:text name="student.input.username"/>', '<s:text name="student.input.email"/>', '<s:text name="student.input.createdAt"/>');" />
+                                                                         name="studentsCheck" onclick="updateStudents(this, '<s:property value="systemUser.username" />', '<s:property value="systemUser.email" />', '<s:property value="systemUser.createdAt" />', '<s:text name="student.input.username"/>', '<s:text name="student.input.email"/>', '<s:text name="student.input.createdAt"/>');" />
                                                     </li>
                                                 </s:if>
                                                 <s:if test="enrollments[#stat.index].status == 2">
@@ -239,7 +239,7 @@
                                                             <s:property value="systemUser.username" />
                                                         </s:else>
                                                             <br /><input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />"
-                                                                         name="studentsCheck" onclick="updateStudents(<s:property value="systemUser.id" />, '<s:property value="systemUser.username" />', '<s:property value="systemUser.email" />', '<s:property value="systemUser.createdAt" />', '<s:text name="student.input.username"/>', '<s:text name="student.input.email"/>', '<s:text name="student.input.createdAt"/>');" />
+                                                                         name="studentsCheck" onclick="updateStudents(this, '<s:property value="systemUser.username" />', '<s:property value="systemUser.email" />', '<s:property value="systemUser.createdAt" />', '<s:text name="student.input.username"/>', '<s:text name="student.input.email"/>', '<s:text name="student.input.createdAt"/>');" />
                                                     </li>
                                                 </s:if>
                                             </s:iterator>
@@ -247,11 +247,37 @@
                                         
                                             <br class="clear" />
                                         </ul>
+                                        
+                                        <!-- Begin: Student Data -->
+                                        <s:iterator value="enrollments" status="stat">
+                                                <div id="div.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" style="display: none;">
+                                                    <div id="div.inner.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="member-info" style="display: none;">
+                                                        <img id="img_div.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="picture" src="../images/foto_profile.jpg" alt="../RenderServletProfile?id=<s:property value="systemUser.id" />" width="80" height="80" />
+                                                        <div>
+                                                            <div>
+                                                                <p><s:text name="student.input.username"/> <span><s:property value="systemUser.username" /></span></p>
+                                                                <p><s:text name="student.input.email"/> <span><s:property value="systemUser.email" /></span></p>
+                                                                <p><s:text name="student.input.createdAt"/> <span><s:property value="systemUser.createdAt" /></span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </s:iterator>
+                                        
+                                        <s:iterator value="enrollments" status="stat">
+                                                <div id="div.multiple.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" style="display: none;">
+                                                    <div id="div.multiple.inner.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="member-info" style="display: none; float: left;">
+                                                        <img id="img_div.multiple.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="picture" src="../images/foto_profile.jpg" alt="../RenderServletProfile?id=<s:property value="systemUser.id" />" width="80" height="80" /><br /><span><s:property value="systemUser.username" /></span>
+                                                    </div>
+                                                </div>
+                                        </s:iterator>
+                                        <br>
+                                        <!-- End: Student Data -->    
                                     <s:else>
                                         <span class="no_grades"><s:text name="admin.noStudents" /></span>
                                     </s:else>
                                     <br />
-                                    <!-- Fim : Divs com caracterísitcas do aluno -->
+                                    
                                 </div>
                             </div>
                         </div>
@@ -266,7 +292,7 @@
 <!-- end col-1-home -->
 
 <div id="box1" style="display:none; text-align:center;">
-    <iframe id="waitingFrame" src="../waiting.jsp" style="width:150px;height:100px;border:0px solid #fff;" scrolling="no" >
+    <iframe id="waitingFrame" frameborder="0" src="../waiting.jsp" style="width:150px;height:100px;border:0px solid #fff;" scrolling="no" >
     </iframe><br/>
 </div>
 
@@ -288,9 +314,9 @@
                 <br/>
                 <div>
                     <p><s:text name="admin.show.studentsCount" /> <span id="admin.course.student.count"></span></p>
-                    <p><s:text name="admin.show.coordinators" /> <span id="admin.course.coordinators"></span>show<span></span></p>
-                    <p><s:text name="admin.show.professors" /> <span id="admin.course.professors"></span>show<span></span></p>
-                    <p><s:text name="admin.show.tutors" /> <span id="admin.course.tutors"></span>show<span></span></p>
+                    <p><s:text name="admin.show.coordinators" /> <span id="admin.course.coordinators"></span></p>
+                    <p><s:text name="admin.show.professors" /> <span id="admin.course.professors"></span></p>
+                    <p><s:text name="admin.show.tutors" /> <span id="admin.course.tutors"></span></p>
                 </div>
                 <div class="actions-box">
                     <h2><s:text name="course.show.actions" /></h2>
@@ -345,8 +371,8 @@
                 <div>
                     <p><s:text name="admin.show.studentsCount" /> <span id="admin.grade.student.count"></span></p>
                     <p><s:text name="admin.show.coordinators" /> <span id="admin.grade.coordinators"></span></p>
-                    <p><s:text name="admin.show.professors" />  <span id="admin.grade.professors"></span>show<span></span></p>
-                    <p><s:text name="admin.show.tutors" /> <span id="admin.grade.tutors"></span>show<span></span></p>
+                    <p><s:text name="admin.show.professors" />  <span id="admin.grade.professors"></span></p>
+                    <p><s:text name="admin.show.tutors" /> <span id="admin.grade.tutors"></span></p>
                     <p><s:text name="admin.show.startDate" /> <span id="admin.grade.startdate"></span></p>
                     <p><s:text name="admin.show.endDate" /> <span id="admin.grade.enddate"></span></p>
                 </div>

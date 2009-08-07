@@ -5,7 +5,7 @@ var fileExtOk = true;
 var checkedStudents = new Array();
 
 Event.observe(window, 'load', loadAccordions, false);
-Event.observe(window, 'click', click, false);
+Event.observe(window, 'load', function() {Event.observe(content, 'click', click, false);}, false);
 
 
 function validateFile(fileName){
@@ -49,12 +49,16 @@ function textCounter(field, countfield, maxlimit) {
 }
 
 function click(e){ 
-    if(e.target.getAttribute('class') != null){       
-        var clazz = e.target.getAttribute('class').toString();
+    if (!e) e = window.event;
+    var evt;
+    if (e.target) evt = e.target;
+        else if (e.srcElement) evt = e.srcElement;
+    if ((evt.className) != null) {       
+        var clazz = evt.className.toString();
 
         if(clazz == 'accordion_toggle_grade2 accordion_toggle_active_grade2'){
 
-            var course = e.target.next(0).getAttribute('id');
+            var course = evt.next(0).getAttribute('id');
 
             if(course != current_course){
                 //eh um curso    
@@ -62,12 +66,12 @@ function click(e){
                 showCourse(course);
             }
         } else if(clazz == 'vertical_accordion_toggle vertical_accordion_toggle_active'){
-            var grade = e.target.next(0).getAttribute('id');
+            var grade = evt.next(0).getAttribute('id');
 
             //eh uma grade
             showGrade(grade);
         } else if(clazz == 'vertical_accordion_toggle2 vertical_accordion_toggle_active2'){
-            var element = e.target.getAttribute('id');
+            var element = evt.getAttribute('id');
             
             //eh uma unidade
             //if (element == 'professors')
@@ -330,8 +334,7 @@ function showStudent(gradeId, courseId, gradeName, courseName) {
 }
 
 function updateStudents(obj, id, userId)
-{
- 
+{        
     var studentDataHtml = "";
     $('reportData').innerHTML = "";
     $('pieCanvas').style.display = "none";
@@ -350,6 +353,7 @@ function updateStudents(obj, id, userId)
     
     var multiple = "";
     var divId;
+    
     if ( checkedElements > 1 ) {
         multiple = ".multiple";
     }
@@ -358,7 +362,7 @@ function updateStudents(obj, id, userId)
         if ( checks[i].checked) { 
 
             // update the div in the multiple group
-            var childs = document.getElementById("div.multiple.inner." + checks[i].id).getElementsByTagName("img");
+            var childs = document.getElementById("div" + multiple + ".inner." + checks[i].id).getElementsByTagName("img");
             for(var j = 0; j < childs.length; j++){
                 if(childs[j].src.search("images/foto_profile.jpg") != -1 && checks[i].id == id){
                     childs[j].src = "../RenderServletProfile?id=" + userId;
@@ -376,7 +380,7 @@ function updateStudents(obj, id, userId)
             // acrescenta o id do tutor numa variável global se estiver marcado
             checkedStudents[arrayIndex++] = checks[i].value;
             var divContent = document.getElementById("div" + multiple + "." + checks[i].id).innerHTML;
-            divContent = divContent.replace("display: none;","display: block;");
+            divContent = divContent.replace(new RegExp("display: none", "i"),"display: block");
             studentDataHtml += divContent;
         }
     }
@@ -665,22 +669,38 @@ function setEnrollments(gradeId, status) {
     }
 }
 
-function setCheckedAllStudents(gradeId, bool)  {
-    var i = 0;
-    var inputs = document.getElementsByTagName('input');
-    var checkedStudents = new Array();
-    var checkedStudentsIndex = 0;
-    for (i = 0; i < inputs.length; i++) {
-        if (inputs[i].id.indexOf('student.id_' + gradeId + '_') > -1) {
-            checkedStudents[checkedStudentsIndex++] = inputs[i];
-            inputs[i].checked = bool;
+function setCheckedAllStudents(gradeId)  {    
+    var checks = document.getElementsByName('studentsCheck');
+    for (i = 0; i < checks.length; i++)
+    {
+        if ( checks[i].id.indexOf('_' + gradeId + '_') > 0 )
+        {
+            checks[i].checked = true ;
+            changeCheckboxStyle(checks[i]);
         }
     }
 
-    if ( checkedStudents[0] != null ) {
-        updateStudents(checkedStudents[0], checkedStudents[0].id);            
+    if ( checks[0] != null )
+    {
+       updateStudents(checks[0], checks[0].id);            
     }
     
+}
+
+function setUncheckedAllStudents(gradeId) {
+    var checks = document.getElementsByName('studentsCheck');
+    for (i = 0; i < checks.length; i++)
+    {   
+        if ( checks[i].id.indexOf('_' + gradeId + '_') > 0 ) {
+            checks[i].checked = false ;
+            changeCheckboxStyle(checks[i]);
+        }
+    }
+
+    if ( checks[0] != null )
+    {
+       updateStudents(checks[0], checks[0].id);            
+    }    
 }
 
 var col1Content = '';

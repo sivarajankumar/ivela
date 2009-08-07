@@ -152,7 +152,7 @@
      
     
     <s:if test="page == pageCount || pageCount==1">
-       <a class="naveg-next" href="#" onclick="javascript:forceSubmit('<s:property value="page + 1"/>');" > Finish </a>     
+       <a class="naveg-next" href="#" onclick="javascript:forceSubmit('<s:property value="page + 1"/>');" > <s:text name="message.paginator.finish" /> </a>     
     </s:if>
     <a class="navegation-back"  href="exam!listExamByUnitContent.action?unitContent.id=<s:property value="unitContent.id"/>&course.id=<s:property value="course.id"/>"><s:text name="exam.show.back" /></a>
 </div>

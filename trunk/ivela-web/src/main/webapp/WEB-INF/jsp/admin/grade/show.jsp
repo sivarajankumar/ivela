@@ -1,7 +1,26 @@
-<%--
-    Document   : show grade
-    Created on : Sep 15, 2008, 2:07:13 PM
-    Author     : marcus
+<%--    
+#############################################################################################
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                      #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: show.jsp                                                                            #
+# Document: Display grade information for Administrators                                    # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 15-SEP-2008 - marcus                            - XXXXXX - Initial Version                #
+# 09-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+# 26-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - i18n general fixes             #
+# 30-JUL-2009 - fantato (Instituto Eldorado)      - 000013 - bug fixes                      #
+#############################################################################################
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -111,16 +130,16 @@
                         </s:if>
                         <s:else>
                             <s:iterator value="grades" status="gstat">
-                                <h4 class="vertical_accordion_toggle"><s:property value="name" /> - <s:property value="enrollments.size()" /> student(s) <img id='imageStatus_<s:property value="id" />' title='<s:property value="statusToText(status)" />' alt='<s:property value="statusToText(status)" />' src='../images/icon/status-grade-<s:property value="status" />.gif' /></h4>
+                                <h4 class="vertical_accordion_toggle"><s:property value="name" /> - <s:property value="enrollments.size()" /> <s:text name="grade.show.students"/> <img id='imageStatus_<s:property value="id" />' title='<s:property value="statusToText(status)" />' alt='<s:property value="statusToText(status)" />' src='../images/icon/status-grade-<s:property value="status" />.gif' /></h4>
                                 <div class="vertical_accordion_content" id="<s:property value="id" />">
                                     <div id="vertical_nested_container2">
                                         <h5 class="vertical_accordion_toggle2" id="students"><s:text name="grade.show.students" /></h5>
                                         <div class="vertical_accordion_content2" id="<s:property value="id" />">
 
                                             <s:if test="(enrollments != null && enrollments.size() > 0)">
-                                                <input type="button" name="CheckAllStudents" value="Marcar Todos" class="btn-check-all"
+                                                <input type="button" name="CheckAllStudents" value="<s:text name="general.markall"/>" class="btn-check-all"
                                                        onClick="checkAllFieldsByName('studentsCheck', '<s:property value="id" />','students')">
-                                                <input type="button" name="UnCheckAllStudents" value="Desmarcar Todos" class="btn-uncheck-all"
+                                                <input type="button" name="UnCheckAllStudents" value="<s:text name="general.unmarkall"/>" class="btn-uncheck-all"
                                                        onClick="unCheckAllFieldsByName('studentsCheck','studentData')">
                                             </s:if>
 
@@ -165,9 +184,9 @@
                                         <h5 class="vertical_accordion_toggle2" id="professors"><s:text name="grade.show.professors" /></h5>
                                         <div class="vertical_accordion_content2" id="<s:property value="id" />">
                                             <s:if test="(professors != null && professors.size() > 0)">
-                                                <input type="button" name="CheckAllProfessors" value="Marcar Todos" class="btn-check-all"
+                                                <input type="button" name="CheckAllProfessors" value="<s:text name="general.markall"/>" class="btn-check-all"
                                                        onClick="checkAllFieldsByName('professorsCheck', '<s:property value="id" />','professors')">
-                                                <input type="button" name="UnCheckAllProfessors" value="Desmarcar Todos" class="btn-uncheck-all"
+                                                <input type="button" name="UnCheckAllProfessors" value="<s:text name="general.unmarkall"/>" class="btn-uncheck-all"
                                                        onClick="unCheckAllFieldsByName('professorsCheck','professorData')">
                                             </s:if>
 
@@ -215,9 +234,9 @@
                                         <div class="vertical_accordion_content2" id="<s:property value="id" />">
 
                                             <s:if test="(tutors != null && tutors.size() > 0)">
-                                                <input type="button" name="CheckAllTutors" value="Marcar Todos" class="btn-check-all"
+                                                <input type="button" name="CheckAllTutors" value="<s:text name="general.markall"/>" class="btn-check-all"
                                                        onClick="checkAllFieldsByName('tutorsCheck', '<s:property value="id" />','tutors')">
-                                                <input type="button" name="UnCheckAllTutors" value="Desmarcar Todos" class="btn-uncheck-all"
+                                                <input type="button" name="UnCheckAllTutors" value="<s:text name="general.unmarkall"/>" class="btn-uncheck-all"
                                                        onClick="unCheckAllFieldsByName('tutorsCheck','tutorData')">
                                             </s:if>
 
@@ -317,16 +336,16 @@
                     <s:iterator value="courseList">
                         <option value="<s:property value="id" />"><s:property value="name" /></option>
                     </s:iterator>
-                </select><img class="tooltip" onmouseover="return escape('Selecione o curso da turma')"/><br />
+                </select><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.01" />')"/></span><br />
 
                 <label for="input.grade.name"><s:text name="grade.input.name" /></label>
-                <input type="text" name="input.grade.name" id="input.grade.name" value="" maxlength="20" size="25"/><img class="tooltip" onmouseover="return escape('Entre com o nome da turma')"/><br />
+                <input type="text" name="input.grade.name" id="input.grade.name" value="" maxlength="20" size="25"/><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.02" />')"></span><br />
 
                 <label for="input.grade.period"><s:text name="grade.input.period" /></label>
-                <input type="text" name="input.grade.period" id="input.grade.period" value="" maxlength="6" size="11" /><img class="tooltip" onmouseover="return escape('Entre com o período do turma (Exemplo: 2008.1 para turma que iniciou no primeiro semestre de 2008')"/><br />
+                <input type="text" name="input.grade.period" id="input.grade.period" value="" maxlength="6" size="11" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.03" />')"></span><br />
 
                 <label for="input.grade.maxstudents"><s:text name="grade.input.maxstudents" /></label>
-                <input type="text" name="input.grade.maxstudents" id="input.grade.maxstudents" value="" maxlength="4" size="7" /><img class="tooltip" onmouseover="return escape('Entre com o número máximo de estudantes nesta turma')"/><br />
+                <input type="text" name="input.grade.maxstudents" id="input.grade.maxstudents" value="" maxlength="4" size="7" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.04" />')"></span><br />
 
                 <label for="input.grade.coordinator"><s:text name="grade.input.coordinator" /></label>
                 <select name="input.grade.coordinator" id="input.grade.coordinator">
@@ -334,29 +353,29 @@
                     <s:iterator value="coordinatorList">
                         <option value="<s:property value="id" />"><s:property value="username" /></option>
                     </s:iterator>
-                </select><img class="tooltip" onmouseover="return escape('Selecione o coordenador da turma')"/><br />
+                </select><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.05" />')"/></span><br />
 
                 <label for="input.grade.maxduration"><s:text name="grade.input.maxduration" /></label>
-                <input type="text" name="input.grade.maxduration" id="input.grade.maxduration" value="" maxlength="4" size="7" /><img class="tooltip" onmouseover="return escape('Entre com o tempo máximo (em dias) de duração da turma')"/><br />
+                <input type="text" name="input.grade.maxduration" id="input.grade.maxduration" value="" maxlength="4" size="7" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.06" />')"></span><br />
 
                 <label><s:text name="grade.input.requiresEnrollmentValidation" /></label>
                 <label class="label-boxfield"><input type="radio" name="input.grade.requires" id="input.grade.requires.yes" value="true"> &nbsp;<s:text name="course.input.yes" /></label>
-                <label class="label-boxfield"><input type="radio" name="input.grade.requires" id="input.grade.requires.no" value="false" checked="checked"> &nbsp;<s:text name="course.input.no" /></label> <img class="tooltip" onmouseover="return escape('Matrícula sujeita a aprovação')"/><br/>
+                <label class="label-boxfield"><input type="radio" name="input.grade.requires" id="input.grade.requires.no" value="false" checked="checked"> &nbsp;<s:text name="course.input.no" /></label> <span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.07" />')"></span><br/>
 
                 <label for="input.grade.status"><s:text name="grade.input.status" /></label>
                 <select id="input.grade.status">
-                    <option value="0">Inactive</option>
-                    <option value="1">Period of Enrollment</option>
-                    <option value="3">In Progress</option>
-                    <option value="2">Registration Finished</option>
-                </select><img class="tooltip" onmouseover="return escape('Escolha o estatus da Turma')"/><br />
+                    <option value="0"><s:text name="grade.input.inactive" /></option>
+                    <option value="1"><s:text name="grade.input.periodOfEnrollment" /></option>
+                    <option value="3"><s:text name="grade.input.inprogress" /></option>
+                    <option value="2"><s:text name="grade.input.finished" /></option>
+                </select><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.08" />')"></span><br />
 
                 <label for="input.grade.startdatetime"><s:text name="grade.input.startdatetime" /></label>
                 <!--input type="text" name="input.grade.startdatetime" id="input.grade.startdatetime" value="" /><img id="startdatetime" src="../images/icon/icon-agenda.gif" /-->
-                <cal:jscalendar format="%d/%m/%Y" name="input.grade.startdatetime" id="input.grade.startdatetime"/><img class="tooltip" onmouseover="return escape('Entre com a data de início da turma')"/><br />
+                <cal:jscalendar format="%d/%m/%Y" name="input.grade.startdatetime" id="input.grade.startdatetime"/><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.09" />')"></span><br />
 
                 <label for="input.grade.enddatetime"><s:text name="grade.input.enddatetime" /></label>
-                <cal:jscalendar format="%d/%m/%Y" name="input.grade.enddatetime" id="input.grade.enddatetime"/><img class="tooltip" onmouseover="return escape('Entre com a data de término da turma')"/><br />
+                <cal:jscalendar format="%d/%m/%Y" name="input.grade.enddatetime" id="input.grade.enddatetime"/><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.10" />')"></span><br />
 
                 <label>&nbsp;</label>
                 <input class="btn-save-courses" type="button" name="input.grade.submit" id="input.grade.submit" value="<s:text name="grade.submit" />" onclick="submitGrade(document.getElementById('input.grade.id').value)" /><br />
@@ -366,7 +385,7 @@
 </div>
 
 <div id="box1" style="display:none; text-align:center;">
-    <iframe id="waitingFrame" src="../waiting.jsp" style="width:150px;height:100px;border:0px solid #fff;" scrolling="no" >
+    <iframe id="waitingFrame" frameborder="0" src="../waiting.jsp" style="width:150px;height:100px;border:0px solid #fff;" scrolling="no" >
     </iframe><br/>
 </div>
 
@@ -388,28 +407,27 @@
                 <br />
 
                 <label><s:text name="student.input.student" /></label><br />
-                <s:hidden name="message.recipient.id" id="input.student.grade.student.id" />
-                <input type="text" name="username" id="username" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
-                <div id="recipientDivAutoCompleter2" class="autocomplete"></div>
+                <s:hidden name="message.recipient.id" id="input.student.grade.student" />
+                <input type="text" name="username" id="username0" onblur="validateUsername0();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
+                <div id="recipientDivAutoCompleter0" class="autocomplete"></div>
                 <script type="text/javascript">
-                   new Ajax.Autocompleter("username","recipientDivAutoCompleter2","systemUser!searchUsersStudent.action", {afterUpdateElement : getSelectionId});
+                   new Ajax.Autocompleter("username0","recipientDivAutoCompleter0","systemUser!searchUsersStudent.action", {afterUpdateElement : getSelectionId0});
 
-                   function getSelectionId(text, li)
+                   function getSelectionId0(text, li)
                    {
-                      $('input.student.grade.student.id').value=li.id;
+                      $('input.student.grade.student').value=li.id;
                    }
 
-                   function validateUsername() {
-                       var id = $('input.student.grade.student.id').value;
+                   function validateUsername0() {
+                       var id = $('input.student.grade.student').value;                       
                        if (id == null || id == '') {
-                           $('username').value = '';
-                           $('username').focus();
+                           $('username0').value = '';
                        }
                    }
                 </script>
                 <br />
 
-                <input class="bbtn-new-one" type="button" name="input.student.submit" id="input.student.submit" value="<s:text name="grade.submit" />" onclick="submitStudent(document.getElementById('input.student.grade.id').value, document.getElementById('input.student.grade.student.id').value);" /><br />
+                <input class="bbtn-new-one" type="button" name="input.student.submit" id="input.student.submit" value="<s:text name="grade.submit" />" onclick="submitStudent(document.getElementById('input.student.grade.id').value, document.getElementById('input.student.grade.student').value);" /><br />
             </div>
         </div>
     </div>
@@ -432,28 +450,27 @@
                 <br />
 
                 <label><s:text name="professor.input.professor" /></label><br />
-                 <s:hidden name="message.recipient.id" id="input.professor.grade.professor.id" />
-                <input type="text" name="username" id="username1" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
-                <div id="recipientDivAutoCompleter21" class="autocomplete"></div>
+                 <s:hidden name="message.recipient.id" id="input.professor.grade.professor" />
+                <input type="text" name="username" id="username1" onblur="validateUsername1();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
+                <div id="recipientDivAutoCompleter1" class="autocomplete"></div>
                 <script type="text/javascript">
-                   new Ajax.Autocompleter("username1","recipientDivAutoCompleter21","systemUser!searchUsersProfessor.action", {afterUpdateElement : getSelectionId});
+                   new Ajax.Autocompleter("username1","recipientDivAutoCompleter1","systemUser!searchUsersProfessor.action", {afterUpdateElement : getSelectionId1});
 
-                   function getSelectionId(text, li)
+                   function getSelectionId1(text, li)
                    {
-                      $('input.professor.grade.professor.id').value=li.id;
+                      $('input.professor.grade.professor').value=li.id;
                    }
 
-                   function validateUsername() {
-                       var id = $('input.professor.grade.professor.id').value;
+                   function validateUsername1() {
+                       var id = $('input.professor.grade.professor').value;
                        if (id == null || id == '') {
                            $('username1').value = '';
-                           $('username1').focus();
                        }
                    }
                 </script>
                 <br />
 
-                <input class="bbtn-new-one" type="button" name="input.professor.submit" id="input.professor.submit" value="<s:text name="grade.submit" />" onclick="submitProfessor(document.getElementById('input.professor.grade.id').value, document.getElementById('input.professor.grade.professor.id').value);" /><br />
+                <input class="bbtn-new-one" type="button" name="input.professor.submit" id="input.professor.submit" value="<s:text name="grade.submit" />" onclick="submitProfessor(document.getElementById('input.professor.grade.id').value, document.getElementById('input.professor.grade.professor').value);" /><br />
             </div>
         </div>
     </div>
@@ -477,21 +494,20 @@
 
                 <label><s:text name="grade.input.tutor" /></label><br />
                 <s:hidden name="message.recipient.id" id="input.tutor.grade.tutor" />
-                <input type="text" name="username" id="username2" onblur="validateUsername();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
-                <div id="recipientDivAutoCompleter22" class="autocomplete"></div>
+                <input type="text" name="username" id="username2" onblur="validateUsername2();" /><span style="color:red; font-weight:bolder;">* <s:text name="message.input.user"/></span>
+                <div id="recipientDivAutoCompleter2" class="autocomplete"></div>
                 <script type="text/javascript">
-                   new Ajax.Autocompleter("username2","recipientDivAutoCompleter22","systemUser!searchUsersTutor.action", {afterUpdateElement : getSelectionId});
+                   new Ajax.Autocompleter("username2","recipientDivAutoCompleter2","systemUser!searchUsersTutor.action", {afterUpdateElement : getSelectionId2});
 
-                   function getSelectionId(text, li)
+                   function getSelectionId2(text, li)
                    {
-                      $('input.tutor.grade.tutor').value=li.id;
+                       	$('input.tutor.grade.tutor').value=li.id;
                    }
 
-                   function validateUsername() {
+                   function validateUsername2() {
                        var id = $('input.tutor.grade.tutor').value;
                        if (id == null || id == '') {
                            $('username2').value = '';
-                           $('username2').focus();
                        }
                    }
                 </script>
@@ -567,9 +583,9 @@
                 <br/>
                 <div>
                     <p><s:text name="grade.show.gradesCount" />: <span id="course.grade.count"></span></p>
-                    <p><s:text name="grade.show.coordinatorsCount" /> <span id="course.coordinator.count"></span>show<span></span></p>
-                    <p><s:text name="grade.show.professorsCount" /> <span id="course.professor.count"></span>show<span></span></p>
-                    <p><s:text name="grade.show.tutorsCount" /><span id="course.tutor.count"></span>show<span></span></p>
+                    <p><s:text name="grade.show.coordinatorsCount" />: <span id="course.coordinator.count"></span></p>
+                    <p><s:text name="grade.show.professorsCount" />: <span id="course.professor.count"></span></p>
+                    <p><s:text name="grade.show.tutorsCount" />: <span id="course.tutor.count"></span></p>
                     <p><s:text name="grade.show.studentsCount" />: <span id="course.student.count"></span></p>
                     <!--p><s:text name="grade.show.graduatedStudentsCount" />: <span id="course.graduated.count"></span></p-->
                 </div>
@@ -628,8 +644,8 @@
 
                 <div>
                     <p><s:text name="grade.input.coordinatorsCount" />: <span id="grade.coordinator.count"></span></p>
-                    <p><s:text name="grade.input.professorsCount" /><span id="grade.professor.count"></span>show<span></span></p>
-                    <p><s:text name="grade.input.tutorsCount" /><span id="grade.tutor.count"></span>show<span></span></p>
+                    <p><s:text name="grade.input.professorsCount" />: <span id="grade.professor.count"></span></p>
+                    <p><s:text name="grade.input.tutorsCount" />: <span id="grade.tutor.count"></span></p>
                     <p><s:text name="grade.input.studentsCount" />: <span id="grade.student.count"></span></p>
                      <!--p><s:text name="grade.input.graduatedStudentsCount" />: <span id="grade.graduated.count"></span></p-->
                 </div>
@@ -666,7 +682,7 @@
                     </li>
                     <br class="clear"/>
                 </ul>
-
+                <br class="clear" />
                 <div class="actions-box">
                     <h2><s:text name="grade.show.actions" /></h2>
                     <div class="edit-tools">
@@ -751,10 +767,10 @@
                         <s:text name="note.what"/><br /><input type="text" name="input.student.note.what" id="input.student.note.what" maxlength="50" size="55" /><br />
                         <s:text name="note.where" /><br /><input type="text" name="input.student.note.where" id="input.student.note.where" maxlength="50" size="55" /><br />
                         <s:text name="note.dtStart" /><br />
-                        <cal:jscalendar format="%d/%m/%Y %H:%M:%S" name="input.student.note.dtStart" id="input.student.note.dtStart"/><img class="tooltip" onmouseover="return escape('Entre com a data de início do compromisso')"/><br />
+                        <cal:jscalendar format="%d/%m/%Y %H:%M:%S" name="input.student.note.dtStart" id="input.student.note.dtStart"/><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.11" />')"></span><br />
                         <br />
                         <s:text name="note.dtEnd" /><br />
-                        <cal:jscalendar format="%d/%m/%Y %H:%M:%S" name="input.student.note.dtEnd" id="input.student.note.dtEnd"/><img class="tooltip" onmouseover="return escape('Entre com a data de término do compromisso')"/><br />
+                        <cal:jscalendar format="%d/%m/%Y %H:%M:%S" name="input.student.note.dtEnd" id="input.student.note.dtEnd"/><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.12" />')"></span><br />
                         <br />
                         <s:text name="note.description"/><br /><textarea cols="65" rows="8" name="input.student.note.description" id="input.student.note.description"></textarea><br />
                         <input type="button" value="Submit" onclick="sendNoteStudent($('input.student.note.dtStart'), $('input.student.note.dtEnd'), $('input.student.note.where'), $('input.student.note.what'), $('input.student.note.description'));" />

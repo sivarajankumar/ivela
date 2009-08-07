@@ -1,7 +1,24 @@
-<%-- 
-    Document   : list Forum
-    Created on : May 15, 2008, 1:38:17 PM
-    Author     : leoomoreira
+<%--
+#############################################################################################
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                      #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: list.jsp                                                                            #
+# Document: list Forum                                                              # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 15-MAY-2008 - Leo Moreira                       - XXXXXX - Initial Version                #
+# 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
+#############################################################################################
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -27,15 +44,6 @@
     <jsp:include page="paginatorTop.jsp"/>
     <br />
     <s:actionmessage/>
-    <div id="breadcrumb">
-        <s:url id="listForum" action="forum" method="list">
-            <s:param name="forum.id" value="forum.id"/>
-        </s:url>
-        <p><s:text name="breadcrumb.youAreHere"/></p>
-        <ul>
-            <li class="current"><s:a href="%{listForum}"><s:text name="forum.breadcrumb"/></s:a></li>
-        </ul>
-    </div>
     <table id="forum">
         <tr>
             <th><s:text name="forum.pageTitle"/></th>

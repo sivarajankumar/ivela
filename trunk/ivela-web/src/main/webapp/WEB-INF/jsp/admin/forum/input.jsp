@@ -1,7 +1,24 @@
-<%-- 
-    Document   : input Forum
-    Created on : Aug 5, 2008, 9:14:56 AM
-    Author     : rodrigo
+<%--    
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: input.jsp                                                                           #
+# Document: Admin Forum Input Page                                                          # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 05-AUG-2008 - rodrigo                           - XXXXXX - Initial Version                #
+# 26-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - i18n fix                       #
+#############################################################################################
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -35,15 +52,15 @@
         <%--<s:textfield name="forum.grade.id" cssClass="name-forum"/><br/>--%>
         <s:select list="gradeList" listKey="id" listValue="name" name="forum.grade.id"></s:select><br/>
         <label><s:text name="forum.input.createTopic"/></label><br/>
-        <s:radio name="forum.studentCreateTopic" key="forum.input.createTopic" list="#{'true':'true','false':'false'}" /><br/>
+        <s:radio name="forum.studentCreateTopic" key="forum.input.createTopic" list="radioBooleanList" /><br/>
         <label><s:text name="forum.input.uploadPost"/></label><br/>
-        <s:radio name="forum.studentUploadPost" key="forum.input.uploadPost" list="#{'true':'true','false':'false'}" /><br/>
+        <s:radio name="forum.studentUploadPost" key="forum.input.uploadPost" list="radioBooleanList" /><br/>
         <label><s:text name="forum.input.uploadRepository"/></label><br/>
-        <s:radio name="forum.studentUploadRepository" key="forum.input.uploadRepository" list="#{'true':'true','false':'false'}" /><br/>
+        <s:radio name="forum.studentUploadRepository" key="forum.input.uploadRepository" list="radioBooleanList" /><br/>
         <label><s:text name="forum.input.linkPost"/></label><br/>
-        <s:radio name="forum.studentLinkPost" key="forum.input.linkPost" list="#{'true':'true','false':'false'}" /><br/>
+        <s:radio name="forum.studentLinkPost" key="forum.input.linkPost" list="radioBooleanList'}" /><br/>
         <label><s:text name="forum.input.public"/></label><br/>
-        <s:radio name="forum.public1" key="forum.input.public" list="#{'true':'true','false':'false'}" /><br/>
+        <s:radio name="forum.public1" key="forum.input.public" list="radioBooleanList" /><br/>
         <s:submit key="forum.input.submit" cssClass="btn-save" />
         <s:a href="forum!list.action" cssClass="btn-cancel"><s:text name="forum.input.cancel" /></s:a>
     </s:form>

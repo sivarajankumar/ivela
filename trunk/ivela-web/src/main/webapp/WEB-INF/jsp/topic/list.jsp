@@ -1,7 +1,25 @@
-<%-- 
-    Document   : list Topic
-    Created on : May 15, 2008, 1:38:17 PM
-    Author     : leoomoreira
+<%--
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: list.jsp                                                                            #
+# Document: List Forum's Topics                                                             #
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 15-MAY-2008 - Leonardo Moreira (UFC)            - XXXXXX - Initial Version                #
+# 27-JUN-2009 - Otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+# 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
+############################################################################################# 
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -21,19 +39,6 @@
 <jsp:include page="paginator.jsp"/>
 <br />
 <s:actionmessage />
-<div id="breadcrumb">
-    <s:url id="listForum" action="forum" method="list">
-        <s:param name="forum.id" value="forum.id"/>
-    </s:url>    
-    <s:url id="listTopic" action="topic" method="listByForum">
-        <s:param name="forum.id" value="forum.id"/>
-    </s:url>    
-    <p><s:text name="breadcrumb.youAreHere"/></p>
-    <ul>
-        <li><s:a href="%{listForum}"><s:text name="forum.breadcrumb"/></s:a></li>
-        <li class="current"><s:a href="%{listTopic}"><s:text name="topic.breadcrumb"/></s:a></li>
-    </ul>
-</div>
 <table id="forum">
     <tr>
         <th><s:text name="topic.list.title" /></th>
@@ -48,14 +53,14 @@
             <td>
                 <h3><s:a href="%{listPostUrl}"><s:property value="topic.title" /></s:a></h3>
                 <p><s:property value="topic.description" /></p>
-                <span class="font-orange-td"><s:text name="topic.list.createdBy" /></span><span class="name-user"><a href=""><s:property value="topic.createdBy.username" /></a></span>		
+                <span class="font-orange-td"><s:text name="topic.list.createdBy" /></span><span class="name-user"><b><s:property value="topic.createdBy.username" /></b></span>     
             </td>
             <td class="topics-views"><s:property value="topicReplies" /></td>
             <!--<td class="topics-views"><s:property value="topicViews" /></td>-->
-            <td>
+            <td>            
                 <span class="font-orange-td"><s:text name="topic.list.date" /></span>&nbsp;<s:date name="lastPost.createdAt" format="%{getText('formatDateLanguage1')}" /><br/>
-                <p><a href=""><s:property value="lastPost.message" /></a></p>
-                <span class="font-orange-td"><s:text name="topic.list.postedBy" /></span><span class="name-user"><a href=""><s:property value="lastPost.createdBy.username"/></a></span>
+                <p><s:a href="%{listPostUrl}"><s:property value="lastPost.message" /></s:a></p>
+                <span class="font-orange-td"><s:text name="topic.list.postedBy" /></span><span class="name-user"><b><s:property value="lastPost.createdBy.username"/></b></span>
             </td>
         </tr>
     </s:iterator>
@@ -71,8 +76,8 @@
     
     function replaceQuotes( quotedText )
     {
-       var out = replaceAll( quotedText, '[quote]', '<div class=\"quote-answer\">' );
-       out = replaceAll( out, '[/quote]', '</div>' );
+       var out = replaceAll( quotedText, '[quote]', '<span class=\"quote-answer\">' );
+       out = replaceAll( out, '[/quote]', '</span>' );
 
 //       alert('quotedText=' + quotedText + "\n" + "out=" + out);
 
@@ -81,10 +86,10 @@
     
     function replaceAll(string, token, newtoken) 
     {
-	while (string.indexOf(token) != -1) 
+    while (string.indexOf(token) != -1) 
         {
-		string = string.replace(token, newtoken);
-	}
+        string = string.replace(token, newtoken);
+    }
 
         return string;
     }

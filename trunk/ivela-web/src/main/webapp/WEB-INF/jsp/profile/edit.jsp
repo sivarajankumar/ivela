@@ -1,7 +1,23 @@
-<%-- 
-    Document   : edit Profile
-    Created on : Jun 27, 2008, 3:04:37 PM
-    Author     : Maristella Myrian
+<%--    
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: edit.jsp                                                                            #
+# Document: Edit Profile Page                                                               # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 27-JUN-2008 - Maristella Myrian (UFC)           - XXXXXX - Initial Version                #
+# 22-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Issues                 #
+#############################################################################################
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,8 +28,7 @@
     <link href="css/profile.css" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" src="js/prototype/prototype.js"></script>
-    <script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>
-    <script type="text/javascript" src="js/systemUser/profile.js"></script>
+    <script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>    
     <script type="text/javascript" src="js/systemUser/base.js"></script>
     <cal:head/>
     <s:head />
@@ -27,7 +42,7 @@
     <br />
     
     <s:actionerror />
-    
+    <s:fielderror/>
     <s:if test="sucess==true"><h2> <s:text name="profile.updateSucess" /></h2> </s:if>
     <s:form action="profile!update.action" method="post" cssClass="form"enctype="multipart/form-data" theme="simple">
 
@@ -38,12 +53,8 @@
         <fieldset><legend><s:text name="systemUser.input.personalInfo"/></legend>
             <p >
                 <label><s:text name="profile.disabilities" />:</label>
-                <span><s:radio name="profile.disabilities" list="#{'true':'yes','false':'no'}" theme="simple"/></span>
-            </p>
-            <p>
-                <label><s:text name="profile.honorific" />:</label>
-                <s:select list="honorificList" listKey="id" listValue="title" value="%{profile.honorific.id}" name="profile.honorific.id" id="honorific" theme="simple"/>
-            </p>
+                <span><s:radio name="profile.disabilities" list="disabilitiesList" theme="simple"/></span>
+            </p>            
             <p>
                 <label><s:text name="profile.firstName" />:</label>
                 <s:textfield cssClass="general-input" name="profile.firstName" theme="simple" />
@@ -54,7 +65,7 @@
             </p>
             <p class="select-type">
                 <label><s:text name="profile.gender" />:</label>
-                <span><s:radio name="profile.gender" list="#{'1':'masculino','0':'feminino'}"  theme="simple"/></span>
+                <span><s:radio name="profile.gender" list="genderList"  theme="simple"/></span>
             </p>
             <p>
                 <label><s:text name="profile.initials" />:</label>
@@ -63,8 +74,7 @@
 
             <p>
                 <label><s:text name="profile.photo" />:</label>
-                <s:file name="upload" theme="simple"  />
-                <span name="profile.photo" onclick="insertFile()" /> 
+                <s:file name="upload" theme="simple"  />                
             </p>
             <p>
                 <label><s:text name="profile.socialNumber" />:</label>
@@ -72,15 +82,11 @@
             </p>
             <p>
                 <label><s:text name="profile.ethnicity" />:</label>
-                <s:select  list="ethnicityList" listKey="id" listValue="name" value="%{profile.ethnicity.id}" name="profile.ethnicity.id" id="ethnicity" theme="simple"></s:select>
-            </p>
-            <p>
-                <label><s:text name="profile.language" />:</label>
-                <s:select list="languageInternationalizationList" listKey="id" listValue="language.name" name="profile.language.id" id="language" theme="simple"></s:select>
-            </p>
+                <s:select  list="ethnicityList" value="%{profile.ethnicity}" name="profile.ethnicity" id="ethnicity" theme="simple"></s:select>
+            </p>            
             <p>
                 <label><s:text name="profile.birthDate" />:</label>
-                <cal:jscalendar name="profile.birthDate"  format="%m/%d/%Y" showstime="true" theme="simple"/>
+                <cal:jscalendar name="profile.birthDate"  format="%{dateFormat}" showstime="true" theme="simple"/>
             </p>
 
         </fieldset>
@@ -90,8 +96,7 @@
         <fieldset>
             <legend><s:text name="systemUser.input.addressTitle"/></legend>
             <p>
-                <label><s:text name="systemUser.input.addSt"/>:</label>
-                <s:select list="locationTypeList" listKey="id" listValue="description" name="inAddress.locationType.id" id="locationType"  value="%{inAddress.locationType.id}" />
+                <label><s:text name="systemUser.input.addSt"/>:</label>                
                 <input name="inAddress.location" id="location" type="text" value="<s:property value="%{inAddress.location}"/>" />
             </p>
             <p>
@@ -104,11 +109,11 @@
             </p>
             <p>     
                 <label><s:text name="systemUser.input.country"/>:</label>
-                <s:select list="countryList" listKey="id" listValue="name"  onchange="selectStates(this.value)" name="country.id" id="country" value="%{inAddress.state.country.id}"></s:select>                  
+                <s:select list="countryList" onchange="selectStates(this.value)" name="inAddress.country" id="country" value="%{inAddress.country}"></s:select>                  
             </p>
             <p>
                 <label><s:text name="systemUser.input.state"/>:</label>
-                <s:select  id="stateId" name="inAddress.state.id" listKey="id" listValue="name" list="inAddress.state.country.states" value="%{inAddress.state.id}">
+                <s:select  id="stateId" name="inAddress.state" list="stateList" value="%{inAddress.state}">
                 </s:select>
             </p>
             <p>

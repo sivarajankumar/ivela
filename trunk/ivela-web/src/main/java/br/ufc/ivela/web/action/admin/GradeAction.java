@@ -1,6 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/*###########################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: GradeAction.java                                                                    #
+# Document: Grade Admin Action                                                              #
+# Date        - Author(Company)                    - Issue# - Summary                       #
+# XX-XXX-XXX -  nelson                             - XXXXXX - Initial Version               #
+# 26-JUN-2009 - otofuji (Instituto Eldorado)       - 000010 - General i18n Fixes            #
+#############################################################################################    
  */
 package br.ufc.ivela.web.action.admin;
 
@@ -40,7 +57,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,10 +71,6 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
-/**
- *
- * @author nelson
- */
 public class GradeAction extends GenericAction {
 
     private List<Grade> gradeList;
@@ -588,7 +603,9 @@ public class GradeAction extends GenericAction {
         List<Grade> grades = gradeRemote.getByCourse(course.getId());
         String studentsCount = String.valueOf(courseRemote.getStudentsCount(course.getId()));
         String gradesCount = String.valueOf(courseRemote.getGradesCount(course.getId()));
-       // String graduatedStudentCount = String.valueOf(courseRemote.getGraduatedStudentsCount(course.getId()));
+        String graduatedStudentCount = String.valueOf(courseRemote.getGraduatedStudentsCount(course.getId()));
+        String professorsCount = String.valueOf(courseRemote.getProfessors(course.getId()).size());
+        String tutorsCount = String.valueOf(courseRemote.getTutors(course.getId()).size());
         StringBuilder json = new StringBuilder();
         json.append("{");
         json.append("\"course\":{");
@@ -598,7 +615,9 @@ public class GradeAction extends GenericAction {
         json.append("\"targetAudience\":\"" + course.getTargetAudience() + "\",");
         json.append("\"studentsCount\":\"" + studentsCount + "\",");
         json.append("\"gradesCount\":\"" + gradesCount + "\",");
-       // json.append("\"graduatedStudentCount\":\"" + graduatedStudentCount + "\",");
+        json.append("\"professorsCount\":\"" + professorsCount + "\",");
+        json.append("\"tutorsCount\":\"" + tutorsCount + "\",");        
+        json.append("\"graduatedStudentCount\":\"" + graduatedStudentCount + "\",");
         json.append("\"grades\":[");
         List<Grade> gradeList = gradeRemote.getByCourse(course.getId());
         for (Grade g : gradeList) {
@@ -788,6 +807,8 @@ public class GradeAction extends GenericAction {
        Grade g = gradeRemote.get(grade.getId());
        g.setCourse(courseRemote.get(grade.getCourseId()));
        String studentsCount = String.valueOf(enrollmentRemote.getByGrade(grade.getId()).size());
+       String professorsCount = String.valueOf(getProfessorsJson(g.getId()).length());
+       String tutorsCount = String.valueOf( getTutorsJson(g.getId()).length());
        json.append("{\"grade\":");
             json.append("{");
             json.append("\"id\":\"" + g.getId() + "\",");
@@ -801,6 +822,9 @@ public class GradeAction extends GenericAction {
             json.append("\"maxStudents\":\"" + g.getMaxStudents() + "\",");
             json.append("\"startDatetime\":\"" + g.getStartDatetime() + "\",");
             json.append("\"endDatetime\":\"" + g.getEndDatetime() + "\",");
+            json.append("\"studentsCount\":\"" + studentsCount + "\",");
+            json.append("\"professorsCount\":\"" + professorsCount + "\",");
+            json.append("\"tutorsCount\":\"" + tutorsCount + "\",");        
             json.append("\"course\":{");
             json.append("\"id\":\"" + g.getCourse().getId() + "\",");
             json.append("\"name\":\"" + g.getCourse().getName() + "\",");
@@ -1461,6 +1485,7 @@ public class GradeAction extends GenericAction {
     public String getGradeIds() {
         return gradeIds;
     }
+    
 
     public void setGradeIds(String gradeIds) {
         this.gradeIds = gradeIds;
@@ -1592,6 +1617,20 @@ public class GradeAction extends GenericAction {
 
     public void setText(String text) {
         this.text = text;
+    }
+    
+    /**
+     * Retrieve the possible Grade Status Value properly translated.
+     * 
+     * @return A Map with the options for the Grade Status
+     */
+    public Map<Integer, String> getGradeStatusList() {
+        Map<Integer, String> gradeStatusList = new LinkedHashMap<Integer, String>();
+        gradeStatusList.put(0, getText("grade.input.inactive", "Inactive"));
+        gradeStatusList.put(1, getText("grade.input.periodOfEnrollment", "Period of enrollment"));
+        gradeStatusList.put(2, getText("grade.input.finished", "Registration finished"));
+        
+        return gradeStatusList;
     }
 }
 

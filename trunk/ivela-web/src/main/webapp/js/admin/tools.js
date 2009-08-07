@@ -21,7 +21,7 @@ function vaiLightWindow(url) {
 function getTopics() {
     new Ajax.Request('../home!getToolsTopics.action',
     {
-        method:'get',
+        method:'post',
         requestHeaders: {
             Accept: 'application/json'
         },
@@ -62,42 +62,41 @@ function getTopics() {
 
 function getMessages() {
     new Ajax.Request('../home!getToolsMessages.action',
-    {
-        method:'get',
-        requestHeaders: {
-            Accept: 'application/json'
-        },
-        onSuccess: function(transport) {
-            var json = transport.responseText.evalJSON(true);
+            {
+                method:'post',
+                requestHeaders: {
+                    Accept: 'application/json'
+                },
+                onSuccess: function(transport) {            
+                    var json = transport.responseText.evalJSON(true);            
+                    if (json.list.message) {
+                        $('messages.empty').style.display = 'none';
+                        $('messages.list').style.display = 'block'
+                        var html = '<ul>';
+                        if (json.list.message.length > 0) {                                
+                            for(var i = 0; i < json.list.message.length; i++) {                        
+                                html += '<li> <a class="lightwindow page-options" '+
+                                    'href="javascript: vaiLightWindow(\'../message!getInbox.action?message.id='+ json.list.message[i].id +'\');">' + json.list.message[i].title + '</a> <br /> ' + from + ' '+ json.list.message[i].sender.username +' - '+ json.list.message[i].datetime.$ +' </li>';
+                            }
+                        } else {
+                            html += '<li> <a class="lightwindow page-options" '+
+                            'href="javascript: vaiLightWindow(\'../message!getInbox.action?message.id='+ json.list.message.id +'\');">';
 
-            if (json.list != null && json.list.message.length > 0) {
-                $('messages.empty').style.display = 'none';
-                $('messages.list').style.display = 'block'
+                            html += json.list.message.title;
 
-                var html = '<ul>';
+                            html += '</a> <br /> ' + from + ' '+ json.list.message.sender.username +' - '+ json.list.message.datetime.$ +' </li>';                                    
+                        }
+                        html += '</ul>';
 
-                for(var i = 0; i < json.list.message.length; i++) {
+                        $('messages.list').innerHTML = html;
+                    } else {
+                        $('messages.empty').style.display = 'block';
+                        $('messages.list').style.display = 'none';
+                    }
 
-                    html += '<li> <a class="lightwindow page-options" '+
-                            'href="javascript:vaiLightWindow(\'../message!getInbox.action?message.id='+ json.list.message[i].id +'\');" '+
-                            '> ';
-
-                    html += json.list.message[i].title;
-
-                    html += '</a> <br /> ' + from + ' '+ json.list.message[i].sender.username +' - '+ json.list.message[i].datetime.$.substring(0,19) +' </li>';
+                },
+                onFailure: function() {
+                    alert('Message: Error retrieving messages...')
                 }
-
-                html += '</ul>';
-
-                $('messages.list').innerHTML = html;
-
-            } else {
-                $('messages.empty').style.display = 'block';
-                $('messages.list').style.display = 'none'
-            }
-        },
-        onFailure: function() {
-            alert('Message: Error retrieving messages...')
-        }
-    });
+            });    
 }

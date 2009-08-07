@@ -10,15 +10,19 @@ var checkedProfessors = new Array();
 var checkedStudents = new Array();
 
 Event.observe(window, 'load', loadAccordions, false);
-Event.observe(window, 'click', click, false);
+Event.observe(window, 'load', function() {Event.observe(content, 'click', click, false);}, false);
  
-function click(e){ 
-    if(e.target.getAttribute('class') != null){       
-        var clazz = e.target.getAttribute('class').toString();
+function click(e){
+	if (!e) e = window.event;
+	var evt;
+    if (e.target) evt = e.target;
+		else if (e.srcElement) evt = e.srcElement;	
+	if ((evt.className) != null){       
+        var clazz = evt.className.toString();
 
         if(clazz == 'accordion_toggle_grade2 accordion_toggle_active_grade2'){
 
-            var course = e.target.next(0).getAttribute('id');
+            var course = evt.next(0).getAttribute('id');
 
             if(course != current_course){
                 //eh um curso    
@@ -26,12 +30,12 @@ function click(e){
                 showCourse(course);
             }
         } else if(clazz == 'vertical_accordion_toggle vertical_accordion_toggle_active'){
-            var grade = e.target.next(0).getAttribute('id');
+            var grade = evt.next(0).getAttribute('id');
 
             //eh uma grade
             showGrade(grade);
         } else if(clazz == 'vertical_accordion_toggle2 vertical_accordion_toggle_active2'){
-            var element = e.target.getAttribute('id');
+            var element = evt.getAttribute('id');
             
             //eh uma unidade
             if (element == 'professors')
@@ -170,9 +174,8 @@ function showCourse(courseId) {
     //var jsonTutors = getJsonFromUrl('course!getTutorsInfo.action?course.id=' + courseId);
             
     var studentsCount = json.course.studentsCount;                
-    var graduatedStudentCount = json.course.graduatedStudentCount;
-    var professorsCount = 0;
-    var tutorsCount = 0;
+    var professorsCount = json.course.professorsCount;    
+    var tutorsCount = json.course.tutorsCount;
     var gradesCount = json.course.gradesCount;
     
     var grades = '';
@@ -201,7 +204,6 @@ function showCourse(courseId) {
     $('course.professor.count').innerHTML = professorsCount;
     $('course.tutor.count').innerHTML = tutorsCount;
     $('course.student.count').innerHTML = studentsCount;
-    $('course.graduated.count').innerHTML = graduatedStudentCount;
     $('course.grade.count').innerHTML = gradesCount;
    
     $('course.grades').innerHTML = grades;    
@@ -214,7 +216,9 @@ function showGrade(gradeId) {
 
     var i = 0;
     
-    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + gradeId);
+    jsonGradeId = gradeId.split("_",1)[0];
+    
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
     var courseId = jsonGrade.grade.courseId;
     var jsonGraduatedStudentsInfo = getJsonFromUrl('course!getGraduatedStudentsInfo.action?course.id=' + courseId);
 
@@ -240,7 +244,6 @@ function showGrade(gradeId) {
         }
     }
     var coordinatorsCount = '1';
-    var graduatedStudentCount = jsonGraduatedStudentsInfo.count;
 
     $('grade.id').value = jsonGrade.grade.id;
     $('grade.course.id').value = jsonGrade.grade.course.id;    
@@ -248,10 +251,10 @@ function showGrade(gradeId) {
     $('grade.name').innerHTML = jsonGrade.grade.name;
     $('grade.course.description').innerHTML = jsonGrade.grade.course.description;
     $('grade.coordinator.count').innerHTML = coordinatorsCount;
-    $('grade.professor.count').innerHTML = professorsCount;
-    $('grade.tutor.count').innerHTML = tutorsCount;
-    $('grade.student.count').innerHTML = studentsCount;
-    $('grade.graduated.count').innerHTML = graduatedStudentCount;
+    $('grade.professor.count').innerHTML = jsonGrade.grade.professorsCount;
+    $('grade.tutor.count').innerHTML = jsonGrade.grade.tutorsCount;
+    $('grade.student.count').innerHTML = jsonGrade.grade.studentsCount;
+    //$('grade.graduated.count').innerHTML = graduatedStudentCount;
     
     checkStatusSelect(jsonGrade.grade.status);
     
@@ -262,8 +265,10 @@ function showStudent(gradeId, courseId) {
     $('showStudent').style.display = 'block';
             
     var i = 0;
+    
+    jsonGradeId = gradeId.split("_",1)[0];
             
-    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + gradeId);
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
     var jsonCourse = getJsonFromUrl('course!getCourseInfo.action?course.id=' + courseId);
     //var jsonStudents = getJsonFromUrl('grade!getStudentsInfo.action?grade.id=' + gradeId);
     
@@ -298,8 +303,10 @@ function showProfessor(gradeId, courseId) {
     $('showProfessor').style.display = 'block';
             
     var i = 0;
+    
+    jsonGradeId = gradeId.split("_",1)[0];
             
-    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + gradeId);
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
     var jsonCourse = getJsonFromUrl('course!getCourseInfo.action?course.id=' + courseId);
     //var jsonProfessors = getJsonFromUrl('grade!getProfessorsInfo.action?grade.id=' + gradeId);
     
@@ -333,8 +340,10 @@ function showProfessor(gradeId, courseId) {
 function showForum(gradeId, courseId) {
     closeAll();
     $('showForum').style.display = 'block';
+    
+    jsonGradeId = gradeId.split("_",1)[0];
 
-    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + gradeId);
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
     var jsonCourse = getJsonFromUrl('course!getCourseInfo.action?course.id=' + courseId);
 
     $('forum.show.grade.id').value = gradeId;
@@ -366,7 +375,9 @@ function showForumId(gradeId, courseId, forumId) {
     closeAll();
     $('showForumId').style.display = 'block';
 
-    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + gradeId);
+    jsonGradeId = gradeId.split("_",1)[0];
+    
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
     var jsonCourse = getJsonFromUrl('course!getCourseInfo.action?course.id=' + courseId);
     var jsonForum = getJsonFromUrl('forum!getForumInfo.action?forum.id=' + forumId);
 
@@ -432,7 +443,7 @@ function updateTutor(obj,id)
             
             var divContent = document.getElementById("div" + multiple + "." + checks[i].id).innerHTML;
 
-            divContent = divContent.replace("display: none;","display: block;");
+            divContent = divContent.replace(new RegExp("display: none", "i"),"display: block");
             tutorDataHtml += divContent;
         }
     }
@@ -482,7 +493,7 @@ function updateProfessor(obj,id)
             checkedProfessors[arrayIndex++] = checks[i].value;
             
             var divContent = document.getElementById("div" + multiple + "." + checks[i].id).innerHTML;
-            divContent = divContent.replace("display: none;","display: block;");
+            divContent = divContent.replace(new RegExp("display: none", "i"),"display: block");
             professorDataHtml += divContent;
         }
     }
@@ -531,7 +542,7 @@ function updateStudents(obj,id)
             showImage("img_div" + multiple + "." + checks[i].id);
             checkedStudents[arrayIndex++] = checks[i].value;
             var divContent = document.getElementById("div" + multiple + "." + checks[i].id).innerHTML;
-            divContent = divContent.replace("display: none;","display: block;");
+            divContent = divContent.replace(new RegExp("display: none", "i"),"display: block");
             studentDataHtml += divContent;
         }
     }
@@ -603,8 +614,7 @@ function showTutor(gradeId, courseId) {
 function showEntryGrade(courseId) {
     closeAll();
     $('showEntryGrade').style.display = 'block';
-    //não sei porque o radio não ficou marcado na jsp ai tive que marca-lo aqui na linha abaixo
-    $('input.grade.requirestrue').checked = "checked";
+    $('input.grade.requires.yes').checked = "checked";
 
     $('input.grade.id').value = '';
     if (courseId == null)
@@ -641,7 +651,7 @@ function showEntryProfessor(gradeId, courseId) {
     
     $('input.professor.grade.professor').value = '';
     
-    $('input.professor.grade.professor').focus();
+   // $('input.professor.grade.professor').focus();
 }
 
 function showEntryStudent(gradeId, courseId) {
@@ -662,7 +672,7 @@ function showEntryStudent(gradeId, courseId) {
     
     $('input.student.grade.student').value = '';
     
-    $('input.student.grade.student').focus();
+   // $('input.student.grade.student').focus();
 }
 
 function showEntryTutor(gradeId, courseId) {
@@ -684,7 +694,7 @@ function showEntryTutor(gradeId, courseId) {
     
     $('input.tutor.grade.tutor').value = '';
     
-    $('input.tutor.grade.tutor').focus();
+  // $('input.tutor.grade.tutor').focus();
 }
 
 function showEntryForum(gradeId) {
@@ -814,7 +824,7 @@ function submitGrade(gradeId) {
     
     var requires = true;
     
-    if($('input.grade.requiresfalse').checked){
+    if($('input.grade.requires.no').checked){
         requires = false;
     }
         
@@ -1200,12 +1210,15 @@ function submitProfessor(gradeId, professorId) {
         url += 'grade.id=' + gradeId;
         url += '&systemUser.id=' + professorId;
     }
-    jsonGrade = getJsonFromUrl(url);
-    if (jsonGrade != null && jsonGrade.grade != null && jsonGrade.grade.id != '') {
+    var jsonGrade = getJsonFromUrl(url);
+    if ( (jsonGrade != null) && (jsonGrade.result != '-1') )
+    {
         document.location = 'grade!show.action';
     }
-    else {
+    else
+    {
         Lightbox.hideAll();
+        $('username1').value="";
         alert('Não inserido');
     }
 }
@@ -1239,12 +1252,15 @@ function submitTutor(gradeId, tutorId) {
         url += 'grade.id=' + gradeId;
         url += '&systemUser.id=' + tutorId;
     }
-    jsonGrade = getJsonFromUrl(url);
-    if (jsonGrade != null && jsonGrade.grade != null && jsonGrade.grade.id != '') {
+    var jsonGrade = getJsonFromUrl(url);
+    if ( (jsonGrade != null) && (jsonGrade.result != '-1') )
+    {
         document.location = 'grade!show.action';
     }
-    else {
+    else
+    {
         Lightbox.hideAll();
+        $('username2').value="";
         alert('Não inserido');
     }
 }
@@ -1264,12 +1280,15 @@ function submitStudent(gradeId, systemUserId) {
         url += 'grade.id=' + gradeId;
         url += '&systemUser.id=' + systemUserId;
     }
-    jsonGrade = getJsonFromUrl(url);
-    if (jsonGrade != null && jsonGrade.grade != null && jsonGrade.grade.id != '') {
+    var jsonGrade = getJsonFromUrl(url);
+    if ( (jsonGrade != null) && (jsonGrade.result != '-1') )
+    {
         document.location = 'grade!show.action';
     }
-    else {
+    else
+    {
         Lightbox.hideAll();
+        $('username0').value="";
         alert('Não inserido');
     }
 }
@@ -1309,9 +1328,9 @@ function showEditGradeById(gradeId)
     $('input.grade.maxduration').value = jsonGrade.grade.maxDuration;
     $('input.grade.status').value = jsonGrade.grade.status;
     if(jsonGrade.grade.requiresEnrollmentValidation)
-        $('input.grade.requirestrue').checked = "checked";
+        $('input.grade.requires.yes').checked = "checked";
     else
-        $('input.grade.requiresfalse').checked = "checked";
+        $('input.grade.requires.no').checked = "checked";
     var startDate = '';
     if (jsonGrade.grade.startDatetime.$ != null) {
         startDate = jsonGrade.grade.startDatetime.$.substring(5, 7)  + '/' + jsonGrade.grade.startDatetime.$.substring(8, 10) + '/' + jsonGrade.grade.startDatetime.$.substring(0, 4);
@@ -1372,9 +1391,9 @@ function showEditGrade() {
     $('input.grade.coordinator').value = jsonGrade.grade.coordinatorId;
     $('input.grade.maxduration').value = jsonGrade.grade.maxDuration;
     if(jsonGrade.grade.requiresEnrollmentValidation)
-        $('input.grade.requirestrue').checked = "checked";
+        $('input.grade.requires.yes').checked = "checked";
     else
-        $('input.grade.requiresfalse').checked = "checked";
+        $('input.grade.requires.no').checked = "checked";
     var startDate = '';
     if (jsonGrade.grade.startDatetime.$ != null) {
         startDate = jsonGrade.grade.startDatetime.$.substring(5, 7)  + '/' + jsonGrade.grade.startDatetime.$.substring(8, 10) + '/' + jsonGrade.grade.startDatetime.$.substring(0, 4);

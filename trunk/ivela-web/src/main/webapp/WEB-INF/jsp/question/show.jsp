@@ -1,7 +1,24 @@
-<%-- 
-    Document   : show Question
-    Created on : Jun 27, 2008, 11:21:04 AM
-    Author     : emanuelle
+<%--
+#############################################################################################
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                      #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: list.jsp                                                                            #
+# Document: show Question                                                                   # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 27-JUN-2008 - Emanuelle                         - XXXXXX - Initial Version                #
+# 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
+#############################################################################################
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,14 +30,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <s:actionerror />
-    <div id="breadcrumb">
-        <p><s:text name="breadcrumb.youAreHere"/></p>
-        <ul>
-            <li><a href="home.action" title="Back to home"><s:text name="home.name"/></a></li>
-            <li><a href="discipline!listByCourse.action?course.id=6&grade.id=10"><s:text name="Inglês para Negócio"/></a></li>
-            <li class="current"><s:text name="Exercise Voice"/></li>
-        </ul>
-    </div>
     <s:if test="question.type==questionAuditive">
     
         <br />

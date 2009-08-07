@@ -20,3 +20,20 @@ function classCss(){
     }
     return css;
 }
+
+function addUnitContentListener(frame) {    
+    var iFrame = frame.contentDocument;
+    if (iFrame != undefined) {
+        iFrame.addEventListener("DOMNodeInserted", nodeInserted, false);
+    }       
+}
+
+
+function nodeInserted(e) {    
+    if (!e) e = window.event;              
+    // Content Lesson is a unit-specific class.... checking by length only for now then 
+    if ((e.target.innerHTML != undefined) && (e.target.innerHTML.length > 300)) {        
+        var scrollx = (document.all)?document.body.scrollLeft:window.pageXOffset;        
+        window.scrollTo(scrollx, 0); 
+    }
+}

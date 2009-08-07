@@ -1,11 +1,31 @@
 <%--
-    Document   : input
-    Created on : Jun 5, 2008, 9:14:56 AM
-    Author     : leoomoreira
+#############################################################################################
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                      #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: index.jsp                                                                           #
+# Document: Home Index Page                                                                 # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 05-JUN-2008 - Leo Moreira                       - XXXXXX - Initial Version                #
+# 08-JUN-2009 - Otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
+# 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
+# 23-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Unicode (UTF-8) support        #
+#############################################################################################
 --%>
 
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%-- código para testar o layout 2 --%>
+<%-- cÃ³digo para testar o layout 2 --%>
 <%@ page import="org.springframework.security.context.SecurityContextHolder"%>
 <%@ page import="org.springframework.security.userdetails.UserDetails"%>
 <%@ page import="br.ufc.ivela.commons.model.SystemUser"%>
@@ -38,13 +58,6 @@
     
 </head>
 
-<div id="breadcrumb">
-    <p><s:text name="breadcrumb.youAreHere"/></p>
-    <ul>
-        <li class="current"><s:text name="home.name"/></li>
-    </ul>
-</div>
-
 <s:if test="newsFlash != null">
     <div class="newsflash" id="hiddenFlash">
         <div class="content-newsflash">
@@ -70,7 +83,7 @@
         <div class="accordion_content" id="<s:property value="grade.course.id" />">
             <dl>
                 <dt><s:text name="home.progress" /></dt>
-                <p class="progress">
+                <p class="progress" style="margin-bottom: -10px;">
                     <span class="box-bar"><img id="course.<s:property value="grade.course.id" />.image" height="11" width="35" src="images/progress-bar/bar.gif" alt="progress bar" /></span>
                     <span class="label" id="course.<s:property value="grade.course.id" />.progress">0%</span>
                 </p>
@@ -87,8 +100,8 @@
                 
                 <dd><s:date name="grade.endDatetime" format="%{getText('formatDateLanguage1')}"/></dd>
                 
-                <dt><s:text name="home.structury"/></dt> <br />
-                <a style ="float:left;  height: 30px;  width: 103px; padding: 0 15px 0 0; background: url(images/icon/course-structure.gif) no-repeat top right;"  href="spacetree.jsp?id=<s:property value="grade.course.id" />" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024,lightwindow_height=500"></a>
+                <dt><s:text name="home.structury"/></dt>
+                <a style ="float:left;  height: 30px;  width: 103px; padding: 0 15px 0 0; margin-top: 10px; background: url(images/icon/course-structure.gif) no-repeat top right;"  href="spacetree.jsp?id=<s:property value="grade.course.id" />" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024,lightwindow_height=500"></a>
             </dl>
             <div class="partner">
                 
