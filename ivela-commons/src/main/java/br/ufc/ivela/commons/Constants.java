@@ -27,7 +27,7 @@ package br.ufc.ivela.commons;
 public class Constants {
     
 	//SYSTEM VERSION
-	public static final String SYSTEM_VERSION = "V01.01-Beta";
+	public static final String SYSTEM_VERSION = "V01.02";
 	
     //TYPE OF GENDER
     public static final int GENDER_FEMALE = 0;
