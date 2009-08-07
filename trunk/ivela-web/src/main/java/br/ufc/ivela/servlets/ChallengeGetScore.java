@@ -1,8 +1,44 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: ChallengeGetScore.jsp                                                                            #
+# Document: Getting Score from exercises                                                                     #
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# XXXXXXXXXXX - Unknown                           - XXXXXX - Initial Version                #
+# 01-JUL-2009 - Fabio Fantato(Instituto Eldorado) - 000010 - Score page does not working    #
+#############################################################################################
+*/
 package br.ufc.ivela.servlets;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.context.SecurityContextHolder;
 
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.ejb.interfaces.ChallengeRemote;
@@ -11,21 +47,6 @@ import br.ufc.ivela.servlets.challenge.Constants;
 import br.ufc.ivela.servlets.challenge.Converter2ObjectFactory;
 import br.ufc.ivela.servlets.challenge.IvelaObj;
 import br.ufc.ivela.servlets.challenge.XMLObject;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.security.context.SecurityContextHolder;
 
 /**
  *
@@ -34,7 +55,7 @@ import org.springframework.security.context.SecurityContextHolder;
 public class ChallengeGetScore extends HttpServlet {
 
     /**
-     * ivela-web/ChallengeGetScore?scoreType=reading&scoreXMLUrl=http://200.17.41.212/public_content/scores/unit1.xml
+     * ivela-web/ChallengeGetScore?scoreType=reading&scoreXMLUrl=/1/1/1/84/scores/unit1.xml
      * @param request
      * @param response
      * @throws javax.servlet.ServletException
@@ -93,14 +114,14 @@ public class ChallengeGetScore extends HttpServlet {
                 "<table width=\"569\" border=\"0\" align=\"center\">" +
                 "<tr><td width=\"40\" valign=\"middle\"><div align=\"center\"><img src=\"RenderServlet?file=1/1/1/84/images/read_ico.gif\"><br><center><font size='1'>*</font></center></div></td><td width=\"271\" valign=\"middle\">" +
                 "  <div align=\"left\">" +
-                "    <applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"http://200.17.41.212/public_content/gaugeApplet/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
+                "    <applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"RenderServlet?file=/globals/applets/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
                 "      <param name=\"percentValue\" value=\""+result[0]+"\">" +
                 "      <param name=\"pointerColor\" value=\"E05A59\" >" +
                 "    </applet>" +
                 "  </div></td>" +
                 "  <td width=\"40\" valign=\"middle\"><img src=\"RenderServlet?file=1/1/1/84/images/write_ico.gif\" alt=\"\" />" +
                 "<br><center><font size='1'>*</font></center></td>" +
-                "  <td width=\"200\" valign=\"middle\"><applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"http://200.17.41.212/public_content/gaugeApplet/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
+                "  <td width=\"200\" valign=\"middle\"><applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"RenderServlet?file=/globals/applets/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
                 "    <param name=\"percentValue\" value=\""+result[1]+"\" />" +
                 "    <param name=\"pointerColor\" value=\"62A165\" />" +
                 "  </applet></td>" +
@@ -108,13 +129,13 @@ public class ChallengeGetScore extends HttpServlet {
                 "<tr>" +
                 "  <td valign=\"middle\"><img src=\"RenderServlet?file=1/1/1/84/images/listen_ico.gif\" alt=\"\" />" +
                 "<br><center><font size='1'>*</font></center></td></td>" +
-                "  <td valign=\"middle\"><applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"http://200.17.41.212/public_content/gaugeApplet/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
+                "  <td valign=\"middle\"><applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"RenderServlet?file=/globals/applets/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
                 "    <param name=\"percentValue\" value=\""+result[2]+"\" />" +
                 "    <param name=\"pointerColor\" value=\"61799F\" />" +
                 "  </applet></td>" +
                 "  <td valign=\"middle\"><img src=\"RenderServlet?file=1/1/1/84/images/speak_ico.gif\" alt=\"\" />" +
                 "<br><center><font size='1'>*</font></center></td></td>" +
-                "  <td valign=\"middle\"><applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"http://200.17.41.212/public_content/gaugeApplet/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
+                "  <td valign=\"middle\"><applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"RenderServlet?file=/globals/applets/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
                 "    <param name=\"percentValue\" value=\""+result[3]+"\" />" +
                 "    <param name=\"pointerColor\" value=\"9D609F\" />" +
                 "  </applet></td>" +
@@ -159,23 +180,43 @@ public class ChallengeGetScore extends HttpServlet {
 
     private ArrayList<String> getScore(String scoreType, String scoreXMLUrl) {
         StringBuffer sb = null;
-        try {
-            // Create a URL for the desired page
-            URL url = new URL(scoreXMLUrl);
+    	Boolean err = true;
+    	String errMsg = "Incorrect file path or incorrect file name. ("+br.ufc.ivela.commons.Constants.DEFAULT_CONTENTPKG_PATH+scoreXMLUrl+") ";
+    	String filename = br.ufc.ivela.commons.Constants.DEFAULT_CONTENTPKG_PATH+scoreXMLUrl;        	
+    	// Create a URL for the desired page
+    	File file = null;
 
-            // Read all the text returned by the server
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-            sb = new StringBuffer();
-            String str;
-            while ((str = in.readLine()) != null) {
-                sb.append(str);
-            }
-            in.close();
-        } catch (MalformedURLException e) {
+    	try {
+              
+              if(scoreXMLUrl!=null){
+                      file = new File(filename);
+                      if(file.exists()){
+                    	  System.err.println(filename);                    	  
+                          // Read all the text returned by the server
+                          BufferedReader in = new BufferedReader(new FileReader(filename));
+                          sb = new StringBuffer();
+                          String str;
+                          while ((str = in.readLine()) != null) {
+                              sb.append(str);
+                          }
+                          in.close();
+                      }
+              } else {
+                  err = true;
+              }
+          
+        } catch(NullPointerException npe){
+            err = true;
+            errMsg = errMsg + npe.getMessage();
+        }catch (MalformedURLException e) {
+        	err = true;
             e.printStackTrace();
         } catch (IOException e) {
+        	err = true;
             e.printStackTrace();
         }
+        
+        if (err) System.err.println(errMsg);
 
         XMLObject xo = new XMLObject();
         xo.setIntType(Constants.SCORE_TYPE);
