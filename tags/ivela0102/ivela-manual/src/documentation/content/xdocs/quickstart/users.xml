@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+  <title>Ivela - Internet Voice E-Learning Application</title>
+  </header>
+  <body>
+    <p>Os usuários do Ivela têm acesso a diferentes recursos do Ivela de acordo com a sua categoria (administrador, professor, tutor). </p>
+    
+    <section id="admin">
+      <title>Administrador</title>
+      <p>
+       Um usuário administrador tem acesso total para adicionar, alterar ou editar informações de cursos, perfis de pessoas, turmas e fóruns. </p>
+     
+    </section>
+
+    <section id="coord">
+      <title>Coordenador</title>
+      <p>
+       Um coordenador é responsável por administrar andamento de cursos, gerenciar professores e turmas.  
+	  </p>
+	
+    </section>
+    <section id="prof">
+      <title>Professor</title>
+      <p>
+       Um professor é responsável pela criação e manutenção de cursos, gerencia turmas, aprova novos alunos em cursos, e também gerencia tutores.  
+	  </p>
+	
+    </section>
+    <section id="tutor">
+      <title>Tutor</title>
+     <p>
+      Um tutor gerencia turmas e também pode participar da criação e manutenção de cursos. 
+	</p>
+	
+    </section>	
+    <section id="student">
+      <title>Estudante</title>
+      <p>
+       Um usuário com permissão de estudante pode participar de cursos cadastrados no Ivela. Para auxiliar o estudante em seu aprendizado, o Ivela disponibiliza para os estudantes:
+       <ul>
+       		<li>Forum - um espaço para o estudante tirar dúvidas e partilhar conhecimento com outros estudantes, promovendo integração entre todos os participantes do curso (professores e alunos).</li>
+       		<li>Agenda - uma ferramente para auxiliar o estudante a gerenciar tarefas, exames, etc.</li>
+       		<li>Mensagens -  serviço de correio eletrônico dentro do Ivela.</li>
+       </ul>
+	  </p>
+	</section>
+  </body>
+</document>

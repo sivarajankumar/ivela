@@ -1,0 +1,212 @@
+#vertical_container{
+    width: 310px;
+    padding: 10px 10px 20px 10px;
+    float:left;
+    height: auto;
+    color: #ff6600;
+}
+
+#vertical_container_course{
+    width: 190px;
+    padding: 0px;
+    float:left;
+    height: auto;
+}
+
+#vertical_container_grade{
+    width: 250px;
+    padding: 0px;
+    float:left;
+    height: auto;
+}
+
+#vertical_container2{
+    width: 529px;
+    margin-left: 10px;
+    /*margin-top: 15px;*/
+    float:left;
+    height: auto;
+    padding: 9px;
+    color:blue;
+    
+}
+
+.accordion_toggle_course {
+    display:block;
+    color:#033d7d;
+    background:url(./images/level-more.gif) #e7e7e7 no-repeat 160px center;   
+    padding: 0px 5px 0 25px;  
+    cursor: pointer;
+}
+
+.accordion_toggle_grade {
+    display:block;
+    color:#033d7d; background:url(./images/level-more.gif) #ececec no-repeat 190px 6px;    
+    cursor: pointer;
+}
+
+.accordion_toggle2 {
+    width: 486px; height: 30px;
+    padding: 0px 5px 0 25px; 
+    color: silver; 
+    clear:both;
+    border: 1px solid #efefef;
+    border-left:none;
+    border-right:none;
+    line-height: 30px;
+    background: url(./images/arrow-right.gif) no-repeat 8px center;
+    color:#033D7D;
+    cursor: pointer;
+    font-size:17px;
+    margin: 0 0 5px 0;
+    
+}
+
+.accordion_toggle {
+    background: transparent url(./images/arrow-right.gif) no-repeat 8px center; 
+    border: 1px solid #efefef;
+    border-left:none;
+    border-right:none;
+    display: block;
+    height: 30px;
+    width: 278px;
+    padding: 0 5px 0 25px;
+    line-height: 30px;
+    color: #033D7D; 
+    text-decoration: none;
+    outline: none;
+    margin: 0 0 5px 0;
+    cursor: pointer;
+    font-size:17px;
+}
+.accordin_toggle:hover{ color:#033D7D; cursor:pointer; }
+
+.accordion_toggle_active_course {
+    background: url(./images/level-less.gif) #999 no-repeat 160px center ;    
+    cursor: pointer;
+    color: #FFF;
+    font-weight:bold;
+    padding: 0 5px 0 25px;
+    
+}
+
+.accordion_toggle_active_grade {
+    color:#ff6600; border: 1px solid #e8e8e8; background:url(../images/level-less.gif) no-repeat 190px 6px;    
+    cursor: pointer;
+}
+
+.accordion_toggle_active2 {
+    background: url(./images/arrow-bottom.gif) #999 no-repeat 8px center;
+    font-size:17px;
+    cursor: pointer;
+    color: #fff;
+    padding: 0 5px 0 25px;
+    border:1px solid #999;
+    
+}
+
+.accordion_toggle_active {
+    cursor: pointer;
+    background: url(./images/arrow-bottom.gif) #999 no-repeat 8px center;
+    padding: 0 5px 0px 25px;
+    font-size:17px;
+    border:1px solid #999;
+    color: #fff;
+    
+}
+
+.accordion_content {
+    background:#f7f7f7;
+    margin-bottom: 10px;
+    padding: 0 3px 15px 5px;
+    color: #444444;
+    overflow: hidden;
+    border-top: none;
+    border-bottom:none;
+    position:relative;
+    
+}
+
+.accordion_content_course{
+    overflow: hidden;
+}
+
+.accordion_content2 {
+    padding: 10px; border: none; /*margin-bottom: 20px;*/
+    background-color: #ffffff;
+    width: 390px;
+    position: relative;
+    padding: 0 10px 10px 10px;
+    color: olive;
+    overflow: hidden;
+    border-top: none;
+}
+
+
+.accordion_content_discipline {
+    width: 530px;
+    margin-left: 15px;
+    /*margin-top: 15px;*/
+    float:left;
+    padding: 10px;
+    color:#ff6600;
+    
+}
+.accordion_content2 .units {width: 390px; height: auto; float:left; list-style-type: none;}
+.accordion_content2 .units li { padding: 5px}
+.accordion_content2 .units li a {font: 12px Arial, Helvetica, sans-serif; padding: 5px}
+.accordion_content2 .units li a:hover {color:#ff6600;}
+
+.accordion_content .partner {width: 100px; height: 75px; position: absolute; top: 10px; right: 10px;}
+.accordion_content .partner p {font: 11px Arial, Helvetica, sans-serif; color: #999; height: 15px; padding: 0;}
+.accordion_content dt{ font: bold 12px Arial, Helvetica, sans-serif; color:#ff6600; margin-top: 10px;}
+.accordion_content dd{font: 11px Arial, Helvetica, sans-serif; color:#000;}
+
+.accordion_content .progress { clear:both; width: 150px;}
+.accordion_content .progress .box-bar {display: block; float:left; width: 67px; height: 11px; margin-right: 10px; padding:0px; background: url(./images/progress-bar/bg-bar.gif) no-repeat top left;}
+.accordion_content .progress .box-bar .bar{display: block; width:100%; height: 11px; background: url(./images/progress-bar/bar.gif) no-repeat;}
+.accordion_content .progress .label {display: block; float:left; font-size: 11px; font-weight:bold; padding: 0; color:#444444;}
+
+.accordion_content h2 {
+    margin: 15px 0 5px 10px;
+    color: #0099FF;
+}
+
+.accordion_content p {
+    line-height: 150%;
+    padding: 5px 10px 15px 10px;
+}
+
+.pendent_toggle {
+    border: 1px solid #efefef;
+    display: block;
+    height: 30px;
+    width: 290px;
+    padding: 0 5px 0 25px;
+    line-height: 30px;
+    text-decoration: none;
+    outline: none;
+    margin: 0 0 5px 0;
+    cursor: pointer;
+    font-size:17px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+.pendent_content {
+    background:#f7f7f7;
+    margin-bottom: 10px;
+    padding: 0 3px 15px 5px;
+    color: #444444;
+    overflow: hidden;
+    position:relative;
+    width: 300px; padding:10px; margin-bottom: 15px;
+}
+
+.pendent_content ul{
+    padding-left: 20px; font: bold 12px  Arial, Helvetica, sans-serif;
+ }
+
+ .pendent_content ul li{
+    line-height: 22px;
+ }
