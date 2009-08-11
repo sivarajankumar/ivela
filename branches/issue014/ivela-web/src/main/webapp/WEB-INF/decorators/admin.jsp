@@ -41,7 +41,6 @@
         <script type="text/javascript" src="../js/prototype/prototype.js"></script>
         <script type="text/javascript" src="../js/scriptaculous/scriptaculous.js"></script>
         <script type="text/javascript" src="../js/scriptaculous/effects.js"></script>
-        <script type="text/javascript" src="../js/resourceBundle.js"></script>
         <script type="text/javascript" src="../js/admin/lightwindow.js"></script>
         <script type="text/javascript" src="../js/accordion.js"></script>
         <script type="text/javascript" src="../js/admin/ajax.js"></script>
