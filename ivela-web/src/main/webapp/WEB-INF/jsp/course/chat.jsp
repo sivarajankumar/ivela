@@ -19,13 +19,11 @@
         
 <center>
     <h2><s:text name="chat.name"/></h2>     
-    <% String serverAddr = request.getRemoteHost(); %>    
-<% String serverAddr = request.getRemoteHost(); %>
+    <% String serverAddr = request.getLocalAddr(); %>       
 
 <applet code="org.jdamico.ircivelaclient.view.HandleApplet"
-	archive="http://"+<%=serverAddr %>+"/public_content/chatlib/ivela_chat.jar, http://"+<%=serverAddr %>+"/public_content/chatlib/jerklib.jar"
-	
-	width=920 height=505>
+    archive="applet/ivela_chat.jar, applet/jerklib.jar""    
+    width="920" height="505">
 
 <param name="nick" value='<s:property value="nick" />' >
 
@@ -35,9 +33,7 @@
 
 <param name="bgcolor" value="FFFFFF">
 
-<param name="server" value="<%=serverAddr %>">
-
-
+<param name="server" value="<%=serverAddr%>">
 
 </applet> 
 </center>
