@@ -85,8 +85,8 @@
             </div>
             <!-- end header -->
             <div class="tools">                
-                <span class="btn-tools" onclick="Effect.toggle('hidden', 'slide')" title="<s:text name="main.tools" />"><img src="../images/icon/icon-tools.gif" /><s:text name="main.tools"/><img src="../images/icon/icon-tools-arrow.gif" /></span>
-                <span class="btn-faq" onclick="document.location = 'faq!list.action';"><img src="../images/icon/icon-faq-home.gif" /></span>
+                <span class="btn-tools" onclick="Effect.toggle('hidden', 'slide')" title="<s:text name="main.tools" />"><img src="../images/icon/icon-tools.gif" /><s:text name="main.tools"/><img src="../images/icon/icon-tools-arrow.gif" /></span>                
+                <span class="btn-manual" onclick="document.location = '/ivela-manual'"><img src="../images/icon/icon-faq.gif" title="<s:text name='main.manual'/>" /></span>                
                 
                 <div class="container-tools" id="hidden" style="display:none;">
                     <div class="content-tools">                        
