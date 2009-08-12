@@ -1,8 +1,33 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: MessageAction.java                                                                  #
+# Document: Action of the message system                                                    # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - Leonardo Oliveira Moreira         - XXXXXX - Initial Version                #
+# 11-AUG-2009 - otofuji (Instituto Eldorado)      - 000010 - Topic Creation                 #
+#############################################################################################
+*/
 package br.ufc.ivela.web.action;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.util.StringUtils;
 
 import br.ufc.ivela.commons.Constants;
 import br.ufc.ivela.commons.dao.Page;
@@ -13,17 +38,7 @@ import br.ufc.ivela.ejb.interfaces.ForumRemote;
 import br.ufc.ivela.ejb.interfaces.GradeRemote;
 import br.ufc.ivela.ejb.interfaces.PostRemote;
 import br.ufc.ivela.ejb.interfaces.TopicRemote;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import org.springframework.util.StringUtils;
 
-/**
- *
- * @author Leonardo Oliveira Moreira
- * 
- * 
- */
 public class TopicAction extends GenericAction {
 
     private ForumRemote forumRemote;
@@ -36,9 +51,10 @@ public class TopicAction extends GenericAction {
     private List<TopicLine> topicLines;
     private int pageCount;
     private int page;
-    private int pageSize = 1;
+    private int pageSize = 5;
     private int count;
     private String topicTitle;
+    private InputStream inputStream;
 
     public GradeRemote getGradeRemote() {
         return gradeRemote;
@@ -53,19 +69,27 @@ public class TopicAction extends GenericAction {
      * if hasn't error, add a new topic
      * if has return list by forum
      */
-    public String add() {
-        performValidateAdd();
+    public String add() {        
+        String hasErrors = performValidateAdd();
+        StringBuilder json = new StringBuilder();
         forum = topic.getForum();
         topic.setCreatedBy(getAuthenticatedUser());
         topic.setCreatedAt(new Date());
-        if (!hasActionErrors()) {
+                
+        String bResult = hasErrors;
+        if (hasErrors == null) {
             Long result = topicRemote.add(topic);
             if (result != null) {
-                return listByForum();
+                bResult = "true";
             }
         }
-        addActionMessage("Unable to Add");
-        return listByForum();
+                
+        json.append("{");
+        json.append("\"result\":\"" + bResult + "\"");
+        json.append("}");
+        
+        setInputStream(new ByteArrayInputStream(json.toString().getBytes()));
+        return "json";
     }
 
     /**
@@ -92,14 +116,20 @@ public class TopicAction extends GenericAction {
      */
     public String remove() {
         performValidateRemove();
+        StringBuilder json = new StringBuilder();
+        boolean bResult = false;
         if (!hasActionErrors()) {
             boolean result = topicRemote.remove(topic.getId());
             if (result) {
-                return listByForum();
+                bResult = true;
             }
-        }
-        addActionMessage("Unable to remove");
-        return listByForum();
+        }        
+        json.append("{");
+        json.append("\"result\":\"" + bResult + "\"");
+        json.append("}");
+        
+        setInputStream(new ByteArrayInputStream(json.toString().getBytes()));
+        return "json";
     }
 
     /**
@@ -150,21 +180,42 @@ public class TopicAction extends GenericAction {
             }
             topicLines.add(line);
         }
+        
         return "list";
     }
 
+    public void setInputStream(InputStream inputStream) {
+        this.inputStream = inputStream;
+    }
+    
+    public InputStream getInputStream() {
+        return inputStream;
+    }
+    
     /**
      * Perform a validation in the add method
      */
-    private void performValidateAdd() {
+    private String performValidateAdd() {
         if (topic == null) {
-            addActionError(getText("topic.input.validation.required"));
+            return getText("topic.input.validation.required");
         }
         // verifies if the title is empty
         if (!StringUtils.hasText(topic.getTitle())) {
-            addActionError(getText("topic.input.validation.title"));
+            return getText("topic.input.validation.title");
         }
-
+        if (topic.getForum() != null) {
+            Topic lastTopic = topicRemote.getLastTopicByForum(topic.getForum()
+                    .getId());
+            if ((lastTopic != null)
+                    && (lastTopic.getCreatedBy().getId()
+                            .equals(getAuthenticatedUser().getId()))
+                    && (lastTopic.getTitle().equalsIgnoreCase(topic.getTitle()))
+                    && (lastTopic.getDescription().equalsIgnoreCase(topic
+                            .getDescription()))) {
+                return getText("forum.error.topic.duplicated");
+            }
+        }
+        return null;
     }
 
     /**
@@ -176,7 +227,17 @@ public class TopicAction extends GenericAction {
             addActionError(getText("topic.input.validation.requiredId"));
         } else {
             // verifies if this id is valid
-            if (topicRemote.get(topic.getId()) == null) {
+            if ((topic = topicRemote.get(topic.getId())) == null) {
+                addActionError(getText("topic.input.validation.invalidId"));
+            }
+            
+            if (getAuthenticatedUser().getAuthentication().getName()
+                    .equalsIgnoreCase("ROLE_ADMIN")) {
+                return;
+            }
+            
+            if (!topic.getCreatedBy().getId().equals(
+                            getAuthenticatedUser().getId())) {
                 addActionError(getText("topic.input.validation.invalidId"));
             }
         }
