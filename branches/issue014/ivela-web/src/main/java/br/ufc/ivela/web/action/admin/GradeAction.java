@@ -17,15 +17,42 @@
 # Date        - Author(Company)                    - Issue# - Summary                       #
 # XX-XXX-XXX -  nelson                             - XXXXXX - Initial Version               #
 # 26-JUN-2009 - otofuji (Instituto Eldorado)       - 000010 - General i18n Fixes            #
-#############################################################################################    
+# 13-AUG-2009 - fantato (Instituto Eldorado)       - 000014 - fixing multiple students enrollment #
+ #############################################################################################    
  */
 package br.ufc.ivela.web.action.admin;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.StrutsStatics;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
 
 import br.ufc.ivela.commons.Constants;
 import br.ufc.ivela.commons.mail.MailSender;
 import br.ufc.ivela.commons.model.Authentication;
-import br.ufc.ivela.web.action.*;
 import br.ufc.ivela.commons.model.Course;
+import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.Enrollment;
 import br.ufc.ivela.commons.model.Forum;
 import br.ufc.ivela.commons.model.Grade;
@@ -44,32 +71,13 @@ import br.ufc.ivela.ejb.interfaces.ProfileRemote;
 import br.ufc.ivela.ejb.interfaces.RepositoryRemote;
 import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 import br.ufc.ivela.ejb.interfaces.TopicRemote;
+import br.ufc.ivela.web.action.GenericAction;
+
 import com.opensymphony.xwork2.ActionContext;
+import com.sun.enterprise.security.jauth.callback.PrivateKeyCallback.Request;
+import com.sun.mail.smtp.SMTPAddressFailedException;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.StrutsStatics;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 
 public class GradeAction extends GenericAction {
 
@@ -114,6 +122,8 @@ public class GradeAction extends GenericAction {
     /* Forum */
     private ForumRemote forumRemote;
     private TopicRemote topicRemote;
+    private boolean userOk;
+    private boolean ignoredMail;
 
     public ForumRemote getForumRemote() {
         return forumRemote;
@@ -183,34 +193,79 @@ public class GradeAction extends GenericAction {
         try {
             String email = "";
             boolean enroll;
-            studentsEnrollment = new ArrayList<String>();
+            studentsEnrollment = new ArrayList<String>();     
             SAXBuilder sb = new SAXBuilder();
             Document d = sb.build(fileStudents);
             Element mural = d.getRootElement();
             List elements = mural.getChildren();
-            Iterator i = elements.iterator();
+            Iterator i = elements.iterator();      
             while (i.hasNext()) {
-                Element element = (Element) i.next();
+                userOk = false;
+                ignoredMail = false;
+                enroll = false;
+            	Element element = (Element) i.next();
                 this.addProfile(element.getChildText("firstName"), element.getChildText("lastName"));
                 email = element.getChildText("email");
 
-                this.addSystemUser(email);
-                enroll = this.enroll();
-
-                studentsEnrollment.add(profile.getFirstName() + " " + profile.getLastName());
-                studentsEnrollment.add(Boolean.toString(enroll));
+                // This code is a trick to ignore exceptions from mail server
+                try {
+                	this.addSystemUser(email);
+                	if (userOk) { 
+                		enroll = this.enroll();
+                	}                	
+                } catch (Throwable ex) {
+                	Logger.getLogger(GradeAction.class.getName()).log(Level.SEVERE, null, ex);
+                	enroll = false;
+                }
+                enroll = (enroll & userOk);
+                studentsEnrollment.add(element.getChildText("firstName") + "#" + element.getChildText("lastName")+"#"+Boolean.toString(enroll));
             }
 
+           getSession().put("studentsEnroll", studentsEnrollment);
 
         } catch (JDOMException ex) {
             Logger.getLogger(GradeAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(GradeAction.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+      
         return "input";
     }
 
+    /**
+     * Retrieves a info about the professores
+     * @return a string in the json format
+     */
+    public String getEnrollResults() {
+    	StringBuilder json = new StringBuilder();
+    	List<String> studentsEnroll = (List<String>)getSession().get("studentsEnroll");
+    	if (studentsEnroll != null) {
+	        json.append("{");
+	            json.append("\"students\":[");
+	                    for (String d : studentsEnroll) {
+	                    json.append("{");        
+	                    	String[] students = d.split("#");
+	                        json.append("\"firstName\":\"" + students[0] + "\",");
+	                        json.append("\"lastName\":\"" + students[1] + "\",");
+	                        json.append("\"status\":\"" + students[2] + "\"");
+	                    json.append("},");
+	                    }
+	                    if (json.substring(json.length() - 1).equals(","))
+	                        json = new StringBuilder(json.substring(0, json.length() - 1));                   
+	                json.append("],");                 
+	        json.append("\"result\": \"true\"");
+    	} else {
+    		json.append("\"result\": \"false\"");
+    	}
+    	json.append("}");
+        setInputStream(new ByteArrayInputStream(json.toString().getBytes()));
+        return "json";
+    }
+    
+    
+    
+    
+    
     public boolean enroll() {
         logger.log("enroll");
         List<Grade> grades = gradeRemote.getGradesByStudent(this.systemUser.getId());
@@ -268,20 +323,26 @@ public class GradeAction extends GenericAction {
 
 
         this.systemUser.setAuthentication(new Authentication(Constants.ROLE_USER));
-        Long id = systemUserRemote.add(this.systemUser);
-        this.systemUser = systemUserRemote.get(id);
+        userOk = false;
+        try { 
+        	Long id = systemUserRemote.add(this.systemUser);
+        	this.systemUser = systemUserRemote.get(id);
+        
+        	try {
+        		MailSender.send(new String[]{this.systemUser.getEmail()}, "[ivela] Request password", "Your username is " + this.systemUser.getUsername() + "<br>Your password is: " + password);
+        	} catch (Throwable ex) {
+        		ignoredMail = true;
+        	}
+        	
+        	HttpServletRequest request = ServletActionContext.getRequest();
 
+        	boolean result = calendarRemote.addInfo(request.getServerName(), String.valueOf(request.getServerPort()), systemUser.getUsername());
 
-        MailSender.send(new String[]{this.systemUser.getEmail()}, "[ivela] Request password", "Your username is " + this.systemUser.getUsername() + "<br>Your password is: " + password);
-
-        //--- create the user in webical application
-        HttpServletRequest request = ServletActionContext.getRequest();
-        //calendarRemote.addInfo(request.getServerName(), String.valueOf(request.getServerPort()), systemUser.getUsername());
-        //System.out.println("#### usuario criado");
-        boolean result = calendarRemote.addInfo("200.17.41.215", String.valueOf(8080), this.systemUser.getUsername());
-        //---
-        addHistory("history.createuser.title", "history.createuser.description", this.systemUser, this.systemUser.getUsername());
-
+        	addHistory("history.createuser.title", "history.createuser.description", this.systemUser, this.systemUser.getUsername());
+        	userOk = true;
+        } catch (Throwable ex){
+        	Logger.getLogger(GradeAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void addProfile(String firstName, String lastName) {
