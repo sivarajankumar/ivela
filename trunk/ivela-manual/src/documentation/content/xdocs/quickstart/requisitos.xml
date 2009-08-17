@@ -49,7 +49,7 @@
       </p>	
 	<p>
 	Caso o Java Runtime Environment versão 1.6 não seja detectado em seu computador, clique no botão "Atenção" (ver imagem abaixo) e você será redirecionado para o site de instalação da última versão do Java Runtime Environment. Após a instalação, você estará pronto para acessar todos os recursos do Ivela.</p>
-	<img src = "./ivela_atencao.jpg" align="center"/>
+	<center><img src = "./ivela_atencao.jpg" width="457px" height="137px"/></center>
 	</section>
 	
    </body>
