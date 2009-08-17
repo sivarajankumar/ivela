@@ -74,7 +74,6 @@ import br.ufc.ivela.ejb.interfaces.TopicRemote;
 import br.ufc.ivela.web.action.GenericAction;
 
 import com.opensymphony.xwork2.ActionContext;
-import com.sun.enterprise.security.jauth.callback.PrivateKeyCallback.Request;
 import com.sun.mail.smtp.SMTPAddressFailedException;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;

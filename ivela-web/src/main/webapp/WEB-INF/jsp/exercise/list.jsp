@@ -71,7 +71,17 @@
                     onSuccess: function(transport) {
                         json = transport.responseText.evalJSON(true);
                     },
-                    onFailure: function() { alert('Message: Something went wrong...') }
+                    onFailure: function() { alert('Message: Something went wrong...') },
+                    onException:function(request, exception) {         
+                        // Temporary Solution that checks for a bad formed and see if
+                        // it is the login page, so redirects.                 
+                        var message = exception.message;
+                        if(message.match(/Badly formed JSON string/)!= null) {
+                            if (message.match(/login-container/) != null) {
+                                document.location = "./home.action";                                
+                            }
+                        }
+                   }
                 });
                 return json;
             }
