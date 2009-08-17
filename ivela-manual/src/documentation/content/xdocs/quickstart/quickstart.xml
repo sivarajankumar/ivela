@@ -22,16 +22,16 @@
   </header>
   <body>
     <section id="register">
-      <title>Cadastro</title>
+      <title>Registro</title>
       <ol>
         <li>Para ter acesso aos recursos do Ivela, clique no link <a href="http://200.19.176.66:8080/ivela-web/systemUser!input.action" target="_blank">Cadastre-se</a> e preencha o formulário conforme instruções da página.</li>
     	<li>Após a conclusão do cadastro o usuário já tem permissão para acessar o Ivela. <br>(Obs.: Usuário novos são inseridos no sistema com nível de permissão de estudante. Professores e tutores devem entrar em contato com administração para que o acesso seja alterado).</br></li>	
 	  </ol>
     </section>
     <section>
-    	<title>Participação em Cursos</title>
+    	<title>Inscrição em cursos do Ivela</title>
     	<p>
-    	Para acompanhar um curso no Ivela, siga os seguintes passos:
+    	Para se inscrever num curso do Ivela, siga os seguintes passos:
     		<ol>
     			<li>Entre no sistema.</li>
     			<li>Clique na aba "Cursos Disponíveis".</li>
@@ -40,6 +40,7 @@
     			<li>Se a participação da turma escolhida for livre, você terá acesso automaticamente ao curso escolhido. Caso o curso necessite da aprovação da administração para novos alunos, aguarde um e-mail com a confirmação de acesso.</li>
     		</ol>
     	</p>
-    </section>
-    </body>
+   </section>
+ 
+   </body>
 </document>
