@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE qalab [<!ELEMENT qalab (summary,file*)>
+<!ATTLIST qalab version CDATA #REQUIRED>
+<!ELEMENT summary (summaryresult*)>
+<!ELEMENT file (result+)>
+<!ATTLIST file id ID #REQUIRED>
+<!ATTLIST file path CDATA #REQUIRED>
+<!ELEMENT result EMPTY>
+<!ATTLIST result date CDATA #REQUIRED>
+<!ATTLIST result statvalue CDATA #REQUIRED>
+<!ATTLIST result type CDATA #REQUIRED>
+<!ELEMENT summaryresult EMPTY>
+<!ATTLIST summaryresult date CDATA #REQUIRED>
+<!ATTLIST summaryresult statvalue CDATA #REQUIRED>
+<!ATTLIST summaryresult filecount CDATA #REQUIRED>
+<!ATTLIST summaryresult type CDATA #REQUIRED>
+]>
+<qalab version="1.1">
+    <summary>
+        <summaryresult date="2008-06-17" filecount="4" statvalue="180" type="checkstyle"/>
+        <summaryresult date="2008-06-17" filecount="4" statvalue="12" type="pmd"/>
+    </summary>
+    <file id="br_ufc_ivela_services_TestResource.java" path="br/ufc/ivela/services/TestResource.java">
+        <result date="2008-06-17" statvalue="26" type="checkstyle"/>
+        <result date="2008-06-17" statvalue="2" type="pmd"/>
+    </file>
+    <file id="br_ufc_ivela_services_PostResource.java" path="br/ufc/ivela/services/PostResource.java">
+        <result date="2008-06-17" statvalue="42" type="checkstyle"/>
+        <result date="2008-06-17" statvalue="2" type="pmd"/>
+    </file>
+    <file id="br_ufc_ivela_services_ForumResource.java" path="br/ufc/ivela/services/ForumResource.java">
+        <result date="2008-06-17" statvalue="40" type="checkstyle"/>
+        <result date="2008-06-17" statvalue="5" type="pmd"/>
+    </file>
+    <file id="br_ufc_ivela_services_RepositoryResource.java" path="br/ufc/ivela/services/RepositoryResource.java">
+        <result date="2008-06-17" statvalue="72" type="checkstyle"/>
+        <result date="2008-06-17" statvalue="3" type="pmd"/>
+    </file>
+</qalab>
