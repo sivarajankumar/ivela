@@ -86,7 +86,7 @@
 <div style="width:620px;position:relative;left:107px;top:-56px">
             <div class="tools">
                 <span class="btn-tools" onclick="Effect.toggle('hidden', 'slide')" title="<s:text name="main.tools" />"><!--img src="images/icon/icon-tools.gif" /--><!--s:text name="main.tools"/--><!--img src="images/icon/icon-tools-arrow.gif" /--></span>
-
+                <span class="btn-manual" onclick="document.location = '/ivela-manual'"><img src="images/icon/icon-faq.gif" title="<s:text name='main.manual'/>" /></span>
             </div>
             <!-- end tools-->
 

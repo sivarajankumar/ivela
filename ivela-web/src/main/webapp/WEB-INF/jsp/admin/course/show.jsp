@@ -48,7 +48,6 @@
     <script type="text/javascript" src="../js/admin/exam.js"></script>
     <script type="text/javascript" src="../js/admin/question.js"></script>
     <script type="text/javascript" src="../js/admin/dictionary.js"></script>
-    <script type="text/javascript" src="../js/admin/webtoolkit.aim.js"></script>
     <script type="text/javascript" src="../js/lightbox.js"></script>
 
     <script type="text/javascript">
