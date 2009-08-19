@@ -49,6 +49,9 @@
     <decorator name="admin" page="admin.jsp">
         <pattern>/admin/*</pattern>
     </decorator>
+    <decorator name="course" page="course.jsp">
+        <pattern>/discipline!showContent.action*</pattern>
+    </decorator>
     <decorator name="main" page="main.jsp">
         <pattern>/*</pattern>
     </decorator>
