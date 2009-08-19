@@ -80,8 +80,8 @@
    <p>&nbsp;</p>
    <table width="750" border="0" align="center">
      <tr>
-       <td width="178" valign="top"><a href="http://sourceforge.net/projects/ivela/" target="_blank"><img src="./images/ivela-logo-full.gif" alt="IVELA" width="178" height="118" border="0"></a></td>
-       <td width="79%" valign="top"><h2><a href="http://sourceforge.net/projects/ivela/" target="_blank"><s:text name="about.ivela.name" /></a></h2>
+       <td width="178" valign="top"><a href="http://code.google.com/p/ivela/" target="_blank"><img src="./images/ivela-logo-full.gif" alt="IVELA" width="178" height="118" border="0"></a></td>
+       <td width="79%" valign="top"><h2><a href="http://code.google.com/p/ivela/" target="_blank"><s:text name="about.ivela.name" /></a></h2>
            <p><s:text name="about.ivela" /><br>
          </p></td>
      </tr>
