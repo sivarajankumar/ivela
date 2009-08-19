@@ -32,7 +32,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="RenderServlet?file=/globals/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="css/base.css" rel="stylesheet" type="text/css" />
         <link href="css/bulletin.css" rel="stylesheet" type="text/css" />
         <title><s:text name="bulletin.pageTitle" /></title>
         <cal:head/>
