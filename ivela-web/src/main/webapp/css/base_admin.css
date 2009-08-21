@@ -20,7 +20,7 @@ a:hover{color:#ff6600;}
 .language img{margin-left:10px;border:2px solid #fff;}
 .language img:hover{border-color:#ff9c00;}
 .tools{width:auto;height:auto;margin:5px;}
-.tools .btn-faq{display:block;float:right;cursor:pointer;position:relative;right:5px;top:10px;}
+.tools .btn-manual{display:block;float:right;cursor:pointer;position:relative;left:5px; top:13px;}
 .tools .btn-tools{display:block;float:right;text-indent:-9999px;overflow:hidden;margin-top:5px;font:bold 11px Arial, Helvetica, sans-serif;height:25px;width:103px;padding:0 15px 0 0;text-decoration:none;background:url(../images/icon/icon-tools2.gif) no-repeat top right;position:relative;left:.4em;}
 /*.tools .btn-tools img { border:none; vertical-align: middle;}*/.tools .btn-tools:hover{background:url(../images/icon/icon-tools3.gif) no-repeat top right;cursor:pointer;}
 .tools .container-tools{width:938px;height:auto;background:#fff2c6;clear:both;padding:7px 9px 7px 7px;font-size:16px;}
