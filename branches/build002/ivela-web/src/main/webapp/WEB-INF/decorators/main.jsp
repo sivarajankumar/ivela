@@ -39,7 +39,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><s:text name="front.pageTitle" /></title>
         <!-- Colocar a logo para aparecer no navegador <link rel="icon" href="../logotipo/logo.jpg" type="image/gif" /> -->
-        <link href="RenderServlet?file=/globals/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="css/base.css" rel="stylesheet" type="text/css" />
         <link href="css/lightwindow.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="js/util/util.js"></script>
         <script type="text/javascript" src="js/prototype/prototype.js"></script>
@@ -162,7 +162,7 @@
                     <li><a href="history!show.action" title="<s:text name="front.history.title" />"><s:text name="front.history" /></a></li>
                     <!--li><a href="note!show.action" title="<s:text name="front.calendar" />" class="last"><s:text name="front.calendar" /></a></li-->
                 </ul>
-                <img class="logo" src="RenderServlet?file=/globals/images/logo-footer.png" alt="<s:property value="front.logo.footer" />" />
+                <img class="logo" src="images/logo-footer.png" alt="<s:property value="front.logo.footer" />" />
             </div>
             <br class="clear" />
         </div>
