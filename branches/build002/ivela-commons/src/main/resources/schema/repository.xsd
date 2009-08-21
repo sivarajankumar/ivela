@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.ivela.com/schema/repository"
+            xmlns:tns="http://www.ivela.com/schema/repository"
+            elementFormDefault="qualified">
+    <xsd:complexType name="directory">
+        <xsd:sequence>
+            <xsd:element name="id" type="xsd:string"/>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="created_by" type="xsd:string"/>
+            <xsd:element name="created_at" type="xsd:string"/>
+            <xsd:element name="directory" type="tns:directory" minOccurs="0" nillable="true" maxOccurs="unbounded"/>
+            <xsd:element name="file" type="tns:file" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>        
+    </xsd:complexType>
+    <xsd:complexType name="file">
+        <xsd:all>
+            <xsd:element name="id" type="xsd:string"/>
+            <xsd:element name="title" type="xsd:string"/>
+            <xsd:element name="name" type="xsd:string"/>
+            <xsd:element name="mimetype" type="xsd:string"/>
+        </xsd:all>        
+    </xsd:complexType>
+    <xsd:element name="repository">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="id" type="xsd:string"/>
+                <xsd:element name="next_value" type="xsd:string"/>
+                <xsd:element name="created_at" type="xsd:string"/>
+                <xsd:element name="directory" type="tns:directory" minOccurs="0" nillable="true" maxOccurs="unbounded"/>
+            </xsd:sequence>            
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
