@@ -74,8 +74,9 @@
                 <h1><s:text name="discipline.show.course" /><s:property value="discipline.course.name" /></h1>
                 <h2><s:text name="discipline.show.discipline" /><s:property value="discipline.name" /></h2>                                                            
                                 
-                <div class="profile-menu">       
-                    <a href="home.action"> <s:text name="front.back" /> </a>                                                        
+                <div class="profile-menu">
+                    <a href="home.action"> <img src="./images/arrow-back.png"  />   
+                    <span> <s:text name="front.back" /> </span></a>                                                        
                 </div>                
             </div>
             <br class="clear" />            
