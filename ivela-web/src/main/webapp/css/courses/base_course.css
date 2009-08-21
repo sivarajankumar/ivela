@@ -17,8 +17,9 @@ html,body{height:95%;width:100%;background:url(../../images/bg_standard2.jpg) #f
 .profile-menu li{float:left;width:36px;position:relative;}
 .profile-menu li li{float:left;width:auto;position:relative;right:35px;border:1px solid #FBD365;}
 /*.profile-menu a, .profile-menu a:visited {display:block;font-size:12px;text-decoration:none; color:#AAA; width:125px; height:30px; background:transparent; padding-left:10px; line-height:29px; font-weight:bold;}*/
-.profile-menu a,.profile-menu a:visited{display:inline;font-size:12px;text-decoration:none;color:#AAA;width:auto;height:20px;background:transparent;padding-left:10px;line-height:29px;font-weight:bold;}
-.profile-menu a.img{height:auto;width:36px;}
+.profile-menu a,.profile-menu a:visited{display:inline;font-size:14px;text-decoration:none;color:#AAA;width:auto;height:20px;background:transparent;padding-left:10px;line-height:29px;font-weight:bold;}
+.profile-menu a img{height:40px;width:40px; border: 0;}
+.profile-menu a span{position:relative; bottom:12px; left: 3px;}
 .profile-menu ul ul a.drop,.profile-menu ul ul a.drop:visited{background:#000 no-repeat 100px center;}
 .profile-menu ul ul a.drop:hover{background:#000;}
 .profile-menu ul ul :hover > a.drop{background:#000;}
