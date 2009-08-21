@@ -74,6 +74,7 @@ html,body{height:95%;width:100%;background:url(../../images/bg_standard2.jpg) #f
 #course-content .lesson-content .exame-box-disable span{color:#fff;background:#eaeaea;padding:0;font-size:25px;}
 #course-content .lesson-content .exame-box-disable p{font-size:12px;color:#999;}
 #course-content .lesson-content .exame-box-disable h3{color:#a7a7a7;}
+#unitContent{witdh: auto; overflow-x: hidden;}
 .level-1 .progress{clear:both;}
 .level-1 .progress .box-bar{display:block;float:left;width:67px;height:11px;margin-right:10px;padding:1px;background:url(../../images/progress-bar/bg-bar.gif) no-repeat top left;}
 .level-1 .progress .box-bar .bar{display:block;width:100%;height:11px;background:url(../../images/progress-bar/bar.gif) no-repeat;}
