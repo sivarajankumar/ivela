@@ -21,6 +21,7 @@
 # 30-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000010 - JS no IE/FF opening repository #
 # 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
 # 23-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Unicode (UTF-8) support        #
+# 18-AUG-2009 - Otofuji (Instituto Eldorado)      - 000015 - Initial Layout Change          #
 ############################################################################################# 
 --%>
 
@@ -41,24 +42,22 @@
         
     %>
 
-<head>
-    <link href="RenderServlet?file=/globals/css/internas<%= ((systemUser2.getUsername().equals("layout")) ? "_v2" : "") %>.css" rel="stylesheet" type="text/css" />
-    <link href="RenderServlet?file=/globals/css/accordion<%= ((systemUser2.getUsername().equals("layout")) ? "_v2" : "") %>.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="js/ead/tools.js"></script>
+<head>        
+    <link href="css/courses/accordion.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/ead/tools.js"></script>    
     <script type="text/javascript" src="js/accordion.js"></script>
-    <script type="text/javascript" src="js/ead/ajax.js"></script>
+    <script type="text/javascript" src="js/util/ajax.js"></script>
     <script type="text/javascript" src="js/util/util.js"></script>
  
     <script type="text/javascript">
-        var unitId = '<s:property value="unit.id" />';
-        
+        var unitId = '<s:property value="unit.id" />';        
         var urlUnitContentId = '<%= ((request.getParameter("unitContentId") != null) ? request.getParameter("unitContentId") : "")%>';
         var urlGradeId = '<%= ((request.getParameter("gradeId") != null) ? request.getParameter("gradeId") : "")%>';
 
         Event.observe(window, 'load', loadAccordions, false);
         Event.observe(window, 'load', viewUnitContent, false);
         
-        function loadAccordions() {		
+        function loadAccordions() {     
             var bottomAccordion = new accordion('vertical_container_course', {
                 classNames : {
                     toggle : 'accordion_toggle_course',
@@ -84,8 +83,7 @@
                 }
         
                 function showUnitContent(unitContentId, disciplineName, unitName, gradeId, type) {
-                    var courseId = '<s:property value='discipline.course.id' />';
-
+                    var courseId = '<s:property value='discipline.course.id' />';                    
                     $('unitName').innerHTML = unitName;
                     $('disciplineName').innerHTML = disciplineName;
                     
@@ -94,7 +92,11 @@
  
                     var hasForuns = getJsonFromUrl('forum!getOpenForunsByCourseJson.action?course.id=' + courseId);
                     
- 
+                    if (hasExercise == "" && sessionTimeout == true) {
+                        returnToHome();
+                        return;
+                    }
+                    
                     if(hasExercise.count==0){
                         $('exerciseWithQuestions').style.display = "none";
                         $('exerciseWithNoQuestions').style.display = "block";
@@ -134,6 +136,10 @@
                     
                     } else if(type == 3) {
                         var jsonUnitContent = getJsonFromUrl('unitContent!getUnitContentJson.action?unitContent.id=' + unitContentId);
+                        if (jsonUnitContent == "" && sessionTimeout == true) {
+                            returnToHome();
+                            return;
+                        }
                         var _width = 820;
                         var _height = 1000;
                         if (jsonUnitContent.unitContent.width != null && jsonUnitContent.unitContent.width != '')
@@ -145,11 +151,15 @@
 
                     } else {
                         var jsonUnitContent = getJsonFromUrl('unitContent!getUnitContentJson.action?unitContent.id=' + unitContentId);
+                        if (jsonUnitContent == "" && sessionTimeout == true) {
+                            returnToHome();
+                            return;
+                        } 
                         var unitId = jsonUnitContent.unitContent.unitId;
                         var jsonUnit = getJsonFromUrl('unit!getUnitJson.action?unit.id=' + unitId);
                         var disciplineId = jsonUnit.unit.disciplineId;
                         //width="665" height="1000"
-                        var _width = <%= ((systemUser2.getUsername().equals("layout")) ? "925" : "700") %>;
+                        var _width =700;
                         var _height = 1000;
                         if (jsonUnitContent.unitContent.width != null && jsonUnitContent.unitContent.width != '')
                             _width = jsonUnitContent.unitContent.width;
@@ -174,7 +184,7 @@
                     $('pnlForum').href = 'forum!listByCourse.action?course.id=' + courseId;
             
                     var html = '';
-                    html += '<iframe id="pdf" scrolling="no" frameborder="0" width="<%= ((systemUser2.getUsername().equals("layout")) ? "925" : "700") %>" height="772" src="discipline!showPdf.action?unitContent.id=' + unitContentId + '&grade.id=' + gradeId + '"></iframe> <br class="clear"/>';
+                    html += '<iframe id="pdf" scrolling="no" frameborder="0" width="700") %>" height="772" src="discipline!showPdf.action?unitContent.id=' + unitContentId + '&grade.id=' + gradeId + '"></iframe> <br class="clear"/>';
                     $('unitContent').innerHTML = html;
 
                     // update the progress bar
@@ -182,36 +192,16 @@
                 }
 
 
-                function getJsonFromUrl(url){
-                    var json;
-                    new Ajax.Request(url,
-                    {
-                        method:'get',
-                        requestHeaders: {Accept: 'application/json'}, 
-                        asynchronous: false,
-                        onSuccess: function(transport) {
-                            json = transport.responseText.evalJSON(true);
-                        },
-                        onFailure: function() { alert('Message: Something went wrong...') },
-                        onException:function(request, exception) {         
-                            // Temporary Solution that checks for a bad formed and see if
-                            // it is the login page, so redirects.                 
-                            var message = exception.message;
-                            if(message.match(/Badly formed JSON string/)!= null) {
-                                if (message.match(/login-container/) != null) {
-                                    document.location = "./home.action";                                    
-                                }
-                            }
-                       }     
-                    });
-                    return json;
-                }        
+    
         
                 function viewUnitContent() {
                     if (urlUnitContentId != '' && urlGradeId != '') {
                         var unitContent = getJsonFromUrl('unitContent!getUnitContentJson.action?unitContent.id=' + urlUnitContentId);
                         var grade = getJsonFromUrl('grade!getGradeJson.action?grade.id=' + urlGradeId);
-
+                        if (unitContent == "" && sessionTimeout == true) {
+                            returnToHome();
+                            return;
+                        } 
                         var gradeId = grade.grade.id;
                         var courseId = grade.grade.course.id;
                         var unitName = unitContent.unitContent.unit.name;
@@ -221,131 +211,14 @@
                     }
 
                     // update the progress bar
-                    getCourseProgress(<s:property value="discipline.course.id" />);
+                    getCourseProgress('<s:property value='discipline.course.id' />');
                 }
     </script>
-    
-    <%
-    
-       if (systemUser2.getUsername().equals("layout"))
-       {
-           
-    %>
-    
-    <script type="text/javascript" src="js/side-bar.js"></script>
 
-<style>
-
-
-/****************************************/
-
-a{outline: none;}
-
-a:active{outline: none;}
-
-#sideBar{text-align:left;}
-
-#sideBar h2{
-	color:#FFFFFF;
-	font-size:110%;
-	font-family:arial;
-	margin:10px 10px 10px 10px;
-	font-weight:bold !important;
-}
-
-#sideBar h2 span{
-	font-size:125%;
-	font-weight:normal !important;
-}
-
-
-#sideBar li a:link,
-#sideBar li a:visited{
-	color:#FFFFFF;
-	font-family:verdana;
-	font-size:100%;
-	text-decoration:none;
-	display:block;
-	margin:0px 0px 0px 0px;
-	padding:0px;
-	width:100%;
-}
-
-#sideBar li a:hover{
-	color:#FFFFFF;
-	text-decoration:underline;
-}
-
-#sideBar{
-	position: absolute;
-        display: block;
-	width: auto;
-	height: auto;
-	top: 225px;
-        left:0px;
-        background-color: #fff;
-/*	background-image: url(images/background2.gif);
-        background-position: top right;
-        background-repeat: repeat-y;*/
-        z-index: 10;
-        
-}
-
-#sideBarTab{
-	float:left;
-	height:137px;
-	width:28px;
-}
-
-#sideBarTab img{
-	border:0px solid #FFFFFF;
-}
-
-#sideBarContents{
-	float:left;
-	overflow:hidden !important;
-	width:auto;
-	height:auto;
-}
-
-#sideBarContentsInner{
-	width:auto;
-}
-</style>
-
-    <%
-    
-       }
-    
-    %>
-    
 </head>
 <s:actionerror />
 
-    <%
-    
-       if (systemUser2.getUsername().equals("layout"))
-       {
-           
-    %>
-
-
-<div id="sideBar">
-	
-	<div id="sideBarContents" style="display:none; border: 3px solid #ffe79c; border-left:none;">
-		<div id="sideBarContentsInner">
-                    
-
-    
-    <%
-    
-       }
-                  
-    %>
-<table border="0">
-    <tr>
-        <td valign="top" rowspan="2" style="width:120px">
-
+   <div id="sidebar">
             <h2 style="display:none"><span id="disciplineName">&nbsp;</span><br /><span id="unitName">&nbsp;</span></h2>
 
     <div class="units-container">
@@ -404,9 +277,9 @@ a:active{outline: none;}
                     </div>
                 </div>
             </div>
-        </div>
+        </div>     
     </div>
-
+<!-- end sidebar -->
 
 <div id="vertical_container_course" style="margin-top:10px">
     <div class="units-container">
@@ -431,51 +304,14 @@ a:active{outline: none;}
         </div>
     </div>
 </div>
-<!-- end col-1-home -->
+<!-- end Unit Index -->
 
-    <%
-    
-       if (systemUser2.getUsername().equals("layout"))
-       {
-           
-    %>                 
-                
-		</div>
-	</div>
-	<a href="#" id="sideBarTab"><img src="images/slide-button.gif" alt="Meus Cursos" title="Meus Cursos" /></a>
-	
-</div>
 
-    
-    <%
-    
-       }
-                  
-    %>
-</td>
-<td style="vertical-align:top">
-<div class="current-course">
-    <span class="corner-left">.</span>
-    <span class="corner-right">.</span>
-    <h1><s:text name="discipline.show.course" /><s:property value="discipline.course.name" /></h1>
-    <h2><s:text name="discipline.show.discipline" /><s:property value="discipline.name" /></h2>
-    <div class="partner">
-        <img src="RenderServletPartner?id=<s:property value="discipline.course.id" />" width="100"  />
-    </div>
+<!-- Lesson Content -->
+<div class="lesson-content">
+     <div id="unitContent"></div>
 </div>
-</td>
-</tr>
-<tr>
-<td>
-<div id="col-2-course"> <!--style="height:550px;width:780px;overflow:auto"-->
-    <div class="lesson-content">
-        <div id="unitContent"></div>
-    </div>
     
-    <!-- end col-2-home -->
     
     <br class="clear" />
-</div>
-</td>
-</tr>
-</table>
+

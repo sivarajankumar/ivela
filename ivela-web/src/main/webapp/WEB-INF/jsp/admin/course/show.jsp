@@ -22,6 +22,7 @@
 # 15-JUN-2009 - fantato (Instituto Eldorado)      - 000010 - broken icons                   #
 # 17-JUN-2009 - fantato (Instituto Eldorado)      - 000010 - multimidia link was wrong      #
 # 25-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - i18n support                   #
+# 20-AGO-2009 - mileine (Instituto Eldorado)      - 000015 - upload translation tip fixed   #
 #############################################################################################
 --%>
 
@@ -165,7 +166,7 @@
                                                                                     </s:iterator>
                                                                                 </s:else>
                                                                             </ul>
-                                                                        </div>
+                                                                      </div>
                                                                         <h6 class="vertical_accordion_toggle4" id="exams"><s:text name="course.show.exam"/></h6>
                                                                         <div class="vertical_accordion_content4" id="<s:property value="id" />">
                                                                             <ul id="ulExamAccordeon_<s:property value="id" />">
@@ -555,7 +556,7 @@
                     <select style="width: 80px;" name="unitContent.orderN" id="upload.unitContent.order_n"></select><span  class="tooltip"onmouseover="return escape('<s:text name="admin.unitContent.tip.01"/>')"></span><br />                                    
                     <br />
                     <label><s:text name="unitContent.input.package" /></label><br />
-                    <s:file name="upload" key="repository.input.file" theme="simple" /><span class="tooltip" onmouseover="return escape('Entre com o pacote da aula')"></span>
+                    <s:file name="upload" key="repository.input.file" theme="simple" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.unitContent.tip.04"/>')"></span>
                     <br />
                     <br />
                     <label><s:text name="unitContent.input.width" /></label><br />

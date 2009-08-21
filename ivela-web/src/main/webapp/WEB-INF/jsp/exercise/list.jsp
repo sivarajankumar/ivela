@@ -11,9 +11,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><s:text name="exercise.list.pageTitle" /></title>
-        <link href="RenderServlet?file=/globals/css/internas.css" rel="stylesheet" type="text/css" />
+        <link href="css/internas.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="js/prototype/prototype.js"></script>
-        <script type="text/javascript" src="js/ead/ajax.js"></script>
+        <script type="text/javascript" src="js/util/ajax.js"></script>
         <script type="text/javascript" src="js/util/util.js"></script>
         <style type="text/css">
             .box-error {width: 600px; height:auto; background:#FFFFCC; border:1px solid #ff7202; padding: 5px;}
