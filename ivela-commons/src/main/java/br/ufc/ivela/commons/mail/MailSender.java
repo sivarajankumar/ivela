@@ -4,16 +4,17 @@
  */
 package br.ufc.ivela.commons.mail;
 
-import br.ufc.ivela.commons.Constants;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import br.ufc.ivela.commons.Constants;
 
 /**
  *
@@ -48,13 +49,16 @@ public class MailSender {
             for (int i = 0; i < to.length; i++) {
                 msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to[i]));
                 // Send the message
-                Transport.send(msg);
+                Transport tr = session.getTransport("smtp");
+                tr.connect();
+                msg.saveChanges();      // don't forget this
+                tr.sendMessage(msg, msg.getAllRecipients());
+                tr.close();
+                                
             }
         } catch (MessagingException ex) {
-            ex.printStackTrace();
+            Logger.getLogger(MailSender.class.getName()).log(Level.SEVERE, null, ex);          
         }
     }
-    public static void main(String[] args) {
-        MailSender.send(new String[] {"leoomoreira@gmail.com"}, "assunto", "conteudo");
-    }
+
 }

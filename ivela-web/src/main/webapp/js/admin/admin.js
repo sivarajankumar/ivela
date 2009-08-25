@@ -101,24 +101,35 @@ function submitList(){
 function showFinish(){
     $('formUpload').reset();
     closeAll();
-    $('showResultEnrollment').style.display = "block";
+    
     $('listResultStudent').innerHTML = "";
+
+    var json = getJson('grade!getEnrollResults.action');
+        
     var html ="";
     html = "<table border ='1'><tr><td>Aluno</td><td>Matricula</td></tr>";
-    for (i=0;i<$('studentsUp').contentDocument.forms[0].elements.length;i++){
-        var x = $('studentsUp').contentDocument.forms[0].elements[i].value.split("#");
-        var situacao;
-        if(x[1]=="true"){
-            situacao = "Realizada";
-        }
-        else{
-            situacao = "Não realizada";
-        }
-        html+="<tr><td>"+x[0]+"</td><td>"+situacao+"</td></tr>"
+    if (json != undefined) {
+	    for (i = 0; i < json.students.length; i++) {
+	        var tempFirstName = json.students[i].firstName;
+	        var tempLastName = json.students[i].lastName;
+	        var tempStatus = json.students[i].status;
+	        if (tempFirstName != undefined){
+	        	 if(tempStatus=="true"){
+	                 situacao = "Realizada";
+	             }
+	             else{
+	                 situacao = "Não realizada";
+	             } 
+	        	 html+="<tr><td>"+tempFirstName+" "+tempLastName+"</td><td>"+situacao+"</td></tr>"
+	        }
+	    }	
+    } else {
+    	 html+="<tr><td>--</td><td>--</td></tr>"
     }
     html +="</table><br><br><a href='home.action'>Concluir</a>";
     $('listResultStudent').innerHTML = html;
-    
+    $('showResultEnrollment').style.display = "block";
+    $('listResultStudent').style.display = "block";
     
 }
         
@@ -660,14 +671,14 @@ function setEnrollments(gradeId, status) {
         falhas++;
     }        
     if (enviadas > 0) {
-        //alert('Estado(s) atualizado(s)');
-        //document.location = 'home.action';
-        updateStructure();
+    	closeLoading();
+        document.location = 'home.action';
     } else {
         alert('Estado(s) não atualizado(s)');    
         closeLoading();
     }
 }
+
 
 function setCheckedAllStudents(gradeId)  {    
     var checks = document.getElementsByName('studentsCheck');

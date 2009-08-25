@@ -24,8 +24,7 @@
         <pattern>/history!showPrintVersion**</pattern>
     </excludes>
     <decorator name="no_login" page="no_login.jsp">
-        <pattern>/systemUser!input**</pattern>
-        <pattern>/faq!list**</pattern>
+        <pattern>/systemUser!input**</pattern>        
         <pattern>/forgotPassword**</pattern>
         <pattern>/aboutUs!list**</pattern>
         <pattern>/systemUser!add**</pattern>
@@ -49,6 +48,9 @@
     </decorator>
     <decorator name="admin" page="admin.jsp">
         <pattern>/admin/*</pattern>
+    </decorator>
+    <decorator name="course" page="course.jsp">
+        <pattern>/discipline!showContent.action*</pattern>
     </decorator>
     <decorator name="main" page="main.jsp">
         <pattern>/*</pattern>

@@ -39,7 +39,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><s:text name="front.pageTitle" /></title>
         <!-- Colocar a logo para aparecer no navegador <link rel="icon" href="../logotipo/logo.jpg" type="image/gif" /> -->
-        <link href="RenderServlet?file=/globals/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="css/base.css" rel="stylesheet" type="text/css" />
         <link href="css/lightwindow.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="js/util/util.js"></script>
         <script type="text/javascript" src="js/prototype/prototype.js"></script>
@@ -86,7 +86,7 @@
 <div style="width:620px;position:relative;left:107px;top:-56px">
             <div class="tools">
                 <span class="btn-tools" onclick="Effect.toggle('hidden', 'slide')" title="<s:text name="main.tools" />"><!--img src="images/icon/icon-tools.gif" /--><!--s:text name="main.tools"/--><!--img src="images/icon/icon-tools-arrow.gif" /--></span>
-
+                <span class="btn-manual" onclick="document.location = '/ivela-manual'"><img src="images/icon/icon-faq.gif" title="<s:text name='main.manual'/>" /></span>
             </div>
             <!-- end tools-->
 
@@ -95,7 +95,7 @@
                     <li id="menu_1" ><a href="index.jsp" title="<s:property value="front.home.title" />"><s:text name="front.home.title" /></a></li>
                     <li id="menu_2" ><a href="course!list.action" title="<s:property value="front.courses.title" />"><s:text name="front.courses" /></a></li>
                     <li id="menu_3" ><a href="history!show.action" title="<s:property value="front.history.title" />"><s:text name="front.history" /></a></li>
-                    <li id="menu_4" ><a href="note!show.action" title="<s:property value="front.calendar" />"><s:text name="front.calendar" /></a></li>
+                    <!-- li id="menu_4" ><a href="note!show.action" title="<s:property value="front.calendar" />"><s:text name="front.calendar" /></a></li-->
                 </ul>
             </div>
 
@@ -160,9 +160,9 @@
                     <li><a href="index.jsp" title="<s:text name="front.controlPanel.title" />"><s:text name="front.controlPanel" /></a></li>
                     <li><a href="course!list.action" title="<s:property value="front.courses.title" />"><s:text name="front.courses" /></a></li>
                     <li><a href="history!show.action" title="<s:text name="front.history.title" />"><s:text name="front.history" /></a></li>
-                    <li><a href="note!show.action" title="<s:text name="front.calendar" />" class="last"><s:text name="front.calendar" /></a></li>
+                    <!--li><a href="note!show.action" title="<s:text name="front.calendar" />" class="last"><s:text name="front.calendar" /></a></li-->
                 </ul>
-                <img class="logo" src="RenderServlet?file=/globals/images/logo-footer.png" alt="<s:property value="front.logo.footer" />" />
+                <img class="logo" src="images/logo-footer.png" alt="<s:property value="front.logo.footer" />" />
             </div>
             <br class="clear" />
         </div>
