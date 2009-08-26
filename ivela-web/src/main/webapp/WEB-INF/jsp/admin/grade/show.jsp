@@ -743,7 +743,7 @@
                             <li><a class="icon-delete" href="javascript:deleteStudent(document.getElementById('student.grade.id').value);"><s:text name= "student.grade.delete.student" /></a></li>
                             <li><a class="icon-newsFlash" href="javascript:showSendNewsFlash('student.newsflash');"><s:text name= "student.send.newsflash" /></a></li>
                             <li><a class="icon-message" href="javascript:showSendMessage('student.message');"><s:text name= "student.send.message" /></a></li>
-                            <li><a class="icon-message" href="javascript:showDiv('student.note');"><s:text name= "student.send.note" /></a></li>
+                            <!-- li><a class="icon-message" href="javascript:showDiv('student.note');"><s:text name= "student.send.note" /></a></li-->
                             <br class="clear" />
                         </ul>
                     </div>
