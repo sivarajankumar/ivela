@@ -20,6 +20,7 @@
 # 08-JUN-2009 - Otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
 # 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
 # 23-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Unicode (UTF-8) support        #
+# 26-AUG-2009 - Rafael Lagoa (Instituto Eldorado) - 001165 - Align no enrollments message   #
 #############################################################################################
 --%>
 
