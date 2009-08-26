@@ -31,11 +31,18 @@
 <%@ page import="org.springframework.security.AuthenticationException" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
+
 <link href="css/login-index.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+#container {
+ height: 100%; 
+ min-height: 0;
+}
+</style>
 <script type="text/javascript" src="js/prototype/prototype.js"></script>
 <script type="text/javascript" src="http://java.com/js/deployJava.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
- 
+
 <c:if test="${param.success == true}">
     <p class="sucess"> <s:text name="systemUser.input.loginInsertedSucessfully"/></p>
 </c:if>
