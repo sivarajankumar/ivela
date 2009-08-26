@@ -140,6 +140,11 @@ function getCourseProgress(courseId) {
         onFailure: function() { 
             alert('Message: Error retrieving last unit content...')
         }
-    });  
+    });    
 }
 
+// Callback for Light Window Close 
+function lightWindowOnClose() {
+    getMessages();
+    getTopics();
+}

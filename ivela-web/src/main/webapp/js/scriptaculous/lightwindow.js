@@ -276,7 +276,8 @@ lightwindow.prototype = {
 		this._prepareIE(false);
 		this._setupDimensions();
 		this._toggleTroubleElements("visible", false);
-		this._monitorKeyboard(false)
+		this._monitorKeyboard(false);
+		if (typeof (lightWindowOnClose) != "undefined") lightWindowOnClose();
 	},
 	createWindow : function(b, a) {
 		this._processLink($(b))
@@ -445,7 +446,7 @@ lightwindow.prototype = {
 		if ($("lightwindow_title_bar_close_link")) {
 			Event.observe("lightwindow_title_bar_close_link", "click",
 					this.deactivate.bindAsEventListener(this));
-			$("lightwindow_title_bar_close_link").onclick = function() {
+			$("lightwindow_title_bar_close_link").onclick = function() {			    
 				return false
 			}
 		}
