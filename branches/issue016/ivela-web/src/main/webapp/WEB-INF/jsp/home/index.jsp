@@ -118,7 +118,8 @@
 
 <s:if test="enrollmentList == null || enrollmentList.size() == 0">
     <s:if test="pendentList == null || pendentList.size() == 0">
-        <h5> <s:text name="front.firstAccess" /> </h5>
+        <br /><br />
+        <h5 style="text-align:center"> <s:text name="front.firstAccess" /> </h5>
     </s:if>
 </s:if>
 <s:else>
