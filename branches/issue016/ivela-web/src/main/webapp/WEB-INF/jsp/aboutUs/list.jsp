@@ -27,12 +27,18 @@
 
 
 <html>
+    <head>
+        <style type="text/css">
+         html, body {height:auto; min-height: 100%;}
+        </style>
+    </head> 
+    
     <h1><s:text name="list.about.us"/></h1> <br />
     <input class="btn-back" type="button" onclick="history.back(1)" value="<s:text name="systemUser.input.btnBack"/>" />
     <br />
         
     
-   <div> 
+   <div style="height: auto; width: auto; margin: 0 auto;" > 
     <table width="750" border="0" align="center">
      <tr>
         <td valign="top">&nbsp;</td>
