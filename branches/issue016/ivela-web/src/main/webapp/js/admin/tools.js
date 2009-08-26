@@ -100,3 +100,9 @@ function getMessages() {
                 }
             });
 }
+
+//Callback for Light Window Close 
+function lightWindowOnClose() {
+    getMessages();
+    getTopics();
+}

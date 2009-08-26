@@ -276,7 +276,8 @@ lightwindow.prototype = {
 		this._prepareIE(false);
 		this._setupDimensions();
 		this._toggleTroubleElements("visible", false);
-		this._monitorKeyboard(false)
+		this._monitorKeyboard(false);
+		if (typeof (lightWindowOnClose) != "undefined") lightWindowOnClose();
 	},
 	createWindow : function(b, a) {
 		this._processLink($(b))
