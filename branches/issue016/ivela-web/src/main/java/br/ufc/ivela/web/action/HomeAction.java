@@ -41,6 +41,11 @@ import java.util.List;
  */
 public class HomeAction extends GenericAction {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8068776172601074387L;
+    
     private MessageRemote messageRemote;
     private EnrollmentRemote enrollmentRemote;
     private ProfileRemote profileRemote;
@@ -61,8 +66,7 @@ public class HomeAction extends GenericAction {
     private Long courseId;
     private UnitContentRemote unitContentRemote;
     private UnitContent lastUnitContent;
-    private Enrollment enrollment;
-    private List<Integer> statusList;
+    private Enrollment enrollment;    
     private ChallengeRemote challengeRemote;
 
     public ChallengeRemote getChallengeRemote() {
@@ -138,6 +142,9 @@ public class HomeAction extends GenericAction {
     public String getToolsMessages() {
 
         messageList = messageRemote.getBySystemUserRecipient(getAuthenticatedUser().getId(), "", 1, 3);
+        
+        StringBuilder json = new StringBuilder("{\"message\":["); 
+
         if (messageList == null) {
             messageList = new ArrayList<Message>();
         } else {
@@ -145,14 +152,22 @@ public class HomeAction extends GenericAction {
                 messageList = messageList.subList(0, 3);
             }
         }
+        for (int i = 0; i < messageList.size(); i++) {
+            Message message = messageList.get(i);
 
-        List list = new ArrayList(messageList);
+            json.append("{\"id\":\"" + message.getId() + "\", \"title\":\""
+                    + message.getTitle() + "\"," + " \"sender\":\""
+                    + message.getSender().getUsername() + "\","
+                    + " \"datetime\":\"" + message.getDatetime()
+                    + "\"}");
 
-        XStream xStream = new XStream(new JettisonMappedXmlDriver());
-        xStream.alias("message", Message.class);
-        xStream.alias("list", ArrayList.class);
+            if (i != messageList.size() - 1) {
+                json.append(",");
+            }
+        }
 
-        setInputStream(new ByteArrayInputStream(xStream.toXML(list).getBytes()));
+        json.append("]}");
+        setInputStream(new ByteArrayInputStream(json.toString().getBytes()));        
 
         return "json";
     }
