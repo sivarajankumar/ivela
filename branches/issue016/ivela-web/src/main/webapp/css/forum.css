@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 
-body {background-color: transparent; background: url(../images/bg_standard2.jpg; z-index:1) #fff repeat-x 0 0;}
+body {background-color: transparent; background: url(../images/bg_standard2.jpg;) #fff repeat-x 0 0;}
 
 #breadcrumb {width: auto; height: 22px; margin: 10px 0 20px 0; padding: 8px 0 0 100px; position:relative;}
 #breadcrumb p {width: auto; height: 17px; padding: 2px 20px 0px 8px; position: absolute; top:6px; left:0; background: url(../images/arrow-breadcrumb.gif) no-repeat top right #033d7d; font: 11px Arial, Helvetica, sans-serif; color:#fff; }
@@ -77,8 +77,8 @@ color:#FFF; padding:3px 5px 2px; margin-top:15px; text-decoration:none;}
 .pagination .current {padding: 2px 5px 2px 5px; margin-right: 2px; font-weight: bold; background-color: #ff7202; color: #FFF;}
 .pages{float:right; width:170px;}
 
-#loading{position:absolute; top:0; left:0; width:95%; height:400px; z-index:100; background-color:transparent; text-align: center}
-#loading img{width: 66px; height: 66px; position:absolute; top: 200px}
+#loading{position:absolute; top:0; left:0; width:95%; height:400px; z-index:100; background-color:transparent;}
+#loading img{width: 66px; height: 66px; position:fixed; top: 48%; left:45%; margin: 0 auto;}
 #topic-new {float:left; font:15px Arial, Helvetica, sans-serif; color:#033d7d; font-weight:bold; text-decoration:none; margin-left: 1px; margin-top:12px;}
 #showEntryTopic h3 {font:15px Arial, Helvetica, sans-serif; color:#033d7d; font-weight:bold; text-decoration:none; margin-left: 1px;}
 #showEntryTopic label {display:block; color:#033d7d; font-weight:bold; font-size: 14px;}

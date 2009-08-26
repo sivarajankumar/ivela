@@ -192,7 +192,7 @@ lightwindow.prototype = {
 										+ "</div>"
 										+ "</div>"
 										+ '<div id="lightwindow_data_slide" >'
-										+ '<div id="lightwindow_data_slide_inner" >'
+										+ '<div id="lightwindow_data_slide_inner" style="display:none;" >'
 										+ '<div id="lightwindow_data_details" >'
 										+ '<div id="lightwindow_data_gallery_container" >'
 										+ '<span id="lightwindow_data_gallery_current"></span>'
