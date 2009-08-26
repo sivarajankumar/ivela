@@ -47,7 +47,7 @@
                 <div class="language">
                     <a href="?request_locale=pt" title="Português"><img src="images/language/pt-br.gif" /></a>
                     <a href="?request_locale=en" title="English"><img src="images/language/en-us.gif" /></a>
-                    <a href="?request_locale=es" title="Español"><img src="images/language/sp-es.gif" /></a>
+                    <!-- a href="?request_locale=es" title="Español"><img src="images/language/sp-es.gif" /></a-->
                 </div>
             </div>
             <!-- end header -->
