@@ -39,7 +39,7 @@ if (viewportwidth >= 1024) {
     result1 = ok;
 }
 
-// System Pre-Requisites for Browsers: Firefox v2 or above and Internet Explorer v6 and v7
+// System Pre-Requisites for Browsers: Firefox v2 or above and Internet Explorer v6 or above
 var result2 = error;
 var x = navigator;
 var browserName = "";
@@ -65,7 +65,7 @@ if (/Shiretoko[\/\s](\d+\.\d+)/.test(navigator.userAgent)){ //test for Firefox/x
 
 if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)){ //test for MSIE x.x;
     var ieversion=new Number(RegExp.$1); // capture x.x portion and store as a number
-    if (ieversion>=6 && ieversion<8) {
+    if (ieversion>=6) {
         result2 = ok;
         browserName= navigator.userAgent.substring(navigator.userAgent.search(/MSIE (\d+\.\d+);/),navigator.userAgent.length);
     }

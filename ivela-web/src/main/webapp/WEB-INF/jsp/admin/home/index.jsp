@@ -201,7 +201,7 @@
                                         <ul class="list-students">
                                             <input type="button" value="<s:text name="home.mark" />"  class="btn-check-all" onclick="setCheckedAllStudents('<s:property value="id" />');" />
                                             <input type="button" value="<s:text name="home.unmark" />" class="btn-uncheck-all" onclick="setUncheckedAllStudents('<s:property value="id" />');" />
-                                        
+                                            <br />
                                             <s:iterator value="enrollments" status="stat"> 
                                                 <s:if test="enrollments[#stat.index].status == 0">
                                                     <li title="<s:property value="systemUser.username" />" id="li.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="box-person">
