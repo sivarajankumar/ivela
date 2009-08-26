@@ -455,104 +455,108 @@ function showTranscript(gradeId){
   
     var studentId;
     var students = getCheckedStudents();
-    if(students.length >1){
-        alert("Selecione apenas um estudante");
-        
-    }
-    else{ 
-        if(students.length ==1){
-            new Lightbox.base('box1');
-            studentId = students[0];
-            closeAllButKeepStudentChecked();
-            var json = getJsonFromUrl('systemUser!getInfo.action?systemUser.id=' + studentId);
-            $('showTranscript').style.display = 'block';
-            $('show.transcript.course').innerHTML= $('student.grade.course.name').innerHTML ;
-            $('show.transcript.grade').innerHTML = $('student.grade.name').innerHTML ;
-            if (json != null && json != '') {
-                $('show.transcript.student').innerHTML = json.systemUser.username;
-            }
     
-            var url = "scorecard!showTranscript.action";
-            var params ="grade.id="+gradeId+"&student.id="+studentId;
-            var jsonUnitContent = getJsonFromUrlPost(url, params);
-            
-            var html = '<input type="hidden" id="scorecard.student.id" name="course.grades" value="'+studentId+'" />';
-            
-            if(jsonUnitContent.transcript!=''){
-                html += '<p style="font: bold 20px Arial, Helvetica, sans-serif; color:#ff7202; margin-top:20px;" class="titulo-exercises-result"></p>';
-                    
-                html += '<table class="table-exercises-result" width="500" border="0" cellspacing="0" cellpadding="0">\n\
-                                      <tr>\n\
-                                         <td width="100" class="titulo">Average Exam</td>\n\
-                                         <td width="100" class="titulo">Average Exercise</td>\n\
-                                         <td width="100" class="titulo">Average Final</td>\n\
-                                         <td width="100" class="titulo">Manual Score</td>\n\
-                                         <td width="100" class="titulo">Status</td>\n\
-                                    </tr>';
-                  
-                    
-                html += '<tr>';
-                html += '<td width="368">';
-                if(jsonUnitContent.transcript.averageExam<0){
-                    html += '*';
-                }
-                else{
-                    html += jsonUnitContent.transcript.averageExam;
-                }
-                html += '</td>';
-                html += '<td width="100">';
-                if(jsonUnitContent.transcript.averageExercise<0){
-                    html += '*';
-                }
-                else{
-                    html += jsonUnitContent.transcript.averageExercise;
-                }
-                html += '</td>';
-                html += '<td width="100">'; 
-                if(jsonUnitContent.transcript.score<0){
-                    html += '*';
-                }
-                else{
-                    html += jsonUnitContent.transcript.score;
-                }    
-                html += '</td>';
-                selectedManualScore = jsonUnitContent.transcript.manualScore;
-                html += '<td class="manual-mark" >\n\
-                                        <select onchange="setManualScoreTranscript(this.value,'+jsonUnitContent.transcript.id+')" name="manualScore_'+ jsonUnitContent.transcript.id +'">\n\
-                                           <option value="0" ' + ( (selectedManualScore == "0.0") ? ("selected") : ("") ) + '>0.0</option>\n\
-                                           <option value="1" ' + ( (selectedManualScore == "1.0") ? ("selected") : ("") ) + '>1.0</option>\n\
-                                           <option value="2" ' + ( (selectedManualScore == "2.0") ? ("selected") : ("") ) + '>2.0</option>\n\
-                                           <option value="3" ' + ( (selectedManualScore == "3.0") ? ("selected") : ("") ) + '>3.0</option>\n\
-                                           <option value="4" ' + ( (selectedManualScore == "4.0") ? ("selected") : ("") ) + '>4.0</option>\n\
-                                           <option value="5" ' + ( (selectedManualScore == "5.0") ? ("selected") : ("") ) + '>5.0</option>\n\
-                                           <option value="6" ' + ( (selectedManualScore == "6.0") ? ("selected") : ("") ) + '>6.0</option>\n\
-                                           <option value="7" ' + ( (selectedManualScore == "7.0") ? ("selected") : ("") ) + '>7.0</option>\n\
-                                           <option value="8" ' + ( (selectedManualScore == "8.0") ? ("selected") : ("") ) + '>8.0</option>\n\
-                                           <option value="9" ' + ( (selectedManualScore == "9.0") ? ("selected") : ("") ) + '>9.0</option>\n\
-                                           <option value="10" ' + ( (selectedManualScore == "10.0") ? ("selected") : ("") ) + '>10.0</option>\n\
-                                        </select>\n\
-                                   </td>';
-                switch(jsonUnitContent.transcript.status){
-                    case '1':
-                        status = '';
-                        break;
-                    case '3':
-                        status = 'in progress';
-                        break;
-                }
-                html +='<td width="100">'+status+'</td>\n\
-                                    </tr>';
-                   
-                html += '</table>';
-            
-            }
-        
-        
-        }
-        html +='<br><a href="javascript:showScorecard('+gradeId+')">See details scoreCard</a>';
-        $('show.transcript.notes').innerHTML = html;
-            
-        Lightbox.hideAll();
-    }
-    
+    if(students.length == 0){
+        alert("Selecione um estudante");    
+    } else {
+	    if(students.length >1){
+	        alert("Selecione apenas um estudante");
+	        
+	    }
+	    else{ 
+	        if(students.length ==1){
+	            new Lightbox.base('box1');
+	            studentId = students[0];
+	            closeAllButKeepStudentChecked();
+	            var json = getJsonFromUrl('systemUser!getInfo.action?systemUser.id=' + studentId);
+	            $('showTranscript').style.display = 'block';
+	            $('show.transcript.course').innerHTML= $('student.grade.course.name').innerHTML ;
+	            $('show.transcript.grade').innerHTML = $('student.grade.name').innerHTML ;
+	            if (json != null && json != '') {
+	                $('show.transcript.student').innerHTML = json.systemUser.username;
+	            }
+	    
+	            var url = "scorecard!showTranscript.action";
+	            var params ="grade.id="+gradeId+"&student.id="+studentId;
+	            var jsonUnitContent = getJsonFromUrlPost(url, params);
+	            
+	            var html = '<input type="hidden" id="scorecard.student.id" name="course.grades" value="'+studentId+'" />';
+	            
+	            if(jsonUnitContent.transcript!=''){
+	                html += '<p style="font: bold 20px Arial, Helvetica, sans-serif; color:#ff7202; margin-top:20px;" class="titulo-exercises-result"></p>';
+	                    
+	                html += '<table class="table-exercises-result" width="500" border="0" cellspacing="0" cellpadding="0">\n\
+	                                      <tr>\n\
+	                                         <td width="100" class="titulo">Average Exam</td>\n\
+	                                         <td width="100" class="titulo">Average Exercise</td>\n\
+	                                         <td width="100" class="titulo">Average Final</td>\n\
+	                                         <td width="100" class="titulo">Manual Score</td>\n\
+	                                         <td width="100" class="titulo">Status</td>\n\
+	                                    </tr>';
+	                  
+	                    
+	                html += '<tr>';
+	                html += '<td width="368">';
+	                if(jsonUnitContent.transcript.averageExam<0){
+	                    html += '*';
+	                }
+	                else{
+	                    html += jsonUnitContent.transcript.averageExam;
+	                }
+	                html += '</td>';
+	                html += '<td width="100">';
+	                if(jsonUnitContent.transcript.averageExercise<0){
+	                    html += '*';
+	                }
+	                else{
+	                    html += jsonUnitContent.transcript.averageExercise;
+	                }
+	                html += '</td>';
+	                html += '<td width="100">'; 
+	                if(jsonUnitContent.transcript.score<0){
+	                    html += '*';
+	                }
+	                else{
+	                    html += jsonUnitContent.transcript.score;
+	                }    
+	                html += '</td>';
+	                selectedManualScore = jsonUnitContent.transcript.manualScore;
+	                html += '<td class="manual-mark" >\n\
+	                                        <select onchange="setManualScoreTranscript(this.value,'+jsonUnitContent.transcript.id+')" name="manualScore_'+ jsonUnitContent.transcript.id +'">\n\
+	                                           <option value="0" ' + ( (selectedManualScore == "0.0") ? ("selected") : ("") ) + '>0.0</option>\n\
+	                                           <option value="1" ' + ( (selectedManualScore == "1.0") ? ("selected") : ("") ) + '>1.0</option>\n\
+	                                           <option value="2" ' + ( (selectedManualScore == "2.0") ? ("selected") : ("") ) + '>2.0</option>\n\
+	                                           <option value="3" ' + ( (selectedManualScore == "3.0") ? ("selected") : ("") ) + '>3.0</option>\n\
+	                                           <option value="4" ' + ( (selectedManualScore == "4.0") ? ("selected") : ("") ) + '>4.0</option>\n\
+	                                           <option value="5" ' + ( (selectedManualScore == "5.0") ? ("selected") : ("") ) + '>5.0</option>\n\
+	                                           <option value="6" ' + ( (selectedManualScore == "6.0") ? ("selected") : ("") ) + '>6.0</option>\n\
+	                                           <option value="7" ' + ( (selectedManualScore == "7.0") ? ("selected") : ("") ) + '>7.0</option>\n\
+	                                           <option value="8" ' + ( (selectedManualScore == "8.0") ? ("selected") : ("") ) + '>8.0</option>\n\
+	                                           <option value="9" ' + ( (selectedManualScore == "9.0") ? ("selected") : ("") ) + '>9.0</option>\n\
+	                                           <option value="10" ' + ( (selectedManualScore == "10.0") ? ("selected") : ("") ) + '>10.0</option>\n\
+	                                        </select>\n\
+	                                   </td>';
+	                switch(jsonUnitContent.transcript.status){
+	                    case '1':
+	                        status = '';
+	                        break;
+	                    case '3':
+	                        status = 'in progress';
+	                        break;
+	                }
+	                html +='<td width="100">'+status+'</td>\n\
+	                                    </tr>';
+	                   
+	                html += '</table>';
+	            
+	            }
+	        
+	        
+	        }
+	        html +='<br><a href="javascript:showScorecard('+gradeId+')">See details scoreCard</a>';
+	        $('show.transcript.notes').innerHTML = html;
+	            
+	        Lightbox.hideAll();
+	    }
+    }   
 }
