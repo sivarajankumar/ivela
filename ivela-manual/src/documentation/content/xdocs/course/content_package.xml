@@ -120,6 +120,15 @@
 	    document<font   COLOR="BLUE"><B>.</B></font>body<font   COLOR="BLUE"><B>.</B></font>innerHTML <font   COLOR="BLUE">=</font> html<font   COLOR="BLUE"><B>;</B></font>
 
 	<font   COLOR="BLUE"><B>}</B></font>
+
+<FONT COLOR="RED"><B>function</B></FONT> computeUrl<FONT COLOR="BLUE"><B>(</B></FONT>urlId<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT>
+
+<FONT COLOR="BLUE"><B>}</B></FONT>
+
+<FONT COLOR="RED"><B>function</B></FONT> computeExe<FONT COLOR="BLUE"><B>(</B></FONT>urlExe<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT>
+
+<FONT COLOR="BLUE"><B>}</B></FONT>
+	
 	<font   COLOR="RED"><B>function</B></font> getHtml<font   COLOR="BLUE"><B>(</B></font>strUrl<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>{</B></font>
 	    <font   COLOR="RED"><B>var</B></font> html<font   COLOR="BLUE"><B>;</B></font>
 
