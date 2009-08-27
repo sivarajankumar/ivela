@@ -153,7 +153,8 @@ accordion.prototype = {
                         : this.currentAccordion.scrollWidth
             }
         });
-        a.merge(this.scaling);
+        if (typeof (ie6browser) == 'undefined')
+            a.merge(this.scaling);
         this.effects.push(new Effect.Scale(this.currentAccordion, 100, a));
         if (this.showAccordion) {
             this.showAccordion.previous(0).removeClassName(

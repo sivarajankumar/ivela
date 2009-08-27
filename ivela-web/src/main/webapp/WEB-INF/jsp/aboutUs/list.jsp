@@ -45,7 +45,7 @@
         <td valign="top">&nbsp;</td>
      </tr>
      <tr>
-        <td width="1780" valign="top"><a href="http://www.eldorado.org.br" target="_blank"><img src="./images/partners/eldorado.png" alt="IBM" width="170" height="80" border="0"></a></td>
+        <td width="1780" valign="top"><a href="http://www.eldorado.org.br" target="_blank"><img class="about-img" src="./images/partners/eldorado.png" alt="Eldorado" width="170" height="80" border="0"></a></td>
         <td valign="top"><h2><a href="http://www.eldorado.org.br" target="_blank"><s:text name="about.eldorado.name" /></a></h2>
         <s:text name="about.eldorado" /></td>
       </tr>
