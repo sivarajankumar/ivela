@@ -262,7 +262,7 @@ public class PostAction extends GenericAction {
         }
 
         setContentLength(new Long(f.length()).toString());
-        setContentDisposition("filename=\"" + dbfile.getFilename() + "\"");
+        setContentDisposition(dbfile.getFilename());
 
         return "download";
     }
