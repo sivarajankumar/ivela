@@ -24,7 +24,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="cal" uri="/jscalendar" %>
 
 <head>
     <link href="css/course.css" rel="stylesheet" type="text/css" />

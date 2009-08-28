@@ -1,4 +1,5 @@
 <%--    
+#############################################################################################
 # Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
 # This file is part of ivela project, an open-source                                        #
 # Program URL   : http://code.google.com/p/ivela/                                           #  
@@ -17,6 +18,7 @@
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 27-JUN-2008 - Maristella Myrian (UFC)           - XXXXXX - Initial Version                #
 # 22-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Issues                 #
+# 28-AUG-2009 - lagoa   (Instituto Eldorado)      - 000016 - Remove fields mask             #
 #############################################################################################
 --%>
 
@@ -31,6 +33,7 @@
     <script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>    
     <script type="text/javascript" src="js/systemUser/base.js"></script>
     <cal:head/>
+    <script type="text/javascript" src="js/util/calendar.js"></script>
     <s:head />
 </head>
     
@@ -86,7 +89,8 @@
             </p>            
             <p>
                 <label><s:text name="profile.birthDate" />:</label>
-                <cal:jscalendar name="profile.birthDate"  format="%{dateFormat}" showstime="true" theme="simple"/>
+                <cal:jscalendar name="profile.birthDate"  format="%{dateFormat}" showstime="true" theme="simple" onfocus="this.readOnly=true;"/>
+                <script>document.getElementsByName('profile.birthDate')[0].readOnly=true;</script>
             </p>
 
         </fieldset>
@@ -105,7 +109,7 @@
             </p>
             <p>
                 <label><s:text name="systemUser.input.zipCode"/>:</label>
-                <input id="izipcode" name="inAddress.zipCode" value="<s:property value="%{inAddress.zipCode}"/> " onkeypress="mascara(this,zipcode)" maxlength="9" />
+                <input id="izipcode" name="inAddress.zipCode" value="<s:property value="%{inAddress.zipCode}"/> " maxlength="9" />
             </p>
             <p>     
                 <label><s:text name="systemUser.input.country"/>:</label>
@@ -130,11 +134,11 @@
             <legend><s:text name="systemUser.input.phoneTitle"/></legend>
             <p>
                 <label><s:text name="systemUser.input.phone"/>:</label>
-                <input id="iphone" name="listPhones[0].number" value="<s:property value="%{listPhones[0].number}"/>" maxlength="14" onkeypress="mascara(this,phone)"/>
+                <input id="iphone" name="listPhones[0].number" value="<s:property value="%{listPhones[0].number}"/>" maxlength="14"/>
             </p>
             <p>
                 <label><s:text name="systemUser.input.mobile"/>:</label>
-                <input id="iphone"  name="listPhones[1].number"  maxlength="14" value="<s:property value="%{listPhones[1].number}"/>" onkeypress="mascara(this,phone)"/>
+                <input id="iphone"  name="listPhones[1].number"  maxlength="14" value="<s:property value="%{listPhones[1].number}"/>"/>
             </p>
         </fieldset>
 

@@ -1,7 +1,24 @@
-<%-- 
-    Document   : input Exam
-    Created on : Jun 19, 2008, 3:03:17 PM
-    Author     : Maristella Myrian
+<%--    
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: input.jsp                                                                           #
+# Document: Input Exam Page                                                                 # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 29-JUN-2008 - Maristella Myrian (UFC)           - XXXXXX - Initial Version                #
+# 28-AUG-2009 - lagoa   (Instituto Eldorado)      - 000016 - Set date field as readonly     #
+#############################################################################################
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,6 +30,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><s:text name="exam.input.pageTitle" /></title>
         <cal:head/>
+        <script type="text/javascript" src="js/util/calendar.js"></script>
         <s:head />
     </head>
         <s:actionerror />
@@ -29,8 +47,10 @@
             <s:textfield name="exam.randomizeQuestionsOrder" key="exam.input.randomizeQuestionsOrder"/>
             <s:textfield name="exam.navigable" key="exam.input.navigable"/>
             <s:textfield name="exam.finals" key="exam.input.finals"/>
-            <cal:jscalendar name="exam.startDatetime" label="Date and time" format="%m/%d/%Y %H:%M:00" showstime="true"/>
-            <cal:jscalendar name="exam.endDatetime" label="End of Date and time" format="%m/%d/%Y %H:%M:00" showstime="true"/>
+            <cal:jscalendar name="exam.startDatetime" label="Date and time" format="%m/%d/%Y %H:%M:00" showstime="true" onfocus="this.readOnly=true;"/>
+            <script>document.getElementsByName('exam.startDatetime')[0].readOnly=true;</script>
+            <cal:jscalendar name="exam.endDatetime" label="End of Date and time" format="%m/%d/%Y %H:%M:00" showstime="true" onfocus="this.readOnly=true;"/>
+            <script>document.getElementsByName('exam.endDatetime')[0].readOnly=true;</script>
             <s:text name="Select Questions:"/>        
             <table border="1">
                 <tr>

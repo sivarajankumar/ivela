@@ -6,15 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="cal" uri="/jscalendar" %>
 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
         <link href="css/system_message.css" rel="stylesheet" type="text/css" />
-        
-        <cal:head/>
         
         <s:head />
     </head>
