@@ -23,6 +23,7 @@
 # 17-JUN-2009 - fantato (Instituto Eldorado)      - 000010 - multimidia link was wrong      #
 # 25-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - i18n support                   #
 # 20-AGO-2009 - mileine (Instituto Eldorado)      - 000015 - upload translation tip fixed   #
+# 28-AGO-2009 - lagoa   (Instituto Eldorado)      - 000016 - Set date field to readonly     #
 #############################################################################################
 --%>
 
@@ -80,6 +81,7 @@
 
     </script>
     <cal:head />
+    <script type="text/javascript" src="js/util/calendar.js"></script>
 </head>
 <s:actionerror />
 
@@ -830,7 +832,8 @@
                         <tr>
                             <td> 
                                 <p><s:text name="input.exam.startdatetime"/></p>
-                                <cal:jscalendar theme="simple" format="%m/%d/%Y %H:%M:00" name="input.exam.startdatetime" id="input.exam.startdatetime" showstime="true" onfocus="hintCalendar(this)" onchange="hint(this,true)" />
+                                <cal:jscalendar theme="simple" format="%m/%d/%Y %H:%M:00" name="input.exam.startdatetime" id="input.exam.startdatetime" showstime="true" onfocus="hintCalendar(this)" onchange="hint(this,true)" onfocus="this.readOnly=true;"/>
+                                <script>document.getElementsByName('input.exam.startdatetime')[0].readOnly=true;</script>
                             </td>
                             <td>
                                 <span class="hint"><s:text name="show.tip.startDate" /></span>
@@ -840,7 +843,8 @@
                         <tr>
                             <td> 
                                 <p><s:text name="input.exam.enddatetime"/></p>
-                                <cal:jscalendar theme="simple" format="%m/%d/%Y %H:%M:00" name="input.exam.enddatetime" id="input.exam.enddatetime" showstime="true" onfocus="hintCalendar(this)" onchange="hint(this,true)"/>
+                                <cal:jscalendar theme="simple" format="%m/%d/%Y %H:%M:00" name="input.exam.enddatetime" id="input.exam.enddatetime" showstime="true" onfocus="hintCalendar(this)" onchange="hint(this,true)" onfocus="this.readOnly=true;"/>
+                                <script>document.getElementsByName('input.exam.enddatetime')[0].readOnly=true;</script>
                             </td>
                             <td>
                                 <span class="hint"><s:text name="show.tip.endDate" /></span>

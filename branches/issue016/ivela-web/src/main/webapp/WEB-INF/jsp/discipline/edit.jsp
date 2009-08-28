@@ -12,7 +12,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><s:text name="discipline.edit.pageTitle" /></title>
-        <cal:head/>
         <s:head />
     </head>
     <s:actionerror />

@@ -23,14 +23,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="cal" uri="/jscalendar" %>
 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><s:text name="forum.pageTitle" /></title>
         <link href="../css/forum_admin.css" rel="stylesheet" type="text/css" />
-        <cal:head/>
         <s:head />
     </head>
     <div id="breadcrumb">
