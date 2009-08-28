@@ -421,19 +421,19 @@ function showReportRe(json){
     if(jsonMany.count != undefined){
         
         p.add("Cursado",jsonMany.count);
-        p.add("Não Cursado",10 - jsonMany.count);
+        p.add("Não Cursado",100 - jsonMany.count);
             
         colorArray = new Array("#ff7202","#999999");
 
         html+="<table><tr><td>Progress in this course</td></tr>";
         html+="<tr><td>";
-        html+= jsonMany.count*10+"%";
+        html+= jsonMany.count+"%";
         html+="</td></tr></table>";
             
     }else{
         html+="<table><tr><td>Progress in this course</td></tr></table>";
         for(i=0; i < jsonMany.map.entry.length; i++){
-            p.add("<b>"+jsonMany.map.entry[i].qtd+"</b> Alunos com "+jsonMany.map.entry[i].percent*10+"%<br /> do curso concluído",jsonMany.map.entry[i].qtd);
+            p.add("<b>"+jsonMany.map.entry[i].qtd+"</b> Alunos com "+jsonMany.map.entry[i].percent+"%<br /> do curso concluído",jsonMany.map.entry[i].qtd);
         }
             
         colorArray = new Array("#ff0400","#007fff","#37ae47","#fffd00","#ff7202");

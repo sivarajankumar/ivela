@@ -119,12 +119,14 @@
                     tab = 2;
                 } else if(action.startsWith("history")){
                     tab = 3;
-                } else if(action.startsWith("note")){
-                    tab = 4;
+                } 
+                //else if(action.startsWith("note")){
+                  //  tab = 4;
+                //}
+
+                if(tab != 0){
+               	 $('menu_'+tab).setAttribute(classCss(),"current");
                 }
-
-                $('menu_'+tab).setAttribute(classCss(),"current");
-
             </script>
             <!-- end menu -->
 </div>
