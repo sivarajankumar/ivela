@@ -35,7 +35,7 @@
         <title><s:text name="front.pageTitle" /></title>
         <!-- Colocar a logo para aparecer no navegador <link rel="icon" href="../logotipo/logo.jpg" type="image/gif" /> -->
         <link href="../css/base_admin.css" rel="stylesheet" type="text/css" />
-        <link href="../css/lightwindow_admin.css" rel="stylesheet" type="text/css" />
+        <link href="../css/lightwindow.css" rel="stylesheet" type="text/css" />
         <link href="../css/accordion_admin.css"  rel="stylesheet" type="text/css" />
         <!--[if IE 6]>
             <link href="../css/ie6adm.css" rel="stylesheet" type="text/css" />
