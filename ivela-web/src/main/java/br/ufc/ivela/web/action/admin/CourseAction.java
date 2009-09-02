@@ -1,7 +1,26 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*  
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: chat.jsp                                                                            #
+# Document: Chat Page                                                                       # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 07-JAN-2009 - Maristella Myrian (UFC)           - XXXXXX - Initial Version                #
+# 02-SEP-2009 - Rafael Lagôa (Instituto Eldorado) - 000016 - Fix showChat action            #
+#############################################################################################
+*/
+
 package br.ufc.ivela.web.action.admin;
 
 import br.ufc.ivela.commons.Constants;
@@ -23,19 +42,18 @@ import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Maristella Myrian
- */
 public class CourseAction extends GenericAction {
 
     private CourseRemote courseRemote;
     private RepositoryRemote repositoryRemote;
     private DisciplineRemote disciplineRemote;
+    private Discipline discipline;
     private EnrollmentRemote enrollmentRemote;
     private GradeRemote gradeRemote;
     private Course course;
@@ -48,6 +66,8 @@ public class CourseAction extends GenericAction {
     private String chatRoomName = "";
     private String teacherName;
     private Long chatUId;
+    private long courseId;
+    private long disciplineId;
 
     public File getUpload() {
         return upload;
@@ -87,6 +107,18 @@ public class CourseAction extends GenericAction {
 
     public void setDisciplineRemote(DisciplineRemote disciplineRemote) {
         this.disciplineRemote = disciplineRemote;
+    }
+
+    public void setDiscipline(Discipline discipline) {
+        this.discipline = discipline;
+    }
+
+    public void setCourseId(Long id) {
+        this.courseId = id;
+    }
+
+    public void setDisciplineId(Long id) {
+        this.disciplineId = id;
     }
 
     /**
@@ -267,9 +299,11 @@ public class CourseAction extends GenericAction {
     }
     
     public String showChat(){
-        this.nick = getAuthenticatedUser().getUsername();
-        this.chatRoomName = "#course_"+course.getId(); 
+        discipline = disciplineRemote.get(disciplineId);
+        this.nick = this.getAuthenticatedUser().getUsername();
+        this.chatRoomName = "#course_"+courseId+"_"+discipline.getId()+"_"+discipline.getName(); 
         this.teacherName = this.nick;
+
         return "chat";
     }
 
