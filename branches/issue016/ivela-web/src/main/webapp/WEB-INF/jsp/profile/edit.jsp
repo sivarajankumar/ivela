@@ -19,6 +19,7 @@
 # 27-JUN-2008 - Maristella Myrian (UFC)           - XXXXXX - Initial Version                #
 # 22-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Issues                 #
 # 28-AUG-2009 - lagoa   (Instituto Eldorado)      - 000016 - Remove fields mask             #
+# 04-SET-2009 - mileine (Instituto Eldorado)      - 000016 - e-mail field added             #
 #############################################################################################
 --%>
 
@@ -53,11 +54,12 @@
         
         <s:hidden name="profile.id" value="%{profile.id}"/>
         <s:hidden name="address.state.id" value="%{inAddress.state.id}"/>
+        <s:hidden name="systemUser.id" value="%{systemUser.id}"/>
         <fieldset><legend><s:text name="systemUser.input.personalInfo"/></legend>
-            <p >
-                <label><s:text name="profile.disabilities" />:</label>
-                <span><s:radio name="profile.disabilities" list="disabilitiesList" theme="simple"/></span>
-            </p>            
+            <p>
+                <label><s:text name="systemUser.input.email" />:</label>
+                <s:textfield cssClass="general-input" name="systemUser.email" theme="simple" />
+            </p>
             <p>
                 <label><s:text name="profile.firstName" />:</label>
                 <s:textfield cssClass="general-input" name="profile.firstName" theme="simple" />
@@ -74,25 +76,28 @@
                 <label><s:text name="profile.initials" />:</label>
                 <s:textfield cssClass="general-input"name="profile.initials" theme="simple"  />
             </p>
-
-            <p>
-                <label><s:text name="profile.photo" />:</label>
-                <s:file name="upload" theme="simple"  />                
+			<p>
+                <label><s:text name="profile.birthDate" />:</label>
+                <cal:jscalendar name="profile.birthDate"  format="%{dateFormat}" showstime="true" theme="simple" onfocus="this.readOnly=true;"/>
+                <script>document.getElementsByName('profile.birthDate')[0].readOnly=true;</script>
             </p>
             <p>
                 <label><s:text name="profile.socialNumber" />:</label>
                 <s:textfield cssClass="general-input" name="profile.socialNumber" theme="simple"  />
             </p>
+            
             <p>
+                <label><s:text name="profile.photo" />:</label>
+                <s:file cssClass="general-input" name="upload" theme="simple"  />                
+            </p>
+			<p>
                 <label><s:text name="profile.ethnicity" />:</label>
                 <s:select  list="ethnicityList" value="%{profile.ethnicity}" name="profile.ethnicity" id="ethnicity" theme="simple"></s:select>
             </p>            
             <p>
-                <label><s:text name="profile.birthDate" />:</label>
-                <cal:jscalendar name="profile.birthDate"  format="%{dateFormat}" showstime="true" theme="simple" onfocus="this.readOnly=true;"/>
-                <script>document.getElementsByName('profile.birthDate')[0].readOnly=true;</script>
-            </p>
-
+                <label><s:text name="profile.disabilities" />:</label>
+                <span><s:radio  name="profile.disabilities" list="disabilitiesList" theme="simple"/></span>
+            </p>            
         </fieldset>
 
         <s:hidden name="inAddress.id" value="%{inAddress.id}"/>
