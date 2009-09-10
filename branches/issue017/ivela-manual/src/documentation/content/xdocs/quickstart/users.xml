@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+  <title>Ivela - Internet Voice E-Learning Application</title>
+  </header>
+  <body>
+    <p>Os usuários do Ivela têm acesso a diferentes recursos do Ivela de acordo com a sua categoria (administrador, coordenador, professor, tutor, aluno).
+    </p>
+    
+    <section id="admin">
+      <title>Administrador</title>
+      <p>
+       Um usuário com perfil de Administrador tem acesso total para adicionar, alterar ou editar informações relacionados a cursos, pessoas e turmas.
+      </p>
+      
+    </section>
+
+    <section id="coord">
+      <title>Coordenador/ Professor/ Tutor</title>
+      <p>
+		Usuários com perfis de Coordenador, Professor e Tutor são responsáveis pelo gerenciamento de cursos e alunos. Os níveis Coordenador, Professor e Tutor foram criados com o objetivo de estabelecer uma hierarquia entre eles, que obedece a ordem descrita abaixo:</p> 
+	  <ol>
+	  	<li>Coordenador: principal responsável por um ou mais cursos, podendo associar a eles professores e tutores.</li>	
+	  	<li>Professor: encarregado pelo coordenador para ministrar um curso, tem permissão para nomear tutores para auxiliá-lo a gerenciar turmas e dar manutenção no conteúdo do curso.  </li>
+	  	<li>Tutor: presta auxílio ao professor nas tarefas relacionadas ao curso.</li>	  
+	  </ol>
+		
+      <p>Os recursos disponíveis para esses usuários no Ivela são: </p>
+	  <ul>
+		 <li>Gerenciamento de Cursos:
+		 		<ul>
+		 			<li>Criação e manutenção de cursos.</li>
+		 			<li>Criação de avaliações/atividades para alunos.</li>
+		 			<li>Manutenção de arquivos no repositório.</li>
+		 		</ul>
+        </li>
+        <li>
+        	Gerenciamento de Turma:
+        		<ul>
+					<li>Adicionar/Remover alunos de um curso.</li>
+        			<li>Acompanhamento de desempenho de alunos.</li>
+        		</ul>	
+		</li>
+		<li>Fórum - Utilizado para criar tópicos relacionados a um determinado curso e também por responder dúvidas postadas pelos alunos.</li>
+    	<li>Agenda - A agenda pode ser utilizada para compartilhar atividades e exames com alunos.</li>
+    	<li>Relatório de desempenho de alunos - Para acompanhar o andamento da turma, os responsáveis têm acesso a dados de desempenho de todos os alunos do curso.</li>
+	</ul>
+	</section>
+    
+  
+    <section id="student">
+      <title>Aluno</title>
+      <p>
+       Um usuário com permissão de aluno pode participar de cursos cadastrados no Ivela. Para auxiliar o aluno em seu aprendizado, o Ivela disponibiliza para os alunos:
+       <ul>
+       		<li>Fórum - Um espaço para o aluno tirar dúvidas e partilhar conhecimento com outros alunos, promovendo integração entre todos os participantes do curso (professores, tutores e alunos).</li>
+       		<li>Agenda - Uma ferramente para auxiliar o aluno a gerenciar tarefas, exames, etc.</li>
+       		<li>Mensagens -  Serviço de correio eletrônico dentro do Ivela.</li>
+       </ul>
+	  </p>
+	</section>
+
+  </body>
+</document>

@@ -1,0 +1,18 @@
+@charset "utf-8";
+/* CSS Document */
+
+#container #content {overflow: hidden;}
+
+#box-news .corner, #box-article .corner, #box-videos .corner, #box-courses .corner, #box-partners .corner{margin: 0px;} 
+
+#search-news-home, #search-courses-home, #search-article-home, #search-article-home form{height: 29px;}
+
+#search-videos-home form { padding: 0 0 1px 0;}
+
+#search-news-home .field, #search-videos-home .field, #search-article-home .field, #search-courses-home .field{border: 0px;}
+
+.button{ width: 180px;}
+
+#list-partners li {display:block; float:left;}
+
+
