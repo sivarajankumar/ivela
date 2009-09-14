@@ -1,6 +1,0 @@
-@charset "utf-8";
-/* CSS Document */
-
-#container #content {overflow: hidden;}
-
-#box-news .corner, #box-article .corner, #box-videos .corner, #box-courses .corner, #box-partners .corner{margin: 0px;}  
