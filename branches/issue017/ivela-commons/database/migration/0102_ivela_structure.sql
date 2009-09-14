@@ -1,0 +1,13 @@
+ALTER TABLE message ADD COLUMN s_delete boolean DEFAULT false NOT NULL;
+ALTER TABLE message ADD COLUMN r_delete boolean DEFAULT false NOT NULL;
+DROP TABLE state CASCADE;
+DROP TABLE country CASCADE;
+DROP TABLE honorific CASCADE;
+DROP TABLE ethnicity CASCADE;
+DROP TABLE location_type CASCADE ;
+DROP TABLE language_internationalization CASCADE;
+ALTER TABLE profile DROP COLUMN honorific;
+ALTER TABLE address DROP COLUMN location_type;
+ALTER TABLE address DROP COLUMN state;
+ALTER TABLE address ADD COLUMN state varchar(100);
+ALTER TABLE address ADD COLUMN country smallint DEFAULT 1 NOT NULL; 
