@@ -63,6 +63,7 @@ function click(e){
             if(course != current_course){
                 //eh um curso    
                 current_course = course;
+                loadAccordions2(course);
                 showCourse(course);
             }
         } else if(clazz == 'vertical_accordion_toggle vertical_accordion_toggle_active'){
@@ -133,10 +134,58 @@ function showFinish(){
     
 }
         
+function loadContent() {
+
+	 var json = getJsonFromUrl('home!getStructureJson.action');
+	 html = "<h3 class='no_grades'><s:text name='admin.nocourses' /></h3>";
+     if (json.courses != '') {
+     html = "";
+         for (i = 0; i <json.courses.length; i++) {
+	    	 if (json.courses[i].name.length > 22) {
+	    		 html += "<h3 class='accordion_toggle_grade2' title='"+json.courses[i].name+"'>"+json.courses[i].name.substring(0, 22)+"...</h3>";
+	    	 } else {   	 
+			     html += "<h3 class='accordion_toggle_grade2'>"+json.courses[i].name+"</h3>";
+	    	 }
+	    	 html += "<div class='accordion_content_grade2' id='"+json.courses[i].id+"'>";
+	    	    html += "<div id='vertical_nested_container_"+json.courses[i].id+"' class='vertical_nested_container'>"; 	        	    	       
+     	        html += "</div>";	        
+	    	 html += "</div>";
+         }    	 
+	 } 
+	
+    
+    $('vertical_container2').innerHTML= html;		 	
+}
+
+
+function loadContent2(id) {
+    html = "<h4 class='no_grades'>no grades</h4>";	   	    	        
+    html += "<div id='vertical_nested_container2'>";		 				                                    
+    html += "</div>";	   	
+    $('vertical_nested_container_' + id).innerHTML= html;		 	
+}
+
+
 //
 //	Set up all accordions
 //
+
+function loadAccordions2(id) {
+	loadContent2(id);
+	if($('vertical_nested_container_'+id) != null) {
+	new accordion('vertical_nested_container_'+id, {
+	  classNames : {
+	      toggle : 'vertical_accordion_toggle',
+	      toggleActive : 'vertical_accordion_toggle_active',
+	      content : 'vertical_accordion_content'
+	  }
+	});            
+	}
+}
+
+
 function loadAccordions() {		
+	loadContent();
     var bottomAccordion = new accordion('vertical_container2', {
         classNames : {
             toggle : 'accordion_toggle_grade2',
@@ -146,25 +195,25 @@ function loadAccordions() {
         direction : 'vertical'
     });
 
-    if($('vertical_nested_container') != null) {
-        new accordion('vertical_nested_container', {
-            classNames : {
-                toggle : 'vertical_accordion_toggle',
-                toggleActive : 'vertical_accordion_toggle_active',
-                content : 'vertical_accordion_content'
-            }
-        });            
-    }
-    
-    if($('vertical_nested_container2') != null) {
-        new accordion('vertical_nested_container2', {
-            classNames : {
-                toggle : 'vertical_accordion_toggle2',
-                toggleActive : 'vertical_accordion_toggle_active2',
-                content : 'vertical_accordion_content2'
-            }
-        });
-    }
+//    if($('vertical_nested_container') != null) {
+//        new accordion('vertical_nested_container', {
+//            classNames : {
+//                toggle : 'vertical_accordion_toggle',
+//                toggleActive : 'vertical_accordion_toggle_active',
+//                content : 'vertical_accordion_content'
+//            }
+//        });            
+//    }
+//    
+//    if($('vertical_nested_container2') != null) {
+//        new accordion('vertical_nested_container2', {
+//            classNames : {
+//                toggle : 'vertical_accordion_toggle2',
+//                toggleActive : 'vertical_accordion_toggle_active2',
+//                content : 'vertical_accordion_content2'
+//            }
+//        });
+//    }
 
     if($$('#vertical_container2 .accordion_toggle_grade2') != null && $$('#vertical_container2 .accordion_toggle_grade2').length > 0) {
       first = bottomAccordion.activate($$('#vertical_container2 .accordion_toggle_grade2')[0]);
