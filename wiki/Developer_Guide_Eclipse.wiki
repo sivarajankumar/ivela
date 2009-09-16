@@ -31,13 +31,13 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
 = Workstation Setup: Env =
   * Put his lines into your .profile or .bash_profile 
 {{{
-  * JAVA_HOME = <path of your jdk>
-  * CLASSPATH = $JAVA_HOME/lib
-  * M2_HOME = <maven-path>
-  * M2 = $M2_HOME/bin
-  * PATH = $JAVA_HOME/bin:$M2:$PATH
-  * LD_LIBRARY_PATH = /usr/lib/jni 
-  * EXPORT JAVA_HOME CLASSPATH M2_HOME M2 PATH LD_LIBRARY_PATH 
+  $ JAVA_HOME=<path of your jdk>
+  $ CLASSPATH=$JAVA_HOME/lib
+  $ M2_HOME=<maven-path>
+  $ M2=$M2_HOME/bin
+  $ PATH=$JAVA_HOME/bin:$M2:$PATH
+  $ LD_LIBRARY_PATH=/usr/lib/jni 
+  $ export JAVA_HOME CLASSPATH M2_HOME M2 PATH LD_LIBRARY_PATH 
 }}}
 
 = Workstation Setup: Glassfish =
@@ -132,7 +132,7 @@ keytool -genkey -keyalg RSA -keystore ~/.asadmintruststore -alias junk
 
 = Workstation Setup: Database =
   * Install PostgreSQL 8.3
-  * Go to [http://code.google.com/p/ivela/downloads/list] and download _ivela_structure.sql & ivela_basic_data.sql_
+  * Go to [http://code.google.com/p/ivela/source/browse/trunk/ivela-commons/database/ivela.sql] and [http://code.google.com/p/ivela/source/browse/trunk/ivela-commons/database/ivela_basic_data.sql] and download _ivela_structure.sql & ivela_basic_data.sql_
   * Save downloaded sql files into _/opt/sws/sql_
   * Create database, structure tables and import basic data:
 {{{
