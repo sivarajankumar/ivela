@@ -30,8 +30,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.TreeMap;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Utility Class to access and manage Application Properties.
@@ -54,7 +54,7 @@ public class PropertiesUtil {
 
     private static Properties propertiesReader;
 
-    private static Logger logger = Logger.getLogger(PropertiesUtil.class.getClass());
+    private static Log logger = LogFactory.getLog(PropertiesUtil.class);
     
     private final Map<Integer, Map<String, String>> statesMap = new HashMap<Integer, Map<String, String>>();
 
@@ -68,10 +68,10 @@ public class PropertiesUtil {
         ClassLoader classL = PropertiesUtil.class.getClassLoader();
             propertiesReader = new Properties();                
             propertiesReader.load(classL.getResourceAsStream(PROPERTIES_FILE));
-        } catch (IOException e) {
-            logger.log(Level.ERROR, PROPERTIES_FILE + " not loaded: " + e.getMessage());
+        } catch (IOException ioe) {
+            logger.error( PROPERTIES_FILE + " not loaded", ioe);
         } catch (Exception e) {
-            logger.log(Level.WARN, PROPERTIES_FILE + "may not have been loaded: " + e.getMessage());
+            logger.warn(PROPERTIES_FILE + "may not have been loaded: ", e);
         }
     }
     

@@ -1,7 +1,25 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*  
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: PostAction.java                                                                     #
+# Document: Post User Action                                                                # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 07-JAN-2009 - Leonardo Oliveira (UFC)           - XXXXXX - Initial Version                #
+# 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
+#############################################################################################
+*/
 package br.ufc.ivela.web.action;
 
 import br.ufc.ivela.commons.Constants;
@@ -20,13 +38,7 @@ import java.util.Date;
 import java.util.List;
 import org.springframework.util.StringUtils;
 
-/**
- *
- * @author Leonardo Oliveira Moreira
- * 
- * 
- */
-public class PostAction extends GenericAction {
+public class PostAction extends CourseAwareAction {
 
     private PostRemote postRemote;
     private Post post;
@@ -68,30 +80,23 @@ public class PostAction extends GenericAction {
     public void setForumRemote(ForumRemote forumRemote) {
         this.forumRemote = forumRemote;
     }
-    
-    
-
+        
     /**
      * Add a quick answer
      * @return a list of quick answer
      */
     public String addQuickAnswer() {
-        performValidationAdd();
-        if (!hasActionErrors()) {
-            topic = post.getTopic();
-            topic = topicRemote.get(topic.getId());
-            forum = forumRemote.get(topic.getForum().getId());
-            post.setCreatedBy(getAuthenticatedUser());
-            post.setCreatedAt(new Date());
-            Long result = postRemote.add(post);
+        topic = post.getTopic();        
+        performValidationAdd();        
+        if (!hasActionErrors()) {            
+            post.setCreatedBy(getAuthenticatedUser());                                                                                  
+            Long result = postRemote.add(post);                        
             if (result != null && result.longValue() > 0) {
-                post = new Post();
-                return list();
+                post = new Post();                
             }
-        }
-        topic = post.getTopic();
+        }       
         topic = topicRemote.get(topic.getId());
-        forum = forumRemote.get(topic.getForum().getId());        
+        forum = topic.getForum();
         return list();
     }
 
@@ -100,55 +105,40 @@ public class PostAction extends GenericAction {
      * @return
      */
     public String add() {
-        performValidationAdd();
-        if (!hasActionErrors()) {
-            topic = post.getTopic();
-            topic = topicRemote.get(topic.getId());
-            forum = forumRemote.get(topic.getForum().getId());
-            post.setCreatedBy(getAuthenticatedUser());
-            post.setCreatedAt(new Date());
-
-            Long idPost = postRemote.add(post);
-            Post p = postRemote.get(idPost);
-
+        topic = post.getTopic();        
+        performValidationAdd();        
+        if (!hasActionErrors()) {                                    
+            post.setCreatedBy(getAuthenticatedUser());            
+            File[] uploadFiles = null;
+            java.io.File[] fileIo = null;                                   
             if (upload != null) {
+                uploadFiles = new File[upload.length];
+                fileIo = new java.io.File[upload.length];
                 for (int i = 0; i < upload.length; i++) {
-                    java.io.File fileIo = upload[i];
-
+                    fileIo[i] = upload[i];                    
                     if (fileIo != null) {
                         file = new File();
-
                         file.setTitle(uploadFileName[i]);
                         file.setDescription(uploadFileName[i]);
                         file.setAuthor((isUserLogged()) ? getAuthenticatedUser().getUsername() : "");
-                        file.setKeywords(uploadFileName[i]);
-                        file.setCourseId(p.getTopic().getForum().getGrade().getCourseId());
+                        file.setKeywords(uploadFileName[i]);                        
                         file.setFilename(uploadFileName[i]);
-                        file.setMimetype(uploadContentType[i]);
-                        file.setSentBy(p.getCreatedBy());
+                        file.setMimetype(uploadContentType[i]);                        
                         file.setUploadDate(new Date());
                         file.setPath(path + file.getFilename());
-
-                        Long idFile = postRemote.addFile(fileIo, file);
-
-                        if (idFile != null) {
-                            File f = postRemote.getFile(idFile);
-
-                            attachPost = new AttachPost();
-                            attachPost.setFile(f);
-                            attachPost.setPost(p);
-
-                            postRemote.addAttach(attachPost);
-                        }
+                        uploadFiles[i] = file;
                     }
-
                 }
             }
+                        
+            Long idPost = postRemote.add(post, fileIo, uploadFiles);
             if (idPost != null) {
                 post = new Post();
-            }
-            return list();
+            }            
         }
+
+        topic = topicRemote.get(topic.getId());
+        forum = topic.getForum();
         return list();
     }
 
@@ -175,6 +165,9 @@ public class PostAction extends GenericAction {
         // verifies if topicId is set
         forum = forumRemote.get(forum.getId());
         topic = topicRemote.get(topic.getId());
+        grade = forum.getGrade();
+        course = forum.getCourse();
+        
         post = null;
         
         if (topic.getId() != null) {
@@ -205,16 +198,14 @@ public class PostAction extends GenericAction {
      *         error view, otherwise
      */
     public String remove() {
-        // verifies if topicId is set
-        post = postRemote.get(post.getId());
-        topic = post.getTopic();
-        topic = topicRemote.get(topic.getId());
-        forum = forumRemote.get(topic.getForum().getId());
+        // verifies if topicId is set                                
         performValidationRemove();
         if (!hasActionErrors()) {
-            boolean result = postRemote.remove(post.getId());
-            if (result) {
-                return list();
+            try {
+                postRemote.remove(post.getId());                                                                        
+            } catch(Exception e) {
+                log.error("Could not remove post: " + post.getId(), e);
+                addActionError(getText("post.input.error.remove"));   
             }
         }
         return list();
@@ -234,7 +225,7 @@ public class PostAction extends GenericAction {
         // verifies if the message is empty
         if (!StringUtils.hasText(post.getMessage())) {
             addActionError(getText("post.input.validation.message"));
-        }
+        }        
     }
 
     private void performValidationRemove() {
@@ -257,8 +248,7 @@ public class PostAction extends GenericAction {
         try {
             downloadStream = new FileInputStream(f);
         } catch (FileNotFoundException ex) {
-            logger.log(ex, "download error!");
-            ex.printStackTrace();
+            log.error("download error!", ex);            
         }
 
         setContentLength(new Long(f.length()).toString());

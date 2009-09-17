@@ -1,14 +1,40 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*  
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: CourseBean.java                                                                     #
+# Document: Course Stateless Bean                                                           # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 07-JAN-2009 - Maristella Myrian (UFC)           - XXXXXX - Initial Version                #
+# 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
+#############################################################################################
+*/
 package br.ufc.ivela.ejb.impl;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ejb.Stateless;
 
 import br.ufc.ivela.commons.dao.DaoFactory;
 import br.ufc.ivela.commons.dao.GenericDao;
 import br.ufc.ivela.commons.dao.Page;
-import br.ufc.ivela.ejb.interfaces.CourseRemote;
-import br.ufc.ivela.ejb.*;
 import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.Exam;
@@ -18,19 +44,9 @@ import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.model.Unit;
 import br.ufc.ivela.commons.model.UnitContent;
 import br.ufc.ivela.commons.util.Thumbnail2;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import javax.ejb.Stateless;
+import br.ufc.ivela.ejb.interfaces.CourseRemote;
 
-/**
- *
- * @author Maristella Myrian
- */
+
 @Stateless(mappedName="CourseBean")
 public class CourseBean implements CourseRemote {
 
@@ -320,6 +336,10 @@ public class CourseBean implements CourseRemote {
         return ((Long) result.get(0)).intValue();
     }
 
+    public List<SystemUser> getCoordinators(Long courseId) {
+        return daoGrade.find("select g.coordinator from Grade g where g.courseId = ? ", new Object[]{courseId});
+    }
+    
     public List<SystemUser> getProfessors(Long courseId) {
         return daoGrade.find("select g.professors from Grade g where g.courseId = ? ", new Object[]{courseId});
     }

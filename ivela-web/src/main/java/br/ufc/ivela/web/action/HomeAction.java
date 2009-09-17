@@ -56,7 +56,7 @@ public class HomeAction extends GenericAction {
     private CourseRemote courseRemote;
     private List<Course> courseList;
     private List<Message> messageList;
-    private List<Topic> recentlyTopics;
+    private List<Topic> recentTopics;
     private TopicRemote topicRemote;
     private NoteRemote noteRemote;
     private List<Note> noteList;
@@ -116,18 +116,19 @@ public class HomeAction extends GenericAction {
     }
 
     public String getToolsTopics() {
-        recentlyTopics = this.topicRemote.getRecentTopics(3);
+        enrollmentList = enrollmentRemote.getByUserAndStatus(getAuthenticatedUser().getId(), Constants.ENROLLMENT_ACTIVE);
+        recentTopics = this.topicRemote.getRecentTopics(3, enrollmentList);
 
         StringBuilder json = new StringBuilder("{\"topics\":["); // fake json!!!
 
-        for (int i = 0; i < recentlyTopics.size(); i++) {
-            Topic topic = recentlyTopics.get(i);
+        for (int i = 0; i < recentTopics.size(); i++) {
+            Topic topic = recentTopics.get(i);
             
             json.append("{\"id\":\""+ topic.getId() +"\", \"title\":\""+ topic.getTitle() +"\"," +
                     " \"createdBy\":\""+ topic.getCreatedBy().getUsername() + "\"," +
                     " \"createdAt\":\""+ topic.getCreatedAt() + "\", \"forumId\":\""+ topic.getForum().getId() +"\"}");
 
-            if(i != recentlyTopics.size() - 1) {
+            if(i != recentTopics.size() - 1) {
                 json.append(",");
             }
         }
@@ -266,7 +267,7 @@ public class HomeAction extends GenericAction {
      * @return recentlyTopics
      */
     public List<Topic> getRecentlyTopics() {
-        return recentlyTopics;
+        return recentTopics;
     }
 
     /**
@@ -274,7 +275,7 @@ public class HomeAction extends GenericAction {
      * @param recentlyTopics
      */
     public void setRecentlyTopics(List<Topic> recentlyTopics) {
-        this.recentlyTopics = recentlyTopics;
+        this.recentTopics = recentlyTopics;
     }
 
     /**

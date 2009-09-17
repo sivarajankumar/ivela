@@ -5,10 +5,16 @@
 
 package br.ufc.ivela.ejb.interfaces;
 
+import java.util.List;
+
+import javax.ejb.Remote;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+
+import org.springframework.transaction.annotation.Transactional;
+
 import br.ufc.ivela.commons.dao.Page;
 import br.ufc.ivela.commons.model.Forum;
-import java.util.List;
-import javax.ejb.Remote;
 
 /**
  *
@@ -81,13 +87,16 @@ public interface ForumRemote {
     
     public Page getAllForumListPage(String title, int page, int pageSize);
     
-
+    @TransactionAttribute( TransactionAttributeType.REQUIRED)
     public Page getForumList(Long systemUser, Long course, boolean isAdministrator, boolean isPublic, String title, int page, int pageSize);
 
+    @TransactionAttribute( TransactionAttributeType.REQUIRED)
     public List<Forum> getForumList(Long systemUser, Long course, boolean isAdministrator, boolean isPublic, String title);
     
+    @TransactionAttribute( TransactionAttributeType.REQUIRED)
     public Page getForumList(Long systemUser, boolean isAdministrator, boolean isPublic, String title, int page, int pageSize);
     
+    @TransactionAttribute( TransactionAttributeType.REQUIRED)
     public List<Forum> getForumList(Long systemUser, boolean isAdministrator, boolean isPublic, String title);
     
     public Forum getForum(Long systemUser, boolean isAdministrator, Long forum);

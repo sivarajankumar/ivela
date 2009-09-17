@@ -1,7 +1,25 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*  
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: TopicAction.java                                                                    #
+# Document: Topic User Action                                                               # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 07-JAN-2009 - Leonardo Oliveira (UFC)           - XXXXXX - Initial Version                #
+# 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
+#############################################################################################
+*/
 package br.ufc.ivela.web.action.admin;
 
 import br.ufc.ivela.web.action.*;
@@ -18,13 +36,7 @@ import java.util.Date;
 import java.util.List;
 import org.springframework.util.StringUtils;
 
-/**
- *
- * @author Leonardo Oliveira Moreira
- * 
- * 
- */
-public class TopicAction extends GenericAction {
+public class TopicAction extends CourseAwareAction {
 
     private ForumRemote forumRemote;
     private TopicRemote topicRemote;
@@ -55,8 +67,7 @@ public class TopicAction extends GenericAction {
     public String add() {
         performValidateAdd();
         forum = topic.getForum();
-        topic.setCreatedBy(getAuthenticatedUser());
-        topic.setCreatedAt(new Date());
+        topic.setCreatedBy(getAuthenticatedUser());        
         if (!hasActionErrors()) {
             Long result = topicRemote.add(topic);
             if (result != null) {
@@ -69,8 +80,7 @@ public class TopicAction extends GenericAction {
     public String addTopic() {
         boolean bResult = false;
         StringBuilder json = new StringBuilder();
-        topic.setCreatedBy(getAuthenticatedUser());
-        topic.setCreatedAt(new Date());
+        topic.setCreatedBy(getAuthenticatedUser());        
         performValidateAdd();
         if (!hasActionErrors()) {
             Long result = topicRemote.add(topic);
@@ -98,10 +108,8 @@ public class TopicAction extends GenericAction {
     
     public String updateTopic() {
         boolean bResult = false;
-        StringBuilder json = new StringBuilder();
-        forum = forumRemote.get(topic.getForum().getId());
-        topic.setCreatedBy(getAuthenticatedUser());
-        topic.setCreatedAt(new Date());
+        StringBuilder json = new StringBuilder();        
+        topic.setCreatedBy(getAuthenticatedUser());        
         bResult = topicRemote.update(topic);
         json.append("{");
         json.append("\"result\":\"" + bResult + "\"");
