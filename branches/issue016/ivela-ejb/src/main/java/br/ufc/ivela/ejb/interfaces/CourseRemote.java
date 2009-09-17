@@ -74,6 +74,8 @@ public interface CourseRemote {
     
     public Integer getStudentsCount(Long courseId);
     
+    public List<SystemUser> getCoordinators(Long courseId);
+            
     public List<SystemUser> getProfessors(Long courseId);
     
     public List<SystemUser> getTutors(Long courseId);

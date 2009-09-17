@@ -538,9 +538,6 @@
 
                 <input type="checkbox" id="forum.studentCreateTopic" name="forum.studentCreateTopic" value="true" /> <s:text name="forum.input.createTopic"/><br/>
                 <input type="checkbox" id="forum.studentUploadPost" name="forum.studentUploadPost" value="true" /> <s:text name="forum.input.uploadPost"/><br/>
-                <input type="checkbox" id="forum.studentUploadRepository" name="forum.studentUploadRepository" value="true" /> <s:text name="forum.input.uploadRepository"/><br/>
-                <input type="checkbox" id="forum.studentLinkPost" name="forum.studentLinkPost" value="true" /> <s:text name="forum.input.linkPost"/><br/>
-
                 <input type="checkbox" id="forum.public1" name="forum.public1" value="true" /> <s:text name="forum.input.public"/><br/>
 
                 <br/>
@@ -895,18 +892,21 @@
                     <input type="hidden" id="forum.grade.course.id" name="forum.grade.course.id" value="" />
                 </form>
                 <br class="clear" />
+                 <s:if test="isAdmin()">
                 <div class="actions-box">
                     <h2><s:text name="grade.show.actions" /></h2>
-                    <div class="edit-tools">
+                    <div class="edit-tools">                       
                         <ul>
                             <li><a class="icon-new" href="javascript:showEntryForum(document.getElementById('forum.show.grade.id').value);"><s:text name= "forum.grade.new.forum" /></a></li>
                             <li><a class="icon-delete" href="javascript:deleteForum();"><s:text name= "forum.grade.delete.forum" /></a></li>
-                            <br class="clear" />
-                        </ul>
+                            <br class="clear" />                            
+                        </ul>                                                                        
                     </div>
                     <div class="edit-box" id="forum.grade.forums">
                     </div>
+                    
                 </div>
+                </s:if>
             </div>
         </div>
     </div>

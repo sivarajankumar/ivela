@@ -1,37 +1,48 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*  
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: CourseAction.java                                                                   #
+# Document: Course User Action                                                              # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 07-JAN-2009 - Leonardo Oliveira (UFC)           - XXXXXX - Initial Version                #
+# 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
+#############################################################################################
+*/
 package br.ufc.ivela.web.action;
 
+import java.io.InputStream;
+import java.util.Iterator;
+import java.util.Set;
+
 import br.ufc.ivela.commons.dao.Page;
-import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.SystemUser;
-import br.ufc.ivela.ejb.interfaces.CourseRemote;
 import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
 import br.ufc.ivela.ejb.interfaces.GradeRemote;
 import br.ufc.ivela.ejb.interfaces.ProfessorRemote;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
 /**
  *
  * @author Maristella Myrian
  */
-public class CourseAction extends GenericAction {
-
-    private CourseRemote courseRemote;
-    private GradeRemote gradeRemote;
+public class CourseAction extends CourseAwareAction {
+    
     private ProfessorRemote professorRemote;
-    private DisciplineRemote disciplineRemote;
-    private Course course;
+    private DisciplineRemote disciplineRemote;    
     private Discipline discipline;
-    private List<Course> courseList;
     private int pageCount;
     private int page;
     private int pageSize = 5;
@@ -39,8 +50,7 @@ public class CourseAction extends GenericAction {
     private InputStream inputStream;
     private String nick;
     private String chatRoomName;
-    private String teacherName;
-    private Grade grade;
+    private String teacherName;    
     private long courseId;
     private long disciplineId;
 
@@ -64,54 +74,6 @@ public class CourseAction extends GenericAction {
         setCount(p.getCount());
         setPageCount(p.getPageCount());
         return "list";
-    }
-
-    /**
-     * Sets a course
-     * @param course
-     */
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    /**
-     * Retrieves a course
-     * @return course
-     */
-    public Course getCourse() {
-        return course;
-    }
-
-    /**
-     * Retrieves the courseLocal
-     * @return courseLocal
-     */
-    public CourseRemote getCourseRemote() {
-        return courseRemote;
-    }
-
-    /**
-     *Sets the course Local
-     * @param courseRemote
-     */
-    public void setCourseRemote(CourseRemote courseRemote) {
-        this.courseRemote = courseRemote;
-    }
-
-    /**
-     * Retrieves a course List
-     * @return courseList
-     */
-    public List<Course> getCourseList() {
-        return courseList;
-    }
-
-    /**
-     *Sets the list of course
-     * @param courseList
-     */
-    public void setCourseList(List<Course> courseList) {
-        this.courseList = courseList;
     }
 
     /**
@@ -168,8 +130,7 @@ public class CourseAction extends GenericAction {
 
     public void setGrade(Grade grade) {
         this.grade = grade;
-    }
-    
+    }    
 
     /**
      * Retrieves the Page size

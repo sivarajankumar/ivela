@@ -698,22 +698,20 @@ function showEntryTutor(gradeId, courseId) {
 }
 
 function showEntryForum(gradeId) {
-    closeAll();
-
-    $('forum.title').value = '';
-    $('forum.description').innerHTML = '';
-    $('forum.description').value = '';
-    $('forum.studentCreateTopic').checked = false;
-    $('forum.studentUploadPost').checked = false;
-    $('forum.studentUploadRepository').checked = false;
-    $('forum.studentLinkPost').checked = false;
-    $('forum.public1').checked = false;
-
-    $('showEntryForum').style.display = 'block';
-    if (gradeId == null)
-        $('forum.grade.id').value = '';
-    else
-        $('forum.grade.id').value = gradeId;
+//    closeAll();
+//
+//    $('forum.title').value = '';
+//    $('forum.description').innerHTML = '';
+//    $('forum.description').value = '';
+//    $('forum.studentCreateTopic').checked = false;
+//    $('forum.studentUploadPost').checked = false;    
+//    $('forum.public1').checked = false;
+//
+//    $('showEntryForum').style.display = 'block';
+//    if (gradeId == null)
+//        $('forum.grade.id').value = '';
+//    else
+//        $('forum.grade.id').value = gradeId;
 }
 
 function showEntryTopic(forumId) {
