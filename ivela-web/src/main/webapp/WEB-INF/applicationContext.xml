@@ -135,9 +135,6 @@
         <jee:jndi-lookup resource-ref="false" jndi-name="FinishedExerciseBean#br.ufc.ivela.ejb.interfaces.FinishedExerciseRemote"
         id="finishedExerciseRemote" expected-type="br.ufc.ivela.ejb.interfaces.FinishedExerciseRemote"/>
 
-        <jee:jndi-lookup resource-ref="false" jndi-name="FaqBean#br.ufc.ivela.ejb.interfaces.FaqRemote"
-        id="faqRemote" expected-type="br.ufc.ivela.ejb.interfaces.FaqRemote"/>        
-
         <jee:jndi-lookup resource-ref="false" jndi-name="WsEnabledBean#br.ufc.ivela.ejb.interfaces.WsEnabledRemote"
         id="wsEnabledRemote" expected-type="br.ufc.ivela.ejb.interfaces.WsEnabledRemote"/>
 
@@ -175,9 +172,7 @@
        
        <bean id="admin_systemUserAction" class="br.ufc.ivela.web.action.admin.SystemUserAction" scope="prototype"/>
        
-       <bean id="admin_dictionaryAction" class="br.ufc.ivela.web.action.admin.DictionaryAction" scope="prototype"/>
-       
-       <bean id="admin_faqAction" class="br.ufc.ivela.web.action.admin.FaqAction" scope="prototype"/>
+       <bean id="admin_dictionaryAction" class="br.ufc.ivela.web.action.admin.DictionaryAction" scope="prototype"/>       
               
        <bean id="systemUserAction" class="br.ufc.ivela.web.action.SystemUserAction" scope="prototype"/>
        
@@ -215,9 +210,7 @@
        
        <bean id="homeAction" class="br.ufc.ivela.web.action.HomeAction" scope="prototype"/>
        
-       <bean id="unitContentAction" class="br.ufc.ivela.web.action.UnitContentAction" scope="prototype"/>
-       
-       <bean id="faqAction" class="br.ufc.ivela.web.action.FaqAction" scope="prototype"/>
+       <bean id="unitContentAction" class="br.ufc.ivela.web.action.UnitContentAction" scope="prototype"/>       
        
        <bean id="aboutUsAction" class="br.ufc.ivela.web.action.AboutUsAction" scope="prototype"/>
        

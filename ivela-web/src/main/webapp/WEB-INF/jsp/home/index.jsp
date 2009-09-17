@@ -53,7 +53,7 @@
     <link href="css/accordion.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/ead/tools.js"></script>
     <script type="text/javascript" src="js/accordion.js"></script>
-    <script type="text/javascript" src="js/ead/ajax.js"></script>
+    <script type="text/javascript" src="js/util/ajax.js"></script>
     <script type="text/javascript" src="js/ead/index.js"></script>
     
 </head>

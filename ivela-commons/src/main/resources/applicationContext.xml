@@ -64,8 +64,7 @@
                 <value>br.ufc.ivela.commons.model.Exercise</value>
                 <value>br.ufc.ivela.commons.model.ExternalAnswerStudentExam</value>
                 <value>br.ufc.ivela.commons.model.ExternalParams</value>
-                <value>br.ufc.ivela.commons.model.ExternalQuestion</value>
-                <value>br.ufc.ivela.commons.model.Faq</value>
+                <value>br.ufc.ivela.commons.model.ExternalQuestion</value>                
                 <value>br.ufc.ivela.commons.model.File</value>
                 <value>br.ufc.ivela.commons.model.FinishedExam</value>
                 <value>br.ufc.ivela.commons.model.FinishedExercise</value>

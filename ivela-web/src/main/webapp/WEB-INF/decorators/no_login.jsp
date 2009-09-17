@@ -62,7 +62,7 @@
             <div id="content-footer">
                <p id="copyright"> &copy; 2009 Ivela <%= Constants.SYSTEM_VERSION %> - All rights reserved.</p>
            
-                <img class="logo" src="RenderServlet?file=/globals/images/logo-footer.png" alt="<s:property value="front.logo.footer" />" />
+                <img class="logo" src="images/logo-footer.png" alt="<s:property value="front.logo.footer" />" />
             </div>
   
         </div>

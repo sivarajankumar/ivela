@@ -74,7 +74,7 @@
          
     </form>
     <div class="tools-login">
-        <a href="/ivela-manual" title="Manual">Manual</a>
+        <a href="/ivela-manual" title="Manual"><s:text name='main.manual'/></a>
         <a href="aboutUs!list.action" title=<s:text name="login.about.us"/>><s:text name="login.about.us"/></a>
         <a href="systemUser!input.action" title=<s:text name="login.join.now"/>><s:text name="login.join.now"/></a>
     </div>
