@@ -1,0 +1,212 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>      
+    <package name="admin" extends="struts-default" namespace="/admin">                
+        <action name="*!*" class="admin_{1}Action" method="{2}">            
+            <result name="input">/WEB-INF/jsp/admin/{1}/input.jsp</result>
+            <result name="success">/WEB-INF/jsp/admin/{1}/result.jsp</result>
+            <result name="list">/WEB-INF/jsp/admin/{1}/list.jsp</result>
+            <result name="edit">/WEB-INF/jsp/admin/{1}/edit.jsp</result>
+            <result name="show">/WEB-INF/jsp/admin/{1}/show.jsp</result>
+            <result name="chat">/WEB-INF/jsp/admin/{1}/chat.jsp</result>
+            <result name="json" type="stream">  
+                <param name="contentType">application/json</param>    
+                <param name="inputName">inputStream</param>  
+            </result> 
+            <result name="text" type="stream">  
+                <param name="contentType">text/plain</param>    
+                <param name="inputName">inputStream</param>  
+            </result> 
+            <result name="pdf" type="stream">  
+                <param name="contentType">application/pdf</param>    
+                <param name="inputName">inputStream</param>  
+            </result>  
+            <result name="courses" type="redirect">course!show.action?message=${message}</result>
+            <result name="grades" type="redirect">grade!show.action?message=${message}</result>
+            <result name="reload">/WEB-INF/jsp/admin/{1}/reload.jsp</result>
+        </action>
+        
+        <action name="index" class="admin_homeAction" method="home">            
+            <result name="home">/WEB-INF/jsp/admin/home/home.jsp</result>
+        </action>
+        
+        <action name="home" class="admin_homeAction">            
+            <result name="json" type="stream">  
+                <param name="contentType">application/json</param>    
+                <param name="inputName">inputStream</param>  
+            </result> 
+            <result name="success">/WEB-INF/jsp/admin/home/index.jsp</result>
+        </action>
+    </package>
+            
+    <package name="default" extends="struts-default">                                                     
+        <global-results>
+            <result name="RuntimeException">/WEB-INF/jsp/error/exception.jsp</result>
+            <result name="NoSuchMethodException">/WEB-INF/jsp/error/notfound.jsp</result>
+            <result name="index">index.jsp</result>
+            <result name="login" type="redirect-action">
+                <param name="actionName">login</param>
+                <param name="success">true</param>
+            </result>
+        </global-results>
+        
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.RuntimeException" 
+                               result="RuntimeException"/>
+            <exception-mapping exception="java.lang.NoSuchMethodException"
+                               result="NoSuchMethodException"/>
+        </global-exception-mappings>
+       
+       <action name="login">            
+            <result>login.jsp</result>
+        </action>
+        
+       <action name="accessDenied">           
+            <result>/WEB-INF/jsp/error/accessDenied.jsp</result>
+       </action>
+       
+        <action name="home" class="homeAction">            
+            <result name="success">WEB-INF/jsp/home/index.jsp</result>
+            <result name="json" type="stream">  
+                <param name="contentType">application/json</param>    
+                <!--param name="contentDisposition">filename="tree.xml"</param-->  
+                <param name="inputName">inputStream</param>  
+            </result>              
+        </action>
+        
+        <action name="forgotPassword" class="systemUserAction" method="forgotPassword">            
+            <result name="forgotPassword">forgotPassword.jsp</result>
+            <result name="json" type="stream">  
+                <param name="contentType">application/json</param>    
+                <param name="inputName">inputStream</param>  
+            </result>              
+        </action>        
+        
+          
+        
+        <action name="*!*" class="{1}Action" method="{2}">                                 
+            <result name="input">WEB-INF/jsp/{1}/input.jsp</result>
+            <result name="success">WEB-INF/jsp/{1}/result.jsp</result>
+            <result name="list">WEB-INF/jsp/{1}/list.jsp</result>
+            <result name="edit">WEB-INF/jsp/{1}/edit.jsp</result>
+            <result name="show">WEB-INF/jsp/{1}/show.jsp</result>
+            <result name="change">WEB-INF/jsp/{1}/change.jsp</result>
+            <result name="auditive">WEB-INF/jsp/{1}/auditive.jsp</result>
+            <result name="printVersion">WEB-INF/jsp/history/printVersion.jsp</result>
+            <result name="showChatStd">WEB-INF/jsp/course/chat.jsp</result>
+            
+            <result name="text" type="stream">  
+                <param name="contentType">text/plain</param>    
+                <param name="inputName">inputStream</param>  
+            </result> 
+            
+            <result name="json" type="stream">  
+                <param name="contentType">application/json</param>    
+                <!--param name="contentDisposition">filename="tree.xml"</param-->  
+                <param name="inputName">inputStream</param>  
+            </result>  
+
+            <result name="pdf" type="stream">  
+                <param name="contentType">application/pdf</param>    
+                <!--param name="contentDisposition">filename="tree.xml"</param-->  
+                <param name="inputName">inputStream</param>  
+            </result>  
+
+            <result name="xml" type="stream">  
+                <param name="contentType">application/xml</param>    
+                <param name="inputName">inputStream</param>  
+            </result>
+
+            <result name="html" type="stream">
+                <param name="contentType">text/html</param>
+                <param name="inputName">inputStream</param>
+            </result>
+            
+            <result name="download" type="stream">  
+                <param name="contentType">application/download</param>  
+                <param name="contentLength">${contentLength}</param>  
+                <param name="contentDisposition">${contentDisposition}</param>  
+                <param name="inputName">downloadStream</param>  
+            </result>
+            
+            <result name="inbox">WEB-INF/jsp/{1}/inbox.jsp</result>
+            <result name="outbox">WEB-INF/jsp/{1}/outbox.jsp</result>
+            <result name="showInbox">WEB-INF/jsp/{1}/showInbox.jsp</result>
+            <result name="showOutbox">WEB-INF/jsp/{1}/showOutbox.jsp</result>
+            
+            
+            <result name="searchForum" type="redirect">{1}!list.action?page=${page}&amp;forumTitle=${forumTitle}</result>  
+            <result name="searchTopic" type="redirect">{1}!listByForum.action?page=${page}&amp;forum.id=${forum.id}&amp;topicTitle=${topicTitle}</result>
+            
+            <result name="searchInbox" type="redirect">{1}!inbox.action?page=${page}&amp;messageTitle=${messageTitle}</result>  
+            <result name="searchOutbox" type="redirect">{1}!outbox.action?page=${page}&amp;messageTitle=${messageTitle}</result>  
+            
+            <result name="listRedirect" type="redirect">{1}!list.action</result>
+            <result name="listRepository" type="redirect">{1}!list.action?courseId=${courseId}&amp;dirId=${dirId}</result>                                   
+        </action>                
+    </package>
+    
+    <package name="profiles" extends="default">
+        <interceptors>
+        <interceptor name="profile" class="br.ufc.ivela.interceptors.ProfileInterceptor"/>
+          <interceptor-stack name="profileStack">                                                                  
+                <interceptor-ref name="exception"/>
+                <interceptor-ref name="alias"/>
+                <interceptor-ref name="servletConfig"/>
+                <interceptor-ref name="prepare"/>
+                <interceptor-ref name="i18n"/>
+                <interceptor-ref name="profile"/>                
+                <interceptor-ref name="chain"/>
+                <interceptor-ref name="debugging"/>
+                <interceptor-ref name="profiling"/>
+                <interceptor-ref name="scopedModelDriven"/>
+                <interceptor-ref name="modelDriven"/>
+                <interceptor-ref name="fileUpload">                                  
+                  <param name="maximumSize">
+                    358400
+                  </param>
+                </interceptor-ref>
+                <interceptor-ref name="checkbox"/>
+                <interceptor-ref name="staticParams"/>
+                <interceptor-ref name="params">
+                  <param name="excludeParams">dojo\..*</param>
+                </interceptor-ref>                
+                <interceptor-ref name="conversionError"/>
+                <interceptor-ref name="validation">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>
+                <interceptor-ref name="workflow">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>                       
+        </interceptor-stack>                             
+        </interceptors>
+                                     
+        <action name="systemUser" class="systemUserAction">  
+            <interceptor-ref name="profileStack" />                      
+            <result name="change">WEB-INF/jsp/systemUser/change.jsp</result>
+            <result name="input">WEB-INF/jsp/systemUser/input.jsp</result>            
+            <result name="edit">WEB-INF/jsp/systemUser/edit.jsp</result>
+            <result name="json" type="stream">  
+                <param name="contentType">application/json</param>    
+                <param name="inputName">inputStream</param>  
+            </result>      
+            <result name="text" type="stream">  
+                <param name="contentType">text/plain</param>    
+                <param name="inputName">inputStream</param>  
+            </result>      
+        </action>
+        
+        <action name="profile" class="profileAction"> 
+            <interceptor-ref name="profileStack" />                                                       
+            <result name="input">WEB-INF/jsp/profile/input.jsp</result>            
+            <result name="edit">WEB-INF/jsp/profile/edit.jsp</result>
+            <result name="json" type="stream">  
+                <param name="contentType">application/json</param>    
+                <param name="inputName">inputStream</param>  
+            </result>                        
+        </action> 
+        
+    </package>
+    
+</struts>
