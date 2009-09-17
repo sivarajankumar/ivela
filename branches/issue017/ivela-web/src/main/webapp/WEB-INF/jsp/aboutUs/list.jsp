@@ -27,19 +27,25 @@
 
 
 <html>
+    <head>
+        <style type="text/css">
+         html, body {height:auto; min-height: 100%;}
+        </style>
+    </head> 
+    
     <h1><s:text name="list.about.us"/></h1> <br />
     <input class="btn-back" type="button" onclick="history.back(1)" value="<s:text name="systemUser.input.btnBack"/>" />
     <br />
         
     
-   <div> 
+   <div style="height: auto; width: auto; margin: 0 auto;" > 
     <table width="750" border="0" align="center">
      <tr>
         <td valign="top">&nbsp;</td>
         <td valign="top">&nbsp;</td>
      </tr>
      <tr>
-        <td width="1780" valign="top"><a href="http://www.eldorado.org.br" target="_blank"><img src="./images/partners/eldorado.png" alt="IBM" width="170" height="80" border="0"></a></td>
+        <td width="1780" valign="top"><a href="http://www.eldorado.org.br" target="_blank"><img class="about-img" src="./images/partners/eldorado.png" alt="Eldorado" width="170" height="80" border="0"></a></td>
         <td valign="top"><h2><a href="http://www.eldorado.org.br" target="_blank"><s:text name="about.eldorado.name" /></a></h2>
         <s:text name="about.eldorado" /></td>
       </tr>

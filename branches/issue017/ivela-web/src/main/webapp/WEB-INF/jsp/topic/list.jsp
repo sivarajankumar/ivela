@@ -41,18 +41,24 @@
 </head>
 
 <h1><s:property value="forum.title" /></h1>
-<s:form cssClass="form-search-forum" action="topic!search" method="post" theme="simple">
+
+<s:form cssClass="form-search-forum" action="topic!search" method="post" theme="simple">    
+    <label><s:text name="topic.search" /></label>
     <s:hidden id="forum.id" name="forum.id" value="%{forum.id}" />
     <s:hidden name="page" value="%{page}" />
-    <label><s:text name="topic.search" /></label>
     <s:textfield cssClass="field" name="topicTitle" />
     <s:submit cssClass="button" src="images/bottons/btn-search.gif" type="image" />
 </s:form>
-<br />
+<div id="breadcrumb">    
+    <ul>        
+        <li><a href="forum!list.action" title="<s:property value="forum.pageTitle"/>"><s:text name="forum.pageTitle"/></a></li>
+        <li class="current" title="<s:property value="topic.pageTitle"/>"><s:property value="forum.title"/></li>
+    </ul>
+</div> 
 <jsp:include page="paginator.jsp"/>
 <br />
 <s:actionmessage />
-<table id="forum">
+<table id="forum-table">
     <tr>
         <th><s:text name="topic.list.title" /></th>
         <th><s:text name="topic.list.replies" /></th>
@@ -67,9 +73,9 @@
                 <h3><s:a href="%{listPostUrl}"><s:property value="topic.title" /></s:a></h3>
                 <p><s:property value="topic.description" /></p>
                 <span class="font-orange-td"><s:text name="topic.list.createdBy" /></span><span class="name-user"><b><s:property value="topic.createdBy.username" /></b></span>
-                <s:if test="topic.createdBy.username==#session.username||#session.role=='admin'">                   
+                <s:if test="getCreatedByUser() || hasAuthorization(authority)">                   
                     - <span> <s:a cssClass="btn-remove" href="javascript:deleteTopic(%{forum.id}, %{topic.id});"><s:text name="topic.list.remove"/></s:a> </span>
-                </s:if>     
+                </s:if>                
             </td>
             <td class="topics-views"><s:property value="topicReplies" /></td>
             <!--<td class="topics-views"><s:property value="topicViews" /></td>-->
@@ -112,7 +118,7 @@
 
 </script>
 
-<s:if test="forum.studentCreateTopic">
+<s:if test="forum.studentCreateTopic||#session.role=='admin'">
 <a id="topic-new" href="javascript:showEntryTopic(document.getElementById('forum.id').value);"><s:text name= "forumId.grade.new.topic" /></a>
 </s:if>
 

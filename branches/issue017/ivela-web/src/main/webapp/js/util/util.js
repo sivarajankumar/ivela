@@ -23,7 +23,7 @@ function classCss(){
 
 function addUnitContentListener(frame) {    
     var iFrame = frame.contentDocument;
-    if (iFrame != undefined) {
+    if (iFrame != undefined && (typeof (iFrame.addEventListener) != "undefined")) {
         iFrame.addEventListener("DOMNodeInserted", nodeInserted, false);
     }       
 }

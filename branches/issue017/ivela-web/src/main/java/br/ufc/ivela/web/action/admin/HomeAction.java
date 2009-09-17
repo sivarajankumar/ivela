@@ -39,7 +39,7 @@ public class HomeAction extends GenericAction {
     
     public String execute() {
         setMessage(getMessage());
-        //courseList = gradeRemote.getStructure();
+        courseList = gradeRemote.getStructure();
         return SUCCESS;
     }
 
@@ -110,42 +110,42 @@ public class HomeAction extends GenericAction {
                 json.append("\"id\":\"" + c.getId() + "\",");
                 json.append("\"name\":\"" + c.getName() + "\",");
                 json.append("\"description\":\"" + c.getDescription() + "\",");
-//                json.append("\"grades\":[");
-//                List<Grade> gradeList = gradeRemote.getByCourse(c.getId());
-//                for (Grade g : gradeList) {
-//                    json.append("{");
-//                    json.append("\"id\":\"" + g.getId() + "\",");
-//                    json.append("\"name\":\"" + g.getName() + "\",");
-//                    json.append("\"period\":\"" + g.getPeriod() + "\",");
-//                    json.append("\"coordinatorId\":\"" + g.getCoordinatorId() + "\",");
-//                    json.append("\"courseId\":\"" + g.getCourseId() + "\",");
-//                    json.append("\"status\":\"" + g.getStatus() + "\",");
-//                    json.append("\"maxDuration\":\"" + g.getMaxDuration() + "\",");
-//                    json.append("\"maxStudents\":\"" + g.getMaxStudents() + "\",");
-//                    json.append("\"startDatetime\":\"" + g.getStartDatetime() + "\",");
-//                    json.append("\"endDatetime\":\"" + g.getEndDatetime() + "\",");
-//                    json.append("\"course\":{");
-//                        json.append("\"id\":\"" + c.getId() + "\",");
-//                        json.append("\"name\":\"" + c.getName() + "\",");
-//                        json.append("\"description\":\"" + c.getDescription() + "\"");
-//                    json.append("},");
-//                    SystemUser coordinator = systemUserRemote.get(g.getCoordinatorId());
-//                    json.append("\"coordinator\":{");
-//                        json.append("\"id\":\"" + coordinator.getId() + "\",");
-//                        json.append("\"username\":\"" + coordinator.getUsername() + "\",");
-//                        json.append("\"email\":\"" + coordinator.getEmail() + "\"");
-//                    json.append("},");
-//                    // commented by Rodrigo Felix
-//                    json.append(getEnrollmentsJson(g.getId()));
-//                    json.append(",");        
-//                    json.append(getProfessorsJson(g.getId()));
-//                    json.append(",");
-//                    json.append(getTutorsJson(g.getId()));
-//                    json.append("},");
-//                }
+                json.append("\"grades\":[");
+                List<Grade> gradeList = gradeRemote.getByCourse(c.getId());
+                for (Grade g : gradeList) {
+                    json.append("{");
+                    json.append("\"id\":\"" + g.getId() + "\",");
+                    json.append("\"name\":\"" + g.getName() + "\",");
+                    json.append("\"period\":\"" + g.getPeriod() + "\",");
+                    json.append("\"coordinatorId\":\"" + g.getCoordinatorId() + "\",");
+                    json.append("\"courseId\":\"" + g.getCourseId() + "\",");
+                    json.append("\"status\":\"" + g.getStatus() + "\",");
+                    json.append("\"maxDuration\":\"" + g.getMaxDuration() + "\",");
+                    json.append("\"maxStudents\":\"" + g.getMaxStudents() + "\",");
+                    json.append("\"startDatetime\":\"" + g.getStartDatetime() + "\",");
+                    json.append("\"endDatetime\":\"" + g.getEndDatetime() + "\",");
+                    json.append("\"course\":{");
+                        json.append("\"id\":\"" + c.getId() + "\",");
+                        json.append("\"name\":\"" + c.getName() + "\",");
+                        json.append("\"description\":\"" + c.getDescription() + "\"");
+                    json.append("},");
+                    SystemUser coordinator = systemUserRemote.get(g.getCoordinatorId());
+                    json.append("\"coordinator\":{");
+                        json.append("\"id\":\"" + coordinator.getId() + "\",");
+                        json.append("\"username\":\"" + coordinator.getUsername() + "\",");
+                        json.append("\"email\":\"" + coordinator.getEmail() + "\"");
+                    json.append("},");
+                    // commented by Rodrigo Felix
+                    json.append(getEnrollmentsJson(g.getId()));
+                    json.append(",");        
+                    json.append(getProfessorsJson(g.getId()));
+                    json.append(",");
+                    json.append(getTutorsJson(g.getId()));
+                    json.append("},");
+                }
                 if (json.substring(json.length() - 1).equals(","))
                     json = new StringBuilder(json.substring(0, json.length() - 1));
-//                json.append("]");
+                json.append("]");
             json.append("},");
         }
         if (json.substring(json.length() - 1).equals(","))

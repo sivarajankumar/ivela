@@ -1,8 +1,25 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
+/*  
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: Post.java                                                                           #
+# Document: Post Model                                                                      # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 07-JAN-2009 - Leonardo Oliveira (UFC)           - XXXXXX - Initial Version                #
+# 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
+#############################################################################################
+*/
 package br.ufc.ivela.commons.model;
 
 import javax.persistence.SequenceGenerator;
@@ -24,10 +41,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author leoomoreira
- */
 @Entity
 @Table(name = "post")
 @NamedQueries({@NamedQuery(name = "Post.findById", query = "SELECT p FROM Post p WHERE p.id = :id"), @NamedQuery(name = "Post.findByTitle", query = "SELECT p FROM Post p WHERE p.title = :title"), @NamedQuery(name = "Post.findByCreatedAt", query = "SELECT p FROM Post p WHERE p.createdAt = :createdAt"), @NamedQuery(name = "Post.findByMessage", query = "SELECT p FROM Post p WHERE p.message = :message")})

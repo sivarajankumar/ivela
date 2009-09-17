@@ -23,31 +23,22 @@
 
 package br.ufc.ivela.web.action;
 
-import br.ufc.ivela.commons.model.Course;
-import br.ufc.ivela.commons.model.Grade;
-import br.ufc.ivela.commons.model.SystemUser;
-import br.ufc.ivela.ejb.interfaces.CourseRemote;
-import br.ufc.ivela.ejb.interfaces.GradeRemote;
-import br.ufc.ivela.ejb.interfaces.RepositoryRemote;
-import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
-import com.opensymphony.xwork2.Preparable;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
 
-/**
- *
- * @author nelson
- */
-public class GradeAction extends GenericAction implements Preparable {
+import br.ufc.ivela.commons.model.Course;
+import br.ufc.ivela.commons.model.Grade;
+import br.ufc.ivela.commons.model.SystemUser;
+import br.ufc.ivela.ejb.interfaces.RepositoryRemote;
+import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 
-    private GradeRemote gradeRemote;
-    private Grade grade;
-    private List<Grade> gradeList;
-    private CourseRemote courseRemote;
-    private List<Course> courseList;
+import com.opensymphony.xwork2.Preparable;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
+
+public class GradeAction extends CourseAwareAction implements Preparable {
+        
     private RepositoryRemote repositoryRemote;
     private SystemUserRemote systemUserRemote;
     private List<SystemUser> systemUserList;
@@ -74,82 +65,6 @@ public class GradeAction extends GenericAction implements Preparable {
         grade = gradeRemote.get(grade.getId());
         setInputStream(new ByteArrayInputStream(xStream.toXML(grade).getBytes()));
         return "json";
-    }
-
-    /**
-     * Retrieves a grade
-     * @return grade
-     */
-    public Grade getGrade() {
-        return grade;
-    }
-
-    /**
-     * Sets a grade
-     * @param grade
-     */
-    public void setGrade(Grade grade) {
-        this.grade = grade;
-    }
-
-    /**
-     * Retrieves a List of grade
-     * @return gradeList
-     */
-    public List<Grade> getGradeList() {
-        return gradeList;
-    }
-
-    /**
-     * Sets a List of grade
-     * @param gradeList
-     */
-    public void setGradeList(List<Grade> gradeList) {
-        this.gradeList = gradeList;
-    }
-
-    public GradeRemote getGradeRemote() {
-        return gradeRemote;
-    }
-
-    /**
-     * Sets a remote grade
-     * @param gradeRemote
-     */
-    public void setGradeRemote(GradeRemote gradeRemote) {
-        this.gradeRemote = gradeRemote;
-    }
-
-    /**
-     * Retrieves a list of course
-     * @return courseList
-     */
-    public List<Course> getCourseList() {
-        return courseList;
-    }
-
-    /**
-     * Sets a list of course
-     * @param courseList
-     */
-    public void setCourseList(List<Course> courseList) {
-        this.courseList = courseList;
-    }
-
-    /**
-     * Retrieves a remote course
-     * @return courseRemote
-     */
-    public CourseRemote getCourseRemote() {
-        return courseRemote;
-    }
-
-    /**
-     * Sets a remote course
-     * @param courseRemote
-     */
-    public void setCourseRemote(CourseRemote courseRemote) {
-        this.courseRemote = courseRemote;
     }
 
     /**

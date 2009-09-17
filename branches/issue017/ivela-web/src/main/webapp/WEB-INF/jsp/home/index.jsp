@@ -20,6 +20,7 @@
 # 08-JUN-2009 - Otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
 # 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
 # 23-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Unicode (UTF-8) support        #
+# 26-AUG-2009 - Rafael Lagoa (Instituto Eldorado) - 001165 - Align no enrollments message   #
 #############################################################################################
 --%>
 
@@ -118,7 +119,8 @@
 
 <s:if test="enrollmentList == null || enrollmentList.size() == 0">
     <s:if test="pendentList == null || pendentList.size() == 0">
-        <h5> <s:text name="front.firstAccess" /> </h5>
+        <br /><br />
+        <h5 style="text-align:center"> <s:text name="front.firstAccess" /> </h5>
     </s:if>
 </s:if>
 <s:else>

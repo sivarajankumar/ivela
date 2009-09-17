@@ -55,7 +55,7 @@ function getJsonFromUrl(url){
 }
 
 
-function getJsonFromUrlPostLoad(params, func){
+function getJsonFromUrlPostLoad(url, params, func){
     new Ajax.Request(url,
     {
         method:'post',

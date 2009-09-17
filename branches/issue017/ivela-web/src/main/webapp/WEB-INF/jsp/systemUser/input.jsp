@@ -19,6 +19,7 @@
 # 05-JUN-2008 - Leo Moreira                       - XXXXXX - Initial Version                #
 # 08-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000007 - IE7 compatibility              #
 # 22-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Issues: i18n           #
+# 27-AUG-2009 - Rafael Lagôa (Instituto Eldorado) - 000016 - Fix calendar positioning on IE7#
 #############################################################################################
 --%>
 
@@ -28,6 +29,7 @@
 
 <head>
     <cal:head/>
+    <script type="text/javascript" src="js/util/calendar.js"></script>
     <link href="css/login-index.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/prototype/prototype.js"></script>
     <script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>
@@ -126,11 +128,12 @@
                 
                 <p>
                     <label><s:text name="systemUser.input.birthdate"/>:</label>
-                    <cal:jscalendar name="profile.birthDate"  format="%{dateFormat}" showstime="true" theme="simple"/>
+                    <cal:jscalendar name="profile.birthDate" format="%{dateFormat}" showstime="true" theme="simple"/>
+                    <script>document.getElementsByName('profile.birthDate')[0].readOnly=true;</script>
                 </p>
                 <p>
                     <label><s:text name="systemUser.input.socialNumber"/>:</label>
-                    <s:textfield name="systemUser.socialNumber" onkeypress="mascara(this,socialnumber)" maxlength="14" />
+                    <s:textfield name="systemUser.socialNumber" maxlength="14" />
                 </p>
             </fieldset>
             
@@ -146,7 +149,7 @@
                 </p>
                 <p>
                     <label><s:text name="systemUser.input.zipCode"/>:</label>
-                    <input id="izipcode" name="inAddress.zipCode" onkeypress="mascara(this,zipcode)" maxlength="9" />
+                    <input id="izipcode" name="inAddress.zipCode" maxlength="9" />
                 </p>
                 <p>     
                     <label><s:text name="systemUser.input.country"/>:</label>
@@ -167,11 +170,11 @@
                 <legend><s:text name="systemUser.input.phoneTitle"/></legend>
                 <p>
                     <label><s:text name="systemUser.input.phone"/>:</label>
-                    <input id="iphone" name="mainPhone" maxlength="14" onkeypress="mascara(this,phone)"/>
+                    <input id="iphone" name="mainPhone" maxlength="14"/>
                 </p>
                 <p>
                     <label><s:text name="systemUser.input.mobile"/>:</label>
-                    <input id="iphone" name ="mobile" maxlength="14" onkeypress="mascara(this,phone)"/>
+                    <input id="iphone" name ="mobile" maxlength="14"/>
                 </p>
             </fieldset>
             

@@ -67,8 +67,7 @@ function submitTopic(forumId)
         if (jsonTopic != null && jsonTopic.result === undefined) {
             alert(errorTopic);
         } else {
-            alert(jsonTopic.result);
-            
+            alert(jsonTopic.result);            
         }
     }
 

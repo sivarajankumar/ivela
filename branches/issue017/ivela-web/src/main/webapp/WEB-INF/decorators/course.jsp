@@ -36,7 +36,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><s:text name="front.pageTitle" /></title>       
         <link href="css/courses/base_course.css" rel="stylesheet" type="text/css" />
-        <link href="css/lightwindow.css" rel="stylesheet" type="text/css" />        
+        <link href="css/lightwindow.css" rel="stylesheet" type="text/css" />
+        <!--[if IE 6]>
+            <link href="css/ie6.css" rel="stylesheet" type="text/css" />
+            <script type="text/javascript">
+                var ie6browser = true;         
+            </script>            
+        <![endif]-->        
         <script type="text/javascript" src="js/prototype/prototype.js"></script>
         <script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>
         <script type="text/javascript" src="js/scriptaculous/effects.js"></script>

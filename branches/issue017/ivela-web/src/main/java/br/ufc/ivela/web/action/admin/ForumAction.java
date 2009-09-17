@@ -1,69 +1,52 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*  
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: ForumAction.java                                                                    #
+# Document: Forum Admin Action                                                              # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 07-JAN-2009 - Leonardo Oliveira (UFC)           - XXXXXX - Initial Version                #
+# 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
+#############################################################################################
+*/
 package br.ufc.ivela.web.action.admin;
 
-import br.ufc.ivela.commons.model.Course;
-import br.ufc.ivela.web.action.*;
-import br.ufc.ivela.commons.model.Forum;
-import br.ufc.ivela.commons.model.Grade;
-import br.ufc.ivela.ejb.interfaces.CourseRemote;
-import br.ufc.ivela.ejb.interfaces.ForumRemote;
-import br.ufc.ivela.ejb.interfaces.GradeRemote;
-import br.ufc.ivela.ejb.interfaces.PostRemote;
-import br.ufc.ivela.ejb.interfaces.TopicRemote;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
+
 import org.springframework.util.StringUtils;
 
-/**
- *
- * @author Leonardo Oliveira Moreira
- */
-public class ForumAction extends GenericAction {
+import br.ufc.ivela.commons.model.Forum;
+import br.ufc.ivela.ejb.interfaces.ForumRemote;
+import br.ufc.ivela.ejb.interfaces.PostRemote;
+import br.ufc.ivela.ejb.interfaces.TopicRemote;
+import br.ufc.ivela.web.action.CourseAwareAction;
+
+public class ForumAction extends CourseAwareAction {
 
     private ForumRemote forumRemote;
     private TopicRemote topicRemote;
     private PostRemote postRemote;
     private Forum forum;
-    private List<Forum> forumList;
-    private List<Grade> gradeList;
-    private GradeRemote gradeRemote;
+    private List<Forum> forumList;    
     private InputStream inputStream;
     private int pageCount;
     private int page;
     private int pageSize = 5;
     private int count;
     private String forumTitle;
-    private Course course;
-    private Grade grade;
-    private CourseRemote courseRemote;
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public CourseRemote getCourseRemote() {
-        return courseRemote;
-    }
-
-    public void setCourseRemote(CourseRemote courseRemote) {
-        this.courseRemote = courseRemote;
-    }
-
-    public Grade getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Grade grade) {
-        this.grade = grade;
-    }
 
     public PostRemote getPostRemote() {
         return postRemote;
@@ -121,35 +104,6 @@ public class ForumAction extends GenericAction {
         this.inputStream = inputStream;
     }
 
-    public GradeRemote getGradeRemote() {
-        return gradeRemote;
-    }
-
-    public void setGradeRemote(GradeRemote gradeRemote) {
-        this.gradeRemote = gradeRemote;
-    }
-
-    public List<Grade> getGradeList() {
-        return gradeList;
-    }
-
-    public void setGradeList(List<Grade> gradeList) {
-        this.gradeList = gradeList;
-    }
-
-    public String add() {
-        gradeList = gradeRemote.getAll();
-        forum.setCreatedBy(getAuthenticatedUser());
-        performValidateAdd();
-        if (!hasActionErrors()) {
-            Long result = forumRemote.add(forum);
-            if (result != null) {
-                return list();
-            }
-        }
-        return list();
-    }
-    
     public String listForums() {
         StringBuilder json = new StringBuilder();
         course = courseRemote.get(course.getId());
@@ -166,10 +120,8 @@ public class ForumAction extends GenericAction {
                 json.append("\"gradeId\":\"" + f.getGrade().getId() + "\",");
                 json.append("\"createdBy\":\"" + f.getCreatedBy() + "\",");
                 json.append("\"public\":\"" + f.getPublic1() + "\",");
-                json.append("\"studentCreateTopic\":\"" + f.getStudentCreateTopic() + "\",");
-                json.append("\"studentLinkPost\":\"" + f.getStudentLinkPost() + "\",");
-                json.append("\"studentUploadPost\":\"" + f.getStudentUploadPost()+ "\",");
-                json.append("\"studentUploadRepository\":\"" + f.getStudentUploadRepository() + "\"");
+                json.append("\"studentCreateTopic\":\"" + f.getStudentCreateTopic() + "\",");                
+                json.append("\"studentUploadPost\":\"" + f.getStudentUploadPost()+ "\"");                
                 json.append("}");
                 json.append(",");
             }
@@ -202,6 +154,20 @@ public class ForumAction extends GenericAction {
         return "json";
     }
 
+    
+    public String add() {
+        gradeList = gradeRemote.getAll();
+        forum.setCreatedBy(getAuthenticatedUser());
+        performValidateAdd();
+        if (!hasActionErrors()) {
+            Long result = forumRemote.add(forum);
+            if (result != null) {
+                return list();
+            }
+        }
+        return list();
+    }
+    
     public String addForum() {
         boolean bResult = false;
         StringBuilder json = new StringBuilder();

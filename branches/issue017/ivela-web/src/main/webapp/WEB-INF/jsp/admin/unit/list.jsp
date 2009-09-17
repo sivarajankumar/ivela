@@ -14,7 +14,6 @@
         <link href="../css/unit_admin.css" rel="stylesheet" type="text/css" />
          <link href="../css/base_admin.css"  rel="stylesheet" type="text/css" />
         <s:head />
-        <cal:head />
     </head>
     <div id="breadcrumb">
         <p><s:text name="admin.breadcrumb.youAreHere"/></p>

@@ -1,7 +1,26 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+###############################################################################################
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                        #
+# This file is part of ivela project, an open-source                                          #
+# Program URL   : http://code.google.com/p/ivela/                                             #  
+#                                                                                             #
+# This program is free software; you can redistribute it and/or modify it under the terms     #
+# of the GNU General Public License as published by the Free Software Foundation; either      #
+# version 3 of the License, or (at your option) any later version.                            #
+#                                                                                             #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;   #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   #
+# See the GNU General Public License for more details.                                        #  
+#                                                                                             #
+###############################################################################################
+# File: list.jsp                                                                              #
+# Document: list BulletinBoard                                                                # 
+# Date        - Author(Company)                   - Issue# - Summary                          #
+# XX-XXX-XXXX - Emanuelle                         - XXXXXX - Initial Version                  #
+# 28-AGO-2009 - Mileine      (Instituto Eldorado) - 000016 - Same course enrollment msg added #
+###############################################################################################
+*/
+
 package br.ufc.ivela.web.action;
 
 import br.ufc.ivela.commons.Constants;
@@ -131,11 +150,13 @@ public class EnrollmentAction extends GenericAction {
 
         if (!yourGradeByCourse.isEmpty()) {
             already = true;
-        }
-
-        if (already || gradeList.size() == 0) {
             gradeList = null;
-            message = "Não há turmas disponíveis";
+            message = "enrolled";
+        }
+            
+        else if (gradeList.size() == 0) {
+            gradeList = null;
+            message = "noGrades";
         }
 
         return "list";

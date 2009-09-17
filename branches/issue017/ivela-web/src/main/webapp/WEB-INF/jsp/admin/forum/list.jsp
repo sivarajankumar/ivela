@@ -13,7 +13,6 @@
         <title><s:text name="forum.pageTitle" /></title>
         <link href="../css/forum_admin.css" rel="stylesheet" type="text/css" />
         <s:head />
-        <cal:head />
     </head>
     <div id="breadcrumb">
         <p><s:text name="admin.breadcrumb.youAreHere"/></p>
