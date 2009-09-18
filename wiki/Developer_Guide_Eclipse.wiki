@@ -1,5 +1,5 @@
 #summary Instructions to start Ivela Development
-#labels install,developerguide,eclipse
+#labels install,developer,eclipse,guide,tutorial
 
 = Technical Pre-requisites =
 
@@ -146,7 +146,7 @@ keytool -genkey -keyalg RSA -keystore ~/.asadmintruststore -alias junk
 {{{
   $ useradd ivela
   $ passwd ivela
-  $ su postgres
+  $ su - postgres
   $ createuser -s ivela
   $ psql
   postgres=# ALTER USER ivela WITH PASSWORD 'mypasswd';
