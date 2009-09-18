@@ -90,7 +90,7 @@ keytool -genkey -keyalg RSA -keystore ~/.asadmintruststore -alias junk
     * <font color='red'>Some users have experienced problems in the glassfish plugin installation.</font> For these users, theses links can help: [https://glassfishplugins.dev.java.net/download/index.html] [https://glassfishplugins.dev.java.net/issues/show_bug.cgi?id=45]
           
 = Workstation Setup: Maven =
-  * Start Netbeans
+  * Start Eclipse
   * Go to _Windows > Preferences > Maven > Installations_ menu
   * Go to _Configure maven installations_ and add you external maven distribution
   * At _Local Repository_ write /opt/sws/localRepo
@@ -142,9 +142,10 @@ keytool -genkey -keyalg RSA -keystore ~/.asadmintruststore -alias junk
   * Install PostgreSQL 8.3
   * Go to [http://code.google.com/p/ivela/source/browse/trunk/ivela-commons/database/ivela.sql] and [http://code.google.com/p/ivela/source/browse/trunk/ivela-commons/database/ivela_basic_data.sql] and download _ivela_structure.sql & ivela_basic_data.sql_
   * Save downloaded sql files into _/opt/sws/sql_
-  * Create database, structure tables and import basic data:
+  * Create database, structure tables and import basic data (make sure that postgres is up and running):
 {{{
-  $ adduser ivela
+  $ useradd ivela
+  $ passwd ivela
   $ su postgres
   $ createuser -s ivela
   $ psql
