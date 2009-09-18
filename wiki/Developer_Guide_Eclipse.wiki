@@ -43,12 +43,18 @@ For tests in other platforms the recommendation is the use of [http://www.virtua
 = Workstation Setup: Glassfish =
   * Download [https://glassfish.dev.java.net/downloads/v2.1-b60e.html] one of the glassfish bundles to disk
   * set JAVA_HOME to the JDK you have installed on your system.
-  * Run  % java -Xmx256m -jar filename.jar
+  * Run  {{{ 
+$ java -Xmx256m -jar filename.jar
+}}}
   * This command will unbundle GlassFish and create a new directory structure rooted under a directory named 'glassfish'.
-  * % cd glassfish
+  * {{{ 
+$ cd glassfish
+}}}
   * If you are using a machine with an operating system that is a derivative of UNIX(tm), set the execute permission for the Ant binaries that are included with the GlassFish bundle. 
-  * % chmod -R +x lib/ant/bin
-  * % lib/ant/bin/ant -f setup.xml  
+{{{ 
+$ chmod -R +x lib/ant/bin
+$ lib/ant/bin/ant -f setup.xml 
+}}} 
   * <font color='red'>Into AIX, Debian and Ubuntu environments it is common to found problems when ANT runs, the problem is described as:</font>
 {{{
 
