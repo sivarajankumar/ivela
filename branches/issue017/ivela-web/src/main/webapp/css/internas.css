@@ -1,0 +1,192 @@
+#content #col-1 {width: 300px; height: auto; background:#fff2c6; padding: 10px; float:left;}
+#content #col-2 {width: 590px; height: auto; float:left; margin-left:30px; background:#DFEBF2; padding: 10px;}
+
+#content .col-1-course {width: 250px; height: auto; float:left;} /*Exceção feita para a página de curso*/
+
+#content .current-course {width: 780px; height: auto; border-top: 2px solid #FFCC99; padding: 15px 20px 0 20px; position:relative; clear: both}
+#content .current-course .corner-left {display: block; width:5px; height: 30px; position: absolute; top:0; left:0; border-left: 2px solid #FFCC99; text-indent: -999px; overflow:hidden;}
+#content .current-course .corner-right {display: block; width:5px; height: 30px; position: absolute; top:0; right:0; border-right: 2px solid #FFCC99; text-indent: -999px; overflow:hidden;}
+
+#content .current-course h1 {font-size: 25px;}
+#content .current-course h2 {margin-bottom: 10px; font-size: 15px; color:#033d7d;}
+
+
+#content .current-course .partner {width: 110px; height: 50px; position: absolute; top: 10px; right: 0px;}
+#content .current-course .partner p {font: 11px Arial, Helvetica, sans-serif; color: #999;}
+
+.units-container {
+    width: 85px; 
+    height:auto;    
+    padding: 0px;}
+.units-container .units-content {
+    width: 85px; 
+    height:auto; 
+    position: relative;
+    background:#fff; 
+    border-bottom: 1px solid #BBD2EE; 
+    border: 1px solid #fbd365; 
+    padding: 0 10px 10px 10px;
+    overflow: hidden;
+    }
+
+
+.units-container h3{
+    font-size:14px; 
+    padding: 3px;
+    cursor:pointer; 
+    margin-top: 10px;}
+.units-container h3.closed{
+    color:#033d7d; 
+    background:url(../images/level-more.gif) #ececec no-repeat 190px 6px;
+}
+.units-container h3.openned{
+    color:#ff6600;
+    border: 1px solid #e8e8e8; 
+    background:url(../images/level-less.gif) no-repeat 190px 6px;
+}
+.units-container .list-class ul{ 
+    list-style-position: outside;
+    margin-left: 10px;
+    display: block;
+    overflow: hidden;
+}
+.units-container .list-class ul li{
+    font-size: 11px; 
+    padding: 13px 0 3px 0;} 
+.units-container .list-class ul li a{
+    font-weight: bold;}
+
+
+#content #col-2-course {width: 800px; height: auto; float:left;}
+
+#content #col-2-course .lesson-menu {width: 800px; height: auto; border-bottom: 1px solid #BBD2EE; padding: 10px; background:#f1f8ff;}
+#content #col-2-course .lesson-menu h2{ width: 260px; height: auto; float:left; font-size: 16px; color:#ff6600;}
+#content #col-2-course .lesson-menu h2 span{color:#033d7d;}
+#content #col-2-course .lesson-menu ul{list-style-type: none; text-align: center; float: right;}
+#content #col-2-course .lesson-menu ul li{float: left; margin:0 15px 0 0; padding:0; height: 22px;  /*background: url(../images/menu/tab-right-course-off.gif) no-repeat right top;*/}
+#content #col-2-course .lesson-menu ul li a{display: block; padding: 3px 0px; color:#033d7d; font-size:12px; font-weight:bold; text-decoration: none; /*background: url(../images/menu/tab-left-course-off.gif) left top no-repeat;*/}
+#content #col-2-course .lesson-menu ul li a:hover{color:#ff6600;} 
+#content #col-2-course .lesson-menu ul li.current {background: #fefefe;}
+
+
+#content #col-2-course .lesson-content {
+    wwidth: 700px;     
+    height:auto; 
+    padding: 0px; 
+    margin:inherit;
+    /* background: #FEFCE5;
+    border: 2px solid #efefef;*/
+}
+#content #col-2-course .lesson-content h2{
+    color:#ff6600;}
+
+#content #col-2-course .lesson-content .exame-box-avaliable, #content #col-2-course .lesson-content .exame-box-disable {
+    font: bold 13px Arial, Helvetica, sans-serif; 
+    color:#fff; 
+    background:#fefce5;
+    padding:3px;
+    border-right:2px solid #999;
+    border-bottom:2px solid #999;
+    text-decoration:none;
+    position: relative;
+    width: 508px; 
+    height: 50px;
+    padding: 10px 10px 10px 100px;
+    border: 1px solid #fdd9bd; 
+    margin-top:50px;
+    margin-bottom: 20px        
+}
+#content #col-2-course .lesson-content .exame-box-avaliable span, #content #col-2-course .lesson-content .exame-box-disable span {
+    display: block;
+    position: absolute; 
+    top: 20px; 
+    left: 25px;
+    font-size: 20px;
+    font-weight: bold; 
+    background:#fdf2cf 9px 9px;
+    cursor: pointer;
+}
+#content #col-2-course .lesson-content .exame-box-avaliable span{
+    font: bold 13px Arial, Helvetica, sans-serif; 
+    color:#fff; 
+    padding:3px;
+    border-right:2px solid #999;
+    border-bottom:2px solid #999;
+    text-decoration:none;
+    
+}
+
+#content #col-2-course .lesson-content .exame-box-avaliable span:hover{
+    background:#ffe79c;
+    
+    
+}
+
+#content #col-2-course .lesson-content .exame-box-avaliable p {
+    font-size: 12px;
+    color:#444;
+}
+#content #col-2-course .lesson-content .exame-box-avaliable h3 {
+    color: #ff6000;
+    font-size:15px;
+    padding: 0;
+    margin: 0;
+}
+
+
+/*  background: }*/
+
+
+#content #col-2-course .lesson-content .exame-box-disable {background: #eaeaea 9px 9px; border: 1px solid #dedede;}
+#content #col-2-course .lesson-content .exame-box-disable span {color:#fff; background:#eaeaea; padding:0; font-size:25px;}
+#content #col-2-course .lesson-content .exame-box-disable p {font-size: 12px; color: #999;}
+#content #col-2-course .lesson-content .exame-box-disable h3 {color: #a7a7a7;}
+
+
+.level-1 .progress {clear:both;}
+.level-1 .progress .box-bar {display: block; float:left; width: 67px; height: 11px; margin-right: 10px; padding:1px; background: url(../images/progress-bar/bg-bar.gif) no-repeat top left;}
+.level-1 .progress .box-bar .bar{display: block; width:100%; height: 11px; background: url(../images/progress-bar/bar.gif) no-repeat;}
+.level-1 .progress .label {display: block; float:left; font-size: 11px; font-weight:bold;}
+
+
+#col-2 .units li {padding: 5px 0; font-size: 13px;}
+
+#col-2 .units {list-style-type: none;}
+#col-2 .units li {padding: 5px 0; font-size: 13px;}
+
+
+#col-2 .level-item {width: 608px; height: auto; background:#000; border: none;}
+#col-2 h2 {clear: both; font-size: 30px; color: #ff6600;}
+#col-2 .level-item h4 {width: 598px; height: 23px; padding: 4px 5px 0 5px; color: #ed6400; clear:both; border: 1px solid #fbd365;}
+#col-2 .level-item h4.openned {background: url(../images/level-openned.gif) no-repeat 584px 8px #fff2c6;}
+#col-2 .level-item h4.closed {background: url(../images/leve-closed.gif) no-repeat 584px 8px #efefef; color:#033d7d;}
+#col-2 .level-item h4:hover { cursor: pointer;}
+#col-2 .level-item .level-content {padding: 10px; border: none; margin-bottom: 20px;}
+
+.progress-level-item {width: 180px; height: auto; padding: 10px; float:right; border: 1px solid #fbd365;}
+.progress-level-item .box-bar {display: block; float:left; width: 67px; height: 11px; margin-right: 10px; padding:1px; background: url(../images/progress-bar/bg-bar.gif) no-repeat top left;}
+.progress-level-item .box-bar .bar{display: block; width:100%; height: 11px; background: url(../images/progress-bar/bar.gif) no-repeat;}
+.progress-level-item .label {display: block; float:left; font-size: 11px; font-weight:bold;}
+.progress-level-item h5, .progress-level-item .description {font: bold 12px Arial, Helvetica, sans-serif; color:#ff6600; margin-top: 10px;}
+.progress-level-item p {font:11px Arial, Helvetica, sans-serif; color:#000;}
+
+
+#col-2 .level-item .level-content .units {width: 360px; height: auto; float:left; list-style-type: none;}
+#col-2 .level-item .level-content .units li {padding: 5px}
+#col-2 .level-item .level-content .units li a {font: 12px Arial, Helvetica, sans-serif; padding: 5px}
+#col-2 .level-item .level-content .units li a:hover {color:#ff6600;}
+
+
+#col-2 .history-content {background:#fff; padding: 10px;}
+#col-2 .history-content h4 {font-size: 15px; margin-top: 20px; color:#033d7d;}
+#col-2 .history-content p {font-size: 12px;}
+
+#col-2 .history-content .block-progress{margin: 10px 0;}
+#col-2 .history-content .block-progress h4 {float: left; font-size: 15px; margin-right: 10px; margin-top:0; }
+
+#col-2 .history-content .block-progress .progress {padding-top: 3px;}
+#col-2 .history-content .block-progress .progress .box-bar {display: block; float:left; width: 67px; height: 11px; margin-right: 10px; padding:1px; background: url(../images/progress-bar/bg-bar.gif) no-repeat top left;}
+#col-2 .history-content .block-progress .progress .box-bar .bar{display: block; width:100%; height: 11px; background: url(../images/progress-bar/bar.gif) no-repeat;}
+#col-2 .history-content .block-progress .progress .label {display: block; float:left; font-size: 11px; font-weight:bold;}
+
+#col-2 .history-content .units li {padding: 2px 0;}
