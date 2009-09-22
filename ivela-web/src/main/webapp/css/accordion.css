@@ -34,14 +34,14 @@
 .accordion_toggle_course {
     display:block;
     color:#033d7d;
-    background:url(./images/level-more.gif) #e7e7e7 no-repeat 160px center;   
+    background:url(../images/level-more.gif) #e7e7e7 no-repeat 160px center;   
     padding: 0px 5px 0 25px;  
     cursor: pointer;
 }
 
 .accordion_toggle_grade {
     display:block;
-    color:#033d7d; background:url(./images/level-more.gif) #ececec no-repeat 190px 6px;    
+    color:#033d7d; background:url(../images/level-more.gif) #ececec no-repeat 190px 6px;    
     cursor: pointer;
 }
 
@@ -54,7 +54,7 @@
     border-left:none;
     border-right:none;
     line-height: 30px;
-    background: url(./images/arrow-right.gif) no-repeat 8px center;
+    background: url(../images/arrow-right.gif) no-repeat 8px center;
     color:#033D7D;
     cursor: pointer;
     font-size:17px;
@@ -63,7 +63,7 @@
 }
 
 .accordion_toggle {
-    background: transparent url(./images/arrow-right.gif) no-repeat 8px center; 
+    background: transparent url(../images/arrow-right.gif) no-repeat 8px center; 
     border: 1px solid #efefef;
     border-left:none;
     border-right:none;
@@ -82,7 +82,7 @@
 .accordin_toggle:hover{ color:#033D7D; cursor:pointer; }
 
 .accordion_toggle_active_course {
-    background: url(./images/level-less.gif) #999 no-repeat 160px center ;    
+    background: url(../images/level-less.gif) #999 no-repeat 160px center ;    
     cursor: pointer;
     color: #FFF;
     font-weight:bold;
@@ -96,7 +96,7 @@
 }
 
 .accordion_toggle_active2 {
-    background: url(./images/arrow-bottom.gif) #999 no-repeat 8px center;
+    background: url(../images/arrow-bottom.gif) #999 no-repeat 8px center;
     font-size:17px;
     cursor: pointer;
     color: #fff;
@@ -107,7 +107,7 @@
 
 .accordion_toggle_active {
     cursor: pointer;
-    background: url(./images/arrow-bottom.gif) #999 no-repeat 8px center;
+    background: url(../images/arrow-bottom.gif) #999 no-repeat 8px center;
     padding: 0 5px 0px 25px;
     font-size:17px;
     border:1px solid #999;
@@ -163,8 +163,8 @@
 .accordion_content dd{font: 11px Arial, Helvetica, sans-serif; color:#000;}
 
 .accordion_content .progress { clear:both; width: 150px;}
-.accordion_content .progress .box-bar {display: block; float:left; width: 67px; height: 11px; margin-right: 10px; padding:0px; background: url(./images/progress-bar/bg-bar.gif) no-repeat top left;}
-.accordion_content .progress .box-bar .bar{display: block; width:100%; height: 11px; background: url(./images/progress-bar/bar.gif) no-repeat;}
+.accordion_content .progress .box-bar {display: block; float:left; width: 67px; height: 11px; margin-right: 10px; padding:0px; background: url(../images/progress-bar/bg-bar.gif) no-repeat top left;}
+.accordion_content .progress .box-bar .bar{display: block; width:100%; height: 11px; background: url(../images/progress-bar/bar.gif) no-repeat;}
 .accordion_content .progress .label {display: block; float:left; font-size: 11px; font-weight:bold; padding: 0; color:#444444;}
 
 .accordion_content h2 {

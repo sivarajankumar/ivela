@@ -36,15 +36,15 @@
     
     <s:form cssClass="form-search-forum" action="forum!search" method="post" theme="simple">
         <label><s:text name="forum.search" /></label>
-        <s:hidden name="page" value="%{page}" />
+        <s:hidden name="page" value="%{page}" />        
         <s:textfield cssClass="field" name="forumTitle" />
-        <s:submit cssClass="button" src="images/bottons/btn-search.gif" type="image" />
+        <s:submit cssClass="button" src="images/bottons/btn-search.gif" type="image" />        
     </s:form>
     <br />
     <jsp:include page="paginatorTop.jsp"/>
     <br />
     <s:actionmessage/>
-    <table id="forum">
+    <table id="forum-table">
         <tr>
             <th><s:text name="forum.pageTitle"/></th>
             <th><s:text name="forum.list.replies"/></th>
@@ -59,7 +59,7 @@
                 <td>
                     <h3><s:a href="%{listTopicUrl}"><s:property value="forum.title"/></s:a></h3>
                     <p><s:property value="forum.description"/></p>
-                    <span class="font-orange-td"><s:text name="forum.list.createdBy" /></span><span class="name-user"><a href="#" class="tooltip" onmouseover="return escape('<s:property value="forum.createdBy.email"/>')"><s:property value="forum.createdBy.username"/></a></span>		
+                    <span class="font-orange-td"><s:text name="forum.list.createdBy" /></span><span class="name-user"><a href="#" class="tooltip" onmouseover="return escape('<s:property value="forum.createdBy.email"/>')"><s:property value="forum.createdBy.username"/></a></span>      
                 </td>
                 <td class="topics-views"><s:property value="forumReplies"/></td>
                 <td class="topics-views"><s:property value="forumViews"/></td>

@@ -24,8 +24,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
-<link href="RenderServlet?file=/globals/css/base.css" rel="stylesheet" type="text/css" />
-<link href="RenderServlet?file=/globals/css/internas.css" rel="stylesheet" type="text/css" />
+<link href="css/base.css" rel="stylesheet" type="text/css" />
+<link href="css/internas.css" rel="stylesheet" type="text/css" />
 <%--
 <html>
     <head>

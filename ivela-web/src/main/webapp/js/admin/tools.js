@@ -69,22 +69,22 @@ function getMessages() {
                 },
                 onSuccess: function(transport) {            
                     var json = transport.responseText.evalJSON(true);            
-                    if (json.list.message) {
+                    if (json.message) {
                         $('messages.empty').style.display = 'none';
                         $('messages.list').style.display = 'block'
                         var html = '<ul>';
-                        if (json.list.message.length > 0) {                                
-                            for(var i = 0; i < json.list.message.length; i++) {                        
+                        if (json.message.length > 0) {                                
+                            for(var i = 0; i < json.message.length; i++) {                        
                                 html += '<li> <a class="lightwindow page-options" '+
-                                    'href="javascript: vaiLightWindow(\'../message!getInbox.action?message.id='+ json.list.message[i].id +'\');">' + json.list.message[i].title + '</a> <br /> ' + from + ' '+ json.list.message[i].sender.username +' - '+ json.list.message[i].datetime.$ +' </li>';
+                                    'href="javascript: vaiLightWindow(\'../message!getInbox.action?message.id='+ json.message[i].id +'\');">' + json.message[i].title + '</a> <br /> ' + from + ' '+ json.message[i].sender +' - '+ json.message[i].datetime +' </li>';
                             }
                         } else {
                             html += '<li> <a class="lightwindow page-options" '+
-                            'href="javascript: vaiLightWindow(\'../message!getInbox.action?message.id='+ json.list.message.id +'\');">';
+                            'href="javascript: vaiLightWindow(\'../message!getInbox.action?message.id='+ json.message.id +'\');">';
 
-                            html += json.list.message.title;
+                            html += json.message.title;
 
-                            html += '</a> <br /> ' + from + ' '+ json.list.message.sender.username +' - '+ json.list.message.datetime.$ +' </li>';                                    
+                            html += '</a> <br /> ' + from + ' '+ json.message.sender.username +' - '+ json.message.datetime.$ +' </li>';                                    
                         }
                         html += '</ul>';
 
@@ -98,5 +98,11 @@ function getMessages() {
                 onFailure: function() {
                     alert('Message: Error retrieving messages...')
                 }
-            });    
+            });
+}
+
+//Callback for Light Window Close 
+function lightWindowOnClose() {
+    getMessages();
+    getTopics();
 }

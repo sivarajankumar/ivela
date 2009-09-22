@@ -22,6 +22,9 @@
 # 15-JUN-2009 - fantato (Instituto Eldorado)      - 000010 - broken icons                   #
 # 17-JUN-2009 - fantato (Instituto Eldorado)      - 000010 - multimidia link was wrong      #
 # 25-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - i18n support                   #
+# 20-AGO-2009 - mileine (Instituto Eldorado)      - 000015 - upload translation tip fixed   #
+# 28-AGO-2009 - lagoa   (Instituto Eldorado)      - 000016 - Set date field to readonly     #
+# 02-SEP-2009 - Rafael Lagôa (Instituto Eldorado) - 000016 - Fix showChat action            #
 #############################################################################################
 --%>
 
@@ -48,7 +51,6 @@
     <script type="text/javascript" src="../js/admin/exam.js"></script>
     <script type="text/javascript" src="../js/admin/question.js"></script>
     <script type="text/javascript" src="../js/admin/dictionary.js"></script>
-    <script type="text/javascript" src="../js/admin/webtoolkit.aim.js"></script>
     <script type="text/javascript" src="../js/lightbox.js"></script>
 
     <script type="text/javascript">
@@ -60,12 +62,10 @@
         var questoesCriadas = '<h2><s:text name="questoes.criadas"/></h2>';
         var questionText = '<h2><s:text name="question.input.text" /></h2>';
 
-        
         if (message != null && message != '') {
             //alert(message);
         }
-    </script>
-    <script>
+
 		function getRepository(value) {
 			return "repository!show.action?courseId="+value; 
 		}
@@ -78,8 +78,12 @@
                 countfield.value = maxlimit - field.value.length;
         }
 
+        function showChat(courseId, disciplineId) {
+        	window.open('course!showChat.action?courseId='+courseId+'&disciplineId='+disciplineId, '');
+        }
     </script>
     <cal:head />
+    <script type="text/javascript" src="js/util/calendar.js"></script>
 </head>
 <s:actionerror />
 
@@ -166,7 +170,7 @@
                                                                                     </s:iterator>
                                                                                 </s:else>
                                                                             </ul>
-                                                                        </div>
+                                                                      </div>
                                                                         <h6 class="vertical_accordion_toggle4" id="exams"><s:text name="course.show.exam"/></h6>
                                                                         <div class="vertical_accordion_content4" id="<s:property value="id" />">
                                                                             <ul id="ulExamAccordeon_<s:property value="id" />">
@@ -483,7 +487,7 @@
                             <li><a class="icon-edit" href="javascript:showEditUnitContent();"><s:text name="unitContent.input.edit" /></a></li>                            
                             <li><a class="icon-delete" href="javascript:deleteUnitContent();"><s:text name="unitContent.input.remove" /></a></li>
                             <li id="unit.challenge"><a class="icon-message"href="javascript:showNewsChallenge();"><s:text name= "course.add.challenge" /></a></li>
-                            <li><a id="chatId" class="icon-chat" href="#" target="_blank" onmouseover="javascript:openChat();"><s:text name= "course.show.chat" /></a></li>
+                            <li><a id="chatId" class="icon-chat" href="javascript:showChat($('course.id').value, $('discipline.id').value);"><s:text name= "course.show.chat" /></a></li>
                             
                             <br class="clear" />
                         </ul>
@@ -556,7 +560,7 @@
                     <select style="width: 80px;" name="unitContent.orderN" id="upload.unitContent.order_n"></select><span  class="tooltip"onmouseover="return escape('<s:text name="admin.unitContent.tip.01"/>')"></span><br />                                    
                     <br />
                     <label><s:text name="unitContent.input.package" /></label><br />
-                    <s:file name="upload" key="repository.input.file" theme="simple" /><span class="tooltip" onmouseover="return escape('Entre com o pacote da aula')"></span>
+                    <s:file name="upload" key="repository.input.file" theme="simple" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.unitContent.tip.04"/>')"></span>
                     <br />
                     <br />
                     <label><s:text name="unitContent.input.width" /></label><br />
@@ -830,7 +834,8 @@
                         <tr>
                             <td> 
                                 <p><s:text name="input.exam.startdatetime"/></p>
-                                <cal:jscalendar theme="simple" format="%m/%d/%Y %H:%M:00" name="input.exam.startdatetime" id="input.exam.startdatetime" showstime="true" onfocus="hintCalendar(this)" onchange="hint(this,true)" />
+                                <cal:jscalendar theme="simple" format="%m/%d/%Y %H:%M:00" name="input.exam.startdatetime" id="input.exam.startdatetime" showstime="true" onfocus="hintCalendar(this)" onchange="hint(this,true)" onfocus="this.readOnly=true;"/>
+                                <script>document.getElementsByName('input.exam.startdatetime')[0].readOnly=true;</script>
                             </td>
                             <td>
                                 <span class="hint"><s:text name="show.tip.startDate" /></span>
@@ -840,7 +845,8 @@
                         <tr>
                             <td> 
                                 <p><s:text name="input.exam.enddatetime"/></p>
-                                <cal:jscalendar theme="simple" format="%m/%d/%Y %H:%M:00" name="input.exam.enddatetime" id="input.exam.enddatetime" showstime="true" onfocus="hintCalendar(this)" onchange="hint(this,true)"/>
+                                <cal:jscalendar theme="simple" format="%m/%d/%Y %H:%M:00" name="input.exam.enddatetime" id="input.exam.enddatetime" showstime="true" onfocus="hintCalendar(this)" onchange="hint(this,true)" onfocus="this.readOnly=true;"/>
+                                <script>document.getElementsByName('input.exam.enddatetime')[0].readOnly=true;</script>
                             </td>
                             <td>
                                 <span class="hint"><s:text name="show.tip.endDate" /></span>

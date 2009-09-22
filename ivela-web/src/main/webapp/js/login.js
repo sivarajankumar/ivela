@@ -39,21 +39,40 @@ if (viewportwidth >= 1024) {
     result1 = ok;
 }
 
-// System Pre-Requisites for Browsers: Firefox v2 or above and Internet Explorer v6 and v7
+// System Pre-Requisites for Browsers: Firefox v2 or above and Internet Explorer v6 or above
 var result2 = error;
 var x = navigator;
+var browserName = "";
+
 if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)){ //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);
     var ffversion=new Number(RegExp.$1); // capture x.x portion and store as a number
     if (ffversion>=2) {
         result2 = ok;
+        browserName= navigator.userAgent.substring(navigator.userAgent.search(/Firefox[\/\s](\d+\.\d+)/),navigator.userAgent.length);
+    }
+}
+
+
+
+// Firefox 3.5 is called Shiretoko in linux versions
+if (/Shiretoko[\/\s](\d+\.\d+)/.test(navigator.userAgent)){ //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);
+    var ffversion=new Number(RegExp.$1); // capture x.x portion and store as a number
+    if (ffversion>=2) {
+        result2 = ok;
+        browserName= navigator.userAgent.substring(navigator.userAgent.search(/Shiretoko[\/\s](\d+\.\d+)/),navigator.userAgent.length);
     }
 }
 
 if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)){ //test for MSIE x.x;
     var ieversion=new Number(RegExp.$1); // capture x.x portion and store as a number
-    if (ieversion>=6 && ieversion<8) {
+    if (ieversion>=6) {
         result2 = ok;
+        browserName= navigator.userAgent.substring(navigator.userAgent.search(/MSIE (\d+\.\d+);/),navigator.userAgent.length);
     }
+}
+
+if (browserName=="") {
+	browserName = navigator.userAgent;
 }
 
 // System Pre-Requisites for Java Virtual Machine: Java Runtime Environment 1.6 or higher
@@ -95,7 +114,7 @@ function verifyDependencies() {
                                     (result2==error?'<tr><td colspan="3"><b>'+dependenciesBROWSER.innerHTML.split('|')[1]+'</b></td></tr><tr><td colspan="3" height="3px"></td></tr>':'') +
                                     (result3==error?'<tr><td colspan="3"><b>'+dependenciesJRE.innerHTML.split('|')[1]+'</b></td></tr><tr><td colspan="3" height="3px"></td></tr>':'') +
                                     '<tr><td>'+dependenciesSCREEN.innerHTML.split('|')[0]+':&nbsp;</td><td>'+viewportwidth+'x'+viewportheight+'</td><td>&nbsp;'+result1+'</td></tr>' +
-                                    '<tr><td>'+dependenciesBROWSER.innerHTML.split('|')[0]+':&nbsp;</td><td>'+x.appCodeName+' '+x.appVersion+'</td><td>&nbsp;'+result2+'</td></tr>' +
+                                    '<tr><td>'+dependenciesBROWSER.innerHTML.split('|')[0]+':&nbsp;</td><td>'+browserName+'</td><td>&nbsp;'+result2+'</td></tr>' +
                                     '<tr><td>'+dependenciesJRE.innerHTML.split('|')[0]+':&nbsp;</td><td>'+deployJava.getJREs()+'</td><td>&nbsp;'+result3+'</td></tr>' +
                                     '</table>';
 

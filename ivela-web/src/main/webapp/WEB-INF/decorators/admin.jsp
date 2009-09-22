@@ -35,13 +35,18 @@
         <title><s:text name="front.pageTitle" /></title>
         <!-- Colocar a logo para aparecer no navegador <link rel="icon" href="../logotipo/logo.jpg" type="image/gif" /> -->
         <link href="../css/base_admin.css" rel="stylesheet" type="text/css" />
-        <link href="../css/lightwindow_admin.css" rel="stylesheet" type="text/css" />
+        <link href="../css/lightwindow.css" rel="stylesheet" type="text/css" />
         <link href="../css/accordion_admin.css"  rel="stylesheet" type="text/css" />
+        <!--[if IE 6]>
+            <link href="../css/ie6adm.css" rel="stylesheet" type="text/css" />
+            <script type="text/javascript">
+                var ie6browser = true;         
+            </script>            
+        <![endif]-->
         <script type="text/javascript" src="../js/util/util.js"></script>
         <script type="text/javascript" src="../js/prototype/prototype.js"></script>
         <script type="text/javascript" src="../js/scriptaculous/scriptaculous.js"></script>
         <script type="text/javascript" src="../js/scriptaculous/effects.js"></script>
-        <script type="text/javascript" src="../js/resourceBundle.js"></script>
         <script type="text/javascript" src="../js/admin/lightwindow.js"></script>
         <script type="text/javascript" src="../js/accordion.js"></script>
         <script type="text/javascript" src="../js/admin/ajax.js"></script>
@@ -86,8 +91,8 @@
             </div>
             <!-- end header -->
             <div class="tools">                
-                <span class="btn-tools" onclick="Effect.toggle('hidden', 'slide')" title="<s:text name="main.tools" />"><img src="../images/icon/icon-tools.gif" /><s:text name="main.tools"/><img src="../images/icon/icon-tools-arrow.gif" /></span>
-                <span class="btn-faq" onclick="document.location = 'faq!list.action';"><img src="../images/icon/icon-faq-home.gif" /></span>
+                <span class="btn-tools" onclick="Effect.toggle('hidden', 'slide')" title="<s:text name="main.tools" />"><img src="../images/icon/icon-tools.gif" /><s:text name="main.tools"/><img src="../images/icon/icon-tools-arrow.gif" /></span>                
+                <span class="btn-manual" onclick="document.location = '/ivela-manual'"><img src="../images/icon/icon-faq.gif" title="<s:text name='main.manual'/>" /></span>                
                 
                 <div class="container-tools" id="hidden" style="display:none;">
                     <div class="content-tools">                        

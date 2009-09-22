@@ -41,30 +41,123 @@ See http://forrest.apache.org/docs/linking.html for more info
   <about label="Sobre" href="/index.html">
     <index label="Ivela" href="/index.html" description="Ivela Manual - Internet Voice E-Learning Application"/>
    </about>
+
   <quickstart  label="Quickstart" description="Ivela Manual - Quickstart">
 	<index label="Requisitos de Sistema" href="/quickstart/requisitos.html" description="Ivela Manual - Requisitos de Sistema"/>	
 	<index label="Registro" href="/quickstart/quickstart.html" description="Ivela Manual - Quickstart - Registro"/>
-	<index label="Usuários" href="/quickstart/users.html" description="Ivela Manual - Usuários"/>
+	<index label="Níveis de Usuário" href="/quickstart/users.html" description="Ivela Manual - Níveis de Usuário"/>
+  	<!--<index label="Recomendações" href="/help/recommendation.html" description="Ivela Manual - Recomendações"/>-->
   </quickstart>	
-  <admin tab="admin" label="Administração" indexfile="/admin/admin.html" description="Ivela Manual - Administração" >
-	<index label="Visão Geral" href="/admin/admin.html" description="Ivela Manual - Administração"/>	
-	<index label="Pacote de Conteúdo" href="/course/content_package.html" description="Ivela Manual - Pacote de Conteúdo"/>	
-	<!--
-	<course label="Cursos" description="Ivela Manual - Visão Geral">
-	</course>
-    <index label="Pessoas" href="/admin/people/user_access.html" description="Ivela Manual - Permissões"/>-->
-	<!--<index label="Ferramentas" href="/admin/tools.html" description="Ivela Manual - Ferramentas"/>-->
-	<!--<index label="Manutenção" href="/admin/system_maintenance.html" description="Ivela Manual - Manutenção"/>-->	
-  </admin>	
-  <student tab="student" href="/student/student.html" label="Alunos" description="Ivela Manual - Alunos">
-	<index label="Visão Geral" href="/student/student.html" description="Ivela Manual - Alunos"/>	
-	<index label="Cursos" href="/student/course.html" description="Ivela Manual - Curso"/>	
-	<!--<index label="Ferramentas" href="/student/tools.html" description="Ivela Manual - Ferramentas"/>-->
-  </student>	
+  <courses tab="cursos" label="Cursos" description="Ivela Manual - Cursos">
+		<index label="Pacote de Conteúdo" href="/course/content_package.html" description="Ivela Manual - Criação de Conteúdo"/>	
+  </courses>
+  
+  <!--<admin tab="admin" label="Administrador" description="Ivela Manual - Administrador" >-->
+	<!--<index label="Visão Geral" href="/users/admin/admin.html" description="Ivela Manual - Visão Geral"/>	
+	<index label="Pessoas" href="" description="Ivela Manual - Pessoas"/>
+	<index label="Pacote de Conteúdo" href="/course/content_package.html" description="Ivela Manual - Criação de Conteúdo"/>	
+	<index label="Turma" href="" description="Ivela Manual - Turma"/>
+ </admin>	-->
+  <!--<coord tab="coord" label="Coordenador" description="Ivela Manual - Coordenador" >
+	<index label="Visão Geral" href="/users/prof/prof.html" description="Ivela Manual - Visão Geral"/>	
+	<index label="Pessoas" href="" description="Ivela Manual - Pessoas"/>
+	<index label="Cursos" href="" description="Ivela Manual - Cursos"/>
+	<index label="Turma" href="" description="Ivela Manual - Turma"/>
+ 	<index label="Pacote de Conteúdo" href="/users/coord/course/content_package.html" description="Ivela Manual - Criação de Conteúdo"/>	
+  </coord>		-->
+  <!--<prof tab="prof" label="Professor" description="Ivela Manual - Professor" >
+	<index label="Visão Geral" href="/users/prof/prof.html" description="Ivela Manual - Visão Geral"/>	
+	<index label="Pessoas" href="" description="Ivela Manual - Pessoas"/>
+	<index label="Cursos" href="" description="Ivela Manual - Cursos"/>
+	<index label="Turma" href="" description="Ivela Manual - Turma"/>
+ 	<index label="Pacote de Conteúdo" href="/users/prof/course/content_package.html" description="Ivela Manual - Criação de Conteúdo"/>	
+  </prof>	-->
+  <!--<tutor tab="tutor" label="Tutor" description="Ivela Manual - Tutor" >
+	<index label="Visão Geral" href="/users/tutor/tutor.html" description="Ivela Manual - Visão Geral"/>	
+	<index label="Pessoas" href="" description="Ivela Manual - Pessoas"/>
+	<index label="Cursos" href="" description="Ivela Manual - Cursos"/>
+	<index label="Turma" href="" description="Ivela Manual - Turma"/>
+ 	<index label="Pacote de Conteúdo" href="/users/tutor/course/content_package.html" description="Ivela Manual - Criação de Conteúdo"/>	
+  </tutor>	-->
+  	<!--<student tab="student" label="Estudante" description="Ivela Manual - Estudante" >
+	<index label="Cursos" href="/users/student/student.html" description="Ivela Manual - Cursos"/>	
+<index label="Cursos Disponíveis" href="" description="Ivela Manual - Quickstart - Cadastro"/>
+	<index label="Meu Boletim" href="" description="Ivela Manual - Níveis de Usuário"/>
+ 	<index label="Minha Agenda" href="" description="Ivela Manual - Criação de Conteúdo"/>	
+  </student>	-->
   <help tab ="" label="Ajuda" href="" description="Ivela Manual - Ajuda">
     <index label="FAQ" href="/help/FAQ.html" description="FAQ"/>
     <index label="Soluções Alternativas" href="/help/troubleshooting.html" description="Ivela Manual - Soluções Alternativas"/>
   </help>
- </site>
+
+  <!--samples label="Samples" href="samples/" tab="samples">
+    <index label="Overview" href="index.html"/>
+    <sample label="Apache doc v2.0" href="sample.html" description="A nonsense
+      document using all possible elements in the current document v2.0">
+      <top href="#top"/>
+      <section href="#section"/>
+    </sample>
+    <static label="Static content" href="static.html" description="Static raw
+      un-processed content"/>
+    <linking label="Linking" href="linking.html" description="Linking explained
+      and demonstrated"/>
+    <sample-howto label="How To" href="howto-howto.html"
+      description="Test of How To documents"/>
+    <sample-html label="Embedded HTML" href="embedded_html.html"
+      description="Test of Embedded HTML"/>
+    <sample-ascii-art label="ascii-art page" href="ascii-art.html"
+      description="Sample Ascii Art page"/>
+    <svg label="Using SVG" href="svg.html" description="Using Scalable Vector Graphics (SVG)"/>
+    <sample-usemap label="usemap" href="usemap.html" description="Client-side
+      imagemap"/>
+    <i18n label="Internationalisation (i18n)" href="i18n.html"/>
+    <i18n-demo label="i18n demonstration" href="demo-i18n.html"/>
+    <sample-custom label="Custom Schema" href="customSchema.html"
+      description="Custom XML schema and doctypes"/>
+    <custom-example href="custom.html" description="A custom XML file"/>
+    <xml-entities label="XML entities" href="xml-entities.html"
+      description="Using XML entities for character replacements"/>
+    <faq label="FAQ" href="faq.html" description="Frequently Asked Questions"/>
+    <locationmap label="Locationmap" href="locationmap/index.html"
+      description="Locationmaps allow the user URL space to be different from
+      the storage URL Space"/>
+    <subdir label="Subdir" href="subdir/">
+      <index label="Index" href="index.html" description="Page generated from a
+        sub-directory"/>
+    </subdir>
+    <showonlywhenselected label="Conditional display of menuitems" href="showonlywhenselected/">
+      <page1 label="Always visible page" href="page1.html"/>
+      <page2 label="Visible only when current" href="page2.html" type="showWhenSelected"/>
+    </showonlywhenselected>
+  </samples>
+  <plugins label="Plugins" href="pluginDocs/plugins_0_70/" tab="plugins">
+    <index label="Index" href="index.html" description="List of plugins
+      available for Forrest"/>
+  </plugins>
+  <files>
+    <hello_print href="hello.pdf"/>
+    <test1 href="test1.html"/>
+  </files-->
+<!--
+  The href must be wholesite.html/pdf  You can change the labels and node names
+  <all label="All">
+    <whole_site_html label="Whole Site HTML" href="wholesite.html"/>
+    <whole_site_pdf label="Whole Site PDF" href="wholesite.pdf"/>
+  </all>
+  -->
+  <!--external-refs>
+    <forrest href="http://forrest.apache.org/">
+      <linking href="docs/linking.html"/>
+      <validation href="docs/validation.html"/>
+      <webapp href="docs/your-project.html#webapp"/>
+      <dtd-docs href="docs/dtd-docs.html"/>
+      <new_content_type href="docs/your-project.html#adding_new_content_type"/>
+      <buildPlugin href="docs/howto/howto-buildPlugin.html"/>
+    </forrest>
+    <forrest-zone href="http://forrest.zones.apache.org/"/>
+    <cocoon href="http://cocoon.apache.org/"/>
+    <xml.apache.org href="http://xml.apache.org/"/>
+  </external-refs-->
+</site>
 
 

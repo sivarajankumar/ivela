@@ -27,15 +27,10 @@
         <property name="jndiName">
             <value>jdbc/ivelaDataSource</value>
         </property>
-    </bean>
+    </bean>    
     
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <!--property name="annotatedPackages">
-            <list>
-                <value>br.ufc.ivela.commons.model</value>
-            </list>
-        </property-->
+        <property name="dataSource" ref="dataSource"/>        
         <property name="annotatedClasses">
             <list>
                 <value>br.ufc.ivela.commons.model.Access</value>
@@ -64,8 +59,7 @@
                 <value>br.ufc.ivela.commons.model.Exercise</value>
                 <value>br.ufc.ivela.commons.model.ExternalAnswerStudentExam</value>
                 <value>br.ufc.ivela.commons.model.ExternalParams</value>
-                <value>br.ufc.ivela.commons.model.ExternalQuestion</value>
-                <value>br.ufc.ivela.commons.model.Faq</value>
+                <value>br.ufc.ivela.commons.model.ExternalQuestion</value>                
                 <value>br.ufc.ivela.commons.model.File</value>
                 <value>br.ufc.ivela.commons.model.FinishedExam</value>
                 <value>br.ufc.ivela.commons.model.FinishedExercise</value>
@@ -128,8 +122,15 @@
                 org.hibernate.dialect.PostgreSQLDialect                
                 <!--hibernate.hbm2ddl.auto=create-->
                 <!--hibernate.show_sql=true-->
-                hibernate.provider_class=org.hibernate.cache.NoCacheProvider
+                hibernate.provider_class=org.hibernate.cache.NoCacheProvider                                
             </value>
         </property>
+    </bean>           
+                            
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">    
+        <property name="sessionFactory" ref="sessionFactory" />
     </bean>
+    
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+        
 </beans>

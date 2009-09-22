@@ -17,36 +17,11 @@
 # Date        - Author(Company)                    - Issue# - Summary                       #
 # XX-XXX-XXX -  nelson                             - XXXXXX - Initial Version               #
 # 26-JUN-2009 - otofuji (Instituto Eldorado)       - 000010 - General i18n Fixes            #
-#############################################################################################    
+# 13-AUG-2009 - fantato (Instituto Eldorado)       - 000014 - fixing multiple students enrollment #
+ #############################################################################################    
  */
 package br.ufc.ivela.web.action.admin;
 
-import br.ufc.ivela.commons.Constants;
-import br.ufc.ivela.commons.mail.MailSender;
-import br.ufc.ivela.commons.model.Authentication;
-import br.ufc.ivela.web.action.*;
-import br.ufc.ivela.commons.model.Course;
-import br.ufc.ivela.commons.model.Enrollment;
-import br.ufc.ivela.commons.model.Forum;
-import br.ufc.ivela.commons.model.Grade;
-import br.ufc.ivela.commons.model.Message;
-import br.ufc.ivela.commons.model.NewsFlash;
-import br.ufc.ivela.commons.model.Profile;
-import br.ufc.ivela.commons.model.SystemUser;
-import br.ufc.ivela.ejb.interfaces.CalendarRemote;
-import br.ufc.ivela.ejb.interfaces.CourseRemote;
-import br.ufc.ivela.ejb.interfaces.EnrollmentRemote;
-import br.ufc.ivela.ejb.interfaces.ForumRemote;
-import br.ufc.ivela.ejb.interfaces.GradeRemote;
-import br.ufc.ivela.ejb.interfaces.MessageRemote;
-import br.ufc.ivela.ejb.interfaces.NewsFlashRemote;
-import br.ufc.ivela.ejb.interfaces.ProfileRemote;
-import br.ufc.ivela.ejb.interfaces.RepositoryRemote;
-import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
-import br.ufc.ivela.ejb.interfaces.TopicRemote;
-import com.opensymphony.xwork2.ActionContext;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -63,7 +38,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.StrutsStatics;
 import org.jdom.Document;
@@ -71,12 +48,33 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
-public class GradeAction extends GenericAction {
+import br.ufc.ivela.commons.Constants;
+import br.ufc.ivela.commons.mail.MailSender;
+import br.ufc.ivela.commons.model.Authentication;
+import br.ufc.ivela.commons.model.Course;
+import br.ufc.ivela.commons.model.Enrollment;
+import br.ufc.ivela.commons.model.Forum;
+import br.ufc.ivela.commons.model.Grade;
+import br.ufc.ivela.commons.model.Message;
+import br.ufc.ivela.commons.model.NewsFlash;
+import br.ufc.ivela.commons.model.Profile;
+import br.ufc.ivela.commons.model.SystemUser;
+import br.ufc.ivela.ejb.interfaces.CalendarRemote;
+import br.ufc.ivela.ejb.interfaces.ForumRemote;
+import br.ufc.ivela.ejb.interfaces.MessageRemote;
+import br.ufc.ivela.ejb.interfaces.NewsFlashRemote;
+import br.ufc.ivela.ejb.interfaces.ProfileRemote;
+import br.ufc.ivela.ejb.interfaces.RepositoryRemote;
+import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
+import br.ufc.ivela.ejb.interfaces.TopicRemote;
+import br.ufc.ivela.web.action.CourseAwareAction;
 
-    private List<Grade> gradeList;
-    private List<Course> courseList;
-    private Course course;
-    private Grade grade;
+import com.opensymphony.xwork2.ActionContext;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
+
+public class GradeAction extends CourseAwareAction {
+    
     private SystemUser systemUser;
     private String message;
     private String startDate;
@@ -91,12 +89,10 @@ public class GradeAction extends GenericAction {
     private String dtStart;
     private String dtEnd;
     private String where;
-    private String text;
-    private CourseRemote courseRemote;
-    private GradeRemote gradeRemote;
+    private String text;    
     private RepositoryRemote repositoryRemote;
     private SystemUserRemote systemUserRemote;
-    private EnrollmentRemote enrollmentRemote;
+    
     private MessageRemote messageRemote;
     private NewsFlashRemote newsFlashRemote;
     private CalendarRemote calendarRemote;
@@ -114,6 +110,8 @@ public class GradeAction extends GenericAction {
     /* Forum */
     private ForumRemote forumRemote;
     private TopicRemote topicRemote;
+    private boolean userOk;
+    private boolean ignoredMail;
 
     public ForumRemote getForumRemote() {
         return forumRemote;
@@ -183,49 +181,91 @@ public class GradeAction extends GenericAction {
         try {
             String email = "";
             boolean enroll;
-            studentsEnrollment = new ArrayList<String>();
+            studentsEnrollment = new ArrayList<String>();     
             SAXBuilder sb = new SAXBuilder();
             Document d = sb.build(fileStudents);
             Element mural = d.getRootElement();
             List elements = mural.getChildren();
-            Iterator i = elements.iterator();
+            Iterator i = elements.iterator();      
             while (i.hasNext()) {
-                Element element = (Element) i.next();
+                userOk = false;
+                ignoredMail = false;
+                enroll = false;
+            	Element element = (Element) i.next();
                 this.addProfile(element.getChildText("firstName"), element.getChildText("lastName"));
                 email = element.getChildText("email");
 
-                this.addSystemUser(email);
-                enroll = this.enroll();
-
-                studentsEnrollment.add(profile.getFirstName() + " " + profile.getLastName());
-                studentsEnrollment.add(Boolean.toString(enroll));
+                // This code is a trick to ignore exceptions from mail server
+                try {
+                	this.addSystemUser(email);
+                	if (userOk) { 
+                		enroll = this.enroll();
+                	}                	
+                } catch (Throwable ex) {
+                	Logger.getLogger(GradeAction.class.getName()).log(Level.SEVERE, null, ex);
+                	enroll = false;
+                }
+                enroll = (enroll & userOk);
+                studentsEnrollment.add(element.getChildText("firstName") + "#" + element.getChildText("lastName")+"#"+Boolean.toString(enroll));
             }
 
+           getSession().put("studentsEnroll", studentsEnrollment);
 
         } catch (JDOMException ex) {
-            Logger.getLogger(GradeAction.class.getName()).log(Level.SEVERE, null, ex);
+            log.error("enrollmentStudents", ex);
         } catch (IOException ex) {
-            Logger.getLogger(GradeAction.class.getName()).log(Level.SEVERE, null, ex);
+            log.error("enrollmentStudents", ex);            
         }
-
+      
         return "input";
     }
 
+    /**
+     * Retrieves a info about the professores
+     * @return a string in the json format
+     */
+    public String getEnrollResults() {
+    	StringBuilder json = new StringBuilder();
+    	List<String> studentsEnroll = (List<String>)getSession().get("studentsEnroll");
+    	if (studentsEnroll != null) {
+	        json.append("{");
+	            json.append("\"students\":[");
+	                    for (String d : studentsEnroll) {
+	                    json.append("{");        
+	                    	String[] students = d.split("#");
+	                        json.append("\"firstName\":\"" + students[0] + "\",");
+	                        json.append("\"lastName\":\"" + students[1] + "\",");
+	                        json.append("\"status\":\"" + students[2] + "\"");
+	                    json.append("},");
+	                    }
+	                    if (json.substring(json.length() - 1).equals(","))
+	                        json = new StringBuilder(json.substring(0, json.length() - 1));                   
+	                json.append("],");                 
+	        json.append("\"result\": \"true\"");
+    	} else {
+    		json.append("\"result\": \"false\"");
+    	}
+    	json.append("}");
+        setInputStream(new ByteArrayInputStream(json.toString().getBytes()));
+        return "json";
+    }
+    
+    
     public boolean enroll() {
-        logger.log("enroll");
+        log.debug("enroll");
         List<Grade> grades = gradeRemote.getGradesByStudent(this.systemUser.getId());
         boolean canAdd = true;
         Grade g = gradeRemote.get(grade.getId());
         for (Grade gr : grades) {
             if (gr.getId().longValue() == g.getId().longValue()) {
-                logger.log("has");
+                log.debug("has");
                 canAdd = false;
                 break;
             }
         }
 
         if (canAdd) {
-            logger.log("canadd");
+            log.debug("canAdd");
             enrollment = new Enrollment();
             enrollment.setGrade(g);
             enrollment.setStartDatetime(new Date());
@@ -234,7 +274,7 @@ public class GradeAction extends GenericAction {
             List count = enrollmentRemote.getByGrade(g.getId());
 
             if (count.size() < g.getMaxStudents()) {
-                logger.log("tam");
+                log.debug("tam");
                 enrollmentRemote.add(enrollment);
                 grade = gradeRemote.get(grade.getId());
                 addHistory("history.enrolluser.title", "history.enrolluser.description", this.systemUser.getUsername(), grade.getName());
@@ -268,20 +308,26 @@ public class GradeAction extends GenericAction {
 
 
         this.systemUser.setAuthentication(new Authentication(Constants.ROLE_USER));
-        Long id = systemUserRemote.add(this.systemUser);
-        this.systemUser = systemUserRemote.get(id);
+        userOk = false;
+        try { 
+        	Long id = systemUserRemote.add(this.systemUser);
+        	this.systemUser = systemUserRemote.get(id);
+        
+        	try {
+        		MailSender.send(new String[]{this.systemUser.getEmail()}, "[ivela] Request password", "Your username is " + this.systemUser.getUsername() + "<br>Your password is: " + password);
+        	} catch (Throwable ex) {
+        		ignoredMail = true;
+        	}
+        	
+        	HttpServletRequest request = ServletActionContext.getRequest();
 
+        	boolean result = calendarRemote.addInfo(request.getServerName(), String.valueOf(request.getServerPort()), systemUser.getUsername());
 
-        MailSender.send(new String[]{this.systemUser.getEmail()}, "[ivela] Request password", "Your username is " + this.systemUser.getUsername() + "<br>Your password is: " + password);
-
-        //--- create the user in webical application
-        HttpServletRequest request = ServletActionContext.getRequest();
-        //calendarRemote.addInfo(request.getServerName(), String.valueOf(request.getServerPort()), systemUser.getUsername());
-        //System.out.println("#### usuario criado");
-        boolean result = calendarRemote.addInfo("200.17.41.215", String.valueOf(8080), this.systemUser.getUsername());
-        //---
-        addHistory("history.createuser.title", "history.createuser.description", this.systemUser, this.systemUser.getUsername());
-
+        	addHistory("history.createuser.title", "history.createuser.description", this.systemUser, this.systemUser.getUsername());
+        	userOk = true;
+        } catch (Throwable ex){
+        	Logger.getLogger(GradeAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void addProfile(String firstName, String lastName) {
@@ -377,10 +423,8 @@ public class GradeAction extends GenericAction {
                 json.append("\"id\":\"" + f.getId() + "\",");
                 json.append("\"title\":\"" + f.getTitle() + "\",");
                 json.append("\"description\":\"" + f.getDescription() + "\",");
-                json.append("\"studentCreateTopic\":\"" + f.getStudentCreateTopic() + "\",");
-                json.append("\"studentLinkPost\":\"" + f.getStudentLinkPost() + "\",");
-                json.append("\"studentUploadPost\":\"" + f.getStudentUploadPost() + "\",");
-                json.append("\"studentUploadRepository\":\"" + f.getStudentUploadRepository() + "\",");
+                json.append("\"studentCreateTopic\":\"" + f.getStudentCreateTopic() + "\",");                
+                json.append("\"studentUploadPost\":\"" + f.getStudentUploadPost() + "\",");                
                 json.append("\"createBy\":{");
                 json.append("\"id\":\"" + f.getCreatedBy().getId() + "\",");
                 json.append("\"username\":\"" + f.getCreatedBy().getUsername() + "\",");
@@ -582,7 +626,7 @@ public class GradeAction extends GenericAction {
     }
 
     public String show() {
-        setMessage(getMessage());
+        setMessage(getMessage());        
         courseList = gradeRemote.getStructure();
         coordinatorList = systemUserRemote.getByAuthentication(Constants.ROLE_COORD);
         professorList = systemUserRemote.getByAuthentication(Constants.ROLE_PROFESSOR);
@@ -916,6 +960,23 @@ public class GradeAction extends GenericAction {
             grade.setStatus(Integer.parseInt(status));
             Long id = gradeRemote.add(grade);
             grade = gradeRemote.get(id);
+            try {
+                Forum forum = new Forum();
+                forum.setTitle(grade.getName());                                               
+                forum.setCourse(course);
+                forum.setGrade(grade);
+                forum.setCreatedBy(getAuthenticatedUser());
+                Long result = forumRemote.add(forum);
+                if (result == null) {
+                    log.warn("Forum Has not been saved for grade: "
+                            + grade.getName() + "|" + grade.getId());
+                }
+            } catch (Exception e) {
+                // Does not Cancel the Transaction if the Forum creation Fails.
+                // An admin may create the Forum later in case of errors.
+                log.error("Forum Creation Failed for course: "
+                        + grade.getName() + "|" + grade.getId(), e);                
+            }
             xStream.alias("grade", Grade.class);
             String json = xStream.toXML(grade);
             setInputStream(new ByteArrayInputStream(json.getBytes()));
@@ -940,8 +1001,9 @@ public class GradeAction extends GenericAction {
             grade.setStartDatetime(startDate);
             grade.setEndDatetime(endDate);
         } catch (ParseException ex) {
-            Logger.getLogger(GradeAction.class.getName()).log(Level.SEVERE, null, ex);
+            log.error("Update Grade", ex);            
         }
+        
         XStream xStream = new XStream(new JettisonMappedXmlDriver());
         if (!hasActionErrors()) {
             grade.setStatus(Integer.parseInt(status));
@@ -981,12 +1043,19 @@ public class GradeAction extends GenericAction {
 
     public String removeGrade() {
         grade = gradeRemote.get(grade.getId());
+        grade.getEnrollments();
         grade.setEnrollments(enrollmentRemote.getByGrade(grade.getId()));
+        grade.setForums(forumRemote.getForumListByGrade(grade.getId()));
         //grade.setDisciplines(disciplineRemote.getByCourse(course.getId()));
         //performValidateRemove();
         XStream xStream = new XStream(new JettisonMappedXmlDriver());
         if (!hasActionErrors()) {
-            boolean result = gradeRemote.remove(grade);
+            if (grade.getForums() != null) {                                
+                for (Forum forumToBeRemoved : grade.getForums()) {
+                    forumRemote.remove(forumToBeRemoved.getId());                    
+                }
+            }
+            boolean result = gradeRemote.remove(grade);            
             xStream.alias("boolean", Boolean.class);
             String json = xStream.toXML(new Boolean(result));
             json = json.replaceAll("boolean", "result");
@@ -1212,10 +1281,10 @@ public class GradeAction extends GenericAction {
                 Logger.getLogger(GradeAction.class.getName()).log(Level.SEVERE, null, ex);
             }
             HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(StrutsStatics.HTTP_REQUEST);
-            logger.log("porta" + request.getLocalPort());
-            logger.log("ip" + request.getRequestURI());
-            logger.log("ip" + request.getRemotePort());
-            logger.log("ip" + request.getRemoteAddr());
+            log.debug("porta" + request.getLocalPort());
+            log.debug("ip" + request.getRequestURI());
+            log.debug("ip" + request.getRemotePort());
+            log.debug("ip" + request.getRemoteAddr());
             result = calendarRemote.addEvent(request.getLocalAddr(), new Integer(request.getLocalPort()).toString(), systemUser.getUsername(), getDescription(), dtI, dtF, getWhere(), getWhat());
         }
         XStream xStream = new XStream(new JettisonMappedXmlDriver());
@@ -1315,86 +1384,6 @@ public class GradeAction extends GenericAction {
     }
 
     /**
-     * Retrieves a grade
-     * @return
-     */
-    public Grade getGrade() {
-        return grade;
-    }
-
-    /**
-     * Sets a grade
-     * @param grade
-     */
-    public void setGrade(Grade grade) {
-        this.grade = grade;
-    }
-
-    /**
-     * Lists the grades
-     * @return gradeList
-     */
-    public List<Grade> getGradeList() {
-        return gradeList;
-    }
-
-    /**
-     * Sets a lis of grades
-     * @param gradeList
-     */
-    public void setGradeList(List<Grade> gradeList) {
-        this.gradeList = gradeList;
-    }
-
-    /**
-     * Retrieves a remote grade
-     * @return gradeRemote
-     */
-    public GradeRemote getGradeRemote() {
-        return gradeRemote;
-    }
-
-    /**
-     * Sets a remote grade
-     * @param gradeRemote
-     */
-    public void setGradeRemote(GradeRemote gradeRemote) {
-        this.gradeRemote = gradeRemote;
-    }
-
-    /**
-     * Retrieves a list of course
-     * @return courseList
-     */
-    public List<Course> getCourseList() {
-        return courseList;
-    }
-
-    /**
-     * Sets a list of course
-     * @param courseList
-     */
-    public void setCourseList(List<Course> courseList) {
-        this.courseList = courseList;
-    }
-
-    /**
-     * Retrieves a remote course
-     * @return courseRemote
-     */
-    public CourseRemote getCourseRemote() {
-        return courseRemote;
-    }
-
-    /**
-     * Sets a remote course
-     * @param courseRemote
-     */
-    public void setCourseRemote(CourseRemote courseRemote) {
-        this.courseRemote = courseRemote;
-    }
-
-    /**
      * Retrieves a remote system user
      * @return
      */
@@ -1472,14 +1461,6 @@ public class GradeAction extends GenericAction {
 
     public void setWhere(String where) {
         this.where = where;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
     }
 
     public String getGradeIds() {
@@ -1577,14 +1558,6 @@ public class GradeAction extends GenericAction {
 
     public void setTutorList(List<SystemUser> tutorList) {
         this.tutorList = tutorList;
-    }
-
-    public EnrollmentRemote getEnrollmentRemote() {
-        return enrollmentRemote;
-    }
-
-    public void setEnrollmentRemote(EnrollmentRemote enrollmentRemote) {
-        this.enrollmentRemote = enrollmentRemote;
     }
 
     public InputStream getInputStream() {

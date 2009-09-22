@@ -22,7 +22,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="cal" uri="/jscalendar" %>
 
 
 <html>
@@ -33,7 +32,6 @@
         <script type="text/javascript" src="js/prototype/prototype.js"></script>
         <script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>
         <title><s:text name="message.pageTitle" /></title>
-        <cal:head/>
         
         <s:head />
     </head>

@@ -536,7 +536,8 @@ CREATE TABLE file (
     mimetype character varying(50) NOT NULL,
     sent_by numeric(10,0) NOT NULL,
     upload_date timestamp without time zone NOT NULL,
-    path character varying(100) NOT NULL
+    path character varying(100) NOT NULL,
+    grade integer DEFAULT 0
 );
 
 
@@ -594,11 +595,11 @@ CREATE TABLE forum (
     title character varying(100) NOT NULL,
     description character varying(255),
     student_create_topic boolean DEFAULT true NOT NULL,
-    student_upload_post boolean DEFAULT false NOT NULL,
-    student_upload_repository boolean DEFAULT false NOT NULL,
-    student_link_post boolean DEFAULT false NOT NULL,
+    student_upload_post boolean DEFAULT true NOT NULL,       
     public boolean DEFAULT false NOT NULL,
-    created_by numeric(10,0) NOT NULL
+    created_by numeric(10,0) NOT NULL,
+    topics_count integer NOT NULL DEFAULT 0, 
+    course integer DEFAULT 0
 );
 
 
@@ -1382,7 +1383,6 @@ ALTER SEQUENCE sq_chat OWNED BY chat.id;
 --
 
 CREATE SEQUENCE sq_course
-	START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
     NO MINVALUE
@@ -1444,7 +1444,6 @@ ALTER SEQUENCE sq_dictionary OWNED BY dictionary.id;
 --
 
 CREATE SEQUENCE sq_discipline
-	START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
     NO MINVALUE
@@ -2614,7 +2613,10 @@ CREATE TABLE topic (
     title character varying(150) NOT NULL,
     created_by numeric(10,0) NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    description character varying(255)
+    description character varying(255),
+    posts_count integer NOT NULL DEFAULT 0,
+    last_post_id integer,
+    last_post_date timestamp without time zone
 );
 
 
@@ -2732,7 +2734,6 @@ ALTER TABLE ivela.unit OWNER TO ivela;
 --
 
 CREATE SEQUENCE sq_unit
-	START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
     NO MINVALUE
@@ -2771,7 +2772,6 @@ ALTER TABLE ivela.unit_content OWNER TO ivela;
 --
 
 CREATE SEQUENCE sq_unit_content
-	START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
     NO MINVALUE
@@ -5523,6 +5523,7 @@ ALTER TABLE ONLY enrollment
 ALTER TABLE ONLY forum
     ADD CONSTRAINT grade_forum_fk FOREIGN KEY (grade) REFERENCES grade(id);
 
+ALTER TABLE ONLY forum ADD CONSTRAINT fk_forum_course FOREIGN KEY (course) REFERENCES course(id);
 
 --
 -- Name: grade_grade_bulletin_board_fk; Type: FK CONSTRAINT; Schema: ivela; Owner: ivela
