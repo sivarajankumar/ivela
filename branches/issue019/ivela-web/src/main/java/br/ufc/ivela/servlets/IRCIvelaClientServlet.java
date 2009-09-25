@@ -7,6 +7,7 @@ package br.ufc.ivela.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.context.SecurityContextHolder;
 
+import br.ufc.ivela.commons.challenger.config.prefs.ManagePreferences;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 
@@ -28,6 +30,7 @@ import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 public class IRCIvelaClientServlet extends HttpServlet{
 
     private static final long serialVersionUID = -4341295579947052433L;
+    private static Map<String, String> prefsMap = ManagePreferences.getInstance().getPreferencesMap();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -65,10 +68,12 @@ public class IRCIvelaClientServlet extends HttpServlet{
                     "<body>\n" +
                     "<h1>IRC Ivela Client - #room_dis"+request.getParameter("discipline.id")+"_course"+request.getParameter("course.id")+"</h1><hr>\n" +
                     "<applet code=\"org.jdamico.ircivelaclient.view.HandleApplet\"\n" +
-                    "archive=\"http://"+request.getServerName()+"/public_content/ircivelaclient/ircivelaclient.jar\" \n" +
-                    "width=\"820\" height=\"480\">\n" +
-                    "<param name=\"server\" value=\""+request.getServerName()+"\" >\n" +
+                    "archive=\""+prefsMap.get("ircAppletPath")+"/ircivelaclient.jar, "+prefsMap.get("ircAppletPath")+"/jerklib.jar\" \n" +
+                    "width=\"920\" height=\"510\">\n" +
+                    "<param name=\"server\" value=\""+prefsMap.get("ircServer")+"\" >\n" +
                     "<param name=\"channel\" value=\"#room_dis"+request.getParameter("discipline.id")+"_course"+request.getParameter("course.id")+"\" >\n" +
+                    "<param name=\"remotefile\" value=\""+prefsMap.get("ircRemoteFile")+"\" >\n" +
+                    "<param name=\"remoteservlet\" value=\""+prefsMap.get("ircRemoteServlet")+"\" >\n" +
                     "<param name=\"nick\" value=\""+email+"\" >\n" +
                     "<param name=\"teacher\" value=\"damico\" >\n" +
                     "<param name=\"bgcolor\" value=\"FDF1D9\" >" +
