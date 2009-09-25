@@ -6,6 +6,8 @@ import br.ufc.ivela.commons.challenger.dataobject.Question;
 import br.ufc.ivela.commons.challenger.dataobject.TransformerInterface;
 import br.ufc.ivela.commons.challenger.util.DebugLogger;
 import br.ufc.ivela.commons.challenger.xml.dataprocessor.QuestionSetDataProcessor;
+import br.ufc.ivela.commons.model.xml.Parser;
+
 import java.io.IOException;
 
 

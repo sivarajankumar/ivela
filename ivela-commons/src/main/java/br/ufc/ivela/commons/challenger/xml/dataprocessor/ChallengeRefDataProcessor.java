@@ -6,8 +6,9 @@ import br.ufc.ivela.commons.challenger.dataobject.ChallengeRef;
 import br.ufc.ivela.commons.challenger.dataobject.IvelaHeader;
 import br.ufc.ivela.commons.challenger.dataobject.IvelaObj;
 import br.ufc.ivela.commons.challenger.dataobject.IvelaPayload;
-import br.ufc.ivela.commons.challenger.xml.Parser;
 import br.ufc.ivela.commons.challenger.xml.TransformFactory;
+import br.ufc.ivela.commons.model.xml.Parser;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
