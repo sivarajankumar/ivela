@@ -4,6 +4,9 @@
 	<comment></comment>
 	<projects>
 		<project>ivela-ear</project>
+		<project>ivela-web</project>
+		<project>ivela-commons</project>
+		<project>ivela-ejb</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

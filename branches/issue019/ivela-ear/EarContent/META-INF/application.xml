@@ -2,16 +2,16 @@
 <!DOCTYPE application PUBLIC "-//Sun Microsystems, Inc.//DTD J2EE Application 1.3//EN" "http://java.sun.com/dtd/application_1_3.dtd">
 <application id="Application_ID">
 	<display-name>ivela-ear</display-name>
-	<module>
-		<java>xalan-2.7.0.jar</java>
-	</module>
-	<module>
+	<module id="WebModule_1253040591488">
 		<web>
 			<web-uri>ivela-web-1.0.war</web-uri>
-			<context-root>ivela-ear</context-root>
+			<context-root>ivela-web</context-root>
 		</web>
 	</module>
-	<module>
+	<module id="EjbModule_1253040593146">
 		<ejb>ivela-ejb-1.0.jar</ejb>
+	</module>
+	<module>
+		<java>xalan-2.7.0.jar</java>
 	</module>
 </application>
