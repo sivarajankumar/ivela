@@ -22,7 +22,21 @@
 
 package br.ufc.ivela.web.action;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.ResourceBundle;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+import org.springframework.util.StringUtils;
+
 import br.ufc.ivela.commons.Constants;
+import br.ufc.ivela.commons.challenger.config.prefs.ManagePreferences;
 import br.ufc.ivela.commons.mail.MailSender;
 import br.ufc.ivela.commons.model.Address;
 import br.ufc.ivela.commons.model.Authentication;
@@ -32,28 +46,22 @@ import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.util.Validators;
 import br.ufc.ivela.ejb.interfaces.AddressRemote;
 import br.ufc.ivela.ejb.interfaces.CalendarRemote;
-import br.ufc.ivela.ejb.interfaces.LanguageRemote;
 import br.ufc.ivela.ejb.interfaces.PhoneRemote;
 import br.ufc.ivela.ejb.interfaces.ProfileRemote;
 import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 import br.ufc.ivela.interceptors.interfaces.ProfileDataProvider;
 
-import com.opensymphony.xwork2.Preparable;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.ResourceBundle;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.struts2.ServletActionContext;
-import org.springframework.util.StringUtils;
+/**
+ * 
+ * @author jdamico
+ *
+ */
 
 
 public class SystemUserAction extends GenericAction implements ProfileDataProvider {
-
-    private CalendarRemote calendarRemote;
+	
+ 	private static final long serialVersionUID = 123L;
+	private CalendarRemote calendarRemote;
     private SystemUserRemote systemUserRemote;
     private SystemUser systemUser;
     private ProfileRemote profileRemote;
@@ -88,6 +96,8 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
     private Address inAddress;
     private Integer country;
     private String dateFormat;
+    
+    private static Map<String, String> prefsMap = ManagePreferences.getInstance().getPreferencesMap();
 
     public String inputChange() {
         return "change";
@@ -177,16 +187,16 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
             su.setPassword(systemUserRemote.encrypt(pwd));
             result = systemUserRemote.update(su);
             if (result) {
-                String body = "Your new password is: <b>" + pwd + "</b>";
+                String body = "Your new password is: <b>" + pwd + "</b> Change it at [###url###]";
 
                 HttpServletRequest request = ServletActionContext.getRequest();
-                String url = "http://" + request.getServerName() + ":" + request.getServerPort() + Constants.WEB_PATH;
-                // String url = "http://200.17.41.212:8080" + Constants.WEB_PATH;
+                String url = prefsMap.get("appHost");
+                
                 if (!url.endsWith("/")) {
                     url += "/";
                 }
 
-                MailSender.send(new String[]{su.getEmail()}, "[ivela] Request password", getLayoutEmail(body, url));
+                MailSender.send(new String[]{su.getEmail()}, prefsMap.get("appName")+" Request password", getLayoutEmail(body, url));
             }
         } else {
             message = "inconsistence";
@@ -202,15 +212,22 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
     }
 
     public String getLayoutEmail(String body, String url) {
-        try {
-            ResourceBundle layout = ResourceBundle.getBundle("layout");
-            System.out.println(layout.getString("layout.email").replaceAll("__body__", body).replaceAll("__linkSite__", url));
-            return layout.getString("layout.email").replaceAll("__body__", body).replaceAll("__linkSite__", url);
-        } catch (NullPointerException e) {
-            System.out.println("Error while retrieving layout property file");
-            e.printStackTrace();
-            return body;
-        }
+    	
+    	if(prefsMap.get("mailBody").equals("html")){
+    		try {
+                ResourceBundle layout = ResourceBundle.getBundle("layout");
+                body = layout.getString("layout.email").replaceAll("__body__", body).replaceAll("__linkSite__", url);
+            } catch (NullPointerException e) {
+
+                e.printStackTrace();
+                
+            }
+    	}else if(prefsMap.get("mailBody").equals("txt")){
+    		body = body.replaceAll("###url###", url);
+    	}
+    	
+        
+        return body;
     }
 
     public CalendarRemote getCalendarRemote() {
@@ -351,16 +368,16 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
             calendarRemote.addInfo(request.getServerName(), String.valueOf(request.getServerPort()), systemUser.getUsername());
             
             // send a confirmation mail
-            String body = "Dear <b>" + systemUser.getUsername() + "</b>, <br /><br />" + 
-                          "&nbsp;&nbsp;&nbsp;&nbsp;You are now register and you can access the iVeLA system.<br /><br /><br />";
+            String body = prefsMap.get("signMsg").replaceAll("###username###", systemUser.getUsername());
+            body = body.replaceAll("###appname###", prefsMap.get("appName"));
 
-            String url = "http://" + request.getServerName() + ":" + request.getServerPort() + Constants.WEB_PATH;
-            //String url = "http://200.17.41.212:8080" + Constants.WEB_PATH;
+            String url = prefsMap.get("appHost");
+
             if (!url.endsWith("/")) {
                 url += "/";
             }
 
-            MailSender.send(new String[]{systemUser.getEmail()}, "[ivela] You were successfully registered", getLayoutEmail(body, url));
+            MailSender.send(new String[]{systemUser.getEmail()}, prefsMap.get("signSubject").replaceAll("###appname###", prefsMap.get("appName")), getLayoutEmail(body, url));
             
             // create a history register
             addHistory("history.createuser.title", "history.createuser.description", systemUser, systemUser.getUsername());
