@@ -12,6 +12,8 @@
     <version>1.0</version>
     <name>ivela-ejb</name>
     <url>http://maven.apache.org</url>
+    <repositories>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>br.ufc.ivela</groupId>
