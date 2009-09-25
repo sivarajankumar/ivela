@@ -9,9 +9,10 @@ import br.ufc.ivela.commons.challenger.dataobject.IvelaObj;
 import br.ufc.ivela.commons.challenger.dataobject.IvelaPayload;
 import br.ufc.ivela.commons.challenger.dataobject.Question;
 import br.ufc.ivela.commons.challenger.dataobject.QuestionOption;
-import br.ufc.ivela.commons.challenger.xml.Parser;
 import br.ufc.ivela.commons.challenger.xml.QuestionSetTransformer2Object;
 import br.ufc.ivela.commons.challenger.xml.TransformFactory;
+import br.ufc.ivela.commons.model.xml.Parser;
+
 import java.util.ArrayList;
 import java.util.List;
 

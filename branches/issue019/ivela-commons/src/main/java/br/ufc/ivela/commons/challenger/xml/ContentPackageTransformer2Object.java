@@ -8,6 +8,8 @@ package br.ufc.ivela.commons.challenger.xml;
 import br.ufc.ivela.commons.challenger.dataobject.IvelaObj;
 import br.ufc.ivela.commons.challenger.dataobject.TransformerInterface;
 import br.ufc.ivela.commons.challenger.xml.dataprocessor.ContentPackageDataProcessor;
+import br.ufc.ivela.commons.model.xml.Parser;
+
 import java.io.IOException;
 import org.xml.sax.SAXException;
 
