@@ -68,6 +68,7 @@
                 <value>br.ufc.ivela.commons.model.Functionality</value>
                 <value>br.ufc.ivela.commons.model.Grade</value>
                 <value>br.ufc.ivela.commons.model.GradeNote</value>
+                <value>br.ufc.ivela.commons.model.GradeUnitContent</value>
                 <value>br.ufc.ivela.commons.model.History</value>
                 <value>br.ufc.ivela.commons.model.HistoryParams</value>                                
                 <value>br.ufc.ivela.commons.model.Language</value>

@@ -177,22 +177,22 @@ public class UnitContentAction extends GenericAction {
                     path += System.getProperty("file.separator") + unitContent;
 
 
-                    String deployFile = ContentPackageUtils.unzip(new File(ContentPackageUtils.UPLOAD_PATH + uploadFileName), new File(path));
-                    String xml = ContentPackageUtils.getStringXML(new File(deployFile));
+                    List<FileSystem> fileSystemList = ContentPackageUtils.unzip(new File(ContentPackageUtils.UPLOAD_PATH + uploadFileName), new File(path));
+//                    String xml = ContentPackageUtils.getStringXML(new File(deployFile));
 
-                    IvelaStringObj ivelaStringObj = new IvelaStringObj();
-                    ivelaStringObj.setType(Constants.CONTENTPACKAGE);
-                    ivelaStringObj.setXml(xml);
-                    TransformerInterface tInter = TransformFactory.getTransformer(ivelaStringObj);
+//                    IvelaStringObj ivelaStringObj = new IvelaStringObj();
+//                    ivelaStringObj.setType(Constants.CONTENTPACKAGE);
+//                    ivelaStringObj.setXml(xml);
+//                    TransformerInterface tInter = TransformFactory.getTransformer(ivelaStringObj);
 
                     IvelaObj ivelaObj = null;
 
                     try {
-                        ivelaObj = tInter.getTransformerType();
-                        IvelaPayload p = ivelaObj.getIvelaPayload();
+//                        ivelaObj = tInter.getTransformerType();
+//                        IvelaPayload p = ivelaObj.getIvelaPayload();
 
                         //System.out.println("File Systems: ");
-                        for (FileSystem f : p.getContentPackage().getFileSystemList()) {
+                        for (FileSystem f : fileSystemList) {//p.getContentPackage().getFileSystemList()) {
                             if (!new File(path + f.getValue()).isDirectory()) {
 
                                 String contentPackageStr = "";
@@ -219,9 +219,6 @@ public class UnitContentAction extends GenericAction {
                         //System.out.println("- Value: " + f.getValue());
                         }
                         setMessage("Content package uploaded");
-                    } catch (SAXException e) {
-                        setMessage(e.getMessage());
-                        DebugLogger.getInstance().logAtExceptionTime(this.getClass().getName(), e.getMessage());
                     } catch (IOException e) {
                         setMessage(e.getMessage());
                         DebugLogger.getInstance().logAtExceptionTime(this.getClass().getName(), e.getMessage());

@@ -46,6 +46,8 @@ function click(e){
                 showStudent($('grade.id').value, $('grade.course.id').value);
             if (element == 'forums')
                 showForum($('grade.id').value, $('grade.course.id').value);
+            if (element == 'lessons')
+                showLesson($('grade.id').value, $('grade.course.id').value);
         } 
     }
 }
@@ -120,6 +122,7 @@ function closeAll() {
     $('showTutor').style.display = 'none';
     $('showStudent').style.display = 'none';
     $('showForum').style.display = 'none';
+    $('showLesson').style.display = 'none';
     $('showForumId').style.display = 'none';
 
     $('showEntryGrade').style.display = 'none';
@@ -369,6 +372,40 @@ function showForum(gradeId, courseId) {
         forums += '</ul>';
     }   
     $('forum.grade.forums').innerHTML = forums;
+}
+
+function showLesson(gradeId, courseId) {
+    closeAll();
+    $('showLesson').style.display = 'block';
+    
+    jsonGradeId = gradeId.split("_",1)[0];
+
+    var jsonGrade = getJsonFromUrl('grade!getGradeInfo.action?grade.id=' + jsonGradeId);
+    var jsonCourse = getJsonFromUrl('course!getCourseInfo.action?course.id=' + courseId);
+
+    $('lesson.show.grade.id').value = gradeId;
+    $('lesson.grade.course.id').value =courseId;
+    
+    $('lesson.grade.course.name').innerHTML = jsonCourse.course.name;
+    $('lesson.grade.name').innerHTML = jsonGrade.grade.name;
+    
+    var json = getJsonFromUrl('forum!listForums.action?course.id=' + courseId + '&grade.id=' + gradeId);
+    var lessons = '';
+    if (json != null && json != '' && json.lessons != '') {
+        lessons += '<ul>';
+        if (json.lessons == null) {
+            var temp = json.lessons.title;
+            if (temp != undefined)
+                lessons = '<li><input type="checkbox" id="lesson.id_' + 0 + '" value="' + json.lessons.id + '" />' + temp + '</li>';
+        }
+        else {
+            for (i = 0; i <json.lessons.length; i++) {
+                lessons += '<li><input type="checkbox" id="lesson.id_' + i + '" value="' + json.lessons[i].id + '" />' + json.lessons[i].title + '</li>';
+            }
+        }
+        lessons += '</ul>';
+    }   
+    $('lesson.grade.lessons').innerHTML = lessons;
 }
 
 function showForumId(gradeId, courseId, forumId) {
