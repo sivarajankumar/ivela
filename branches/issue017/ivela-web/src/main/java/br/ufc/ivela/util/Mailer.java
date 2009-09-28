@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Pattern;
 
 import javax.mail.Address;
 import javax.mail.MessagingException;
@@ -80,7 +81,7 @@ public class Mailer implements TextProvider, LocaleProvider {
 
     private long delayTime = DEFAULT_TIMER;
     
-    private String sender = DEFAULT_SENDER;
+    private String sender = DEFAULT_SENDER;    
     
     /**
      * Subscribe to receive alerts for a specific Model.
@@ -148,7 +149,7 @@ public class Mailer implements TextProvider, LocaleProvider {
     public void send(SystemUser[] to, String from, String subject, String velocityTemplate, Map[] params, boolean retry) {
         String[] toString;
         
-        Map[] parameters;
+        Map[] parameters = null;
         if (to == null || to.length <= 0) {
             toString = new String[0];
         } else {
@@ -169,7 +170,9 @@ public class Mailer implements TextProvider, LocaleProvider {
          
         subject = getText(subject);
         
-        MailSender sender = new MailSenderVelocity(toString, from, subject, velocityTemplate, params);
+        parameters = parameters != null && parameters.length > 0? parameters : params;
+        
+        MailSender sender = new MailSenderVelocity(toString, from, subject, velocityTemplate, parameters);
         sender.setRetry(retry);
         taskExecutor.execute(sender);
     }    
@@ -238,41 +241,77 @@ public class Mailer implements TextProvider, LocaleProvider {
     }
 
     public String getText(String aTextName) {
-        return textProvider.getText(aTextName);
+        try {
+            return textProvider.getText(aTextName); 
+        } catch (Exception e) {
+            return aTextName;
+        }
     }
 
     public String getText(String aTextName, String defaultValue) {
-        return textProvider.getText(aTextName, defaultValue);
+        try {
+            return textProvider.getText(aTextName, defaultValue);
+        } catch (Exception e) {
+            return aTextName;
+        }
     }
 
     public String getText(String aTextName, String defaultValue, String obj) {
-        return textProvider.getText(aTextName, defaultValue, obj);
+        try {
+            return textProvider.getText(aTextName, defaultValue, obj);
+        } catch (Exception e) {
+            return aTextName;
+        }
     }
 
     public String getText(String aTextName, List args) {
-        return textProvider.getText(aTextName, args);
+        try {
+            return textProvider.getText(aTextName, args);
+        } catch (Exception e) {
+            return aTextName;
+        }
     }
 
     public String getText(String key, String[] args) {
-        return textProvider.getText(key, args);
+        try {
+            return textProvider.getText(key, args);
+        } catch (Exception e) {
+            return key;
+        }
     }
 
     public String getText(String aTextName, String defaultValue, List args) {
-        return textProvider.getText(aTextName, defaultValue, args);
+        try {
+            return textProvider.getText(aTextName, defaultValue, args);
+        } catch (Exception e) {
+            return defaultValue;
+        }
     }
 
     public String getText(String key, String defaultValue, String[] args) {
-        return textProvider.getText(key, defaultValue, args);
+        try {
+            return textProvider.getText(key, defaultValue, args);
+        } catch (Exception e) {
+            return defaultValue;
+        }
     }
 
     public String getText(String key, String defaultValue, List args,
             ValueStack stack) {
-        return textProvider.getText(key, defaultValue, args, stack);
+        try {
+            return textProvider.getText(key, defaultValue, args, stack);
+        } catch (Exception e) {
+            return defaultValue;
+        }
     }
 
     public String getText(String key, String defaultValue, String[] args,
             ValueStack stack) {
-        return textProvider.getText(key, defaultValue, args, stack);
+        try {
+            return textProvider.getText(key, defaultValue, args, stack);
+        } catch (Exception e) {
+            return defaultValue;
+        }
     }
 
     public ResourceBundle getTexts() {
