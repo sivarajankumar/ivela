@@ -49,7 +49,6 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
 import br.ufc.ivela.commons.Constants;
-import br.ufc.ivela.commons.mail.MailSender;
 import br.ufc.ivela.commons.model.Authentication;
 import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Enrollment;
@@ -314,7 +313,10 @@ public class GradeAction extends CourseAwareAction {
         	this.systemUser = systemUserRemote.get(id);
         
         	try {
-        		MailSender.send(new String[]{this.systemUser.getEmail()}, "[ivela] Request password", "Your username is " + this.systemUser.getUsername() + "<br>Your password is: " + password);
+        		mailer.send(new String[] { this.systemUser.getEmail() }, null,
+                        "[ivela] Request password", "Your username is "
+                                + this.systemUser.getUsername()
+                                + "<br>Your password is: " + password, true);
         	} catch (Throwable ex) {
         		ignoredMail = true;
         	}

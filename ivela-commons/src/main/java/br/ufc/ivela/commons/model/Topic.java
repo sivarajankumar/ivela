@@ -40,10 +40,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author leoomoreira
- */
 @Entity
 @Table(name = "topic")
 @NamedQueries({@NamedQuery(name = "Topic.findById", query = "SELECT t FROM Topic t WHERE t.id = :id"), @NamedQuery(name = "Topic.findByTitle", query = "SELECT t FROM Topic t WHERE t.title = :title"), @NamedQuery(name = "Topic.findByCreatedAt", query = "SELECT t FROM Topic t WHERE t.createdAt = :createdAt"), @NamedQuery(name = "Topic.findByDescription", query = "SELECT t FROM Topic t WHERE t.description = :description")})
