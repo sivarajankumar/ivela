@@ -20,7 +20,7 @@
 #############################################################################################
 */
 
-package br.ufc.ivela.services;
+package br.ufc.ivela.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,6 +38,23 @@ import org.apache.commons.logging.LogFactory;
  */
 public class PropertiesUtil {
        
+    public enum IVELA_PROPERTIES {
+        /**
+         * Web Path for the Application
+         */
+        WEB_PATH("web.path");
+        
+        private String key;
+        
+        private IVELA_PROPERTIES(String key) {
+            this.key = key;
+        }
+        
+        public String getKey() {
+            return key;
+        }
+    }
+    
     private static final String PROPERTIES_FILE = "ivela.properties";
 
     private static final String ENTRY_DELIMITER = "\\|";
@@ -166,6 +183,17 @@ public class PropertiesUtil {
             }
         }
         return statesList;
+    }
+    
+    /**
+     * Retrieve a Property from the Ivela properties file.
+     * 
+     * @param property the Property to retrieve
+     * 
+     * @return the value in the specified property
+     */
+    public String getProperty(IVELA_PROPERTIES property) {
+        return propertiesReader.getProperty(property.getKey());   
     }
     
     private void parseProperty(String property, Map<String, String> parsedProperty) {        

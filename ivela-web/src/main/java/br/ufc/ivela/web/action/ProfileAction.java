@@ -43,7 +43,7 @@ import br.ufc.ivela.ejb.interfaces.PhoneRemote;
 import br.ufc.ivela.ejb.interfaces.ProfileRemote;
 import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 import br.ufc.ivela.interceptors.interfaces.ProfileDataProvider;
-import br.ufc.ivela.services.PropertiesUtil;
+import br.ufc.ivela.util.PropertiesUtil;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;

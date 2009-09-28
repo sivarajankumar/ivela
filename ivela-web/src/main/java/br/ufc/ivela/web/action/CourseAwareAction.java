@@ -20,20 +20,19 @@
  */
 package br.ufc.ivela.web.action;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.security.GrantedAuthority;
 
 import br.ufc.ivela.commons.model.Course;
-import br.ufc.ivela.commons.model.Enrollment;
 import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.model.SystemUser.AUTHORITY;
 import br.ufc.ivela.ejb.interfaces.CourseRemote;
 import br.ufc.ivela.ejb.interfaces.EnrollmentRemote;
 import br.ufc.ivela.ejb.interfaces.GradeRemote;
+import br.ufc.ivela.util.Mailer;
 
 /**
  * Course Aware Action implements default methods used by Actions that 
@@ -51,6 +50,7 @@ public class CourseAwareAction extends GenericAction {
     protected List<Course> courseList;    
     protected Grade grade;    
     protected Course course;    
+    protected Mailer mailer;    
     
     /**
      * Retrieves a List of grade
@@ -120,7 +120,7 @@ public class CourseAwareAction extends GenericAction {
     public void setEnrollmentRemote(EnrollmentRemote enrollmentRemote) {
         this.enrollmentRemote = enrollmentRemote;
     }
-    
+
     /**
      * Retrieves a grade
      * @return grade
@@ -151,6 +151,22 @@ public class CourseAwareAction extends GenericAction {
      */
     public Course getCourse() {
         return course;
+    }
+    
+    /**
+     * Retrieves the Mailer used by this Action
+     * @return mailer
+     */
+    public Mailer getMailer() {
+        return mailer;
+    }
+    
+    /**
+     * Sets the Mailer used by this Action
+     * @param mailer
+     */
+    public void setMailer(Mailer mailer) {
+        this.mailer = mailer;
     }
     
     /**

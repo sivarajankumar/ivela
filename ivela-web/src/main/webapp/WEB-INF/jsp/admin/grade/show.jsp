@@ -312,15 +312,6 @@
                                             </div>
                                             <br class="clear" />
                                         </div>
-
-
-                                        <h5 class="vertical_accordion_toggle2" id="lessons"><s:text name="grade.show.lessons" /></h5>
-                                        <div class="vertical_accordion_content2" id="<s:property value="id" />">
-                                            <div id="vertical_nested_container3">
-                                                <span class="no_grades"><s:text name="admin.noLessons" /></span>
-                                            </div>
-                                            <br class="clear" />
-                                        </div>
                                     </div>
                                 </div>
                             </s:iterator>
@@ -912,39 +903,6 @@
                         </ul>                                                                        
                     </div>
                     <div class="edit-box" id="forum.grade.forums">
-                    </div>
-                    
-                </div>
-                </s:if>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="showLesson" style="display: none;">
-    <div id="col-2-home">
-        <div class="container-grades">
-            <div class="content-grades">
-                <h1><span id="lesson.grade.course.name"></span></h1>
-                <h2 style="float:left; width:400px; padding-top:45px;"><span id="lesson.grade.name"></span></h2>
-                <h2 style="float:left; width:400px; padding-top:7px;"><s:text name="grade.show.lessons" /></h2>
-                <br class="clear" />
-                <form action="" class="form-edit">
-                    <input type="hidden" id="lesson.show.grade.id" name="lesson.show.grade.id" value="" />
-                    <input type="hidden" id="lesson.grade.course.id" name="lesson.grade.course.id" value="" />
-                </form>
-                <br class="clear" />
-                 <s:if test="isAdmin()">
-                <div class="actions-box">
-                    <h2><s:text name="grade.show.actions" /></h2>
-                    <div class="edit-tools">                       
-                        <ul>
-                            <li><a class="icon-new" href="javascript:showEntryLesson(document.getElementById('lesson.show.grade.id').value);"><s:text name= "lesson.grade.new.lesson" /></a></li>
-                            <li><a class="icon-delete" href="javascript:deleteLesson();"><s:text name= "lesson.grade.delete.lesson" /></a></li>
-                            <br class="clear" />                            
-                        </ul>                                                                        
-                    </div>
-                    <div class="edit-box" id="lesson.grade.lessons">
                     </div>
                     
                 </div>
