@@ -351,17 +351,17 @@ public class SystemUserAction extends GenericAction implements
             // send a confirmation mail
 
             String url = "http://" + request.getServerName() + ":" +
-            request.getServerPort() + Constants.WEB_PATH;
-            String url = "http://200.17.41.212:8080" + PropertiesUtil.getPropertiesUtil().getProperty(IVELA_PROPERTIES.WEB_PATH);
+            request.getServerPort() + PropertiesUtil.getPropertiesUtil().getProperty(IVELA_PROPERTIES.WEB_PATH);            
             if (!url.endsWith("/")) {
               url += "/";
             }
             Map<String, String> map = new HashMap<String, String>();
             map.put("url", url);
             String subject = "[ivela] You were successfully registered";
-            mailer.send(systemUser, subject,
+            
+            mailer.send(new SystemUser[]{systemUser}, null, subject,
                     "welcome_user_en.vm",
-                    map);
+                    new Map[]{map}, true);
 
             // create a history register
             addHistory("history.createuser.title",
