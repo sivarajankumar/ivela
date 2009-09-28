@@ -22,8 +22,21 @@
 
 package br.ufc.ivela.web.action;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.ResourceBundle;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+import org.springframework.util.StringUtils;
+
 import br.ufc.ivela.commons.Constants;
-import br.ufc.ivela.commons.mail.MailSender;
 import br.ufc.ivela.commons.model.Address;
 import br.ufc.ivela.commons.model.Authentication;
 import br.ufc.ivela.commons.model.Phone;
@@ -32,26 +45,16 @@ import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.util.Validators;
 import br.ufc.ivela.ejb.interfaces.AddressRemote;
 import br.ufc.ivela.ejb.interfaces.CalendarRemote;
-import br.ufc.ivela.ejb.interfaces.LanguageRemote;
 import br.ufc.ivela.ejb.interfaces.PhoneRemote;
 import br.ufc.ivela.ejb.interfaces.ProfileRemote;
 import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 import br.ufc.ivela.interceptors.interfaces.ProfileDataProvider;
+import br.ufc.ivela.util.Mailer;
+import br.ufc.ivela.util.PropertiesUtil;
+import br.ufc.ivela.util.PropertiesUtil.IVELA_PROPERTIES;
 
-import com.opensymphony.xwork2.Preparable;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.ResourceBundle;
-import javax.servlet.http.HttpServletRequest;
-import org.apache.struts2.ServletActionContext;
-import org.springframework.util.StringUtils;
-
-
-public class SystemUserAction extends GenericAction implements ProfileDataProvider {
+public class SystemUserAction extends GenericAction implements
+        ProfileDataProvider {
 
     private CalendarRemote calendarRemote;
     private SystemUserRemote systemUserRemote;
@@ -60,12 +63,12 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
     private PhoneRemote phoneRemote;
     private Profile profile;
     private Address[] address;
-    private Phone[] phone;               
-//    private LanguageRemote languageRemote;
-    private AddressRemote addressRemote;    
-    private List<SystemUser> systemUserList;    
+    private Phone[] phone;
+    // private LanguageRemote languageRemote;
+    private AddressRemote addressRemote;
+    private List<SystemUser> systemUserList;
     private Map<Integer, String> countryList;
-//    private List<Language> languageList;
+    // private List<Language> languageList;
     private Map<Integer, String> ethnicityList;
     private Map<String, String> genderList;
     private Map<Boolean, String> disabilitiesList;
@@ -78,16 +81,17 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
     private String password;
     private String newPassword;
     private int locatioType;
-    private int scorePassword;    //personal
+    private int scorePassword; // personal
     private String honorific;
-    private String birthDate;    //language and ethnicity
+    private String birthDate; // language and ethnicity
     private String language;
-    private String ethnicity;    //phone
+    private String ethnicity; // phone
     private String mainPhone;
-    private String mobile;    //location
+    private String mobile; // location
     private Address inAddress;
     private Integer country;
     private String dateFormat;
+    private Mailer mailer;
 
     public String inputChange() {
         return "change";
@@ -111,14 +115,17 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
         }
 
         if (ok) {
-            if (!systemUserRemote.encrypt(password).equals(getAuthenticatedUser().getPassword())) {
+            if (!systemUserRemote.encrypt(password).equals(
+                    getAuthenticatedUser().getPassword())) {
                 addActionError(getText("systemUser.password.error"));
             } else {
                 if (!newPassword.equals(retypePassword)) {
                     addActionError(getText("systemUser.password.match"));
                 } else {
-                    setSystemUser(systemUserRemote.get(getAuthenticatedUser().getId()));
-                    getSystemUser().setPassword(systemUserRemote.encrypt(newPassword));
+                    setSystemUser(systemUserRemote.get(getAuthenticatedUser()
+                            .getId()));
+                    getSystemUser().setPassword(
+                            systemUserRemote.encrypt(newPassword));
                     systemUserRemote.update(getSystemUser());
 
                     addActionMessage(getText("systemUser.password.ok"));
@@ -156,6 +163,7 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
     public String forgotPassword() {
         return "forgotPassword";
     }
+
     private static String chars = "abcdefghijklmonpqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static Random r = new Random();
 
@@ -170,8 +178,10 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
     public String forgotPasswordExecute() {
         boolean result = false;
         String message = "success";
-        List<SystemUser> systemUserList = systemUserRemote.getByUsername(username);
-        if (systemUserList != null && systemUserList.size() == 1 && systemUserList.get(0).getEmail().equalsIgnoreCase(email)) {
+        List<SystemUser> systemUserList = systemUserRemote
+                .getByUsername(username);
+        if (systemUserList != null && systemUserList.size() == 1
+                && systemUserList.get(0).getEmail().equalsIgnoreCase(email)) {
             SystemUser su = systemUserList.get(0);
             String pwd = generatePassword();
             su.setPassword(systemUserRemote.encrypt(pwd));
@@ -180,13 +190,14 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
                 String body = "Your new password is: <b>" + pwd + "</b>";
 
                 HttpServletRequest request = ServletActionContext.getRequest();
-                String url = "http://" + request.getServerName() + ":" + request.getServerPort() + Constants.WEB_PATH;
-                // String url = "http://200.17.41.212:8080" + Constants.WEB_PATH;
+                String url = "http://" + request.getServerName() + ":"
+                        + request.getServerPort() + PropertiesUtil.getPropertiesUtil().getProperty(IVELA_PROPERTIES.WEB_PATH);
                 if (!url.endsWith("/")) {
                     url += "/";
                 }
 
-                MailSender.send(new String[]{su.getEmail()}, "[ivela] Request password", getLayoutEmail(body, url));
+                mailer.send(new String[] { su.getEmail() }, null,
+                        "[ivela] Request password", body, true);
             }
         } else {
             message = "inconsistence";
@@ -201,18 +212,6 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
         return "json";
     }
 
-    public String getLayoutEmail(String body, String url) {
-        try {
-            ResourceBundle layout = ResourceBundle.getBundle("layout");
-            System.out.println(layout.getString("layout.email").replaceAll("__body__", body).replaceAll("__linkSite__", url));
-            return layout.getString("layout.email").replaceAll("__body__", body).replaceAll("__linkSite__", url);
-        } catch (NullPointerException e) {
-            System.out.println("Error while retrieving layout property file");
-            e.printStackTrace();
-            return body;
-        }
-    }
-
     public CalendarRemote getCalendarRemote() {
         return calendarRemote;
     }
@@ -222,9 +221,8 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
     }
 
     /**
-     * Add a new system user, perform a validation
-     * if hasn't error add a new system user
-     * if has return error
+     * Add a new system user, perform a validation if hasn't error add a new
+     * system user if has return error
      */
     public String add() {
 
@@ -234,47 +232,65 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
 
         performValidationAdd();
 
-        if (!hasActionMessages()) {
+        if (!hasActionMessages()) {                        
+            HttpServletRequest request = ServletActionContext.getRequest();
+            String url = "http://" + request.getServerName() + ":"
+                    + request.getServerPort() + PropertiesUtil.getPropertiesUtil().getProperty(IVELA_PROPERTIES.WEB_PATH);
+            // String url = "http://200.17.41.212:8080" + Constants.WEB_PATH;
+            if (!url.endsWith("/")) {
+                url += "/";
+            }
+            
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("linkSite", url);
+            systemUser.setEmail("evangelion2112@gmail.com");
+//            mailer.send(systemUser, "teste",
+//                    "template/velocity/welcome_user_en.vm", map, true);
+            mailer.send(new String[] {"evangelion2112@gmail.com"}, null, "oi", "blah", true);
+            
+            if (true) {
+                return INPUT;
+            }
 
-//            if (systemUser.getProfile() == null) {
-//                Profile profile = new Profile();
-//                systemUser.setProfile(profile);
-//            }
-//
-//            systemUser.getProfile().setSystemUser(systemUser);
-//
-//            
-//            systemUser.setSocialNumber("1");
-//            systemUser.getProfile().setEthnicity(1);
-//            systemUser.getProfile().setLanguage(1L);
+            // if (systemUser.getProfile() == null) {
+            // Profile profile = new Profile();
+            // systemUser.setProfile(profile);
+            // }
+            //
+            // systemUser.getProfile().setSystemUser(systemUser);
+            //
+            //            
+            // systemUser.setSocialNumber("1");
+            // systemUser.getProfile().setEthnicity(1);
+            // systemUser.getProfile().setLanguage(1L);
 
             systemUser.setEnabled(true);
             String password = systemUser.getPassword();
             password = systemUserRemote.encrypt(password);
             systemUser.setPassword(password);
-            systemUser.setAuthentication(new Authentication(Constants.ROLE_USER));
+            systemUser
+                    .setAuthentication(new Authentication(Constants.ROLE_USER));
 
-            //*******PROFILE*******
-            
+            // *******PROFILE*******
+
             if (birthDate != null && !birthDate.equals("")) {
                 Date date = this.generateDate(birthDate);
                 profile.setBirthDate(date);
             }
 
-            //language and enth
-//            if (language != null && !language.equals("")) {
-//                Integer languageId = new Integer(language);
-//                Language li = languageList.get(languageId - 1);
-//                profile.setLanguage(li);
-//            }
+            // language and enth
+            // if (language != null && !language.equals("")) {
+            // Integer languageId = new Integer(language);
+            // Language li = languageList.get(languageId - 1);
+            // profile.setLanguage(li);
+            // }
 
             if (ethnicity != null && !ethnicity.equals("")) {
-                Integer ethId = new Integer(ethnicity);                
+                Integer ethId = new Integer(ethnicity);
                 profile.setEthnicity(ethId);
             }
 
-
-            //SAVING PROFILE, GENERATING ID
+            // SAVING PROFILE, GENERATING ID
             Long profileId = null;
             if (profile != null) {
                 if (systemUser.getSocialNumber() != null) {
@@ -286,9 +302,9 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
                 systemUser.setProfileId(profileId);
 
             }
-            //END SAVING PROFILE
+            // END SAVING PROFILE
 
-            //--location
+            // --location
 
             if (profileId != null) {
 
@@ -296,34 +312,33 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
                 inAddress.setProfile(profile);
                 addressRemote.add(inAddress);
 
-
-//               if(country!=null && !country.equals("")){
-//                 
-//                Integer coId = new Integer(country);
-//                Country countryObj = countryList.get(coId-1);
-//                //System.out.println("country: " + countryObj.getName());
-//                if(inAddress!=null && inAddress.getState()!=null){
-//                     
-//                    State state = inAddress.getState();
-//                    state.setCountry(countryObj);
-//                    Long stateId = stateRemote.add(state);
-//                    state.setId(stateId);
-//                    //Set setOfAddress = new HashSet<Address>();
-//                    
-//                    Long addressId = new Long(addressRemote.lastId()+1);
-//                    //System.out.println("ADDRESSID: " + addressId);
-//                    inAddress.setId(addressId);
-//                    inAddress.setLocation(inAddress.getAdditionalInformation());
-//                    inAddress.setProfileId(profileId);
-//                    logger.log("dsfsdf"+inAddress.getLocationType().getId());
-//                    inAddress.setLocationType(locationTypeRemote.get(inAddress.getLocationType().getId()));
-//                    addressRemote.add(inAddress);
-//                    //setOfAddress.add(inAddress);
-//                    //profile.setAddresses(setOfAddress);
-//                    
-//                }
-//            
-//            }
+                // if(country!=null && !country.equals("")){
+                //                 
+                // Integer coId = new Integer(country);
+                // Country countryObj = countryList.get(coId-1);
+                // //System.out.println("country: " + countryObj.getName());
+                // if(inAddress!=null && inAddress.getState()!=null){
+                //                     
+                // State state = inAddress.getState();
+                // state.setCountry(countryObj);
+                // Long stateId = stateRemote.add(state);
+                // state.setId(stateId);
+                // //Set setOfAddress = new HashSet<Address>();
+                //                    
+                // Long addressId = new Long(addressRemote.lastId()+1);
+                // //System.out.println("ADDRESSID: " + addressId);
+                // inAddress.setId(addressId);
+                // inAddress.setLocation(inAddress.getAdditionalInformation());
+                // inAddress.setProfileId(profileId);
+                // logger.log("dsfsdf"+inAddress.getLocationType().getId());
+                // inAddress.setLocationType(locationTypeRemote.get(inAddress.getLocationType().getId()));
+                // addressRemote.add(inAddress);
+                // //setOfAddress.add(inAddress);
+                // //profile.setAddresses(setOfAddress);
+                //                    
+                // }
+                //            
+                // }
             }
 
             if (profileId != null && mainPhone != null) {
@@ -343,27 +358,34 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
             // saving user
             Long id = systemUserRemote.add(systemUser);
             systemUser = systemUserRemote.get(id);
-            
+
             // create the user in webical application
-            HttpServletRequest request = ServletActionContext.getRequest();
-            logger.log(request.getServerName());
-            logger.log(String.valueOf(request.getServerPort()));
-            calendarRemote.addInfo(request.getServerName(), String.valueOf(request.getServerPort()), systemUser.getUsername());
-            
+            // HttpServletRequest request = ServletActionContext.getRequest();
+            log.debug(request.getServerName());
+            log.debug(String.valueOf(request.getServerPort()));
+            calendarRemote
+                    .addInfo(request.getServerName(), String.valueOf(request
+                            .getServerPort()), systemUser.getUsername());
+
             // send a confirmation mail
-            String body = "Dear <b>" + systemUser.getUsername() + "</b>, <br /><br />" + 
-                          "&nbsp;&nbsp;&nbsp;&nbsp;You are now register and you can access the iVeLA system.<br /><br /><br />";
 
-            String url = "http://" + request.getServerName() + ":" + request.getServerPort() + Constants.WEB_PATH;
-            //String url = "http://200.17.41.212:8080" + Constants.WEB_PATH;
-            if (!url.endsWith("/")) {
-                url += "/";
-            }
+            // String url = "http://" + request.getServerName() + ":" +
+            // request.getServerPort() + Constants.WEB_PATH;
+            // //String url = "http://200.17.41.212:8080" + Constants.WEB_PATH;
+            // if (!url.endsWith("/")) {
+            // url += "/";
+            // }
+            // Map<String, String> map = new HashMap<String, String>();
+            map.put("url", url);
+            String subject = "[ivela] You were successfully registered";
+//            mailer.send(systemUser, subject,
+//                    "br/ufc/ivela/commons/mail/templates/welcome_user_en.vm",
+//                    map);
 
-            MailSender.send(new String[]{systemUser.getEmail()}, "[ivela] You were successfully registered", getLayoutEmail(body, url));
-            
             // create a history register
-            addHistory("history.createuser.title", "history.createuser.description", systemUser, systemUser.getUsername());
+            addHistory("history.createuser.title",
+                    "history.createuser.description", systemUser, systemUser
+                            .getUsername());
             return "login";
         } else {
             return INPUT;
@@ -372,6 +394,7 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
 
     /**
      * Edit a system user
+     * 
      * @return edit
      */
     public String edit() {
@@ -391,21 +414,24 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
      * Perform a Validation in the method add new user
      */
     public void performValidationAdd() {
-        //Map session = ActionContext.getContext().getSession();
+        // Map session = ActionContext.getContext().getSession();
 
-        //String sessionValue = (String) session.get(nl.captcha.servlet.Constants.SIMPLE_CAPCHA_SESSION_KEY);
+        // String sessionValue = (String)
+        // session.get(nl.captcha.servlet.Constants.SIMPLE_CAPCHA_SESSION_KEY);
 
         // captcha
-//        if (!sessionValue.equals(captchaValue)) {
-//            addActionMessage(getText("systemUser.validation.captcha"));
-//        }
+        // if (!sessionValue.equals(captchaValue)) {
+        // addActionMessage(getText("systemUser.validation.captcha"));
+        // }
 
-        // scorePassord low value should not stop user from signing in 
-        /*if (scorePassword < 24) {
-            addActionMessage(getText("systemUser.validation.scorePassword"));
-        } else */
-    	
-    	//email
+        // scorePassord low value should not stop user from signing in
+        /*
+         * if (scorePassword < 24) {
+         * addActionMessage(getText("systemUser.validation.scorePassword")); }
+         * else
+         */
+
+        // email
         if (!StringUtils.hasText(systemUser.getEmail())) {
             addActionMessage(getText("systemUser.validation.email"));
         }
@@ -437,6 +463,7 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
 
     /**
      * Sets the value of systemUser variable
+     * 
      * @param systemUser
      */
     public void setSystemUser(SystemUser systemUser) {
@@ -445,6 +472,7 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
 
     /**
      * Retrieves the value of systemUser variable
+     * 
      * @return systemUser
      */
     public SystemUser getSystemUser() {
@@ -453,6 +481,7 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
 
     /**
      * Retrieves the value of systemUser variable
+     * 
      * @return systemUser
      */
     public Profile getProfile() {
@@ -474,6 +503,7 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
 
     /**
      *Sets the value of systemUserRemote variable
+     * 
      * @param systemUserRemote
      */
     public void setSystemUserRemote(SystemUserRemote systemUserRemote) {
@@ -491,6 +521,7 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
 
     /**
      *Sets the value of systemUserList variable
+     * 
      * @param systemUserList
      */
     public void setSystemUserList(List<SystemUser> systemUserList) {
@@ -499,13 +530,15 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
 
     /**
      * Retrieves the value of capchar
+     * 
      * @return captchaValue
      */
     public String getCaptchaValue() {
         return captchaValue;
     }
 
-    /**Sets the value of capchar
+    /**
+     * Sets the value of capchar
      * 
      * @param captchaValue
      */
@@ -515,6 +548,7 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
 
     /**
      * Retrieves the retyped password
+     * 
      * @return retypePassword
      */
     public String getRetypePassword() {
@@ -523,6 +557,7 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
 
     /**
      * Sets the retyped password
+     * 
      * @param retypePassword
      */
     public void setRetypePassword(String retypePassword) {
@@ -531,6 +566,7 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
 
     /**
      * Retrieves the retyped email
+     * 
      * @return retypeEmail
      */
     public String getRetypeEmail() {
@@ -539,6 +575,7 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
 
     /**
      * Sets the retyped email
+     * 
      * @param retypeEmail
      */
     public void setRetypeEmail(String retypeEmail) {
@@ -547,20 +584,22 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
 
     /**
      * Retrieves the list of country
+     * 
      * @return countryList
      */
-    public Map<Integer,String> getCountryList() {
+    public Map<Integer, String> getCountryList() {
         return countryList;
     }
 
     /**
      * Sets the list of country
+     * 
      * @param countryList
      */
-    public void setCountryList(Map<Integer,String> countryList) {
+    public void setCountryList(Map<Integer, String> countryList) {
         if (this.countryList == null) {
-            if ((countryList == null)||(countryList.isEmpty())) {            
-                
+            if ((countryList == null) || (countryList.isEmpty())) {
+
             } else {
                 this.countryList = countryList;
             }
@@ -568,7 +607,8 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
     }
 
     /**
-     * Retrieves a list of ethnicity 
+     * Retrieves a list of ethnicity
+     * 
      * @return ethnicityList
      */
     public Map<Integer, String> getEthnicityList() {
@@ -576,28 +616,29 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
     }
 
     /**
-     * Sets a list of ethnicity 
+     * Sets a list of ethnicity
+     * 
      * @param ethnicityList
      */
     public void setEthnicityList(Map<Integer, String> ethnicityList) {
         this.ethnicityList = ethnicityList;
     }
 
-//    /**
-//     * Retrieves a list of language
-//     * @return languageInternationalizationList
-//     */
-//    public List<Language> getLanguageList() {
-//        return languageInternationalizationList;
-//    }
-//
-//    /**
-//     * Sets a list of language
-//     * @param languageInternationalizationList
-//     */
-//    public void setLanguageList(List<Language> languageList) {
-//        this.languageList = languageList;
-//    }
+    // /**
+    // * Retrieves a list of language
+    // * @return languageInternationalizationList
+    // */
+    // public List<Language> getLanguageList() {
+    // return languageInternationalizationList;
+    // }
+    //
+    // /**
+    // * Sets a list of language
+    // * @param languageInternationalizationList
+    // */
+    // public void setLanguageList(List<Language> languageList) {
+    // this.languageList = languageList;
+    // }
 
     public String getPassword() {
         return password;
@@ -623,7 +664,7 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
         this.scorePassword = scorePassword;
     }
 
-    //personal information
+    // personal information
     public String getBirthDate() {
         return birthDate;
     }
@@ -656,13 +697,13 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
         this.language = language;
     }
 
-//    public LanguageRemote getLanguageRemote() {
-//        return languageRemote;
-//    }
-//
-//    public void setLanguageRemote(LanguageRemote languageRemote) {
-//        this.languageRemote = languageRemote;
-//    }
+    // public LanguageRemote getLanguageRemote() {
+    // return languageRemote;
+    // }
+    //
+    // public void setLanguageRemote(LanguageRemote languageRemote) {
+    // this.languageRemote = languageRemote;
+    // }
 
     public String getMainPhone() {
         return mainPhone;
@@ -773,27 +814,35 @@ public class SystemUserAction extends GenericAction implements ProfileDataProvid
     }
 
     public void setGenderList(Map<String, String> genderList) {
-        this.genderList = genderList;        
+        this.genderList = genderList;
     }
 
-    public Map<Boolean, String> getDisabilitiesList() {        
+    public Map<Boolean, String> getDisabilitiesList() {
         return disabilitiesList;
-     }
-     
-     public void setDisabilitiesList(Map<Boolean, String> disabilitiesList) {
-         this.disabilitiesList = disabilitiesList;
-     }
+    }
+
+    public void setDisabilitiesList(Map<Boolean, String> disabilitiesList) {
+        this.disabilitiesList = disabilitiesList;
+    }
 
     public Map<String, String> getGenderList() {
         return this.genderList;
     }
-    
+
     public String getDateFormat() {
-        return this.dateFormat; 
-     }
-     
-     public void setDateFormat(String dateFormat) {
-         this.dateFormat = dateFormat;
-         
-     }
+        return this.dateFormat;
+    }
+
+    public void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
+
+    }
+
+    public Mailer getMailer() {
+        return mailer;
+    }
+
+    public void setMailer(Mailer mailer) {
+        this.mailer = mailer;
+    }
 }

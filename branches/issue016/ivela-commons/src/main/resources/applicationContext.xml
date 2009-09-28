@@ -52,6 +52,7 @@
                 <value>br.ufc.ivela.commons.model.ChallengerResult</value>                
                 <value>br.ufc.ivela.commons.model.Course</value>
                 <value>br.ufc.ivela.commons.model.CourseRequisite</value>
+                <value>br.ufc.ivela.commons.model.DelayedMail</value>
                 <value>br.ufc.ivela.commons.model.Dictionary</value>
                 <value>br.ufc.ivela.commons.model.Discipline</value>
                 <value>br.ufc.ivela.commons.model.Enrollment</value>                
@@ -93,6 +94,7 @@
                 <value>br.ufc.ivela.commons.model.SentenceAuditiveQuestion</value>                
                 <value>br.ufc.ivela.commons.model.StudentExam</value>
                 <value>br.ufc.ivela.commons.model.StudentExercise</value>
+                <value>br.ufc.ivela.commons.model.Subscription</value>                
                 <value>br.ufc.ivela.commons.model.SystemUserChat</value>
                 <value>br.ufc.ivela.commons.model.SystemUser</value>
                 <value>br.ufc.ivela.commons.model.SystemUserPlacementQuestion</value>
@@ -132,5 +134,5 @@
     </bean>
     
     <tx:annotation-driven transaction-manager="transactionManager"/>
-        
+
 </beans>
