@@ -13,15 +13,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
-import br.ufc.ivela.commons.challenger.dataobject.FileSystem;
 
 /**
  *
@@ -54,9 +50,8 @@ public class ContentPackageUtils {
      * @return
      * @throws java.io.IOException
      */
-    public static List<FileSystem> unzip(File flZipFile, File dir) throws IOException {
-    	List<FileSystem> fileSystemList = new ArrayList<FileSystem>();
-    	FileSystem tmp = null;
+    public static String unzip(File flZipFile, File dir) throws IOException {
+        String result = "";
 
         // cria diretório informado, caso não exista
         if (!dir.exists()) {
@@ -86,13 +81,10 @@ public class ContentPackageUtils {
                 }
 
                 System.err.println("Extracting file: " + entry.getName());
-//                if (entry.getName().equalsIgnoreCase("contentpackage.ivela.xml")) {
-//                	result = dir.getAbsolutePath() + File.separator + entry.getName();
-//                    //System.out.println(result);
-//                }
-                tmp = new FileSystem();
-                tmp.setValue(File.separator + entry.getName());
-                fileSystemList.add(tmp);
+                if (entry.getName().equalsIgnoreCase("contentpackage.ivela.xml")) {
+                    result = dir.getAbsolutePath() + File.separator + entry.getName();
+                    //System.out.println(result);
+                }
                 copyInputStream(zipFile.getInputStream(entry), new BufferedOutputStream(new FileOutputStream(new File(dir, entry.getName()))));
             }
 
@@ -100,10 +92,10 @@ public class ContentPackageUtils {
         } catch (IOException ioe) {
             System.err.println("Unhandled exception:");
             ioe.printStackTrace();
-            return null;
+            return "";
         }
 
-        return fileSystemList;
+        return result;
     }
 
     /**
