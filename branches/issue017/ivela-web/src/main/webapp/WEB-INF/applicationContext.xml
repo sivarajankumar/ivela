@@ -10,18 +10,18 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
-       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.5.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.5.xsd"
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
        
        default-autowire="byName">
-       
+
        <bean id="propertyPlaceholder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
             <property name="location" value="classpath:java_mail.properties"></property>
        </bean>
        
        <util:properties id="javaMailPropertiesFile" location="classpath:java_mail.properties"/>
        <util:properties id="velocityPropertiesFile" location="classpath:velocity.properties"/>
-                     
+           
         <bean id="logger" class="br.ufc.ivela.commons.Logger" scope="singleton">
             <constructor-arg index="0" value="true"/> <!-- log on console -->
             <constructor-arg index="1" value="false"/> <!-- log on file -->
@@ -29,7 +29,7 @@
             
             <property name="active" value="true"/>
         </bean>
-        
+
         <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" scope="singleton">
             <property name="corePoolSize" value="1" />
             <property name="maxPoolSize" value="2" />
@@ -56,7 +56,7 @@
             <property name="mailService" ref="mailService"/>            
             <property name="taskExecutor" ref="taskExecutor"></property>                       
         </bean>
-        
+
         <jee:jndi-lookup resource-ref="false"  jndi-name="CalendarBean#br.ufc.ivela.ejb.interfaces.CalendarRemote"
         id="calendarRemote" expected-type="br.ufc.ivela.ejb.interfaces.CalendarRemote"/>
 
@@ -110,6 +110,9 @@
         
         <jee:jndi-lookup resource-ref="false" jndi-name="GradeBean#br.ufc.ivela.ejb.interfaces.GradeRemote"
         id="gradeRemote" expected-type="br.ufc.ivela.ejb.interfaces.GradeRemote"/>
+        
+        <jee:jndi-lookup resource-ref="false" jndi-name="GradeUnitContentBean#br.ufc.ivela.ejb.interfaces.GradeUnitContentRemote"
+        id="gradeUnitContentRemote" expected-type="br.ufc.ivela.ejb.interfaces.GradeUnitContentRemote"/>
         
         <jee:jndi-lookup resource-ref="false" jndi-name="EnrollmentBean#br.ufc.ivela.ejb.interfaces.EnrollmentRemote"
         id="enrollmentRemote" expected-type="br.ufc.ivela.ejb.interfaces.EnrollmentRemote"/>
@@ -173,13 +176,13 @@
 
         <jee:jndi-lookup resource-ref="false" jndi-name="WsEnabledBean#br.ufc.ivela.ejb.interfaces.WsEnabledRemote"
         id="wsEnabledRemote" expected-type="br.ufc.ivela.ejb.interfaces.WsEnabledRemote"/>
-        
+
         <jee:jndi-lookup resource-ref="false" jndi-name="SubscriptionBean#br.ufc.ivela.ejb.interfaces.SubscriptionRemote"
         id="subscriptionRemote" expected-type="br.ufc.ivela.ejb.interfaces.SubscriptionRemote"/>
         
         <jee:jndi-lookup resource-ref="false" jndi-name="DelayedMailBean#br.ufc.ivela.ejb.interfaces.DelayedMailRemote"
         id="delayedMailRemote" expected-type="br.ufc.ivela.ejb.interfaces.DelayedMailRemote"/>
-        
+
         <!-- 
             Actions para Admin 
             iniciar o id com "admin."
@@ -255,5 +258,7 @@
        <bean id="unitContentAction" class="br.ufc.ivela.web.action.UnitContentAction" scope="prototype"/>       
        
        <bean id="aboutUsAction" class="br.ufc.ivela.web.action.AboutUsAction" scope="prototype"/>
-                        
+       
+       <bean id="contentInfoAction" class="br.ufc.ivela.web.action.ContentInfoAction" scope="prototype"/>
+
 </beans>
