@@ -112,7 +112,9 @@
                 <ul>
                     <li id="menu_1" ><a href="home.action" title="<s:property value="admin.controlPanel" />"><s:text name="admin.controlPanel" /></a></li>
                     <li id="menu_4" ><a href="systemUser!show.action" title="<s:property value="back.people.title" />"><s:text name="admin.people" /></a></li>
+                    <sec:authorize ifAnyGranted="ROLE_ADMIN, ROLE_COORD, ROLE_PROFESSOR">
                     <li id="menu_2" ><a href="course!show.action" title="<s:property value="back.courses.title" />"><s:text name="admin.courses" /></a></li>
+                    </sec:authorize>
                     <li id="menu_3" ><a href="grade!show.action" title="<s:property value="back.grades.title" />"><s:text name="admin.grade" /></a></li>
                 </ul>
             </div>
@@ -160,7 +162,9 @@
                 <ul>
                     <li><a href="home.action" title="<s:property value="back.home.title" />"><s:text name="admin.controlPanel" /></a></li>
                     <li><a href="systemUser!show.action" title="<s:property value="back.people.title" />"><s:text name="admin.people" /></a></li>
+                    <sec:authorize ifAnyGranted="ROLE_ADMIN, ROLE_COORD, ROLE_PROFESSOR">
                     <li><a href="course!show.action" title="<s:property value="back.courses.title" />"><s:text name="admin.courses" /></a></li>
+                    </sec:authorize>
                     <li><a href="grade!show.action" class="last" title="<s:property value="back.grades.title" />"><s:text name="admin.grade" /></a></li>
                 </ul>
             </div>

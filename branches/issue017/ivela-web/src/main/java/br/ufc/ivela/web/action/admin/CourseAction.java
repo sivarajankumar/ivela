@@ -306,7 +306,7 @@ public class CourseAction extends CourseAwareAction {
      */
     public String show() {
         setMessage(getMessage());
-        courseList = courseRemote.getStructure();
+        courseList = courseRemote.getStructure(getAuthenticatedUser());
 
         return "show";
     }

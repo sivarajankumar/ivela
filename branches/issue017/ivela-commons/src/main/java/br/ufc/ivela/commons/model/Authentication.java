@@ -23,12 +23,16 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  *
  * @author leoomoreira
  */
 @Entity
 @Table(name = "authentication")
+@Cache(region="authenticationCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQueries({@NamedQuery(name = "Authentication.findById", query = "SELECT a FROM Authentication a WHERE a.id = :id"), @NamedQuery(name = "Authentication.findByName", query = "SELECT a FROM Authentication a WHERE a.name = :name"), @NamedQuery(name = "Authentication.findByDescription", query = "SELECT a FROM Authentication a WHERE a.description = :description")})
 public class Authentication implements Serializable {
     private static final long serialVersionUID = 1L;

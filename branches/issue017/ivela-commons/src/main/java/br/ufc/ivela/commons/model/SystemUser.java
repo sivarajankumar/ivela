@@ -44,12 +44,16 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.security.GrantedAuthority;
 import org.springframework.security.userdetails.UserDetails;
 
 
 @Entity
 @Table(name = "system_user")
+@Cache(region="systemUserCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQueries({@NamedQuery(name = "SystemUser.findById", query = "SELECT s FROM SystemUser s WHERE s.id = :id"), @NamedQuery(name = "SystemUser.findByEmail", query = "SELECT s FROM SystemUser s WHERE s.email = :email"), @NamedQuery(name = "SystemUser.findBySocialNumber", query = "SELECT s FROM SystemUser s WHERE s.socialNumber = :socialNumber"), @NamedQuery(name = "SystemUser.findByUsername", query = "SELECT s FROM SystemUser s WHERE s.username = :username"), @NamedQuery(name = "SystemUser.findByPassword", query = "SELECT s FROM SystemUser s WHERE s.password = :password"), @NamedQuery(name = "SystemUser.findByEnabled", query = "SELECT s FROM SystemUser s WHERE s.enabled = :enabled")})
 public class SystemUser implements UserDetails, Serializable {
     private static final long serialVersionUID = 1L;
@@ -135,7 +139,7 @@ public class SystemUser implements UserDetails, Serializable {
          * @parameter the name of the authority
          */
         public boolean hasAuthority(String authority) {
-            return this.role.equals(role);
+            return this.role.equals(authority);
         }        
         
         /**

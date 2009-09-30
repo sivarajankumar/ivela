@@ -32,15 +32,13 @@ import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
 import br.ufc.ivela.ejb.interfaces.GradeRemote;
-import br.ufc.ivela.ejb.interfaces.ProfessorRemote;
 
 /**
  *
  * @author Maristella Myrian
  */
 public class CourseAction extends CourseAwareAction {
-    
-    private ProfessorRemote professorRemote;
+        
     private DisciplineRemote disciplineRemote;    
     private Discipline discipline;
     private int pageCount;
@@ -179,22 +177,6 @@ public class CourseAction extends CourseAwareAction {
 
     public void setNick(String nick) {
         this.nick = nick;
-    }
-
-    public GradeRemote getGradeRemote() {
-        return gradeRemote;
-    }
-
-    public void setGradeRemote(GradeRemote gradeRemote) {
-        this.gradeRemote = gradeRemote;
-    }
-
-    public ProfessorRemote getProfessorRemote() {
-        return professorRemote;
-    }
-
-    public void setProfessorRemote(ProfessorRemote professorRemote) {
-        this.professorRemote = professorRemote;
     }
 
     public String getTeacherName() {

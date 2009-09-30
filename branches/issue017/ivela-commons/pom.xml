@@ -72,6 +72,10 @@
                     <groupId>cglib</groupId>
                     <artifactId>cglib</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>net.sf.ehcache</groupId>
+                    <artifactId>ehcache</artifactId>                    
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -158,7 +162,12 @@
         	<groupId>org.apache.velocity</groupId>
         	<artifactId>velocity</artifactId>
         	<version>1.6.2</version>
-        </dependency>        
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+             <artifactId>ehcache</artifactId>
+            <version>1.6.2</version>
+        </dependency>                
     </dependencies>
     <build>
         <plugins>
