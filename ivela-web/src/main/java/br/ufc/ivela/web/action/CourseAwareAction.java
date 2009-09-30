@@ -51,6 +51,8 @@ public class CourseAwareAction extends GenericAction {
     protected Grade grade;    
     protected Course course;    
     protected Mailer mailer;    
+    private List<Course> userCourses;
+    private List<Grade> userGrades;
     
     /**
      * Retrieves a List of grade
@@ -186,6 +188,31 @@ public class CourseAwareAction extends GenericAction {
         return false;
     }
     
+    public String getAuthority(Object object) {
+        String authority_ = AUTHORITY.ROLE_NONE.getAuthority();
+        SystemUser user = getAuthenticatedUser();
+        if (object instanceof Course) {
+            Course objCourse = (Course) object;
+            GrantedAuthority[] authorities = user.getAuthorities();              
+            String authorityTemp = authorities != null && authorities.length > 0? authorities[0].getAuthority() : null;
+            if (userHasCourse(objCourse, null, authorityTemp)) {
+                authority_ = authorityTemp;
+            }
+        } else if (object instanceof Grade) {
+            Grade objGrade = (Grade) object;
+            GrantedAuthority[] authorities = user.getAuthorities();              
+            String authorityTemp = authorities != null && authorities.length > 0? authorities[0].getAuthority() : null;
+            if (userHasGrade(objGrade, null, authorityTemp)) {
+                authority_ = authorityTemp;
+            }
+        } else {            
+            GrantedAuthority[] authorities = user.getAuthorities();            
+            authority_ = authorities != null && authorities.length > 0? authorities[0].getAuthority() : authority_;            
+        }
+            
+        return authority_;
+    }
+    
     @Override
     public String getAuthority() {        
         if (authority != null && !authority.isEmpty()) {
@@ -221,21 +248,13 @@ public class CourseAwareAction extends GenericAction {
             // Professor Authorization
             //
             } else if (AUTHORITY.ROLE_PROFESSOR.hasAuthority(authority)) {                
-                if (grade != null && grade.getId() != null) {
-                    Set<SystemUser> professorSet = grade.getProfessors();
-                    boolean result = false;
-                    if (professorSet == null || professorSet.isEmpty()){                        
-                        result = gradeRemote.getProfessors(grade.getId()).contains(user);                        
-                    } else {
-                        result = professorSet.contains(user);
-                    }
-                    if (result)
+                if (grade != null && grade.getId() != null) {                                                            
+                    if (userHasGrade(grade, null, AUTHORITY.ROLE_PROFESSOR.getAuthority()))
                         this.authority = AUTHORITY.ROLE_PROFESSOR.getAuthority();    
                 } else if (course != null && course.getId() != null) {
-                    // No Grade, It is course access.
-                    List<SystemUser> gradeProfessors = courseRemote.getProfessors(course.getId());
-                    if (gradeProfessors.contains(user))
-                        this.authority = AUTHORITY.ROLE_PROFESSOR.getAuthority();                    
+                    // No Grade, It is course access.                    
+                    if (userHasCourse(course, null, AUTHORITY.ROLE_PROFESSOR.getAuthority()))
+                        this.authority = AUTHORITY.ROLE_PROFESSOR.getAuthority();                        
                 } 
                 break;
             //
@@ -243,14 +262,7 @@ public class CourseAwareAction extends GenericAction {
             //
             } else if (AUTHORITY.ROLE_TUTOR.hasAuthority(authority)) {                
                 if (grade != null && grade.getId() != null) {
-                    Set<SystemUser> tutorSet = grade.getTutors();
-                    boolean result = false;
-                    if (tutorSet == null || tutorSet.isEmpty()){
-                        result = gradeRemote.getTutors(grade.getId()).contains(user);   
-                    } else {
-                        result = tutorSet.contains(user);
-                    }                    
-                    if (result)
+                    if (userHasGrade(grade, null, AUTHORITY.ROLE_TUTOR.getAuthority()))                        
                         this.authority = AUTHORITY.ROLE_TUTOR.getAuthority();    
                 }                
                 break;
@@ -260,20 +272,91 @@ public class CourseAwareAction extends GenericAction {
             } else if (AUTHORITY.ROLE_COORD.hasAuthority(authority)) {
                 this.authority = AUTHORITY.ROLE_COORD.getAuthority();
                 if (grade != null && grade.getId() != null) {
-                    if (grade.getCoordinator() == null)
-                        grade = gradeRemote.get(grade.getId());
-                    if (user.equals(grade.getCoordinator()))
-                        this.authority = AUTHORITY.ROLE_PROFESSOR.getAuthority();
+                    if (user.getId().equals(grade.getCoordinatorId()))                                                
+                        this.authority = AUTHORITY.ROLE_COORD.getAuthority();                    
                 } else if (course != null && course.getId() != null) {
-                    // No Grade, It is course access.                    
-                    List<SystemUser> gradeCoordinators = courseRemote.getCoordinators(course.getId());
-                    if (gradeCoordinators.contains(user))
-                        this.authority = AUTHORITY.ROLE_PROFESSOR.getAuthority();
+                    // No Grade, It is course access.                                        
+                    if (userHasCourse(course, null, AUTHORITY.ROLE_COORD.getAuthority()))
+                        this.authority = AUTHORITY.ROLE_COORD.getAuthority();
                 }                  
                 break;
             }                                         
         }
         
         return authority;  
+    }
+    
+    /**
+     * Checks if the User has Access to a specific Course
+     * 
+     * @param course The Course
+     * @param systemUser System User that should have the Course, if null the method will get the authenticated user.
+     * @param authorization GrantedAuthority that should be used, if null it will use the first GrantedAuthority for the user
+     * 
+     * @return <code> true </code> if the User has access to the course, <code> false </code> otherwise.
+     */
+    public boolean userHasCourse(Course course, SystemUser systemUser, String authorization) {
+        if (userCourses == null) {
+            SystemUser user = systemUser != null && systemUser.getId() != null? systemUser : getAuthenticatedUser();
+            String authority_;
+            if (authorization != null && !authorization.isEmpty()) {
+                authority_ = authorization;
+            } else {
+                GrantedAuthority[] authorities = user.getAuthorities();
+                authority_ = authorities != null && authorities.length > 0? authorities[0].getAuthority() : null;   
+            }
+                                                
+            if (AUTHORITY.ROLE_USER.hasAuthority(authority_)) {                
+                return false;
+            } else if (AUTHORITY.ROLE_ADMIN.hasAuthority(authority_)) {
+                return true;
+            } else if (AUTHORITY.ROLE_PROFESSOR.hasAuthority(authority_)) {                
+                userCourses = courseRemote.getCoursesByProfessor(user.getId());
+            } else if (AUTHORITY.ROLE_TUTOR.hasAuthority(authority_)) {                
+                userCourses = courseRemote.getCoursesByTutor(user.getId());
+            } else if (AUTHORITY.ROLE_COORD.hasAuthority(authority_)) {
+                userCourses = courseRemote.getCoursesByCoordinator(user.getId());
+            } 
+            
+        }
+        
+        return userCourses.contains(course);
+    }
+    
+    /**
+     * Checks if the User has Access to a specific Grade
+     * 
+     * @param grade The Grade
+     * @param systemUser System User that should have the Course, if null the method will get the authenticated user.
+     * @param authorization GrantedAuthority that should be used, if null it will use the first GrantedAuthority for the user
+     * 
+     * @return <code> true </code> if the User has access to the course, <code> false </code> otherwise.
+     */
+    public boolean userHasGrade(Grade grade, SystemUser systemUser, String authorization) {
+        if (userGrades == null) {
+            SystemUser user = systemUser != null && systemUser.getId() != null? systemUser : getAuthenticatedUser();
+            String authority_;
+            if (authorization != null && !authorization.isEmpty()) {
+                authority_ = authorization;
+            } else {
+                GrantedAuthority[] authorities = user.getAuthorities();
+                authority_ = authorities != null && authorities.length > 0? authorities[0].getAuthority() : null;   
+            }
+            
+            if (AUTHORITY.ROLE_USER.hasAuthority(authority_)) {                
+                userGrades = gradeRemote.getGradesByStudent(user.getId());
+            } else if (AUTHORITY.ROLE_ADMIN.hasAuthority(authority_)) {
+                return true;
+            } else if (AUTHORITY.ROLE_PROFESSOR.hasAuthority(authority_)) {                
+                userGrades = gradeRemote.getGradeByProfessors(user.getId());
+            } else if (AUTHORITY.ROLE_TUTOR.hasAuthority(authority_)) {                
+                userGrades = gradeRemote.getGradeByTutors(user.getId());
+            } else if (AUTHORITY.ROLE_COORD.hasAuthority(authority_)) {
+                userGrades = gradeRemote.getByCoordinator(user.getId());
+            } 
+            
+        }
+        
+        return userGrades.contains(grade);
     }
 }

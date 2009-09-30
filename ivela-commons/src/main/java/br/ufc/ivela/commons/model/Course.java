@@ -39,8 +39,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name = "course")
+@Cache(region="courseCache", usage = CacheConcurrencyStrategy.READ_WRITE)  
 @NamedQueries({@NamedQuery(name = "Course.findById", query = "SELECT c FROM Course c WHERE c.id = :id"), @NamedQuery(name = "Course.findByName", query = "SELECT c FROM Course c WHERE c.name = :name"), @NamedQuery(name = "Course.findByDescription", query = "SELECT c FROM Course c WHERE c.description = :description"), @NamedQuery(name = "Course.findByImage", query = "SELECT c FROM Course c WHERE c.image = :image"), @NamedQuery(name = "Course.findByTargetAudience", query = "SELECT c FROM Course c WHERE c.targetAudience = :targetAudience"), @NamedQuery(name = "Course.findByContents", query = "SELECT c FROM Course c WHERE c.contents = :contents"), @NamedQuery(name = "Course.findByActive", query = "SELECT c FROM Course c WHERE c.active = :active")})
 public class Course implements Serializable {
     private static final long serialVersionUID = 1L;

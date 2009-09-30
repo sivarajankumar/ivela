@@ -21,7 +21,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <head>
     <script type="text/javascript" src="../js/admin/tools.js"></script>
 </head>
@@ -40,7 +40,9 @@
     <div id="vertical_container2" >
         <h3 class="no_grades"><a href="home.action" title="<s:property value="admin.controlPanel" />"><s:text name="admin.controlPanel" /></a></h3>
         <h3 class="no_grades"><a href="systemUser!show.action" title="<s:property value="back.people.title" />"><s:text name="admin.people" /></a></h3>
+        <sec:authorize ifAnyGranted="ROLE_ADMIN, ROLE_COORD, ROLE_PROFESSOR">
         <h3 class="no_grades"><a href="course!show.action" title="<s:property value="back.courses.title" />"><s:text name="admin.courses" /></a></h3>
+        </sec:authorize>
         <h3 class="no_grades"><a href="grade!show.action" title="<s:property value="aback.grades.title" />"><s:text name="admin.grade" /></a></h3>   
     </div>
 </div>

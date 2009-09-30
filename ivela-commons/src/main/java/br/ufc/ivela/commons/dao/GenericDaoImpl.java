@@ -47,7 +47,7 @@ public class GenericDaoImpl<T> extends HibernateDaoSupport implements GenericDao
     }
 
     public T get(Serializable id) {
-        return (T) getHibernateTemplate().get(clazz, id);
+        return (T) getHibernateTemplate().get(clazz, id);        
     }
 
     public List<T> getAll() {

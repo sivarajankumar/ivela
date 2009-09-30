@@ -66,6 +66,8 @@ public interface CourseRemote {
     
     public List<Course> getStructure();
     
+    public List<Course> getStructure(SystemUser systemUser);
+    
     public String getCourseJsonStructure(Long courseId);
     
     public Course getCourseStructure(Long courseId);
@@ -93,5 +95,35 @@ public interface CourseRemote {
     public int isFinishedCourse(Long studentId, Long courseId, long gradeId);
     
     public List<Course> getCourses(String name, String description);
+    
+    /**
+     * Method that get the list of courses by Coordinator
+     *  
+     * @param userId the System User Id of the Professor
+     * @return List instance with the course objects, the list will be empty if no result if found
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.SystemUser
+     */
+    public List<Course> getCoursesByCoordinator(Long userId);
+    
+    /**
+     * Method that get the list of courses by Professor
+     * 
+     * @param userId the System User Id of the Professor
+     * @return List instance with the course objects, the list will be empty if no result if found
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.SystemUser
+     */
+    public List<Course> getCoursesByProfessor(Long userId);
+    
+    /**
+     * Method that get the list of courses by Tutor
+     * 
+     * @param userId the System User Id of the Professor
+     * @return List instance with the course objects, the list will be empty if no result if found
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.SystemUser
+     */
+    public List<Course> getCoursesByTutor(Long userId);
 }
 

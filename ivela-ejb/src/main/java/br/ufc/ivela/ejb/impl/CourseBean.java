@@ -32,6 +32,8 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
+import org.springframework.security.GrantedAuthority;
+
 import br.ufc.ivela.commons.dao.DaoFactory;
 import br.ufc.ivela.commons.dao.GenericDao;
 import br.ufc.ivela.commons.dao.Page;
@@ -43,6 +45,7 @@ import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.model.Unit;
 import br.ufc.ivela.commons.model.UnitContent;
+import br.ufc.ivela.commons.model.SystemUser.AUTHORITY;
 import br.ufc.ivela.commons.util.Thumbnail2;
 import br.ufc.ivela.ejb.interfaces.CourseRemote;
 
@@ -264,32 +267,7 @@ public class CourseBean implements CourseRemote {
 
     public List<Course> getStructure() {
         List<Course> list = getAll();
-
-        for (Course course : list) {
-            course.setDisciplines(daoDisc.getByFK("courseId", course.getId()));
-
-            if (course.getDisciplines() != null) {
-                for (Discipline discipline : course.getDisciplines()) {
-                    discipline.setUnits(daoUnit.getByFK("disciplineId", discipline.getId()));
-
-                    if (discipline.getUnits() != null) {
-                        for (Unit unit : discipline.getUnits()) {
-                            unit.setUnitContents(daoUContent.getByFK("unitId", unit.getId()));
-
-                            if (unit.getUnitContents() != null) {
-                                for (UnitContent unitContent : unit.getUnitContents()) {
-                                    //unitContent.setExercises(daoExercise.getByFK("unitContentId", unitContent.getId()));
-                                    unitContent.setExercises(daoExercise.find("from Exercise e where e.unitContentId = ? and e.active = ? order by e.order", new Object[]{unitContent.getId(), true}));
-                                    //unitContent.setExams(daoExam.getByFK("unitContentId", unitContent.getId()));
-                                    unitContent.setExams(daoExam.find("from Exam e where e.unitContentId = ? and e.active = ? order by e.order", new Object[]{unitContent.getId(), true}));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
+        buildCourseListContent(list);
         return list;
     }
 
@@ -484,5 +462,74 @@ public class CourseBean implements CourseRemote {
         if (results == null)
             results = new ArrayList<Course>();
         return results;
+    }
+
+    public List<Course> getCoursesByCoordinator(Long userId) {
+        Object[] params = new Object[]{userId};          
+        return daoCourse.find("select c from Grade g, Course c WHERE g.courseId = c.id and g.coordinatorId = ?", params);
+    }
+
+    public List<Course> getCoursesByProfessor(Long userId) {
+        Object[] params = new Object[]{userId};
+        
+        return daoCourse.find("select c from Professor p, Course c WHERE c.id = p.grade.courseId and p.systemUser.id = ?", params);
+    }
+
+    public List<Course> getCoursesByTutor(Long userId) {
+        Object[] params = new Object[]{userId};
+        
+        return daoCourse.find("select c from Tutor t, Course c WHERE c.id = t.grade.courseId and t.systemUser.id = ?", params);
+    }
+
+    public List<Course> getStructure(SystemUser systemUser) {        
+        List<Course> list = new ArrayList<Course>(0);
+        
+        if (systemUser == null || systemUser.getId() == null) {
+            return list;
+        }
+        
+        GrantedAuthority[] authorities = systemUser.getAuthorities();
+        String authority_ = authorities != null && authorities.length > 0 ? authorities[0].getAuthority() : null;
+
+        if (AUTHORITY.ROLE_ADMIN.hasAuthority(authority_)) {
+            list = getAll();
+        } else if (AUTHORITY.ROLE_PROFESSOR.hasAuthority(authority_)) {
+            list = getCoursesByProfessor(systemUser.getId());            
+        } else if (AUTHORITY.ROLE_TUTOR.hasAuthority(authority_)) {
+            list = getCoursesByTutor(systemUser.getId());
+        } else if (AUTHORITY.ROLE_COORD.hasAuthority(authority_)) {
+            list = getCoursesByCoordinator(systemUser.getId());
+        }
+        
+        buildCourseListContent(list);
+        
+        return list;
+    }
+    
+    private void buildCourseListContent(List<Course> courseList) {
+        for (Course course : courseList) {
+            course.setDisciplines(daoDisc.getByFK("courseId", course.getId()));
+
+            if (course.getDisciplines() != null) {
+                for (Discipline discipline : course.getDisciplines()) {
+                    discipline.setUnits(daoUnit.getByFK("disciplineId", discipline.getId()));
+
+                    if (discipline.getUnits() != null) {
+                        for (Unit unit : discipline.getUnits()) {
+                            unit.setUnitContents(daoUContent.getByFK("unitId", unit.getId()));
+
+                            if (unit.getUnitContents() != null) {
+                                for (UnitContent unitContent : unit.getUnitContents()) {
+                                    //unitContent.setExercises(daoExercise.getByFK("unitContentId", unitContent.getId()));
+                                    unitContent.setExercises(daoExercise.find("from Exercise e where e.unitContentId = ? and e.active = ? order by e.order", new Object[]{unitContent.getId(), true}));
+                                    //unitContent.setExams(daoExam.getByFK("unitContentId", unitContent.getId()));
+                                    unitContent.setExams(daoExam.find("from Exam e where e.unitContentId = ? and e.active = ? order by e.order", new Object[]{unitContent.getId(), true}));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

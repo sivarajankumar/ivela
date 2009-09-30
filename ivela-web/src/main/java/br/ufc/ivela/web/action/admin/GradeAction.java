@@ -629,7 +629,14 @@ public class GradeAction extends CourseAwareAction {
 
     public String show() {
         setMessage(getMessage());        
-        courseList = gradeRemote.getStructure();
+        courseList = gradeRemote.getStructure(getAuthenticatedUser());
+        for (Course course: courseList) {
+            Iterator<Grade> iterator = course.getGrades().iterator();            
+            while (iterator.hasNext()) {
+                Grade grade_ = iterator.next();
+                if (!userHasGrade(grade_,null,null)) iterator.remove();                                                    
+            }
+        }
         coordinatorList = systemUserRemote.getByAuthentication(Constants.ROLE_COORD);
         professorList = systemUserRemote.getByAuthentication(Constants.ROLE_PROFESSOR);
         tutorList = systemUserRemote.getByAuthentication(Constants.ROLE_TUTOR);
