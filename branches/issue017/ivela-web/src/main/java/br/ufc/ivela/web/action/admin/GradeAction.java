@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -208,6 +209,7 @@ public class GradeAction extends CourseAwareAction {
                 studentsEnrollment.add(element.getChildText("firstName") + "#" + element.getChildText("lastName")+"#"+Boolean.toString(enroll));
             }
 
+            Collections.sort(studentsEnrollment);
            getSession().put("studentsEnroll", studentsEnrollment);
 
         } catch (JDOMException ex) {
