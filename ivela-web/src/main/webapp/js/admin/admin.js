@@ -7,7 +7,6 @@ var checkedStudents = new Array();
 Event.observe(window, 'load', loadAccordions, false);
 Event.observe(window, 'load', function() {Event.observe(content, 'click', click, false);}, false);
 
-
 function validateFile(fileName){
     if(fileName != ""){
            var ext = fileName.split(".",2);
@@ -136,7 +135,7 @@ function showFinish(){
 //
 //	Set up all accordions
 //
-function loadAccordions() {		
+function loadAccordions() {	
     var bottomAccordion = new accordion('vertical_container2', {
         classNames : {
             toggle : 'accordion_toggle_grade2',
@@ -716,6 +715,17 @@ function setUncheckedAllStudents(gradeId) {
 
 var col1Content = '';
 var col2Content = '';
+var boxContent = '';
+
+function showBoxLoading() {
+	boxContent = $('boxContent').innerHTML;
+    $('boxContent').innerHTML = '<img src="../images/ajax-loading.gif" />';
+}
+
+function closeBoxLoading() {
+	$('boxContent').innerHTML=boxContent;
+}
+
 
 function showLoading() {
     col1Content = $('col-1-home').innerHTML;

@@ -11,6 +11,7 @@
     <link href="../css/lightbox.css"  rel="stylesheet" type="text/css" />
     <link href="../css/cadAtividades.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../js/admin/admin.js"></script>
+    <script type="text/javascript" src="../js/util/util.js"></script>
     <script type="text/javascript" src="../js/admin/scorecard.js"></script>
     <script type="text/javascript" src="../js/admin/tools.js"></script>
     <script type="text/javascript" src="../js/lightbox.js"></script>
@@ -203,41 +204,28 @@
                                             <s:iterator value="enrollments" status="stat"> 
                                                 <s:if test="enrollments[#stat.index].status == 0">
                                                     <li title="<s:property value="systemUser.username" />" id="li.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="box-person">
-                                                        <img id="img_<s:property value="grades[#gstat.index].id" />_<s:property value="systemUser.id" />" src="../images/icon/icon-person-yellow.gif" /><br />
-                                                        <s:if test="systemUser.username.length() > 8">
-                                                            <s:property value="systemUser.username.substring(0,8)+ \"...\"" />
-                                                        </s:if>
-                                                        <s:else>
-                                                            <s:property value="systemUser.username" />
-                                                        </s:else>
-                                                            <br /><input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" 
+                                                        <input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" 
                                                                          name="studentsCheck" onclick="updateStudents(this, '<s:property value="systemUser.username" />', '<s:property value="systemUser.email" />', '<s:property value="systemUser.createdAt" />', '<s:text name="student.input.username"/>', '<s:text name="student.input.email"/>', '<s:text name="student.input.createdAt"/>');" />
+
+                                                        <img id="img_<s:property value="grades[#gstat.index].id" />_<s:property value="systemUser.id" />" src="../images/icon/icon-person-yellow.gif" />
+                                                       <s:property value="systemUser.username" />                                                      
                                                     </li>
                                                 </s:if>
                                                 <s:if test="enrollments[#stat.index].status == 1">
                                                     <li title="<s:property value="systemUser.username" />" id="li.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="box-person">
-                                                        <img id="img_<s:property value="grades[#gstat.index].id" />_<s:property value="systemUser.id" />" src="../images/icon/icon-person-green.gif" /><br />
-                                                        <s:if test="systemUser.username.length() > 8">
-                                                            <s:property value="systemUser.username.substring(0,8)+ \"...\"" />
-                                                        </s:if>
-                                                        <s:else>
-                                                            <s:property value="systemUser.username" />
-                                                        </s:else> 
-                                                            <br /><input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" 
+                                                         <input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" 
                                                                          name="studentsCheck" onclick="updateStudents(this, '<s:property value="systemUser.username" />', '<s:property value="systemUser.email" />', '<s:property value="systemUser.createdAt" />', '<s:text name="student.input.username"/>', '<s:text name="student.input.email"/>', '<s:text name="student.input.createdAt"/>');" />
+
+                                                        <img id="img_<s:property value="grades[#gstat.index].id" />_<s:property value="systemUser.id" />" src="../images/icon/icon-person-green.gif" />
+                                                            <s:property value="systemUser.username" />
                                                     </li>
                                                 </s:if>
                                                 <s:if test="enrollments[#stat.index].status == 2">
                                                     <li title="<s:property value="systemUser.username" />" id="li.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" class="box-person">
-                                                        <img id="img_<s:property value="grades[#gstat.index].id" />_<s:property value="systemUser.id" />" src="../images/icon/icon-person-red.gif" /><br />
-                                                        <s:if test="systemUser.username.length() > 8">
-                                                            <s:property value="systemUser.username.substring(0,8)+ \"...\"" />
-                                                        </s:if>
-                                                        <s:else>
-                                                            <s:property value="systemUser.username" />
-                                                        </s:else>
-                                                            <br /><input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />"
+                                                           <input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />"
                                                                          name="studentsCheck" onclick="updateStudents(this, '<s:property value="systemUser.username" />', '<s:property value="systemUser.email" />', '<s:property value="systemUser.createdAt" />', '<s:text name="student.input.username"/>', '<s:text name="student.input.email"/>', '<s:text name="student.input.createdAt"/>');" />
+                                                        <img id="img_<s:property value="grades[#gstat.index].id" />_<s:property value="systemUser.id" />" src="../images/icon/icon-person-red.gif" />
+                                                           <s:property value="systemUser.username" />
                                                     </li>
                                                 </s:if>
                                             </s:iterator>

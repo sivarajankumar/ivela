@@ -33,6 +33,7 @@
     <link href="../css/lightbox.css"  rel="stylesheet" type="text/css" />
     <link href="../css/cadAtividades.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../fckeditor/fckeditor.js"></script>
+    <script type="text/javascript" src="../js/util/util.js"></script>
     <script type="text/javascript" src="../js/admin/tools.js"></script>
     <script type="text/javascript" src="../js/admin/grade.js"></script>
     <script type="text/javascript" src="../js/lightbox.js"></script>
