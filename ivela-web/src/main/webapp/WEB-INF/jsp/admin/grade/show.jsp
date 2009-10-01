@@ -152,7 +152,14 @@
                                             <s:else>
                                                 <ul class="list-students">
                                                     <s:iterator value="enrollments" status="stat">
-                                                        <li title="<s:property value="systemUser.username" />" id="li.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onMouseOver="mouseOverPerson('student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" onMouseOut="mouseOutPerson('student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');"><img src="../images/icon/icon-person.gif" /><br /><s:if test="systemUser.username.length() > 8"><s:property value="systemUser.username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="systemUser.username" /></s:else><br /><input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" name="studentsCheck" onclick="updateStudents(this,'student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" /></li>
+                                                        <li title="<s:property value="systemUser.username" />" id="li.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onMouseOver="mouseOverPerson('student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" onMouseOut="mouseOutPerson('student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');">
+                                                        <input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" name="studentsCheck" onclick="updateStudents(this,'student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" />
+                                                        <img src="../images/icon/icon-person.gif" />
+                                                        <s:if test="systemUser.username.length() > 20">
+                                                        <s:property value="systemUser.username.substring(0,20)+ \"...\"" />
+                                                        </s:if><s:else><s:property value="systemUser.username" />
+                                                        </s:else>
+                                                        </li>
                                                     </s:iterator>
                                                     <br class="clear" />
                                                 </ul>
@@ -199,7 +206,16 @@
                                             <s:else>
                                                 <ul class="list-students">
                                                     <s:iterator value="professors" status="stat">
-                                                        <li title="<s:property value="username" />" id="li.professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onMouseOver="mouseOverPerson('professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" onMouseOut="mouseOutPerson('professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');"><img src="../images/icon/icon-person.gif" /><br /><s:if test="username.length() > 8"><s:property value="username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br /><input type="checkbox" value="<s:property value="id" />" id="professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" name="professorsCheck" onclick="updateProfessor(this,'professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" /></li>
+                                                        <li title="<s:property value="username" />" id="li.professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onMouseOver="mouseOverPerson('professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" onMouseOut="mouseOutPerson('professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');">
+                                                        <input type="checkbox" value="<s:property value="id" />" id="professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" name="professorsCheck" onclick="updateProfessor(this,'professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" />
+                                                        <img src="../images/icon/icon-person.gif" />
+                                                        <s:if test="username.length() > 20">
+                                                        <s:property value="username.substring(0,20)+ \"...\"" />
+                                                        </s:if>
+                                                        <s:else>
+                                                        <s:property value="username" />
+                                                        </s:else>                  
+                                                        </li>
                                                     </s:iterator>
                                                     <br class="clear" />
                                                 </ul>
@@ -249,7 +265,15 @@
                                             <s:else>
                                                 <ul class="list-students">
                                                     <s:iterator value="tutors" status="stat">
-                                                        <li title="<s:property value="username" />" id="li.tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onMouseOver="mouseOverPerson('tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" onMouseOut="mouseOutPerson('tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');"><img src="../images/icon/icon-person.gif" /><br /><s:if test="username.length() > 8"><s:property value="username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br /><input type="checkbox" value="<s:property value="id" />" name="tutorsCheck" id="tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onclick="updateTutor(this,'tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" /></li>
+                                                        <li title="<s:property value="username" />" id="li.tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onMouseOver="mouseOverPerson('tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" onMouseOut="mouseOutPerson('tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');">
+                                                        <input type="checkbox" value="<s:property value="id" />" name="tutorsCheck" id="tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onclick="updateTutor(this,'tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" />
+                                                        <img src="../images/icon/icon-person.gif" />
+                                                        <s:if test="username.length() > 20"><s:property value="username.substring(0,20)+ \"...\"" />
+                                                        </s:if>
+                                                        <s:else>
+                                                        <s:property value="username" />
+                                                        </s:else>
+                                                        </li>
                                                     </s:iterator>
                                                     <br class="clear" />
                                                 </ul>

@@ -5,6 +5,8 @@ package br.ufc.ivela.ejb.impl;
  * and open the template in the editor.
  */
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -202,7 +204,13 @@ public class GradeBean implements GradeRemote {
         for (Course course : courseList) {
             course.setGrades(daoGrade.getByFK("courseId", course.getId()));
             for (Grade grade : course.getGrades()) {
-                grade.setEnrollments(daoEnroll.find("select e from Enrollment e, SystemUser su where e.grade.id = ? and e.systemUser.id = su. id and su.enabled = true", new Object[]{grade.getId()}));
+            	List<Enrollment> enroll = daoEnroll.find("select e from Enrollment e, SystemUser su where e.grade.id = ? and e.systemUser.id = su. id and su.enabled = true", new Object[]{grade.getId()});
+            	Collections.sort(enroll,new Comparator<Enrollment>() {
+					public int compare(Enrollment arg0, Enrollment arg1) {
+						return arg0.getSystemUser().getUsername().compareToIgnoreCase(arg1.getSystemUser().getUsername());
+					}
+            	});
+                grade.setEnrollments(enroll);
                 List<SystemUser> professors = getProfessors(grade.getId());
                 List<SystemUser> tutors = getTutors(grade.getId());
                 List<Forum> forums = daoForum.getByFK("grade.id", grade.getId());

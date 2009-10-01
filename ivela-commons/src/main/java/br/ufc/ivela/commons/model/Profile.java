@@ -46,7 +46,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name = "profile")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="profileCache",usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQueries({@NamedQuery(name = "Profile.findById", query = "SELECT p FROM Profile p WHERE p.id = :id"), @NamedQuery(name = "Profile.findByFirstName", query = "SELECT p FROM Profile p WHERE p.firstName = :firstName"), @NamedQuery(name = "Profile.findByInitials", query = "SELECT p FROM Profile p WHERE p.initials = :initials"), @NamedQuery(name = "Profile.findByLastName", query = "SELECT p FROM Profile p WHERE p.lastName = :lastName"), @NamedQuery(name = "Profile.findByBirthDate", query = "SELECT p FROM Profile p WHERE p.birthDate = :birthDate"), @NamedQuery(name = "Profile.findBySocialNumber", query = "SELECT p FROM Profile p WHERE p.socialNumber = :socialNumber"), @NamedQuery(name = "Profile.findByPhoto", query = "SELECT p FROM Profile p WHERE p.photo = :photo"), @NamedQuery(name = "Profile.findByGender", query = "SELECT p FROM Profile p WHERE p.gender = :gender"), @NamedQuery(name = "Profile.findByDisabilities", query = "SELECT p FROM Profile p WHERE p.disabilities = :disabilities")})
 public class Profile implements Serializable {
     private static final long serialVersionUID = 1L;
