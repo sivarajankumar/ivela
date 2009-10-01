@@ -68,6 +68,7 @@
                 <value>br.ufc.ivela.commons.model.Forum</value>
                 <value>br.ufc.ivela.commons.model.Functionality</value>
                 <value>br.ufc.ivela.commons.model.Grade</value>
+                <value>br.ufc.ivela.commons.model.GradeUnitContent</value>
                 <value>br.ufc.ivela.commons.model.GradeNote</value>
                 <value>br.ufc.ivela.commons.model.History</value>
                 <value>br.ufc.ivela.commons.model.HistoryParams</value>                                
@@ -87,7 +88,7 @@
                 <value>br.ufc.ivela.commons.model.PlacementQuestion</value>
                 <value>br.ufc.ivela.commons.model.Post</value>
                 <value>br.ufc.ivela.commons.model.Professor</value>
-                <value>br.ufc.ivela.commons.model.Profile</value>                
+                <value>br.ufc.ivela.commons.model.Profile</value>
                 <value>br.ufc.ivela.commons.model.QuestionExam</value>
                 <value>br.ufc.ivela.commons.model.QuestionExercise</value>
                 <value>br.ufc.ivela.commons.model.Question</value>
@@ -125,7 +126,7 @@
             <value>
                 org.hibernate.dialect.PostgreSQLDialect                
                 <!--hibernate.hbm2ddl.auto=create-->
-                <!--hibernate.show_sql=true-->                
+                <!--hibernate.show_sql=true-->
                 hibernate.cache.provider_class=net.sf.ehcache.hibernate.SingletonEhCacheProvider  
                 hibernate.cache.use_query_cache=false  
                 hibernate.cache.use_second_level_cache=true                                  

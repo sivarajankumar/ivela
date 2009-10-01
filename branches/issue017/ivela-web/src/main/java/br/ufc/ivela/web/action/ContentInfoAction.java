@@ -11,6 +11,7 @@ import br.ufc.ivela.commons.Constants;
 import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.FinishedUnitContent;
+import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.model.Unit;
 import br.ufc.ivela.commons.model.UnitContent;
@@ -36,6 +37,7 @@ public class ContentInfoAction extends GenericAction {
     private Discipline discipline;
     private Unit unit;
     private UnitContent unitContent;
+    private Grade grade;
     private String goToPage;
     private String pageHtml;
 
@@ -53,37 +55,14 @@ public class ContentInfoAction extends GenericAction {
         return "text";
     }
 
-//    public String goToPage() {
-//        discipline = disciplineRemote.get(discipline.getId());
-//        discipline.setCourse(courseRemote.get(discipline.getCourseId()));
-//        unit = unitRemote.get(unit.getId());
-//        if (discipline != null) {
-//            disciplineUnitList = unitRemote.getByDisciplineOpen(discipline.getId());
-//        }
-//        if (disciplineUnitList == null) {
-//            disciplineUnitList = new ArrayList<Unit>();
-//        }
-//        this.unitContentList = new ArrayList<List>();
-//        for (Unit unit : disciplineUnitList) {
-//            List<UnitContent> temp = unitContentRemote.getByUnitOrdered(unit.getId());
-//            unit.setUnitContents(temp);
-//        }
-//        return "text";
-//    }
-
     public String getSystemUser() {
-//        Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        SystemUser systemUser = null;
-//        if (obj instanceof UserDetails) {
-//            systemUser = (SystemUser) obj;
-//        }
         SystemUser systemUser = getAuthenticatedUser();
         setInputStream(new ByteArrayInputStream((systemUser.getId()+" - "+systemUser.getUsername()+" - "+systemUser.getEmail()).getBytes()));
         return "text";
     }
 
     public String getProgress() {
-        Integer progress = courseRemote.getProgress(getAuthenticatedUser().getId(), new Long(1));
+        Integer progress = courseRemote.getProgress(getAuthenticatedUser().getId(), course.getId());
         StringBuilder json = new StringBuilder();
         json.append("{");
         json.append("\"progress\":\"" + progress.intValue() + "\"");
@@ -109,6 +88,12 @@ public class ContentInfoAction extends GenericAction {
         return "show";
     }
 
+    public String isUnlocked() {
+        boolean isUnlocked = gradeUnitContentRemote.isUnlocked(grade.getId(), unitContent.getId());
+        setInputStream(new ByteArrayInputStream(new Boolean(isUnlocked).toString().getBytes()));
+        return "text";
+    }
+
     public InputStream getInputStream() {
         return inputStream;
     }
@@ -117,18 +102,15 @@ public class ContentInfoAction extends GenericAction {
         this.inputStream = inputStream;
     }
 
-    public void setCourseRemote(
-            CourseRemote courseRemote) {
+    public void setCourseRemote(CourseRemote courseRemote) {
         this.courseRemote = courseRemote;
     }
 
-    public void setGradeUnitContentRemote(
-            GradeUnitContentRemote gradeUnitContentRemote) {
+    public void setGradeUnitContentRemote(GradeUnitContentRemote gradeUnitContentRemote) {
         this.gradeUnitContentRemote = gradeUnitContentRemote;
     }
 
-    public void setFinishedUnitContentRemote(
-            FinishedUnitContentRemote finishedUnitContentRemote) {
+    public void setFinishedUnitContentRemote(FinishedUnitContentRemote finishedUnitContentRemote) {
         this.finishedUnitContentRemote = finishedUnitContentRemote;
     }
 
@@ -148,7 +130,11 @@ public class ContentInfoAction extends GenericAction {
         this.unitContent = unitContent;
     }
 
-    public void setGoToPage(String goToPage) {
+    public void setGrade(Grade grade) {
+		this.grade = grade;
+	}
+
+	public void setGoToPage(String goToPage) {
         this.goToPage = goToPage;
     }
 
