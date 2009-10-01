@@ -14,6 +14,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "grade_unit_content")
@@ -27,18 +28,22 @@ public class GradeUnitContent implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
+    @Column(name="grade")
+    private Long gradeId;    
+    @Transient
     private Grade grade; 
 
-    @OneToOne
+    @Column(name="unit_content")
+    private Long unitContentId;    
+    @Transient
     private UnitContent unitContent;
 
     @Column(name="start_datetime")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date startDatetime;    
+    private Date startDatetime;
 
     @Column(name="mail_flag")
-    private Boolean mailFlag;    
+    private Boolean mailFlag;
 
     public GradeUnitContent() {
     }

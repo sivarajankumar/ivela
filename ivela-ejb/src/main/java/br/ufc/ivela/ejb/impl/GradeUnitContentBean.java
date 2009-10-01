@@ -1,5 +1,9 @@
 package br.ufc.ivela.ejb.impl;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import javax.ejb.Stateless;
 
 import br.ufc.ivela.commons.dao.DaoFactory;
@@ -26,5 +30,21 @@ public class GradeUnitContentBean implements GradeUnitContentRemote {
 
     public boolean remove(GradeUnitContent gradeUnitContent) {
         return daoGradeUnitCont.remove(gradeUnitContent);
+    }
+
+    public boolean isUnlocked(Long gradeId, Long unitContentId) {
+        boolean isUnlocked = true;
+        Object[] params = new Object[]{gradeId, unitContentId};
+        List<GradeUnitContent> results = daoGradeUnitCont.find("from GradeUnitContent WHERE gradeId = ? and unitContentId = ?", params);
+        if (results != null && results.size() > 0 && results.get(0) != null) {
+            GradeUnitContent guc = (GradeUnitContent)results.get(0);
+            Date actualDate = new Date();
+            Date startDate = guc.getStartDatetime();
+
+            if (actualDate.before(startDate)) {
+                isUnlocked = false;
+            }
+        }
+        return isUnlocked;
     }
 }
