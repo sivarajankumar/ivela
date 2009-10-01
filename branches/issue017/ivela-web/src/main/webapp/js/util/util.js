@@ -6,6 +6,12 @@ function getLanguage (){
     return navigator.language.substring(0,2);
 }
 
+
+function showMenuLoading(page) {
+    $('menu_load').innerHTML = '<img src="../images/ajax-loading.gif" />';
+    document.location = page;
+}
+
 function classCss(){
     
     var css;

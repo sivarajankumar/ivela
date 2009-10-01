@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 
-
 function execute(url, params, funcao) {
     new Ajax.Request(url, { method: 'post', parameters: params, onComplete: funcao });
 }

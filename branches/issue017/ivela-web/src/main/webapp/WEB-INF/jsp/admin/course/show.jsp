@@ -42,6 +42,7 @@
     <script type="text/javascript" src="../fckeditor/fckeditor.js"></script>
     <script type="text/javascript" src="../js/admin/tools.js"></script>
     <script type="text/javascript" src="../js/admin/utils.js"></script>
+    <script type="text/javascript" src="../js/util/util.js"></script>
     <script type="text/javascript" src="../js/admin/courses.js"></script>
     <script type="text/javascript" src="../js/admin/discipline.js"></script>
     <script type="text/javascript" src="../js/admin/unit.js"></script>

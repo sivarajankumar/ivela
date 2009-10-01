@@ -35,6 +35,7 @@
     <script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>
     <script type="text/javascript" src="js/scriptaculous/effects.js"></script>
     <script type="text/javascript" src="js/systemUser/base.js"></script>    
+    <script type="text/javascript" src="../js/util/util.js"></script>
     <script type="text/javascript" src="js/password/passwordmeter.js"></script>       
     <script type="text/javascript">
         window.onload=function() {
