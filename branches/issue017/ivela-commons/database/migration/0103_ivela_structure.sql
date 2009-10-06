@@ -45,6 +45,7 @@ CREATE TABLE grade_unit_content (
     grade numeric(10,0) NOT NULL,
     unit_content numeric(10,0) NOT NULL,
     start_datetime timestamp without time zone,
+    finish_datetime timestamp without time zone,
     mail_flag boolean
 );
 ALTER TABLE ivela.grade_unit_content OWNER TO ivela;

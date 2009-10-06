@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 
 import br.ufc.ivela.commons.Constants;
@@ -22,7 +23,7 @@ import br.ufc.ivela.ejb.interfaces.GradeUnitContentRemote;
 import br.ufc.ivela.ejb.interfaces.UnitContentRemote;
 import br.ufc.ivela.ejb.interfaces.UnitRemote;
 
-public class ContentInfoAction extends GenericAction {
+public class ContentInfoAction extends CourseAwareAction {
 
     private InputStream inputStream;   
 
@@ -92,6 +93,11 @@ public class ContentInfoAction extends GenericAction {
         boolean isUnlocked = gradeUnitContentRemote.isUnlocked(grade.getId(), unitContent.getId());
         setInputStream(new ByteArrayInputStream(new Boolean(isUnlocked).toString().getBytes()));
         return "text";
+    }
+
+    public void sendEmail() {
+        mailer.send(new String[]{getAuthenticatedUser().getEmail()}, null, "", "", true);
+        mailer.send(new String[]{getAuthenticatedUser().getEmail()}, null, "", "", null, true);
     }
 
     public InputStream getInputStream() {
