@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,7 +18,7 @@ import javax.persistence.Transient;
 @Table(name = "grade_unit_content")
 public class GradeUnitContent implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @SequenceGenerator(name="seq", sequenceName="sq_grade_unit_content", allocationSize=1)
@@ -41,6 +39,10 @@ public class GradeUnitContent implements Serializable {
     @Column(name="start_datetime")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDatetime;
+
+    @Column(name="finish_datetime")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date finishDatetime;
 
     @Column(name="mail_flag")
     private Boolean mailFlag;
@@ -76,43 +78,67 @@ public class GradeUnitContent implements Serializable {
         return "br.ufc.ivela.commons.model.GradeUnitContent[id=" + id + "]";
     }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Grade getGrade() {
-		return grade;
-	}
+    public Long getGradeId() {
+        return gradeId;
+    }
 
-	public void setGrade(Grade grade) {
-		this.grade = grade;
-	}
+    public void setGradeId(Long gradeId) {
+        this.gradeId = gradeId;
+    }
 
-	public UnitContent getUnitContent() {
-		return unitContent;
-	}
+    public Grade getGrade() {
+        return grade;
+    }
 
-	public void setUnitContent(UnitContent unitContent) {
-		this.unitContent = unitContent;
-	}
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
 
-	public Date getStartDatetime() {
-		return startDatetime;
-	}
+    public Long getUnitContentId() {
+        return unitContentId;
+    }
 
-	public void setStartDatetime(Date startDatetime) {
-		this.startDatetime = startDatetime;
-	}
+    public void setUnitContentId(Long unitContentId) {
+        this.unitContentId = unitContentId;
+    }
 
-	public Boolean getMailFlag() {
-		return mailFlag;
-	}
+    public UnitContent getUnitContent() {
+        return unitContent;
+    }
 
-	public void setMailFlag(Boolean mailFlag) {
-		this.mailFlag = mailFlag;
-	}
+    public void setUnitContent(UnitContent unitContent) {
+        this.unitContent = unitContent;
+    }
+
+    public Date getStartDatetime() {
+        return startDatetime;
+    }
+
+    public void setStartDatetime(Date startDatetime) {
+        this.startDatetime = startDatetime;
+    }
+
+    public Date getFinishDatetime() {
+        return finishDatetime;
+    }
+
+    public void setFinishDatetime(Date finishDatetime) {
+        this.finishDatetime = finishDatetime;
+    }
+
+    public Boolean getMailFlag() {
+        return mailFlag;
+    }
+
+    public void setMailFlag(Boolean mailFlag) {
+        this.mailFlag = mailFlag;
+    }
 }
