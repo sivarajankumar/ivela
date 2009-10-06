@@ -6,9 +6,9 @@ function getLanguage (){
     return navigator.language.substring(0,2);
 }
 
-
 function showMenuLoading(page) {
-    $('menu_load').innerHTML = '<img src="../images/ajax-loading.gif" />';
+    $('menu_load').innerHTML = '<img style="display:block;" src="../images/ajax-loading.gif" width=22px height=22px />';
+    $('menu_load').setAttribute(classCss(),"no_grades");
     document.location = page;
 }
 

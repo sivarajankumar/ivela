@@ -31,7 +31,7 @@
     <link href="../css/profile.css" rel="stylesheet" type="text/css" />
     
     <cal:head/>
-    <script type="text/javascript" src="js/util/calendar.js"></script>
+    <script type="text/javascript" src="../js/util/calendar.js"></script>
     <s:head />
 </head>
 
