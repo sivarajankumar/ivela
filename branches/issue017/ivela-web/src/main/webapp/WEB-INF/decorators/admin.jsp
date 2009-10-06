@@ -109,8 +109,8 @@
             </div>
 
             <div id="menu">
-                <ul>   
-                    <li><h3 id="menu_load" class="no_grades"></h3></li>             	                    
+                <ul>
+                    <li id="menu_load" ><img style="display:none;" src="../images/ajax-loading.gif" width=22px height=22px /></li>                	                    
                     <li id="menu_1" ><a href="javascript:showMenuLoading('home.action');" title="<s:property value="admin.controlPanel" />"><s:text name="admin.controlPanel" /></a></li>
                     <li id="menu_4" ><a href="javascript:showMenuLoading('systemUser!show.action');" title="<s:property value="back.people.title" />"><s:text name="admin.people" /></a></li>
                     <sec:authorize ifAnyGranted="ROLE_ADMIN, ROLE_COORD, ROLE_PROFESSOR">
