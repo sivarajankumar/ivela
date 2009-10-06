@@ -169,6 +169,7 @@ public class Mailer implements TextProvider, LocaleProvider {
         }
          
         subject = getText(subject);
+        velocityTemplate = getText(velocityTemplate);
         
         parameters = parameters != null && parameters.length > 0? parameters : params;
         
@@ -188,6 +189,7 @@ public class Mailer implements TextProvider, LocaleProvider {
      */
     public void send(String[] to, String from, String subject, String velocityTemplate, Map[] params, boolean retry) {
         subject = getText(subject);
+        velocityTemplate = getText(velocityTemplate);
         MailSender sender = new MailSenderVelocity(to, from, subject, velocityTemplate, params);
         sender.setRetry(retry);
         taskExecutor.execute(sender);
@@ -482,6 +484,8 @@ public class Mailer implements TextProvider, LocaleProvider {
     }
     
     private class MailSenderVelocity extends MailSender {
+        
+        private static final String DEFAULT_VELOCITY_LOCATION = "template/velocity/";
     	private String[] to;    	
     	private String subject;
     	private String velocityTemplate;
@@ -490,7 +494,7 @@ public class Mailer implements TextProvider, LocaleProvider {
     	private Object origin;
     	private String type;
     	private Map param;
-    	
+    	private String velLocation = DEFAULT_VELOCITY_LOCATION;
     	
     	MailSenderVelocity(String[] to, String from, String subject, String velocityTemplate, Map[] params) {
     		this.to = to;
@@ -505,6 +509,10 @@ public class Mailer implements TextProvider, LocaleProvider {
     	    this.type = type;
     	    this.from = from != null && !from.isEmpty()? from : sender;
     	    this.param = param;
+    	}
+    	
+    	public void setVelocityTemplateLocation(String location) {
+    	    this.velLocation = location;
     	}
     	
     	public List<MimeMessage> sendMessages() {
@@ -538,10 +546,10 @@ public class Mailer implements TextProvider, LocaleProvider {
     	            params[i] = map;    	            
     	        }    	            	        
     	        
-    	    } else {
-    	        
     	    }
     	        		
+    	    velocityTemplate = velLocation + velocityTemplate;
+    	    
     		try {
     			messagesNotSent = mailService.send(to, from, subject, velocityTemplate, params);
     		} catch (Exception e) {

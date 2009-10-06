@@ -187,7 +187,7 @@ public class MailService {
         message.setTo(to);
         message.setFrom(from);         
         message.setSubject(subject);                        
-        String text = velocityTemplate != null && velocityTemplate.isEmpty()? VelocityEngineUtils.mergeTemplateIntoString(
+        String text = velocityTemplate != null && !velocityTemplate.isEmpty()? VelocityEngineUtils.mergeTemplateIntoString(
            velocityEngine, velocityTemplate, params) : "";
         message.setText(text, true);
         
