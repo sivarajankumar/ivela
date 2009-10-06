@@ -9,10 +9,10 @@
         </tr>
         <tr>
             <td>    
-                Dear <b> ${SystemUser.username} </b>, 
+                Caro(a) <b> ${SystemUser.username} </b>, 
                     <br />
                     <br /> 
-                       &nbsp;&nbsp;&nbsp;&nbsp;You are now registered and may access the iVeLA system.
+                       &nbsp;&nbsp;&nbsp;&nbsp;Sua nova senha &eacute;: <b> ${password} </b>
                     <br />
                     <br />
                     <br />                    

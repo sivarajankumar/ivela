@@ -12,7 +12,7 @@
                 Dear <b> ${SystemUser.username} </b>, 
                     <br />
                     <br /> 
-                       &nbsp;&nbsp;&nbsp;&nbsp;You are now registered and may access the iVeLA system.
+                       &nbsp;&nbsp;&nbsp;&nbsp;Your new password is: <b> ${password} </b>
                     <br />
                     <br />
                     <br />                    

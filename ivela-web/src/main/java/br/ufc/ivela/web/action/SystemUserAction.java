@@ -186,18 +186,18 @@ public class SystemUserAction extends GenericAction implements
             String pwd = generatePassword();
             su.setPassword(systemUserRemote.encrypt(pwd));
             result = systemUserRemote.update(su);
-            if (result) {
-                String body = "Your new password is: <b>" + pwd + "</b>";
-
+            if (result) {                
                 HttpServletRequest request = ServletActionContext.getRequest();
                 String url = "http://" + request.getServerName() + ":"
                         + request.getServerPort() + PropertiesUtil.getPropertiesUtil().getProperty(IVELA_PROPERTIES.WEB_PATH);
                 if (!url.endsWith("/")) {
                     url += "/";
                 }
-
-                mailer.send(new String[] { su.getEmail() }, null,
-                        "[ivela] Request password", body, true);
+                Map params = new HashMap();
+                params.put("password", pwd);
+                params.put("url", url);
+                mailer.send(new SystemUser[] { su }, null,
+                        "user.forgot.pass", "user.forgot.pass.velocity", new Map[]{params}, true);
             }
         } else {
             message = "inconsistence";
@@ -356,11 +356,10 @@ public class SystemUserAction extends GenericAction implements
               url += "/";
             }
             Map<String, String> map = new HashMap<String, String>();
-            map.put("url", url);
-            String subject = "[ivela] You were successfully registered";
+            map.put("url", url);            
             
-            mailer.send(new SystemUser[]{systemUser}, null, subject,
-                    "welcome_user_en.vm",
+            mailer.send(new SystemUser[]{systemUser}, null, "user.new.registered",
+                    "user.new.registered.velocity",
                     new Map[]{map}, true);
 
             // create a history register
