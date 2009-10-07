@@ -178,7 +178,7 @@ public class DisciplineAction extends GenericAction {
             List<UnitContent> temp = unitContentRemote.getByUnitOrdered(unit.getId());
             unit.setUnitContents(temp);
         }
-        return "show";
+        return "custom";
     }
     
     /**

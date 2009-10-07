@@ -117,7 +117,8 @@ function showDisciplines(params) {
     var msg = it_gotocourse;
     if(customToc=='true') {
         var html = '';     
-        html += "<h4 class='accordion_toggle2'><a href='#' onclick='javascript:fullScreen(\"discipline!showToc.action?" + params + "\");'>"+msg+"</a></h4>";
+        
+        html += "<h4 class='accordion_toggle2'><a href='#' onclick='javascript:fullScreen(\"discipline!showContentCustom.action?" + params + "&discipline.id=1&unit.id=1\");'>"+msg+"</a></h4>";
         $('vertical_container2').innerHTML = html;
     } else {
 	    new Ajax.Request('discipline!listByCourse.action?' + params,
