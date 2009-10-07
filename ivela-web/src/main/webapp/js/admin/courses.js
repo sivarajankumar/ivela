@@ -7,15 +7,6 @@ function showCourse(courseId) {
     var i = 0;
     
     var json = getJsonFromUrl('course!getCourseInfoJson.action?course.id=' + courseId);
-    
-    //var jsonCourse = getJsonFromUrl('course!getCourseInfo.action?course.id=' + courseId);
-    //var jsonStudents = getJsonFromUrl('course!getStudentsInfo.action?course.id=' + courseId);
-    //var jsonGrades = getJsonFromUrl('course!getGradesInfo.action?course.id=' + courseId);
-    //var jsonGraduatedStudentsInfo = getJsonFromUrl('course!getGraduatedStudentsInfo.action?course.id=' + courseId);
-    //var jsonProfessors = getJsonFromUrl('course!getProfessorsInfo.action?course.id=' + courseId);
-    //var jsonTutors = getJsonFromUrl('course!getTutorsInfo.action?course.id=' + courseId);
-    //var jsonDisciplines = getJsonFromUrl('course!getDisciplinesInfo.action?course.id=' + courseId);
-    //var jsonRequisites = getJsonFromUrl('course!getRequisitesInfo.action?course.id=' + courseId);
             
     var professors = '';
     var tutors = '';
@@ -84,10 +75,6 @@ function showCourse(courseId) {
             for (i = 0; i < json.course.disciplines.length; i++) {
                 disciplines += '<li><input type="checkbox" id="discipline.id_' + i + '" value="' + json.course.disciplines[i].id + '" />' + json.course.disciplines[i].name + '</li>';
               
-                //if (i != jsonDisciplines.list.discipline.length - 1)
-                //    disciplines += ',&nbsp;';
-                //else
-                //    disciplines += '.';
             }
         }
         disciplines += '</ul>';
@@ -104,10 +91,6 @@ function showCourse(courseId) {
         else {
             for (i = 0; i < json.course.requisites.length; i++) {
                 requeriments += '<li>' + json.course.requisites[i].name + '</li>';
-                //if (i != jsonRequisites.list.course.length - 1)
-                //    requeriments += ',&nbsp;';
-                //else
-                //    requeriments += '.';
             }
         }
         requeriments += '</ul>';
@@ -118,7 +101,6 @@ function showCourse(courseId) {
     $('course.description').innerHTML = json.course.description;
     $('course.student.count').innerHTML = studentsCount;
     $('course.grade.count').innerHTML = gradesCount;
-    //$('course.graduated.count').innerHTML = graduatedStudentCount;
     $('course.professors').innerHTML = professors;
     $('course.tutors').innerHTML = tutors;
     $('course.requirements').innerHTML = requeriments;
@@ -132,6 +114,7 @@ function showEntryCourse() {
     $('showEntryCourse').style.display = 'block';
     $('input.course.challengeItens.yes').checked="checked";
 	$('input.course.uploadPackage.yes').checked="checked";
+	$('input.course.customToc.yes').checked="checked";    
     $('input.course.id').value = '';
     $('input.course.name').value = '';
     $('input.course.repository').value = '';
@@ -140,6 +123,7 @@ function showEntryCourse() {
     $('input.course.contents').value = '';
     $('input.course.uploadPackage').value = '';
     $('input.course.challengeItens').value = '';
+    $('input.course.customToc').value = '';
     $('input.course.name').focus();
 }
 
@@ -163,6 +147,7 @@ function showEditCourse(courseId) {
     
     var uploadPackageEnabled = jsonCourse.course.uploadPackageEnabled;
     var challengeItensEnabled  = jsonCourse.course.challengeItensEnabled;
+    var customToc  = jsonCourse.course.customToc;
 
     if(jsonCourse.course.challengeItensEnabled)
     	$('input.course.challengeItens.yes').checked="checked";
@@ -173,6 +158,11 @@ function showEditCourse(courseId) {
     	$('input.course.uploadPackage.yes').checked="checked";    
     else
     	$('input.course.uploadPackage.no').checked="checked";
+    
+    if (jsonCourse.course.customToc)
+    	$('input.course.customToc.yes').checked="checked";    
+    else
+    	$('input.course.customToc.no').checked="checked";
  
     	
     $('input.course.name').focus();
@@ -209,6 +199,7 @@ function submitCourse(courseId) {
     
     var challengeItensEnabled = false;
     var uploadPackageEnabled = false;
+    var customToc = false;
     
     if ($('input.course.challengeItens.yes').checked) {
     	challengeItensEnabled = true;
@@ -218,6 +209,11 @@ function submitCourse(courseId) {
     if ($('input.course.uploadPackage.yes').checked) {
     	uploadPackageEnabled = true;
     }
+    
+    if ($('input.course.customToc.yes').checked) {
+    	customToc = true;
+    }
+    
     
     if (courseId != null && courseId.length > 0) {
         url += 'course!updateCourse.action?';
@@ -229,6 +225,7 @@ function submitCourse(courseId) {
         url += '&course.contents=' + $('input.course.contents').value;
         url += '&course.challengeItensEnabled=' + challengeItensEnabled;
         url += '&course.uploadPackageEnabled=' + uploadPackageEnabled;
+        url += '&course.customToc=' + customToc;
 
     }
     else {
@@ -239,6 +236,7 @@ function submitCourse(courseId) {
         url += '&course.contents=' + $('input.course.contents').value;
         url += '&course.challengeItensEnabled=' + challengeItensEnabled;
         url += '&course.uploadPackageEnabled=' + uploadPackageEnabled;
+        url += '&course.customToc=' + customToc;
     }
             
     var jsonCourse = getJsonFromUrl(url);

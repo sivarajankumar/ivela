@@ -22,11 +22,14 @@
 */
 package br.ufc.ivela.web.action;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import br.ufc.ivela.commons.dao.Page;
+import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.SystemUser;
@@ -162,6 +165,23 @@ public class CourseAction extends CourseAwareAction {
         
         return "showChatStd";
     }
+    
+    public String getCustomTocJson() {
+        course = courseRemote.get(course.getId());
+        Boolean customToc = course.getCustomToc();
+        //String customTocRedirect = course.getCustomTocRedirect();
+        String customTocPage = "none";
+        StringBuilder json = new StringBuilder();
+        json.append("{");
+            json.append("\"customToc\":{");
+                json.append("\"redirect\":\"" + customToc + "\"");
+            json.append("}");
+        json.append("}");
+        setInputStream(new ByteArrayInputStream(json.toString().getBytes()));
+        return "json";
+    }
+    
+    
 
     public String getChatRoomName() {
         return chatRoomName;

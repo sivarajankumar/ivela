@@ -5,7 +5,7 @@ var idUnitContent = getUrlParameter("unitContent.id");;
 var idGrade = getUrlParameter("grade.id");;
 
 function goToPage(goToPage) {
-    window.location = 'contentInfo!showContent.action?course.id='+idCourse+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitContent.id='+idUnitContent+'&goToPage='+goToPage;
+    window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitContent.id='+idUnitContent+'&goToPage='+goToPage;
 }
 
 function getSystemUser() {

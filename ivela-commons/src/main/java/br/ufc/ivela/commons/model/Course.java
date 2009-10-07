@@ -13,11 +13,12 @@
 # See the GNU General Public License for more details.                                      #  
 #                                                                                           #
 #############################################################################################
-# File: Course.jsp                                                                          #
+# File: Course.java                                                                         #
 # Document: Course Model                                                                    # 
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 07-JAN-2009 - Leonardo Oliveira (UFC)           - XXXXXX - Initial Version                #
 # 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
+# 06-OCT-2009 - Fabio Fantato (Instituto Eldorado)- 000017 - Table of Contents              # 
 #############################################################################################
 */
 
@@ -79,6 +80,8 @@ public class Course implements Serializable {
     private boolean uploadPackageEnabled;
     @Column(name = "challenge_itens_enabled")
     private boolean challengeItensEnabled;
+    @Column(name = "custom_toc")
+    private boolean customToc;
 
     public Course() {
     }
@@ -203,6 +206,15 @@ public class Course implements Serializable {
     public void setChallengeItensEnabled(boolean challengeItensEnabled) {
         this.challengeItensEnabled = challengeItensEnabled;
     }
+
+    public boolean getCustomToc() {
+        return customToc;
+    }
+
+    public void setCustomToc(boolean customToc) {
+        this.customToc = customToc;
+    }
+
     
     @Override
     public int hashCode() {
