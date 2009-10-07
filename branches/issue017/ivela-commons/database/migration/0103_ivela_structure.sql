@@ -61,3 +61,5 @@ ALTER TABLE grade_unit_content ALTER COLUMN id SET DEFAULT nextval('sq_grade_uni
 ALTER TABLE ONLY grade_unit_content ADD CONSTRAINT pk_grade_unit_content PRIMARY KEY (id);
 ALTER TABLE ONLY grade_unit_content ADD CONSTRAINT grade_user_grade_unit_content_fk FOREIGN KEY (grade) REFERENCES grade(id);
 ALTER TABLE ONLY grade_unit_content ADD CONSTRAINT unit_content_user_grade_unit_content_fk FOREIGN KEY (unit_content) REFERENCES unit_content(id);
+
+ALTER TABLE course ADD COLUMN custom_toc boolean DEFAULT false;

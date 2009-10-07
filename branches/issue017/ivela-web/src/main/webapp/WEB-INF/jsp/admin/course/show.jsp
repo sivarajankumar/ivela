@@ -241,6 +241,11 @@
                 <label class="label-boxfield"><input type="radio" name="input.course.challengeItens" id="input.course.challengeItens.yes" value="true"> &nbsp;<s:text name="course.input.yes" /></label>
                 <label class="label-boxfield"><input type="radio" name="input.course.challengeItens" id="input.course.challengeItens.no" value="false" checked="checked"> &nbsp;<s:text name="course.input.no" /></label> <span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.06" />')"></span><br/>
 
+                <label><s:text name="course.input.customToc" /></label>
+                <label class="label-boxfield"><input type="radio" name="input.course.customToc" id="input.course.customToc.yes" value="true"> &nbsp;<s:text name="course.input.yes" /></label>
+                <label class="label-boxfield"><input type="radio" name="input.course.customToc" id="input.course.customToc.no" value="false" checked="checked"> &nbsp;<s:text name="course.input.no" /></label> <span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.07" />')"></span><br/>
+
+
   				<label>&nbsp;</label>
                 <input type="button" name="input.course.submit" id="input.course.submit" value="<s:text name="systemUser.input.btnSave" />" onclick="submitCourse($('input.course.id').value)" />
             </div>

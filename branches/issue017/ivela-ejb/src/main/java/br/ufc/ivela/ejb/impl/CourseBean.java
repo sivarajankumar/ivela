@@ -18,6 +18,7 @@
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 07-JAN-2009 - Maristella Myrian (UFC)           - XXXXXX - Initial Version                #
 # 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
+# 06-OCT-2009 - Fabio Fantato (Instituto Eldorado)- 000017 - Table of Contents              #
 #############################################################################################
 */
 package br.ufc.ivela.ejb.impl;
@@ -140,13 +141,6 @@ public class CourseBean implements CourseRemote {
     }
 
     public String getJsonStructure() {
-        //var json = {"id":"1",  "name":"Computacao",  "children":[
-        //	{"id":"2", "name":"Teste", "children":[
-        //          {"id":"3", "name":"xxx", "children":[]}
-        //      ]},
-        //	{"id":"4", "name":"Giggity", "children":[]} ]
-        // };
-
         List<Course> list = getStructure();
         StringBuffer jsonBuffer = new StringBuffer();
         String json = null;
@@ -209,13 +203,7 @@ public class CourseBean implements CourseRemote {
     }
 
     public String getCourseJsonStructure(Long courseId) {
-        //var json = {"id":"1",  "name":"Computacao",  "children":[
-        //	{"id":"2", "name":"Teste", "children":[
-        //          {"id":"3", "name":"xxx", "children":[]}
-        //      ]},
-        //	{"id":"4", "name":"Giggity", "children":[]} ]
-        // };
-
+       
         Course course = getCourseStructure(courseId);
         StringBuffer jsonBuffer = new StringBuffer();
         String json = null;

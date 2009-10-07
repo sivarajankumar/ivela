@@ -91,6 +91,7 @@
             <result name="list">WEB-INF/jsp/{1}/list.jsp</result>
             <result name="edit">WEB-INF/jsp/{1}/edit.jsp</result>
             <result name="show">WEB-INF/jsp/{1}/show.jsp</result>
+            <result name="toc">WEB-INF/jsp/{1}/toc.jsp</result>
             <result name="change">WEB-INF/jsp/{1}/change.jsp</result>
             <result name="auditive">WEB-INF/jsp/{1}/auditive.jsp</result>
             <result name="printVersion">WEB-INF/jsp/history/printVersion.jsp</result>

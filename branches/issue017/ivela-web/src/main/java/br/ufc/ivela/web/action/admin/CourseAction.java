@@ -204,12 +204,6 @@ public class CourseAction extends CourseAwareAction {
 
     public String updateImage() {
         java.io.File fileIo = upload;
-        //logger.log("oldPhoto: ->" + oldPhoto + "<-");
-        //logger.log("upload: ->" + upload + "<-");
-
-        //if (upload == null || upload.equals(" ")) {
-            //course.setImage(oldFromSession);
-        //} else {
             course = courseRemote.get(course.getId());
 
             if(!new File(Constants.FILE_UPLOAD_PARTNERS+course.getId()).exists()){
@@ -217,12 +211,9 @@ public class CourseAction extends CourseAwareAction {
             }
             course.setImage(Constants.FILE_UPLOAD_PARTNERS + course.getId() + "/" + uploadFileName);
             boolean result = courseRemote.update(course);
-            logger.log("file" + course.getImage());
+            log.info("file" + course.getImage());
             if (fileIo != null && uploadFileName != null && uploadFileName.trim().length() > 0)
                 courseRemote.savePhoto(course, fileIo);
-        //}
-
-        //setSucess(profileRemote.edit(profile));
         return "courses";
     }    
 
@@ -572,6 +563,7 @@ public class CourseAction extends CourseAwareAction {
         String graduatedStudentCount = String.valueOf(courseRemote.getGraduatedStudentsCount(course.getId()));
         Boolean uploadPackageEnabled = course.getUploadPackageEnabled();
         Boolean challengeItensEnabled = course.getChallengeItensEnabled();
+        Boolean customToc = course.getCustomToc();
         StringBuilder json = new StringBuilder();
         json.append("{");
             json.append("\"course\":{");
@@ -582,6 +574,7 @@ public class CourseAction extends CourseAwareAction {
                 json.append("\"image\":\"" + course.getImage() + "\",");
                 json.append("\"uploadPackageEnabled\":\"" + uploadPackageEnabled + "\",");
                 json.append("\"challengeItensEnabled\":\"" + challengeItensEnabled + "\",");
+                json.append("\"customToc\":\"" + customToc + "\",");
                 json.append("\"studentsCount\":\"" + studentsCount + "\",");
                 json.append("\"gradesCount\":\"" + gradesCount + "\",");
                 json.append("\"graduatedStudentCount\":\"" + graduatedStudentCount + "\",");

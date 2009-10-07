@@ -78,46 +78,88 @@ function loadAccordions() {
 }
 
 
-function showDisciplines(params) {
-    new Ajax.Request('discipline!listByCourse.action?' + params,
+function getJson(url){
+    var json = '';
+    new Ajax.Request(url,
     {
         method:'get',
-        requestHeaders: {Accept: 'application/json'}, 
+        requestHeaders: {Accept: 'application/json'},
+        asynchronous: false,
         onSuccess: function(transport) {
-            var json = transport.responseText.evalJSON(true);
-            var disciplines = json.disciplines.discipline;
-            var msg = it_nodisciplines;
-
-            if (disciplines == undefined) {
-                var html = '';
-                html += '<h4 class="accordion_toggle2">' + msg + '</h4>';
-                $('vertical_container2').innerHTML = html;
-                var rightAccordion = new accordion('vertical_container2',{
-                    classNames : {
-                        toggle : 'accordion_toggle2',
-                        toggleActive : 'accordion_toggle_active2',
-                        content : 'accordion_content2' }
-                    , direction : 'vertical'});
-
-                rightAccordion.activate($$('#vertical_container2 .accordion_toggle2')[0]);
-            }
-            else
-                printDisciplines(disciplines);
-
+            json = transport.responseText.evalJSON(true);
         },
-        onFailure: function() { alert('Message: Something went wrong...') },
-        onException:function(request, exception) {         
-            // Temporary Solution that checks for a bad formed and see if
-            // it is the login page, so redirects.                 
-            var message = exception.message;
-            if(message.match(/Badly formed JSON string/)!= null) {
-                if (message.match(/login-container/) != null) {
-                    document.location = "./home.action";                    
-                }
-            }
-       }
-        
-    });        
+        onFailure: function() { alert('Message: json access error...') }
+    });
+    return json;
+}
+
+
+function fullScreen(theURL) {
+	
+		strWidth = screen.availWidth - 10;
+		strHeight = screen.availHeight - 10;
+	
+
+	
+	if (window.showModalDialog) {
+		window.showModalDialog(theURL, window, "dialogHeight:"+strHeight+"px;dialogWidth:"+strWidth+"px;center=yes");	
+	} else {
+		window.open(theURL, '', 'toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,fullscreen=yes');
+		
+	}
+	return false;
+}
+
+
+function showDisciplines(params) {
+	var jsonCourse = getJson('course!getCustomTocJson.action?'+params);
+	var customToc = jsonCourse.customToc.redirect;
+    var msg = it_gotocourse;
+    if(customToc=='true') {
+        var html = '';     
+        html += "<h4 class='accordion_toggle2'><a href='#' onclick='javascript:fullScreen(\"discipline!showToc.action?" + params + "\");'>"+msg+"</a></h4>";
+        $('vertical_container2').innerHTML = html;
+    } else {
+	    new Ajax.Request('discipline!listByCourse.action?' + params,
+	    {
+	        method:'get',
+	        requestHeaders: {Accept: 'application/json'}, 
+	        onSuccess: function(transport) {
+	            var json = transport.responseText.evalJSON(true);
+	            var disciplines = json.disciplines.discipline;
+	            var msg = it_nodisciplines;
+	
+	            if (disciplines == undefined) {
+	                var html = '';
+	                html += '<h4 class="accordion_toggle2">' + msg + '</h4>';
+	                $('vertical_container2').innerHTML = html;
+	                var rightAccordion = new accordion('vertical_container2',{
+	                    classNames : {
+	                        toggle : 'accordion_toggle2',
+	                        toggleActive : 'accordion_toggle_active2',
+	                        content : 'accordion_content2' }
+	                    , direction : 'vertical'});
+	
+	                rightAccordion.activate($$('#vertical_container2 .accordion_toggle2')[0]);
+	            }
+	            else
+	                printDisciplines(disciplines);
+	
+	        },
+	        onFailure: function() { alert('Message: Something went wrong...') },
+	        onException:function(request, exception) {         
+	            // Temporary Solution that checks for a bad formed and see if
+	            // it is the login page, so redirects.                 
+	            var message = exception.message;
+	            if(message.match(/Badly formed JSON string/)!= null) {
+	                if (message.match(/login-container/) != null) {
+	                    document.location = "./home.action";                    
+	                }
+	            }
+	       }
+	        
+	    });
+    } 
 }
 
 function printDisciplines(disciplines) {
@@ -180,7 +222,7 @@ function printUnits(disciplineId, units) {
         var id = unit.id;
         var name = unit.name;                    
 
-        html += '<li><a href="discipline!showContent.action?course.id='+courseId+ '&discipline.id=' + disciplineId + '&unit.id=' + id + '">' + name + '</a></li>';
+        html += "<li><a href='#' onclick='javascript:fullScreen(\"discipline!showContent.action?course.id="+courseId+ "&discipline.id=" + disciplineId + "&unit.id=" + id + "\");'>" + name + "</a></li>";
     }
     return html;
 }
