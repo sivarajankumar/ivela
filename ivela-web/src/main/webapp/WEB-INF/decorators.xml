@@ -50,9 +50,8 @@
         <pattern>/admin/*</pattern>
     </decorator>
     <decorator name="course_custom" page="course_custom.jsp">
-        <pattern>/discipline!showContentCustom.action*</pattern>
-        <pattern>/discipline!showToc.action*</pattern>
         <pattern>/contentInfo!showContentCustom.action*</pattern>
+        <pattern>/contentInfo!showTocCustom.action*</pattern>
     </decorator>
     <decorator name="course" page="course.jsp">
         <pattern>/discipline!showContent.action*</pattern>
