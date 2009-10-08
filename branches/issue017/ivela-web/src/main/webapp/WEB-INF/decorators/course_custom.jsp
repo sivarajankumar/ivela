@@ -43,8 +43,8 @@
             </script>            
         <![endif]-->        
         <script type="text/javascript" src="js/prototype/prototype.js"></script>
-        <script type="text/javascript" src="js/contentInfo/contentInfo.js"></script>
         <decorator:head />
+        <script type="text/javascript" src="js/contentInfo/contentInfo.js"></script>
     </head>
     <%
 
