@@ -158,56 +158,6 @@ public class DisciplineAction extends GenericAction {
         return "show";
     }
     
-    /**
-     * Show the units of the disciplines
-     * @return units
-     */
-    public String showContentCustom() {
-        
-        discipline = disciplineRemote.get(discipline.getId());
-        discipline.setCourse(courseRemote.get(discipline.getCourseId()));
-        unit = unitRemote.get(unit.getId());
-        if (discipline != null) {
-            disciplineUnitList = unitRemote.getByDisciplineOpen(discipline.getId());
-        }
-        if (disciplineUnitList == null) {
-            disciplineUnitList = new ArrayList<Unit>();
-        }
-        this.unitContentList = new ArrayList<List>();
-        for (Unit unit : disciplineUnitList) {
-            List<UnitContent> temp = unitContentRemote.getByUnitOrdered(unit.getId());
-            unit.setUnitContents(temp);
-        }
-        return "custom";
-    }
-    
-    /**
-     * Show the units of the disciplines
-     * @return units
-     */
-    public String showToc() {        
-        //course = courseRemote.get(course.getId());           
-    	//String page = course.getCustomTocPage();
-    	String page = "none";
-    	
-    	 discipline = disciplineRemote.get(Long.valueOf(1));
-         discipline.setCourse(courseRemote.get(Long.valueOf(1)));
-         unit = unitRemote.get(Long.valueOf(1));
-         if (discipline != null) {
-             disciplineUnitList = unitRemote.getByDisciplineOpen(Long.valueOf(1));
-         }
-         if (disciplineUnitList == null) {
-             disciplineUnitList = new ArrayList<Unit>();
-         }
-         this.unitContentList = new ArrayList<List>();
-         for (Unit unit : disciplineUnitList) {
-             List<UnitContent> temp = unitContentRemote.getByUnitOrdered(Long.valueOf(1));
-             unit.setUnitContents(temp);
-         }
-        return "toc";
-    }
-    
-    
     public String showLastContent() {
         
         SystemUser atual = systemUserRemote.get(getAuthenticatedUser().getId());

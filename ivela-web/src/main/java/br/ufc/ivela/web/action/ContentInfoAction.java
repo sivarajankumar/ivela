@@ -72,6 +72,24 @@ public class ContentInfoAction extends CourseAwareAction {
         return "json";
     }
 
+    public String showTocCustom() {
+        StringBuffer html = new StringBuffer();
+        String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + goToPage;
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(filename));
+            String str;
+            while ((str = in.readLine()) != null) {
+                html.append(str);
+            }
+            in.close();
+        } catch (IOException ioe) {
+            // do something
+        }
+        setPageHtml(html.toString());
+        return "show";
+    }
+    
+    
     public String showContentCustom() {
         StringBuffer html = new StringBuffer();
         String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + discipline.getId() + "/" + unit.getId() + "/" + unitContent.getId() + "/" + goToPage;
