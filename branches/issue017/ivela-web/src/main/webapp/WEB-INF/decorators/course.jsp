@@ -47,6 +47,7 @@
         <script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>
         <script type="text/javascript" src="js/scriptaculous/effects.js"></script>
         <script type="text/javascript" src="js/scriptaculous/lightwindow.js"></script>
+        <script type="text/javascript" src="js/contentInfo/contentInfo.js"></script>
 
         <decorator:head />
     </head>

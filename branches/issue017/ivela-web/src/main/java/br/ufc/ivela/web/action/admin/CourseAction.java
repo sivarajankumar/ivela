@@ -561,8 +561,7 @@ public class CourseAction extends CourseAwareAction {
         String studentsCount = String.valueOf(courseRemote.getStudentsCount(course.getId()));
         String gradesCount = String.valueOf(courseRemote.getGradesCount(course.getId()));
         String graduatedStudentCount = String.valueOf(courseRemote.getGraduatedStudentsCount(course.getId()));
-        Boolean uploadPackageEnabled = course.getUploadPackageEnabled();
-        Boolean challengeItensEnabled = course.getChallengeItensEnabled();
+        Boolean uploadPackageEnabled = course.getUploadPackageEnabled();                        
         Boolean customToc = course.getCustomToc();
         StringBuilder json = new StringBuilder();
         json.append("{");
@@ -572,8 +571,8 @@ public class CourseAction extends CourseAwareAction {
                 json.append("\"description\":\"" + course.getDescription() + "\",");
                 json.append("\"targetAudience\":\"" + course.getTargetAudience() + "\",");
                 json.append("\"image\":\"" + course.getImage() + "\",");
-                json.append("\"uploadPackageEnabled\":\"" + uploadPackageEnabled + "\",");
-                json.append("\"challengeItensEnabled\":\"" + challengeItensEnabled + "\",");
+                json.append("\"uploadPackageEnabled\":\"" + uploadPackageEnabled + "\",");                
+                json.append("\"uploadPackageEnabled\":\"" + uploadPackageEnabled + "\",");                
                 json.append("\"customToc\":\"" + customToc + "\",");
                 json.append("\"studentsCount\":\"" + studentsCount + "\",");
                 json.append("\"gradesCount\":\"" + gradesCount + "\",");

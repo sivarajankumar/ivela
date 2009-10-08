@@ -350,48 +350,15 @@ public class CourseBean implements CourseRemote {
                 "Discipline d where uc.unitId = u.id and u.disciplineId = d.id " +
                 "and d.courseId = ?", new Object[]{courseId});
         
-        List allExercises = daoCourse.find("" +
-                "select e " +
-                "from Exercise e, UnitContent uc, Unit u, Discipline d " +
-                "where e.unitContentId = uc.id " +
-                "and uc.unitId = u.id " +
-                "and u.disciplineId = d.id " +
-                "and d.courseId = ?", new Object[]{courseId});
-
-        List allExams = daoCourse.find("" +
-                "select e " +
-                "from Exam e, UnitContent uc, Unit u, Discipline d " +
-                "where e.unitContentId = uc.id " +
-                "and uc.unitId = u.id " +
-                "and u.disciplineId = d.id " +
-                "and d.courseId = ?", new Object[]{courseId});
-
-        
         List finishedUnitContents = daoCourse.find("select f.unitContent from FinishedUnitContent f " +
                 "where f.course = ? and f.systemUser = ?", new Object[]{courseId, systemUserId});
 
-        List finishedExercises = daoCourse.find("select f.exercise from FinishedExercise f, UnitContent uc, Unit u, Discipline d " +
-                "where f.unitContent = uc.id " +
-                "and uc.unitId = u.id " +
-                "and u.disciplineId = d.id " +
-                "and d.courseId = ? and f.systemUser = ?", new Object[]{courseId, systemUserId});
-
-        List finishedExams = daoCourse.find("select f.exam from FinishedExam f, UnitContent uc, Unit u, Discipline d " +
-                "where f.unitContent = uc.id " +
-                "and uc.unitId = u.id " +
-                "and u.disciplineId = d.id " +
-                "and d.courseId = ? and f.systemUser = ?", new Object[]{courseId, systemUserId});
-
         int cUnitContents = (allUnitContents != null) ? allUnitContents.size() : 0;
-        int cExercises = (allExercises != null) ? allExercises.size() : 0;
-        int cExams = (allExams != null) ? allExams.size() : 0;
-        
+       
         int cFinishedUnitContents = (finishedUnitContents != null) ? finishedUnitContents.size() : 0;
-        int cFinishedExercises = (finishedExercises != null) ? finishedExercises.size() : 0;
-        int cFinishedExams = (finishedExams != null) ? finishedExams.size() : 0;
 
-        int all =  cUnitContents + cExercises + cExams;
-        int done = cFinishedUnitContents + cFinishedExercises + cFinishedExams;
+        int all =  cUnitContents;
+        int done = cFinishedUnitContents;
         
         double rate = (double) ((double) done / (double) all) * 100;
         

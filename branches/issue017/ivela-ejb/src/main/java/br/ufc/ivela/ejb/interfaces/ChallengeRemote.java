@@ -17,8 +17,10 @@ public interface ChallengeRemote {
 
     public Long add(Challenge challenge);
 
-    public Long add(String challid, long uid, double challvalue);
+    public Long add(String challid, long uid, double challvalue, long challengeItemId);
     
     public Challenge get(String challid, long uid);
+    
+    public Challenge get(Long uid, Long challengeItemId);
     
 }

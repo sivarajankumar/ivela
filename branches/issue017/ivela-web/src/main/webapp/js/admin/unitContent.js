@@ -9,54 +9,14 @@ function showUnitContent(unitContentId) {
     
     jsonUnitContentId = unitContentId.split("_",1)[0];
     var jsonUnitContent = getJsonFromUrl('unit!getUnitContentInfo.action?unitContent.id=' + jsonUnitContentId);
-    var jsonExercises = getJsonFromUrl('unitContent!getExercisesInfo.action?unitContent.id=' + jsonUnitContentId);
-    var jsonExams = getJsonFromUrl('unitContent!getExamsInfo.action?unitContent.id=' + jsonUnitContentId);
     
     var id = jsonUnitContent.unitContent.id;
     var title = jsonUnitContent.unitContent.title;
     var description = jsonUnitContent.unitContent.description;
     var type = jsonUnitContent.unitContent.type;
-    
-    var exercises = '';
-
-    if (jsonExercises.list != '') {
-        exercises += '<h3>Exercises</h3>';
-        exercises += '<ul>';
-        if (jsonExercises.list.exercises.length == null) {
-            var temp = jsonExercises.list.exercises.title;
-            exercises += '<li><input type="checkbox" id="exercises.id_' + 0 + '" value="' +jsonExercises.list.exercises.id + '" />' + temp + '</li>';
-        }
-        else {
-            for (i = 0; i < jsonExercises.list.exercises.length; i++) {
-                exercises += '<li><input type="checkbox" id="exercises.id_' + i + '" value="' + jsonExercises.list.exercises[i].id + '" />' + jsonExercises.list.exercises[i].title + '</li>';
-            }
-        }
-        exercises += '</ul>';
-    }
-    
-    var exams = '';
-
-    if (jsonExams.list != '') {
-        exams += '<h3>Exams</h3>';
-        exams += '<ul>';
-        if (jsonExams.list.exams.length == null) {
-            var temp = jsonExams.list.exams.title;
-            exams += '<li><input type="checkbox" id="exams.id_' + 0 + '" value="' +jsonExams.list.exams.id + '" />' + temp + '</li>';
-        }
-        else {
-            for (i = 0; i < jsonExams.list.exams.length; i++) {
-                exams += '<li><input type="checkbox" id="exams.id_' + i + '" value="' + jsonExams.list.exams[i].id + '" />' + jsonExams.list.exams[i].title + '</li>';
-            }
-        }
-        exams += '</ul>';
-    }
-    
-    
-    
+ 
     $('unitContent.id').value = id;
     $('unitContent.title').innerText = title;
-    $('unitContent.exercises').innerHTML = exercises;
-    $('unitContent.exams').innerHTML = exams;
     //$('unitContent.html').innerHTML = description;    
     //var oEditor = FCKeditorAPI.GetInstance('FCKeditor1');
     //oEditor.SetHTML(description);
@@ -323,7 +283,7 @@ function showUploadUnitContent(unitId) {
     $('showUploadUnitContent').style.display = 'block';
     $('upload.unit.id').value = unitId;
     
-    	jsonUnitId = unitId.split("_",1)[0];
+        jsonUnitId = unitId.split("_",1)[0];
         var jsonUnitContentOrders = getJsonFromUrl('unitContent!getUnitContentOrdersJson.action?unit.id=' + jsonUnitId);
         $('upload.unitContent.order_n').length = 0;
         var item = 1;

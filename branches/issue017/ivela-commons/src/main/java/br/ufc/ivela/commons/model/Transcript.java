@@ -1,8 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
+ /*##################################################################################################
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                             #
+# This file is part of ivela project, an open-source                                               #
+# Program URL   : http://code.google.com/p/ivela/                                                  #
+#                                                                                                  #
+# This program is free software; you can redistribute it and/or modify it under the terms          #
+# of the GNU General Public License as published by the Free Software Foundation; either           #
+# version 3 of the License, or (at your option) any later version.                                 #
+#                                                                                                  #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;        #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.        #
+# See the GNU General Public License for more details.                                             #
+#                                                                                                  #
+####################################################################################################
+# File: Transcript.java                                                                            #
+# Document: Transcript Model                                                                       #
+# Date        - Author(Company)                   - Issue# - Summary                               #
+# XX-XXX-XXXX - Rodrigo                           - XXXXXX - Initial Version                       #
+# 07-OCT-2009 - Otofuji (Instituto Eldorado)      - 000017 - Review Course, Challenge refactory    #
+##################################################################################################*/
 package br.ufc.ivela.commons.model;
 
 import javax.persistence.SequenceGenerator;
@@ -11,7 +26,6 @@ import javax.persistence.GenerationType;
 
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,10 +35,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-/**
- *
- * @author rodrigo
- */
 @Entity
 @Table(name = "transcript")
 @NamedQueries({@NamedQuery(name = "Transcript.findById", query = "SELECT t FROM Transcript t WHERE t.id = :id"), @NamedQuery(name = "Transcript.findByStatus", query = "SELECT t FROM Transcript t WHERE t.status = :status"), @NamedQuery(name = "Transcript.findByScore", query = "SELECT t FROM Transcript t WHERE t.score = :score")})
@@ -43,6 +53,12 @@ public class Transcript implements Serializable {
     private Double averageExercise;
     @Column(name = "average_exam", nullable = true)
     private Double averageExam;
+    @Column(name = "average_challenge", nullable = true)
+    private Double averageChallenge;
+    @Column(name = "total_challenge", nullable = true)
+    private Double totalChallenge;
+    @Column(name = "challenges_done", nullable = true)
+    private int challengesDone;
     @Column(name = "manual_score", nullable = true)
     private Double manualScore;
     @JoinColumn(name = "grade", referencedColumnName = "id")
@@ -157,6 +173,52 @@ public class Transcript implements Serializable {
     @Override
     public String toString() {
         return "br.ufc.ivela.commons.model.Transcript[id=" + id + "]";
+    }
+
+    /**
+     * @param averageChallenge the averageChallenge to set
+     */
+    public void setAverageChallenge(Double averageChallenge) {
+        this.averageChallenge = averageChallenge;
+    }
+
+    /**
+     * Average up to now.
+     * 
+     * @return the averageChallenge
+     */
+    public Double getAverageChallenge() {
+        return averageChallenge;
+    }
+
+    /**
+     * @param totalChallenge the totalChallenge to set
+     */
+    public void setTotalChallenge(Double totalChallenge) {
+        this.totalChallenge = totalChallenge;
+    }
+
+    /**
+     * Counting all the challenges (including the ones that have not been done yet)
+     * 
+     * @return the totalChallenge
+     */
+    public Double getTotalChallenge() {
+        return totalChallenge;
+    }
+
+    /**
+     * @param challengesDone the challengesDone to set
+     */
+    public void setChallengesDone(int challengesDone) {
+        this.challengesDone = challengesDone;
+    }
+
+    /**
+     * @return the challengesDone
+     */
+    public int getChallengesDone() {
+        return challengesDone;
     }
 
 }

@@ -1,8 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
+/*##################################################################################################
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                             #
+# This file is part of ivela project, an open-source                                               #
+# Program URL   : http://code.google.com/p/ivela/                                                  #
+#                                                                                                  #
+# This program is free software; you can redistribute it and/or modify it under the terms          #
+# of the GNU General Public License as published by the Free Software Foundation; either           #
+# version 3 of the License, or (at your option) any later version.                                 #
+#                                                                                                  #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;        #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.        #
+# See the GNU General Public License for more details.                                             #
+#                                                                                                  #
+####################################################################################################
+# File: ChallengeItems.java                                                                        #
+# Document: Challenge Item Model                                                                   #
+# Date        - Author(Company)                   - Issue# - Summary                               #
+# XX-XXX-XXXX - Leonardo Moreira                  - XXXXXX - Initial Version                       #
+# 07-OCT-2009 - Otofuji (Instituto Eldorado)      - 000017 - Review Course, Challenge refactory    #
+##################################################################################################*/
 package br.ufc.ivela.commons.model;
 
 import javax.persistence.SequenceGenerator;
@@ -19,10 +34,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author leoomoreira
- */
+
 @Entity
 @Table(name = "challenge_items")
 public class ChallengeItems implements Serializable {
@@ -41,6 +53,8 @@ public class ChallengeItems implements Serializable {
     @Column(name = "timestamp")
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
+    @Column(name = "scorable", nullable = false)
+    private Boolean scorable;
     
     @JoinColumn(name = "course", referencedColumnName = "id")
     @ManyToOne
@@ -151,6 +165,24 @@ public class ChallengeItems implements Serializable {
     @Override
     public String toString() {
         return "br.ufc.ivela.commons.model.ChallengerItems[id=" + id + "]";
+    }
+
+    /**
+     * if a challenge counts for the total score in the grade or not;
+     * 
+     * @param scorable the scorable to set
+     */
+    public void setScorable(Boolean scorable) {
+        this.scorable = scorable;
+    }
+
+    /**
+     * if a challenge counts for the total score in the grade or not;
+     * 
+     * @return the scorable
+     */
+    public Boolean getScorable() {
+        return scorable;
     }
 
 }

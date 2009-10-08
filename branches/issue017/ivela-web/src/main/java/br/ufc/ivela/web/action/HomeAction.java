@@ -13,7 +13,6 @@ import br.ufc.ivela.commons.model.Note;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.model.Topic;
 import br.ufc.ivela.commons.model.UnitContent;
-import br.ufc.ivela.ejb.interfaces.ChallengeRemote;
 import br.ufc.ivela.ejb.interfaces.CourseRemote;
 import br.ufc.ivela.ejb.interfaces.EnrollmentRemote;
 import br.ufc.ivela.ejb.interfaces.MessageRemote;
@@ -67,17 +66,7 @@ public class HomeAction extends GenericAction {
     private UnitContentRemote unitContentRemote;
     private UnitContent lastUnitContent;
     private Enrollment enrollment;    
-    private ChallengeRemote challengeRemote;
 
-    public ChallengeRemote getChallengeRemote() {
-        return challengeRemote;
-    }
-
-    public void setChallengeRemote(ChallengeRemote challengeRemote) {
-        this.challengeRemote = challengeRemote;
-    }
-    
-    
     /**
      * Get a list of messages by the authenticated user, and the last topics, and the last notes
      * @return Sucess if the user could see all the messages

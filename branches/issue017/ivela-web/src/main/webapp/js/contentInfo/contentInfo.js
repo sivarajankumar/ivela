@@ -93,3 +93,89 @@ function nextPage(nextPage) {
 function getCurrentLocation() {
     currentLocation = getJson();
 }*/
+
+
+
+
+
+/*************************/
+/*** Challenges Section **/
+/*************************/
+
+var paintAnswerBackground;
+var wrongAnswerStyle;
+var rightAnswerStyle;
+
+/* Submit a Exercise for answer, expects a Form Element as parameter that will be serialized and sent. The input fields for your exercise */
+function submitExercise(form) {
+    
+    if (rightAnswerStyle == undefined || rightAnswerStyle == "") {
+    rightAnswerStyle = '<img class="challengeCheck" src="images/course/default/lesson_li_right.gif" alt="" />';
+    }
+    
+    if (wrongAnswerStyle == undefined || rightAnswerStyle == "") {
+    wrongAnswerStyle = '<img class="challengeCheck" src="images/course/default/lesson_li_wrong.gif" alt="" />';
+    }
+
+    var value = Form.serialize(form, false);
+    
+    var url = '/ivela-web/ChallengeSolver?gradeId='+idGrade+'&unitId='+idUnit+'&'+value;
+    var json = getJson(url);
+
+    if (json == undefined || json == "") return false;
+    
+    if (json.status == "err") {
+        //alert();
+        return false;
+    }
+    
+    if (json.status == "fin") {
+        //Maximum number of retries reached
+        return false;        
+    }
+    
+    var i = 0;    
+    for (i = 0; i < json.list.right.length; i++) {   
+    rightDiv = document.getElementById(json.list.right[i] + "_check");
+        if (rightDiv != undefined) {
+            rightDiv.innerHTML = rightAnswerStyle;
+        }
+    }
+
+    for (i = 0; i < json.list.wrong.length; i++) {   
+        errorDiv = document.getElementById(json.list.wrong[i] + "_check");
+        if (errorDiv != undefined) {
+            errorDiv.innerHTML = wrongAnswerStyle;
+        }
+    }
+    
+    var name = json.name;
+    var status = json.status;
+    var div = document.getElementById(name + "_status");
+    if (div != undefined) {
+      var divStyle = "fail";
+     
+      if(status == "ok") {divStyle = "ok";}        
+
+      var html = '<div id=\"status_content'+divStyle+'\">';
+      html += '<div id=\"status\">Score: '+json.results;                     
+      html += '</div>';
+      div.innerHTML = html;      
+    }
+
+    return false;
+}
+
+/* Use this to set what shoulda appear in the check div in case of right answers in the challenge */
+function setRightAnswerStyle(style) {
+    rightAnswerStyle = style;
+}
+
+/* Use this to set what shoulda appear in the check div in case of wrong answers in the challenge */
+function setWrongAnswerStyle(style) {
+    wrongAnswerStyle = style;
+}
+
+/*****************************/
+/*** end Challenges Section **/
+/*****************************/
