@@ -33,6 +33,14 @@ function isUnlocked() {
     document.write(getHtml('contentInfo!isUnlocked.action?grade.id='+idGrade+'&unitContent.id='+idUnitContent));
 }
 
+function isCompleted() {
+    document.write(getHtml('contentInfo!isCompleted.action?systemUser.id='+70+'&unitContent.id='+idUnitContent+'&grade.id='+idGrade));
+}
+
+function finishLesson() {
+    document.write(getHtml('contentInfo!finishLesson.action?course.id='+idCourse+'&systemUser.id='+70+'&unitContent.id='+idUnitContent+'&grade.id='+idGrade));
+}
+
 /*************************/
 /** Auxiliary Functions **/
 /*************************/

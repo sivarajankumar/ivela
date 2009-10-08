@@ -16,4 +16,6 @@ public interface GradeUnitContentRemote {
     public boolean remove(GradeUnitContent unitContent);
 
     public boolean isUnlocked(Long gradeId, Long unitContentId);
+
+    public boolean sendMail(Long gradeId, Long unitContentId);
 }

@@ -40,11 +40,23 @@ public class GradeUnitContentBean implements GradeUnitContentRemote {
             GradeUnitContent guc = (GradeUnitContent)results.get(0);
             Date actualDate = new Date();
             Date startDate = guc.getStartDatetime();
+            Date finishDate = guc.getFinishDatetime();
 
-            if (actualDate.before(startDate)) {
+            if (actualDate.before(startDate) && actualDate.after(finishDate)) {
                 isUnlocked = false;
             }
         }
         return isUnlocked;
+    }
+
+    public boolean sendMail(Long gradeId, Long unitContentId) {
+        boolean sendMail = false;
+        Object[] params = new Object[]{gradeId, unitContentId};
+        List<GradeUnitContent> results = daoGradeUnitCont.find("from GradeUnitContent WHERE gradeId = ? and unitContentId = ?", params);
+        if (results != null && results.size() > 0 && results.get(0) != null) {
+            GradeUnitContent guc = (GradeUnitContent)results.get(0);
+            sendMail = guc.getMailFlag().booleanValue();
+        }
+        return sendMail;
     }
 }
