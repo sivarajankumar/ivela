@@ -18,6 +18,7 @@
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 07-JAN-2009 - Leonardo Oliveira (UFC)           - XXXXXX - Initial Version                #
 # 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
+# 08-OCT-2009 - Fabio Fantato (Instituto Eldorado)- 000017 - Table of Contents              #
 #############################################################################################
 */
 package br.ufc.ivela.web.action;
@@ -34,12 +35,9 @@ import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
+import br.ufc.ivela.ejb.interfaces.EnrollmentRemote;
 import br.ufc.ivela.ejb.interfaces.GradeRemote;
 
-/**
- *
- * @author Maristella Myrian
- */
 public class CourseAction extends CourseAwareAction {
         
     private DisciplineRemote disciplineRemote;    
@@ -166,15 +164,23 @@ public class CourseAction extends CourseAwareAction {
         return "showChatStd";
     }
     
+    /**
+     * Gathering information to verify if there are a custom Toc for this course.
+     * @return json: redirect -> true/false , params -> course.id and grade.id
+     */
     public String getCustomTocJson() {
         course = courseRemote.get(course.getId());
+        Long user = this.getAuthenticatedUser().getId();
+        List<Grade> gradeList = gradeRemote.getGradesInProgressAndEnrolled(user, course.getId());
+        //Get only the first element of grade. There are no multiple grades in progress for a given course.
+        Long gradeEnrolled = ((!gradeList.isEmpty())?gradeList.get(0).getId():0);        
         Boolean customToc = course.getCustomToc();
-        //String customTocRedirect = course.getCustomTocRedirect();
-        String customTocPage = "none";
+        String customTocParams = "course.id="+course.getId()+"&grade.id="+gradeEnrolled+"&goToPage=index.html";
         StringBuilder json = new StringBuilder();
         json.append("{");
             json.append("\"customToc\":{");
-                json.append("\"redirect\":\"" + customToc + "\"");
+                json.append("\"redirect\":\"" + customToc + "\",");
+                json.append("\"params\":\"" + customTocParams + "\"");                
             json.append("}");
         json.append("}");
         setInputStream(new ByteArrayInputStream(json.toString().getBytes()));
