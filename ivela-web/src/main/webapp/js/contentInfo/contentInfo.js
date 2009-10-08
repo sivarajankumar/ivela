@@ -1,8 +1,8 @@
 var idCourse = getUrlParameter("course.id");
 var idDiscipline = getUrlParameter("discipline.id");
 var idUnit = getUrlParameter("unit.id");
-var idUnitContent = getUrlParameter("unitContent.id");;
-var idGrade = getUrlParameter("grade.id");;
+var idUnitContent = getUrlParameter("unitContent.id");
+var idGrade = getUrlParameter("grade.id");
 
 function goToPage(goToPage) {
     window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitContent.id='+idUnitContent+'&goToPage='+goToPage;
@@ -14,6 +14,15 @@ function getSystemUser() {
 
 function getProgress() {
     document.write(getHtml('contentInfo!getProgress.action?course.id='+idCourse));
+}
+
+function showGlobalImage(image) {
+     document.write('RenderServlet?file='+idCourse+'/'+image);
+//    document.write('<img src="RenderServlet?file=/'+idCourse+'/'+image+'">');
+}
+
+function includeGlobalCss(css) {
+    document.write('<link href="RenderServlet?file=/'+idCourse+'/'+css+'" rel="stylesheet" type="text/css" />');
 }
 
 function showImage(image) {
