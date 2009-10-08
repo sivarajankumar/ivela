@@ -3,20 +3,23 @@
  * and open the template in the editor.
  */
 
-package br.ufc.ivela.servlets.challenge;
+package br.ufc.ivela.commons.challenger.util;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
+import br.ufc.ivela.commons.challenger.dataobject.IvelaHeader;
+import br.ufc.ivela.commons.challenger.dataobject.IvelaObj;
+import br.ufc.ivela.commons.challenger.dataobject.IvelaPayload;
+
 /**
  *
  * @author jdamico
  */
 public class ScoreDataProcessor  extends DefaultHandler {
-
-    private BasicLogger log = new BasicLogger(true, this.getClass().getName());
+    
     private IvelaObj score = new IvelaObj();
     private IvelaHeader ivelaHeader = new IvelaHeader();
     private IvelaPayload ivelaPayload = new IvelaPayload();
@@ -39,7 +42,7 @@ public class ScoreDataProcessor  extends DefaultHandler {
         if (qualifiedName.equals(TAG_HEADER)) {
             activeTag = TAG_HEADER;
             buffer = new StringBuffer();
-            log.setOutput("attributes.getValue(\"doctype\"): " + attributes.getValue("doctype"));
+            //log.setOutput("attributes.getValue(\"doctype\"): " + attributes.getValue("doctype"));
             ivelaHeader.setDocType(attributes.getValue("doctype"));
             ivelaHeader.setDocSubType(attributes.getValue("docsubtype"));
             isTagActive = true;

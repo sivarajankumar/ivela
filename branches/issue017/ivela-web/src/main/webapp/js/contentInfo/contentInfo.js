@@ -140,7 +140,7 @@ function submitExercise(form) {
     var json = getJson(url);
 
     if (json == undefined || json == "") return false;
-    
+
     if (json.status == "err") {
         //alert();
         return false;
@@ -148,25 +148,29 @@ function submitExercise(form) {
     
     if (json.status == "fin") {
         //Maximum number of retries reached
-        return false;        
+        // return false;
     }
     
     var i = 0;    
+    var name = json.name;
+
     for (i = 0; i < json.list.right.length; i++) {   
-    rightDiv = document.getElementById(json.list.right[i] + "_check");
+    var rightDiv = document.getElementById(json.list.right[i] + "_check");
+    if (rightDiv == undefined) rightDiv = document.getElementById(name + "_" + json.list.right[i] + "_check");
         if (rightDiv != undefined) {
             rightDiv.innerHTML = rightAnswerStyle;
         }
     }
 
     for (i = 0; i < json.list.wrong.length; i++) {   
-        errorDiv = document.getElementById(json.list.wrong[i] + "_check");
+        var errorDiv = document.getElementById(json.list.wrong[i] + "_check");
+        if (errorDiv == undefined) errorDiv = document.getElementById(name + "_" + json.list.wrong[i] + "_check");
         if (errorDiv != undefined) {
             errorDiv.innerHTML = wrongAnswerStyle;
         }
     }
     
-    var name = json.name;
+
     var status = json.status;
     var div = document.getElementById(name + "_status");
     if (div != undefined) {
@@ -180,6 +184,47 @@ function submitExercise(form) {
       div.innerHTML = html;      
     }
 
+    var count_sta = json.count;
+    if (count_sta != undefined) {
+      var divC = document.getElementById(name + "_count_status");
+      if (divC != undefined) {
+        var html = '<div id=\"count_status_content\">';
+        html += '<div id=\"count_status\"> ';
+        html += count_sta;                     
+        html += '</div>';
+        div.innerHTML = html;      
+      }
+    }
+    return false;
+}
+
+/* Retrieves the Right Answers for the Exercise, this will mark the exercise as done */
+function getExerciseAnswers(form) {
+    var value = Form.serialize(form, false);    
+    var url = '/ivela-web/ChallengeSolver?answers=t&gradeId='+idGrade+'&unitId='+idUnit+'&'+value;
+    var json = getJson(url);
+    if (json == undefined || json == "") return false;
+
+    if (json.status == "err") {
+        //alert();
+        return false;
+    }
+         
+    for (i = 0; i < json.list.right.length; i++) {   
+        var text = form.getInputs('text', json.list.right[i] +'oi');    
+        if (text[0] != undefined) {     
+            text[0].value = json.list.answers[i];
+            continue;
+        } 
+        var button = form.getInputs('radio', json.list.right[i]);
+        if (button[0] != undefined) {
+           var radioValue = json.list.answers[i];        
+           for (j = 0; j < button.length; j++) {
+               if (button[j].value == radioValue) button[j].checked = 1
+           }                                
+        }
+    }
+    
     return false;
 }
 

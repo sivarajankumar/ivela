@@ -1,6 +1,9 @@
 package br.ufc.ivela.commons.challenger.dataobject;
 
+import java.util.List;
+
 import br.ufc.ivela.commons.challenger.dataobject.ContentPackage;
+import br.ufc.ivela.commons.challenger.util.Challenge;
 
 /**
  * Fundamental element of {@link IvelaObj}
@@ -16,6 +19,10 @@ public class IvelaPayload {
 	private ChallengeRef challengeRef = null;
 	private ChallengeDesc challengeDesc = null;
         
+
+    private Challenge challenge = null;
+    private List<Challenge> listChallenge = null;
+    
         private ContentPackage contentPackage = null;
 
         public ContentPackage getContentPackage() {
@@ -40,8 +47,24 @@ public class IvelaPayload {
 
 	public void setChallengeDesc(ChallengeDesc challengeDesc) {
 		this.challengeDesc = challengeDesc;
-	}
-	
+	}	
+
+   public List<Challenge> getListChallenge() {
+       return listChallenge;
+   }
+
+   public void setListChallenge(List<Challenge> listChallenge) {
+       this.listChallenge = listChallenge;
+   }
+
+   public Challenge getChallenge() {
+       return challenge;
+   }
+
+   public void setChallenge(Challenge challenge) {
+       this.challenge = challenge;
+   }
+
 	
 	
 }

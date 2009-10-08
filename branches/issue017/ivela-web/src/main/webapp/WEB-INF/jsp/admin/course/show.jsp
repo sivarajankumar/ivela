@@ -216,7 +216,7 @@
                 <label class="label-boxfield"><input type="radio" name="input.course.customToc" id="input.course.customToc.no" value="false" checked="checked"> &nbsp;<s:text name="course.input.no" /></label> <span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.07" />')"></span><br/>
 
                 <label><s:text name="course.input.retries" /></label>
-                <input type="text" name="input.course.challengeRetries" id="input.course.challengeRetries" value="" size="2" maxlength="2" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.01"/>')"> </span><br/><span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.08" />')"></span><br/>
+                <input type="text" name="input.course.challengeRetries" id="input.course.challengeRetries" value="" size="2" maxlength="2" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.08" />')"></span><br/>
 
   				<label>&nbsp;</label>
                 <input type="button" name="input.course.submit" id="input.course.submit" value="<s:text name="systemUser.input.btnSave" />" onclick="submitCourse($('input.course.id').value)" />
@@ -578,20 +578,27 @@
                 <h2><s:text name="show.challenge.add"/></h2>
                 <s:form id="formChallenge" action="">
                     <input type="hidden" id="challengeItens.id" name="challengeItens.id" />
-                    <input type="hidden" id="challengeItens.timestamp" name="challengeItens.timestamp" />
+                    <input type="hidden" id="challengeItens.timestamp" name="challengeItens.timestamp" />                    
                     <table>
                         <tr>
                             <td><s:text name="show.challenge.name"/></td>
                             <td><input type="text" id="challengeItens.name" name="challengeItens.name" /></td>
                         </tr>
                         <tr>
+                            <td><s:text name="show.challenge.weight"/></td>
+                            <td><input type="text" id="weight" name="weight" /> <span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.09" />')"></span></td>                            
+                        </tr>
+                        
+                        <tr>
                             <td><s:text name="show.challenge.xml"/></td>
                             <td><textarea id="challengeItens.xml" name="challengeItens.xml" label="show.challenge.xml" cols="50" rows="25"></textarea></td>
-                        </tr>    
+                        </tr>
+                             
                         <tr>
                             <td><s:text name="show.challenge.dependency"/></td>
                             <td><select id="challengeItens.dependency" ></select></td>
                         </tr>
+                         
                         <tr>
                             <td></td>
                             <td><input id="submitChall" type="button" value="Add" onclick="submitChallenge()"/>

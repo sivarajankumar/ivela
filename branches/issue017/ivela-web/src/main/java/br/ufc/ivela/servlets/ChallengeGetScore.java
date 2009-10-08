@@ -42,11 +42,11 @@ import org.springframework.security.context.SecurityContextHolder;
 
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.ejb.interfaces.ChallengeRemote;
-import br.ufc.ivela.servlets.challenge.Challenge;
-import br.ufc.ivela.servlets.challenge.Constants;
-import br.ufc.ivela.servlets.challenge.Converter2ObjectFactory;
-import br.ufc.ivela.servlets.challenge.IvelaObj;
-import br.ufc.ivela.servlets.challenge.XMLObject;
+import br.ufc.ivela.commons.challenger.util.Challenge;
+import br.ufc.ivela.commons.challenger.config.Constants;
+import br.ufc.ivela.commons.challenger.util.Converter2ObjectFactory;
+import br.ufc.ivela.commons.challenger.dataobject.IvelaObj;
+import br.ufc.ivela.commons.challenger.util.XMLObject;
 
 /**
  *

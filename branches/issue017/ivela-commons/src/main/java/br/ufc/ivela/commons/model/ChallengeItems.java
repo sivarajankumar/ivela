@@ -39,6 +39,10 @@ import javax.persistence.TemporalType;
 @Table(name = "challenge_items")
 public class ChallengeItems implements Serializable {
     private static final long serialVersionUID = 1L;
+    
+    /** Default weight for a challenge */
+    public static final int DEFAULT_WEIGHT = 10;
+    
     @Id
     @SequenceGenerator(name="seq", sequenceName="sq_challenge_items", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
@@ -53,8 +57,8 @@ public class ChallengeItems implements Serializable {
     @Column(name = "timestamp")
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
-    @Column(name = "scorable", nullable = false)
-    private Boolean scorable;
+    @Column(name = "weight", nullable = false)
+    private Integer weight = DEFAULT_WEIGHT;
     
     @JoinColumn(name = "course", referencedColumnName = "id")
     @ManyToOne
@@ -168,21 +172,21 @@ public class ChallengeItems implements Serializable {
     }
 
     /**
-     * if a challenge counts for the total score in the grade or not;
-     * 
-     * @param scorable the scorable to set
+     * Weight for a challenge, 0 or less means that the challenge will not be counted for the student score
+     *  
+     * @param weight the weight to set
      */
-    public void setScorable(Boolean scorable) {
-        this.scorable = scorable;
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
 
     /**
-     * if a challenge counts for the total score in the grade or not;
+     * Weight for a challenge, 0 or less means that the challenge will not be counted for the student score
      * 
-     * @return the scorable
+     * @return the weight
      */
-    public Boolean getScorable() {
-        return scorable;
+    public Integer getWeight() {
+        return weight;
     }
 
 }

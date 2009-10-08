@@ -54,11 +54,11 @@ public class Transcript implements Serializable {
     @Column(name = "average_exam", nullable = true)
     private Double averageExam;
     @Column(name = "average_challenge", nullable = true)
-    private Double averageChallenge;
-    @Column(name = "total_challenge", nullable = true)
-    private Double totalChallenge;
+    private Double averageChallenge;    
     @Column(name = "challenges_done", nullable = true)
     private int challengesDone;
+    @Column(name = "challenges_weight", nullable = true)
+    private int challengesWeight;
     @Column(name = "manual_score", nullable = true)
     private Double manualScore;
     @JoinColumn(name = "grade", referencedColumnName = "id")
@@ -192,22 +192,6 @@ public class Transcript implements Serializable {
     }
 
     /**
-     * @param totalChallenge the totalChallenge to set
-     */
-    public void setTotalChallenge(Double totalChallenge) {
-        this.totalChallenge = totalChallenge;
-    }
-
-    /**
-     * Counting all the challenges (including the ones that have not been done yet)
-     * 
-     * @return the totalChallenge
-     */
-    public Double getTotalChallenge() {
-        return totalChallenge;
-    }
-
-    /**
      * @param challengesDone the challengesDone to set
      */
     public void setChallengesDone(int challengesDone) {
@@ -219,6 +203,20 @@ public class Transcript implements Serializable {
      */
     public int getChallengesDone() {
         return challengesDone;
+    }
+
+    /**
+     * @param challengesWeight the challengesWeight to set
+     */
+    public void setChallengesWeight(int challengesWeight) {
+        this.challengesWeight = challengesWeight;
+    }
+
+    /**
+     * @return the challengesWeight
+     */
+    public int getChallengesWeight() {
+        return challengesWeight;
     }
 
 }

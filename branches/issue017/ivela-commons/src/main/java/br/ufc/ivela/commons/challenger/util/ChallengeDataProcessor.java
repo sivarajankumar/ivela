@@ -2,20 +2,23 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufc.ivela.servlets.challenge;
+package br.ufc.ivela.commons.challenger.util;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.Attributes;
 
+import br.ufc.ivela.commons.challenger.dataobject.IvelaHeader;
+import br.ufc.ivela.commons.challenger.dataobject.IvelaObj;
+import br.ufc.ivela.commons.challenger.dataobject.IvelaPayload;
+
 /**
  *
  * @author jdamico
  */
 public class ChallengeDataProcessor extends DefaultHandler {
-
-    private BasicLogger log = new BasicLogger(true, this.getClass().getName());
+    
     private IvelaObj challenge = new IvelaObj();
     private IvelaHeader ivelaHeader = new IvelaHeader();
     private IvelaPayload ivelaPayload = new IvelaPayload();
@@ -38,7 +41,7 @@ public class ChallengeDataProcessor extends DefaultHandler {
         if (qualifiedName.equals(TAG_HEADER)) {
             activeTag = TAG_HEADER;
             buffer = new StringBuffer();
-            log.setOutput("attributes.getValue(\"doctype\"): " + attributes.getValue("doctype"));
+            //log.setOutput("attributes.getValue(\"doctype\"): " + attributes.getValue("doctype"));
             ivelaHeader.setDocType(attributes.getValue("doctype"));
             ivelaHeader.setDocSubType(attributes.getValue("docsubtype"));
             isTagActive = true;
@@ -63,8 +66,8 @@ public class ChallengeDataProcessor extends DefaultHandler {
         } else if (qualifiedName.equals(TAG_FIELD)) {
             activeTag = TAG_FIELD;
             Field field = new Field();
-            log.setOutput("attributes.getValue(\"name\"): " + attributes.getValue("name"));
-            log.setOutput("attributes.getValue(\"value\"): " + attributes.getValue("value"));
+            //log.setOutput("attributes.getValue(\"name\"): " + attributes.getValue("name"));
+            //log.setOutput("attributes.getValue(\"value\"): " + attributes.getValue("value"));
             field.setName(attributes.getValue("name"));
             field.setValue(attributes.getValue("value"));
             fields.add(field);
