@@ -10,6 +10,7 @@ import java.util.Date;
  */
 
 public class IvelaHeader {
+    
 	private String docType = null;
 	private String docSubType = null;
 	private String author = null;

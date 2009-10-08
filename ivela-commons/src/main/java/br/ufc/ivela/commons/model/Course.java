@@ -82,6 +82,8 @@ public class Course implements Serializable {
     private Integer challengeRetries;
     @Column(name = "challenge_count")
     private Integer challengeCount;
+    @Column(name = "challenge_weight")
+    private Integer challengeWeight;
     @Column(name = "custom_toc")
     private boolean customToc;
 
@@ -271,6 +273,20 @@ public class Course implements Serializable {
      */
     public Integer getChallengeCount() {
         return challengeCount;
+    }
+
+    /**
+     * @param challengeWeight the challengeWeight to set
+     */
+    public void setChallengeWeight(Integer challengeWeight) {
+        this.challengeWeight = challengeWeight;
+    }
+
+    /**
+     * @return the challengeWeight
+     */
+    public Integer getChallengeWeight() {
+        return challengeWeight;
     }
 
 }

@@ -25,6 +25,7 @@ function submitChallenge(){
     params += "&challengeItems.course.id="+$('course.id').value;
     params += "&challengeItems.discipline.id="+$('discipline.id').value;
     params += "&challengeItems.unit.id="+$('unit.id').value;
+    params += "&challengeItems.weight="+$('challengeItens.weight').value;
     params += "&challengeItems.xml="+replaceAll($('challengeItens.xml').value);
     params += "&challengeItems.dependency="+$('challengeItens.dependency').value;
     if($('challengeItens.id').value!=''){
