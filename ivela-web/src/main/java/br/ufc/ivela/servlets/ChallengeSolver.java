@@ -177,7 +177,7 @@ public class ChallengeSolver extends HttpServlet {
 
             }        
         } catch (Exception e) {
-            challRemote.add(challid, uid, result);
+            //challRemote.add(challid, uid, result);
             response.getWriter().println("{\"list\":{\"results\":[{\"ret\":\"" + result + "\"}]},\"name\":\"" + challid + "\", \"status\": \"" + status + "\"}");            
             log.error("Exception in Challenge solver: " + uid + '|' + challid, e);
         }
