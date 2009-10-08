@@ -586,7 +586,7 @@
                         </tr>
                         <tr>
                             <td><s:text name="show.challenge.weight"/></td>
-                            <td><input type="text" id="weight" name="weight" /> <span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.09" />')"></span></td>                            
+                            <td><input type="text" id="challengeItens.weight" name="challengeItens.weight" /> <span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.09" />')"></span></td>                            
                         </tr>
                         
                         <tr>
