@@ -106,7 +106,7 @@ public class HistoryBean implements HistoryRemote {
     
     public List<Transcript> getTranscriptsByStudentByGrade(Long studentId, Long gradeId){
         //  TEMPORARIO calculando para CADA turma
-        this.calcAverageCourse(gradeId,studentId);
+        // this.calcAverageCourse(gradeId,studentId);
         
         //
         return daoTranscript.find("from Transcript t where t.systemUser.id = ? and t.grade.id = ?", new Object[]{studentId,gradeId});

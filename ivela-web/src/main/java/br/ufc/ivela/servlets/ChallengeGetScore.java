@@ -105,10 +105,6 @@ public class ChallengeGetScore extends HttpServlet {
         }
 
 
-        
-
-        
-
         String ret = "<div class=\"content-lesson\">" +
                 "<h2>Percentage of done exercises</h2>" +
                 "<table width=\"569\" border=\"0\" align=\"center\">" +

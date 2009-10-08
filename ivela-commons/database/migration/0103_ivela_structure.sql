@@ -63,3 +63,21 @@ ALTER TABLE ONLY grade_unit_content ADD CONSTRAINT grade_user_grade_unit_content
 ALTER TABLE ONLY grade_unit_content ADD CONSTRAINT unit_content_user_grade_unit_content_fk FOREIGN KEY (unit_content) REFERENCES unit_content(id);
 
 ALTER TABLE course ADD COLUMN custom_toc boolean DEFAULT false;
+
+
+--
+-- Start Challenge Modifications
+--
+ALTER TABLE challenge_items ADD COLUMN scorable boolean NOT NULL DEFAULT TRUE;
+ALTER TABLE challenge ADD COLUMN unit_id integer NOT NULL DEFAULT 0;
+ALTER TABLE challenge ADD COLUMN retries smallint NOT NULL DEFAULT 0;
+ALTER TABLE course DROP COLUMN challenge_itens_enabled;
+ALTER TABLE course ADD COLUMN challenge_retries smallint NOT NULL DEFAULT 0;
+ALTER TABLE course ADD COLUMN challenge_count smallint NOT NULL DEFAULT 0;
+CREATE INDEX index_challenge_by_name_course ON challenge_items(course, name);
+ALTER TABLE transcript ADD COLUMN average_challenge numeric(4,2) DEFAULT 0;
+ALTER TABLE transcript ADD COLUMN total_challenge numeric(4,2) DEFAULT 0;
+ALTER TABLE transcript ADD COLUMN challenges_done smallint DEFAULT 0;
+--
+-- End of Challenge Modifications
+--

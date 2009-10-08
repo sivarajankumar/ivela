@@ -78,8 +78,10 @@ public class Course implements Serializable {
     private boolean active;
     @Column(name = "upload_package_enabled")
     private boolean uploadPackageEnabled;
-    @Column(name = "challenge_itens_enabled")
-    private boolean challengeItensEnabled;
+    @Column(name = "challenge_retries")
+    private Integer challengeRetries;
+    @Column(name = "challenge_count")
+    private Integer challengeCount;
     @Column(name = "custom_toc")
     private boolean customToc;
 
@@ -197,15 +199,7 @@ public class Course implements Serializable {
 
     public void setUploadPackageEnabled(boolean uploadPackageEnabled) {
         this.uploadPackageEnabled = uploadPackageEnabled;
-    }
-    
-    public boolean getChallengeItensEnabled() {
-        return challengeItensEnabled;
-    }
-
-    public void setChallengeItensEnabled(boolean challengeItensEnabled) {
-        this.challengeItensEnabled = challengeItensEnabled;
-    }
+    }    
 
     public boolean getCustomToc() {
         return customToc;
@@ -239,6 +233,44 @@ public class Course implements Serializable {
     @Override
     public String toString() {
         return "br.ufc.ivela.commons.model.Course[id=" + id + "]";
+    }
+
+    /**
+     * How many retries for Challenge is possible
+     * 
+     * @param challengeRetries the challengeRetries to set
+     */
+    public void setChallengeRetries(Integer challengeRetries) {
+        if (challengeRetries < 0) challengeRetries = 0; 
+        this.challengeRetries = challengeRetries;
+    }
+
+    /**
+     * How many retries for Challenge is possible
+     * 
+     * @return the challengeRetries
+     */
+    public Integer getChallengeRetries() {
+        return challengeRetries;
+    }
+
+    /**
+     * Number of Challenges in this Course.
+     * @param challengeCount the challengeCount to set
+     */
+    public void setChallengeCount(Integer challengeCount) {
+        if (challengeCount < 0) challengeRetries = 0;
+        
+        this.challengeCount = challengeCount;
+    }
+
+    /**
+     * Number of Challenges in this Course.
+     * 
+     * @return the challengeCount
+     */
+    public Integer getChallengeCount() {
+        return challengeCount;
     }
 
 }
