@@ -45,6 +45,10 @@ public class Discipline implements Serializable {
     @Column(name="course")
     private Long courseId;
     
+    @Column(name="tag")
+    private String tag;
+
+    
     @Transient
     private Course course;
     
@@ -103,6 +107,13 @@ public class Discipline implements Serializable {
         this.units = units;
     }
     
+    public void setTag(String tag) {
+    	this.tag = tag;
+    }
+    
+    public String getTag() {
+    	return tag;
+    }
     
     
     @Override
