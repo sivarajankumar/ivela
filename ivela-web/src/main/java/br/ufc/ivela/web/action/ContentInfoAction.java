@@ -49,6 +49,8 @@ public class ContentInfoAction extends CourseAwareAction {
     private UnitContent unitContent;
     private Grade grade;
     private String goToPage;
+    private String disciplineTag;
+    private String unitTag;
     private String pageHtml;
 
     public String getSystemUser() {
@@ -67,9 +69,24 @@ public class ContentInfoAction extends CourseAwareAction {
         return "json";
     }
 
+    private String getFilenameByDisciplineTag(String disciplineTag) {
+    	discipline = disciplineRemote.get(Long.valueOf(1));
+    	return discipline.getId() + "/" + goToPage;
+    }
+    
+    private String getFilenameByUnitTag(String unitTag) {
+    	unitContent = unitContentRemote.get(Long.valueOf(1));    	
+    	return unitContent.getUnitId() + "/" + unitContent.getId() + "/" + goToPage;
+    }
+    
     public String showTocCustom() {
         StringBuffer html = new StringBuffer();
         String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + goToPage;
+        if (disciplineTag!=null) {                	
+        	filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + getFilenameByDisciplineTag(disciplineTag);
+        } else if (unitTag!=null) {
+        	filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/1/" + getFilenameByUnitTag(unitTag);        		
+       	}
         try {
             BufferedReader in = new BufferedReader(new FileReader(filename));
             String str;
@@ -83,7 +100,7 @@ public class ContentInfoAction extends CourseAwareAction {
         setPageHtml(html.toString());
         return "show";
     }
-
+    
     public String showContentCustom() {
         StringBuffer html = new StringBuffer();
         String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + discipline.getId() + "/" + unit.getId() + "/" + unitContent.getId() + "/" + goToPage;
@@ -191,6 +208,11 @@ public class ContentInfoAction extends CourseAwareAction {
         this.finishedUnitContentRemote = finishedUnitContentRemote;
     }
 
+    public void setDisciplineRemote(DisciplineRemote disciplineRemote) {
+        this.disciplineRemote = disciplineRemote;
+    }
+
+    
     public void setUnitContentRemote(UnitContentRemote unitContentRemote) {
         this.unitContentRemote = unitContentRemote;
     }
@@ -223,6 +245,14 @@ public class ContentInfoAction extends CourseAwareAction {
         this.goToPage = goToPage;
     }
 
+    public void setDisciplineTag(String disciplineTag) {
+        this.disciplineTag = disciplineTag;
+    }
+    
+    public void setUnitTag(String unitTag) {
+        this.unitTag = unitTag;
+    }
+   
     public String getPageHtml() {
         return pageHtml;
     }
