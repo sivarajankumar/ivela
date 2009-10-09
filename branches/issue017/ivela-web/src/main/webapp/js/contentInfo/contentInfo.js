@@ -24,6 +24,10 @@ function getProgress() {
     document.write(getHtml('contentInfo!getProgress.action?course.id='+idCourse));
 }
 
+function getTimeLeft() {
+    document.write(getHtml('contentInfo!getTimeLeft.action?course.id='+idCourse));
+}
+
 function showGlobalImage(image) {
     document.write('<img src="RenderServlet?file=/'+idCourse+'/'+image+'">');
 }
@@ -31,6 +35,8 @@ function showGlobalImage(image) {
 function showGlobalImage(image,params) {
     document.write('<img src="RenderServlet?file=/'+idCourse+'/'+image+'" '+params+'>');
 }
+
+
 
 function includeGlobalCss(css) {
     document.write('<link href="RenderServlet?file=/'+idCourse+'/'+css+'" rel="stylesheet" type="text/css" />');

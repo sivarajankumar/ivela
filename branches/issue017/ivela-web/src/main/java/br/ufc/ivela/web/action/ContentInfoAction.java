@@ -1,3 +1,23 @@
+/*
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #
+#############################################################################################
+# File: ContentInfoAction.java                                                              #
+# Document: Action for Course Content                                                       #
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 09-OCT-2009 - Rafael Lagoa (Instituto Eldorado) - 000017 - Initial version                #
+#############################################################################################
+*/
 package br.ufc.ivela.web.action;
 
 import java.io.BufferedReader;
@@ -18,6 +38,7 @@ import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.FinishedUnitContent;
 import br.ufc.ivela.commons.model.Grade;
+import br.ufc.ivela.commons.model.Profile;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.model.Unit;
 import br.ufc.ivela.commons.model.UnitContent;
@@ -25,6 +46,7 @@ import br.ufc.ivela.ejb.interfaces.CourseRemote;
 import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
 import br.ufc.ivela.ejb.interfaces.FinishedUnitContentRemote;
 import br.ufc.ivela.ejb.interfaces.GradeUnitContentRemote;
+import br.ufc.ivela.ejb.interfaces.ProfileRemote;
 import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 import br.ufc.ivela.ejb.interfaces.UnitContentRemote;
 import br.ufc.ivela.ejb.interfaces.UnitRemote;
@@ -42,6 +64,7 @@ public class ContentInfoAction extends CourseAwareAction {
     private GradeUnitContentRemote gradeUnitContentRemote;
     private FinishedUnitContentRemote finishedUnitContentRemote;
     private SystemUserRemote systemUserRemote;
+    private ProfileRemote profileRemote;
 
     private Course course;
     private Discipline discipline;
@@ -54,8 +77,12 @@ public class ContentInfoAction extends CourseAwareAction {
     private String pageHtml;
 
     public String getSystemUser() {
-        SystemUser systemUser = getAuthenticatedUser();
-        setInputStream(new ByteArrayInputStream((systemUser.getId()+" - "+systemUser.getUsername()+" - "+systemUser.getEmail()).getBytes()));
+        Profile profile = profileRemote.getBySystemUserId(getAuthenticatedUser().getId());
+        String name = profile.getFirstName()+" "+profile.getLastName();
+        if (name == null || "".equals(name.trim())) {
+            name = getAuthenticatedUser().getUsername();
+        }
+        setInputStream(new ByteArrayInputStream(name.getBytes()));
         return "text";
     }
 
@@ -70,15 +97,21 @@ public class ContentInfoAction extends CourseAwareAction {
     }
 
     private String getFilenameByDisciplineTag(String disciplineTag) {
-    	discipline = disciplineRemote.get(Long.valueOf(1));
-    	return discipline.getId() + "/" + goToPage;
+        discipline = disciplineRemote.get(Long.valueOf(1));
+        return discipline.getId() + "/" + goToPage;
     }
-    
+
     private String getFilenameByUnitTag(String unitTag) {
-    	unitContent = unitContentRemote.get(Long.valueOf(1));    	
-    	return unitContent.getUnitId() + "/" + unitContent.getId() + "/" + goToPage;
+        unitContent = unitContentRemote.get(Long.valueOf(1));    	
+        return unitContent.getUnitId() + "/" + unitContent.getId() + "/" + goToPage;
     }
-    
+
+    public String getTimeLeft() {
+        String timeLeft = courseRemote.getTimeLeft(getAuthenticatedUser().getId(), course.getId());
+        setInputStream(new ByteArrayInputStream(timeLeft.toString().getBytes()));
+        return "text";
+    }
+
     public String showTocCustom() {
         StringBuffer html = new StringBuffer();
         String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + goToPage;
@@ -100,7 +133,7 @@ public class ContentInfoAction extends CourseAwareAction {
         setPageHtml(html.toString());
         return "show";
     }
-    
+
     public String showContentCustom() {
         StringBuffer html = new StringBuffer();
         String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + discipline.getId() + "/" + unit.getId() + "/" + unitContent.getId() + "/" + goToPage;
@@ -212,13 +245,16 @@ public class ContentInfoAction extends CourseAwareAction {
         this.disciplineRemote = disciplineRemote;
     }
 
-    
     public void setUnitContentRemote(UnitContentRemote unitContentRemote) {
         this.unitContentRemote = unitContentRemote;
     }
 
     public void setSystemUserRemote(SystemUserRemote systemUserRemote) {
         this.systemUserRemote = systemUserRemote;
+    }
+
+    public void setProfileRemote(ProfileRemote profileRemote) {
+        this.profileRemote = profileRemote;
     }
 
     public void setCourse(Course course) {
@@ -248,11 +284,11 @@ public class ContentInfoAction extends CourseAwareAction {
     public void setDisciplineTag(String disciplineTag) {
         this.disciplineTag = disciplineTag;
     }
-    
+
     public void setUnitTag(String unitTag) {
         this.unitTag = unitTag;
     }
-   
+
     public String getPageHtml() {
         return pageHtml;
     }
