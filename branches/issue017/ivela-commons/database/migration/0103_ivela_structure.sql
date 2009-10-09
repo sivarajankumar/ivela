@@ -83,3 +83,9 @@ ALTER TABLE transcript ADD COLUMN challenges_weight integer DEFAULT 0;
 --
 -- End of Challenge Modifications
 --
+
+--- Content modifications
+ALTER TABLE discipline ADD COLUMN tag character varying(20);
+
+
+--- End of Content Modifications
