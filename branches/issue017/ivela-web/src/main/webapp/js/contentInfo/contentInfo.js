@@ -8,6 +8,14 @@ function goToPage(goToPage) {
     window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitContent.id='+idUnitContent+'&goToPage='+goToPage;
 }
 
+function goToDiscipline(disciplineTag) {
+    window.location = 'contentInfo!showTocCustom.action?course.id='+idCourse+'&disciplineTag='+disciplineTag+'&goToPage=table_contents.html';
+}
+
+function goToUnit(unitTag,goToPage) {
+    window.location = 'contentInfo!showTocCustom.action?course.id='+idCourse+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitTag='+unitTag+'&goToPage='+goToPage;
+}
+
 function getSystemUser() {
     document.write(getHtml('contentInfo!getSystemUser.action'));
 }
@@ -23,8 +31,6 @@ function showGlobalImage(image) {
 function showGlobalImage(image,params) {
     document.write('<img src="RenderServlet?file=/'+idCourse+'/'+image+'" '+params+'>');
 }
-
-
 
 function includeGlobalCss(css) {
     document.write('<link href="RenderServlet?file=/'+idCourse+'/'+css+'" rel="stylesheet" type="text/css" />');
