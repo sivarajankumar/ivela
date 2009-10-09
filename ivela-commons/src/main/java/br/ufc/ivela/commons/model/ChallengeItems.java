@@ -43,6 +43,10 @@ public class ChallengeItems implements Serializable {
     /** Default weight for a challenge */
     public static final int DEFAULT_WEIGHT = 10;
     
+    /** Default OR separator used in the answer fields **/
+    public static final String ANSWER_OR_SEPARATOR = "\\[or\\]";
+    
+    
     @Id
     @SequenceGenerator(name="seq", sequenceName="sq_challenge_items", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")

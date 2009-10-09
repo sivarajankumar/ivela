@@ -65,8 +65,15 @@ public class ChallengeSolver extends HttpServlet {
         Long unitId = Long.decode(request.getParameter("unitId"));
         Long gradeId = Long.decode(request.getParameter("gradeId"));
         String retrieveAnswers = request.getParameter("answers");
+        String dependency = request.getParameter("dependency");
+        Boolean checkDependency = Boolean.FALSE;
+        if (dependency != null) {
+            checkDependency = Boolean.parseBoolean(dependency);
+        }
+        
         Long uid = 0L;
         Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        
         if (obj != null && obj instanceof SystemUser) {
             uid = ((SystemUser) obj).getId();
         }
@@ -76,7 +83,7 @@ public class ChallengeSolver extends HttpServlet {
                 String json = getChallengeRemote().retrieveChallengeAnswers(challid, uid, unitId, gradeId);
                 response.getWriter().println(json);
             } else if (!challid.equals("audio")) {                
-                String json = getChallengeRemote().executeChallenge(challid, uid, unitId, gradeId, request.getParameterMap());
+                String json = getChallengeRemote().executeChallenge(challid, uid, unitId, gradeId, request.getParameterMap(), checkDependency);
                 response.getWriter().println(json);                
             } else if (challid.equals("audio")) {
                 challRemote.add(request.getParameter("value"), uid, 100);

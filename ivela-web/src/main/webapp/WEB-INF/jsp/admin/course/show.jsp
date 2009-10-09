@@ -185,6 +185,8 @@
                 <h1><s:text name="home.course" /></h1><br/><br/><br/>
                 <label><s:text name="course.input.name" /></label><br/>
                 <input type="hidden" name="input.course.repository" id="input.course.repository" value=""/>
+                <input type="hidden" name="input.course.challengeCount" id="input.course.challengeCount" value=""/>
+                <input type="hidden" name="input.course.challengeWeight" id="input.course.challengeWeight" value=""/>
                 <input type="text" name="input.course.name" id="input.course.name" value="" size="61" maxlength="35" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.01"/>')"> </span><br/>
                 <label><s:text name="course.input.description" /></label><br/>
                 <textarea onKeyDown="textCounter(this,$('remLen'),250);" onKeyUp="textCounter(this,$('remLen'),250);" rows="4" name="input.course.description" id="input.course.description" cols="70" ></textarea><span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.02"/>')"></span><br/>

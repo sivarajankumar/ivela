@@ -27,7 +27,7 @@ public interface ChallengeRemote {
     
     public Challenge get(Long uid, Long challengeItemId);
     
-    public String executeChallenge(String challid, Long userId, Long unidId, Long gradeId, Map userAnswers);
+    public String executeChallenge(String challid, Long userId, Long unidId, Long gradeId, Map userAnswers, boolean dependency);
     
     public String retrieveChallengeAnswers(String challid, Long userId, Long unidId, Long gradeId);
     
