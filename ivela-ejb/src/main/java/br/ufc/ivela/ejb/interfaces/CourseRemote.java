@@ -21,12 +21,15 @@
 */
 package br.ufc.ivela.ejb.interfaces;
 
+import java.util.Date;
+import java.util.List;
+
+import javax.ejb.Remote;
+
 import br.ufc.ivela.commons.dao.Page;
 import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.SystemUser;
-import java.util.List;
-import javax.ejb.Remote;
 
 @Remote
 public interface CourseRemote {
@@ -102,7 +105,9 @@ public interface CourseRemote {
     public Integer getGraduatedStudentsCount(Long courseId);
     
     Integer getProgress(Long systemUserId, Long courseId);
-    
+
+    public String getTimeLeft(Long systemUserId, Long courseId);
+
     public void savePhoto(Course p, java.io.File file);
     
     public int isFinishedCourse(Long studentId, Long courseId, long gradeId);

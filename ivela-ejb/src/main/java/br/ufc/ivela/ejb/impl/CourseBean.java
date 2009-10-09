@@ -1,8 +1,8 @@
-/*  
+/*
 #############################################################################################
 # Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
 # This file is part of ivela project, an open-source                                        #
-# Program URL   : http://code.google.com/p/ivela/                                           #  
+# Program URL   : http://code.google.com/p/ivela/                                           #
 #                                                                                           #
 # This program is free software; you can redistribute it and/or modify it under the terms   #
 # of the GNU General Public License as published by the Free Software Foundation; either    #
@@ -10,15 +10,16 @@
 #                                                                                           #
 # This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
 # without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
-# See the GNU General Public License for more details.                                      #  
+# See the GNU General Public License for more details.                                      #
 #                                                                                           #
 #############################################################################################
 # File: CourseBean.java                                                                     #
-# Document: Course Stateless Bean                                                           # 
+# Document: Course Stateless Bean                                                           #
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 07-JAN-2009 - Maristella Myrian (UFC)           - XXXXXX - Initial Version                #
 # 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
 # 06-OCT-2009 - Fabio Fantato (Instituto Eldorado)- 000017 - Table of Contents              #
+# 09-OCT-2009 - Rafael Lagoa (Instituto Eldorado) - 000017 - Time Left method               #
 #############################################################################################
 */
 package br.ufc.ivela.ejb.impl;
@@ -28,7 +29,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -42,6 +47,7 @@ import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.Exam;
 import br.ufc.ivela.commons.model.Exercise;
+import br.ufc.ivela.commons.model.FinishedUnitContent;
 import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.model.Unit;
@@ -49,7 +55,6 @@ import br.ufc.ivela.commons.model.UnitContent;
 import br.ufc.ivela.commons.model.SystemUser.AUTHORITY;
 import br.ufc.ivela.commons.util.Thumbnail2;
 import br.ufc.ivela.ejb.interfaces.CourseRemote;
-
 
 @Stateless(mappedName="CourseBean")
 public class CourseBean implements CourseRemote {
@@ -364,7 +369,25 @@ public class CourseBean implements CourseRemote {
         
         return (int) rate;
     }
-    
+
+    public String getTimeLeft(Long systemUserId, Long courseId) {
+        List<UnitContent> allUnitContents = daoCourse.find("select uc from UnitContent uc, Unit u, " +
+                "Discipline d where uc.unitId = u.id and u.disciplineId = d.id " +
+                "and d.courseId = ?", new Object[]{courseId});
+
+        List<Long> finishedUnitContents = daoCourse.find("select f.unitContent from FinishedUnitContent f " +
+                "where f.course = ? and f.systemUser = ?", new Object[]{courseId, systemUserId});
+
+        long timeLeft = 0;
+        for (UnitContent unitContent : allUnitContents) {
+            if (!finishedUnitContents.contains(unitContent.getId())) {
+                timeLeft += unitContent.getDuration().getTime();
+            }
+        }
+
+        return new Date(timeLeft).getHours() + " hours and " + new Date(timeLeft).getMinutes() + " minutes";
+    }
+
     public void savePhoto(Course p, File file) {
         InputStream data = null;
         try {

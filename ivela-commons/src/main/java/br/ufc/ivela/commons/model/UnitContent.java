@@ -1,63 +1,82 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #
+#############################################################################################
+# File: ContentInfoAction.java                                                              #
+# Document: Action for Course Content                                                       #
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# xx-xxx-xxxx - Leo Moreira                       - xxxxxx - Initial version                #
+# 09-OCT-2009 - Rafael Lagoa (Instituto Eldorado) - 000017 - Adding new fields              #
+#############################################################################################
+*/
 package br.ufc.ivela.commons.model;
 
-import javax.persistence.SequenceGenerator;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-/**
- *
- * @author leoomoreira
- */
 @Entity
 @Table(name = "unit_content")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQueries({@NamedQuery(name = "UnitContent.findById", query = "SELECT u FROM UnitContent u WHERE u.id = :id"), @NamedQuery(name = "UnitContent.findByOrderN", query = "SELECT u FROM UnitContent u WHERE u.orderN = :orderN"), @NamedQuery(name = "UnitContent.findByTitle", query = "SELECT u FROM UnitContent u WHERE u.title = :title"), @NamedQuery(name = "UnitContent.findByDescription", query = "SELECT u FROM UnitContent u WHERE u.description = :description")})
 public class UnitContent implements Serializable {
+
     private static final long serialVersionUID = 1L;
+
     @Id
     @SequenceGenerator(name="seq", sequenceName="sq_unit_content", allocationSize=1)
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
     @Column(name = "id", nullable = false)
     private Long id;
+
     @Column(name = "order_n", nullable = false)
     private int orderN;
+
     @Column(name = "title", nullable = false)
     private String title;
+
     @Column(name = "description", nullable = false)
     private String description;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy="unitContentId", targetEntity=Exercise.class)
     private Collection<Exercise> exercises;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy="unitContentId", targetEntity=Exam.class)
     private Collection<Exam> exams; 
-    
-    
-   
+
     @Column(name="unit")
     private Long unitId;    
     @Transient
     private Unit unit;
-    
+
     private Integer type;
 
     @Column(name = "width")
@@ -65,7 +84,11 @@ public class UnitContent implements Serializable {
 
     @Column(name = "height")
     private Integer height;
-    
+
+    @Column(name = "duration")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date duration;
+
     public UnitContent() {
     }
 
@@ -193,5 +216,12 @@ public class UnitContent implements Serializable {
     public void setWidth(Integer width) {
         this.width = width;
     }
-    
+
+    public Date getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Date duration) {
+        this.duration = duration;
+    }
 }

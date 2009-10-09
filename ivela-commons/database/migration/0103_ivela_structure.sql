@@ -62,6 +62,9 @@ ALTER TABLE ONLY grade_unit_content ADD CONSTRAINT pk_grade_unit_content PRIMARY
 ALTER TABLE ONLY grade_unit_content ADD CONSTRAINT grade_user_grade_unit_content_fk FOREIGN KEY (grade) REFERENCES grade(id);
 ALTER TABLE ONLY grade_unit_content ADD CONSTRAINT unit_content_user_grade_unit_content_fk FOREIGN KEY (unit_content) REFERENCES unit_content(id);
 
+ALTER TABLE unit_content ADD COLUMN duration time without time zone;
+UPDATE unit_content SET duration = '00:00:00';
+
 ALTER TABLE course ADD COLUMN custom_toc boolean DEFAULT false;
 
 
@@ -86,6 +89,4 @@ ALTER TABLE transcript ADD COLUMN challenges_weight integer DEFAULT 0;
 
 --- Content modifications
 ALTER TABLE discipline ADD COLUMN tag character varying(20);
-
-
 --- End of Content Modifications
