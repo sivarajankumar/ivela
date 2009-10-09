@@ -38,7 +38,7 @@ function submitChallenge(){
          str = "inserido";
     }
     var json = getJsonFromUrlPost(url,params);
-     if(json.challengeItem!=""){
+    if(json.challengeItem!=undefined && json.challengeItem!=""){
         alert(str+" com sucesso!");
         
      }
@@ -55,6 +55,7 @@ function submitSearch(){
         $('challengeItens.id').value = json.challengeItems.id;
         $('challengeItens.name').value =json.challengeItems.name;
         $('challengeItens.dependency').value = json.challengeItems.dependency;
+        $('challengeItens.weight').value = json.challengeItems.weight;
         $('challengeItens.xml').value =   json.challengeItems.xml; 
         $('submitChall').value = "Update";
         $('removeCha').style.display= "block";

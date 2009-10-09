@@ -124,6 +124,7 @@ function showEntryCourse() {
     $('input.course.uploadPackage').value = '';
     $('input.course.challengeItens').value = '';
     $('input.course.customToc').value = '';
+    $('input.course.challengeRetries').value = '0';
     $('input.course.name').focus();
 }
 
@@ -164,7 +165,19 @@ function showEditCourse(courseId) {
     else
     	$('input.course.customToc.no').checked="checked";
  
-    	
+    if (jsonCourse.course.challengeRetries)
+        $('input.course.challengeRetries').value = jsonCourse.course.challengeRetries;
+    else
+        $('input.course.challengeRetries').value = '0';
+    if (jsonCourse.course.challengeCount)
+        $('input.course.challengeCount').value = jsonCourse.course.challengeCount;
+    else
+        $('input.course.challengeCount').value = '0';
+    if (jsonCourse.course.challengeWeight)
+        $('input.course.challengeWeight').value = jsonCourse.course.challengeWeight;
+    else
+        $('input.course.challengeWeight').value = '0';
+    
     $('input.course.name').focus();
 }
         
@@ -226,6 +239,9 @@ function submitCourse(courseId) {
         url += '&course.challengeItensEnabled=' + challengeItensEnabled;
         url += '&course.uploadPackageEnabled=' + uploadPackageEnabled;
         url += '&course.customToc=' + customToc;
+        url += '&course.challengeRetries=' + $('input.course.challengeRetries').value;
+        url += '&course.challengeCount=' + $('input.course.challengeCount').value;
+        url += '&course.challengeWeight=' + $('input.course.challengeWeight').value;
 
     }
     else {
@@ -237,6 +253,9 @@ function submitCourse(courseId) {
         url += '&course.challengeItensEnabled=' + challengeItensEnabled;
         url += '&course.uploadPackageEnabled=' + uploadPackageEnabled;
         url += '&course.customToc=' + customToc;
+        url += '&course.challengeRetries=' + $('input.course.challengeRetries').value;
+        url += '&course.challengeCount=' + $('input.course.challengeCount').value;
+        url += '&course.challengeWeight=' + $('input.course.challengeWeight').value;
     }
             
     var jsonCourse = getJsonFromUrl(url);

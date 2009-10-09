@@ -170,19 +170,33 @@ public class ChallengeBean implements ChallengeRemote {
         
         return -1;        
     }
-
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public String executeChallenge(String challid, Long userId, Long unidId, Long gradeId, Map userAnswers) {                       
+    
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)    
+    public String executeChallenge(String challid, Long userId, Long unitId, Long gradeId, Map userAnswers, boolean dependency) {                       
         Challenge currentStats = null;
         Course course = null;
         ChallengeItems challItem = null;
         int retriesLeft = -1;
-        challItem = challengeItemsRemote.getByUnit(challid, unidId);
+        challItem = challengeItemsRemote.getByUnit(challid, unitId);
         if (challItem == null) {
-            throw new IllegalArgumentException("Invalid Challenge Item:" + challid + ',' + userId + ',' + unidId);
+            throw new IllegalArgumentException("Invalid Challenge Item:" + challid + ',' + userId + ',' + unitId);
         }
         Integer weight = challItem.getWeight();        
-        boolean scorable = weight > 0? true : false;                
+        boolean scorable = weight > 0? true : false;     
+        boolean addScoreUser = true;
+        
+        if (dependency) {
+            Long dependentChallengeId = challItem.getDependency();
+            if (dependentChallengeId == null) dependentChallengeId =  new Long(0);
+            ChallengeItems dependentChallenge = challengeItemsRemote.get(dependentChallengeId);      
+            
+            if (dependentChallenge != null) {
+                Challenge depStats = get(userId, dependentChallenge.getId());
+                if (depStats == null) 
+                    return buildJsonAnswer(null, null, null, 0, challid, "dep:" + dependentChallenge.getName(), retriesLeft);    
+            }
+            
+        }
         if (scorable) {
             course = challItem.getCourse();
             course = course.getChallengeRetries() != null ? course : courseRemote.get(challItem.getCourse().getId());
@@ -192,6 +206,7 @@ public class ChallengeBean implements ChallengeRemote {
             // Maximum number of retries reached?            
             if ((currentStats != null)&&(currentStats.getRetries() < 0)) {
                 scorable = false;
+                addScoreUser = false;
             }
             
             if (course.getChallengeRetries() > 0) {
@@ -204,6 +219,7 @@ public class ChallengeBean implements ChallengeRemote {
                 
                 if (retriesLeft <= 0) {
                     scorable = false;
+                    addScoreUser = false;
                 }
             }
         }
@@ -236,13 +252,12 @@ public class ChallengeBean implements ChallengeRemote {
                             
             String dbAnswer = answers.get(i).getValue();                    
 
-            if (dbAnswer.equalsIgnoreCase(userAnswer) && !userAnswer.equals("")) {
+            if (compareAnswer(dbAnswer, userAnswer)) {
                 points++;
                 rightFields.add(option);
             } else {
                 wrongFields.add(option);
             }
-
         }
         
         double result = ((double) (points * 100)) / (double) answers.size();
@@ -292,7 +307,7 @@ public class ChallengeBean implements ChallengeRemote {
             }
         }
         // Update Later, in case of fail here, the student has their score at least
-        add(challid, userId, result, challItem.getId());
+        if (addScoreUser) add(challid, userId, result, challItem.getId());
         
         return buildJsonAnswer(rightFields, wrongFields, null, result, challid, status, retriesLeft);
     }    
@@ -407,5 +422,26 @@ public class ChallengeBean implements ChallengeRemote {
         }        
         
         return buildJsonAnswer(rightFields, null, answerFields, results, challItem.getName(), "fin", 0);
+    }
+    
+    private boolean compareAnswer(String correctAnswer, String userAnswer) {
+        boolean isCorrect = false;
+        
+        if (userAnswer == null || userAnswer.equals("")) {
+            return isCorrect;
+        }
+        
+        userAnswer = userAnswer.trim();        
+        
+        String[] listAnswer = correctAnswer.split(ChallengeItems.ANSWER_OR_SEPARATOR);
+                
+        for (String answer: listAnswer) {
+            if (answer.trim().equalsIgnoreCase(userAnswer)) {
+                isCorrect = true;
+                break;
+            }    
+        }
+        
+        return isCorrect;
     }
 }

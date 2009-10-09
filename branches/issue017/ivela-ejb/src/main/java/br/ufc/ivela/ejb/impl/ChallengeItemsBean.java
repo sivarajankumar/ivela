@@ -22,25 +22,40 @@ package br.ufc.ivela.ejb.impl;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 
 import br.ufc.ivela.commons.dao.DaoFactory;
 import br.ufc.ivela.commons.dao.GenericDao;
 import br.ufc.ivela.commons.model.ChallengeItems;
 import br.ufc.ivela.commons.model.ChallengerResult;
+import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Unit;
 import br.ufc.ivela.ejb.interfaces.ChallengeItemsRemote;
+import br.ufc.ivela.ejb.interfaces.CourseRemote;
 
 @Stateless(mappedName="ChallengeItemsBean")
 public class ChallengeItemsBean implements ChallengeItemsRemote {
 
     private GenericDao<ChallengeItems> daoChallengeItems = DaoFactory.getInstance(ChallengeItems.class);
     private GenericDao<ChallengerResult> daoChallengeResult = DaoFactory.getInstance(ChallengerResult.class);
-
+    
+    @EJB
+    private CourseRemote courseRemote;
+    
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Long add(ChallengeItems challengeItems) {
+        Course course = challengeItems.getCourse();
+        course = courseRemote.get(course.getId());
+        course.setChallengeCount(course.getChallengeCount() + 1);
+        course.setChallengeWeight(course.getChallengeWeight() + challengeItems.getWeight());
+        courseRemote.update(course);
         return (Long) daoChallengeItems.save(challengeItems);
     }
 
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public ChallengeItems get(Long id) {
         if (id == null) {
             return null;
@@ -48,14 +63,37 @@ public class ChallengeItemsBean implements ChallengeItemsRemote {
         return daoChallengeItems.get(id);
     }
 
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Boolean remove (ChallengeItems challengeItems){
+        if (challengeItems.getName() == null
+                || challengeItems.getCourse() == null
+                || challengeItems.getWeight() == null) {
+            challengeItems = get(challengeItems.getId());
+        }
+        
+        Course course = challengeItems.getCourse();
+        course = courseRemote.get(course.getId());
+        course.setChallengeCount(course.getChallengeCount() - 1);
+        course.setChallengeWeight(course.getChallengeWeight() - challengeItems.getWeight());
+        courseRemote.update(course);
         return daoChallengeItems.remove(challengeItems);
     }
     
-    public Boolean update (ChallengeItems challengeItems){
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Boolean update (ChallengeItems challengeItems){        
+        
+        ChallengeItems oldChallengeItems = get(challengeItems.getId());
+                
+        Course course = challengeItems.getCourse();
+        course = courseRemote.get(course.getId());
+        int weight = course.getChallengeWeight() - oldChallengeItems.getWeight(); 
+        weight = weight + challengeItems.getWeight();
+        course.setChallengeWeight(weight);  
+        courseRemote.update(course);
         return daoChallengeItems.update(challengeItems);
     }
     
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public ChallengeItems get(String name) {
         if (name == null) {
             return null;
@@ -70,6 +108,7 @@ public class ChallengeItemsBean implements ChallengeItemsRemote {
         }
     }
     
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public ChallengeItems getByUnit(String name, Long unitId) {
         if (name == null || unitId == null) {
             return null;
@@ -86,14 +125,19 @@ public class ChallengeItemsBean implements ChallengeItemsRemote {
         }
     }
     
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<ChallengeItems> getByUnit(Long unitId){
         return (List<ChallengeItems>)daoChallengeItems.find("from ChallengeItems c where c.unit.id=?", new Object[]{unitId});
     }
+    
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public ChallengerResult getChallengerResult(Long id){
         return daoChallengeResult.get(id);
     }
     
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<ChallengerResult> getChallengerResultByUnitContent(Long unitContentId,Long studentId, Long gradeId){
         return daoChallengeResult.find("from ChallengerResult ch where ch.unitContent.id =? and ch.student.id =? and ch.grade.id =? ", new Object[]{unitContentId,studentId,gradeId});    
     }
 }
+

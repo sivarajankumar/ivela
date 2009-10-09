@@ -146,16 +146,22 @@ function submitExercise(form) {
 
     if (json == undefined || json == "") return false;
 
-    if (json.status == "err") {
+    var status = json.status;
+
+    if (status == "err") {
         //alert();
         return false;
     }
     
-    if (json.status == "fin") {
+    if (status == "fin") {
         //Maximum number of retries reached
         // return false;
     }
     
+    if (status.indexOf("dep") != -1) {
+        //alert(status.substring(4));
+    }
+   
     var i = 0;    
     var name = json.name;
 
@@ -175,8 +181,6 @@ function submitExercise(form) {
         }
     }
     
-
-    var status = json.status;
     var div = document.getElementById(name + "_status");
     if (div != undefined) {
       var divStyle = "fail";
@@ -216,9 +220,13 @@ function getExerciseAnswers(form) {
     }
          
     for (i = 0; i < json.list.right.length; i++) {   
-        var text = form.getInputs('text', json.list.right[i] +'oi');    
+        var text = form.getInputs('text', json.list.right[i]);    
         if (text[0] != undefined) {     
-            text[0].value = json.list.answers[i];
+            var ans = json.list.answers[i];
+            if (ans.indexOf("[or]") != -1) {
+                ans = ans.substring(0, ans.indexOf("[or]"));
+            }
+            text[0].value = ans;
             continue;
         } 
         var button = form.getInputs('radio', json.list.right[i]);

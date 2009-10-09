@@ -78,12 +78,12 @@ public class Course implements Serializable {
     private boolean active;
     @Column(name = "upload_package_enabled")
     private boolean uploadPackageEnabled;
-    @Column(name = "challenge_retries")
-    private Integer challengeRetries;
+    @Column(name = "challenge_retries", nullable = false)
+    private Integer challengeRetries = 0;
     @Column(name = "challenge_count")
-    private Integer challengeCount;
+    private Integer challengeCount = 0;
     @Column(name = "challenge_weight")
-    private Integer challengeWeight;
+    private Integer challengeWeight = 0;
     @Column(name = "custom_toc")
     private boolean customToc;
 
