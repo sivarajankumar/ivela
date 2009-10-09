@@ -17,9 +17,14 @@ function getProgress() {
 }
 
 function showGlobalImage(image) {
-     document.write('RenderServlet?file='+idCourse+'/'+image);
-//    document.write('<img src="RenderServlet?file=/'+idCourse+'/'+image+'">');
+    document.write('<img src="RenderServlet?file=/'+idCourse+'/'+image+'">');
 }
+
+function showGlobalImage(image,params) {
+    document.write('<img src="RenderServlet?file=/'+idCourse+'/'+image+'" '+params+'>');
+}
+
+
 
 function includeGlobalCss(css) {
     document.write('<link href="RenderServlet?file=/'+idCourse+'/'+css+'" rel="stylesheet" type="text/css" />');
