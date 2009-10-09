@@ -46,10 +46,16 @@
         <script type="text/javascript" src="js/prototype/prototype.js"></script>
         <script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>
         <script type="text/javascript" src="js/scriptaculous/effects.js"></script>
-        <script type="text/javascript" src="js/scriptaculous/lightwindow.js"></script>
-        <script type="text/javascript" src="js/contentInfo/contentInfo.js"></script>
-
+        <script type="text/javascript" src="js/scriptaculous/lightwindow.js"></script>        
+        <script type="text/javascript">
+            var idCourse = '<s:property value="course.id" />' 
+            var idDiscipline = '<s:property value="discipline.id" />'
+            var idUnit = '<s:property value="unit.id" />'
+            var idUnitContent = '<s:property value="unitContent.id" />' 
+            var idGrade = '<s:property value="grade.id" />'
+        </script>
         <decorator:head />
+        <script type="text/javascript" src="js/contentInfo/contentInfo.js"></script>
     </head>
     <%
 
