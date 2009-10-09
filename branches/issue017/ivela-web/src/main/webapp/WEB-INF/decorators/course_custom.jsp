@@ -43,8 +43,8 @@
             </script>            
         <![endif]-->        
         <script type="text/javascript" src="js/prototype/prototype.js"></script>
-        <decorator:head />
         <script type="text/javascript" src="js/contentInfo/contentInfo.js"></script>
+        <decorator:head />
     </head>
     <%
 
@@ -59,11 +59,7 @@
     %>
 
     <body>
-     <div id="container">
-            <div id="course-content">
-            <decorator:body/>
-            </div>
-        </div>
+    <decorator:body/>
     </div>
   </body>
 </html>
