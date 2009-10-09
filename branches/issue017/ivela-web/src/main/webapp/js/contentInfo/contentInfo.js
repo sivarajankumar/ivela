@@ -1,8 +1,3 @@
-var idCourse = getUrlParameter("course.id");
-var idDiscipline = getUrlParameter("discipline.id");
-var idUnit = getUrlParameter("unit.id");
-var idUnitContent = getUrlParameter("unitContent.id");
-var idGrade = getUrlParameter("grade.id");
 
 function goToPage(goToPage) {
     window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitContent.id='+idUnitContent+'&goToPage='+goToPage;
@@ -70,18 +65,6 @@ function computeExe(urlExe) {
     // do nothing
 }
 
-function getUrlParameter(name) {
-    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-    var regexS = "[\\?&]"+name+"=([^&#]*)";
-    var regex = new RegExp(regexS);
-    var results = regex.exec(window.location.href);
-    if (results == null) {
-        return "";
-    } else {
-        return results[1];
-    }
-}
-
 function getHtml(strUrl) {
     var html;
     new Ajax.Request(strUrl, {
@@ -143,12 +126,15 @@ var rightAnswerStyle;
 /* Submit a Exercise for answer, expects a Form Element as parameter that will be serialized and sent. The input fields for your exercise */
 function submitExercise(form) {
     
+    if (form == undefined) 
+        form = $('exercise');
+    
     if (rightAnswerStyle == undefined || rightAnswerStyle == "") {
-    rightAnswerStyle = '<img class="challengeCheck" src="images/course/default/lesson_li_right.gif" alt="" />';
+    rightAnswerStyle = "transparent url(images/course/default/lesson_li_right.gif) no-repeat scroll left top";
     }
     
     if (wrongAnswerStyle == undefined || rightAnswerStyle == "") {
-    wrongAnswerStyle = '<img class="challengeCheck" src="images/course/default/lesson_li_wrong.gif" alt="" />';
+    wrongAnswerStyle = "transparent url(images/course/default/lesson_li_wrong.gif) no-repeat scroll left top";
     }
 
     var value = Form.serialize(form, false);
@@ -181,7 +167,7 @@ function submitExercise(form) {
     var rightDiv = document.getElementById(json.list.right[i] + "_check");
     if (rightDiv == undefined) rightDiv = document.getElementById(name + "_" + json.list.right[i] + "_check");
         if (rightDiv != undefined) {
-            rightDiv.innerHTML = rightAnswerStyle;
+            rightDiv.style.background = rightAnswerStyle;
         }
     }
 
@@ -189,7 +175,7 @@ function submitExercise(form) {
         var errorDiv = document.getElementById(json.list.wrong[i] + "_check");
         if (errorDiv == undefined) errorDiv = document.getElementById(name + "_" + json.list.wrong[i] + "_check");
         if (errorDiv != undefined) {
-            errorDiv.innerHTML = wrongAnswerStyle;
+            errorDiv.style.background = wrongAnswerStyle;
         }
     }
     
@@ -221,6 +207,9 @@ function submitExercise(form) {
 
 /* Retrieves the Right Answers for the Exercise, this will mark the exercise as done */
 function getExerciseAnswers(form) {
+    if (form == undefined) 
+        form = $('exercise');
+    
     var value = Form.serialize(form, false);    
     var url = '/ivela-web/ChallengeSolver?answers=t&gradeId='+idGrade+'&unitId='+idUnit+'&'+value;
     var json = getJson(url);

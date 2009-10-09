@@ -34,10 +34,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 
 import br.ufc.ivela.commons.Constants;
-import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.FinishedUnitContent;
-import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.Profile;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.model.Unit;
@@ -66,11 +64,9 @@ public class ContentInfoAction extends CourseAwareAction {
     private SystemUserRemote systemUserRemote;
     private ProfileRemote profileRemote;
 
-    private Course course;
     private Discipline discipline;
     private Unit unit;
-    private UnitContent unitContent;
-    private Grade grade;
+    private UnitContent unitContent;    
     private String goToPage;
     private String disciplineTag;
     private String unitTag;
@@ -257,26 +253,30 @@ public class ContentInfoAction extends CourseAwareAction {
         this.profileRemote = profileRemote;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
     public void setDiscipline(Discipline discipline) {
         this.discipline = discipline;
     }
 
+    public Discipline getDiscipline() {
+        return discipline;
+    }
+    
     public void setUnit(Unit unit) {
         this.unit = unit;
     }
 
+    public Unit getUnit() {
+        return unit;
+    }
+    
     public void setUnitContent(UnitContent unitContent) {
         this.unitContent = unitContent;
     }
-
-    public void setGrade(Grade grade) {
-        this.grade = grade;
+    
+    public UnitContent getUnitContent() {
+        return unitContent;
     }
-
+    
     public void setGoToPage(String goToPage) {
         this.goToPage = goToPage;
     }

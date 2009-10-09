@@ -61,7 +61,7 @@ public class ChallengeSolver extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {                                    
         response.setContentType("application/json");
         ChallengeRemote challRemote = this.getChallengeRemote();
-        String challid = request.getParameter("challid");    
+        String challid = request.getParameter("challenge");    
         Long unitId = Long.decode(request.getParameter("unitId"));
         Long gradeId = Long.decode(request.getParameter("gradeId"));
         String retrieveAnswers = request.getParameter("answers");
