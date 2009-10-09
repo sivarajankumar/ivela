@@ -55,6 +55,8 @@ public interface DisciplineRemote {
     
     public List<Discipline> getByCourse(Long courseId);
     
+    public Discipline getByCourseAndTag(Long courseId,String tag);
+    
     public String getByCourseTest(Long courseId);
     
     public boolean update(Discipline discipline);

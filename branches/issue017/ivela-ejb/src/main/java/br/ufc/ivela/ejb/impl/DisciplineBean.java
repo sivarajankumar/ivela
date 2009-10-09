@@ -54,6 +54,12 @@ public class DisciplineBean implements DisciplineRemote {
         return daoDiscipline.update(discipline);
     }
 
+    
+    public Discipline getByCourseAndTag(Long courseId,String tag){    	
+    	List<Discipline> disciplineList = daoDiscipline.find("from Discipline d where d.courseId = ? and d.tag = ?", new Object[] {courseId,tag});
+    	return (!disciplineList.isEmpty()? disciplineList.get(0):null);
+    }
+    
     public String getByCourseTest(Long courseId) {
         List<Discipline> disciplineList = new ArrayList<Discipline>();
 
