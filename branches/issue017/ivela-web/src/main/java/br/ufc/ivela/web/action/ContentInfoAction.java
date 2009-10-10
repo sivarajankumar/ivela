@@ -98,8 +98,9 @@ public class ContentInfoAction extends CourseAwareAction {
     }
 
     private String getFilenameByUnitTag(String unitTag) {
-        unitContent = unitContentRemote.get(Long.valueOf(1));    	
-        return unitContent.getUnitId() + "/" + unitContent.getId() + "/" + goToPage;
+        unit = unitRemote.get(Long.valueOf(1));
+        unitContent = unitContentRemote.get(Long.valueOf(1));
+        return unit.getId() + "/" + unitContent.getId() + "/" + goToPage;
     }
 
     public String getTimeLeft() {
@@ -239,6 +240,10 @@ public class ContentInfoAction extends CourseAwareAction {
 
     public void setDisciplineRemote(DisciplineRemote disciplineRemote) {
         this.disciplineRemote = disciplineRemote;
+    }
+
+    public void setUnitRemote(UnitRemote unitRemote) {
+        this.unitRemote = unitRemote;
     }
 
     public void setUnitContentRemote(UnitContentRemote unitContentRemote) {
