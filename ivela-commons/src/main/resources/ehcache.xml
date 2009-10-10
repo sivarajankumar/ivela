@@ -12,12 +12,14 @@
 
 <cache name="profileCache" maxElementsInMemory="700" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LFU" />
 
-<cache name="enrollmentCache" maxElementsInMemory="700" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LFU" />
+<cache name="enrollmentCache" maxElementsInMemory="5000" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LFU" />
 
 <cache name="disciplineCache" maxElementsInMemory="1000"  eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LRU" />
 
 <cache name="systemUserCache" maxElementsInMemory="5000"  eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LRU" />
 
 <cache name="functionalityCache" maxElementsInMemory="5000" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LRU" />
+
+<cache name="contentInfoCache" maxElementsInMemory="2000" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LRU" />
 
 </ehcache>

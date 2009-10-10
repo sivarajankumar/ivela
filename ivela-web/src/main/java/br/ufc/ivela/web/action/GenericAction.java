@@ -31,6 +31,8 @@ import java.util.Map;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import net.sf.ehcache.CacheManager;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.GrantedAuthority;
@@ -51,6 +53,14 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public abstract class GenericAction extends ActionSupport {
 
+    protected static CacheManager cacheManager;
+    
+    static {
+        // Create a CacheManager using a specific config file
+        cacheManager = CacheManager.create(GenericAction.class
+                .getResource("ehcache.xml"));        
+    } 
+    
     /** Serial Version UID */
     private static final long serialVersionUID = 1720091751419475881L;
     

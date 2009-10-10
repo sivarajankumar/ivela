@@ -22,6 +22,7 @@ package br.ufc.ivela.web.action;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,6 +31,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -53,6 +57,12 @@ import br.ufc.ivela.util.PropertiesUtil.IVELA_PROPERTIES;
 
 public class ContentInfoAction extends CourseAwareAction {
 
+    private static Cache cache;
+    
+    static {
+        cache = cacheManager.getCache("contentInfoCache");        
+    } 
+    
     private InputStream inputStream;   
 
     private CourseRemote courseRemote;
@@ -109,65 +119,34 @@ public class ContentInfoAction extends CourseAwareAction {
         return "text";
     }
 
-    public String showTocCustom() {
-        StringBuffer html = new StringBuffer();
+    public String showTocCustom() {        
         String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + goToPage;
         if (disciplineTag!=null) {                	
         	filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + getFilenameByDisciplineTag(disciplineTag);
         } else if (unitTag!=null) {
         	filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/1/" + getFilenameByUnitTag(unitTag);        		
        	}
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(filename));
-            String str;
-            while ((str = in.readLine()) != null) {
-                html.append(str);
-            }
-            in.close();
-        } catch (IOException ioe) {
-            // do something
-        }
-        setPageHtml(html.toString());
+        
+        setPageHtml(loadContentFile(filename));
         return "show";
     }
 
-    public String showContentCustom() {
-        StringBuffer html = new StringBuffer();
+    public String showContentCustom() {        
         String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + discipline.getId() + "/" + unit.getId() + "/" + unitContent.getId() + "/" + goToPage;
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(filename));
-            String str;
-            while ((str = in.readLine()) != null) {
-                html.append(str);
-            }
-            in.close();
-        } catch (IOException ioe) {
-            // do something
-        }
-
+        
         SystemUser user = systemUserRemote.get(getAuthenticatedUser().getId());
         user.setLastUnitContentId(unitContent.getId());
         systemUserRemote.update(user);
 
-        setPageHtml(html.toString());
+        setPageHtml(loadContentFile(filename));
         return "show";
     }
     
     
-    public String showContent() {
-        StringBuffer html = new StringBuffer();
+    public String showContent() {        
         String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + discipline.getId() + "/" + unit.getId() + "/" + unitContent.getId() + "/" + goToPage;
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(filename));
-            String str;
-            while ((str = in.readLine()) != null) {
-                html.append(str);
-            }
-            in.close();
-        } catch (IOException ioe) {
-            // do something
-        }
-        setPageHtml(html.toString());
+
+        setPageHtml(loadContentFile(filename));
 
         SystemUser user = systemUserRemote.get(getAuthenticatedUser().getId());
         user.setLastUnitContentId(unitContent.getId());
@@ -300,5 +279,51 @@ public class ContentInfoAction extends CourseAwareAction {
 
     public void setPageHtml(String pageHtml) {
         this.pageHtml = pageHtml;
+    }    
+    
+    /**
+     * Load a Content File
+     * 
+     * @param filename The File name 
+     * 
+     * @return a String representation of the file contents. 
+     */
+    private String loadContentFile(String filename)  {
+        String content = "";
+        
+        try {
+            File file = new File(filename);
+            
+            // It tries to load from the cache first.
+            // Caches are kept by the complete filename and date of the file
+            // Old files are not removed until the cache is full.
+            String key = filename + file.lastModified();
+            Element cacheElement = cache.get(key);            
+            if (cacheElement != null) {
+                log.debug("retrieved "+ filename + " from cache ");
+                content = (String) cacheElement.getValue();
+            } else {
+                BufferedReader in = null;
+                StringBuilder html = new StringBuilder();
+                try {               
+                    in = new BufferedReader(new FileReader(file));                                       
+                    String str;
+                    while ((str = in.readLine()) != null) {
+                        html.append(str);
+                    }
+                } catch (IOException ioe) {
+                    log.error("Error Reading the File Content:" + filename, ioe);
+                } finally {
+                    if (in != null) in.close();
+                }     
+                content = html.toString();                
+                cache.put(new Element(key, content));
+            }
+        }  catch (Exception e) {
+            log.error("Error Loading Course Content:" + filename, e);
+        }
+        
+        return content;
     }
+    
 }
