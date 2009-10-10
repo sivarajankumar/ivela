@@ -385,7 +385,8 @@ public class CourseBean implements CourseRemote {
             }
         }
 
-        return new Date(timeLeft).getHours() + " hours and " + new Date(timeLeft).getMinutes() + " minutes";
+        Date date = new Date(timeLeft);
+        return (date.getHours()!=0 ? date.getHours() + " hora(s) e ":"") + date.getMinutes() + " minuto(s)";
     }
 
     public void savePhoto(Course p, File file) {
