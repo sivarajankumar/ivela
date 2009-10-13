@@ -23,9 +23,12 @@ package br.ufc.ivela.web.action;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +41,7 @@ import net.sf.ehcache.Element;
 import org.apache.struts2.ServletActionContext;
 
 import br.ufc.ivela.commons.Constants;
+import br.ufc.ivela.commons.challenger.dataobject.FileSystem;
 import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.FinishedUnitContent;
 import br.ufc.ivela.commons.model.Profile;
@@ -303,20 +307,7 @@ public class ContentInfoAction extends CourseAwareAction {
                 log.debug("retrieved "+ filename + " from cache ");
                 content = (String) cacheElement.getValue();
             } else {
-                BufferedReader in = null;
-                StringBuilder html = new StringBuilder();
-                try {               
-                    in = new BufferedReader(new FileReader(file));                                       
-                    String str;
-                    while ((str = in.readLine()) != null) {
-                        html.append(str);
-                    }
-                } catch (IOException ioe) {
-                    log.error("Error Reading the File Content:" + filename, ioe);
-                } finally {
-                    if (in != null) in.close();
-                }     
-                content = html.toString();                
+                content = parseContentFile(file);                
                 cache.put(new Element(key, content));
             }
         }  catch (Exception e) {
@@ -326,4 +317,45 @@ public class ContentInfoAction extends CourseAwareAction {
         return content;
     }
     
+    /**
+     * Parses the Content of a File (Replacing all the dynamic contents)
+     * 
+     * @param file The File to be parsed
+     * 
+     * @return a String with the content properlu parsed.
+     */
+    private String parseContentFile(File file) {                    
+        BufferedReader in = null;
+        StringBuilder html = new StringBuilder();
+        try {               
+            in = new BufferedReader(new FileReader(file));                                       
+            String str;
+            while ((str = in.readLine()) != null) {
+                html.append(str);
+            }
+        } catch (IOException ioe) {
+            log.error("Error Reading the File Content:" + file.getName(), ioe);
+        } finally {
+            try {
+                in.close();
+            } catch (Exception e) {
+                log.debug("Error Closing file:" + file.getName(), e);
+            }
+        }             
+        
+        // Parsing Contents
+        parseContentFileCSS(html);               
+        return html.toString();        
+    }
+    
+    private void parseContentFileCSS(StringBuilder builder) {
+        String css = "@path";
+        int position = -1;
+        while ((position = builder.indexOf(css)) > -1) {
+            builder.replace(position, position + css.length(), course.getId() + File.separator
+                    + discipline.getId() + File.separator + unit.getId() + File.separator
+                    + unitContent.getId());
+        }
+
+    }
 }
