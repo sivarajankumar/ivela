@@ -31,6 +31,30 @@ function showGlobalImage(image,params) {
     document.write('<img src="RenderServlet?file=/'+idCourse+'/'+image+'" '+params+'>');
 }
 
+function showPlayer(sound_file, height, width) {
+    var address = document.location.href;
+    address = address.split(".action")[0];
+    address = address.substring(0, address.lastIndexOf("/") + 1);
+
+    var applet = '<applet code=" br.ufc.ivela.voice.sound.PlayerApplet" archive="applet/ivela_sound.jar, applet/jogg-0.0.7.jar,  applet/jorbis-0.0.15.jar, applet/tritonus_share.jar, applet/vorbisspi1.0.3.jar" ';
+    if (!width) 
+    applet += 'width="75"';
+    else
+        applet += 'width=' + width; 
+    if (!height) 
+    applet += ' height="27"';
+    else
+        applet += ' height=' + height;
+    
+    sound_file = 'RenderServlet?file=/'+idCourse+'/'+idDiscipline+'/'+idUnit+'/'+idUnitContent+'/' + sound_file;
+    applet +=  ' > <param name="audio_url" value="';
+    applet += sound_file;    
+    applet += '"/> <param name="audioHost" value="';
+    applet += address;
+    applet += '" /> </applet>';
+    document.write(applet);
+}
+
 function includeGlobalCss(css) {
     document.write('<link href="RenderServlet?file=/'+idCourse+'/'+css+'" rel="stylesheet" type="text/css" />');
 }
