@@ -37,6 +37,14 @@ public class UnitContentBean implements UnitContentRemote {
         return daoUnitCont.find("from UnitContent uc where uc.unitId = ? order by orderN", new Object[]{idUnit});
     }
 
+    public UnitContent getByDisciplineAndTag(Long idDiscipline,String tag) {
+    	UnitContent unitContent = null;
+    	List<UnitContent> unitContents = daoUnitCont.find("select uc from UnitContent uc,Unit u where uc.unitId=u.id and u.disciplineId=? and uc.tag = ?",new Object[]{idDiscipline,tag}); 
+    	if (!unitContents.isEmpty()) {
+    		unitContent = unitContents.get(0);
+    	}    	
+    	return unitContent;
+    }
  
     public Long add(UnitContent unitContent) {
         return (Long) daoUnitCont.save(unitContent);

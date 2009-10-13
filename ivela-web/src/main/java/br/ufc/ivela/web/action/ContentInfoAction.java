@@ -82,6 +82,7 @@ public class ContentInfoAction extends CourseAwareAction {
     private Unit unit;
     private UnitContent unitContent;    
     private String goToPage;
+    private String goToIndex;
     private String disciplineTag;
     private String unitTag;
     private String pageHtml;
@@ -112,9 +113,12 @@ public class ContentInfoAction extends CourseAwareAction {
     }
 
     private String getFilenameByUnitTag(String unitTag) {
-        unit = unitRemote.get(Long.valueOf(1));
-        unitContent = unitContentRemote.get(Long.valueOf(1));
-        return unit.getId() + "/" + unitContent.getId() + "/" + goToPage;
+    	Long disc = discipline.getId();
+    	if (disc==null) {
+    		disc = Long.valueOf(1);
+    	}
+    	unitContent = unitContentRemote.getByDisciplineAndTag(disc,"lesson1");
+        return unitContent.getUnitId() + "/" + unitContent.getId() + "/" + goToPage;
     }
 
     public String getTimeLeft() {
@@ -123,25 +127,20 @@ public class ContentInfoAction extends CourseAwareAction {
         return "text";
     }
 
-    public String showTocCustom() {        
-        String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + goToPage;
-        if (disciplineTag!=null) {                	
+    public String showContentCustom() {        
+    	String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + goToPage;
+    	SystemUser user = systemUserRemote.get(getAuthenticatedUser().getId());        
+    	if (goToIndex!=null) {
+    		filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + goToPage;    		
+    	} else if (disciplineTag!=null) {                	
         	filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + getFilenameByDisciplineTag(disciplineTag);
         } else if (unitTag!=null) {
         	filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/1/" + getFilenameByUnitTag(unitTag);        		
-       	}
-        
-        setPageHtml(loadContentFile(filename));
-        return "show";
-    }
-
-    public String showContentCustom() {        
-        String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + discipline.getId() + "/" + unit.getId() + "/" + unitContent.getId() + "/" + goToPage;
-        
-        SystemUser user = systemUserRemote.get(getAuthenticatedUser().getId());
-        user.setLastUnitContentId(unitContent.getId());
+       	} else {
+       	  filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + discipline.getId() + "/" + unit.getId() + "/" + unitContent.getId() + "/" + goToPage;
+		  user.setLastUnitContentId(unitContent.getId());
+       	} 
         systemUserRemote.update(user);
-
         setPageHtml(loadContentFile(filename));
         return "show";
     }
@@ -269,6 +268,10 @@ public class ContentInfoAction extends CourseAwareAction {
         this.goToPage = goToPage;
     }
 
+    public void setGoToIndex(String goToIndex) {
+        this.goToIndex = goToIndex;
+    }
+    
     public void setDisciplineTag(String disciplineTag) {
         this.disciplineTag = disciplineTag;
     }

@@ -175,7 +175,7 @@ public class CourseAction extends CourseAwareAction {
         //Get only the first element of grade. There are no multiple grades in progress for a given course.
         Long gradeEnrolled = ((!gradeList.isEmpty())?gradeList.get(0).getId():0);        
         Boolean customToc = course.getCustomToc();
-        String customTocParams = "course.id="+course.getId()+"&grade.id="+gradeEnrolled+"&goToPage=index.html";
+        String customTocParams = "course.id="+course.getId()+"&grade.id="+gradeEnrolled+"&goToIndex=yes&goToPage=index.html";
         StringBuilder json = new StringBuilder();
         json.append("{");
             json.append("\"customToc\":{");
