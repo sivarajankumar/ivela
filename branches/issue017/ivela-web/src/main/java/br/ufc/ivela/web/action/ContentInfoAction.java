@@ -108,16 +108,13 @@ public class ContentInfoAction extends CourseAwareAction {
     }
 
     private String getFilenameByDisciplineTag(String disciplineTag) {
-        discipline = disciplineRemote.get(Long.valueOf(1));
+    	discipline = disciplineRemote.getByCourseAndTag(course.getId(), disciplineTag);
         return discipline.getId() + "/" + goToPage;
     }
 
     private String getFilenameByUnitTag(String unitTag) {
     	Long disc = discipline.getId();
-    	if (disc==null) {
-    		disc = Long.valueOf(1);
-    	}
-    	unitContent = unitContentRemote.getByDisciplineAndTag(disc,"lesson1");
+    	unitContent = unitContentRemote.getByDisciplineAndTag(disc,unitTag);
         return unitContent.getUnitId() + "/" + unitContent.getId() + "/" + goToPage;
     }
 
