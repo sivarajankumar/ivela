@@ -77,6 +77,9 @@ public class UnitContent implements Serializable {
     @Transient
     private Unit unit;
 
+    @Column(name="tag")
+    private String tag;
+    
     private Integer type;
 
     @Column(name = "width")
@@ -151,6 +154,14 @@ public class UnitContent implements Serializable {
         this.unitId = unitId;
     }
 
+    public void setTag(String tag) {
+    	this.tag = tag;
+    }
+    
+    public String getTag() {
+    	return tag;
+    }
+    
     public Integer getType() {
         return type;
     }

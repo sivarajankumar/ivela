@@ -119,7 +119,7 @@ function showDisciplines(params) {
     if(customToc=='true') {
         var html = '';     
         
-        html += "<h4 class='accordion_toggle2'><a href='#' onclick='javascript:fullScreen(\"contentInfo!showTocCustom.action?"+customTocParams+"\");'>"+msg+"</a></h4>";
+        html += "<h4 class='accordion_toggle2'><a href='#' onclick='javascript:fullScreen(\"contentInfo!showContentCustom.action?"+customTocParams+"\");'>"+msg+"</a></h4>";
         $('vertical_container2').innerHTML = html;
     } else {
 	    new Ajax.Request('discipline!listByCourse.action?' + params,
