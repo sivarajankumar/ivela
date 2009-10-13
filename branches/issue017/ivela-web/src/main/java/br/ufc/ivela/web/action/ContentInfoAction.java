@@ -305,6 +305,7 @@ public class ContentInfoAction extends CourseAwareAction {
             Element cacheElement = cache.get(key);            
             if (cacheElement != null) {
                 log.debug("retrieved "+ filename + " from cache ");
+                content = parseContentFile(file);
                 content = (String) cacheElement.getValue();
             } else {
                 content = parseContentFile(file);                
@@ -344,11 +345,13 @@ public class ContentInfoAction extends CourseAwareAction {
         }             
         
         // Parsing Contents
-        parseContentFileCSS(html);               
+        parseContentFilePath(html);
+        parseContentFileCSS(html);
+        
         return html.toString();        
     }
-    
-    private void parseContentFileCSS(StringBuilder builder) {
+
+    private void parseContentFilePath(StringBuilder builder) {
         String css = "@path";
         int position = -1;
         while ((position = builder.indexOf(css)) > -1) {
@@ -357,5 +360,13 @@ public class ContentInfoAction extends CourseAwareAction {
                     + unitContent.getId());
         }
 
+    }
+    
+    private void parseContentFileCSS(StringBuilder builder) {
+        
+    }
+    
+    private void parseContentFileApplets(StringBuilder builder) {
+        
     }
 }
