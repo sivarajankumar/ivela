@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +62,8 @@ import br.ufc.ivela.util.PropertiesUtil.IVELA_PROPERTIES;
 
 public class ContentInfoAction extends CourseAwareAction {
 
+    private static final String DEFAULT_RENDERER = "RenderServlet";
+    
     private static Cache cache;
     
     static {
@@ -354,19 +357,42 @@ public class ContentInfoAction extends CourseAwareAction {
     private void parseContentFilePath(StringBuilder builder) {
         String css = "@path";
         int position = -1;
-        while ((position = builder.indexOf(css)) > -1) {
+        int tempPosition = 0;
+        while ((position = builder.indexOf(css, tempPosition)) > -1) {
             builder.replace(position, position + css.length(), course.getId() + File.separator
                     + discipline.getId() + File.separator + unit.getId() + File.separator
                     + unitContent.getId());
+            tempPosition = position + 1;
         }
-
     }
     
     private void parseContentFileCSS(StringBuilder builder) {
-        
-    }
+        String css = "@import";        
+        String path = DEFAULT_RENDERER + "?file=" + course.getId() + File.separator
+        + discipline.getId() + File.separator + unit.getId() + File.separator
+        + unitContent.getId() + '/';
+        int position = -1;
+        int tempPosition = 0;
+        while ((position = builder.indexOf(css, tempPosition)) > -1) {            
+            int start = builder.indexOf("'", position + 1);
+            int start_2 = builder.indexOf("\"", position + 1);
+            start = start < 0? builder.length() - 1: start;
+            start_2 = start_2 < 0? builder.length() - 1 : start_2;
+            start = start > start_2? start_2 : start;
+            builder.insert(start + 1,  path);
+            tempPosition = start;
+        }
+    }        
     
-    private void parseContentFileApplets(StringBuilder builder) {
+    private String extractValue(StringBuilder builder, int initPost, int endPos, String separator) {
+        String value = "";
+        int start = builder.indexOf(separator);
+        int end = builder.indexOf(separator, start + 1);
         
+        if (end < endPos) {
+            value = builder.substring(start + 1, end); 
+        }
+        
+        return value;
     }
 }
