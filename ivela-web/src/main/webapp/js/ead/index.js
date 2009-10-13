@@ -98,11 +98,9 @@ function fullScreen(theURL) {
 	
 		strWidth = screen.availWidth - 10;
 		strHeight = screen.availHeight - 10;
-	
-
-	
+		
 	if (window.showModalDialog) {
-		window.showModalDialog(theURL, window, "dialogHeight:"+strHeight+"px;dialogWidth:"+strWidth+"px;center=yes");	
+		window.showModalDialog(theURL, window, "dialogHeight:"+strHeight+"px;dialogWidth:"+strWidth+"px;center=yes;dialogHide:yes;edge:sunken;resizable:no;scroll:no;status:no;unadorned:no");	
 	} else {
 		window.open(theURL, '', 'toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,fullscreen=yes');
 		
