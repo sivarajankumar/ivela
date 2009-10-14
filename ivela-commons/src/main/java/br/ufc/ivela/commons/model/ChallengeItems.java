@@ -41,7 +41,7 @@ public class ChallengeItems implements Serializable {
     private static final long serialVersionUID = 1L;
     
     /** Default weight for a challenge */
-    public static final int DEFAULT_WEIGHT = 10;
+    public static final int DEFAULT_WEIGHT = 1;
     
     /** Default OR separator used in the answer fields **/
     public static final String ANSWER_OR_SEPARATOR = "\\[or\\]";

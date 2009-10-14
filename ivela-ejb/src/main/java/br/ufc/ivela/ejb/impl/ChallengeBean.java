@@ -275,23 +275,28 @@ public class ChallengeBean implements ChallengeRemote {
                 // Leverages the weight of the exercise                
                 Transcript transcript = transcripts.get(0);
                 double average = transcript.getAverageChallenge();                
-                double challengesDone = (double) transcript.getChallengesWeight();                                
+                double challengesDone = (double) transcript.getChallengesWeight();
+                double total = transcript.getChallengesTotal();
                 int numberChallenges = transcript.getChallengesDone();
                 if (currentStats != null) {
                     // The student has done the exercise before
                     average = (average * challengesDone)
-                            - (currentStats.getChallvalue() * weight);                                       
+                            - (currentStats.getChallvalue() * weight);
+                    total = total - (currentStats.getChallvalue() * weight);
                 } else {
                     average = (average * challengesDone);                    
                     challengesDone = challengesDone + weight;
                     numberChallenges++;
                 }
 
+                total = total + (result * weight);
+                
                 if (challengesDone > 0)
                     average = (average + (result * weight)) / challengesDone;
                 else
                     average = 0; // Should not be possible
                 
+                transcript.setChallengesTotal(total);
                 transcript.setAverageChallenge(average);                
                 transcript.setChallengesDone(numberChallenges);
                 transcript.setChallengesWeight((int) challengesDone);

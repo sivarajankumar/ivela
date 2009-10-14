@@ -71,7 +71,7 @@ ALTER TABLE course ADD COLUMN custom_toc boolean DEFAULT false;
 --
 -- Start Challenge Modifications
 --
-ALTER TABLE challenge_items ADD COLUMN weight integer NOT NULL DEFAULT 10;
+ALTER TABLE challenge_items ADD COLUMN weight integer NOT NULL DEFAULT 1;
 ALTER TABLE challenge ADD COLUMN unit_id integer NOT NULL DEFAULT 0;
 ALTER TABLE challenge ADD COLUMN retries smallint NOT NULL DEFAULT 0;
 ALTER TABLE course DROP COLUMN challenge_itens_enabled;
@@ -82,6 +82,8 @@ CREATE INDEX index_challenge_by_name_course ON challenge_items(course, name);
 ALTER TABLE transcript ADD COLUMN average_challenge numeric(7,2) DEFAULT 0;
 ALTER TABLE transcript ADD COLUMN challenges_done smallint DEFAULT 0;
 ALTER TABLE transcript ADD COLUMN challenges_weight integer DEFAULT 0;
+ALTER TABLE transcript ADD COLUMN challenges_total numeric(10,2) DEFAULT 0;
+UPDATE challenge_items set weight=1 where name LIKE '%'
 
 --
 -- End of Challenge Modifications
