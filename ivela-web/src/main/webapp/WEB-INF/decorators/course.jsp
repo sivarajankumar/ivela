@@ -69,7 +69,7 @@
 
     %>
 
-    <body>
+    <body <decorator:getProperty property="body.onload" writeEntireProperty="true" />>
 
     <div id="container">
        <div id="header">

@@ -22,4 +22,8 @@
 
 <cache name="contentInfoCache" maxElementsInMemory="2000" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LRU" />
 
+<cache name="renderTextServletCache" maxElementsInMemory="4000" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LFU" />
+
+<cache name="renderBinaryServletCache" maxElementsInMemory="4000" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LFU" />
+
 </ehcache>
