@@ -174,7 +174,7 @@ function displayChat() {
 	strHeight = screen.availHeight - 80;
 	var showUrl = 'course!showChatStd.action?courseId='+idCourse+'&disciplineId='+idDiscipline;
 	var home = new Ext.Window({
-	       title: 'Forum',
+	       title: 'Chat',
 	       width: strWidth,
 	       height:strHeight,
 	       minWidth: strWidth-100,
