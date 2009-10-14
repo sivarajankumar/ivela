@@ -198,7 +198,9 @@ public class PostAction extends CourseAwareAction {
      *         error view, otherwise
      */
     public String remove() {
-        // verifies if topicId is set                                
+        // verifies if topicId is set
+        post = postRemote.get(post.getId());
+        topic = post.getTopic();        
         performValidationRemove();
         if (!hasActionErrors()) {
             try {
@@ -208,6 +210,8 @@ public class PostAction extends CourseAwareAction {
                 addActionError(getText("post.input.error.remove"));   
             }
         }
+        topic = topicRemote.get(topic.getId());
+        forum = topic.getForum();
         return list();
     }
 
