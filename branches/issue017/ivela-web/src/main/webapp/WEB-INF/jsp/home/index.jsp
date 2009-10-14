@@ -49,8 +49,10 @@
         var it_nodisciplines = '<s:text name="home.nodisciplines" />';
         var it_nounits = '<s:text name="home.nounits" />';
         var it_nounitcontents = '<s:text name="home.nounitcontents" />';
-        var it_gotocourse = '<s:text name="home.gotocourse" />';
+        var it_gotocourse = '<s:text name="home.gotocourse" />';        
         -->
+        var tabslist=0;
+     	var win=0;
     </script>
     <link href="css/accordion.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/ead/tools.js"></script>

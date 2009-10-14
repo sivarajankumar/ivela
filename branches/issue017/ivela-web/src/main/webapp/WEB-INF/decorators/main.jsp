@@ -53,6 +53,18 @@
         <script type="text/javascript" src="js/scriptaculous/effects.js"></script>
         <script type="text/javascript" src="js/scriptaculous/lightwindow.js"></script>
 
+<link rel="stylesheet" type="text/css" href="js/ext/resources/css/ext-all.css">
+ 
+		  <!-- Include here your own css files if you have them. -->
+ 
+		  <!-- First of javascript includes must be an adapter... -->
+		  <script type="text/javascript" src="js/ext/adapter/ext/ext-base.js"></script>
+		 
+		  <!-- ...then you need the Ext itself, either debug or production version. -->
+		  <script type="text/javascript" src="js/ext/ext-all-debug.js"></script>
+		  <script type="text/javascript" src="js/ext/miframe.js"></script>
+
+
         <decorator:head />
     </head>
     <%
@@ -63,10 +75,13 @@
 
         if (obj instanceof UserDetails) {
             systemUser = (SystemUser) obj;
-        }
-
+        }       
+        
     %>
-
+     <script>
+     	var tabs=0;
+     	var win=0;
+     </script>
     <body>
 
         <div id="container">

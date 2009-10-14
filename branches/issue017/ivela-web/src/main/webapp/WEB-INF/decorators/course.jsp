@@ -44,9 +44,6 @@
             </script>            
         <![endif]-->        
         <script type="text/javascript" src="js/prototype/prototype.js"></script>
-        <script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>
-        <script type="text/javascript" src="js/scriptaculous/effects.js"></script>
-        <script type="text/javascript" src="js/scriptaculous/lightwindow.js"></script>        
         <script type="text/javascript">
             var idCourse = '<s:property value="course.id" />' 
             var idDiscipline = '<s:property value="discipline.id" />'
