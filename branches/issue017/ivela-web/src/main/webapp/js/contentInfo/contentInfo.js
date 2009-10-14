@@ -157,15 +157,12 @@ function showImage(image) {
     document.write('<img src="RenderServlet?file=/'+idCourse+'/'+idDiscipline+'/'+idUnit+'/'+idUnitContent+'/'+image+'">');
 }
 
-function isUnlocked(unitContentTag) {
-    if ("true"==getHtml('contentInfo!isUnlocked.action?grade.id='+idGrade+'&unitContent.tag='+unitContentTag)) {
-        document.write('<img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_acesse.png">');
-    }
-}
-
-function isCompleted(unitContentTag) {
+function labelUnitStatus(unitContentTag, goToPage) {
+    var onClickFunc = "goToUnit('"+unitContentTag+"', '"+goToPage+"');";
     if ("true"==getHtml('contentInfo!isCompleted.action?unitContent.tag='+unitContentTag)) {
-        document.write('<img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_concluido.png">');
+        document.write('<a href="#" onclick="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_concluido.png"></a>');
+    } else if ("true"==getHtml('contentInfo!isUnlocked.action?grade.id='+idGrade+'&unitContent.tag='+unitContentTag)) {
+        document.write('<a href="#" onclick="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_acesse.png"></a>');
     }
 }
 

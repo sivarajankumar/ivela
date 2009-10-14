@@ -59,7 +59,7 @@ public class GradeUnitContentBean implements GradeUnitContentRemote {
             Date startDate = guc.getStartDatetime();
             Date finishDate = guc.getFinishDatetime();
 
-            if (actualDate.before(startDate) && actualDate.after(finishDate)) {
+            if (actualDate.before(startDate) || actualDate.after(finishDate)) {
                 isUnlocked = false;
             }
         }
