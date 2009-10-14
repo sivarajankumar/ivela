@@ -1,3 +1,4 @@
+var progressArrowCont = 0;
 
 function goToPage(goToPage) {
     window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitContent.id='+idUnitContent+'&goToPage='+goToPage;
@@ -15,11 +16,29 @@ function displayUserName() {
     document.write(getHtml('contentInfo!getSystemUser.action'));
 }
 
-function getProgress() {
-    document.write(getHtml('contentInfo!getProgress.action?course.id='+idCourse));
+function ProgressCourse() {
+    var progress = getHtml('contentInfo!getProgress.action?course.id='+idCourse);
+    for (j=0 ; j < 10 ; j++) {
+        if(j < progress) {
+            document.write('<img src="RenderServlet?file=/'+idCourse+'/'+idDiscipline+'/'+idUnit+'/'+idUnitContent+'/images/home_andamento_feito.gif" />');
+            progressArrowCont += 11;
+        } else {
+            document.write('<img src="RenderServlet?file=/'+idCourse+'/'+idDiscipline+'/'+idUnit+'/'+idUnitContent+'/images/home_andamento_falta.gif" />');
+        }
+    }
+    addLoadEvent(ProgressCourseArrow);
 }
 
-function getTimeLeft() {
+function ProgressCourseArrow() {
+    var arr = document.getElementsByTagName("div");
+    for (i = 0; i < arr.length; i++) {
+        if (arr[i].className == "home_andamento_seta") {
+           arr[i].style.left = progressArrowCont+"px";
+        }
+    }
+}
+
+function getTimeRemaining() {
     document.write(getHtml('contentInfo!getTimeLeft.action?course.id='+idCourse));
 }
 
@@ -79,6 +98,10 @@ function displayChat() {
     window.open('course!showChatStd.action?courseId='+idCourse+'&disciplineId='+idDiscipline, '');
 }
 
+function fechar() {
+    window.close();
+}
+
 /*************************/
 /** Auxiliary Functions **/
 /*************************/
@@ -115,31 +138,19 @@ function getJson(strUrl) {
     return json;
 }
 
-/*function goToPage(goToPage) {
-    document.body.innerHTML = getHtml('contentInfo!showContent.action?course.id='+idCourse+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitContent.id='+idUnitContent+'&goToPage='+goToPage);
+function addLoadEvent(func) {
+    var oldonload = window.onload;
+    if (typeof window.onload != 'function') {
+        window.onload = func;
+    } else {
+        window.onload = function() {
+            if (oldonload) {
+                oldonload();
+            }
+            func();
+        }
+    }
 }
-function goToPage(goToPage) {
-    window.location = 'http://localhost:8080/ivela-web/discipline!showContent.action?course.id=2&discipline.id=1&unit.id=1';
-}
-function goToPage(goToPage) {
-    window.location = 'RenderServlet?file=/'+idCourse+'/'+idDiscipline+'/'+idUnit+'/'+idUnitContent+'/'+goToPage;
-}
-function goToPage(goToPage) {
-    var html = getHtml('http://localhost:8080/ivela-web/RenderServlet?file=/2/1/1/1/'+goToPage);    document.body.innerHTML = html;}
-function previousPage(previousPage) {
-    alert(previousPage);
-}
-
-function nextPage(nextPage) {
-    alert(nextPage);
-}
-function getCurrentLocation() {
-    currentLocation = getJson();
-}*/
-
-
-
-
 
 /*************************/
 /*** Challenges Section **/

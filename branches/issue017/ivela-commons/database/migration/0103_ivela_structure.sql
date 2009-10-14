@@ -90,6 +90,6 @@ ALTER TABLE transcript ADD COLUMN challenges_weight integer DEFAULT 0;
 --- Content modifications
 ALTER TABLE discipline ADD COLUMN tag character varying(20);
 ALTER TABLE unit_content ADD COLUMN tag character varying(20);
-update discipline set tag = SUBSTRING(LOWER(REPLACE(name, ' ', '')),1,20)
-update unit_content set tag = SUBSTRING(LOWER(REPLACE(title, ' ', '')),1,20)
+UPDATE discipline SET tag = SUBSTRING(LOWER(REPLACE(name, ' ', '')),1,20);
+UPDATE unit_content SET tag = SUBSTRING(LOWER(REPLACE(title, ' ', '')),1,20);
 --- End of Content Modifications
