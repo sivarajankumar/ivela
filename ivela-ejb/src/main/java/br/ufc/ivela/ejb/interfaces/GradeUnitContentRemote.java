@@ -17,5 +17,7 @@ public interface GradeUnitContentRemote {
 
     public boolean isUnlocked(Long gradeId, Long unitContentId);
 
+    public boolean isUnlocked(Long gradeId, String unitContentTag);
+
     public boolean sendMail(Long gradeId, Long unitContentId);
 }

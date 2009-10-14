@@ -27,6 +27,7 @@ function displayUserName() {
 
 function ProgressCourse() {
     var progress = getHtml('contentInfo!getProgress.action?course.id='+idCourse);
+    progressArrowCont = 0;
     for (j=0 ; j < 10 ; j++) {
         if(j < progress) {
             document.write('<img src="RenderServlet?file=/'+idCourse+'/'+idDiscipline+'/'+idUnit+'/'+idUnitContent+'/images/home_andamento_feito.gif" />');
@@ -133,12 +134,16 @@ function showImage(image) {
     document.write('<img src="RenderServlet?file=/'+idCourse+'/'+idDiscipline+'/'+idUnit+'/'+idUnitContent+'/'+image+'">');
 }
 
-function isUnlocked() {
-    document.write(getHtml('contentInfo!isUnlocked.action?grade.id='+idGrade+'&unitContent.id='+idUnitContent));
+function isUnlocked(unitContentTag) {
+    if ("true"==getHtml('contentInfo!isUnlocked.action?grade.id='+idGrade+'&unitContent.tag='+unitContentTag)) {
+        document.write('<img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_acesse.png">');
+    }
 }
 
-function isCompleted() {
-    document.write(getHtml('contentInfo!isCompleted.action?systemUser.id='+70+'&unitContent.id='+idUnitContent+'&grade.id='+idGrade));
+function isCompleted(unitContentTag) {
+    if ("true"==getHtml('contentInfo!isCompleted.action?unitContent.tag='+unitContentTag)) {
+        document.write('<img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_concluido.png">');
+    }
 }
 
 function finishLesson() {
