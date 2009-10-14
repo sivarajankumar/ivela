@@ -23,13 +23,9 @@ package br.ufc.ivela.web.action;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +38,6 @@ import net.sf.ehcache.Element;
 import org.apache.struts2.ServletActionContext;
 
 import br.ufc.ivela.commons.Constants;
-import br.ufc.ivela.commons.challenger.dataobject.FileSystem;
 import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.FinishedUnitContent;
 import br.ufc.ivela.commons.model.Profile;
@@ -90,6 +85,8 @@ public class ContentInfoAction extends CourseAwareAction {
     private String unitTag;
     private String pageHtml;
 
+    private String path;
+    
     public String getSystemUser() {
         Profile profile = profileRemote.getBySystemUserId(getAuthenticatedUser().getId());
         String name = profile.getFirstName()+" "+profile.getLastName();
@@ -346,10 +343,16 @@ public class ContentInfoAction extends CourseAwareAction {
                 log.debug("Error Closing file:" + file.getName(), e);
             }
         }             
+       
+        path = DEFAULT_RENDERER + "?file=" + course.getId() + File.separator + discipline.getId()
+        + File.separator + unit.getId() + File.separator + unitContent.getId() + '/';
         
         // Parsing Contents
         parseContentFilePath(html);
         parseContentFileCSS(html);
+        parseContentFileImg(html);
+        parseContentFileInput(html);
+        parseContentFileJS(html);
         
         return html.toString();        
     }
@@ -368,9 +371,7 @@ public class ContentInfoAction extends CourseAwareAction {
     
     private void parseContentFileCSS(StringBuilder builder) {
         String css = "@import";        
-        String path = DEFAULT_RENDERER + "?file=" + course.getId() + File.separator
-        + discipline.getId() + File.separator + unit.getId() + File.separator
-        + unitContent.getId() + '/';
+        
         int position = -1;
         int tempPosition = 0;
         while ((position = builder.indexOf(css, tempPosition)) > -1) {            
@@ -383,10 +384,83 @@ public class ContentInfoAction extends CourseAwareAction {
             tempPosition = start;
         }
     }        
+        
+    private void parseContentFileJS(StringBuilder builder) {
+        String input = "<script";
+        String src = "src=";
+        String type = "type";
+        String end = ">";
+        
+        int position = -1;
+        int tempPosition = 0;
+        while ((position = builder.indexOf(input, tempPosition)) > -1) {
+            int typePos = builder.indexOf(type, position + 1);
+            int endPos = builder.indexOf(end, position + 1);
+            typePos = typePos < 0? builder.length() : typePos;            
+            
+            if (typePos > endPos) {
+                tempPosition = position + 1;
+                continue;
+            }
+            
+            String typeOfInput = extractValue(builder, typePos, endPos, "\"");
+            typeOfInput = typeOfInput.equals("")? extractValue(builder, typePos, endPos, "'") : typeOfInput;
+            
+            if (typeOfInput.equalsIgnoreCase("text/javascript")) {
+                int srcPos = builder.indexOf(src, position + 1);
+                builder.insert(srcPos + src.length() + 1,  path);                   
+            }            
+            
+            tempPosition = position + 1;
+        }
+    }    
+
+    private void parseContentFileImg(StringBuilder builder) {
+        String img = "<img";
+        String src = "src=";        
+        
+        int position = -1;
+        int tempPosition = 0;
+        while ((position = builder.indexOf(img, tempPosition)) > -1) {
+            int srcPos = builder.indexOf(src, position + 1);
+            builder.insert(srcPos + src.length() + 1,  path);
+            tempPosition = position + 1;
+        }
+    }
+    
+    private void parseContentFileInput(StringBuilder builder) {
+        String input = "<input";
+        String src = "src=";
+        String type = "type";
+        String end = ">";
+        
+        int position = -1;
+        int tempPosition = 0;
+        while ((position = builder.indexOf(input, tempPosition)) > -1) {
+            int typePos = builder.indexOf(type, position + 1);
+            int endPos = builder.indexOf(end, position + 1);
+            typePos = typePos < 0? builder.length() : typePos;            
+            
+            if (typePos > endPos) {
+                tempPosition = position + 1;
+                continue;
+            }
+            
+            String typeOfInput = extractValue(builder, typePos, endPos, "\"");
+            typeOfInput = typeOfInput.equals("")? extractValue(builder, typePos, endPos, "'") : typeOfInput;
+            
+            if (typeOfInput.equalsIgnoreCase("image")) {
+                int srcPos = builder.indexOf(src, position + 1);
+                builder.insert(srcPos + src.length() + 1,  path);                   
+            }            
+            
+            tempPosition = position + 1;
+        }
+    }
     
     private String extractValue(StringBuilder builder, int initPost, int endPos, String separator) {
         String value = "";
-        int start = builder.indexOf(separator);
+        int start = builder.indexOf(separator, initPost);
         int end = builder.indexOf(separator, start + 1);
         
         if (end < endPos) {

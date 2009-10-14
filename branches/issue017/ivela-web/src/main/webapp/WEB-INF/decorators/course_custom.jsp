@@ -65,7 +65,7 @@
 
     %>
 
-    <body>
+    <body <decorator:getProperty property="body.onload" writeEntireProperty="true" />>
     <decorator:body/>    
   </body>
 </html>

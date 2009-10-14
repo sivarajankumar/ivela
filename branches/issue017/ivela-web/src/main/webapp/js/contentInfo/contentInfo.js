@@ -11,7 +11,7 @@ function goToUnit(unitTag,goToPage) {
     window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitTag='+unitTag+'&goToPage='+goToPage;
 }
 
-function getSystemUser() {
+function displayUserName() {
     document.write(getHtml('contentInfo!getSystemUser.action'));
 }
 
