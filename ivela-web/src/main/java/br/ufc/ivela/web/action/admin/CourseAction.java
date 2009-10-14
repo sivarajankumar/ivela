@@ -301,13 +301,13 @@ public class CourseAction extends CourseAwareAction {
 
         return "show";
     }
-    
-    public String showChat(){
-        discipline = disciplineRemote.get(disciplineId);
-        this.nick = this.getAuthenticatedUser().getUsername();
-        this.chatRoomName = "#course_"+courseId+"_"+discipline.getId()+"_"+discipline.getName(); 
-        this.teacherName = this.nick;
 
+    public String showChat() {
+        course = courseRemote.get(courseId);
+        grade = gradeRemote.get(grade.getId());
+        this.nick = this.getAuthenticatedUser().getUsername();
+        this.chatRoomName = "#course_"+course.getName()+"_grade_"+grade.getName();
+        this.teacherName = this.nick;
         return "chat";
     }
 

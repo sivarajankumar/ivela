@@ -75,6 +75,10 @@ function finishLesson() {
     document.write(getHtml('contentInfo!finishLesson.action?course.id='+idCourse+'&systemUser.id='+70+'&unitContent.id='+idUnitContent+'&grade.id='+idGrade));
 }
 
+function displayChat() {
+    window.open('course!showChatStd.action?courseId='+idCourse+'&disciplineId='+idDiscipline, '');
+}
+
 /*************************/
 /** Auxiliary Functions **/
 /*************************/

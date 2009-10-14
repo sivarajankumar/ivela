@@ -63,6 +63,10 @@
             else
                 countfield.value = maxlimit - field.value.length;
         }
+
+        function showChat(courseId, gradeId) {
+            window.open('course!showChat.action?courseId='+courseId+'&grade.id='+gradeId, '');
+        }
     </script>
         <style>
 
@@ -719,6 +723,7 @@
                             <li><a  class ="icon-new" href="javascript:showEntryForum($('grade.id').value)" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"><s:text name="forum.input.list" /></a></li>
                             <li><a class="icon-newsFlash" href="javascript:showSendNewsFlash('grade.newsflash');"><s:text name= "student.send.newsflash" /></a></li>
                             <li><a class="icon-message" href="javascript:showSendMessage('grade.message');"><s:text name= "student.send.message" /></a></li>
+                            <li><a id="chatId" class="icon-chat" href="javascript:showChat($('course.id').value, $('grade.id').value);"><s:text name= "course.show.chat" /></a></li>
 
                             <br class="clear" />
                         </ul>
