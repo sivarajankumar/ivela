@@ -31,6 +31,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -44,12 +45,14 @@ import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.FinishedUnitContent;
 import br.ufc.ivela.commons.model.Profile;
 import br.ufc.ivela.commons.model.SystemUser;
+import br.ufc.ivela.commons.model.Transcript;
 import br.ufc.ivela.commons.model.Unit;
 import br.ufc.ivela.commons.model.UnitContent;
 import br.ufc.ivela.ejb.interfaces.CourseRemote;
 import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
 import br.ufc.ivela.ejb.interfaces.FinishedUnitContentRemote;
 import br.ufc.ivela.ejb.interfaces.GradeUnitContentRemote;
+import br.ufc.ivela.ejb.interfaces.HistoryRemote;
 import br.ufc.ivela.ejb.interfaces.ProfileRemote;
 import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 import br.ufc.ivela.ejb.interfaces.UnitContentRemote;
@@ -68,15 +71,14 @@ public class ContentInfoAction extends CourseAwareAction {
     } 
     
     private InputStream inputStream;   
-
-    private CourseRemote courseRemote;
+    
     private DisciplineRemote disciplineRemote;
     private UnitRemote unitRemote;
     private UnitContentRemote unitContentRemote;
     private GradeUnitContentRemote gradeUnitContentRemote;
     private FinishedUnitContentRemote finishedUnitContentRemote;
     private SystemUserRemote systemUserRemote;
-    private ProfileRemote profileRemote;
+    private ProfileRemote profileRemote;    
 
     private Discipline discipline;
     private Unit unit;
@@ -89,6 +91,7 @@ public class ContentInfoAction extends CourseAwareAction {
 
     private String path;
     private String replacePath;
+    private String scoreType;
     
     public String getSystemUser() {
         Profile profile = profileRemote.getBySystemUserId(getAuthenticatedUser().getId());
@@ -129,6 +132,83 @@ public class ContentInfoAction extends CourseAwareAction {
         return "text";
     }
 
+    public String getTutorsEmail() {
+        grade = gradeRemote.get(grade.getId());
+        Set<SystemUser> tutors = grade.getTutors();         
+        StringBuilder builder = new StringBuilder();
+        builder.append("mailto:");
+        for (SystemUser tutor: tutors) {
+            builder.append(tutor.getEmail());
+            builder.append(',');            
+        }
+        
+        // No Tutors? Try Professors
+        if (builder.length() == 7) {         
+            Set<SystemUser> professors = grade.getProfessors();
+            for (SystemUser professor: professors) {
+                builder.append(professor.getEmail());
+                builder.append(',');            
+            }            
+        }
+        
+        // No Professors too?!? Coordinator!
+        if (builder.length() == 7) {            
+            SystemUser coord = systemUserRemote.get(grade.getCoordinatorId());
+            builder.append(coord.getEmail());
+            builder.append(',');
+        }
+        
+        if (builder.length() > 7) {
+            builder.deleteCharAt(builder.length() - 1);
+            builder.append("?subject=[iVela] ");
+            builder.append(getText("grade.contact.questions"));
+            builder.append(' ');
+            builder.append(grade.getName());            
+            if (unitContent != null && unitContent.getId() != null) {
+                builder.append(' ');
+                builder.append('-');
+                builder.append(' ');
+                unitContent = unitContentRemote.get(unitContent.getId());
+                builder.append(unitContent.getTitle());                
+            }            
+        }
+        
+        setInputStream(new ByteArrayInputStream(builder.toString().getBytes()));
+        return "text";
+    }
+    
+    public String getScore() {
+        SystemUser user = getAuthenticatedUser();
+        List<Transcript> transcripts = historyRemote.getTranscriptsByStudentByGrade(user.getId(), grade.getId());
+        
+        if (transcripts.size() < 0) return "";
+        
+        Transcript transcript = transcripts.get(0);
+        StringBuilder builder = new StringBuilder();
+        int total = (int) transcript.getChallengesTotal().doubleValue();                
+        builder.append(total);
+        if (scoreType.equals("current")) {
+            builder.append(' ');
+            int currentP = transcript.getChallengesWeight() * Transcript.DEFAULT_GRADE;
+            builder.append(getText("history.of"));
+            builder.append(' ');
+            builder.append(currentP);
+        } else if (scoreType.equals("total")) {
+            builder.append(' ');
+            course = courseRemote.get(course.getId());
+            int totalP = course.getChallengeWeight() * Transcript.DEFAULT_GRADE;
+            builder.append(getText("history.of"));
+            builder.append(' ');
+            builder.append(totalP);
+        }
+        builder.append(' ');
+        builder.append(getText("history.points"));
+        
+        setInputStream(new ByteArrayInputStream(builder.toString().getBytes()));
+        
+        return "text";
+    }
+    
     public String showContentCustom() {        
     	String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + goToPage;
     	SystemUser user = systemUserRemote.get(getAuthenticatedUser().getId());        
@@ -216,10 +296,6 @@ public class ContentInfoAction extends CourseAwareAction {
         this.inputStream = inputStream;
     }
 
-    public void setCourseRemote(CourseRemote courseRemote) {
-        this.courseRemote = courseRemote;
-    }
-
     public void setGradeUnitContentRemote(GradeUnitContentRemote gradeUnitContentRemote) {
         this.gradeUnitContentRemote = gradeUnitContentRemote;
     }
@@ -295,6 +371,21 @@ public class ContentInfoAction extends CourseAwareAction {
     public void setPageHtml(String pageHtml) {
         this.pageHtml = pageHtml;
     }    
+    
+    /**
+     * @param scoreType the scoreType to set
+     */
+    public void setScoreType(String scoreType) {
+        this.scoreType = scoreType;
+    }
+
+    /**
+     * @return the scoreType
+     */
+    public String getScoreType() {
+        if (scoreType == null) return "";
+        return scoreType;
+    }
     
     /**
      * Load a Content File
@@ -479,4 +570,5 @@ public class ContentInfoAction extends CourseAwareAction {
         
         return value;
     }
+
 }

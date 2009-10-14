@@ -85,7 +85,7 @@ public abstract class GenericAction extends ActionSupport {
     /** Common Logging interface */
     protected Log log = LogFactory.getLog(this.getClass());
     
-    private HistoryRemote historyRemote;
+    protected HistoryRemote historyRemote;
     private HistoryParamsRemote historyParamsRemote;        
     private SystemUser systemUser;       
     protected String authority;

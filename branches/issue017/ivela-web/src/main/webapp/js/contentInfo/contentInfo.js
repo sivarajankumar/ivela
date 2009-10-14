@@ -1,15 +1,24 @@
 var progressArrowCont = 0;
 
+function goToHome(goToPage) {
+    var url ="contentInfo!showContentCustom.action?course.id="+idCourse+"&grade.id="+idGrade+"&goToIndex=yes&goToPage=";
+    if (!goToPage)
+        url += "index.html";
+    else
+        url += goToPage;            
+    window.location = url;
+}
+
 function goToPage(goToPage) {
-    window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitContent.id='+idUnitContent+'&goToPage='+goToPage;
+    window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitContent.id='+idUnitContent+'&goToPage='+goToPage;
 }
 
 function goToDiscipline(disciplineTag) {
-    window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+'&disciplineTag='+disciplineTag+'&goToPage=table_contents.html';
+    window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&disciplineTag='+disciplineTag+'&goToPage=table_contents.html';
 }
 
 function goToUnit(unitTag,goToPage) {
-    window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitTag='+unitTag+'&goToPage='+goToPage;
+    window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitTag='+unitTag+'&goToPage='+goToPage;
 }
 
 function displayUserName() {
@@ -40,6 +49,24 @@ function ProgressCourseArrow() {
 
 function getTimeRemaining() {
     document.write(getHtml('contentInfo!getTimeLeft.action?course.id='+idCourse));
+}
+
+function getScoreOnly() {
+    document.write(getHtml('contentInfo!getScore.action?grade.id='+idGrade+"&ScoreType=only"));
+}
+
+//
+function getScore() {
+    document.write(getHtml('contentInfo!getScore.action?grade.id='+idGrade+"&ScoreType=current"));
+}
+
+// Total Score for the User for a course
+function getScoreTotal() {
+    document.write(getHtml('contentInfo!getScore.action?course.id='+idCourse+"&grade.id="+idGrade+"&ScoreType=total"));
+}
+
+function displayTutor() {    
+    window.open(getHtml('contentInfo!getTutorsEmail.action?grade.id='+idGrade+'&unitContent.id='+idUnitContent));
 }
 
 function showGlobalImage(image) {
@@ -74,6 +101,30 @@ function showPlayer(sound_file, height, width) {
     document.write(applet);
 }
 
+function showRecorder(question, phrases, grammar_file, chances, audio_files, exercise) {
+    var address = document.location.href;
+    address = address.split(".action")[0];
+    address = address.substring(0, address.lastIndexOf("/") + 1);
+
+    var applet = '<applet code="br.ufc.ivela.voice.BlackBoardApplet" archive="applet/ivela_voice_new.jar, applet/jogg-0.0.7.jar,  applet/jorbis-0.0.15.jar, applet/tritonus_share.jar, applet/vorbisspi1.0.3.jar" ';    
+        applet += 'width="490" height="250"  >';                
+        applet += '<param name="question" value="';    
+        applet += question;        
+        applet += '" /> <param name="exe" value="';    
+        applet += phrases;        
+        applet += '" /> <param name="conf" value="';    
+        applet += grammar_file;        
+        applet += '" /> <param name="chances" value="';    
+        applet += chances;        
+        applet += '" /> <param name="audio" value="';    
+        applet += audio_files;        
+        applet += '" /> <param name="exeId" value="';
+        applet += exercise;        
+        applet += '" /> <param name="audioHost" value="';
+        applet += address;
+        applet += '" /> </applet>';
+}
+     
 function includeGlobalCss(css) {
     document.write('<link href="RenderServlet?file=/'+idCourse+'/'+css+'" rel="stylesheet" type="text/css" />');
 }

@@ -56,11 +56,13 @@ function submitSearch(){
         $('challengeItens.name').value =json.challengeItems.name;
         $('challengeItens.dependency').value = json.challengeItems.dependency;
         $('challengeItens.weight').value = json.challengeItems.weight;
+        $('challengeItens.weight').readOnly = true; 
         $('challengeItens.xml').value =   json.challengeItems.xml; 
         $('submitChall').value = "Update";
         $('removeCha').style.display= "block";
     }
     else{
+        $('challengeItens.weight').readOnly = false;
         alert("Não encontrado!");
         showNewsChallenge();
     }

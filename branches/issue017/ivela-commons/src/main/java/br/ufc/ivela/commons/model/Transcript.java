@@ -39,6 +39,9 @@ import javax.persistence.Table;
 @Table(name = "transcript")
 @NamedQueries({@NamedQuery(name = "Transcript.findById", query = "SELECT t FROM Transcript t WHERE t.id = :id"), @NamedQuery(name = "Transcript.findByStatus", query = "SELECT t FROM Transcript t WHERE t.status = :status"), @NamedQuery(name = "Transcript.findByScore", query = "SELECT t FROM Transcript t WHERE t.score = :score")})
 public class Transcript implements Serializable {
+    
+    public static final int DEFAULT_GRADE = 100;
+    
     private static final long serialVersionUID = 1L;
     @Id
     @SequenceGenerator(name="seq", sequenceName="sq_transcript", allocationSize=1)
@@ -59,6 +62,8 @@ public class Transcript implements Serializable {
     private int challengesDone;
     @Column(name = "challenges_weight", nullable = true)
     private int challengesWeight;
+    @Column(name = "challenges_total", nullable = true)
+    private Double challengesTotal;    
     @Column(name = "manual_score", nullable = true)
     private Double manualScore;
     @JoinColumn(name = "grade", referencedColumnName = "id")
@@ -217,6 +222,20 @@ public class Transcript implements Serializable {
      */
     public int getChallengesWeight() {
         return challengesWeight;
+    }
+
+    /**
+     * @param challengesTotal the challengesTotal to set
+     */
+    public void setChallengesTotal(Double challengesTotal) {
+        this.challengesTotal = challengesTotal;
+    }
+
+    /**
+     * @return the challengesTotal
+     */
+    public Double getChallengesTotal() {
+        return challengesTotal;
     }
 
 }
