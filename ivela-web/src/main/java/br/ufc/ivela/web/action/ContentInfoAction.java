@@ -102,12 +102,11 @@ public class ContentInfoAction extends CourseAwareAction {
 
     public String getProgress() {
         Integer progress = courseRemote.getProgress(getAuthenticatedUser().getId(), course.getId());
-        StringBuilder json = new StringBuilder();
-        json.append("{");
-        json.append("\"progress\":\"" + progress.intValue() + "\"");
-        json.append("}");
-        setInputStream(new ByteArrayInputStream(json.toString().getBytes()));
-        return "json";
+        if (!new Integer(0).equals(progress)) {
+            progress = progress/10;
+        }
+        setInputStream(new ByteArrayInputStream(progress.toString().getBytes()));
+        return "text";
     }
 
     private String getFilenameByDisciplineTag(String disciplineTag) {
