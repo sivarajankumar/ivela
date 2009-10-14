@@ -78,10 +78,6 @@
             else 
                 countfield.value = maxlimit - field.value.length;
         }
-
-        function showChat(courseId, disciplineId) {
-        	window.open('course!showChat.action?courseId='+courseId+'&disciplineId='+disciplineId, '');
-        }
     </script>
     <cal:head />
     <script type="text/javascript" src="../js/util/calendar.js"></script>
@@ -467,8 +463,6 @@
                             <li><a class="icon-edit" href="javascript:showEditUnitContent();"><s:text name="unitContent.input.edit" /></a></li>                            
                             <li><a class="icon-delete" href="javascript:deleteUnitContent();"><s:text name="unitContent.input.remove" /></a></li>
                             <li id="unit.challenge"><a class="icon-message"href="javascript:showNewsChallenge();"><s:text name= "course.add.challenge" /></a></li>
-                            <li><a id="chatId" class="icon-chat" href="javascript:showChat($('course.id').value, $('discipline.id').value);"><s:text name= "course.show.chat" /></a></li>
-                            
                             <br class="clear" />
                         </ul>
                     </div>

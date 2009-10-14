@@ -146,24 +146,21 @@ public class CourseAction extends CourseAwareAction {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
-    
-    public String showChatStd(){        
+
+    public String showChatStd() {
         course = courseRemote.get(courseId);
-        discipline = disciplineRemote.get(disciplineId);
         this.nick = this.getAuthenticatedUser().getUsername();
-        //this.chatRoomName = "#course_"+this.course.getId();
-        this.chatRoomName = "#course_"+course.getId()+"_"+discipline.getId()+"_"+discipline.getName(); 
         this.grade = gradeRemote.getActiveByStudentByCourse(this.getAuthenticatedUser().getId(), course.getId());
+        this.chatRoomName = "#course_"+course.getName()+"_grade_"+grade.getName();
         Set<SystemUser> list = (Set<SystemUser>)grade.getProfessors();
         Iterator i = list.iterator();
         if(i.hasNext())
             this.teacherName =  ((SystemUser)i.next()).getUsername();
         else 
             this.teacherName = "admin";
-        
         return "showChatStd";
     }
-    
+
     /**
      * Gathering information to verify if there are a custom Toc for this course.
      * @return json: redirect -> true/false , params -> course.id and grade.id
