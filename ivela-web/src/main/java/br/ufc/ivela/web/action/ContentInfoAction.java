@@ -110,7 +110,7 @@ public class ContentInfoAction extends CourseAwareAction {
 
     private String getFilenameByDisciplineTag(String disciplineTag) {
     	discipline = disciplineRemote.getByCourseAndTag(course.getId(), disciplineTag);
-    	replacePath = ""+ course.getId() + File.separator + discipline.getId() + File.separator + discipline.getId();
+    	replacePath = ""+ course.getId() + File.separator + discipline.getId();
     	
     	return discipline.getId() + "/" + goToPage;
     }
@@ -118,7 +118,7 @@ public class ContentInfoAction extends CourseAwareAction {
     private String getFilenameByUnitTag(String unitTag) {
     	Long disc = discipline.getId();
     	unitContent = unitContentRemote.getByDisciplineAndTag(disc,unitTag);
-    	replacePath = ""+ course.getId() + File.separator + discipline.getId() + File.separator + discipline.getId() + File.separator + unit.getId() + File.separator + unitContent.getId();
+    	replacePath = ""+ course.getId() + File.separator + discipline.getId() + File.separator + unitContent.getUnitId() + File.separator + unitContent.getId();
     	return unitContent.getUnitId() + "/" + unitContent.getId() + "/" + goToPage;
     }
 
@@ -139,7 +139,7 @@ public class ContentInfoAction extends CourseAwareAction {
         } else if (unitTag!=null) {
         	filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/"+discipline.getId()+"/" + getFilenameByUnitTag(unitTag);        		
        	} else {
-       		replacePath = course.getId() + File.separator + discipline.getId() + File.separator + discipline.getId() + File.separator + unit.getId() + File.separator + unitContent.getId();
+       		replacePath = course.getId() + File.separator + discipline.getId() + File.separator + unit.getId() + File.separator + unitContent.getId();
        		filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + discipline.getId() + "/" + unit.getId() + "/" + unitContent.getId() + "/" + goToPage;
 		  user.setLastUnitContentId(unitContent.getId());
        	} 
@@ -153,7 +153,7 @@ public class ContentInfoAction extends CourseAwareAction {
     public String showContent() {        
         
     	String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + discipline.getId() + "/" + unit.getId() + "/" + unitContent.getId() + "/" + goToPage;
-    	replacePath = course.getId() + File.separator + discipline.getId() + File.separator + discipline.getId() + File.separator + unit.getId() + File.separator + unitContent.getId();  		
+    	replacePath = course.getId() + File.separator + discipline.getId() + File.separator + unit.getId() + File.separator + unitContent.getId();  		
     	path = DEFAULT_RENDERER + "?file=" + replacePath + File.separator;
     	
         setPageHtml(loadContentFile(filename));

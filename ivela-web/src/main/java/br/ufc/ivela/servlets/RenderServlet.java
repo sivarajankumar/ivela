@@ -152,9 +152,18 @@ public class RenderServlet extends HttpServlet {
     }
     
     private void parseCSSFile(StringBuilder builder, String cssFile) {
-        String css = "url(";        
-        String[] splitCssFile = cssFile.split("/");
-        String path = "RenderServlet?file=" + splitCssFile[0] + '/' + splitCssFile[1] + '/' + splitCssFile[2] + '/' + splitCssFile[3];
+        String css = "url(";
+        String cssFiletoSplit = cssFile.substring(0, cssFile.indexOf("css")-1);
+        String[] splitCssFile = cssFiletoSplit.split("/");
+        StringBuilder pathBuffer = new StringBuilder();
+        pathBuffer.append("RenderServlet?file=");
+        for (int i=0;i<splitCssFile.length;i++) {
+        	pathBuffer.append(splitCssFile[i]);
+        	pathBuffer.append("/");
+        }
+        if (pathBuffer.substring(pathBuffer.length() - 1).equals("/"))
+        	pathBuffer = new StringBuilder(pathBuffer.substring(0, pathBuffer.length() - 1));              
+        String path = pathBuffer.toString();
         int position = -1;
         int tempPosition = 0;
         while ((position = builder.indexOf(css, tempPosition)) > -1) {            
