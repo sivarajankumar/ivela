@@ -247,14 +247,14 @@ public class ContentInfoAction extends CourseAwareAction {
     }
 
     public String isUnlocked() {
-        boolean isUnlocked = gradeUnitContentRemote.isUnlocked(grade.getId(), unitContent.getId());
+        boolean isUnlocked = gradeUnitContentRemote.isUnlocked(grade.getId(), unitContent.getTag());
         setInputStream(new ByteArrayInputStream(new Boolean(isUnlocked).toString().getBytes()));
         return "text";
     }
 
     public String isCompleted() {
         setInputStream(new ByteArrayInputStream("false".getBytes()));
-        List<FinishedUnitContent> finishedUnitContentlist = finishedUnitContentRemote.getByUnitContentAndSystemUser(unitContent.getId(), getAuthenticatedUser().getId());
+        List<FinishedUnitContent> finishedUnitContentlist = finishedUnitContentRemote.getByUnitContentTagAndSystemUser(unitContent.getTag(), getAuthenticatedUser().getId());
         if (!finishedUnitContentlist.isEmpty()) {
             setInputStream(new ByteArrayInputStream("true".getBytes()));
         }

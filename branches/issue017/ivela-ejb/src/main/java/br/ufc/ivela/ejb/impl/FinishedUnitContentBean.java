@@ -51,4 +51,11 @@ public class FinishedUnitContentBean implements FinishedUnitContentRemote {
         return list;
     }
 
+    public List<FinishedUnitContent> getByUnitContentTagAndSystemUser(String unitContentTag, Long systemUserId) {
+        Object[] params = new Object[] { unitContentTag, systemUserId };
+        List<FinishedUnitContent> list = (List<FinishedUnitContent>) daoFinishedUnitContent.find("select fuc from FinishedUnitContent fuc, UnitContent uc where fuc.unitContent=uc.id and uc.tag=? and fuc.systemUser = ?", params);
+        if (list == null)
+            list = new ArrayList<FinishedUnitContent>();
+        return list;
+    }
 }

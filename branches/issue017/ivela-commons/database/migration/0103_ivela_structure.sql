@@ -83,7 +83,7 @@ ALTER TABLE transcript ADD COLUMN average_challenge numeric(7,2) DEFAULT 0;
 ALTER TABLE transcript ADD COLUMN challenges_done smallint DEFAULT 0;
 ALTER TABLE transcript ADD COLUMN challenges_weight integer DEFAULT 0;
 ALTER TABLE transcript ADD COLUMN challenges_total numeric(10,2) DEFAULT 0;
-UPDATE challenge_items set weight=1 where name LIKE '%'
+UPDATE challenge_items set weight=1 where name LIKE '%';
 
 --
 -- End of Challenge Modifications
