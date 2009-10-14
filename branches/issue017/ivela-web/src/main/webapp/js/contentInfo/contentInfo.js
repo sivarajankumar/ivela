@@ -22,8 +22,8 @@ function goToUnit(unitTag,goToPage) {
 }
 
 function displayForum() {
-	strWidth = screen.availWidth - 20;
-	strHeight = screen.availHeight - 20;
+	strWidth = screen.availWidth - 80;
+	strHeight = screen.availHeight - 80;
 	var showUrl = "forum!list.action?course.id="+idCourse;
 	var home = new Ext.Window({
 	       title: 'Forum',
@@ -32,7 +32,6 @@ function displayForum() {
 	       minWidth: strWidth-100,
 	       minHeight: strWidth-50,
 	       collapsible:true,	     
-	   	   maximized:true,
 	       autoScroll:true,
 	       plain:true,
 	       bodyStyle:'padding:0px;',
@@ -171,8 +170,23 @@ function finishLesson() {
 }
 
 function displayChat() {
-    window.open('course!showChatStd.action?courseId='+idCourse+'&disciplineId='+idDiscipline, '');
+	strWidth = screen.availWidth - 80;
+	strHeight = screen.availHeight - 80;
+	var showUrl = 'course!showChatStd.action?courseId='+idCourse+'&disciplineId='+idDiscipline;
+	var home = new Ext.Window({
+	       title: 'Forum',
+	       width: strWidth,
+	       height:strHeight,
+	       minWidth: strWidth-100,
+	       minHeight: strWidth-50,
+	       collapsible:true,	     
+	       autoScroll:true,
+	       plain:true,
+	       bodyStyle:'padding:0px;',
+	       body: new Ext.ux.ManagedIframe({autoCreate:{src:showUrl, cls:'x-window-body'}})});
+	home.show();
 }
+
 
 function fechar() {
     window.close();
