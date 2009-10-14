@@ -21,6 +21,29 @@ function goToUnit(unitTag,goToPage) {
     window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitTag='+unitTag+'&goToPage='+goToPage;
 }
 
+function displayForum() {
+	strWidth = screen.availWidth - 20;
+	strHeight = screen.availHeight - 20;
+	var showUrl = "forum!list.action?course.id="+idCourse;
+	var home = new Ext.Window({
+	       title: 'Forum',
+	       width: strWidth,
+	       height:strHeight,
+	       minWidth: strWidth-100,
+	       minHeight: strWidth-50,
+	       collapsible:true,	     
+	   	   maximized:true,
+	       autoScroll:true,
+	       plain:true,
+	       bodyStyle:'padding:0px;',
+	       body: new Ext.ux.ManagedIframe({autoCreate:{src:showUrl, cls:'x-window-body'}})});
+	home.show();
+}
+
+function closeCourse() {
+	window.close();
+}
+
 function displayUserName() {
     document.write(getHtml('contentInfo!getSystemUser.action'));
 }

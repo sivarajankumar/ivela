@@ -41,7 +41,21 @@
                 var ie6browser = true;         
             </script>            
         <![endif]-->        
-        <script type="text/javascript" src="js/prototype/prototype.js"></script>        
+        <link href="css/lightwindow.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="js/prototype/prototype.js"></script>
+         <!-- Ext relies on its default css so include it here. -->
+		  <!-- This must come BEFORE javascript includes! -->
+		  <link rel="stylesheet" type="text/css" href="js/ext/resources/css/ext-all.css">
+ 
+		  <!-- Include here your own css files if you have them. -->
+ 
+		  <!-- First of javascript includes must be an adapter... -->
+		  <script type="text/javascript" src="js/ext/adapter/ext/ext-base.js"></script>
+		 
+		  <!-- ...then you need the Ext itself, either debug or production version. -->
+		  <script type="text/javascript" src="js/ext/ext-all-debug.js"></script>
+		  <script type="text/javascript" src="js/ext/miframe.js"></script>
+        
         <script type="text/javascript">
             var idCourse = '<s:property value="course.id" />' 
             var idDiscipline = '<s:property value="discipline.id" />'
@@ -66,5 +80,6 @@
 
     <body <decorator:getProperty property="body.onload" writeEntireProperty="true" />>
     <decorator:body/>    
+    <div id="hide"></div>
   </body>
 </html>
