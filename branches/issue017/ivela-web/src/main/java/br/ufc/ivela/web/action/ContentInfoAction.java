@@ -23,9 +23,11 @@ package br.ufc.ivela.web.action;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -314,8 +316,7 @@ public class ContentInfoAction extends CourseAwareAction {
             String key = filename + file.lastModified();
             Element cacheElement = cache.get(key);            
             if (cacheElement != null) {
-                log.debug("retrieved "+ filename + " from cache ");
-                content = parseContentFile(file);
+                log.debug("retrieved "+ filename + " from cache ");                
                 content = (String) cacheElement.getValue();
             } else {
                 content = parseContentFile(file);                
@@ -338,8 +339,10 @@ public class ContentInfoAction extends CourseAwareAction {
     private String parseContentFile(File file) {                    
         BufferedReader in = null;
         StringBuilder html = new StringBuilder();
-        try {               
-            in = new BufferedReader(new FileReader(file));                                       
+        try {   
+            
+            //TODO Force the User to specify the enconding?
+            in = new BufferedReader(new InputStreamReader(new FileInputStream(file), "ISO-8859-1"));
             String str;
             while ((str = in.readLine()) != null) {
                 html.append(str);
@@ -362,7 +365,7 @@ public class ContentInfoAction extends CourseAwareAction {
         parseContentFileCSS(html);
         parseContentFileImg(html);
         parseContentFileInput(html);
-        parseContentFileJS(html);
+        parseContentFileJS(html);        
         
         return html.toString();        
     }

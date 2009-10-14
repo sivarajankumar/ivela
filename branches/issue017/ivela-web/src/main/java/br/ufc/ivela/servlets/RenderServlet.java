@@ -7,28 +7,28 @@ package br.ufc.ivela.servlets;
 
 
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import br.ufc.ivela.commons.Constants;
 import br.ufc.ivela.web.action.GenericAction;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 
 /**
  *
@@ -112,27 +112,41 @@ public class RenderServlet extends HttpServlet {
                                 in.close();
                             }
 
-                    }else{
-                                         
-                        Element cacheElement = objectCache.get(key);
+                    } else {
 
-                        if (cacheElement != null) {
-                            
-                        } else {
-                            response.setContentType(mimeType);
-                            response.setContentLength((int) file.length());
-                            FileInputStream in = new FileInputStream(file);                            
-                            OutputStream out = response.getOutputStream();
-                            try {
+                        Element cacheElement = objectCache.get(key);
+                        byte[] content = null;
+
+                        response.setContentType(mimeType);
+                        response.setContentLength((int) file.length());
+                        OutputStream out = response.getOutputStream();
+                        FileInputStream in = new FileInputStream(file);
+                        try {
+                            if (cacheElement != null) {
+                                log.debug("retrieved " + filename + " from cache ");
+                                content = (byte[]) cacheElement.getValue();
+                                out.write(content);
+                            } else {
+                                content = new byte[(int) file.length()];
+
                                 byte[] buf = new byte[1024];
                                 int count = 0;
+                                int position = 0;
                                 while ((count = in.read(buf)) >= 0) {
                                     out.write(buf, 0, count);
+                                    System.arraycopy(buf, 0, content, position, count);
+                                    position += count;
                                 }
-                            } finally {
-                                in.close();
-                                out.close();
+
+                                objectCache.put(new Element(key, content));
                             }
+                        } catch (IOException e) {
+                            err = true;
+                            errMsg = errMsg + e.getMessage();
+                            log.error(errMsg, e);
+                        } finally {
+                            in.close();
+                            out.close();
                         }
                     }
                     
