@@ -122,7 +122,8 @@ public class ContentInfoAction extends CourseAwareAction {
     private String getFilenameByUnitTag(String unitTag) {
     	Long disc = discipline.getId();
     	unitContent = unitContentRemote.getByDisciplineAndTag(disc,unitTag);
-    	replacePath = ""+ course.getId() + File.separator + discipline.getId() + File.separator + unitContent.getUnitId() + File.separator + unitContent.getId();
+    	unit = unitRemote.get(unitContent.getUnitId());
+    	replacePath = ""+ course.getId() + File.separator + discipline.getId() + File.separator + unit.getId() + File.separator + unitContent.getId();
     	return unitContent.getUnitId() + "/" + unitContent.getId() + "/" + goToPage;
     }
 
@@ -233,7 +234,7 @@ public class ContentInfoAction extends CourseAwareAction {
     
     public String showContent() {        
         
-    	String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + discipline.getId() + "/" + unit.getId() + "/" + unitContent.getId() + "/" + goToPage;
+    	String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + discipline.getId() + "/" + unitContent.getUnitId() + "/" + unitContent.getId() + "/" + goToPage;
     	replacePath = course.getId() + File.separator + discipline.getId() + File.separator + unit.getId() + File.separator + unitContent.getId();  		
     	path = DEFAULT_RENDERER + "?file=" + replacePath + File.separator;
     	
@@ -324,6 +325,7 @@ public class ContentInfoAction extends CourseAwareAction {
         this.profileRemote = profileRemote;
     }
 
+    
     public void setDiscipline(Discipline discipline) {
         this.discipline = discipline;
     }
