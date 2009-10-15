@@ -44,13 +44,11 @@
 
 <head>
     <script>
-        <!--
         var it_nocourses = '<s:text name="home.nocourses" />';
         var it_nodisciplines = '<s:text name="home.nodisciplines" />';
         var it_nounits = '<s:text name="home.nounits" />';
         var it_nounitcontents = '<s:text name="home.nounitcontents" />';
         var it_gotocourse = '<s:text name="home.gotocourse" />';        
-        -->
         var tabslist=0;
      	var win=0;
     </script>
