@@ -183,25 +183,27 @@ function showImage(image) {
 
 function labelDisciplineStatus(disciplineTag) {
     var status = getHtml('contentInfo!isDisciplineCompleted.action?grade.id='+idGrade+'&course.id='+idCourse+'&discipline.tag='+disciplineTag);
+    var onClickFunc = "goToDiscipline('"+disciplineTag+"');";
     if ("0"==status) {
-        document.write('<img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_concluido.png">');
+        document.write('<a href="#" onclick="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_concluido.png"></a>');
     } else if ("-1"==status){
-        document.write('<img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_acesse.png">');
+        document.write('<a href="#" onclick="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_acesse.png"></a>');
     } else {
-        document.write('<img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_continuar.png">');
+        document.write('<a href="#" onclick="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_continuar.png"></a>');
     }
 }
 
 function labelUnitStatus(unitContentTag, goToPage) {
     var onClickFunc = "goToUnit('"+unitContentTag+"', '"+goToPage+"');";
     if ("true"==getHtml('contentInfo!isUnitCompleted.action?unitContent.tag='+unitContentTag)) {
-        document.write('<a href="#" onclick="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_concluido.png"></a>');
+        document.write('<a href="#" onclick="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_concluido_menor.png"></a>');
     } else {
         if (("true"==getHtml('contentInfo!isUnitUnlocked.action?grade.id='+idGrade+'&unitContent.tag='+unitContentTag)) && (accessed == "")) {
-           accessed = 'true';
-           document.write('<a href="#" onclick="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_acesse.png"></a>');
+            accessed = 'true';
+            document.write('<a href="#" onclick="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_acesse_menor.png"></a>');
         } else {
-           accessed = 'locked';
+            document.write('<img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_bloqueado_menor.png">');
+            accessed = 'locked';
         }
     }
 }
