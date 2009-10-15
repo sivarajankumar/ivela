@@ -287,7 +287,7 @@ var paintAnswerBackground;
 var wrongAnswerStyle;
 var rightAnswerStyle;
 
-\/* Submit a Exercise for answer, expects a Form Element as parameter that will be serialized and sent. The input fields for your exercise */
+/* Submit a Exercise for answer, expects a Form Element as parameter that will be serialized and sent. The input fields for your exercise */
 function submitExercise(form) {
     
     if (form == undefined) 
