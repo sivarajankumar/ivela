@@ -121,7 +121,10 @@ public class DisciplineBean implements DisciplineRemote {
             result += unitRemote.isUnitFinished(studentId, unitId, courseId, gradeId);               
         }
         
-        result = result < 0? -1 : result;
+        if (result < 0) {
+            result = -result;
+            result = result == unitsId.size()? -1 : result;
+        }        
         
         return result;
     }

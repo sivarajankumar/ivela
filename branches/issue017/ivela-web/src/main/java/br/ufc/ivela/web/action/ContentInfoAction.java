@@ -182,7 +182,7 @@ public class ContentInfoAction extends CourseAwareAction {
         SystemUser user = getAuthenticatedUser();
         List<Transcript> transcripts = historyRemote.getTranscriptsByStudentByGrade(user.getId(), grade.getId());
         
-        if (transcripts.size() < 0) return "";
+        if (transcripts.size() <= 0) return "";
         
         Transcript transcript = transcripts.get(0);
         StringBuilder builder = new StringBuilder();
@@ -292,7 +292,10 @@ public class ContentInfoAction extends CourseAwareAction {
             params.put("url", url);
             mailer.send(new SystemUser[] { getAuthenticatedUser() }, null, "lesson.finished", "lesson.finished.velocity", new Map[]{params}, true);
         }
-        return "text";
+        
+        discipline = disciplineRemote.get(discipline.getId());
+        disciplineTag = discipline.getTag();
+        return showContentCustom();
     }
 
     public InputStream getInputStream() {
