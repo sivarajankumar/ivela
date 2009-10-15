@@ -59,6 +59,7 @@ import br.ufc.ivela.commons.model.Message;
 import br.ufc.ivela.commons.model.NewsFlash;
 import br.ufc.ivela.commons.model.Profile;
 import br.ufc.ivela.commons.model.SystemUser;
+import br.ufc.ivela.commons.model.Transcript;
 import br.ufc.ivela.ejb.interfaces.CalendarRemote;
 import br.ufc.ivela.ejb.interfaces.ForumRemote;
 import br.ufc.ivela.ejb.interfaces.MessageRemote;
@@ -554,6 +555,17 @@ public class GradeAction extends CourseAwareAction {
             e.setStatus(1);
             e.setSystemUser(systemUser);
             json +=enrollmentRemote.add(e);
+            List<Transcript> transcripts = historyRemote.getTranscriptsByStudentByGrade(getAuthenticatedUser().getId(), grade.getId());
+            if (transcripts.isEmpty()) {
+                historyRemote.addTranscript(grade.getId(), getAuthenticatedUser().getId());    
+            } else {
+                Transcript trans = transcripts.get(0);
+                trans.setAverageChallenge(0.0);
+                trans.setChallengesTotal(0.0);
+                trans.setChallengesWeight(0);
+                trans.setChallengesDone(0);
+                historyRemote.updateTranscript(trans);
+            }
         }
         else{
             json += "-1";
