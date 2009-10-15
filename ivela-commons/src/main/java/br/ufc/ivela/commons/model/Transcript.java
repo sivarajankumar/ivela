@@ -57,13 +57,13 @@ public class Transcript implements Serializable {
     @Column(name = "average_exam", nullable = true)
     private Double averageExam;
     @Column(name = "average_challenge", nullable = true)
-    private Double averageChallenge;    
+    private Double averageChallenge = 0.0;    
     @Column(name = "challenges_done", nullable = true)
-    private int challengesDone;
+    private int challengesDone = 0;
     @Column(name = "challenges_weight", nullable = true)
-    private int challengesWeight;
+    private int challengesWeight = 0;
     @Column(name = "challenges_total", nullable = true)
-    private Double challengesTotal;    
+    private Double challengesTotal = 0.0;    
     @Column(name = "manual_score", nullable = true)
     private Double manualScore;
     @JoinColumn(name = "grade", referencedColumnName = "id")

@@ -1,0 +1,13 @@
+html,body{height:100%;background:url(../images/bg_standard2.jpg) #fff repeat-x top left;}
+.clear{clear:both;height:0;font-size:1px;line-height:0;}
+h3{font-size:22px; font-weight:bold;text-decoration:none;color:#033d7d;}
+.message{padding-left: 12px; font-size:15px; color:#633d7d;}
+#header{width:960px;height:65px;background:url(../images/bg-ballons2.jpg) no-repeat top left;padding-top:19px;}
+#header .logotipo{width:97px;height:56px;float:left;background:url(../images/ivela-logo2.gif) no-repeat 0 0;text-indent:-999px;overflow:hidden;}
+#menu{width:auto;height:30px;}
+#menu ul{list-style-type:none;text-align:center;}
+#menu ul li{float:left;margin:0 5px 0 0;padding:0;height:30px;}
+#menu li a{display:block;padding:7px 12px 0;color:#633d7d;font-size:15px;text-decoration:none;}
+#menu li a:hover{color:#ff6600;}
+#menu ul .current{background:url(../images/menu/tab-right.gif) no-repeat right top;}
+#menu ul .current a{background:url(../images/menu/tab-left.gif) left top no-repeat;color:#ff6600;}

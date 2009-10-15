@@ -182,30 +182,32 @@ public class ContentInfoAction extends CourseAwareAction {
         SystemUser user = getAuthenticatedUser();
         List<Transcript> transcripts = historyRemote.getTranscriptsByStudentByGrade(user.getId(), grade.getId());
         
-        if (transcripts.size() <= 0) return "";
-        
-        Transcript transcript = transcripts.get(0);
-        StringBuilder builder = new StringBuilder();
-        int total = (int) transcript.getChallengesTotal().doubleValue();                
-        builder.append(total);
-        if (scoreType.equals("current")) {
+        if (transcripts.size() <= 0) {
+            setInputStream(new ByteArrayInputStream(("0 " + getText("history.points")).getBytes()));
+        } else {
+            Transcript transcript = transcripts.get(0);
+            StringBuilder builder = new StringBuilder();
+            int total = (int) transcript.getChallengesTotal().doubleValue();
+            builder.append(total);
+            if (scoreType.equals("current")) {
+                builder.append(' ');
+                int currentP = transcript.getChallengesWeight() * Transcript.DEFAULT_GRADE;
+                builder.append(getText("history.of"));
+                builder.append(' ');
+                builder.append(currentP);
+            } else if (scoreType.equals("total")) {
+                builder.append(' ');
+                course = courseRemote.get(course.getId());
+                int totalP = course.getChallengeWeight() * Transcript.DEFAULT_GRADE;
+                builder.append(getText("history.of"));
+                builder.append(' ');
+                builder.append(totalP);
+            }
             builder.append(' ');
-            int currentP = transcript.getChallengesWeight() * Transcript.DEFAULT_GRADE;
-            builder.append(getText("history.of"));
-            builder.append(' ');
-            builder.append(currentP);
-        } else if (scoreType.equals("total")) {
-            builder.append(' ');
-            course = courseRemote.get(course.getId());
-            int totalP = course.getChallengeWeight() * Transcript.DEFAULT_GRADE;
-            builder.append(getText("history.of"));
-            builder.append(' ');
-            builder.append(totalP);
+            builder.append(getText("history.points"));
+
+            setInputStream(new ByteArrayInputStream(builder.toString().getBytes()));
         }
-        builder.append(' ');
-        builder.append(getText("history.points"));
-        
-        setInputStream(new ByteArrayInputStream(builder.toString().getBytes()));
         
         return "text";
     }
