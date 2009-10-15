@@ -62,4 +62,6 @@ public interface DisciplineRemote {
     public boolean update(Discipline discipline);
     
     public String getByCourseOrderByName(Long courseId);
+
+    public boolean isDisciplineFinished(Long studentId, Long disciplineId, long gradeId);
 }
