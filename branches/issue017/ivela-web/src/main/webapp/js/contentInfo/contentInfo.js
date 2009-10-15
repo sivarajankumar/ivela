@@ -39,6 +39,26 @@ function displayForum() {
 	home.show();
 }
 
+function translateWord(keyWord){
+    var width = 500;
+    var height = 450;
+    var url = "http://www.google.com/dictionary?aq=f&langpair=en|pt&q="+keyWord+"&hl=pt-BR";
+	var showUrl = "forum!list.action?course.id="+idCourse;
+	var home = new Ext.Window({
+	       title: 'Translate Word',
+	       width: width,
+	       height:height,
+	       minWidth: width-100,
+	       minHeight: height-50,
+	       collapsible:true,	     
+	       autoScroll:true,
+	       plain:true,
+	       bodyStyle:'padding:0px;',
+	       body: new Ext.ux.ManagedIframe({autoCreate:{src:showUrl, cls:'x-window-body'}})});
+	home.show();
+}
+
+
 function closeCourse() {
 	window.close();
 }
