@@ -125,7 +125,10 @@ function showEntryCourse() {
     $('input.course.challengeItens').value = '';
     $('input.course.customToc').value = '';
     $('input.course.challengeRetries').value = '0';
+    $('input.course.challengeCount').value = '0';
+    $('input.course.challengeWeight').value = '0';
     $('input.course.name').focus();
+    
 }
 
 function showEditCourse(courseId) {
@@ -245,7 +248,7 @@ function submitCourse(courseId) {
 
     }
     else {
-        url += 'course!addCourse.action?';
+    	url += 'course!addCourse.action?';
         url += 'course.name=' + $('input.course.name').value;
         url += '&course.description=' + $('input.course.description').value;
         url += '&course.targetAudience=' + $('input.course.targetAudience').value;
@@ -254,8 +257,8 @@ function submitCourse(courseId) {
         url += '&course.uploadPackageEnabled=' + uploadPackageEnabled;
         url += '&course.customToc=' + customToc;
         url += '&course.challengeRetries=' + $('input.course.challengeRetries').value;
-        url += '&course.challengeCount=' + $('input.course.challengeCount').value;
-        url += '&course.challengeWeight=' + $('input.course.challengeWeight').value;
+        url += '&course.challengeCount=0';
+        url += '&course.challengeWeight=0';
     }
             
     var jsonCourse = getJsonFromUrl(url);
