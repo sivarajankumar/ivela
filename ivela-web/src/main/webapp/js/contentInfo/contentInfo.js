@@ -23,7 +23,7 @@ function goToUnit(unitTag,goToPage) {
 }
 
 function displayForum() {
-	strWidth = screen.availWidth - 150;
+	strWidth = screen.availWidth - 200;
 	strHeight = screen.availHeight - 150;
 	var showUrl = "forum!list.action?course.id="+idCourse;
 	var home = new Ext.Window({
@@ -43,10 +43,9 @@ function displayForum() {
 }
 
 function translateWord(keyWord){
-	width = screen.availWidth - 150;
+	width = screen.availWidth - 200;
 	height = screen.availHeight - 150;
-	var url = "http://www.google.com/dictionary?aq=f&langpair=en|pt&q="+keyWord+"&hl=pt-BR";
-	var showUrl = "forum!list.action?course.id="+idCourse;
+	var showUrl = "http://www.google.com/dictionary?aq=f&langpair=en|pt&q="+keyWord+"&hl=pt-BR";
 	var home = new Ext.Window({
 	       title: 'Translate Word',
 	       width: width,
@@ -213,7 +212,7 @@ function finishLesson() {
 }
 
 function displayChat() {
-	strWidth = screen.availWidth - 150;
+	strWidth = screen.availWidth - 200;
 	strHeight = screen.availHeight - 150;
 	var showUrl = 'course!showChatStd.action?courseId='+idCourse+'&disciplineId='+idDiscipline;
 	var home = new Ext.Window({
