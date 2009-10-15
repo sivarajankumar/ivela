@@ -97,10 +97,10 @@ function fullScreen(theURL) {
 	
 	strWidth = screen.availWidth - 10;
 	strHeight = screen.availHeight - 10;
-		
-	if (window.showModalDialog) {
-		window.showModalDialog(theURL, window, "dialogHeight:"+strHeight+"px;dialogWidth:"+strWidth+"px;center=yes;dialogHide:yes;edge:sunken;resizable:no;scroll:no;status:no;unadorned:no");	
-	}
+	window.open(theURL, '', ',type=fullWindow,fullscreen,scrollbars=yes');
+	//if (window.showModalDialog) {
+		//window.showModalDialog(theURL, window, "dialogHeight:"+strHeight+"px;dialogWidth:"+strWidth+"px;center=yes;dialogHide:yes;edge:sunken;resizable:no;scroll:no;status:no;");	
+	//}
 }
 
 
