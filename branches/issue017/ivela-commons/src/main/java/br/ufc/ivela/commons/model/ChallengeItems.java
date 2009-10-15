@@ -46,6 +46,9 @@ public class ChallengeItems implements Serializable {
     /** Default OR separator used in the answer fields **/
     public static final String ANSWER_OR_SEPARATOR = "\\[or\\]";
     
+    /** Default AND separator used in the answer fields **/
+    public static final String ANSWER_AND_SEPARATOR = "\\[and\\]";
+    
     
     @Id
     @SequenceGenerator(name="seq", sequenceName="sq_challenge_items", allocationSize=1)
