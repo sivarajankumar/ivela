@@ -287,12 +287,20 @@ var paintAnswerBackground;
 var wrongAnswerStyle;
 var rightAnswerStyle;
 
-/* Submit a Exercise for answer, expects a Form Element as parameter that will be serialized and sent. The input fields for your exercise */
+\/* Submit a Exercise for answer, expects a Form Element as parameter that will be serialized and sent. The input fields for your exercise */
 function submitExercise(form) {
     
     if (form == undefined) 
         form = $('exercise');
     
+    var chalName = form.name;
+    
+    if (chalName) {
+      chalName = '&challenge='+chalName;
+    } else {
+      chalName = "";
+    }
+
     if (rightAnswerStyle == undefined || rightAnswerStyle == "") {
     rightAnswerStyle = "transparent url(images/course/default/lesson_li_right.gif) no-repeat scroll left top";
     }
@@ -303,7 +311,7 @@ function submitExercise(form) {
 
     var value = Form.serialize(form, false);
     
-    var url = '/ivela-web/ChallengeSolver?gradeId='+idGrade+'&unitId='+idUnit+'&'+value;
+    var url = '/ivela-web/ChallengeSolver?gradeId='+idGrade+'&unitId='+idUnit+chalName+'&'+value;
     var json = getJson(url);
 
     if (json == undefined || json == "") return false;
@@ -374,8 +382,16 @@ function getExerciseAnswers(form) {
     if (form == undefined) 
         form = $('exercise');
     
+    var chalName = form.name;
+    
+    if (chalName) {
+      chalName = '&challenge='+chalName;
+    } else {
+      chalName = "";
+    }
+
     var value = Form.serialize(form, false);    
-    var url = '/ivela-web/ChallengeSolver?answers=t&gradeId='+idGrade+'&unitId='+idUnit+'&'+value;
+    var url = '/ivela-web/ChallengeSolver?answers=t&gradeId='+idGrade+'&unitId='+idUnit+chalName+'&'+value;
     var json = getJson(url);
     if (json == undefined || json == "") return false;
 
