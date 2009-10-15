@@ -104,6 +104,7 @@ public class UnitAction extends GenericAction {
         //validates the add
         //performValidationAdd();
         if (!hasActionErrors()) {
+        	unitContent.setTag(unitContent.getTitle().replace(" ", "").toLowerCase());
             unitContent.setDescription("<html><body>" + treatHtml(unitContent.getDescription()) + "</body></html>");
             List<UnitContent> unitContents = unitContentRemote.getByUnit(this.unitContent.getUnitId());
             int order_n = unitContent.getOrderN();

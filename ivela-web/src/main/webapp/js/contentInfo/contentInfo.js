@@ -23,13 +23,15 @@ function goToUnit(unitTag,goToPage) {
 }
 
 function displayForum() {
-	strWidth = screen.availWidth - 80;
-	strHeight = screen.availHeight - 80;
+	strWidth = screen.availWidth - 150;
+	strHeight = screen.availHeight - 150;
 	var showUrl = "forum!list.action?course.id="+idCourse;
 	var home = new Ext.Window({
 	       title: 'Forum',
 	       width: strWidth,
 	       height:strHeight,
+	       x: 30,
+	       y: 30,
 	       minWidth: strWidth-100,
 	       minHeight: strWidth-50,
 	       collapsible:true,	     
@@ -41,14 +43,16 @@ function displayForum() {
 }
 
 function translateWord(keyWord){
-    var width = 500;
-    var height = 450;
-    var url = "http://www.google.com/dictionary?aq=f&langpair=en|pt&q="+keyWord+"&hl=pt-BR";
+	width = screen.availWidth - 150;
+	height = screen.availHeight - 150;
+	var url = "http://www.google.com/dictionary?aq=f&langpair=en|pt&q="+keyWord+"&hl=pt-BR";
 	var showUrl = "forum!list.action?course.id="+idCourse;
 	var home = new Ext.Window({
 	       title: 'Translate Word',
 	       width: width,
 	       height:height,
+	       x: 30,
+	       y: 30,
 	       minWidth: width-100,
 	       minHeight: height-50,
 	       collapsible:true,	     
@@ -207,13 +211,15 @@ function finishLesson() {
 }
 
 function displayChat() {
-	strWidth = screen.availWidth - 80;
-	strHeight = screen.availHeight - 80;
+	strWidth = screen.availWidth - 150;
+	strHeight = screen.availHeight - 150;
 	var showUrl = 'course!showChatStd.action?courseId='+idCourse+'&disciplineId='+idDiscipline;
 	var home = new Ext.Window({
 	       title: 'Chat',
 	       width: strWidth,
 	       height:strHeight,
+	       x: 30,
+	       y: 30,
 	       minWidth: strWidth-100,
 	       minHeight: strWidth-50,
 	       collapsible:true,	     

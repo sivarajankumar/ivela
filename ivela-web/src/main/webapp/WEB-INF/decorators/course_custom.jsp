@@ -53,7 +53,7 @@
 		  <script type="text/javascript" src="js/ext/adapter/ext/ext-base.js"></script>
 		 
 		  <!-- ...then you need the Ext itself, either debug or production version. -->
-		  <script type="text/javascript" src="js/ext/ext-all-debug.js"></script>
+		  <script type="text/javascript" src="js/ext/ext-all.js"></script>
 		  <script type="text/javascript" src="js/ext/miframe.js"></script>
         
         <script type="text/javascript">
