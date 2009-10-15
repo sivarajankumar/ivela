@@ -182,8 +182,7 @@
                 <ul>
                     <li><a href="index.jsp" title="<s:text name="front.controlPanel.title" />"><s:text name="front.controlPanel" /></a></li>
                     <li><a href="course!list.action" title="<s:property value="front.courses.title" />"><s:text name="front.courses" /></a></li>
-                    <li><a href="history!show.action" title="<s:text name="front.history.title" />"><s:text name="front.history" /></a></li>
-                    <!--li><a href="note!show.action" title="<s:text name="front.calendar" />" class="last"><s:text name="front.calendar" /></a></li-->
+                    <li><a href="history!show.action" title="<s:text name="front.history.title" />" class="last"><s:text name="front.history" /></a></li>
                 </ul>
                 <img class="logo" src="images/logo-footer.png" alt="<s:property value="front.logo.footer" />" />
             </div>
