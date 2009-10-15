@@ -112,19 +112,19 @@ public class ContentInfoAction extends CourseAwareAction {
         return "text";
     }
 
-    private String getFilenameByDisciplineTag(String disciplineTag) {
+    private String getFilenameByDisciplineTag(String page,String disciplineTag) {
     	discipline = disciplineRemote.getByCourseAndTag(course.getId(), disciplineTag);
     	replacePath = ""+ course.getId() + File.separator + discipline.getId();
     	
-    	return discipline.getId() + "/" + goToPage;
+    	return discipline.getId() + "/" + page;
     }
 
-    private String getFilenameByUnitTag(String unitTag) {
+    private String getFilenameByUnitTag(String page,String unitTag) {
     	Long disc = discipline.getId();
     	unitContent = unitContentRemote.getByDisciplineAndTag(disc,unitTag);
     	unit = unitRemote.get(unitContent.getUnitId());
     	replacePath = ""+ course.getId() + File.separator + discipline.getId() + File.separator + unit.getId() + File.separator + unitContent.getId();
-    	return unitContent.getUnitId() + "/" + unitContent.getId() + "/" + goToPage;
+    	return unitContent.getUnitId() + "/" + unitContent.getId() + "/" + page;
     }
 
     public String getTimeLeft() {
@@ -213,18 +213,19 @@ public class ContentInfoAction extends CourseAwareAction {
     }
     
     public String showContentCustom() {        
-    	String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + goToPage;
+    	String page = goToPage;
+    	String filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + page;
     	SystemUser user = systemUserRemote.get(getAuthenticatedUser().getId());        
     	if (goToIndex!=null) {
     		replacePath = ""+course.getId();
-    		filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + goToPage;        	
+    		filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + page;        	
     	} else if (disciplineTag!=null) {                	    		
-        	filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + getFilenameByDisciplineTag(disciplineTag);
+        	filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + getFilenameByDisciplineTag(page,disciplineTag);
         } else if (unitTag!=null) {
-        	filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/"+discipline.getId()+"/" + getFilenameByUnitTag(unitTag);        		
+        	filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/"+discipline.getId()+"/" + getFilenameByUnitTag(page,unitTag);        		
        	} else {
        		replacePath = course.getId() + File.separator + discipline.getId() + File.separator + unit.getId() + File.separator + unitContent.getId();
-       		filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + discipline.getId() + "/" + unit.getId() + "/" + unitContent.getId() + "/" + goToPage;
+       		filename = Constants.DEFAULT_CONTENTPKG_PATH + "/" + course.getId() + "/" + discipline.getId() + "/" + unit.getId() + "/" + unitContent.getId() + "/" + page;
 		  user.setLastUnitContentId(unitContent.getId());
        	} 
     	path = DEFAULT_RENDERER + "?file=" + replacePath + File.separator;

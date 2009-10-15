@@ -7,19 +7,19 @@ function goToHome(goToPage) {
         url += "index.html";
     else
         url += goToPage;            
-    window.location = url;
+    document.location = url;
 }
 
 function goToPage(goToPage) {
-    window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitContent.id='+idUnitContent+'&goToPage='+goToPage;
+    document.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitContent.id='+idUnitContent+'&goToPage='+goToPage;
 }
 
 function goToDiscipline(disciplineTag) {
-    window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&disciplineTag='+disciplineTag+'&goToPage=table_contents.html';
+    document.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&disciplineTag='+disciplineTag+'&goToPage=table_contents.html';
 }
 
 function goToUnit(unitTag,goToPage) {
-    window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitTag='+unitTag+'&goToPage='+goToPage;
+    document.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitTag='+unitTag+'&goToPage='+goToPage;
 }
 
 function displayForum() {
@@ -32,8 +32,8 @@ function displayForum() {
 	       height:strHeight,
 	       x: 30,
 	       y: 30,
-	       minWidth: strWidth-100,
-	       minHeight: strWidth-50,
+	       minWidth: 30,
+	       minHeight: 30,
 	       collapsible:true,	     
 	       autoScroll:true,
 	       plain:true,
@@ -52,14 +52,15 @@ function translateWord(keyWord){
 	       height:height,
 	       x: 30,
 	       y: 30,
-	       minWidth: width-100,
-	       minHeight: height-50,
+	       minWidth: 30,
+	       minHeight: 30,
 	       collapsible:true,	     
 	       autoScroll:true,
 	       plain:true,
 	       bodyStyle:'padding:0px;',
 	       body: new Ext.ux.ManagedIframe({autoCreate:{src:showUrl, cls:'x-window-body'}})});
 	home.show();
+	return false;
 }
 
 
@@ -221,8 +222,8 @@ function displayChat() {
 	       height:strHeight,
 	       x: 30,
 	       y: 30,
-	       minWidth: strWidth-100,
-	       minHeight: strWidth-50,
+	       minWidth: 30,
+	       minHeight: 30,
 	       collapsible:true,	     
 	       autoScroll:true,
 	       plain:true,
