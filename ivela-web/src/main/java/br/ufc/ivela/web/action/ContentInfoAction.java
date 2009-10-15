@@ -295,6 +295,7 @@ public class ContentInfoAction extends CourseAwareAction {
         
         discipline = disciplineRemote.get(discipline.getId());
         disciplineTag = discipline.getTag();
+        goToPage = "table_contents.html";
         return showContentCustom();
     }
 

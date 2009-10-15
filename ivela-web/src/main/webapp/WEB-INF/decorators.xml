@@ -52,6 +52,7 @@
     <decorator name="course_custom" page="course_custom.jsp">
         <pattern>/contentInfo!showContentCustom.action*</pattern>
         <pattern>/contentInfo!showTocCustom.action*</pattern>
+        <pattern>/contentInfo!finishLesson.action*</pattern>
     </decorator>
     <decorator name="course" page="course.jsp">
         <pattern>/discipline!showContent.action*</pattern>
