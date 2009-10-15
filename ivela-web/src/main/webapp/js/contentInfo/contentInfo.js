@@ -177,8 +177,13 @@ function showImage(image) {
 }
 
 function labelDisciplineStatus(disciplineTag) {
-    if ("true"==getHtml('contentInfo!isDisciplineCompleted.action?grade.id='+idGrade+'&discipline.tag='+disciplineTag)) {
+    var status = getHtml('contentInfo!isDisciplineCompleted.action?grade.id='+idGrade+'&course.id='+idCourse+'&discipline.tag='+disciplineTag);
+    if ("0"==status) {
         document.write('<img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_concluido.png">');
+    } else if ("-1"==status){
+        document.write('<img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_acesse.png">');
+    } else {
+        document.write('<img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_continuar.png">');
     }
 }
 

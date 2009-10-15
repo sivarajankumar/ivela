@@ -43,6 +43,14 @@ public class FinishedUnitContentBean implements FinishedUnitContentRemote {
         return daoFinishedUnitContent.remove(daoFinishedUnitContent.get(finishedUnitContentId));
     }
 
+    public List<FinishedUnitContent> getByCourseAndSystemUser(Long courseId, Long systemUserId) {
+        Object[] params = new Object[] { courseId, systemUserId };
+        List<FinishedUnitContent> list = (List<FinishedUnitContent>) daoFinishedUnitContent.find("from FinishedUnitContent c where c.course = ? and c.systemUser = ?", params);
+        if (list == null)
+            list = new ArrayList<FinishedUnitContent>();
+        return list;
+    }
+    
     public List<FinishedUnitContent> getByUnitContentAndSystemUser(Long unitContentId, Long systemUserId) {
         Object[] params = new Object[] { unitContentId, systemUserId };
         List<FinishedUnitContent> list = (List<FinishedUnitContent>) daoFinishedUnitContent.find("from FinishedUnitContent c where c.unitContent = ? and c.systemUser = ?", params);
