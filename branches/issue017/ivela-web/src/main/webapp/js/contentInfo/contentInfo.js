@@ -114,7 +114,8 @@ function getScoreTotal() {
 }
 
 function displayTutor() {    
-    window.open(getHtml('contentInfo!getTutorsEmail.action?grade.id='+idGrade+'&unitContent.id='+idUnitContent));
+    mailToWindow = window.open(getHtml('contentInfo!getTutorsEmail.action?grade.id='+idGrade+'&unitContent.id='+idUnitContent), 'mailToWindow');
+    mailToWindow.close();
 }
 
 function showGlobalImage(image) {
