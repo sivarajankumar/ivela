@@ -1,4 +1,5 @@
 var progressArrowCont = 0;
+var accessed = "";
 
 function goToHome(goToPage) {
     var url ="contentInfo!showContentCustom.action?course.id="+idCourse+"&grade.id="+idGrade+"&goToIndex=yes&goToPage=";
@@ -191,8 +192,13 @@ function labelUnitStatus(unitContentTag, goToPage) {
     var onClickFunc = "goToUnit('"+unitContentTag+"', '"+goToPage+"');";
     if ("true"==getHtml('contentInfo!isUnitCompleted.action?unitContent.tag='+unitContentTag)) {
         document.write('<a href="#" onclick="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_concluido.png"></a>');
-    } else if ("true"==getHtml('contentInfo!isUnitUnlocked.action?grade.id='+idGrade+'&unitContent.tag='+unitContentTag)) {
-        document.write('<a href="#" onclick="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_acesse.png"></a>');
+    } else {
+        if (("true"==getHtml('contentInfo!isUnitUnlocked.action?grade.id='+idGrade+'&unitContent.tag='+unitContentTag)) && (accessed == "")) {
+           accessed = 'true';
+           document.write('<a href="#" onclick="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_acesse.png"></a>');
+        } else {
+           accessed = 'locked';
+        }
     }
 }
 
