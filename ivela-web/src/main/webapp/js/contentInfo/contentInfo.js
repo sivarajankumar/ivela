@@ -295,6 +295,7 @@ function addLoadEvent(func) {
 var paintAnswerBackground;
 var wrongAnswerStyle;
 var rightAnswerStyle;
+var oldStyleBackground;
 
 /* Submit a Exercise for answer, expects a Form Element as parameter that will be serialized and sent. The input fields for your exercise */
 function submitExercise(form) {
@@ -340,26 +341,52 @@ function submitExercise(form) {
     if (status.indexOf("dep") != -1) {
         //alert(status.substring(4));
     }
-   
+
     var i = 0;    
     var name = json.name;
+    var fieldsHash = new Hash();
 
     for (i = 0; i < json.list.right.length; i++) {   
-    var rightDiv = document.getElementById(json.list.right[i] + "_check");
-    if (rightDiv == undefined) rightDiv = document.getElementById(name + "_" + json.list.right[i] + "_check");
-        if (rightDiv != undefined) {
-            rightDiv.style.background = rightAnswerStyle;
+        var field = json.list.right[i];
+        if (field.indexOf('|') > -1) {
+           var sp = field.split('|'); 
+           fieldsHash[sp[0]] = 't';           
+        } else {
+       fieldsHash[field] = 't';          
         }
     }
 
     for (i = 0; i < json.list.wrong.length; i++) {   
-        var errorDiv = document.getElementById(json.list.wrong[i] + "_check");
-        if (errorDiv == undefined) errorDiv = document.getElementById(name + "_" + json.list.wrong[i] + "_check");
-        if (errorDiv != undefined) {
-            errorDiv.style.background = wrongAnswerStyle;
+    var field = json.list.wrong[i];
+        if (field.indexOf('|') > -1) {
+           var sp = field.split('|'); 
+           fieldsHash[sp[0]] = 'f';          
+        } else {
+       fieldsHash[field] = 'f';          
         }
     }
-    
+
+    var keys = fieldsHash.keys();
+    for (i = 0; i < keys.length; i++) {   
+       if (fieldsHash[keys[i]] == 't') {
+        var field = json.list.right[i];
+        var rightDiv = document.getElementById(keys[i] + "_check");
+        if (rightDiv == undefined) rightDiv = document.getElementById(name + "_" + keys[i] + "_check");
+          if (rightDiv != undefined) {
+            if (!oldStyleBackground) oldStyleBackground = rightDiv.style.background;
+            rightDiv.style.background = rightAnswerStyle;    
+          }
+       } else {
+        var errorDiv = document.getElementById(keys[i] + "_check");
+        if (errorDiv == undefined) errorDiv = document.getElementById(name + "_" + keys[i] + "_check");
+          if (errorDiv != undefined) {
+            if (!oldStyleBackground) oldStyleBackground = errorDiv.style.background;
+            errorDiv.style.background = wrongAnswerStyle;
+          }
+       }
+    }
+
+
     var div = document.getElementById(name + "_status");
     if (div != undefined) {
       var divStyle = "fail";
@@ -385,6 +412,7 @@ function submitExercise(form) {
     }
     return false;
 }
+
 
 /* Retrieves the Right Answers for the Exercise, this will mark the exercise as done */
 function getExerciseAnswers(form) {

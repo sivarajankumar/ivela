@@ -432,7 +432,7 @@ public class ChallengeBean implements ChallengeRemote {
     private boolean compareAnswer(String correctAnswer, String userAnswer) {
         boolean isCorrect = false;
         
-        if (userAnswer == null || userAnswer.equals("")) {
+        if (userAnswer == null) {
             return isCorrect;
         }
         
@@ -440,11 +440,35 @@ public class ChallengeBean implements ChallengeRemote {
         
         String[] listAnswer = correctAnswer.split(ChallengeItems.ANSWER_OR_SEPARATOR);
                 
+        outerLoop:
         for (String answer: listAnswer) {
-            if (answer.trim().equalsIgnoreCase(userAnswer)) {
-                isCorrect = true;
+            
+            String[] andAnswer = correctAnswer.split(ChallengeItems.ANSWER_AND_SEPARATOR);
+            
+            if (userAnswer.isEmpty()) {
+                isCorrect = userAnswer.equals(answer);
                 break;
-            }    
+            }
+            
+            if (andAnswer.length > 1) {                
+                for (String andStr: andAnswer) {
+                    String cmpAnswer = userAnswer;
+                    userAnswer = userAnswer.replace(andStr, "");
+                    if (userAnswer.equals(cmpAnswer)) {                        
+                        continue outerLoop;
+                    }                    
+                }
+                
+                if (userAnswer.trim().isEmpty()) {
+                    isCorrect = true;
+                    break;
+                }
+            } else {
+                if (answer.trim().equalsIgnoreCase(userAnswer)) {
+                    isCorrect = true;
+                    break;
+                }       
+            }            
         }
         
         return isCorrect;
