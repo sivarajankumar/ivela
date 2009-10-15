@@ -49,14 +49,11 @@
     <decorator name="admin" page="admin.jsp">
         <pattern>/admin/*</pattern>
     </decorator>
-    <decorator name="course_custom" page="course_custom.jsp">
-        <pattern>/contentInfo!showContentCustom.action*</pattern>
-        <pattern>/contentInfo!showTocCustom.action*</pattern>
-        <pattern>/contentInfo!finishLesson.action*</pattern>
+    <decorator name="course_custom" page="course_custom.jsp">        
+        <pattern>/contentInfo!*</pattern>
     </decorator>
     <decorator name="course" page="course.jsp">
-        <pattern>/discipline!showContent.action*</pattern>
-        <pattern>/contentInfo!showContent.action*</pattern>
+        <pattern>/discipline!showContent.action*</pattern>        
     </decorator>
     <decorator name="main" page="main.jsp">
         <pattern>/*</pattern>

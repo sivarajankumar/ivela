@@ -42,7 +42,7 @@
             
     <package name="default" extends="struts-default">                                                     
         <global-results>
-            <result name="RuntimeException">/WEB-INF/jsp/error/exception.jsp</result>
+            <result name="GenericException">/WEB-INF/jsp/error/exception.jsp</result>
             <result name="NoSuchMethodException">/WEB-INF/jsp/error/notfound.jsp</result>
             <result name="index">index.jsp</result>
             <result name="login" type="redirect-action">
@@ -52,10 +52,10 @@
         </global-results>
         
         <global-exception-mappings>
-            <exception-mapping exception="java.lang.RuntimeException" 
-                               result="RuntimeException"/>
             <exception-mapping exception="java.lang.NoSuchMethodException"
                                result="NoSuchMethodException"/>
+            <exception-mapping exception="java.lang.Throwable" 
+                               result="GenericException"/>            
         </global-exception-mappings>
        
        <action name="login">            
