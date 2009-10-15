@@ -22,6 +22,8 @@
 package br.ufc.ivela.commons.model;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 
@@ -93,10 +95,20 @@ public class UnitContent implements Serializable {
     private Date duration;
 
     public UnitContent() {
+        try {
+			this.duration = new SimpleDateFormat("hh:mm:ss").parse("00:00:00");
+		} catch (ParseException e) {
+			// do nothing
+		}
     }
 
     public UnitContent(Long id) {
         this.id = id;
+        try {
+			this.duration = new SimpleDateFormat("hh:mm:ss").parse("00:00:00");
+		} catch (ParseException e) {
+			// do nothing
+		}
     }
 
     public UnitContent(Long id, int orderN, String title, String description) {
@@ -104,6 +116,11 @@ public class UnitContent implements Serializable {
         this.orderN = orderN;
         this.title = title;
         this.description = description;
+        try {
+			this.duration = new SimpleDateFormat("hh:mm:ss").parse("00:00:00");
+		} catch (ParseException e) {
+			// do nothing
+		}
     }
 
     public Long getId() {
