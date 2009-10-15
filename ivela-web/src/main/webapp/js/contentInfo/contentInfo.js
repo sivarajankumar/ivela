@@ -6,19 +6,19 @@ function goToHome(goToPage) {
         url += "index.html";
     else
         url += goToPage;            
-    window.location  = url;
+    window.location = url;
 }
 
 function goToPage(goToPage) {
-	window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitContent.id='+idUnitContent+'&goToPage='+goToPage;
+    window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitContent.id='+idUnitContent+'&goToPage='+goToPage;
 }
 
 function goToDiscipline(disciplineTag) {
-	window.location  = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&disciplineTag='+disciplineTag+'&goToPage=table_contents.html';
+    window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&disciplineTag='+disciplineTag+'&goToPage=table_contents.html';
 }
 
 function goToUnit(unitTag,goToPage) {
-	window.location  = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitTag='+unitTag+'&goToPage='+goToPage;
+    window.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitTag='+unitTag+'&goToPage='+goToPage;
 }
 
 function displayForum() {
@@ -197,7 +197,7 @@ function labelUnitStatus(unitContentTag, goToPage) {
 }
 
 function finishLesson() {
-    document.write(getHtml('contentInfo!finishLesson.action?course.id='+idCourse+'&systemUser.id='+70+'&unitContent.id='+idUnitContent+'&grade.id='+idGrade));
+    window.location = 'contentInfo!finishLesson.action?course.id='+idCourse+'&discipline.id='+idDiscipline+'&unitContent.id='+idUnitContent+'&grade.id='+idGrade;
 }
 
 function displayChat() {

@@ -105,10 +105,11 @@ public class UnitBean implements UnitRemote {
         List<Long> unitContents = daoUnitContent.find(sql, params);
         List<FinishedUnitContent> finishedUnitContents = finishedUnitContentRemote.getByCourseAndSystemUser(courseId, studentId);               
                 
+        outerLoop:
         for(Long unitContentId: unitContents){
-            for (FinishedUnitContent finishedUnit: finishedUnitContents) {
+            for (FinishedUnitContent finishedUnit: finishedUnitContents) {                
                 if (finishedUnit.getUnitContent().equals(unitContentId)) {                    
-                    continue;
+                    continue outerLoop;
                 }
             }                   
             result += 1;
