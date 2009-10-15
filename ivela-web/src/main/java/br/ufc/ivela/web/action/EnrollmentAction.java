@@ -27,6 +27,7 @@ import br.ufc.ivela.commons.Constants;
 import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Enrollment;
 import br.ufc.ivela.commons.model.Grade;
+import br.ufc.ivela.commons.model.Transcript;
 import br.ufc.ivela.ejb.interfaces.CourseRemote;
 import br.ufc.ivela.ejb.interfaces.EnrollmentRemote;
 import br.ufc.ivela.ejb.interfaces.GradeRemote;
@@ -114,7 +115,18 @@ public class EnrollmentAction extends GenericAction {
             if (count.size() < g.getMaxStudents()) {
                 enrollmentRemote.add(enrollment);
                 grade = gradeRemote.get(grade.getId());
-                addHistory("history.enrolluser.title", "history.enrolluser.description", getAuthenticatedUser().getUsername(), grade.getName());
+                List<Transcript> transcripts = historyRemote.getTranscriptsByStudentByGrade(getAuthenticatedUser().getId(), grade.getId());
+                if (transcripts.isEmpty()) {
+                    historyRemote.addTranscript(grade.getId(), getAuthenticatedUser().getId());    
+                } else {
+                    Transcript trans = transcripts.get(0);
+                    trans.setAverageChallenge(0.0);
+                    trans.setChallengesTotal(0.0);
+                    trans.setChallengesWeight(0);
+                    trans.setChallengesDone(0);
+                    historyRemote.updateTranscript(trans);
+                }
+                addHistory("history.enrolluser.title", "history.enrolluser.description", getAuthenticatedUser().getUsername(), grade.getName());                                               
             } else {
                 addActionMessage(getText("enrollment.list.add"));
                 return listGrades();
@@ -217,7 +229,7 @@ public class EnrollmentAction extends GenericAction {
         Enrollment e = enrollmentRemote.get(enrollment.getId());
 
         if (e.getGrade().getStatus() == Constants.GRADE_PERIOD_OF_ENROLLMENT) {
-            enrollmentRemote.remove(enrollment.getId());
+            enrollmentRemote.remove(enrollment.getId());            
         } else if (e.getGrade().getStatus() == Constants.GRADE_IN_PROGRESS) {
             e.setStatus(Constants.ENROLLMENT_SUSPENDED);
             enrollmentRemote.update(e);

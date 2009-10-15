@@ -182,7 +182,7 @@ public class ContentInfoAction extends CourseAwareAction {
         SystemUser user = getAuthenticatedUser();
         List<Transcript> transcripts = historyRemote.getTranscriptsByStudentByGrade(user.getId(), grade.getId());
         
-        if (transcripts.size() <= 0) {
+        if (transcripts.isEmpty()) {
             setInputStream(new ByteArrayInputStream(("0 " + getText("history.points")).getBytes()));
         } else {
             Transcript transcript = transcripts.get(0);

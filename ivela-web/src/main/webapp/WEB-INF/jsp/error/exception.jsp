@@ -31,11 +31,6 @@
     </head>
     <body>        
 
-        <div id="header">
-                <h1><a href="/ivela-web/index.jsp" class="logotipo"  style="position:relative;top:-10px" title="<s:property value="front.home.title" />"><s:text name="front.pageTitle" /></a></h1>                 
-                <br class="clear" />
-        </div>
-
         <br/>
         <h3><s:text name="error.exception.error"/></h3>
         <p class="message" >
@@ -51,11 +46,9 @@
         <h3><s:text name="error.exception.like"/></h3>
         <div id="menu">
           <ul>
-            <li id="menu_1" ><a href="index.jsp" title="">My Courses</a></li>
-            <li id="menu_2" ><a href="course!list.action" title="">Available Courses</a></li>
-            <li id="menu_3" ><a href="history!show.action" title="">Scorecard</a></li>
+            <li id="menu_1" ><a href="index.jsp" title="">Home</a></li>            
           </ul>
         </div>
-
+        
     </body>
 </html>
