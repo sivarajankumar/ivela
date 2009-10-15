@@ -46,7 +46,7 @@ var browserName = "";
 
 if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)){ //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);
     var ffversion=new Number(RegExp.$1); // capture x.x portion and store as a number
-    if (ieversion>=7 && ieversion<8) {
+    if (ffversion>=2) {
         result2 = ok;
         browserName= navigator.userAgent.substring(navigator.userAgent.search(/Firefox[\/\s](\d+\.\d+)/),navigator.userAgent.length);
     }
@@ -65,7 +65,7 @@ if (/Shiretoko[\/\s](\d+\.\d+)/.test(navigator.userAgent)){ //test for Firefox/x
 
 if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)){ //test for MSIE x.x;
     var ieversion=new Number(RegExp.$1); // capture x.x portion and store as a number
-    if (ieversion>=6) {
+    if (ieversion>=7 && ieversion<8) {
         result2 = ok;
         browserName= navigator.userAgent.substring(navigator.userAgent.search(/MSIE (\d+\.\d+);/),navigator.userAgent.length);
     }
