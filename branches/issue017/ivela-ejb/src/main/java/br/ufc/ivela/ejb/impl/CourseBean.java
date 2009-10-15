@@ -418,7 +418,7 @@ public class CourseBean implements CourseRemote {
         int total = disciplines.size();
         int finished = 0;
         for(Long disciplineId : disciplines){
-            if(disciplineBean.isDisciplineFinished(studentId, disciplineId, gradeId))
+            if(disciplineBean.isDisciplineFinished(studentId, disciplineId, courseId, gradeId) == 0)
                finished++; 
         }
         

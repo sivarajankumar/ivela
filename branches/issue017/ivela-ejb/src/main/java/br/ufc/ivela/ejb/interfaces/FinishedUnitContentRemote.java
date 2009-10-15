@@ -17,6 +17,8 @@ public interface FinishedUnitContentRemote {
 
     public List<FinishedUnitContent> getByUnitContent(Long unitContentId);
 
+    public List<FinishedUnitContent> getByCourseAndSystemUser(Long courseId, Long systemUserId);
+    
     public List<FinishedUnitContent> getByUnitContentAndSystemUser(Long unitContentId, Long systemUserId);
 
     public List<FinishedUnitContent> getByUnitContentTagAndSystemUser(String unitContentTag, Long systemUserId);

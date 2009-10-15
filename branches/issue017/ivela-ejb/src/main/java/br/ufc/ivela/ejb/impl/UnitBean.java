@@ -6,11 +6,17 @@ package br.ufc.ivela.ejb.impl;
 
 import br.ufc.ivela.commons.dao.DaoFactory;
 import br.ufc.ivela.commons.dao.GenericDao;
+import br.ufc.ivela.ejb.interfaces.FinishedUnitContentRemote;
 import br.ufc.ivela.ejb.interfaces.UnitRemote;
 import br.ufc.ivela.ejb.*;
+import br.ufc.ivela.commons.model.FinishedUnitContent;
 import br.ufc.ivela.commons.model.Unit;
 import br.ufc.ivela.commons.model.UnitContent;
+
+import java.util.Iterator;
 import java.util.List;
+
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
@@ -22,6 +28,9 @@ public class UnitBean implements UnitRemote {
 
     private GenericDao<Unit> daoUnit = DaoFactory.getInstance(Unit.class);
     private GenericDao<UnitContent> daoUnitContent = DaoFactory.getInstance(UnitContent.class);
+    
+    @EJB
+    FinishedUnitContentRemote finishedUnitContentRemote;
 
     /**
      * Connect to the server and add a new unit
@@ -86,20 +95,27 @@ public class UnitBean implements UnitRemote {
         return daoUnit.remove(unit);
     }
     
-    public boolean isUnitFinished(Long studentId, Long unitId, long gradeId){
-        boolean res = true;
+    public int isUnitFinished(Long studentId, Long unitId, long courseId, long gradeId){
+        int result = 0;
         UnitContentBean ucBean = new UnitContentBean();
         String sql = "select uc.id from UnitContent uc" +
                      " where uc.unitId=?";
         Object[] params = new Object[]{unitId};
         
         List<Long> unitContents = daoUnitContent.find(sql, params);
-        
+        List<FinishedUnitContent> finishedUnitContents = finishedUnitContentRemote.getByCourseAndSystemUser(courseId, studentId);               
+                
         for(Long unitContentId: unitContents){
-            if(!ucBean.isUnitContentFinished(studentId, unitContentId, gradeId))
-                return false;
+            for (FinishedUnitContent finishedUnit: finishedUnitContents) {
+                if (finishedUnit.getUnitContent().equals(unitContentId)) {                    
+                    continue;
+                }
+            }                   
+            result += 1;
         }
+                
+        result = result == unitContents.size()? -1 : result;
         
-        return res;
+        return result;
     }
 }

@@ -248,8 +248,8 @@ public class ContentInfoAction extends CourseAwareAction {
     }
 
     public String isDisciplineCompleted() {
-        boolean isDisciplineCompleted = disciplineRemote.isDisciplineFinished(getAuthenticatedUser().getId(), discipline.getId(), grade.getId());
-        setInputStream(new ByteArrayInputStream(new Boolean(isDisciplineCompleted).toString().getBytes()));
+        int isDisciplineCompleted = disciplineRemote.isDisciplineFinished(getAuthenticatedUser().getId(), discipline.getTag(), course.getId(), grade.getId());
+        setInputStream(new ByteArrayInputStream(new Integer(isDisciplineCompleted).toString().getBytes()));
         return "text";
     }
 
