@@ -29,15 +29,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.springframework.security.GrantedAuthority;
 
 import br.ufc.ivela.commons.dao.DaoFactory;
@@ -47,7 +45,6 @@ import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.Exam;
 import br.ufc.ivela.commons.model.Exercise;
-import br.ufc.ivela.commons.model.FinishedUnitContent;
 import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.model.Unit;
@@ -378,14 +375,14 @@ public class CourseBean implements CourseRemote {
         List<Long> finishedUnitContents = daoCourse.find("select f.unitContent from FinishedUnitContent f " +
                 "where f.course = ? and f.systemUser = ?", new Object[]{courseId, systemUserId});
 
-        long timeLeft = 0;
+        Date date = new Date(70, 1, 1, 0, 0, 0);
         for (UnitContent unitContent : allUnitContents) {
             if (!finishedUnitContents.contains(unitContent.getId())) {
-                timeLeft += unitContent.getDuration().getTime();
+            	date = DateUtils.addHours(date, unitContent.getDuration().getHours());
+            	date = DateUtils.addMinutes(date, unitContent.getDuration().getMinutes());
             }
         }
 
-        Date date = new Date(timeLeft);
         return (date.getHours()!=0 ? date.getHours() + " hora(s) e ":"") + date.getMinutes() + " minuto(s)";
     }
 
