@@ -87,65 +87,6 @@
 
 <br>
 <br> 
-<s:if test="!transcriptList.isEmpty()">
-<table width="100%">
-    <tr>
-        <td align="right">
-            <a id="pnlAvaliacao" href="history!showPrintVersion.action" id="btn-goto-avaliacao" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"  
-               style="text-decoration: none;">
-                <img src="/ivela-web/images/icon/icon-printer.gif" border="0" /> <font style="font-family:arial;font-size: 12px;"><s:text name="history.print"/></font>
-            </a>
-        </td>
-    </tr>
-    
-</table>
-  <h1><s:text name="history.title"/></h1>
-    <table class="table-exercises-result" width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-            <td width="368" class="titulo"><center><s:text name="history.table.course"/></center></td>
-            <td width="368" class="titulo"><center><s:text name="history.table.grade"/></center></td>
-            <td width="368" class="titulo"><center><s:text name="history.table.average.exercise"/></center></td>
-            <td width="368" class="titulo"><center><s:text name="history.table.average.exam"/></center></td>
-            <td width="368" class="titulo"><center><s:text name="history.table.average"/></center></td>
-            <td width="368" class="titulo"><center><s:text name="history.table.result"/></center></td>
-        </tr>
-        
-        <s:iterator value="transcriptList">
-            <tr>
-                <td align="left">
-                    <s:property value="grade.course.name"/>
-                </td>
-                <td align="left">
-                    <s:property value="grade.name"/>
-                </td>
-                <td class="score">
-                    <s:if test="averageExercise<0.0">--</s:if>
-                    <s:else><s:property value="averageExercise"/></s:else>
-                </td>
-                <td class="score">
-                    <s:if test="averageExam<0.0">--</s:if>
-                    <s:else><s:property value="averageExam"/></s:else>
-                </td>
-                <td class="score">
-                    <s:if test="score<0.0">--</s:if>
-                    <s:else><s:property value="score"/></s:else>
-                </td>
-                <s:if test="status==0">
-                    <td class="manual-mark"><s:text name="history.status.failed"/></td>
-                </s:if>
-                <s:if test="status ==1">
-                    <td class="manual-mark"><s:text name="history.status.approved"/></td>
-                </s:if>
-                <s:if test="status==3">
-                    <td class="manual-mark"><s:text name="history.status.inprogress"/></td>
-                </s:if>
-            </tr> 
-        </s:iterator>
-
-    
-</table>    
-</s:if>
-<br/>
 
 <h1><s:text name="history.list.title"/></h1>
 
