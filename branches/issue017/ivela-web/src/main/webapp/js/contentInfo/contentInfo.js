@@ -18,6 +18,10 @@ function goToDiscipline(disciplineTag) {
     document.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&disciplineTag='+disciplineTag+'&goToPage=table_contents.html';
 }
 
+function goToDisciplineHelp(disciplineTag, goToPage) {
+    document.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&disciplineTag='+disciplineTag+'&goToPage='+goToPage;
+}
+
 function goToUnit(unitTag,goToPage) {
     document.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&discipline.id='+idDiscipline+'&unit.id='+idUnit+'&unitTag='+unitTag+'&goToPage='+goToPage;
 }
