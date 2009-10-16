@@ -73,7 +73,7 @@
         </s:iterator>
     </table>
     <s:if test="back">
-        <span class="name-user"> <a href="forum!list.action"><s:text name="forum.list.seeAll"/></a></span>
+        <span class="name-user"> <a class="forum-message" href="forum!list.action"><s:text name="forum.list.seeAll"/></a></span>
     </s:if>   
      <%--
     <s:form cssClass="form-search-forum" action="forum!search" method="post" theme="simple">
