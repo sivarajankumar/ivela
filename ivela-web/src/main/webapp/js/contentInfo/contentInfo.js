@@ -300,6 +300,7 @@ var paintAnswerBackground;
 var wrongAnswerStyle;
 var rightAnswerStyle;
 var oldStyleBackground;
+var retrieslLeft;
 
 /* Submit a Exercise for answer, expects a Form Element as parameter that will be serialized and sent. The input fields for your exercise */
 function submitExercise(form) {
@@ -414,6 +415,15 @@ function submitExercise(form) {
         div.innerHTML = html;      
       }
     }
+
+    if (json.list.wrong.length > 0) {
+         var errorPop = $('error_popup');
+     if(errorPop) errorPop.style.visibility = 'visible';
+    }
+
+    if (json.count) {
+    retriesLeft = json.count;
+    }
     return false;
 }
 
@@ -441,7 +451,9 @@ function getExerciseAnswers(form) {
         return false;
     }
          
+
     for (i = 0; i < json.list.right.length; i++) {   
+
         var text = form.getInputs('text', json.list.right[i]);    
         if (text[0] != undefined) {     
             var ans = json.list.answers[i];
@@ -451,6 +463,7 @@ function getExerciseAnswers(form) {
             text[0].value = ans;
             continue;
         } 
+
         var button = form.getInputs('radio', json.list.right[i]);
         if (button[0] != undefined) {
            var radioValue = json.list.answers[i];        
@@ -458,11 +471,75 @@ function getExerciseAnswers(form) {
                if (button[j].value == radioValue) button[j].checked = 1
            }                                
         }
+
+        var checkboxes = form.getInputs('checkbox', json.list.right[i]);
+        if (checkboxes[0] == undefined) continue;
+        if (checkboxes[0] != undefined) {
+           var checkboxesValue = json.list.answers[i];        
+           if (checkboxesValue.indexOf("[and]") != -1) {
+                var splitValues = checkboxesValue.split("[and]");
+                for (z = 0; z < splitValues.length; z++) {
+                  var fieldName = json.list.right[i];
+                  checkboxes = form.getInputs('checkbox', fieldName);
+                  for (j = 0; j < checkboxes.length; j++) {
+                    if (checkboxes[j].value == splitValues[z]) checkboxes[j].checked = 1
+                  }
+                }
+                continue;
+            }
+           if (checkboxesValue.indexOf("[or]") != -1) {
+                var splitValues = checkboxesValue.split("[or]");
+                for (z = 0; z < splitValues.length; z++) {
+                  checkboxes = form.getInputs('checkbox', fieldName);
+                  var fieldName = json.list.right[i];
+                  for (j = 0; j < checkboxes.length; j++) {
+                    if (checkboxes[j].value == splitValues[z]) checkboxes[j].checked = 1
+                  }
+                }
+                continue;
+           }
+
+           var checkboxesValue = json.list.answers[i];        
+
+           for (j = 0; j < checkboxes.length; j++) {
+               if (checkboxes[j].value == checkboxesValue) checkboxes[j].checked = 1
+           }                                
+
+        }
     }
     
     return false;
 }
 
+function redoExercise(form) {
+    if (form == undefined) 
+        form = $('exercise')
+    
+    var inputs = form.getInputs();    
+
+    for (i = 0; i < inputs.length; i++) {
+        var input = inputs[i];
+        var div = document.getElementById(input.name + "_check");
+        if (div == undefined) div = document.getElementById(name + "_" + input.name + "_check");
+        if (div != undefined) {
+           div.style.background = oldStyleBackground;
+        }
+        
+        if (input.type == 'text') {
+           input.value = '';
+        } else if (input.type == 'radio') {
+           input.checked = 0;
+        } else if (input.type == 'checkbox') {
+           input.checked = 0;
+        }           
+    }
+}
+
+function closePopUpError() {
+     var errorPop = $('error_popup');
+     if(errorPop) errorPop.style.visibility = 'hidden';
+     retriesLeft = null;
+}
 /* Use this to set what shoulda appear in the check div in case of right answers in the challenge */
 function setRightAnswerStyle(style) {
     rightAnswerStyle = style;

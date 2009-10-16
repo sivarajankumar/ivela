@@ -423,7 +423,7 @@ public class ChallengeBean implements ChallengeRemote {
         
         for (int i = 0; i < answers.size(); i++) {
             rightFields.add(answers.get(i).getName());
-            answerFields.add(answers.get(i).getValue());
+            answerFields.add(answers.get(i).getValue().trim());
         }        
         
         return buildJsonAnswer(rightFields, null, answerFields, results, challItem.getName(), "fin", 0);
