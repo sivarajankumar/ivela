@@ -62,10 +62,10 @@ color:#ff7202; font-weight:bold; padding:3px 0 0 20px;}
 #form-answer .name-title{margin-bottom:15px; width:700px;}
 #form-answer .btn-send{background:url(../images/icon/icon-save.gif) no-repeat top left; padding: 0 0 0 20px; margin-bottom:20px; margin-top:10px; width:auto; height:auto; display:block; font:11px Arial, Helvetica, sans-serif; color:#033d7d;}
 
-.form-search-forum {position:absolute; top: 0px; right: 30px; width:330px; float: right; height:auto;  padding:10px 0 30px;}
+.form-search-forum {position:absolute; top: 0px; right: 38px; width:340px; float: right; height:auto;  padding:10px 0 30px;}
 .form-search-forum label {display:inline; position:relative; left: 120px; color:#033d7d; font-weight:bold; font-size: 14px;margin-bottom: 20px;}
-.form-search-forum input.field {width:250px; display: inline; height:19px; float:left; margin: 2px 7px 5px 5px; padding:0 0 2px; font:11px Arial, Helvetica, sans-serif; *position: relative; *right: 1em;}
-.form-search-forum input.button {width:64px; display: inline; height:21px; float:left; margin-top: 2px; *position: relative; *right: 1em;}
+.form-search-forum input.field {width:250px; display: inline; height:16px; float:left; margin: 2px 7px 5px 5px; padding:0 0 2px; font:11px Arial, Helvetica, sans-serif; *position: relative; *right: 1em;}
+.form-search-forum input.button {width:64px; display: inline; height:23px; float:left; margin-top: 2px; *position: relative; *right: 1em;}
 
 
 .pages-all{background:url(../images/img-pages.gif) no-repeat top left; width:79px; height:26px; float:left; font:11px Arial, Helvetica, sans-serif; 
@@ -89,3 +89,4 @@ color:#FFF; padding:3px 5px 2px; margin-top:15px; text-decoration:none;}
 #overlay[id]{position:fixed;}
 .lightbox{width:95%; height:96%; background:transparent;}
 
+.forum-message {float:left; font:15px Arial, Helvetica, sans-serif; color:#033d7d; font-weight:bold; text-decoration:none; margin-left: 1px; margin-top:12px;}

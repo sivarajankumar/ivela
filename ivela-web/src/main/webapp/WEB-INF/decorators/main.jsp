@@ -149,16 +149,7 @@
 <div class="tools" style="position:relative;top:-56px;left:-5px">
                 <div class="container-tools" id="hidden" style="display:none;">
                     <div class="content-tools">
-                        <div id="last_unit_content_div" style="display:none;">
-                            <p class="last-action">
-                                <span><s:text name="main.tools.lastLesson"/></span>
-
-                                <a href="discipline!showLastContent.action">
-                                    <span id="last_unit_content_title"></span>
-                                </a>
-                            </p>
-                        </div>
-
+                        
                         <jsp:include page="../jsp/message/tools.jsp"/>
                         
                         <jsp:include page="../jsp/forum/tools.jsp"/>

@@ -85,16 +85,16 @@ public class TopicDaoImpl<T> extends GenericDaoImpl<T> implements TopicDao<T> {
                 "in (" +
                 "select distinct t.id from Forum f, Topic t, Enrollment e, Grade g, Course c where ";
         if (isPublic)
-            countQuery +="(f.id = " + forum + " and t.forum.id = f.id and f.title LIKE '" + title + "' and f.public1 = " + isPublic + ") or ";
+            countQuery +="(f.id = " + forum + " and t.forum.id = f.id and f.public1 = " + isPublic + ") or ";
             countQuery +="(f.id = " + forum + " and t.forum.id = f.id and " +
                 "f.grade.id = e.grade.id and " +
                 "e.systemUser.id = " + systemUser + " and " +
                 "e.grade.id = g.id and " +
                 "g.courseId = c.id and " +
-                "f.title LIKE '" + title + "' and f.public1 = false)" +
-                ")";    
+                "f.public1 = false)" +
+                ") and tt.title LIKE '" + title + "'";    
         if (isAdministrator) {
-            countQuery = "select count(t.id) from Forum f, Topic t where f.id = " + forum + " and t.forum.id = f.id and t.title LIKE '" + title + "'";                  
+            countQuery = "select count(t.id) from Forum f, Topic t where f.id = " + forum + " and t.forum.id = f.id and t.title LIKE '" + title + "%'";                  
         }
         
         return countQuery;
@@ -110,16 +110,16 @@ public class TopicDaoImpl<T> extends GenericDaoImpl<T> implements TopicDao<T> {
                 "in (" +
                 "select distinct t.id from Forum f, Topic t, Enrollment e, Grade g, Course c where ";
         if (isPublic)
-            query +="(f.id = " + forum + " and t.forum.id = f.id and f.title LIKE '" + title + "' and f.public1 = " + isPublic + ") or ";
+            query +="(f.id = " + forum + " and t.forum.id = f.id and f.public1 = " + isPublic + ") or ";
         query +="(f.id = " + forum + " and t.forum.id = f.id and " +
                 "f.grade.id = e.grade.id and " +
                 "e.systemUser.id = " + systemUser + " and " +
                 "e.grade.id = g.id and " +
                 "g.courseId = c.id and " +
-                "f.title LIKE '" + title + "' and f.public1 = false)" +
-                ") order by tt.lastPostDate desc, tt.createdAt desc";
+                "f.public1 = false)" +
+                ") and tt.title LIKE '" + title + "' order by tt.lastPostDate desc, tt.createdAt desc";
         if (isAdministrator) {
-            query = "select t from Forum f, Topic t where f.id = " + forum + " and t.forum.id = f.id and t.title LIKE '" + title + "'" + " order by t.createdAt desc, t.lastPostDate desc";
+            query = "select t from Forum f, Topic t where f.id = " + forum + " and t.forum.id = f.id and t.title LIKE '" + title + "%'" + " order by t.createdAt desc, t.lastPostDate desc";
         }       
         return query;
     }
