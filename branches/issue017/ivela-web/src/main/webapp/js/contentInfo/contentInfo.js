@@ -335,16 +335,17 @@ function submitExercise(form) {
 
     if (status == "err") {
         //alert();
-        return false;
+        return;
     }
     
     if (status == "fin") {
         //Maximum number of retries reached
-        // return false;
+        return;
     }
     
     if (status.indexOf("dep") != -1) {
         //alert(status.substring(4));
+        return;
     }
 
     var i = 0;    
@@ -423,8 +424,7 @@ function submitExercise(form) {
 
     if (json.count) {
     retriesLeft = json.count;
-    }
-    return false;
+    }    
 }
 
 
@@ -448,7 +448,7 @@ function getExerciseAnswers(form) {
 
     if (json.status == "err") {
         //alert();
-        return false;
+        return;
     }
          
 
@@ -506,9 +506,7 @@ function getExerciseAnswers(form) {
            }                                
 
         }
-    }
-    
-    return false;
+    }    
 }
 
 function redoExercise(form) {
