@@ -266,6 +266,7 @@
                     <input type="hidden" name="unitContent.unitId" id="input.unitContent.unit.id" value="" />
                     <input type="hidden" name="unitContent.id" id="input.unitContent.id" value="" />
                     <input type="hidden" name="unitContent.description" id="input.unitContent.description" value="" />
+                    <input type="hidden" name="unitContent.tag" id="input.unitContent.tag" value="" />
                     <h1><s:text name="unitContent.input.add" /></h1><br />
                     <br />
                     <br />
@@ -525,6 +526,7 @@
                     <s:hidden name="unitContent.type" value="2" />
                     <s:hidden name="unitContent.unitId" id="upload.unit.id" value="" />
                     <s:hidden name="unitContent.description" value="none" />
+                    <s:hidden name="unitContent.tag" id="upload.unitContent.tag" value=""/>
                     <br />
                     <br />
                     <label><s:text name="unitContent.input.title" /></label><br />
@@ -540,7 +542,7 @@
                     <label><s:text name="unitContent.input.width" /></label><br />
                     <s:textfield name="unitContent.width" id="upload.unitContent.width" maxLength="4" size="8" /><span class="tooltip"  onmouseover="return escape('<s:text name="admin.unitContent.tip.03"/>')"></span><br />
                     <label><s:text name="unitContent.input.height" /></label><br />
-                    <s:textfield name="unitContent.height" id="upload.unitContent.height" maxLength="4" size="8" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.unitContent.tip.03"/>')"></span><br /><br />
+                    <s:textfield name="unitContent.height" id="upload.unitContent.height" maxLength="4" size="8" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.unitContent.tip.03"/>')"></span><br /><br />                    
                     <s:submit key="systemUser.input.btnSave" />
                 </s:form>
             </div>

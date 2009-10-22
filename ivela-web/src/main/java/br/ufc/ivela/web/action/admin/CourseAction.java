@@ -43,6 +43,8 @@ import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
 import br.ufc.ivela.ejb.interfaces.ForumRemote;
 import br.ufc.ivela.ejb.interfaces.RepositoryRemote;
+import br.ufc.ivela.util.PropertiesUtil;
+import br.ufc.ivela.util.PropertiesUtil.IVELA_PROPERTIES;
 import br.ufc.ivela.web.action.CourseAwareAction;
 
 import com.thoughtworks.xstream.XStream;
@@ -61,6 +63,10 @@ public class CourseAction extends CourseAwareAction {
     private String nick = "";
     private String chatRoomName = "";
     private String teacherName;
+    private String ircServer;
+    private String chatColor;
+    private String blackGet;
+    private String blackSave;
     private Long chatUId;
     private long courseId;
     private long disciplineId;
@@ -117,6 +123,14 @@ public class CourseAction extends CourseAwareAction {
         this.disciplineId = id;
     }
 
+    public String getIrcServer() {
+        return ircServer;
+    }
+    
+    public String getChatColor() {
+        return chatColor;
+    }
+    
     /**
      * Add a new Course, perform validation
      * if hasn't errors add a new course
@@ -306,8 +320,14 @@ public class CourseAction extends CourseAwareAction {
         course = courseRemote.get(courseId);
         grade = gradeRemote.get(grade.getId());
         this.nick = this.getAuthenticatedUser().getUsername();
-        this.chatRoomName = "#course_"+course.getName()+"_grade_"+grade.getName();
+        this.chatRoomName = "course_"+course.getName()+"_grade_"+grade.getName();
+        this.chatRoomName = this.chatRoomName.replace(' ', '_');
         this.teacherName = this.nick;
+        PropertiesUtil putil = PropertiesUtil.getPropertiesUtil();
+        this.ircServer = putil.getProperty(IVELA_PROPERTIES.IRC_SERVER);
+        this.chatColor = putil.getProperty(IVELA_PROPERTIES.CHAT_COLOR);
+        this.blackGet = putil.getProperty(IVELA_PROPERTIES.BLACKBOARD_SERVER_GET);
+        this.blackSave = putil.getProperty(IVELA_PROPERTIES.BLACKBOARD_SERVER_SAVE);
         return "chat";
     }
 
@@ -661,5 +681,12 @@ public class CourseAction extends CourseAwareAction {
         this.teacherName = teacherName;
     }
     
+    public String getBlackboardServerGet() {
+        return blackGet;        
+    }
+    
+    public String getBlackboardServerSave() {
+        return blackSave;
+    }
     
 }

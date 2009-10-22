@@ -23,42 +23,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
-<%@page import="java.net.InetAddress;" %>
-<%@page import="java.net.NetworkInterface;" %>
-<%@page import="java.net.SocketException;" %>
-<%@page import="java.net.UnknownHostException;" %>
-<%@page import="java.util.Enumeration;" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
-
-<%
-    String inetAddress = new String();
-    Enumeration<NetworkInterface> netInterfaces = null;
-    try {
-        netInterfaces = NetworkInterface.getNetworkInterfaces();
-    } catch (SocketException e) {
-        // do nothing
-    }
-
-    while (netInterfaces.hasMoreElements()) {
-        NetworkInterface ni = netInterfaces.nextElement();
-        Enumeration<InetAddress> address = ni.getInetAddresses();
-        while (address.hasMoreElements()) {
-            InetAddress addr = address.nextElement();
-            if (!addr.isLoopbackAddress() && addr.isSiteLocalAddress()
-                && !(addr.getHostAddress().indexOf(":") > -1)) {
-                inetAddress = addr.getHostAddress();
-            }
-        }
-    }
-    if ((inetAddress == null) || ("".equals(inetAddress))) {
-        try {
-            inetAddress = InetAddress.getLocalHost().getHostAddress();
-        } catch (UnknownHostException e) {
-            inetAddress = "127.0.0.1";
-        }
-    }
-%>
 
 <html>
   <head>
@@ -74,8 +40,10 @@
         <param name="nick" value='<s:property value="nick" />'>
         <param name="teacher" value='<s:property value="teacherName" />'>
         <param name="channel" value='<s:property value="chatRoomName" />'>
-        <param name="bgcolor" value="FFFFFF">
-        <param name="server" value="<%=inetAddress%>">
+        <param name="bgcolor" value='<s:property value="chatColor" />'>
+        <param name="server" value='<s:property value="ircServer" />'>
+        <param name="remotefile" value='<s:property value="blackboardServerGet" />' >
+        <param name="remoteservlet" value='<s:property value="blackboardServerSave" />' >        
       </applet>
     </center>
   </body>

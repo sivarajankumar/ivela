@@ -1,3 +1,9 @@
+// Temporary Workaround for the problem of IE breaking in some tag imgs,
+// resending a request that may be broke in some IEs and thus breaking the session
+if (window.opener) {
+  document.cookie = window.opener.document.cookie;
+}
+
 var progressArrowCont = 0;
 var accessed = "";
 
@@ -119,7 +125,7 @@ function getScoreTotal() {
 
 function displayTutor() {    
     mailToWindow = window.open(getHtml('contentInfo!getTutorsEmail.action?grade.id='+idGrade+'&unitContent.id='+idUnitContent), 'mailToWindow');
-    mailToWindow.close();
+    if (mailToWindow) mailToWindow.close();
 }
 
 function showGlobalImage(image) {
@@ -376,17 +382,49 @@ function submitExercise(form) {
     for (i = 0; i < keys.length; i++) {   
        if (fieldsHash[keys[i]] == 't') {
         var field = json.list.right[i];
-        var rightDiv = document.getElementById(keys[i] + "_check");
-        if (rightDiv == undefined) rightDiv = document.getElementById(name + "_" + keys[i] + "_check");
+        var rightDiv = $(keys[i] + "_check");
+        if (rightDiv == undefined) rightDiv = $(name + "_" + keys[i] + "_check");
           if (rightDiv != undefined) {
-            if (!oldStyleBackground) oldStyleBackground = rightDiv.style.background;
+            if (!oldStyleBackground) {
+               var backStyle = "";
+               if (rightDiv.style.background) {
+                 backStyle = rightDiv.style.background;
+               } else if (rightDiv.currentStyle) {
+                 backStyle += rightDiv.currentStyle.backgroundColor;
+                 backStyle += ' ';
+                 backStyle += rightDiv.currentStyle.backgroundImage;
+                 backStyle += ' ';
+                 backStyle += rightDiv.currentStyle.backgroundY;
+                 backStyle += ' ';
+                 backStyle += rightDiv.currentStyle.backgroundX;
+                 backStyle += ' ';
+                 backStyle += rightDiv.currentStyle.backgroundRepeat;
+               }
+               oldStyleBackground = backStyle;
+            }
             rightDiv.style.background = rightAnswerStyle;    
           }
        } else {
-        var errorDiv = document.getElementById(keys[i] + "_check");
-        if (errorDiv == undefined) errorDiv = document.getElementById(name + "_" + keys[i] + "_check");
+        var errorDiv = $(keys[i] + "_check");
+        if (errorDiv == undefined) errorDiv = $(name + "_" + keys[i] + "_check");
           if (errorDiv != undefined) {
-            if (!oldStyleBackground) oldStyleBackground = errorDiv.style.background;
+            if (!oldStyleBackground) {
+              var backStyle = "";
+              if (errorDiv.style.background) {
+                backStyle = errorDiv.style.background;
+              } else if (errorDiv.currentStyle) {
+                backStyle += errorDiv.currentStyle.backgroundColor;
+                backStyle += ' ';
+                backStyle += errorDiv.currentStyle.backgroundImage;
+                backStyle += ' ';
+                backStyle += errorDiv.currentStyle.backgroundY;
+                backStyle += ' ';
+                backStyle += errorDiv.currentStyle.backgroundX;
+                backStyle += ' ';
+                backStyle += errorDiv.currentStyle.backgroundRepeat;
+              }
+              oldStyleBackground = backStyle;
+            }
             errorDiv.style.background = wrongAnswerStyle;
           }
        }
@@ -418,12 +456,12 @@ function submitExercise(form) {
     }
 
     if (json.list.wrong.length > 0) {
-         var errorPop = $('error_popup');
-     if(errorPop) errorPop.style.visibility = 'visible';
+      var errorPop = $('error_popup');
+      if(errorPop) errorPop.style.visibility = 'visible';
     }
 
     if (json.count) {
-    retriesLeft = json.count;
+      retriesLeft = json.count;
     }    
 }
 
@@ -538,6 +576,7 @@ function closePopUpError() {
      if(errorPop) errorPop.style.visibility = 'hidden';
      retriesLeft = null;
 }
+
 /* Use this to set what shoulda appear in the check div in case of right answers in the challenge */
 function setRightAnswerStyle(style) {
     rightAnswerStyle = style;

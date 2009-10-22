@@ -40,6 +40,22 @@ public class PropertiesUtil {
        
     public enum IVELA_PROPERTIES {
         /**
+         * Server for the blackboard to store
+         */
+        BLACKBOARD_SERVER_SAVE("blackboard.server.save"),
+        /**
+         * Server for the blackboard to retrieve 
+         */
+        BLACKBOARD_SERVER_GET("blackboard.server.get"),
+        /**
+         * Color used in the IRC chat
+         */
+        CHAT_COLOR("chat.color"),
+        /**
+         * IRC server
+         */
+        IRC_SERVER("irc.server"),        
+        /**
          * Web Path for the Application
          */
         WEB_PATH("web.path");
@@ -194,6 +210,17 @@ public class PropertiesUtil {
      */
     public String getProperty(IVELA_PROPERTIES property) {
         return propertiesReader.getProperty(property.getKey());   
+    }
+    
+    /**
+     * Retrieve a Property from the Ivela properties file.
+     * 
+     * @param property the String Property to retrieve
+     * 
+     * @return the value in the specified property
+     */
+    public String getProperty(String property) {
+        return propertiesReader.getProperty(property);   
     }
     
     private void parseProperty(String property, Map<String, String> parsedProperty) {        

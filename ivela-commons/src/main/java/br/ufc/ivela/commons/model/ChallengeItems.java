@@ -37,7 +37,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "challenge_items")
-public class ChallengeItems implements Serializable {
+public class ChallengeItems implements Comparable<ChallengeItems>, Serializable {
     private static final long serialVersionUID = 1L;
     
     /** Default weight for a challenge */
@@ -194,6 +194,10 @@ public class ChallengeItems implements Serializable {
      */
     public Integer getWeight() {
         return weight;
+    }
+
+    public int compareTo(ChallengeItems o) {
+        return name.compareTo(o.getName());
     }
 
 }
