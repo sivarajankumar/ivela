@@ -47,10 +47,24 @@ public class UnitContentBean implements UnitContentRemote {
     }
  
     public Long add(UnitContent unitContent) {
+        if (unitContent.getTag() == null || unitContent.getTag().isEmpty()) {
+            String name = unitContent.getTitle();
+            if (name != null) {
+                unitContent.setTag(name.toLowerCase().replace(" ", ""));
+            }
+        }
+        
         return (Long) daoUnitCont.save(unitContent);
     }
 
     public Boolean update(UnitContent unitContent) {
+        if (unitContent.getTag() == null || unitContent.getTag().isEmpty()) {
+            String name = unitContent.getTitle();
+            if (name != null) {
+                unitContent.setTag(name.toLowerCase().replace(" ", ""));
+            }
+        }
+        
         return daoUnitCont.update(unitContent);
     }
 

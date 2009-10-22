@@ -37,6 +37,8 @@ import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
 import br.ufc.ivela.ejb.interfaces.EnrollmentRemote;
 import br.ufc.ivela.ejb.interfaces.GradeRemote;
+import br.ufc.ivela.util.PropertiesUtil;
+import br.ufc.ivela.util.PropertiesUtil.IVELA_PROPERTIES;
 
 public class CourseAction extends CourseAwareAction {
         
@@ -49,7 +51,11 @@ public class CourseAction extends CourseAwareAction {
     private InputStream inputStream;
     private String nick;
     private String chatRoomName;
-    private String teacherName;    
+    private String teacherName; 
+    private String ircServer;
+    private String chatColor;
+    private String blackGet;
+    private String blackSave;
     private long courseId;
     private long disciplineId;
 
@@ -152,6 +158,12 @@ public class CourseAction extends CourseAwareAction {
         this.nick = this.getAuthenticatedUser().getUsername();
         this.grade = gradeRemote.getActiveByStudentByCourse(this.getAuthenticatedUser().getId(), course.getId());
         this.chatRoomName = "#course_"+course.getName()+"_grade_"+grade.getName();
+        this.chatRoomName = this.chatRoomName.replace(' ', '_');
+        PropertiesUtil putil = PropertiesUtil.getPropertiesUtil();
+        this.ircServer = putil.getProperty(IVELA_PROPERTIES.IRC_SERVER);
+        this.chatColor = putil.getProperty(IVELA_PROPERTIES.CHAT_COLOR);
+        this.blackGet = putil.getProperty(IVELA_PROPERTIES.BLACKBOARD_SERVER_GET);
+        this.blackSave = putil.getProperty(IVELA_PROPERTIES.BLACKBOARD_SERVER_SAVE);
         Set<SystemUser> list = (Set<SystemUser>)grade.getProfessors();
         Iterator i = list.iterator();
         if(i.hasNext())
@@ -194,6 +206,22 @@ public class CourseAction extends CourseAwareAction {
         this.chatRoomName = chatRoomName;
     }
 
+    public String getIrcServer() {
+        return ircServer;
+    }
+    
+    public String getChatColor() {
+        return chatColor;
+    }
+    
+    public String getBlackboardServerGet() {
+        return blackGet;        
+    }
+    
+    public String getBlackboardServerSave() {
+        return blackSave;
+    }
+    
     public String getNick() {
         return nick;
     }

@@ -252,8 +252,11 @@ function showEditUnitContentById(unitContentId) {
 
         $('input.unitContent.id').value = jsonUnitContent.unitContent.id;
         $('input.unitContent.unit.id').value = jsonUnitContent.unitContent.unitId
-        $('input.unitContent.title').value = jsonUnitContent.unitContent.title;
+        $('input.unitContent.title').value = jsonUnitContent.unitContent.title;        
 
+        if(jsonUnitContent.unitContent.tag)
+            $('input.unitContent.tag').value = jsonUnitContent.unitContent.tag;
+        
         var jsonUnitContentOrders = getJsonFromUrl('unitContent!getUnitContentOrdersJson.action?unit.id=' + jsonUnitContent.unitContent.unitId);
         $('input.unitContent.order_n').length = 0;
         var item = 1;
@@ -282,6 +285,11 @@ function showUploadUnitContent(unitId) {
     closeAll();
     $('showUploadUnitContent').style.display = 'block';
     $('upload.unit.id').value = unitId;
+    $('upload.unitContent.id').value = "";
+    $('upload.unitContent.title').value = "";
+    $('upload.unitContent.width').value = "";
+    $('upload.unitContent.height').value = "";
+    $('upload.unitContent.tag').value = "";
     
         jsonUnitId = unitId.split("_",1)[0];
         var jsonUnitContentOrders = getJsonFromUrl('unitContent!getUnitContentOrdersJson.action?unit.id=' + jsonUnitId);
@@ -314,6 +322,8 @@ function showUploadUnitContentId(unitContentId, jsonUnitContent) {
     else
         $('upload.unitContent.height').value = jsonUnitContent.unitContent.height;
 
+    if(jsonUnitContent.unitContent.tag)
+        $('upload.unitContent.tag').value = jsonUnitContent.unitContent.tag;    
 
         var jsonUnitContentOrders = getJsonFromUrl('unitContent!getUnitContentOrdersJson.action?unit.id=' + jsonUnitContent.unitContent.unitId);
         $('upload.unitContent.order_n').length = 0;
