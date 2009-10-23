@@ -1,20 +1,36 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*  
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: CourseRemote.java                                                                   #
+# Document: Course Remote                                                                   # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 06-OCT-2009 - Fabio Fantato (Instituto Eldorado)- 000017 - Table of Contents              # 
+#############################################################################################
+*/
 package br.ufc.ivela.ejb.interfaces;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.ejb.Remote;
 
 import br.ufc.ivela.commons.dao.Page;
 import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.SystemUser;
-import java.util.List;
-import javax.ejb.Remote;
 
-/**
- *
- * @author maristella
- */
 @Remote
 public interface CourseRemote {
 
@@ -66,6 +82,8 @@ public interface CourseRemote {
     
     public List<Course> getStructure();
     
+    public List<Course> getStructure(SystemUser systemUser);
+    
     public String getCourseJsonStructure(Long courseId);
     
     public Course getCourseStructure(Long courseId);
@@ -74,6 +92,8 @@ public interface CourseRemote {
     
     public Integer getStudentsCount(Long courseId);
     
+    public List<SystemUser> getCoordinators(Long courseId);
+            
     public List<SystemUser> getProfessors(Long courseId);
     
     public List<SystemUser> getTutors(Long courseId);
@@ -85,11 +105,43 @@ public interface CourseRemote {
     public Integer getGraduatedStudentsCount(Long courseId);
     
     Integer getProgress(Long systemUserId, Long courseId);
-    
+
+    public String getTimeLeft(Long systemUserId, Long courseId);
+
     public void savePhoto(Course p, java.io.File file);
     
     public int isFinishedCourse(Long studentId, Long courseId, long gradeId);
     
     public List<Course> getCourses(String name, String description);
+    
+    /**
+     * Method that get the list of courses by Coordinator
+     *  
+     * @param userId the System User Id of the Professor
+     * @return List instance with the course objects, the list will be empty if no result if found
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.SystemUser
+     */
+    public List<Course> getCoursesByCoordinator(Long userId);
+    
+    /**
+     * Method that get the list of courses by Professor
+     * 
+     * @param userId the System User Id of the Professor
+     * @return List instance with the course objects, the list will be empty if no result if found
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.SystemUser
+     */
+    public List<Course> getCoursesByProfessor(Long userId);
+    
+    /**
+     * Method that get the list of courses by Tutor
+     * 
+     * @param userId the System User Id of the Professor
+     * @return List instance with the course objects, the list will be empty if no result if found
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.SystemUser
+     */
+    public List<Course> getCoursesByTutor(Long userId);
 }
 

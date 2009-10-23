@@ -654,8 +654,8 @@ INSERT INTO language VALUES (3, 'Spanish', 'es_SP');
 
 
 
+INSERT INTO profile VALUES (1, 'werwerewrewwrew', 'e', 'tttttttttttt', NULL, '', '/uploads/profiles/1/jdamicopb.jpg', NULL, NULL, 1, 1);
 
-INSERT INTO profile VALUES (1, '', '', '', NULL, '', NULL, 1, false, NULL, NULL);
 
 --
 -- Data for Name: student_exam; Type: TABLE DATA; Schema: ivela; Owner: ivela
@@ -683,6 +683,10 @@ INSERT INTO ws_enabled VALUES (1, '127.0.0.1');
 -- INSERT INTO application_settings VALUES (1, NULL, '${java.io.tmpdir}', '.zip', 5000, true, 'webical', 'webical');
 
 
+
+
+UPDATE discipline SET tag = SUBSTRING(LOWER(REPLACE(name, ' ', '')),1,20);
+UPDATE unit_content SET tag = SUBSTRING(LOWER(REPLACE(title, ' ', '')),1,20);
 
 
 

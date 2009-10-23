@@ -28,7 +28,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><s:text name="systemUser.edit.pageTitle" /></title>
-        <cal:head/>
         <s:head />
     </head>
     

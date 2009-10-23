@@ -5,19 +5,22 @@
 
 package br.ufc.ivela.ejb.impl;
 
-import br.ufc.ivela.commons.dao.DaoFactory;
-import br.ufc.ivela.commons.dao.GenericDao;
-import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
-import br.ufc.ivela.ejb.*;
-import br.ufc.ivela.commons.model.SystemUser;
-import br.ufc.ivela.commons.model.Profile;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.ejb.Stateless;
+
+import br.ufc.ivela.commons.dao.DaoFactory;
+import br.ufc.ivela.commons.dao.GenericDao;
+import br.ufc.ivela.commons.model.Profile;
+import br.ufc.ivela.commons.model.SystemUser;
+import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 
 /**
  *
@@ -103,19 +106,51 @@ public class SystemUserBean implements SystemUserRemote {
     }
 
     public List<SystemUser> getByAuthentication(Long authenticationId) {        
-        return daoSystemUser.find("select s from SystemUser s where s.authentication.id  = ? and s.enabled = true", new Object[]{authenticationId});
+    	List<SystemUser> users = daoSystemUser.find("select s from SystemUser s where s.authentication.id  = ? and s.enabled = true", new Object[]{authenticationId});
+    	Collections.sort(users,new Comparator<SystemUser>() {
+
+			public int compare(SystemUser arg0, SystemUser arg1) {
+				return arg0.getUsername().compareToIgnoreCase(arg1.getUsername());
+			}
+    		
+    	});
+    	return users;
     }
 
     public List<SystemUser> getByUsername(String username) {
-        return (List<SystemUser>) daoSystemUser.find("select su from SystemUser su where upper(su.username) = ? and su.enabled = true", new Object[] { username.toUpperCase() });
+    	List<SystemUser> users = (List<SystemUser>) daoSystemUser.find("select su from SystemUser su where upper(su.username) = ? and su.enabled = true", new Object[] { username.toUpperCase() });
+    	Collections.sort(users,new Comparator<SystemUser>() {
+
+			public int compare(SystemUser arg0, SystemUser arg1) {
+				return arg0.getUsername().compareToIgnoreCase(arg1.getUsername());
+			}
+    		
+    	});
+    	return users;
     }
     
     public List<SystemUser> getByUsernameByAuthentication(String username,Long authenticationId) {
-        return (List<SystemUser>) daoSystemUser.find("select su from SystemUser su where upper(su.username) LIKE  ? and su.authentication.id  = ? and su.enabled = true", new Object[] { username.toUpperCase()+ "%",authenticationId });
+    	List<SystemUser> users = (List<SystemUser>) daoSystemUser.find("select su from SystemUser su where upper(su.username) LIKE  ? and su.authentication.id  = ? and su.enabled = true", new Object[] { username.toUpperCase()+ "%",authenticationId });
+    	Collections.sort(users,new Comparator<SystemUser>() {
+
+			public int compare(SystemUser arg0, SystemUser arg1) {
+				return arg0.getUsername().compareToIgnoreCase(arg1.getUsername());
+			}
+    		
+    	});
+    	return users;
     }
     
     public List<SystemUser> getUsersByUsername(String username) {
-        return (List<SystemUser>) daoSystemUser.find("select su from SystemUser su where upper(su.username) LIKE ? and su.enabled = true", new Object[] { username.toUpperCase() + "%" });
+    	List<SystemUser> users = (List<SystemUser>) daoSystemUser.find("select su from SystemUser su where upper(su.username) LIKE ? and su.enabled = true", new Object[] { username.toUpperCase() + "%" });
+    	Collections.sort(users,new Comparator<SystemUser>() {
+
+			public int compare(SystemUser arg0, SystemUser arg1) {
+				return arg0.getUsername().compareToIgnoreCase(arg1.getUsername());
+			}
+    		
+    	});
+    	return users;
     }
     
 }

@@ -22,6 +22,8 @@ import br.ufc.ivela.ejb.*;
 import br.ufc.ivela.ejb.interfaces.HistoryRemote;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 
 /**
  *
@@ -71,6 +73,7 @@ public class HistoryBean implements HistoryRemote {
         return daoHistory.update(history);
     }
     
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Long addTranscript(Long gradeId, Long studentId){
         Transcript transcript = new Transcript();
         Grade grade = gradeBean.get(gradeId);
@@ -104,15 +107,16 @@ public class HistoryBean implements HistoryRemote {
         return list;
     }
     
+    @TransactionAttribute(TransactionAttributeType.SUPPORTS)
     public List<Transcript> getTranscriptsByStudentByGrade(Long studentId, Long gradeId){
         //  TEMPORARIO calculando para CADA turma
-        this.calcAverageCourse(gradeId,studentId);
+        // this.calcAverageCourse(gradeId,studentId);
         
         //
         return daoTranscript.find("from Transcript t where t.systemUser.id = ? and t.grade.id = ?", new Object[]{studentId,gradeId});
     }
     
-    
+   @TransactionAttribute(TransactionAttributeType.SUPPORTS)
    public Transcript getTranscript(Long transcriptId){
        return daoTranscript.get(transcriptId);
    } 
@@ -149,6 +153,7 @@ public class HistoryBean implements HistoryRemote {
        
    }
    
+   @TransactionAttribute(TransactionAttributeType.REQUIRED)
    public Boolean updateTranscript(Transcript transcript){
         return daoTranscript.update(transcript);
    }

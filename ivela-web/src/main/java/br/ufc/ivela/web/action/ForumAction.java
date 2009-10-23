@@ -1,8 +1,31 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*  
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: ForumAction.java                                                                    #
+# Document: Forum User Action                                                               # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 07-JAN-2009 - Leonardo Oliveira (UFC)           - XXXXXX - Initial Version                #
+# 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
+#############################################################################################
+*/
 package br.ufc.ivela.web.action;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.ufc.ivela.commons.Constants;
 import br.ufc.ivela.commons.dao.Page;
@@ -12,34 +35,22 @@ import br.ufc.ivela.commons.model.Forum;
 import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.Post;
 import br.ufc.ivela.commons.model.Topic;
-import br.ufc.ivela.ejb.interfaces.CourseRemote;
 import br.ufc.ivela.ejb.interfaces.ForumRemote;
-import br.ufc.ivela.ejb.interfaces.GradeRemote;
 import br.ufc.ivela.ejb.interfaces.PostRemote;
 import br.ufc.ivela.ejb.interfaces.TopicRemote;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- *
- * @author Leonardo Oliveira Moreira
- * 
  * Action of the forum
  */
-public class ForumAction extends GenericAction {
-
-    private GradeRemote gradeRemote;
-    private CourseRemote courseRemote;    
+public class ForumAction extends CourseAwareAction {
+       
     private ForumRemote forumRemote;
     private TopicRemote topicRemote;
     private PostRemote postRemote;
-    private Forum forum;
-    private Grade grade;
-    private Course course;
+    private Forum forum;    
     private Discipline discipline;
     private List<Forum> forumList;
     private List<ForumLine> forumLines;
@@ -65,14 +76,6 @@ public class ForumAction extends GenericAction {
 
     public void setForumTitle(String forumTitle) {
         this.forumTitle = forumTitle;
-    }
-
-    public Grade getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Grade grade) {
-        this.grade = grade;
     }
 
     public boolean isBack() {
@@ -118,10 +121,7 @@ public class ForumAction extends GenericAction {
             if (topicList != null) {
                 forumViews += topicList.size();
                 for (Topic t : topicList) {
-                    List<Post> postList = postRemote.getByTopic(t.getId());
-                    if (postList != null) {
-                        forumReplies += postList.size();
-                    }
+                    forumReplies += t.getPostsCount();
                 }
             }
 
@@ -466,54 +466,6 @@ public class ForumAction extends GenericAction {
         public void setLastTopic(Topic lastTopic) {
             this.lastTopic = lastTopic;
         }
-    }
-
-    /**
-     * Retrieves a course
-     * @return course
-     */
-    public Course getCourse() {
-        return course;
-    }
-
-    /**
-     * Sets a course
-     * @param course
-     */
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    /**
-     * Retrieves a remote course
-     * @return courseRemote
-     */
-    public CourseRemote getCourseRemote() {
-        return courseRemote;
-    }
-
-    /**
-     * Sets a remote course
-     * @param courseRemote
-     */
-    public void setCourseRemote(CourseRemote courseRemote) {
-        this.courseRemote = courseRemote;
-    }
-
-    /**
-     * Retrieves a remote grade
-     * @return gradeRemote
-     */
-    public GradeRemote getGradeRemote() {
-        return gradeRemote;
-    }
-
-    /**
-     * Sets a remote grade
-     * @param gradeRemote
-     */
-    public void setGradeRemote(GradeRemote gradeRemote) {
-        this.gradeRemote = gradeRemote;
     }
 
     public InputStream getInputStream() {

@@ -40,7 +40,7 @@ public class TopicBeanTest {
      */
     @Test
     public void testGetAll() {
-        List<Topic> list = topicBean.getRecentTopics(3);
+        List<Topic> list = topicBean.getRecentTopics(3, null);
         
         assertTrue(list.size() > 0);
     }

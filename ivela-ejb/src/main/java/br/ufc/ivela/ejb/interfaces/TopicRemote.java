@@ -6,6 +6,7 @@
 package br.ufc.ivela.ejb.interfaces;
 
 import br.ufc.ivela.commons.dao.Page;
+import br.ufc.ivela.commons.model.Enrollment;
 import br.ufc.ivela.commons.model.Topic;
 import java.util.List;
 import javax.ejb.Remote;
@@ -64,7 +65,7 @@ public interface TopicRemote {
     
     public Topic getLastTopicByForum(Long forumId);
     
-    public List<Topic> getRecentTopics(int count);
+    public List<Topic> getRecentTopics(int count, List<Enrollment> gradeIds);
     
     public boolean isAccess(Long systemUser, Long course);
     

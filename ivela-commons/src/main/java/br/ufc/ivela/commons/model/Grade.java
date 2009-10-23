@@ -1,7 +1,25 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*  
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: Grade.java                                                                          #
+# Document: Grade Model                                                                     # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 07-JAN-2009 - Leonardo Oliveira (UFC)           - XXXXXX - Initial Version                #
+# 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
+#############################################################################################
+*/
 
 package br.ufc.ivela.commons.model;
 
@@ -29,12 +47,16 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  *
  * @author leoomoreira
  */
 @Entity
 @Table(name = "grade")
+@Cache(region="gradeCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQueries({@NamedQuery(name = "Grade.findById", query = "SELECT g FROM Grade g WHERE g.id = :id"), @NamedQuery(name = "Grade.findByName", query = "SELECT g FROM Grade g WHERE g.name = :name"), @NamedQuery(name = "Grade.findByPeriod", query = "SELECT g FROM Grade g WHERE g.period = :period"), @NamedQuery(name = "Grade.findByMaxStudents", query = "SELECT g FROM Grade g WHERE g.maxStudents = :maxStudents"), @NamedQuery(name = "Grade.findByStatus", query = "SELECT g FROM Grade g WHERE g.status = :status"), @NamedQuery(name = "Grade.findByRequiresEnrollmentValidation", query = "SELECT g FROM Grade g WHERE g.requiresEnrollmentValidation = :requiresEnrollmentValidation"), @NamedQuery(name = "Grade.findByStartDatetime", query = "SELECT g FROM Grade g WHERE g.startDatetime = :startDatetime"), @NamedQuery(name = "Grade.findByEndDatetime", query = "SELECT g FROM Grade g WHERE g.endDatetime = :endDatetime"), @NamedQuery(name = "Grade.findByMaxDuration", query = "SELECT g FROM Grade g WHERE g.maxDuration = :maxDuration")})
 public class Grade implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -49,6 +71,7 @@ public class Grade implements Serializable {
     private String period;
     @Column(name = "max_students", nullable = false)
     private int maxStudents;
+        
     @Column(name = "status", nullable = false)
     private int status;
     @Column(name = "requires_enrollment_validation", nullable = false)
@@ -86,8 +109,8 @@ public class Grade implements Serializable {
     private Long coordinatorId;    
     @Transient
     private SystemUser coordinator;
-    
-    @Transient
+        
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "grade")    
     private List<Forum> forums;
     
     public Grade() {
@@ -141,10 +164,27 @@ public class Grade implements Serializable {
         this.maxStudents = maxStudents;
     }
 
+    /**
+     * Return the Status of the Grade. 
+     * 
+     * @return 0: Inactive <br>
+     *         1: Period Of Enrollment <br>
+     *         2: finished <br>
+     *         3: inProgress <br>
+     **/                     
     public int getStatus() {
         return status;
     }
 
+    /**
+     * Sets the Status of the Grade.
+     * 
+     * @param status
+     *            0: Inactive <br>
+     *            1: Period Of Enrollment <br>
+     *            2: finished <br>
+     *            3: inProgress <br>
+     */
     public void setStatus(int status) {
         this.status = status;
     }

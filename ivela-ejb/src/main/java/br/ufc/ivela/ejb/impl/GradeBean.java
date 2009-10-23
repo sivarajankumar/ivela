@@ -4,19 +4,28 @@ package br.ufc.ivela.ejb.impl;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+
+import org.springframework.security.GrantedAuthority;
+
 import br.ufc.ivela.commons.dao.DaoFactory;
 import br.ufc.ivela.commons.dao.GenericDao;
 import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Enrollment;
 import br.ufc.ivela.commons.model.Forum;
-import br.ufc.ivela.ejb.interfaces.GradeRemote;
-import br.ufc.ivela.ejb.*;
 import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.model.Topic;
-import java.util.HashSet;
-import java.util.List;
-import javax.ejb.Stateless;
+import br.ufc.ivela.commons.model.SystemUser.AUTHORITY;
+import br.ufc.ivela.ejb.interfaces.CourseRemote;
+import br.ufc.ivela.ejb.interfaces.GradeRemote;
 
 /**
  *
@@ -27,12 +36,15 @@ import javax.ejb.Stateless;
 @Stateless(mappedName="GradeBean")
 public class GradeBean implements GradeRemote {
 
+    @EJB
+    private CourseRemote courseRemote;
+    
     private GenericDao<Course> daoCourse = DaoFactory.getInstance(Course.class);
     private GenericDao<Grade> daoGrade = DaoFactory.getInstance(Grade.class);
     private GenericDao<Forum> daoForum = DaoFactory.getInstance(Forum.class);
     private GenericDao<Topic> daoTopic = DaoFactory.getInstance(Topic.class);
     private GenericDao<Enrollment> daoEnroll = DaoFactory.getInstance(Enrollment.class);
-    private GenericDao<SystemUser> daoSu = DaoFactory.getInstance(SystemUser.class);
+    private GenericDao<SystemUser> daoSu = DaoFactory.getInstance(SystemUser.class);    
 
     public Long add(Grade grade) {
         return (Long) daoGrade.save(grade);
@@ -91,17 +103,20 @@ public class GradeBean implements GradeRemote {
     } 
 
     /**
-     * retrive the list of grade by professors
-     * @param userId
+     * retrieve the list of grade by professors
+     * @param userId Id of the Professor User
      * @return
      */
-    public List getGradeByProfessors(Long gradeId) {
-
-        Object[] params = new Object[]{gradeId};
-
-        return daoGrade.find("select g from Grade g, Professor p, Course c WHERE g.courseId = c.id and c.active = true and g.id = p.grade.id =?", params);
+    public List getGradeByProfessors(Long userId) {
+        Object[] params = new Object[]{userId};        
+        return daoGrade.find("select p.grade from Professor p WHERE p.systemUser.id =?", params);
     }
 
+    public List<Grade> getGradeByTutors(Long systemUserId) {
+        Object[] params = new Object[]{systemUserId};
+        return daoGrade.find("select t.grade from Tutor t WHERE t.systemUser.id =?", params);
+    }
+    
     public List<Grade> getByStudent(SystemUser user) {
         Object[] params = new Object[]{user};
         return daoGrade.find("select g from Grade g, Course c, Enrollment e WHERE g.courseId = c.id and c.active = true and g.id = e.grade.id ? and g.requiresEnrollmentValidation = ?", params);
@@ -129,24 +144,8 @@ public class GradeBean implements GradeRemote {
     
     public List<Course> getStructure() {
         List<Course> list = daoCourse.find("from Course c where c.active = true", new Object[] {});
-        for (Course course : list) {
-            course.setGrades(daoGrade.getByFK("courseId", course.getId()));
-            for (Grade grade : course.getGrades()) {
-                grade.setEnrollments(daoEnroll.find("select e from Enrollment e, SystemUser su where e.grade.id = ? and e.systemUser.id = su. id and su.enabled = true", new Object[]{grade.getId()}));
-                List<SystemUser> professors = getProfessors(grade.getId());
-                List<SystemUser> tutors = getTutors(grade.getId());
-                List<Forum> forums = daoForum.getByFK("grade.id", grade.getId());
-                grade.setProfessors(new HashSet<SystemUser>(professors));
-                grade.setTutors(new HashSet<SystemUser>(tutors));
-                grade.setCoordinator(daoSu.get(grade.getCoordinatorId()));
-                grade.setCourse(course);
-                for (Forum f : forums) {
-                    List<Topic> topicList = daoTopic.getByFK("forum.id", f.getId());
-                    f.setTopicCollection(topicList);
-                }
-                grade.setForums(forums);                
-            }
-        }
+        
+        buildCourseListContent(list);
         return list;
     }
 
@@ -170,5 +169,61 @@ public class GradeBean implements GradeRemote {
     public List<Grade> getGradesByCourseAndStatus(Long course, int status) {
         Object[] params = new Object[]{course, status};
         return daoGrade.find("select g from Grade g Where g.courseId = ? and status = ?", params);
+    }
+    
+    public List<Grade> getGradeListByProfessorSystemUser(Long systemUserId) {
+        return daoSu.find("from Grade g where g.id = (select distinct p.grade.id from Professor p where p.systemUser.id = ? and p.systemUser.enabled = true)", new Object[] { systemUserId });
+    }
+
+    public List<Course> getStructure(SystemUser systemUser) {
+        List<Course> list = new ArrayList<Course>(0);
+        
+        if (systemUser == null || systemUser.getId() == null) {
+            return list;
+        }
+        
+        GrantedAuthority[] authorities = systemUser.getAuthorities();
+        String authority_ = authorities != null && authorities.length > 0 ? authorities[0].getAuthority() : null;
+
+        if (AUTHORITY.ROLE_ADMIN.hasAuthority(authority_)) {
+            list = courseRemote.getAll();
+        } else if (AUTHORITY.ROLE_PROFESSOR.hasAuthority(authority_)) {
+            list = courseRemote.getCoursesByProfessor(systemUser.getId());            
+        } else if (AUTHORITY.ROLE_TUTOR.hasAuthority(authority_)) {
+            list = courseRemote.getCoursesByTutor(systemUser.getId());
+        } else if (AUTHORITY.ROLE_COORD.hasAuthority(authority_)) {
+            list = courseRemote.getCoursesByCoordinator(systemUser.getId());
+        }
+        
+        buildCourseListContent(list);
+        
+        return list;
+    }
+
+    private void buildCourseListContent(List<Course> courseList) {
+        for (Course course : courseList) {
+            course.setGrades(daoGrade.getByFK("courseId", course.getId()));
+            for (Grade grade : course.getGrades()) {
+            	List<Enrollment> enroll = daoEnroll.find("select e from Enrollment e, SystemUser su where e.grade.id = ? and e.systemUser.id = su. id and su.enabled = true", new Object[]{grade.getId()});
+            	Collections.sort(enroll,new Comparator<Enrollment>() {
+					public int compare(Enrollment arg0, Enrollment arg1) {
+						return arg0.getSystemUser().getUsername().compareToIgnoreCase(arg1.getSystemUser().getUsername());
+					}
+            	});
+                grade.setEnrollments(enroll);
+                List<SystemUser> professors = getProfessors(grade.getId());
+                List<SystemUser> tutors = getTutors(grade.getId());
+                List<Forum> forums = daoForum.getByFK("grade.id", grade.getId());
+                grade.setProfessors(new HashSet<SystemUser>(professors));
+                grade.setTutors(new HashSet<SystemUser>(tutors));
+                grade.setCoordinator(daoSu.get(grade.getCoordinatorId()));
+                grade.setCourse(course);
+                for (Forum f : forums) {
+                    List<Topic> topicList = daoTopic.getByFK("forum.id", f.getId());
+                    f.setTopicCollection(topicList);
+                }
+                grade.setForums(forums);                
+            }
+        }
     }
 }

@@ -7,7 +7,6 @@ var checkedStudents = new Array();
 Event.observe(window, 'load', loadAccordions, false);
 Event.observe(window, 'load', function() {Event.observe(content, 'click', click, false);}, false);
 
-
 function validateFile(fileName){
     if(fileName != ""){
            var ext = fileName.split(".",2);
@@ -101,31 +100,42 @@ function submitList(){
 function showFinish(){
     $('formUpload').reset();
     closeAll();
-    $('showResultEnrollment').style.display = "block";
+    
     $('listResultStudent').innerHTML = "";
+
+    var json = getJson('grade!getEnrollResults.action');
+        
     var html ="";
     html = "<table border ='1'><tr><td>Aluno</td><td>Matricula</td></tr>";
-    for (i=0;i<$('studentsUp').contentDocument.forms[0].elements.length;i++){
-        var x = $('studentsUp').contentDocument.forms[0].elements[i].value.split("#");
-        var situacao;
-        if(x[1]=="true"){
-            situacao = "Realizada";
-        }
-        else{
-            situacao = "Não realizada";
-        }
-        html+="<tr><td>"+x[0]+"</td><td>"+situacao+"</td></tr>"
+    if (json != undefined) {
+	    for (i = 0; i < json.students.length; i++) {
+	        var tempFirstName = json.students[i].firstName;
+	        var tempLastName = json.students[i].lastName;
+	        var tempStatus = json.students[i].status;
+	        if (tempFirstName != undefined){
+	        	 if(tempStatus=="true"){
+	                 situacao = "Realizada";
+	             }
+	             else{
+	                 situacao = "Não realizada";
+	             } 
+	        	 html+="<tr><td>"+tempFirstName+" "+tempLastName+"</td><td>"+situacao+"</td></tr>"
+	        }
+	    }	
+    } else {
+    	 html+="<tr><td>--</td><td>--</td></tr>"
     }
     html +="</table><br><br><a href='home.action'>Concluir</a>";
     $('listResultStudent').innerHTML = html;
-    
+    $('showResultEnrollment').style.display = "block";
+    $('listResultStudent').style.display = "block";
     
 }
         
 //
 //	Set up all accordions
 //
-function loadAccordions() {		
+function loadAccordions() {	
     var bottomAccordion = new accordion('vertical_container2', {
         classNames : {
             toggle : 'accordion_toggle_grade2',
@@ -660,14 +670,14 @@ function setEnrollments(gradeId, status) {
         falhas++;
     }        
     if (enviadas > 0) {
-        //alert('Estado(s) atualizado(s)');
-        //document.location = 'home.action';
-        updateStructure();
+    	closeLoading();
+        document.location = 'home.action';
     } else {
         alert('Estado(s) não atualizado(s)');    
         closeLoading();
     }
 }
+
 
 function setCheckedAllStudents(gradeId)  {    
     var checks = document.getElementsByName('studentsCheck');
@@ -705,6 +715,17 @@ function setUncheckedAllStudents(gradeId) {
 
 var col1Content = '';
 var col2Content = '';
+var boxContent = '';
+
+function showBoxLoading() {
+	boxContent = $('boxContent').innerHTML;
+    $('boxContent').innerHTML = '<img src="../images/ajax-loading.gif" />';
+}
+
+function closeBoxLoading() {
+	$('boxContent').innerHTML=boxContent;
+}
+
 
 function showLoading() {
     col1Content = $('col-1-home').innerHTML;

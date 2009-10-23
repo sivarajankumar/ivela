@@ -23,26 +23,26 @@
 <%-- Placeholder Version  --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <html>
 <head>
-<title>
-<s:text name="error.404" />
-</title>
+<title><s:text name="error.404" /></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="css/exception.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
 <h1><s:text name="error.404" /></h1>
-<br/>
-<p>
-<s:text name="error.404.description" />
-</p>
+<br />
+<p><s:text name="error.404.description" /></p>
+<br />
+<hr />
+<h3><s:text name="error.exception.like" /></h3>
+<div id="menu">
+<ul>
+    <li id="menu_1" ><a href="index.jsp" title="">Home</a></li>
+</ul>
+</div>
 
-<br/>
-<p>
-<s:text name="error.404.options" />
-</p>
-<br/>   
-<a href="javascript: history.back(1)"><s:text name="error.404.options.1" /> </a>
 </body>
 </html>

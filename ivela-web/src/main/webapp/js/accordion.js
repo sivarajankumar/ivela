@@ -32,10 +32,26 @@ accordion.prototype = {
         if (Prototype.Browser.IE) {
             var r = document, h = Selector.handlers, c = true;
             var n = new Array();
-            var elementCount = document.all(b).length;
-            if (!elementCount) elementCount = 1;            
-            for (var i = 0; i < elementCount; i++) {
-                n[i] = document.all(b, i);
+            var elementCount;
+            if ((typeof (window.external.AddToFavoritesBar) != "undefined")) {
+                // IE 8          
+                elementCount = document.all.length;                                 
+                if (!elementCount) elementCount = 1;    
+                var z = 0;
+                for (var i = 0; i < elementCount; i++) {
+                    var element = document.all(i);
+                    if (element.id == b) {
+                        n[z] = element;                  
+                        z = z+ 1;
+                    }
+                }
+            } else {
+                // IE <= 7               
+                elementCount = document.all(b).length;                                 
+                if (!elementCount) elementCount = 1;                    
+                for (var i = 0; i < elementCount; i++) {
+                    n[i] = document.all(b,i);
+                }
             }
             c = "descendant";
             a = h.className(n, r, this.options.classNames.toggle, c);
@@ -137,7 +153,8 @@ accordion.prototype = {
                         : this.currentAccordion.scrollWidth
             }
         });
-        a.merge(this.scaling);
+        if (typeof (ie6browser) == 'undefined')
+            a.merge(this.scaling);
         this.effects.push(new Effect.Scale(this.currentAccordion, 100, a));
         if (this.showAccordion) {
             this.showAccordion.previous(0).removeClassName(

@@ -42,7 +42,7 @@
             
     <package name="default" extends="struts-default">                                                     
         <global-results>
-            <result name="RuntimeException">/WEB-INF/jsp/error/exception.jsp</result>
+            <result name="GenericException">/WEB-INF/jsp/error/exception.jsp</result>
             <result name="NoSuchMethodException">/WEB-INF/jsp/error/notfound.jsp</result>
             <result name="index">index.jsp</result>
             <result name="login" type="redirect-action">
@@ -52,10 +52,10 @@
         </global-results>
         
         <global-exception-mappings>
-            <exception-mapping exception="java.lang.RuntimeException" 
-                               result="RuntimeException"/>
             <exception-mapping exception="java.lang.NoSuchMethodException"
                                result="NoSuchMethodException"/>
+            <exception-mapping exception="java.lang.Throwable" 
+                               result="GenericException"/>            
         </global-exception-mappings>
        
        <action name="login">            
@@ -126,7 +126,7 @@
             <result name="download" type="stream">  
                 <param name="contentType">application/download</param>  
                 <param name="contentLength">${contentLength}</param>  
-                <param name="contentDisposition">${contentDisposition}</param>  
+                <param name="contentDisposition">attachment; filename="${contentDisposition}"</param>  
                 <param name="inputName">downloadStream</param>  
             </result>
             

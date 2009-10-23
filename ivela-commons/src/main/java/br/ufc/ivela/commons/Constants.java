@@ -27,7 +27,7 @@ package br.ufc.ivela.commons;
 public class Constants {
     
 	//SYSTEM VERSION
-	public static final String SYSTEM_VERSION = "V01.02";
+	public static final String SYSTEM_VERSION = "V02.00";
 	
     //TYPE OF GENDER
     public static final int GENDER_FEMALE = 0;
@@ -114,11 +114,5 @@ public class Constants {
      
      public static final Double  AVERAGE_FOR_APPROVAL = 7.0;
      
-     public static final Long MAX_LENGTH_FILE = 3000000L;
-     
-     public static final String MAIL_SMTP_HOST = "smtp.ufc.br";
-     public static final int MAIL_SMTP_PORT = 25;
-     public static final String MAIL_FROM = "no-reply@ivela.ufc.br";
-    public static String DEFAULT_LOCALE = "en_US";
-             
+     public static final Long MAX_LENGTH_FILE = 3000000L;                      
 }
