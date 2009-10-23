@@ -6,6 +6,7 @@ function showNewsChallenge(){
     $('formSearchChallenge').reset();
     $('submitChall').value = "Add";
     $('showChallenge').style.display= "block";
+    $('challengeItens.weight').readOnly = false; 
 }
 
 function showDependency(){
@@ -63,7 +64,7 @@ function submitSearch(){
     }
     else{
         $('challengeItens.weight').readOnly = false;
-        alert("Não encontrado!");
+        alert("Não encontrado!");        
         showNewsChallenge();
     }
 }

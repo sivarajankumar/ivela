@@ -296,6 +296,7 @@ public class ContentInfoAction extends CourseAwareAction {
             mailer.send(new SystemUser[] { getAuthenticatedUser() }, null, "lesson.finished", "lesson.finished.velocity", new Map[]{params}, true);
         }
         
+        unitContent = null;
         discipline = disciplineRemote.get(discipline.getId());
         disciplineTag = discipline.getTag();
         goToPage = "table_contents.html";
@@ -540,7 +541,7 @@ public class ContentInfoAction extends CourseAwareAction {
         while ((position = builder.indexOf(img, tempPosition)) > -1) {
             int srcPos = builder.indexOf(src, position + 1);
             builder.insert(srcPos + src.length() + 1,  path);
-            tempPosition = position + 1;
+            tempPosition = position + 5;
         }
     }
     
