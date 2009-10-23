@@ -1,0 +1,172 @@
+@charset "utf-8";
+/* CSS Document */
+
+* {margin:0pt;
+    padding:0pt;
+}
+.clear {
+    clear:both;
+    font-size:1px;
+    height:0pt;
+    line-height:0px;
+}
+body {
+    background: url(../images/bg_standard2.jpg) repeat-x scroll -12px top ;
+    height:100%;
+}
+#container {
+    font-family:Arial,Helvetica,sans-serif;
+    height:auto;
+    margin:0pt auto;
+    min-height:100%;
+    text-align:left;
+    width:960px;
+}
+a {
+    color:#033D7D;
+}
+a:hover {
+    color:#FF6600;
+}
+#header {
+    background:transparent url(../images/bg-ballons3.jpg) no-repeat scroll 0pt;
+    height:150px;
+    padding-top:19px;
+    width:960px;
+}
+#header .logotipo {
+    background:transparent url(../images/ivela-logo2.gif) no-repeat scroll 0pt;
+    float:left;
+    height:118px;
+    overflow:hidden;
+    text-indent:-999px;
+    width:178px;
+}
+#content {
+    height:auto;
+    margin-bottom:50px;
+    padding-top:20px;
+    width:100%;
+}
+
+#content ol .item{
+    font-family:Arial,Helvetica,sans-serif;
+    padding:5px;
+    border:1px solid black;
+}
+
+#content ol .subitem{
+    font-family:Arial,Helvetica;
+    padding-left:35px;
+    font-size:11px;
+    
+}
+#content h1, h2, h3, h4, h5, ul, li {
+    font-family:Arial,Helvetica,sans-serif;
+    padding:5px;
+}
+#content h1 {
+    color:#FF7202;
+    font-size:35px;
+    margin:10px;
+}
+#content h2 {
+    color:#044B9B;
+    font-size:25px;
+    margin:20px;
+}
+#content h3 {
+    color:#044B9B;
+    font-size:18px;
+    margin:20px;
+}
+#content h4 {
+    color:#444;
+    font-size:15px;
+    margin:20px;
+}
+#content h5 {
+    color:#ff6600;
+    font-size:15px;
+    margin:20px;
+}
+#content ol {
+    font-size:20px;
+}
+#content li {
+    font-size:15px;
+    font-weight: bold;
+    margin-left:25px;
+    
+}
+#content p {
+    color:#444;
+    font-size:13px;
+    margin-left:30px;
+    margin-bottom:10px;
+}
+.btn-save, .btn-cancel {
+    color:#454545;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:14px;
+    font-style:normal;
+    font-variant:normal;
+    font-weight:bold;
+    line-height:normal;
+    padding:0pt 0pt 0pt 20px;
+    text-decoration:none;
+}
+.btn-save:hover, .btn-cancel:hover {
+    color:#FF7202;
+    cursor:pointer;
+}
+.btn-save {
+    background:transparent url(../images/icon/icon-save.gif) no-repeat scroll left center;
+    margin-left:350px;
+}
+.btn-cancel {
+    background:transparent url(../images/icon/icon-cancel.gif) no-repeat scroll left center;
+}
+#footer {
+    background:#696969 url(../images/bg-footer.jpg) repeat-x scroll left top;
+    height:100px;
+    width:100%;
+}
+#footer #content-footer {
+    height:auto;
+    margin:0pt auto;
+    padding-top:20px;
+    width:960px;
+}
+#footer #content-footer .logo {
+    float:left;
+}
+#footer #content-footer ul {
+    float:left;
+    list-style-type:none;
+    margin:30px 0pt 0pt 30px;
+}
+#footer #content-footer ol li {
+    display:inline;
+}
+#footer #content-footer ol li{
+    border-right:1px solid #FFFFFF;
+    color:#FFFFFF;
+    display:block;
+    float:left;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:11px;
+    font-size-adjust:none;
+    font-stretch:normal;
+    font-style:normal;
+    font-variant:normal;
+    font-weight:normal;
+    line-height:normal;
+    padding:0pt 10px;
+}
+#footer #content-footer ul li a.last {
+    border:medium none;
+}
+#footer #content-footer ul li a:hover {
+    color:#999999;
+}
