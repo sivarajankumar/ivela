@@ -164,7 +164,7 @@ function showRecorder(question, phrases, grammar_file, chances, audio_files, exe
     var address = document.location.href;
     address = address.split(".action")[0];
     address = address.substring(0, address.lastIndexOf("/") + 1);
-
+    var host = address + 'RenderServlet?file=/'+idCourse+'/'+idDiscipline+'/'+idUnit+'/'+idUnitContent+'/';
     var applet = '<applet code="br.ufc.ivela.voice.BlackBoardApplet" archive="applet/ivela_voice_new.jar, applet/jogg-0.0.7.jar,  applet/jorbis-0.0.15.jar, applet/tritonus_share.jar, applet/vorbisspi1.0.3.jar" ';    
         applet += 'width="490" height="250"  >';                
         applet += '<param name="question" value="';    
@@ -180,8 +180,11 @@ function showRecorder(question, phrases, grammar_file, chances, audio_files, exe
         applet += '" /> <param name="exeId" value="';
         applet += exercise;        
         applet += '" /> <param name="audioHost" value="';
-        applet += address;
+        applet += host;
+        applet += '" /> <param name="installerHost" value="';
+        applet += address + "RenderServlet?file=julius/";        
         applet += '" /> </applet>';
+        document.write(applet);
 }
      
 function includeGlobalCss(css) {
