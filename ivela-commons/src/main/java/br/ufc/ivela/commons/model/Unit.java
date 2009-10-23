@@ -29,7 +29,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Table(name = "unit")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="unitCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQueries({@NamedQuery(name = "Unit.findById", query = "SELECT u FROM Unit u WHERE u.id = :id"), @NamedQuery(name = "Unit.findByName", query = "SELECT u FROM Unit u WHERE u.name = :name")})
 public class Unit implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -49,7 +49,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name = "forum")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="forumCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQueries({@NamedQuery(name = "Forum.findById", query = "SELECT f FROM Forum f WHERE f.id = :id"), @NamedQuery(name = "Forum.findByTitle", query = "SELECT f FROM Forum f WHERE f.title = :title"), @NamedQuery(name = "Forum.findByDescription", query = "SELECT f FROM Forum f WHERE f.description = :description"), @NamedQuery(name = "Forum.findByStudentCreateTopic", query = "SELECT f FROM Forum f WHERE f.studentCreateTopic = :studentCreateTopic"), @NamedQuery(name = "Forum.findByStudentUploadPost", query = "SELECT f FROM Forum f WHERE f.studentUploadPost = :studentUploadPost"), @NamedQuery(name = "Forum.findByPublic1", query = "SELECT f FROM Forum f WHERE f.public1 = :public1")})
 public class Forum implements Serializable {
     private static final long serialVersionUID = 1L;

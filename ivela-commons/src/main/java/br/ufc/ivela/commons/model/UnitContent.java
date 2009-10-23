@@ -47,7 +47,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Table(name = "unit_content")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(region="unitContentCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQueries({@NamedQuery(name = "UnitContent.findById", query = "SELECT u FROM UnitContent u WHERE u.id = :id"), @NamedQuery(name = "UnitContent.findByOrderN", query = "SELECT u FROM UnitContent u WHERE u.orderN = :orderN"), @NamedQuery(name = "UnitContent.findByTitle", query = "SELECT u FROM UnitContent u WHERE u.title = :title"), @NamedQuery(name = "UnitContent.findByDescription", query = "SELECT u FROM UnitContent u WHERE u.description = :description")})
 public class UnitContent implements Serializable {
 
