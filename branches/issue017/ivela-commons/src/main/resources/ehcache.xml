@@ -8,7 +8,13 @@
 
 <cache name="courseCache" maxElementsInMemory="300" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LFU" />
 
-<cache name="gradeCache" maxElementsInMemory="700" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LFU" />
+<cache name="unitContentCache" maxElementsInMemory="1000" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LFU" />
+
+<cache name="unitCache" maxElementsInMemory="700" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LFU" />
+
+<cache name="forumCache" maxElementsInMemory="500" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LFU" />
+
+<cache name="gradeCache" maxElementsInMemory="300" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LFU" />
 
 <cache name="profileCache" maxElementsInMemory="700" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LFU" />
 
@@ -26,4 +32,11 @@
 
 <cache name="renderBinaryServletCache" maxElementsInMemory="4000" eternal="true" overflowToDisk="false" memoryStoreEvictionPolicy="LFU" />
 
+<cache name="org.hibernate.cache.StandardQueryCache"
+    maxElementsInMemory="20" eternal="false" timeToLiveSeconds="240"
+    overflowToDisk="false" />
+
+<cache name="org.hibernate.cache.UpdateTimestampsCache"
+    maxElementsInMemory="5000" eternal="true" overflowToDisk="false" />
+    
 </ehcache>
