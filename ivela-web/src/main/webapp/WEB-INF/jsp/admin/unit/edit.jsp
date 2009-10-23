@@ -12,7 +12,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><s:text name="unit.pageTitle" /></title>
         <link href="../css/unit_admin.css" rel="stylesheet" type="text/css" />
-        <cal:head/>
         <s:head />
     </head>
     <div id="breadcrumb">

@@ -50,9 +50,9 @@ function click(e){
 }
         
 //
-//	Set up all accordions
+//  Set up all accordions
 //
-function loadAccordions() {		
+function loadAccordions() {     
     var bottomAccordion = new accordion('vertical_container2', {
         classNames : {
             toggle : 'accordion_toggle_course2',
@@ -118,19 +118,8 @@ function closeAll() {
     $('showEntryDiscipline').style.display = 'none';
     $('showEntryUnit').style.display = 'none';
     $('showEntryUnitContent').style.display = 'none';
-    $('showEntryExercise').style.display = 'none';
     $('showUploadUnitContent').style.display = 'none';
-    $('showEntryExam').style.display = 'none';
-    $('showManagerExercises').style.display = 'none';
-    $('showManagerExams').style.display = 'none';
-    $('showEntryQuestion').style.display = 'none';
-    $('questionSubjective').style.display = 'none';
-    $('questionObjective').style.display = 'none';
-    $('questionAuditive').style.display = 'none';
-    $('showExam').style.display = 'none';
-    $('showExercise').style.display = 'none';
-    $('showQuestion').style.display = 'none';
-    $('showQuestionSubjective').style.display = 'none';
+    
     $('showDictionary').style.display = 'none';
     $('deleteDict').style.display = 'none';
     $('updateDict').style.display = 'none';

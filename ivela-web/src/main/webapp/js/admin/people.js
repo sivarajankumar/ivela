@@ -383,19 +383,19 @@ function changeCheckboxStyle(obj)
     if ( obj.checked )
     {
         $('li.' + obj.id ).style.backgroundColor = "#FFE79C";
-        $('li.' + obj.id ).style.border = "1px solid #FF7202";
+        $('li.' + obj.id ).style.border = "0px solid #FF7202";
     }
     else
     {
         $('li.' + obj.id ).style.backgroundColor = "#FFFFFF";
-        $('li.' + obj.id ).style.border = "1px solid #D9E5F2";
+        $('li.' + obj.id ).style.border = "0px solid #D9E5F2";
     }
 }
 
 function mouseOverPerson(id)
 {
     $('li.' + id ).style.backgroundColor = "#FFE79C";
-    $('li.' + id ).style.border = "1px solid #FF7202";
+    $('li.' + id ).style.border = "0px solid #FF7202";
 }
 
 function mouseOutPerson(id)
@@ -403,7 +403,7 @@ function mouseOutPerson(id)
     if ( !$(id).checked )
     {
         $('li.' + id ).style.backgroundColor = "#FFFFFF";
-        $('li.' + id ).style.border = "1px solid #D9E5F2";
+        $('li.' + id ).style.border = "0px solid #D9E5F2";
     }
 }
 

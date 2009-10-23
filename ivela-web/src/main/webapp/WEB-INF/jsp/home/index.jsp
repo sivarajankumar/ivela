@@ -20,6 +20,7 @@
 # 08-JUN-2009 - Otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
 # 15-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Remove breadcrumb area         #
 # 23-JUL-2009 - Rafael Lagoa (Instituto Eldorado) - 000012 - Unicode (UTF-8) support        #
+# 26-AUG-2009 - Rafael Lagoa (Instituto Eldorado) - 001165 - Align no enrollments message   #
 #############################################################################################
 --%>
 
@@ -43,17 +44,18 @@
 
 <head>
     <script>
-        <!--
         var it_nocourses = '<s:text name="home.nocourses" />';
         var it_nodisciplines = '<s:text name="home.nodisciplines" />';
         var it_nounits = '<s:text name="home.nounits" />';
         var it_nounitcontents = '<s:text name="home.nounitcontents" />';
-        -->
+        var it_gotocourse = '<s:text name="home.gotocourse" />';        
+        var tabslist=0;
+     	var win=0;
     </script>
     <link href="css/accordion.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/ead/tools.js"></script>
     <script type="text/javascript" src="js/accordion.js"></script>
-    <script type="text/javascript" src="js/ead/ajax.js"></script>
+    <script type="text/javascript" src="js/util/ajax.js"></script>
     <script type="text/javascript" src="js/ead/index.js"></script>
     
 </head>
@@ -118,7 +120,8 @@
 
 <s:if test="enrollmentList == null || enrollmentList.size() == 0">
     <s:if test="pendentList == null || pendentList.size() == 0">
-        <h5> <s:text name="front.firstAccess" /> </h5>
+        <br /><br />
+        <h5 style="text-align:center"> <s:text name="front.firstAccess" /> </h5>
     </s:if>
 </s:if>
 <s:else>

@@ -42,11 +42,11 @@ import org.springframework.security.context.SecurityContextHolder;
 
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.ejb.interfaces.ChallengeRemote;
-import br.ufc.ivela.servlets.challenge.Challenge;
-import br.ufc.ivela.servlets.challenge.Constants;
-import br.ufc.ivela.servlets.challenge.Converter2ObjectFactory;
-import br.ufc.ivela.servlets.challenge.IvelaObj;
-import br.ufc.ivela.servlets.challenge.XMLObject;
+import br.ufc.ivela.commons.challenger.util.Challenge;
+import br.ufc.ivela.commons.challenger.config.Constants;
+import br.ufc.ivela.commons.challenger.util.Converter2ObjectFactory;
+import br.ufc.ivela.commons.challenger.dataobject.IvelaObj;
+import br.ufc.ivela.commons.challenger.util.XMLObject;
 
 /**
  *
@@ -55,7 +55,7 @@ import br.ufc.ivela.servlets.challenge.XMLObject;
 public class ChallengeGetScore extends HttpServlet {
 
     /**
-     * ivela-web/ChallengeGetScore?scoreType=reading&scoreXMLUrl=/1/1/1/84/scores/unit1.xml
+     * ivela-web/ChallengeGetScore?scoreType=reading&scoreXMLUrl=/1/1/1/84/xml/unit1.xml
      * @param request
      * @param response
      * @throws javax.servlet.ServletException
@@ -105,23 +105,19 @@ public class ChallengeGetScore extends HttpServlet {
         }
 
 
-        
-
-        
-
         String ret = "<div class=\"content-lesson\">" +
                 "<h2>Percentage of done exercises</h2>" +
                 "<table width=\"569\" border=\"0\" align=\"center\">" +
                 "<tr><td width=\"40\" valign=\"middle\"><div align=\"center\"><img src=\"RenderServlet?file=1/1/1/84/images/read_ico.gif\"><br><center><font size='1'>*</font></center></div></td><td width=\"271\" valign=\"middle\">" +
                 "  <div align=\"left\">" +
-                "    <applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"RenderServlet?file=/globals/applets/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
+                "    <applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"RenderServlet?file=globals/applets/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
                 "      <param name=\"percentValue\" value=\""+result[0]+"\">" +
                 "      <param name=\"pointerColor\" value=\"E05A59\" >" +
                 "    </applet>" +
                 "  </div></td>" +
                 "  <td width=\"40\" valign=\"middle\"><img src=\"RenderServlet?file=1/1/1/84/images/write_ico.gif\" alt=\"\" />" +
                 "<br><center><font size='1'>*</font></center></td>" +
-                "  <td width=\"200\" valign=\"middle\"><applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"RenderServlet?file=/globals/applets/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
+                "  <td width=\"200\" valign=\"middle\"><applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"RenderServlet?file=globals/applets/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
                 "    <param name=\"percentValue\" value=\""+result[1]+"\" />" +
                 "    <param name=\"pointerColor\" value=\"62A165\" />" +
                 "  </applet></td>" +
@@ -129,13 +125,13 @@ public class ChallengeGetScore extends HttpServlet {
                 "<tr>" +
                 "  <td valign=\"middle\"><img src=\"RenderServlet?file=1/1/1/84/images/listen_ico.gif\" alt=\"\" />" +
                 "<br><center><font size='1'>*</font></center></td></td>" +
-                "  <td valign=\"middle\"><applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"RenderServlet?file=/globals/applets/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
+                "  <td valign=\"middle\"><applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"RenderServlet?file=globals/applets/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
                 "    <param name=\"percentValue\" value=\""+result[2]+"\" />" +
                 "    <param name=\"pointerColor\" value=\"61799F\" />" +
                 "  </applet></td>" +
                 "  <td valign=\"middle\"><img src=\"RenderServlet?file=1/1/1/84/images/speak_ico.gif\" alt=\"\" />" +
                 "<br><center><font size='1'>*</font></center></td></td>" +
-                "  <td valign=\"middle\"><applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"RenderServlet?file=/globals/applets/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
+                "  <td valign=\"middle\"><applet code=\"org.jdamico.gaugeapplet.core.DrwGauge\" archive=\"RenderServlet?file=globals/applets/jdamicoGauge.jar\" width=\"200\" height=\"200\">" +
                 "    <param name=\"percentValue\" value=\""+result[3]+"\" />" +
                 "    <param name=\"pointerColor\" value=\"9D609F\" />" +
                 "  </applet></td>" +

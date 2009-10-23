@@ -1,13 +1,33 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+###############################################################################################
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                        #
+# This file is part of ivela project, an open-source                                          #
+# Program URL   : http://code.google.com/p/ivela/                                             #  
+#                                                                                             #
+# This program is free software; you can redistribute it and/or modify it under the terms     #
+# of the GNU General Public License as published by the Free Software Foundation; either      #
+# version 3 of the License, or (at your option) any later version.                            #
+#                                                                                             #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;   #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   #
+# See the GNU General Public License for more details.                                        #  
+#                                                                                             #
+###############################################################################################
+# File: list.jsp                                                                              #
+# Document: list BulletinBoard                                                                # 
+# Date        - Author(Company)                   - Issue# - Summary                          #
+# XX-XXX-XXXX - Emanuelle                         - XXXXXX - Initial Version                  #
+# 28-AGO-2009 - Mileine      (Instituto Eldorado) - 000016 - Same course enrollment msg added #
+###############################################################################################
+*/
+
 package br.ufc.ivela.web.action;
 
 import br.ufc.ivela.commons.Constants;
 import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Enrollment;
 import br.ufc.ivela.commons.model.Grade;
+import br.ufc.ivela.commons.model.Transcript;
 import br.ufc.ivela.ejb.interfaces.CourseRemote;
 import br.ufc.ivela.ejb.interfaces.EnrollmentRemote;
 import br.ufc.ivela.ejb.interfaces.GradeRemote;
@@ -95,7 +115,18 @@ public class EnrollmentAction extends GenericAction {
             if (count.size() < g.getMaxStudents()) {
                 enrollmentRemote.add(enrollment);
                 grade = gradeRemote.get(grade.getId());
-                addHistory("history.enrolluser.title", "history.enrolluser.description", getAuthenticatedUser().getUsername(), grade.getName());
+                List<Transcript> transcripts = historyRemote.getTranscriptsByStudentByGrade(getAuthenticatedUser().getId(), grade.getId());
+                if (transcripts.isEmpty()) {
+                    historyRemote.addTranscript(grade.getId(), getAuthenticatedUser().getId());    
+                } else {
+                    Transcript trans = transcripts.get(0);
+                    trans.setAverageChallenge(0.0);
+                    trans.setChallengesTotal(0.0);
+                    trans.setChallengesWeight(0);
+                    trans.setChallengesDone(0);
+                    historyRemote.updateTranscript(trans);
+                }
+                addHistory("history.enrolluser.title", "history.enrolluser.description", getAuthenticatedUser().getUsername(), grade.getName());                                               
             } else {
                 addActionMessage(getText("enrollment.list.add"));
                 return listGrades();
@@ -131,11 +162,13 @@ public class EnrollmentAction extends GenericAction {
 
         if (!yourGradeByCourse.isEmpty()) {
             already = true;
-        }
-
-        if (already || gradeList.size() == 0) {
             gradeList = null;
-            message = "Não há turmas disponíveis";
+            message = "enrolled";
+        }
+            
+        else if (gradeList.size() == 0) {
+            gradeList = null;
+            message = "noGrades";
         }
 
         return "list";
@@ -196,7 +229,7 @@ public class EnrollmentAction extends GenericAction {
         Enrollment e = enrollmentRemote.get(enrollment.getId());
 
         if (e.getGrade().getStatus() == Constants.GRADE_PERIOD_OF_ENROLLMENT) {
-            enrollmentRemote.remove(enrollment.getId());
+            enrollmentRemote.remove(enrollment.getId());            
         } else if (e.getGrade().getStatus() == Constants.GRADE_IN_PROGRESS) {
             e.setStatus(Constants.ENROLLMENT_SUSPENDED);
             enrollmentRemote.update(e);

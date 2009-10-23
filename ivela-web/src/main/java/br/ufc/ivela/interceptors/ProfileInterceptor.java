@@ -35,7 +35,7 @@ import java.util.TreeMap;
 import java.util.Map.Entry;
 
 import br.ufc.ivela.interceptors.interfaces.ProfileDataProvider;
-import br.ufc.ivela.services.PropertiesUtil;
+import br.ufc.ivela.util.PropertiesUtil;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionSupport;

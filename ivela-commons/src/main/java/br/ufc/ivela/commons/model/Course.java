@@ -1,7 +1,26 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*  
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: Course.java                                                                         #
+# Document: Course Model                                                                    # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 07-JAN-2009 - Leonardo Oliveira (UFC)           - XXXXXX - Initial Version                #
+# 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
+# 06-OCT-2009 - Fabio Fantato (Instituto Eldorado)- 000017 - Table of Contents              # 
+#############################################################################################
+*/
 
 package br.ufc.ivela.commons.model;
 
@@ -18,14 +37,15 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-/**
- *
- * @author leoomoreira
- */
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name = "course")
+@Cache(region="courseCache", usage = CacheConcurrencyStrategy.READ_WRITE)  
 @NamedQueries({@NamedQuery(name = "Course.findById", query = "SELECT c FROM Course c WHERE c.id = :id"), @NamedQuery(name = "Course.findByName", query = "SELECT c FROM Course c WHERE c.name = :name"), @NamedQuery(name = "Course.findByDescription", query = "SELECT c FROM Course c WHERE c.description = :description"), @NamedQuery(name = "Course.findByImage", query = "SELECT c FROM Course c WHERE c.image = :image"), @NamedQuery(name = "Course.findByTargetAudience", query = "SELECT c FROM Course c WHERE c.targetAudience = :targetAudience"), @NamedQuery(name = "Course.findByContents", query = "SELECT c FROM Course c WHERE c.contents = :contents"), @NamedQuery(name = "Course.findByActive", query = "SELECT c FROM Course c WHERE c.active = :active")})
 public class Course implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -52,12 +72,20 @@ public class Course implements Serializable {
     private Collection<Discipline> disciplines;
     @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="courseId", targetEntity=Grade.class)
     private Collection<Grade> grades;
+    @OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="course", targetEntity=Forum.class)
+    private Forum forum;
     @Column(name = "active")
     private boolean active;
     @Column(name = "upload_package_enabled")
     private boolean uploadPackageEnabled;
-    @Column(name = "challenge_itens_enabled")
-    private boolean challengeItensEnabled;
+    @Column(name = "challenge_retries", nullable = false)
+    private Integer challengeRetries = 0;
+    @Column(name = "challenge_count")
+    private Integer challengeCount = 0;
+    @Column(name = "challenge_weight")
+    private Integer challengeWeight = 0;
+    @Column(name = "custom_toc")
+    private boolean customToc;
 
     public Course() {
     }
@@ -143,6 +171,14 @@ public class Course implements Serializable {
         this.grades = grades;
     }
 
+    public Forum getForum() {
+        return forum;
+    }
+
+    public void setForum(Forum forum) {
+        this.forum = forum;
+    }
+    
     public String getRepositoryStructure() {
         return repositoryStructure;
     }
@@ -165,15 +201,16 @@ public class Course implements Serializable {
 
     public void setUploadPackageEnabled(boolean uploadPackageEnabled) {
         this.uploadPackageEnabled = uploadPackageEnabled;
-    }
-    
-    public boolean getChallengeItensEnabled() {
-        return challengeItensEnabled;
+    }    
+
+    public boolean getCustomToc() {
+        return customToc;
     }
 
-    public void setChallengeItensEnabled(boolean challengeItensEnabled) {
-        this.challengeItensEnabled = challengeItensEnabled;
+    public void setCustomToc(boolean customToc) {
+        this.customToc = customToc;
     }
+
     
     @Override
     public int hashCode() {
@@ -198,6 +235,58 @@ public class Course implements Serializable {
     @Override
     public String toString() {
         return "br.ufc.ivela.commons.model.Course[id=" + id + "]";
+    }
+
+    /**
+     * How many retries for Challenge is possible
+     * 
+     * @param challengeRetries the challengeRetries to set
+     */
+    public void setChallengeRetries(Integer challengeRetries) {
+        if (challengeRetries < 0) challengeRetries = 0; 
+        this.challengeRetries = challengeRetries;
+    }
+
+    /**
+     * How many retries for Challenge is possible
+     * 
+     * @return the challengeRetries
+     */
+    public Integer getChallengeRetries() {
+        return challengeRetries;
+    }
+
+    /**
+     * Number of Challenges in this Course.
+     * @param challengeCount the challengeCount to set
+     */
+    public void setChallengeCount(Integer challengeCount) {
+        if (challengeCount < 0) challengeRetries = 0;
+        
+        this.challengeCount = challengeCount;
+    }
+
+    /**
+     * Number of Challenges in this Course.
+     * 
+     * @return the challengeCount
+     */
+    public Integer getChallengeCount() {
+        return challengeCount;
+    }
+
+    /**
+     * @param challengeWeight the challengeWeight to set
+     */
+    public void setChallengeWeight(Integer challengeWeight) {
+        this.challengeWeight = challengeWeight;
+    }
+
+    /**
+     * @return the challengeWeight
+     */
+    public Integer getChallengeWeight() {
+        return challengeWeight;
     }
 
 }

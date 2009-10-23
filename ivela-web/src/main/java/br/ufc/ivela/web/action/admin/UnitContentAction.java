@@ -190,34 +190,6 @@ public class UnitContentAction extends GenericAction {
                     try {
                         ivelaObj = tInter.getTransformerType();
                         IvelaPayload p = ivelaObj.getIvelaPayload();
-
-                        //System.out.println("File Systems: ");
-                        for (FileSystem f : p.getContentPackage().getFileSystemList()) {
-                            if (!new File(path + f.getValue()).isDirectory()) {
-
-                                String contentPackageStr = "";
-                                String line = "";
-                                boolean find = false;
-                                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(path + f.getValue()))));
-                                while ((line = br.readLine()) != null) {
-                                    if (line.toLowerCase().indexOf("@path") > -1) {
-                                        find = true;
-                                        line = line.replaceAll("@path", course + File.separator + discipline + File.separator + unit + File.separator + unitContent);
-                                    }
-                                    contentPackageStr += line + "\n";
-                                }
-                                br.close();
-                                if (find) {
-                                    PrintWriter pw = new PrintWriter(new File(path + f.getValue()));
-                                    pw.print(contentPackageStr);
-                                    pw.close();
-                                }
-
-                            }
-                        //ContentPackageUtils.moveFile(new File(ContentPackageUtils.UPLOAD_PATH + f.getValue()), new File(path + System.getProperty("file.separator") + f.getValue().substring(0, f.getValue().lastIndexOf(System.getProperty("file.separator")))));
-                        //System.out.println("Movendo: De: " + ContentPackageUtils.UPLOAD_PATH + f.getValue() + " Para: " + path + System.getProperty("file.separator") + f.getValue().substring(0, f.getValue().lastIndexOf(System.getProperty("file.separator"))));
-                        //System.out.println("- Value: " + f.getValue());
-                        }
                         setMessage("Content package uploaded");
                     } catch (SAXException e) {
                         setMessage(e.getMessage());

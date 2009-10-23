@@ -33,26 +33,7 @@
       	As informações relacionadas ao desenvolvimento do Ivela ficam à disposição de todos que tenham interesse em conhecer melhor e até mesmo contribuir com o projeto. Por ser uma aplicação de código-aberto (GPL), todos são convidados a participar do desenvolvimento do Ivela. </p>
       	<p>Visite o site oficial de desenvolvimento do projeto: <a href="http://code.google.com/p/ivela/" target="_blank">http://code.google.com/p/ivela/</a>. </p>
     </section>
-   <section id="license">
-    	<title>Projetos utilizados pelo Ivela </title>
-    	
-		<table width="80%" align="center">
-		<tr><th>Projeto</th><th>Licença</th><th>Versão</th></tr>
-		<tr><td> <a href="http://www.acegisecurity.org/">ACEGI</a> </td><td> Apache License 2.0 </td><td> 2.0 </td></tr> 
-		<tr><td> <a href="https://glassfish.dev.java.net/">GlasshFish</a> </td><td> GPL v2 / CDDL </td><td> 2 </td></tr> 
-		<tr><td> <a href="http://www.hibernate.org/">Hibernate</a> </td><td> LGPL </td><td> 3.2.1 </td></tr> 
-		<tr><td> <a href="http://jersey.dev.java.net/">Jersey</a> </td><td> GPL v2 / CDDL </td><td> 1.0 </td></tr> 
-		<tr><td> <a href="http://julius.sourceforge.jp/en_index.php">Julius: Large Vocabulary Continuous Speech Recognition Engine</a> </td><td> BSD </td><td> 4.0.2 </td></tr> 
-		<tr><td> <a href="http://maven.apache.org/">Maven</a> </td><td> Apache License 2.0 </td><td> 2.0.9 </td></tr> 
-		<tr><td> <a href="http://openjdk.java.net/projects/jdk6/">OpenJDK</a> </td><td> GPL v2 </td><td> 1.6 </td></tr> 
-		<tr><td> <a href="http://www.postgresql.org/">PostgreSQL</a> </td><td> BSD </td><td> 8.3.1 </td></tr> <tr><td> <a href="http://www.springframework.org/">Spring</a> </td><td> Apache License 2.0 </td><td> 2.5.4 </td></tr> 
-		<tr><td> <a href="http://struts.apache.org/2.x/index.html">Struts</a> </td><td> Apache License 2.0 </td><td> 2.0.11.1 </td></tr> 
-		<tr><td> <a href="http://voxforge.org/home">VoxForge</a> </td><td> GPL v2 </td><td> 3.5.2 </td></tr> 
-		<tr><td> <a href="http://code.google.com/p/webical/">Webical</a> </td><td> GPL v3 </td><td> 4.0 </td></tr> 
-		<tr><td> <a href="http://code.google.com/p/ivelavoice/">ivelavoice</a> </td><td> GPL v2 </td><td> 2.0.1 </td></tr> 
-		<tr><td> <a href="http://code.google.com/p/ircivelaclient/">ircivelaclient</a> </td><td> GPL v2 </td><td> 0.2.7 </td></tr> 
-		<tr><td> <a href="http://code.google.com/p/gaugeapplet/">gaugeapplet</a> </td><td> GPL v2 </td><td> 0.0.1 </td></tr> 
-		<tr><td> <a href="http://code.google.com/p/javaquerybuilder/">javaquerybuilder</a> </td><td> GPL v2 </td><td> 0.0.1 </td></tr> </table>
-    </section>
+    
+   
     </body>
 </document>

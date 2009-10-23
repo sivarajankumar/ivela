@@ -1,8 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
+/*##################################################################################################
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                             #
+# This file is part of ivela project, an open-source                                               #
+# Program URL   : http://code.google.com/p/ivela/                                                  # 
+#                                                                                                  #
+# This program is free software; you can redistribute it and/or modify it under the terms          #
+# of the GNU General Public License as published by the Free Software Foundation; either           #
+# version 3 of the License, or (at your option) any later version.                                 #
+#                                                                                                  #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;        #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.        #
+# See the GNU General Public License for more details.                                             #
+#                                                                                                  #
+####################################################################################################
+# File: Challenge.java                                                                             #
+# Document: User Challenge Result Model                                                            #
+# Date        - Author(Company)                   - Issue# - Summary                               #
+# XX-XXX-XXXX - Jose Damico                       - XXXXXX - Initial Version                       #
+# 07-OCT-2009 - Otofuji (Instituto Eldorado)      - 000017 - Review Course, Challenge refactory    #
+##################################################################################################*/
 package br.ufc.ivela.commons.model;
 
 import java.io.Serializable;
@@ -13,11 +28,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-/**
- *
- * @author jdamico
- */
 
 /*
  * CREATE TABLE challenge (
@@ -61,7 +71,11 @@ public class Challenge implements Serializable {
     @Column(name = "challvalue", nullable = false)
     private double challvalue;
     @Column(name = "uid", nullable = false)
-    private Long uid;
+    private Long uid;    
+    @Column(name = "unit_id", nullable = false)
+    private Long challengeId;    
+    @Column(name = "retries", nullable = false)
+    private int retries;
 
     public Long getUid() {
         return uid;
@@ -122,5 +136,33 @@ public class Challenge implements Serializable {
             return false;
         }
         return true;
+    }
+
+    /**
+     * @param challengeId the challengeId to set
+     */
+    public void setChallengeId(Long challengeId) {
+        this.challengeId = challengeId;
+    }
+
+    /**
+     * @return the challengeId
+     */
+    public Long getChallengeId() {
+        return challengeId;
+    }
+
+    /**
+     * @param retries the retries to set
+     */
+    public void setRetries(int retries) {
+        this.retries = retries;
+    }
+
+    /**
+     * @return the retries
+     */
+    public int getRetries() {
+        return retries;
     }
 }

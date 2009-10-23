@@ -89,17 +89,17 @@
 .vertical_accordion_content2 ul li{
     padding:3px 0;}
 .vertical_accordion_content2 .list-students li {
-    border:1px solid #D9E5F2;
+    border:0px solid #D9E5F2;
     float:left;
-    margin-bottom:10px;
-    margin-right:10px;
-    padding:8px 2px 8px 2px;
-    text-align:center;
-    width:60px;
+    margin-bottom:1px;
+    margin-right:1px;
+    padding:2px 2px 2px 2px;
+    text-align:left;
+    width:180px;
 }
 .vertical_accordion_content2 .list-students li:hover, .list-students li.selected {
     background:#FFE79C none repeat scroll 0%;
-    border:1px solid #FF7202;
+    border:0px solid #FF7202;
     cursor:pointer;
 }
 .vertical_accordion_content2 .form-filter-students {

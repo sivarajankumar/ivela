@@ -16,8 +16,11 @@ import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.util.StringUtils;
 
 
 /**
@@ -27,7 +30,7 @@ import java.util.List;
 public class ChallengeAction extends GenericAction {
 
     ChallengeItems challengeItems;
-    Unit unit;
+    Unit unit;       
     InputStream inputStream;
     List<ChallengeItems> listChallengeItems;
     ChallengeItemsRemote challengeItemsRemote;
@@ -61,6 +64,7 @@ public class ChallengeAction extends GenericAction {
         StringBuilder json = new StringBuilder("{\"list\":[");
         listChallengeItems = new ArrayList<ChallengeItems>(); 
         listChallengeItems = challengeItemsRemote.getByUnit(unit.getId());
+        Collections.sort(listChallengeItems);
         for (ChallengeItems challengeIt : listChallengeItems) {
             json.append("{");
             json.append("\"id\":\"" + challengeIt.getId() + "\",");
@@ -129,6 +133,16 @@ public class ChallengeAction extends GenericAction {
 
     public void setUnit(Unit unit) {
         this.unit = unit;
+    }
+    
+    private void performValidateAdd() {
+        if (challengeItems == null) {
+            addActionError(getText("challenge.input.validation"));
+        }
+
+        if (!StringUtils.hasText(challengeItems.getName())) {
+            addActionError(getText("challenge.input.validation.name"));
+        }
     }
     
     

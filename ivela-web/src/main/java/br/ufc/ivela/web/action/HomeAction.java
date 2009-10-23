@@ -13,7 +13,6 @@ import br.ufc.ivela.commons.model.Note;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.model.Topic;
 import br.ufc.ivela.commons.model.UnitContent;
-import br.ufc.ivela.ejb.interfaces.ChallengeRemote;
 import br.ufc.ivela.ejb.interfaces.CourseRemote;
 import br.ufc.ivela.ejb.interfaces.EnrollmentRemote;
 import br.ufc.ivela.ejb.interfaces.MessageRemote;
@@ -41,6 +40,11 @@ import java.util.List;
  */
 public class HomeAction extends GenericAction {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -8068776172601074387L;
+    
     private MessageRemote messageRemote;
     private EnrollmentRemote enrollmentRemote;
     private ProfileRemote profileRemote;
@@ -51,7 +55,7 @@ public class HomeAction extends GenericAction {
     private CourseRemote courseRemote;
     private List<Course> courseList;
     private List<Message> messageList;
-    private List<Topic> recentlyTopics;
+    private List<Topic> recentTopics;
     private TopicRemote topicRemote;
     private NoteRemote noteRemote;
     private List<Note> noteList;
@@ -61,19 +65,8 @@ public class HomeAction extends GenericAction {
     private Long courseId;
     private UnitContentRemote unitContentRemote;
     private UnitContent lastUnitContent;
-    private Enrollment enrollment;
-    private List<Integer> statusList;
-    private ChallengeRemote challengeRemote;
+    private Enrollment enrollment;    
 
-    public ChallengeRemote getChallengeRemote() {
-        return challengeRemote;
-    }
-
-    public void setChallengeRemote(ChallengeRemote challengeRemote) {
-        this.challengeRemote = challengeRemote;
-    }
-    
-    
     /**
      * Get a list of messages by the authenticated user, and the last topics, and the last notes
      * @return Sucess if the user could see all the messages
@@ -112,18 +105,19 @@ public class HomeAction extends GenericAction {
     }
 
     public String getToolsTopics() {
-        recentlyTopics = this.topicRemote.getRecentTopics(3);
+        enrollmentList = enrollmentRemote.getByUserAndStatus(getAuthenticatedUser().getId(), Constants.ENROLLMENT_ACTIVE);
+        recentTopics = this.topicRemote.getRecentTopics(3, enrollmentList);
 
         StringBuilder json = new StringBuilder("{\"topics\":["); // fake json!!!
 
-        for (int i = 0; i < recentlyTopics.size(); i++) {
-            Topic topic = recentlyTopics.get(i);
+        for (int i = 0; i < recentTopics.size(); i++) {
+            Topic topic = recentTopics.get(i);
             
             json.append("{\"id\":\""+ topic.getId() +"\", \"title\":\""+ topic.getTitle() +"\"," +
                     " \"createdBy\":\""+ topic.getCreatedBy().getUsername() + "\"," +
                     " \"createdAt\":\""+ topic.getCreatedAt() + "\", \"forumId\":\""+ topic.getForum().getId() +"\"}");
 
-            if(i != recentlyTopics.size() - 1) {
+            if(i != recentTopics.size() - 1) {
                 json.append(",");
             }
         }
@@ -138,6 +132,9 @@ public class HomeAction extends GenericAction {
     public String getToolsMessages() {
 
         messageList = messageRemote.getBySystemUserRecipient(getAuthenticatedUser().getId(), "", 1, 3);
+        
+        StringBuilder json = new StringBuilder("{\"message\":["); 
+
         if (messageList == null) {
             messageList = new ArrayList<Message>();
         } else {
@@ -145,14 +142,22 @@ public class HomeAction extends GenericAction {
                 messageList = messageList.subList(0, 3);
             }
         }
+        for (int i = 0; i < messageList.size(); i++) {
+            Message message = messageList.get(i);
 
-        List list = new ArrayList(messageList);
+            json.append("{\"id\":\"" + message.getId() + "\", \"title\":\""
+                    + message.getTitle() + "\"," + " \"sender\":\""
+                    + message.getSender().getUsername() + "\","
+                    + " \"datetime\":\"" + message.getDatetime()
+                    + "\"}");
 
-        XStream xStream = new XStream(new JettisonMappedXmlDriver());
-        xStream.alias("message", Message.class);
-        xStream.alias("list", ArrayList.class);
+            if (i != messageList.size() - 1) {
+                json.append(",");
+            }
+        }
 
-        setInputStream(new ByteArrayInputStream(xStream.toXML(list).getBytes()));
+        json.append("]}");
+        setInputStream(new ByteArrayInputStream(json.toString().getBytes()));        
 
         return "json";
     }
@@ -251,7 +256,7 @@ public class HomeAction extends GenericAction {
      * @return recentlyTopics
      */
     public List<Topic> getRecentlyTopics() {
-        return recentlyTopics;
+        return recentTopics;
     }
 
     /**
@@ -259,7 +264,7 @@ public class HomeAction extends GenericAction {
      * @param recentlyTopics
      */
     public void setRecentlyTopics(List<Topic> recentlyTopics) {
-        this.recentlyTopics = recentlyTopics;
+        this.recentTopics = recentlyTopics;
     }
 
     /**

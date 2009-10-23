@@ -36,7 +36,9 @@
         <title><s:text name="front.pageTitle" /></title>
         <!-- Colocar a logo para aparecer no navegador <link rel="icon" href="../logotipo/logo.jpg" type="image/gif" /> -->
         <link href="css/base_no_login.css" rel="stylesheet" type="text/css" />
-                   
+        <!--[if IE 6]>
+            <link href="css/ie6.css" rel="stylesheet" type="text/css" />
+        <![endif]-->                   
         <decorator:head/>
     </head>
     
@@ -47,7 +49,7 @@
                 <div class="language">
                     <a href="?request_locale=pt" title="Português"><img src="images/language/pt-br.gif" /></a>
                     <a href="?request_locale=en" title="English"><img src="images/language/en-us.gif" /></a>
-                    <a href="?request_locale=es" title="Español"><img src="images/language/sp-es.gif" /></a>
+                    <!-- a href="?request_locale=es" title="Español"><img src="images/language/sp-es.gif" /></a-->
                 </div>
             </div>
             <!-- end header -->
@@ -62,7 +64,7 @@
             <div id="content-footer">
                <p id="copyright"> &copy; 2009 Ivela <%= Constants.SYSTEM_VERSION %> - All rights reserved.</p>
            
-                <img class="logo" src="RenderServlet?file=/globals/images/logo-footer.png" alt="<s:property value="front.logo.footer" />" />
+                <img class="logo" src="images/logo-footer.png" alt="<s:property value="front.logo.footer" />" />
             </div>
   
         </div>

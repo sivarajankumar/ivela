@@ -35,13 +35,18 @@
         <title><s:text name="front.pageTitle" /></title>
         <!-- Colocar a logo para aparecer no navegador <link rel="icon" href="../logotipo/logo.jpg" type="image/gif" /> -->
         <link href="../css/base_admin.css" rel="stylesheet" type="text/css" />
-        <link href="../css/lightwindow_admin.css" rel="stylesheet" type="text/css" />
+        <link href="../css/lightwindow.css" rel="stylesheet" type="text/css" />
         <link href="../css/accordion_admin.css"  rel="stylesheet" type="text/css" />
+        <!--[if IE 6]>
+            <link href="../css/ie6adm.css" rel="stylesheet" type="text/css" />
+            <script type="text/javascript">
+                var ie6browser = true;         
+            </script>            
+        <![endif]-->
         <script type="text/javascript" src="../js/util/util.js"></script>
         <script type="text/javascript" src="../js/prototype/prototype.js"></script>
         <script type="text/javascript" src="../js/scriptaculous/scriptaculous.js"></script>
         <script type="text/javascript" src="../js/scriptaculous/effects.js"></script>
-        <script type="text/javascript" src="../js/resourceBundle.js"></script>
         <script type="text/javascript" src="../js/admin/lightwindow.js"></script>
         <script type="text/javascript" src="../js/accordion.js"></script>
         <script type="text/javascript" src="../js/admin/ajax.js"></script>
@@ -86,8 +91,8 @@
             </div>
             <!-- end header -->
             <div class="tools">                
-                <span class="btn-tools" onclick="Effect.toggle('hidden', 'slide')" title="<s:text name="main.tools" />"><img src="../images/icon/icon-tools.gif" /><s:text name="main.tools"/><img src="../images/icon/icon-tools-arrow.gif" /></span>
-                <span class="btn-faq" onclick="document.location = 'faq!list.action';"><img src="../images/icon/icon-faq-home.gif" /></span>
+                <span class="btn-tools" onclick="Effect.toggle('hidden', 'slide')" title="<s:text name="main.tools" />"><img src="../images/icon/icon-tools.gif" /><s:text name="main.tools"/><img src="../images/icon/icon-tools-arrow.gif" /></span>                
+                <span class="btn-manual" onclick="document.location = '/ivela-manual'"><img src="../images/icon/icon-faq.gif" title="<s:text name='main.manual'/>" /></span>                
                 
                 <div class="container-tools" id="hidden" style="display:none;">
                     <div class="content-tools">                        
@@ -105,14 +110,17 @@
 
             <div id="menu">
                 <ul>
-                    <li id="menu_1" ><a href="home.action" title="<s:property value="admin.controlPanel" />"><s:text name="admin.controlPanel" /></a></li>
-                    <li id="menu_4" ><a href="systemUser!show.action" title="<s:property value="back.people.title" />"><s:text name="admin.people" /></a></li>
-                    <li id="menu_2" ><a href="course!show.action" title="<s:property value="back.courses.title" />"><s:text name="admin.courses" /></a></li>
-                    <li id="menu_3" ><a href="grade!show.action" title="<s:property value="back.grades.title" />"><s:text name="admin.grade" /></a></li>
+                    <li id="menu_load" ><img style="display:none;" src="../images/ajax-loading.gif" width=22px height=22px /></li>                	                    
+                    <li id="menu_1" ><a href="javascript:showMenuLoading('home.action');" title="<s:property value="admin.controlPanel" />"><s:text name="admin.controlPanel" /></a></li>
+                    <li id="menu_4" ><a href="javascript:showMenuLoading('systemUser!show.action');" title="<s:property value="back.people.title" />"><s:text name="admin.people" /></a></li>
+                    <sec:authorize ifAnyGranted="ROLE_ADMIN, ROLE_COORD, ROLE_PROFESSOR">
+                    <li id="menu_2" ><a href="javascript:showMenuLoading('course!show.action');" title="<s:property value="back.courses.title" />"><s:text name="admin.courses" /></a></li>
+                    </sec:authorize>
+                    <li id="menu_3" ><a href="javascript:showMenuLoading('grade!show.action');" title="<s:property value="back.grades.title" />"><s:text name="admin.grade" /></a></li>
                 </ul>
             </div>
             
-            <div class="horizontal-line-t">                 
+            <div id="horizontal-line-t" class="horizontal-line-t">                 
             </div>
             
             <script type="text/javascript">
@@ -153,10 +161,12 @@
             <div id="content-footer">
                 <img class="logo" src="../images/logo-footer.gif" alt="<s:property value="front.logo.footer" />" />
                 <ul>
-                    <li><a href="home.action" title="<s:property value="back.home.title" />"><s:text name="admin.controlPanel" /></a></li>
-                    <li><a href="systemUser!show.action" title="<s:property value="back.people.title" />"><s:text name="admin.people" /></a></li>
-                    <li><a href="course!show.action" title="<s:property value="back.courses.title" />"><s:text name="admin.courses" /></a></li>
-                    <li><a href="grade!show.action" class="last" title="<s:property value="back.grades.title" />"><s:text name="admin.grade" /></a></li>
+                   <li><a href="javascript:showMenuLoading('home.action');" title="<s:property value="back.home.title" />"><s:text name="admin.controlPanel" /></a></li>
+                    <li><a href="javascript:showMenuLoading('systemUser!show.action');" title="<s:property value="back.people.title" />"><s:text name="admin.people" /></a></li>
+                    <sec:authorize ifAnyGranted="ROLE_ADMIN, ROLE_COORD, ROLE_PROFESSOR">
+                    <li><a href="javascript:showMenuLoading('course!show.action');" title="<s:property value="back.courses.title" />"><s:text name="admin.courses" /></a></li>
+                    </sec:authorize>
+                    <li><a href="javascript:showMenuLoading('grade!show.action');" class="last" title="<s:property value="back.grades.title" />"><s:text name="admin.grade" /></a></li>
                 </ul>
             </div>
             <br class="clear" />
