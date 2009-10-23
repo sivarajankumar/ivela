@@ -1,8 +1,8 @@
 // Temporary Workaround for the problem of IE breaking in some tag imgs,
 // resending a request that may be broke in some IEs and thus breaking the session
-if (window.opener) {
-  document.cookie = window.opener.document.cookie;
-}
+//if (window.opener) {
+//  document.cookie = window.opener.document.cookie;
+//}
 
 var progressArrowCont = 0;
 var accessed = "";

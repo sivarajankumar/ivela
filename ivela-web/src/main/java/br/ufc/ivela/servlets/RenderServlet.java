@@ -59,7 +59,6 @@ public class RenderServlet extends HttpServlet {
                 
         response.setCharacterEncoding("ISO-8859-1");
         response.setDateHeader("Expires",System.currentTimeMillis(  ) + 24*60*60*1000);
-        response.addCookie(request.getCookies()[0]);
         String reqFile = request.getParameter(Constants.RENDER_SERVLET_FILE_PARAM);
         String filename = Constants.DEFAULT_CONTENTPKG_PATH+reqFile;
         File file = null;
