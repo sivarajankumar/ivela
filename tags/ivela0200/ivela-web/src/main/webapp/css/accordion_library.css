@@ -1,0 +1,109 @@
+body {background-color: transparent; background: url(../images/bg_standard2.jpg) #fff repeat-x 0 0;}
+
+#content {width: 95%; height: auto; margin-bottom: 50px; padding: 0px 0 0 20px; font: 12px Arial, Helvetica, sans-serif;}
+#content h1{font:30px Arial, Helvetica, sans-serif; color:#ff7202; font-weight:bold;}
+#content #col-1-home {width: 300px; height: auto; background:#edf4fc; padding: 10px; float:left;}
+#content #col-2-home {width: 610px; height: auto; float:left; margin-left:30px;}
+#content a {color: #033d7d;}
+#content a:hover {color: #033d7d;}
+
+#col-2-home .container-courses {
+    height: auto;
+    background:#efefef;
+    padding: 10px;
+}
+
+#col-2-home .content-courses {
+    background: #fff;
+    border:1px solid #fbd365;
+    font-size: 12px;
+    padding: 0 10px 10px 10px;
+}
+
+#col-2-home .content-courses h1 {
+    margin-top:10px; font-size: 20px;
+}
+
+/* ACCORDION */
+
+
+#category_container{
+    width: 298px;
+    height: auto;
+    background:#fff;
+}
+
+.category_toggle{
+    background:url(../images/icon/closed-folder.gif) #FFF no-repeat 5px;
+    color: #033d7d;
+    font-size: 14px;
+    padding: 5px 15px 5px 30px;
+    border: 1px solid #dae6f3;
+    border-bottom: none;
+    cursor: pointer;
+    margin: 0;
+}
+
+.category_active{
+    background:url(../images/icon/opened-folder.gif) #FFF no-repeat 5px;
+    color:#ff7202;
+    font-size: 14px;
+    font-weight:bold;
+    padding: 5px 15px 5px 30px;
+    border: 1px solid #dae6f3;
+    border-bottom: none;
+    cursor: pointer;
+}
+
+.category_content{
+    border: 1px solid #dae6f3;
+    padding: 0px 0 0px 0px;
+    overflow: hidden;
+}
+
+#category_container2{
+    width: 297px;
+    height: auto;
+    background:#fff;
+}
+
+.category_toggle2{
+    background:url(../images/icon/closed-folder.gif) #FFF no-repeat 5px;
+    color: #033d7d;
+    font-size: 14px;
+    padding: 5px 15px 5px 30px;
+    border: 1px solid #dae6f3;
+    cursor: pointer;
+    margin: 0 0 0 30px;
+}
+
+.category_active2{
+    background:url(../images/icon/opened-folder.gif) #FFF no-repeat 5px;
+    color:#ff7202;
+    font-size: 14px;
+    font-weight:bold;
+    padding: 5px 15px 5px 30px;
+    border: 1px solid #dae6f3;
+    border-bottom: none;
+    cursor: pointer;
+}
+
+.category_content2{
+    border: 1px solid #dae6f3;
+    padding: 10px 10px 10px 0 ;
+    margin: 0 0 0 30px;
+    overflow: hidden;
+}
+
+.list-files {
+    list-style-type: none;
+    list-style-image: url(../images/icon/file.gif);
+    margin-left: 15px;
+}
+
+.list-files li {
+    line-height: 22px;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #033d7d;
+}
