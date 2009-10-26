@@ -4,6 +4,18 @@
  */
 package br.ufc.ivela.web.action;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import org.springframework.util.StringUtils;
+
 import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.FinishedUnitContent;
@@ -11,27 +23,19 @@ import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.model.Unit;
 import br.ufc.ivela.commons.model.UnitContent;
-import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
 import br.ufc.ivela.commons.util.Validators;
 import br.ufc.ivela.ejb.interfaces.CourseRemote;
+import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
 import br.ufc.ivela.ejb.interfaces.FinishedUnitContentRemote;
 import br.ufc.ivela.ejb.interfaces.GradeRemote;
 import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 import br.ufc.ivela.ejb.interfaces.UnitContentRemote;
 import br.ufc.ivela.ejb.interfaces.UnitRemote;
+
 import com.lowagie.text.Document;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.html.SAXmyHtmlHandler;
 import com.lowagie.text.pdf.PdfWriter;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import org.springframework.util.StringUtils;
-import java.util.List;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 
 /**
  *

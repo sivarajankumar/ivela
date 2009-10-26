@@ -1,8 +1,32 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: TopicAction.java                                                                    #
+# Document: Action of the forum topics                                                      # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - Leonardo Oliveira Moreira         - XXXXXX - Initial Version                #
+# 11-AUG-2009 - otofuji (Instituto Eldorado)      - 000010 - Topic Creation                 #
+#############################################################################################
+*/
 package br.ufc.ivela.web.action;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.util.StringUtils;
 
 import br.ufc.ivela.commons.Constants;
 import br.ufc.ivela.commons.dao.Page;
@@ -10,62 +34,51 @@ import br.ufc.ivela.commons.model.Forum;
 import br.ufc.ivela.commons.model.Post;
 import br.ufc.ivela.commons.model.Topic;
 import br.ufc.ivela.ejb.interfaces.ForumRemote;
-import br.ufc.ivela.ejb.interfaces.GradeRemote;
 import br.ufc.ivela.ejb.interfaces.PostRemote;
 import br.ufc.ivela.ejb.interfaces.TopicRemote;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import org.springframework.util.StringUtils;
 
-/**
- *
- * @author Leonardo Oliveira Moreira
- * 
- * 
- */
-public class TopicAction extends GenericAction {
+public class TopicAction extends CourseAwareAction {
 
     private ForumRemote forumRemote;
     private TopicRemote topicRemote;
-    private PostRemote postRemote;
-    private GradeRemote gradeRemote;
+    private PostRemote postRemote;    
     private Forum forum;
     private Topic topic;
     private List<Topic> topicList;
     private List<TopicLine> topicLines;
     private int pageCount;
     private int page;
-    private int pageSize = 1;
+    private int pageSize = 5;
     private int count;
     private String topicTitle;
-
-    public GradeRemote getGradeRemote() {
-        return gradeRemote;
-    }
-
-    public void setGradeRemote(GradeRemote gradeRemote) {
-        this.gradeRemote = gradeRemote;
-    }
+    private InputStream inputStream;
 
     /**
      * Add a new topic, perform a validate 
      * if hasn't error, add a new topic
      * if has return list by forum
      */
-    public String add() {
-        performValidateAdd();
+    public String add() {        
+        String hasErrors = performValidateAdd();
+        StringBuilder json = new StringBuilder();
         forum = topic.getForum();
-        topic.setCreatedBy(getAuthenticatedUser());
-        topic.setCreatedAt(new Date());
-        if (!hasActionErrors()) {
-            Long result = topicRemote.add(topic);
-            if (result != null) {
-                return listByForum();
+        topic.setCreatedBy(getAuthenticatedUser());                        
+        String bResult = hasErrors;
+        if (hasErrors == null) {                        
+            bResult = "true";                     
+            try { 
+                topicRemote.add(topic);                              
+            } catch (Exception e) {
+                bResult = getText("forum.error.topic.fail");
             }
         }
-        addActionMessage("Unable to Add");
-        return listByForum();
+        
+        json.append("{");
+        json.append("\"result\":\"" + bResult + "\"");
+        json.append("}");
+        
+        setInputStream(new ByteArrayInputStream(json.toString().getBytes()));
+        return "json";
     }
 
     /**
@@ -92,14 +105,21 @@ public class TopicAction extends GenericAction {
      */
     public String remove() {
         performValidateRemove();
+        StringBuilder json = new StringBuilder();
+        boolean result = false;
+        forum = topic.getForum();
         if (!hasActionErrors()) {
-            boolean result = topicRemote.remove(topic.getId());
-            if (result) {
-                return listByForum();
+            try {
+                result = topicRemote.remove(topic.getId());
+            } catch (Exception e) {                
             }
-        }
-        addActionMessage("Unable to remove");
-        return listByForum();
+        }        
+        json.append("{");
+        json.append("\"result\":\"" + result + "\"");
+        json.append("}");
+        
+        setInputStream(new ByteArrayInputStream(json.toString().getBytes()));
+        return "json";
     }
 
     /**
@@ -108,6 +128,9 @@ public class TopicAction extends GenericAction {
      */
     public String listByForum() {
         forum = forumRemote.get(forum.getId());
+        grade = forum.getGrade();
+        course = forum.getCourse();
+         
         if (page < 1) {
             page = 1;
         }
@@ -116,14 +139,13 @@ public class TopicAction extends GenericAction {
         }
         boolean isAdministrator = ! (getAuthenticatedUser().getAuthentication().getId().equals(Constants.ROLE_USER));
         Page p = topicRemote.getTopicList(getAuthenticatedUser().getId(), isAdministrator, true, forum.getId(), topicTitle, page, pageSize);
-        topicList = p.getList();
-        System.out.println(topicList.size());
+        topicList = p.getList();     
         setCount(p.getCount());
         setPageCount(p.getPageCount());
         topicLines = new ArrayList<TopicLine>();
         for (int i = 0; topicList != null && i < topicList.size(); i++) {
             Topic t = topicList.get(i);
-            Post lastPost = postRemote.getLastPostByTopic(t.getId());
+            Post lastPost = t.getLastPost();
             String message = "";
             if (lastPost != null) {
                 message = lastPost.getMessage();
@@ -138,33 +160,54 @@ public class TopicAction extends GenericAction {
             long topicReplies = 0;
 
             topicView += topicList.size();
-            List<Post> postList = postRemote.getByTopic(t.getId());
-            if (postList != null) {
-                topicReplies = postList.size();
-            }
+            
+            topicReplies = t.getPostsCount();
+            
             line.setTopicReplies(topicReplies);
             line.setTopicViews(topicView);
+            line.setCreatedByUser(t.getCreatedBy().equals(getAuthenticatedUser()));
 
             if (lastPost != null) {
                 line.setLastPost(lastPost);
             }
             topicLines.add(line);
         }
+        
         return "list";
     }
 
+    public void setInputStream(InputStream inputStream) {
+        this.inputStream = inputStream;
+    }
+    
+    public InputStream getInputStream() {
+        return inputStream;
+    }
+    
     /**
      * Perform a validation in the add method
      */
-    private void performValidateAdd() {
+    private String performValidateAdd() {
         if (topic == null) {
-            addActionError(getText("topic.input.validation.required"));
+            return getText("topic.input.validation.required");
         }
         // verifies if the title is empty
         if (!StringUtils.hasText(topic.getTitle())) {
-            addActionError(getText("topic.input.validation.title"));
+            return getText("topic.input.validation.title");
         }
-
+        if (topic.getForum() != null) {
+            Topic lastTopic = topicRemote.getLastTopicByForum(topic.getForum()
+                    .getId());
+            if ((lastTopic != null)
+                    && (lastTopic.getCreatedBy().getId()
+                            .equals(getAuthenticatedUser().getId()))
+                    && (lastTopic.getTitle().equalsIgnoreCase(topic.getTitle()))
+                    && (lastTopic.getDescription().equalsIgnoreCase(topic
+                            .getDescription()))) {
+                return getText("forum.error.topic.duplicated");
+            }
+        }
+        return null;
     }
 
     /**
@@ -176,7 +219,16 @@ public class TopicAction extends GenericAction {
             addActionError(getText("topic.input.validation.requiredId"));
         } else {
             // verifies if this id is valid
-            if (topicRemote.get(topic.getId()) == null) {
+            if ((topic = topicRemote.get(topic.getId())) == null) {
+                addActionError(getText("topic.input.validation.invalidId"));
+            }
+            
+            if (hasAuthorization(getAuthority())) {
+                return;
+            }
+            
+            if (!topic.getCreatedBy().getId().equals(
+                            getAuthenticatedUser().getId())) {
                 addActionError(getText("topic.input.validation.invalidId"));
             }
         }
@@ -373,7 +425,7 @@ public class TopicAction extends GenericAction {
     public void setPostRemote(PostRemote postRemote) {
         this.postRemote = postRemote;
     }
-
+    
     /**
      * Class that represents a item of the topic list in the view
      */
@@ -383,7 +435,8 @@ public class TopicAction extends GenericAction {
         private Long topicReplies;
         private Long topicViews;
         private Post lastPost;
-
+        private boolean createdByUser = false;
+        
         /**
          * Retrieves the last post
          * @return lastPost
@@ -446,6 +499,14 @@ public class TopicAction extends GenericAction {
          */
         public void setTopicViews(Long topicViews) {
             this.topicViews = topicViews;
+        }
+        
+        public boolean getCreatedByUser() {
+            return createdByUser;
+        }
+        
+        void setCreatedByUser(boolean createdByUser) {
+            this.createdByUser = createdByUser;
         }
     }
 }

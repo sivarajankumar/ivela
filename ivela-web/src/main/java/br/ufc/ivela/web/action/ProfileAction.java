@@ -18,6 +18,7 @@
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # ??-???-2008 - Leonardo Moreira                  - XXXXXX - Initial Version                #
 # 22-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Fixes                  #
+# 04-SET-2009 - mileine (Instituto Eldorado)      - 000016 - e-mail field added             #
 #############################################################################################
 */
 
@@ -42,7 +43,7 @@ import br.ufc.ivela.ejb.interfaces.PhoneRemote;
 import br.ufc.ivela.ejb.interfaces.ProfileRemote;
 import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 import br.ufc.ivela.interceptors.interfaces.ProfileDataProvider;
-import br.ufc.ivela.services.PropertiesUtil;
+import br.ufc.ivela.util.PropertiesUtil;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
@@ -60,7 +61,7 @@ public class ProfileAction extends GenericAction implements ProfileDataProvider 
     private Map<Integer, String> ethnicityList;
     private Map<String, String> genderList;
     private Map<Boolean, String> disabilitiesList;
-//    private List<Language> languageList;
+//  private List<Language> languageList;
     private Address[] address;
     private Phone[] phone;
     private boolean sucess = false;
@@ -122,7 +123,6 @@ public class ProfileAction extends GenericAction implements ProfileDataProvider 
         if (systemUser.getProfileId() != null) {
             profile = profileRemote.get(systemUser.getProfileId());
             inAddress = addressRemote.getByProfile(profile.getId());
-       
             listPhones = phoneRemote.getByProfile(profile.getId());
         } else {
             profile = new Profile();            
@@ -153,7 +153,7 @@ public class ProfileAction extends GenericAction implements ProfileDataProvider 
     public String update() {
         java.io.File fileIo = upload;
         boolean resul = true;
-
+         
         logger.log("oldPhoto: ->" + oldPhoto + "<-");
         logger.log("upload: ->" + upload + "<-");
 
@@ -196,8 +196,13 @@ public class ProfileAction extends GenericAction implements ProfileDataProvider 
             }    
         }
         
+        SystemUser systemUserUpdate = systemUserRemote.get(systemUser.getId());
+        systemUserUpdate.setEmail(systemUser.getEmail());
+        
         resul = (resul) ? profileRemote.edit(profile) : false;
 
+        resul = (resul) ? systemUserRemote.update(systemUserUpdate) : false;
+        
         resul = (resul) ? addressRemote.update(inAddress) : false;
 
         resul = (resul) ? phoneRemote.update(listPhones.get(0)) : false;

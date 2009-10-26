@@ -18,6 +18,7 @@
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 27-JUN-2008 - Maristella Myrian (UFC)           - XXXXXX - Initial Version                #
 # 22-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - General Issues                 #
+# 28-AGO-2009 - lagoa   (Instituto Eldorado)      - 000016 - Set date field as readonly     #
 #############################################################################################
 --%>
 
@@ -30,6 +31,7 @@
     <link href="../css/profile.css" rel="stylesheet" type="text/css" />
     
     <cal:head/>
+    <script type="text/javascript" src="../js/util/calendar.js"></script>
     <s:head />
 </head>
 
@@ -82,7 +84,8 @@
             </p>            
             <p>
                 <label><s:text name="profile.birthDate" />:</label>
-                <cal:jscalendar name="profile.birthDate"  format="%m/%d/%Y" showstime="true" theme="simple"/>
+                <cal:jscalendar name="profile.birthDate"  format="%m/%d/%Y" showstime="true" theme="simple" onfocus="this.readOnly=true;"/>
+                <script>document.getElementsByName('profile.birthDate')[0].readOnly=true;</script>
             </p>
             
         </fieldset>

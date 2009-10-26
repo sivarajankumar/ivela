@@ -1,25 +1,28 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*  
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: CourseAction.java                                                                   #
+# Document: Course Action                                                                   # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 07-JAN-2009 - Maristella Myrian (UFC)           - XXXXXX - Initial Version                #
+# 02-SEP-2009 - Rafael Lagôa (Instituto Eldorado) - 000016 - Fix showChat action            #
+#############################################################################################
+*/
+
 package br.ufc.ivela.web.action.admin;
 
-import br.ufc.ivela.commons.Constants;
-import br.ufc.ivela.commons.ContentPackageUtils;
-import br.ufc.ivela.web.action.*;
-import org.springframework.util.StringUtils;
-import br.ufc.ivela.commons.model.Course;
-import br.ufc.ivela.commons.model.Discipline;
-import br.ufc.ivela.commons.model.Enrollment;
-import br.ufc.ivela.commons.model.Grade;
-import br.ufc.ivela.commons.model.SystemUser;
-import br.ufc.ivela.ejb.interfaces.CourseRemote;
-import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
-import br.ufc.ivela.ejb.interfaces.EnrollmentRemote;
-import br.ufc.ivela.ejb.interfaces.GradeRemote;
-import br.ufc.ivela.ejb.interfaces.RepositoryRemote;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
@@ -27,19 +30,32 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Maristella Myrian
- */
-public class CourseAction extends GenericAction {
+import org.springframework.util.StringUtils;
 
-    private CourseRemote courseRemote;
+import br.ufc.ivela.commons.Constants;
+import br.ufc.ivela.commons.ContentPackageUtils;
+import br.ufc.ivela.commons.model.Course;
+import br.ufc.ivela.commons.model.Discipline;
+import br.ufc.ivela.commons.model.Enrollment;
+import br.ufc.ivela.commons.model.Forum;
+import br.ufc.ivela.commons.model.Grade;
+import br.ufc.ivela.commons.model.SystemUser;
+import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
+import br.ufc.ivela.ejb.interfaces.ForumRemote;
+import br.ufc.ivela.ejb.interfaces.RepositoryRemote;
+import br.ufc.ivela.util.PropertiesUtil;
+import br.ufc.ivela.util.PropertiesUtil.IVELA_PROPERTIES;
+import br.ufc.ivela.web.action.CourseAwareAction;
+
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
+
+public class CourseAction extends CourseAwareAction {
+    
     private RepositoryRemote repositoryRemote;
     private DisciplineRemote disciplineRemote;
-    private EnrollmentRemote enrollmentRemote;
-    private GradeRemote gradeRemote;
-    private Course course;
-    private List<Course> courseList;
+    private Discipline discipline;    
+    private ForumRemote forumRemote;        
     private InputStream inputStream;
     private String message;
     private java.io.File upload;
@@ -47,7 +63,13 @@ public class CourseAction extends GenericAction {
     private String nick = "";
     private String chatRoomName = "";
     private String teacherName;
+    private String ircServer;
+    private String chatColor;
+    private String blackGet;
+    private String blackSave;
     private Long chatUId;
+    private long courseId;
+    private long disciplineId;
 
     public File getUpload() {
         return upload;
@@ -64,13 +86,13 @@ public class CourseAction extends GenericAction {
     public void setUploadFileName(String uploadFileName) {
         this.uploadFileName = uploadFileName;
     }
-    
-    public GradeRemote getGradeRemote() {
-        return gradeRemote;
+
+    public ForumRemote getForumRemote() {
+        return forumRemote;
     }
 
-    public void setGradeRemote(GradeRemote gradeRemote) {
-        this.gradeRemote = gradeRemote;
+    public void setForumRemote(ForumRemote forumRemote) {
+        this.forumRemote = forumRemote;
     }
     
     public String getMessage() {
@@ -89,6 +111,26 @@ public class CourseAction extends GenericAction {
         this.disciplineRemote = disciplineRemote;
     }
 
+    public void setDiscipline(Discipline discipline) {
+        this.discipline = discipline;
+    }
+
+    public void setCourseId(Long id) {
+        this.courseId = id;
+    }
+
+    public void setDisciplineId(Long id) {
+        this.disciplineId = id;
+    }
+
+    public String getIrcServer() {
+        return ircServer;
+    }
+    
+    public String getChatColor() {
+        return chatColor;
+    }
+    
     /**
      * Add a new Course, perform validation
      * if hasn't errors add a new course
@@ -121,6 +163,23 @@ public class CourseAction extends GenericAction {
             course.setRepositoryStructure(repositoryRemote.getInitialStructure());
             Long id = courseRemote.add(course);
             course = courseRemote.get(id);
+            try {
+                Forum forum = new Forum();
+                forum.setTitle(course.getName());                
+                forum.setPublic1(true);                
+                forum.setCourse(course);                    
+                forum.setCreatedBy(getAuthenticatedUser());
+                Long result = forumRemote.add(forum);
+                if (result == null) {
+                    log.warn("Forum Has not been saved for course: "
+                            + course.getName() + "|" + course.getId());
+                }
+            } catch (Exception e) {
+                // Does not Cancel the Transaction if the Forum creation Fails.
+                // An admin may create the Forum later in case of errors.
+                log.error("Forum Creation Failed for course: "
+                        + course.getName() + "|" + course.getId(), e);                
+            }
             xStream.alias("course", Course.class);
             String json = xStream.toXML(course);
             setInputStream(new ByteArrayInputStream(json.getBytes()));
@@ -159,12 +218,6 @@ public class CourseAction extends GenericAction {
 
     public String updateImage() {
         java.io.File fileIo = upload;
-        //logger.log("oldPhoto: ->" + oldPhoto + "<-");
-        //logger.log("upload: ->" + upload + "<-");
-
-        //if (upload == null || upload.equals(" ")) {
-            //course.setImage(oldFromSession);
-        //} else {
             course = courseRemote.get(course.getId());
 
             if(!new File(Constants.FILE_UPLOAD_PARTNERS+course.getId()).exists()){
@@ -172,12 +225,9 @@ public class CourseAction extends GenericAction {
             }
             course.setImage(Constants.FILE_UPLOAD_PARTNERS + course.getId() + "/" + uploadFileName);
             boolean result = courseRemote.update(course);
-            logger.log("file" + course.getImage());
+            log.info("file" + course.getImage());
             if (fileIo != null && uploadFileName != null && uploadFileName.trim().length() > 0)
                 courseRemote.savePhoto(course, fileIo);
-        //}
-
-        //setSucess(profileRemote.edit(profile));
         return "courses";
     }    
 
@@ -261,15 +311,23 @@ public class CourseAction extends GenericAction {
      */
     public String show() {
         setMessage(getMessage());
-        courseList = courseRemote.getStructure();
+        courseList = courseRemote.getStructure(getAuthenticatedUser());
 
         return "show";
     }
-    
-    public String showChat(){
-        this.nick = getAuthenticatedUser().getUsername();
-        this.chatRoomName = "#course_"+course.getId(); 
+
+    public String showChat() {
+        course = courseRemote.get(courseId);
+        grade = gradeRemote.get(grade.getId());
+        this.nick = this.getAuthenticatedUser().getUsername();
+        this.chatRoomName = "course_"+course.getName()+"_grade_"+grade.getName();
+        this.chatRoomName = this.chatRoomName.replace(' ', '_');
         this.teacherName = this.nick;
+        PropertiesUtil putil = PropertiesUtil.getPropertiesUtil();
+        this.ircServer = putil.getProperty(IVELA_PROPERTIES.IRC_SERVER);
+        this.chatColor = putil.getProperty(IVELA_PROPERTIES.CHAT_COLOR);
+        this.blackGet = putil.getProperty(IVELA_PROPERTIES.BLACKBOARD_SERVER_GET);
+        this.blackSave = putil.getProperty(IVELA_PROPERTIES.BLACKBOARD_SERVER_SAVE);
         return "chat";
     }
 
@@ -450,54 +508,6 @@ public class CourseAction extends GenericAction {
     }
 
     /**
-     * Sets the value of course variable
-     * @param course
-     */
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    /**
-     * Retrieves the value of course variable
-     * @return course
-     */
-    public Course getCourse() {
-        return course;
-    }
-
-    /**
-     * Retrieves the value of courseRemote variable
-     * @return courseRemote
-     */
-    public CourseRemote getCourseRemote() {
-        return courseRemote;
-    }
-
-    /**
-     * Sets the value of courseRemote variable
-     * @param courseRemote
-     */
-    public void setCourseRemote(CourseRemote courseRemote) {
-        this.courseRemote = courseRemote;
-    }
-
-    /**
-     * Retrieves the value of courseList variable
-     * @return courseList
-     */
-    public List<Course> getCourseList() {
-        return courseList;
-    }
-
-    /**
-     * Sets the value of courseList variable
-     * @param courseList
-     */
-    public void setCourseList(List<Course> courseList) {
-        this.courseList = courseList;
-    }
-
-    /**
      * Perform a validation in the add method
      */
     private void performValidateAdd() {
@@ -571,8 +581,11 @@ public class CourseAction extends GenericAction {
         String studentsCount = String.valueOf(courseRemote.getStudentsCount(course.getId()));
         String gradesCount = String.valueOf(courseRemote.getGradesCount(course.getId()));
         String graduatedStudentCount = String.valueOf(courseRemote.getGraduatedStudentsCount(course.getId()));
-        Boolean uploadPackageEnabled = course.getUploadPackageEnabled();
-        Boolean challengeItensEnabled = course.getChallengeItensEnabled();
+        Boolean uploadPackageEnabled = course.getUploadPackageEnabled();                        
+        Boolean customToc = course.getCustomToc();
+        Integer challengeRetries = course.getChallengeRetries();
+        Integer challengeCount = course.getChallengeCount();
+        Integer challengeWeight = course.getChallengeWeight();
         StringBuilder json = new StringBuilder();
         json.append("{");
             json.append("\"course\":{");
@@ -581,8 +594,12 @@ public class CourseAction extends GenericAction {
                 json.append("\"description\":\"" + course.getDescription() + "\",");
                 json.append("\"targetAudience\":\"" + course.getTargetAudience() + "\",");
                 json.append("\"image\":\"" + course.getImage() + "\",");
-                json.append("\"uploadPackageEnabled\":\"" + uploadPackageEnabled + "\",");
-                json.append("\"challengeItensEnabled\":\"" + challengeItensEnabled + "\",");
+                json.append("\"uploadPackageEnabled\":\"" + uploadPackageEnabled + "\",");                
+                json.append("\"uploadPackageEnabled\":\"" + uploadPackageEnabled + "\",");                
+                json.append("\"customToc\":\"" + customToc + "\",");
+                json.append("\"challengeRetries\":\"" + challengeRetries + "\",");
+                json.append("\"challengeCount\":\"" + challengeCount + "\",");
+                json.append("\"challengeWeight\":\"" + challengeWeight + "\",");
                 json.append("\"studentsCount\":\"" + studentsCount + "\",");
                 json.append("\"gradesCount\":\"" + gradesCount + "\",");
                 json.append("\"graduatedStudentCount\":\"" + graduatedStudentCount + "\",");
@@ -631,15 +648,6 @@ public class CourseAction extends GenericAction {
         setInputStream(new ByteArrayInputStream(json.toString().getBytes()));
         return "json";
     }
-
-    public EnrollmentRemote getEnrollmentRemote() {
-        return enrollmentRemote;
-    }
-
-    public void setEnrollmentRemote(EnrollmentRemote enrollmentRemote) {
-        this.enrollmentRemote = enrollmentRemote;
-    }
- 
     
     public Long getChatUId() {
         return chatUId;
@@ -673,5 +681,12 @@ public class CourseAction extends GenericAction {
         this.teacherName = teacherName;
     }
     
+    public String getBlackboardServerGet() {
+        return blackGet;        
+    }
+    
+    public String getBlackboardServerSave() {
+        return blackSave;
+    }
     
 }

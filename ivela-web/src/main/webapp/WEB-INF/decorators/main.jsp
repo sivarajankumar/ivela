@@ -39,13 +39,31 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><s:text name="front.pageTitle" /></title>
         <!-- Colocar a logo para aparecer no navegador <link rel="icon" href="../logotipo/logo.jpg" type="image/gif" /> -->
-        <link href="RenderServlet?file=/globals/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="css/base.css" rel="stylesheet" type="text/css" />
         <link href="css/lightwindow.css" rel="stylesheet" type="text/css" />
+        <!--[if IE 6]>
+            <link href="css/ie6.css" rel="stylesheet" type="text/css" />
+            <script type="text/javascript">
+                var ie6browser = true;         
+            </script>   
+        <![endif]-->      
         <script type="text/javascript" src="js/util/util.js"></script>
         <script type="text/javascript" src="js/prototype/prototype.js"></script>
         <script type="text/javascript" src="js/scriptaculous/scriptaculous.js"></script>
         <script type="text/javascript" src="js/scriptaculous/effects.js"></script>
         <script type="text/javascript" src="js/scriptaculous/lightwindow.js"></script>
+
+<link rel="stylesheet" type="text/css" href="js/ext/resources/css/ext-all.css">
+ 
+		  <!-- Include here your own css files if you have them. -->
+ 
+		  <!-- First of javascript includes must be an adapter... -->
+		  <script type="text/javascript" src="js/ext/adapter/ext/ext-base.js"></script>
+		 
+		  <!-- ...then you need the Ext itself, either debug or production version. -->
+		  <script type="text/javascript" src="js/ext/ext-all-debug.js"></script>
+		  <script type="text/javascript" src="js/ext/miframe.js"></script>
+
 
         <decorator:head />
     </head>
@@ -57,10 +75,13 @@
 
         if (obj instanceof UserDetails) {
             systemUser = (SystemUser) obj;
-        }
-
+        }       
+        
     %>
-
+     <script>
+     	var tabs=0;
+     	var win=0;
+     </script>
     <body>
 
         <div id="container">
@@ -86,7 +107,7 @@
 <div style="width:620px;position:relative;left:107px;top:-56px">
             <div class="tools">
                 <span class="btn-tools" onclick="Effect.toggle('hidden', 'slide')" title="<s:text name="main.tools" />"><!--img src="images/icon/icon-tools.gif" /--><!--s:text name="main.tools"/--><!--img src="images/icon/icon-tools-arrow.gif" /--></span>
-
+                <span class="btn-manual" onclick="document.location = '/ivela-manual'"><img src="images/icon/icon-faq.gif" title="<s:text name='main.manual'/>" /></span>
             </div>
             <!-- end tools-->
 
@@ -95,7 +116,7 @@
                     <li id="menu_1" ><a href="index.jsp" title="<s:property value="front.home.title" />"><s:text name="front.home.title" /></a></li>
                     <li id="menu_2" ><a href="course!list.action" title="<s:property value="front.courses.title" />"><s:text name="front.courses" /></a></li>
                     <li id="menu_3" ><a href="history!show.action" title="<s:property value="front.history.title" />"><s:text name="front.history" /></a></li>
-                    <li id="menu_4" ><a href="note!show.action" title="<s:property value="front.calendar" />"><s:text name="front.calendar" /></a></li>
+                    <!-- li id="menu_4" ><a href="note!show.action" title="<s:property value="front.calendar" />"><s:text name="front.calendar" /></a></li-->
                 </ul>
             </div>
 
@@ -113,12 +134,14 @@
                     tab = 2;
                 } else if(action.startsWith("history")){
                     tab = 3;
-                } else if(action.startsWith("note")){
-                    tab = 4;
+                } 
+                //else if(action.startsWith("note")){
+                  //  tab = 4;
+                //}
+
+                if(tab != 0){
+               	 $('menu_'+tab).setAttribute(classCss(),"current");
                 }
-
-                $('menu_'+tab).setAttribute(classCss(),"current");
-
             </script>
             <!-- end menu -->
 </div>
@@ -126,16 +149,7 @@
 <div class="tools" style="position:relative;top:-56px;left:-5px">
                 <div class="container-tools" id="hidden" style="display:none;">
                     <div class="content-tools">
-                        <div id="last_unit_content_div" style="display:none;">
-                            <p class="last-action">
-                                <span><s:text name="main.tools.lastLesson"/></span>
-
-                                <a href="discipline!showLastContent.action">
-                                    <span id="last_unit_content_title"></span>
-                                </a>
-                            </p>
-                        </div>
-
+                        
                         <jsp:include page="../jsp/message/tools.jsp"/>
                         
                         <jsp:include page="../jsp/forum/tools.jsp"/>
@@ -159,10 +173,9 @@
                 <ul>
                     <li><a href="index.jsp" title="<s:text name="front.controlPanel.title" />"><s:text name="front.controlPanel" /></a></li>
                     <li><a href="course!list.action" title="<s:property value="front.courses.title" />"><s:text name="front.courses" /></a></li>
-                    <li><a href="history!show.action" title="<s:text name="front.history.title" />"><s:text name="front.history" /></a></li>
-                    <li><a href="note!show.action" title="<s:text name="front.calendar" />" class="last"><s:text name="front.calendar" /></a></li>
+                    <li><a href="history!show.action" title="<s:text name="front.history.title" />" class="last"><s:text name="front.history" /></a></li>
                 </ul>
-                <img class="logo" src="RenderServlet?file=/globals/images/logo-footer.png" alt="<s:property value="front.logo.footer" />" />
+                <img class="logo" src="images/logo-footer.png" alt="<s:property value="front.logo.footer" />" />
             </div>
             <br class="clear" />
         </div>
