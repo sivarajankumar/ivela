@@ -15,6 +15,8 @@ import java.util.Date;
  * @author Leonardo Oliveira Moreira
  * 
  * Class that implements the use of log across the application
+ * 
+ * @deprecated Use the org.apache.commons.logging package for Logging.
  */
 public class Logger {
 

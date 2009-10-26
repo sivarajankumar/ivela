@@ -1,12 +1,31 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: GenericDaoImpl.java                                                                 #
+# Document: Generic Dao Implementation                                                      # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - marcus (UFC)                      - XXXXXX - Initial Version                #
+# 10-SEP-2009 - otofuji (Instituto Eldorado)      - 000016 - Review Forum                   #
+#############################################################################################
+*/
 package br.ufc.ivela.commons.dao;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -14,14 +33,12 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
-import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author marcus
- */
+
+@Transactional
 public class GenericDaoImpl<T> extends HibernateDaoSupport implements GenericDao<T>, Serializable {
 
     private Class<T> clazz;
@@ -30,7 +47,7 @@ public class GenericDaoImpl<T> extends HibernateDaoSupport implements GenericDao
     }
 
     public T get(Serializable id) {
-        return (T) getHibernateTemplate().get(clazz, id);
+        return (T) getHibernateTemplate().get(clazz, id);        
     }
 
     public List<T> getAll() {
@@ -99,44 +116,26 @@ public class GenericDaoImpl<T> extends HibernateDaoSupport implements GenericDao
         return getHibernateTemplate().save(t);
     }
 
-    public boolean remove(T t) {
-        try {
-            getHibernateTemplate().delete(t);
-
-            return true;
-        } catch (DataAccessException e) {
-            e.printStackTrace();
-            return false;
-        }
+    public boolean remove(T t) {        
+       getHibernateTemplate().delete(t);
+       return true;
     }
 
-    public boolean remove(Serializable id) {
-        return remove((T) getHibernateTemplate().load(clazz, id));
+    public boolean remove(Serializable id) {      
+      return remove((T) getHibernateTemplate().load(clazz, id));
     }
 
-    public boolean removeAll(Collection<T> collection) {
-        try {
-            getHibernateTemplate().deleteAll(collection);
-
-            return true;
-        } catch (DataAccessException e) {
-            e.printStackTrace();
-            return false;
-        }
+    public boolean removeAll(Collection<T> collection) {        
+        getHibernateTemplate().deleteAll(collection);
+        return true;
     }
 
-    public boolean update(T t) {
-        try {
-            getHibernateTemplate().update(t);
-
-            return true;
-        } catch (DataAccessException e) {
-            e.printStackTrace();
-            return false;
-        }
+    public boolean update(T t) {        
+        getHibernateTemplate().update(t);
+        return true;
     }
 
-    public List getByNamedQuery(String namedQuery, String[] paramNames, Object[] paramValues) {
+    public List getByNamedQuery(String namedQuery, String[] paramNames, Object[] paramValues) {                       
         return getHibernateTemplate().findByNamedQueryAndNamedParam(namedQuery, paramNames, paramValues);
     }
 
