@@ -5,23 +5,24 @@
 
 package br.ufc.ivela.commons.model;
 
-import javax.persistence.SequenceGenerator;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import java.io.Serializable;
 import java.util.Collection;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  *
@@ -29,6 +30,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "discipline")
+@Cache(region="disciplineCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQueries({@NamedQuery(name = "Discipline.findById", query = "SELECT d FROM Discipline d WHERE d.id = :id"), @NamedQuery(name = "Discipline.findByName", query = "SELECT d FROM Discipline d WHERE d.name = :name")})
 public class Discipline implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -42,6 +44,10 @@ public class Discipline implements Serializable {
     
     @Column(name="course")
     private Long courseId;
+    
+    @Column(name="tag")
+    private String tag;
+
     
     @Transient
     private Course course;
@@ -101,6 +107,13 @@ public class Discipline implements Serializable {
         this.units = units;
     }
     
+    public void setTag(String tag) {
+    	this.tag = tag;
+    }
+    
+    public String getTag() {
+    	return tag;
+    }
     
     
     @Override

@@ -1,4 +1,4 @@
-/*  
+/*    
 #############################################################################################
 # Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
 # This file is part of ivela project, an open-source                                        #
@@ -13,67 +13,46 @@
 # See the GNU General Public License for more details.                                      #  
 #                                                                                           #
 #############################################################################################
-# File: Page.java                                                                           #
-# Document: Page Model                                                                      # 
+# File: SubscriptionDaoImpl.java                                                            #
+# Document: Subscription DAO Implementation                                                 # 
 # Date        - Author(Company)                   - Issue# - Summary                        #
-# 07-JAN-2009 - Marcus (UFC)           - XXXXXX - Initial Version                           #
-# 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
+# 24-SEP-2009 - otofuji (Instituto Eldorado)      - 000016 - Review Mail                    #
 #############################################################################################
 */
 package br.ufc.ivela.commons.dao;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Page implements Serializable{
+import br.ufc.ivela.commons.dao.interfaces.SubscriptionDao;
+import br.ufc.ivela.commons.model.Subscription;
+import br.ufc.ivela.commons.model.Topic;
 
-    private List results;
-    private int pageSize;
-    private int page;
-    private GenericDao dao;
-    private int count;
+public class SubscriptionDaoImpl<T> extends GenericDaoImpl<T> implements
+        SubscriptionDao<T> {
 
-    public Page(List results,int page, int pageSize, int count){
-        if (page <= 0) page = 1;
+    public List<Subscription> getSubscriptionByClass(String clazz, Long id) {
+        Object[] params = new Object[]{clazz, id};        
         
-        this.results = results;
-        this.page = page;
-        this.pageSize = pageSize;
-        this.count = count;
-    }
-    
-    public Page(String query, String countQuery, Object[] params, Object[] countParams, int page, int pageSize) {
-        if (page <= 0) page = 1;
+        List<Subscription> results = find("from Subscription s where s.category = ? and s.category_id = ?", params);
         
-        this.page = page;
-        this.pageSize = pageSize;
-        dao = DaoFactory.getInstance();
-
-        results = dao.paginatedFind(query, params, pageSize, page);
-        count = dao.getCount(countQuery, countParams);
-    }
-
-    
-
-    public boolean isNextPage() {
-        return results.size() > pageSize;
-    }
-
-    public List getList() {
-        return isNextPage() ? results.subList(0, pageSize) : results;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public int getPageCount() {
-        int div = (count / pageSize);       
-        
-        if((count % pageSize) == 0){
-            return div;
+        if(results == null){
+            return new ArrayList<Subscription>(0);
         } else {
-            return div + 1;
+            return results;
         }
     }
+
+    public List<Subscription> getSubscriptionByClassAndType(String clazz,
+            String type, Long id) {
+        Object[] params = new Object[]{clazz, type, id};
+        List<Subscription> results = find("from Subscription s where s.category = ? and s.type = ? and s.category_id = ?", params);
+        
+        if(results ==null){
+            return new ArrayList<Subscription>(0);
+        } else {
+            return results;
+        }
+    }
+
 }

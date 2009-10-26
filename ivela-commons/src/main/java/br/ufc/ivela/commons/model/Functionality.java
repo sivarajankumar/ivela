@@ -16,12 +16,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  *
  * @author leoomoreira
  */
 @Entity
 @Table(name = "functionality")
+@Cache(region="functionalityCache", usage = CacheConcurrencyStrategy.READ_WRITE)
 @NamedQueries({@NamedQuery(name = "Functionality.findById", query = "SELECT f FROM Functionality f WHERE f.id = :id"), @NamedQuery(name = "Functionality.findByName", query = "SELECT f FROM Functionality f WHERE f.name = :name"), @NamedQuery(name = "Functionality.findByAction", query = "SELECT f FROM Functionality f WHERE f.action = :action"), @NamedQuery(name = "Functionality.findByMethod", query = "SELECT f FROM Functionality f WHERE f.method = :method"), @NamedQuery(name = "Functionality.findByDescription", query = "SELECT f FROM Functionality f WHERE f.description = :description")})
 public class Functionality implements Serializable {
     private static final long serialVersionUID = 1L;

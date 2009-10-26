@@ -8,6 +8,10 @@ package br.ufc.ivela.commons.challenger.config;
  */
 
 public interface Constants {
+    
+    public static final int CHALLENGE_TYPE = 1;
+    public static final int SCORE_TYPE = 2;
+    
 	public static final int XML_INTERNALS_CHALLENGEREF = 1;
 	public static final String SUBTYPE_QUESTIONSET = "questionset";
 	public static final String TAG_HEADER = "header";
