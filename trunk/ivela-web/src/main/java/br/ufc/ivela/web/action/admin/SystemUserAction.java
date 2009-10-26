@@ -122,7 +122,8 @@ public class SystemUserAction extends GenericAction {
                 
         XStream xStream = new XStream(new JettisonMappedXmlDriver());
                 
-        int res = courseRemote.isFinishedCourse(studentId, courseId, gradeId);
+        int res = courseRemote.getProgress(studentId, courseId);
+                
         String json = xStream.toXML(res);
         
         json = json.replaceAll("int", "count");
@@ -544,9 +545,9 @@ class ThreadToResolve extends Thread{
     public int res;
     @Override
     public void run() {
+    
+     res = courseRemote.getProgress(studentId, courseId);  
      
-     res = courseRemote.isFinishedCourse(studentId, courseId, gradeId);   
-        
     }
     
     

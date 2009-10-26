@@ -25,21 +25,30 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 
 <html>
-    <body>
-        <h2><s:text name="error.exception.error"/></h2>
-        <p>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="css/exception.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>        
+
+        <br/>
+        <h3><s:text name="error.exception.error"/></h3>
+        <p class="message" >
             <s:text name="error.exception.contact"/>
         </p>
         <hr/>
         <h3><s:text name="error.exception.message"/></h3>
         <s:actionerror/>
-        <p>
+        <p class="message">
             <s:property value="%{exception.message}"/>
         </p>
-        <hr/>
-        <h3><s:text name="error.exception.details"/></h3>
-        <p>
-            <s:property value="%{exceptionStack}"/>
-        </p>
+        <hr/>        
+        <h3><s:text name="error.exception.like"/></h3>
+        <div id="menu">
+          <ul>
+            <li id="menu_1" ><a href="index.jsp" title="">Home</a></li>            
+          </ul>
+        </div>
+        
     </body>
 </html>

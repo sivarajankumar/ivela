@@ -20,6 +20,7 @@
 # 09-JUN-2009 - otofuji (Instituto Eldorado)      - 000007 - IE7 compatibility              #
 # 26-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - i18n general fixes             #
 # 30-JUL-2009 - fantato (Instituto Eldorado)      - 000013 - bug fixes                      #
+# 28-AGO-2009 - lagoa   (Instituto Eldorado)      - 000016 - Set date field as readonly     #
 #############################################################################################
 --%>
 
@@ -32,6 +33,7 @@
     <link href="../css/lightbox.css"  rel="stylesheet" type="text/css" />
     <link href="../css/cadAtividades.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../fckeditor/fckeditor.js"></script>
+    <script type="text/javascript" src="../js/util/util.js"></script>
     <script type="text/javascript" src="../js/admin/tools.js"></script>
     <script type="text/javascript" src="../js/admin/grade.js"></script>
     <script type="text/javascript" src="../js/lightbox.js"></script>
@@ -61,6 +63,10 @@
             else
                 countfield.value = maxlimit - field.value.length;
         }
+
+        function showChat(courseId, gradeId) {
+            window.open('course!showChat.action?courseId='+courseId+'&grade.id='+gradeId, '');
+        }
     </script>
         <style>
 
@@ -89,6 +95,7 @@
 
     </style>
     <cal:head />
+    <script type="text/javascript" src="../js/util/calendar.js"></script>
 </head>
 <s:actionerror />
 
@@ -149,7 +156,14 @@
                                             <s:else>
                                                 <ul class="list-students">
                                                     <s:iterator value="enrollments" status="stat">
-                                                        <li title="<s:property value="systemUser.username" />" id="li.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onMouseOver="mouseOverPerson('student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" onMouseOut="mouseOutPerson('student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');"><img src="../images/icon/icon-person.gif" /><br /><s:if test="systemUser.username.length() > 8"><s:property value="systemUser.username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="systemUser.username" /></s:else><br /><input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" name="studentsCheck" onclick="updateStudents(this,'student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" /></li>
+                                                        <li title="<s:property value="systemUser.username" />" id="li.student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onMouseOver="mouseOverPerson('student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" onMouseOut="mouseOutPerson('student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');">
+                                                        <input type="checkbox" value="<s:property value="systemUser.id" />" id="student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" name="studentsCheck" onclick="updateStudents(this,'student.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" />
+                                                        <img src="../images/icon/icon-person.gif" />
+                                                        <s:if test="systemUser.username.length() > 20">
+                                                        <s:property value="systemUser.username.substring(0,20)+ \"...\"" />
+                                                        </s:if><s:else><s:property value="systemUser.username" />
+                                                        </s:else>
+                                                        </li>
                                                     </s:iterator>
                                                     <br class="clear" />
                                                 </ul>
@@ -196,7 +210,16 @@
                                             <s:else>
                                                 <ul class="list-students">
                                                     <s:iterator value="professors" status="stat">
-                                                        <li title="<s:property value="username" />" id="li.professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onMouseOver="mouseOverPerson('professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" onMouseOut="mouseOutPerson('professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');"><img src="../images/icon/icon-person.gif" /><br /><s:if test="username.length() > 8"><s:property value="username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br /><input type="checkbox" value="<s:property value="id" />" id="professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" name="professorsCheck" onclick="updateProfessor(this,'professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" /></li>
+                                                        <li title="<s:property value="username" />" id="li.professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onMouseOver="mouseOverPerson('professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" onMouseOut="mouseOutPerson('professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');">
+                                                        <input type="checkbox" value="<s:property value="id" />" id="professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" name="professorsCheck" onclick="updateProfessor(this,'professor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" />
+                                                        <img src="../images/icon/icon-person.gif" />
+                                                        <s:if test="username.length() > 20">
+                                                        <s:property value="username.substring(0,20)+ \"...\"" />
+                                                        </s:if>
+                                                        <s:else>
+                                                        <s:property value="username" />
+                                                        </s:else>                  
+                                                        </li>
                                                     </s:iterator>
                                                     <br class="clear" />
                                                 </ul>
@@ -246,7 +269,15 @@
                                             <s:else>
                                                 <ul class="list-students">
                                                     <s:iterator value="tutors" status="stat">
-                                                        <li title="<s:property value="username" />" id="li.tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onMouseOver="mouseOverPerson('tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" onMouseOut="mouseOutPerson('tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');"><img src="../images/icon/icon-person.gif" /><br /><s:if test="username.length() > 8"><s:property value="username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br /><input type="checkbox" value="<s:property value="id" />" name="tutorsCheck" id="tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onclick="updateTutor(this,'tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" /></li>
+                                                        <li title="<s:property value="username" />" id="li.tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onMouseOver="mouseOverPerson('tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" onMouseOut="mouseOutPerson('tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');">
+                                                        <input type="checkbox" value="<s:property value="id" />" name="tutorsCheck" id="tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />" onclick="updateTutor(this,'tutor.id_<s:property value="grades[#gstat.index].id" />_<s:property value="#stat.index" />');" />
+                                                        <img src="../images/icon/icon-person.gif" />
+                                                        <s:if test="username.length() > 20"><s:property value="username.substring(0,20)+ \"...\"" />
+                                                        </s:if>
+                                                        <s:else>
+                                                        <s:property value="username" />
+                                                        </s:else>
+                                                        </li>
                                                     </s:iterator>
                                                     <br class="clear" />
                                                 </ul>
@@ -372,10 +403,12 @@
 
                 <label for="input.grade.startdatetime"><s:text name="grade.input.startdatetime" /></label>
                 <!--input type="text" name="input.grade.startdatetime" id="input.grade.startdatetime" value="" /><img id="startdatetime" src="../images/icon/icon-agenda.gif" /-->
-                <cal:jscalendar format="%d/%m/%Y" name="input.grade.startdatetime" id="input.grade.startdatetime"/><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.09" />')"></span><br />
+                <cal:jscalendar format="%d/%m/%Y" name="input.grade.startdatetime" id="input.grade.startdatetime" onfocus="this.readOnly=true;"/><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.09" />')"></span><br />
+                <script>document.getElementsByName('input.grade.startdatetime')[0].readOnly=true;</script>
 
                 <label for="input.grade.enddatetime"><s:text name="grade.input.enddatetime" /></label>
-                <cal:jscalendar format="%d/%m/%Y" name="input.grade.enddatetime" id="input.grade.enddatetime"/><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.10" />')"></span><br />
+                <cal:jscalendar format="%d/%m/%Y" name="input.grade.enddatetime" id="input.grade.enddatetime" onfocus="this.readOnly=true;"/><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.10" />')"></span><br />
+                <script>document.getElementsByName('input.grade.enddatetime')[0].readOnly=true;</script>
 
                 <label>&nbsp;</label>
                 <input class="btn-save-courses" type="button" name="input.grade.submit" id="input.grade.submit" value="<s:text name="grade.submit" />" onclick="submitGrade(document.getElementById('input.grade.id').value)" /><br />
@@ -534,9 +567,6 @@
 
                 <input type="checkbox" id="forum.studentCreateTopic" name="forum.studentCreateTopic" value="true" /> <s:text name="forum.input.createTopic"/><br/>
                 <input type="checkbox" id="forum.studentUploadPost" name="forum.studentUploadPost" value="true" /> <s:text name="forum.input.uploadPost"/><br/>
-                <input type="checkbox" id="forum.studentUploadRepository" name="forum.studentUploadRepository" value="true" /> <s:text name="forum.input.uploadRepository"/><br/>
-                <input type="checkbox" id="forum.studentLinkPost" name="forum.studentLinkPost" value="true" /> <s:text name="forum.input.linkPost"/><br/>
-
                 <input type="checkbox" id="forum.public1" name="forum.public1" value="true" /> <s:text name="forum.input.public"/><br/>
 
                 <br/>
@@ -693,6 +723,7 @@
                             <li><a  class ="icon-new" href="javascript:showEntryForum($('grade.id').value)" class="lightwindow page-options" params="lightwindow_type=external,lightwindow_width=1024"><s:text name="forum.input.list" /></a></li>
                             <li><a class="icon-newsFlash" href="javascript:showSendNewsFlash('grade.newsflash');"><s:text name= "student.send.newsflash" /></a></li>
                             <li><a class="icon-message" href="javascript:showSendMessage('grade.message');"><s:text name= "student.send.message" /></a></li>
+                            <li><a id="chatId" class="icon-chat" href="javascript:showChat($('course.id').value, $('grade.id').value);"><s:text name= "course.show.chat" /></a></li>
 
                             <br class="clear" />
                         </ul>
@@ -743,7 +774,7 @@
                             <li><a class="icon-delete" href="javascript:deleteStudent(document.getElementById('student.grade.id').value);"><s:text name= "student.grade.delete.student" /></a></li>
                             <li><a class="icon-newsFlash" href="javascript:showSendNewsFlash('student.newsflash');"><s:text name= "student.send.newsflash" /></a></li>
                             <li><a class="icon-message" href="javascript:showSendMessage('student.message');"><s:text name= "student.send.message" /></a></li>
-                            <li><a class="icon-message" href="javascript:showDiv('student.note');"><s:text name= "student.send.note" /></a></li>
+                            <!-- li><a class="icon-message" href="javascript:showDiv('student.note');"><s:text name= "student.send.note" /></a></li-->
                             <br class="clear" />
                         </ul>
                     </div>
@@ -767,10 +798,12 @@
                         <s:text name="note.what"/><br /><input type="text" name="input.student.note.what" id="input.student.note.what" maxlength="50" size="55" /><br />
                         <s:text name="note.where" /><br /><input type="text" name="input.student.note.where" id="input.student.note.where" maxlength="50" size="55" /><br />
                         <s:text name="note.dtStart" /><br />
-                        <cal:jscalendar format="%d/%m/%Y %H:%M:%S" name="input.student.note.dtStart" id="input.student.note.dtStart"/><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.11" />')"></span><br />
+                        <cal:jscalendar format="%d/%m/%Y %H:%M:%S" name="input.student.note.dtStart" id="input.student.note.dtStart" onfocus="this.readOnly=true;"/><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.11" />')"></span><br />
+                        <script>document.getElementsByName('input.student.note.dtStart')[0].readOnly=true;</script>
                         <br />
                         <s:text name="note.dtEnd" /><br />
-                        <cal:jscalendar format="%d/%m/%Y %H:%M:%S" name="input.student.note.dtEnd" id="input.student.note.dtEnd"/><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.12" />')"></span><br />
+                        <cal:jscalendar format="%d/%m/%Y %H:%M:%S" name="input.student.note.dtEnd" id="input.student.note.dtEnd" onfocus="this.readOnly=true;"/><span class="tooltip" onmouseover="return escape('<s:text name="admin.grade.tip.12" />')"></span><br />
+                        <script>document.getElementsByName('input.student.note.dtEnd')[0].readOnly=true;</script>
                         <br />
                         <s:text name="note.description"/><br /><textarea cols="65" rows="8" name="input.student.note.description" id="input.student.note.description"></textarea><br />
                         <input type="button" value="Submit" onclick="sendNoteStudent($('input.student.note.dtStart'), $('input.student.note.dtEnd'), $('input.student.note.where'), $('input.student.note.what'), $('input.student.note.description'));" />
@@ -889,18 +922,21 @@
                     <input type="hidden" id="forum.grade.course.id" name="forum.grade.course.id" value="" />
                 </form>
                 <br class="clear" />
+                 <s:if test="isAdmin()">
                 <div class="actions-box">
                     <h2><s:text name="grade.show.actions" /></h2>
-                    <div class="edit-tools">
+                    <div class="edit-tools">                       
                         <ul>
                             <li><a class="icon-new" href="javascript:showEntryForum(document.getElementById('forum.show.grade.id').value);"><s:text name= "forum.grade.new.forum" /></a></li>
                             <li><a class="icon-delete" href="javascript:deleteForum();"><s:text name= "forum.grade.delete.forum" /></a></li>
-                            <br class="clear" />
-                        </ul>
+                            <br class="clear" />                            
+                        </ul>                                                                        
                     </div>
                     <div class="edit-box" id="forum.grade.forums">
                     </div>
+                    
                 </div>
+                </s:if>
             </div>
         </div>
     </div>

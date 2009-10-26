@@ -18,9 +18,9 @@
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 19-NOV-2008 - marcus                            - XXXXXX - Initial Version                #
 # 01-JUL-2009 - mileine (Instituto Eldorado)      - 000010 - Password strength test added   #
+# 26-AUG-2009 - Rafael Lagoa (Instituto Eldorado) - 000902 - Fieldset legend line fix       #
 #############################################################################################
 --%>
-
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
@@ -45,7 +45,7 @@
         <s:actionerror/>
         <s:actionmessage/>
 
-        <s:form action="systemUser!change.action" method="post" cssClass="form">
+        <s:form name="changePasswordForm" action="systemUser!change.action" method="post" theme="simple">
 
             <fieldset>
                 <legend><s:text name="systemUser.password.change"/></legend>

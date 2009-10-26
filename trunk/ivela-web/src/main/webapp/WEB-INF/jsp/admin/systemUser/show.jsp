@@ -19,7 +19,7 @@
 # 30-SEP-2008 - Marcus                            - XXXXXX - Initial Version                #
 # 09-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 000007 - IE7 compatibility              #
 # 15-JUN-2009 - Fabio Fantato(Instituto Eldorado) - 00000X - Reverting list instead field   #
-# 															 adding user into categories    #
+#                                                            adding user into categories    #
 # 26-JUN-2009 - Otofuji(Instituto Eldorado)       - 000010 - i18n Issues                    #
 #############################################################################################
 --%>
@@ -89,9 +89,12 @@
                     <ul class="list-students">
                         <s:iterator value="listAdmin" status="stat">                
                             <li title="<s:property value="username" />" id="li.admin.id_<s:property value="#stat.index"/>" onMouseOver="mouseOverPerson('admin.id_<s:property value="#stat.index"/>');" onMouseOut="mouseOutPerson('admin.id_<s:property value="#stat.index"/>');">
-                                <img src="../images/icon/icon-person.gif" /><br />
-                                <s:if test="username.length() > 8"><s:property value="username.substring(0,8)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br />
                                 <input type="checkbox" name="adminCheck" id="admin.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
+                                <img src="../images/icon/icon-person.gif" />
+                                <s:if test="username.length() > 20">
+                                <s:property value="username.substring(0,20)+ \"...\"" /></s:if><s:else>
+                                <s:property value="username" /></s:else>
+                               
                             </li>                
                         </s:iterator>
                     </ul>
@@ -144,9 +147,9 @@
                     <ul class="list-students">
                         <s:iterator value="listCoord" status="stat">                
                             <li title="<s:property value="username" />" id="li.coord.id_<s:property value="#stat.index"/>" onMouseOver="mouseOverPerson('coord.id_<s:property value="#stat.index"/>');" onMouseOut="mouseOutPerson('coord.id_<s:property value="#stat.index"/>');">
-                                <img src="../images/icon/icon-person.gif" /><br />
-                                <s:if test="username.length() > 3"><s:property value="username.substring(0,3)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br />
                                 <input type="checkbox"  name="coordCheck" id="coord.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
+                                <img src="../images/icon/icon-person.gif" />
+                                <s:if test="username.length() > 20"><s:property value="username.substring(0,20)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else>
                             </li>                
                         </s:iterator>
                     </ul>
@@ -198,9 +201,9 @@
                     <ul class="list-students">
                         <s:iterator value="listProf" status="stat">                
                             <li title="<s:property value="username" />" id="li.prof.id_<s:property value="#stat.index"/>" onMouseOver="mouseOverPerson('prof.id_<s:property value="#stat.index"/>');" onMouseOut="mouseOutPerson('prof.id_<s:property value="#stat.index"/>');">
-                                <img src="../images/icon/icon-person.gif" /><br />
-                                <s:if test="username.length() > 3"><s:property value="username.substring(0,3)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br />
                                 <input type="checkbox"  name="profCheck" id="prof.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
+                                <img src="../images/icon/icon-person.gif" />
+                                <s:if test="username.length() > 20"><s:property value="username.substring(0,20)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else>
                             </li>                
                         </s:iterator>
                     </ul>
@@ -254,9 +257,9 @@
                     <ul class="list-students">
                         <s:iterator value="listTutor" status="stat">                
                             <li title="<s:property value="username" />" id="li.tutor.id_<s:property value="#stat.index"/>" onMouseOver="mouseOverPerson('tutor.id_<s:property value="#stat.index"/>');" onMouseOut="mouseOutPerson('tutor.id_<s:property value="#stat.index"/>');">
+                                <input type="checkbox"  name="tutorCheck" id="tutor.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
                                 <img src="../images/icon/icon-person.gif" /><br />
                                 <s:if test="username.length() > 3"><s:property value="username.substring(0,3)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br />
-                                <input type="checkbox"  name="tutorCheck" id="tutor.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
                             </li>                
                         </s:iterator>
                     </ul>
@@ -308,9 +311,9 @@
                 <ul class="list-students">
                     <s:iterator value="listUser" status="stat">                
                         <li title="<s:property value="username" />" id="li.student.id_<s:property value="#stat.index"/>" onMouseOver="mouseOverPerson('student.id_<s:property value="#stat.index"/>');" onMouseOut="mouseOutPerson('student.id_<s:property value="#stat.index"/>');">
-                            <img src="../images/icon/icon-person.gif" /><br />
-                            <s:if test="username.length() > 3"><s:property value="username.substring(0,3)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else><br />
                             <input type="checkbox"  name="studentCheck" id="student.id_<s:property value="#stat.index"/>" value="<s:property value="id"/>" onclick="updatePerson(this,<s:property value="id"/>);"/>
+                            <img src="../images/icon/icon-person.gif" />
+                            <s:if test="username.length() > 20"><s:property value="username.substring(0,20)+ \"...\"" /></s:if><s:else><s:property value="username" /></s:else>
                         </li>                
                     </s:iterator>
                 </ul>
@@ -443,7 +446,9 @@
                     <h2><s:text name="course.show.actions"/>:</h2>
                     <div class="edit-tools">
                         <ul>
+                            <sec:authorize ifAnyGranted="ROLE_ADMIN">
                             <li><a class="icon-new-person"  href="javascript:showDiv('coord.add')"><s:text name="systemUser.show.coordenator"/></a></li>
+                            </sec:authorize>
                             <br class="clear" />
                         </ul>                        
                     </div>
@@ -467,10 +472,13 @@
                     <h2><s:text name="course.show.actions"/>:</h2>
                     <div class="edit-tools">
                         <ul>
+                            <sec:authorize ifAnyGranted="ROLE_ADMIN">
                             <li><a class="icon-edit" href="javascript:showDiv('multiple.message.coord');"><s:text name="course.send.message"/></a></li>
+                            <li><a class="icon-delete" href="javascript:showDiv('multiple.delete.coord');"><s:text name="course.show.deleteCoor" /></a></li>
+                            </sec:authorize>
                             <li><a class="icon-message"  href="javascript:showDiv('multiple.newsflash.coord');"><s:text name="course.send.newsflash" /></a></li>
                             <li><a class="icon-newsFlash" href="javascript:showDiv('multiple.change.coord');"><s:text name="course.show.perfil" /></a></li>
-                            <li><a class="icon-delete" href="javascript:showDiv('multiple.delete.coord');"><s:text name="course.show.deleteCoor" /></a></li>
+                            
                             <br class="clear" />
                         </ul>                        
                     </div>
@@ -501,6 +509,7 @@
                         <input type="button" value="<s:text name="systemUser.input.deleteNo" />" onclick="deleteStudent(false)" />
                     </div>
                 </div>
+                
                 <!-- end actions-box -->
 
                 
@@ -523,7 +532,9 @@
                     <h2><s:text name="course.show.actions"/>:</h2>
                     <div class="edit-tools">
                         <ul>
+                            <sec:authorize ifAnyGranted="ROLE_ADMIN, ROLE_COORD">
                             <li><a class="icon-new-person"  href="javascript:showDiv('prof.add')"><s:text name="systemUser.show.professor" /></a></li>
+                            </sec:authorize>
                             <br class="clear" />
                         </ul>                        
                     </div>
@@ -548,10 +559,12 @@
                     <h2><s:text name="course.show.actions"/>:</h2>
                     <div class="edit-tools">
                         <ul>
+                            <sec:authorize ifAnyGranted="ROLE_ADMIN, ROLE_COORD">
                             <li><a class="icon-edit" href="javascript:showDiv('multiple.message.prof');"><s:text name="course.send.message"/></a></li>
-                            <li><a class="icon-message"  href="javascript:showDiv('multiple.newsflash.prof');"><s:text name="course.send.newsflash" /></a></li>
-                            <li><a class="icon-newsFlash" href="javascript:showDiv('multiple.change.prof');"><s:text name="course.show.perfil" /></a></li>
                             <li><a class="icon-delete" href="javascript:showDiv('multiple.delete.prof');"><s:text name="course.show.deleteProf" /></a></li>
+                            </sec:authorize>
+                            <li><a class="icon-message"  href="javascript:showDiv('multiple.newsflash.prof');"><s:text name="course.send.newsflash" /></a></li>
+                            <li><a class="icon-newsFlash" href="javascript:showDiv('multiple.change.prof');"><s:text name="course.show.perfil" /></a></li>                            
                             <br class="clear" />
                         </ul>                        
                     </div>
@@ -582,6 +595,7 @@
                         <input type="button" value="<s:text name="systemUser.input.deleteNo" />" onclick="deleteStudent(false)" />
                     </div>
                 </div>
+                
                 <!-- end actions-box -->
                 
             </div>
@@ -603,7 +617,9 @@
                     <h2><s:text name="course.show.actions"/>:</h2>
                     <div class="edit-tools">
                         <ul>
+                            <sec:authorize ifAnyGranted="ROLE_ADMIN, ROLE_COORD, ROLE_PROFESSOR">
                             <li><a class="icon-new-person"  href="javascript:showDiv('tutor.add')"><s:text name="systemUser.show.tutor"/></a></li>
+                            </sec:authorize>
                             <br class="clear" />
                         </ul>                        
                     </div>
@@ -624,14 +640,18 @@
                 </div>
                 <!-- end actions-user -->
                 
+                
                 <div class="actions-box" id="actions.all.tutor" style="display:none">
                     <h2><s:text name="course.show.actions"/>:</h2>
                     <div class="edit-tools">
                         <ul>
+                            <sec:authorize ifAnyGranted="ROLE_ADMIN, ROLE_COORD, ROLE_PROFESSOR">
                             <li><a class="icon-edit" href="javascript:showDiv('multiple.message.tutor');"><s:text name="course.send.message"/></a></li>
+                            <li><a class="icon-delete" href="javascript:showDiv('multiple.delete.tutor');"><s:text name="course.show.deleteTutor" /></a></li>
+                            </sec:authorize>
                             <li><a class="icon-message"  href="javascript:showDiv('multiple.newsflash.tutor');"><s:text name="course.send.newsflash" /></a></li>
                             <li><a class="icon-newsFlash" href="javascript:showDiv('multiple.change.tutor');"><s:text name="course.show.perfil" /></a></li>
-                            <li><a class="icon-delete" href="javascript:showDiv('multiple.delete.tutor');"><s:text name="course.show.deleteTutor" /></a></li>
+                            
                             <br class="clear" />
                         </ul>                        
                     </div>
@@ -661,7 +681,7 @@
                         <input type="button" value="<s:text name="systemUser.input.deleteYes" />" onclick="deleteStudent(true)" />
                         <input type="button" value="<s:text name="systemUser.input.deleteNo" />" onclick="deleteStudent(false)" />
                     </div>
-                </div>
+                </div>                
                 <!-- end actions-box -->
 
                 

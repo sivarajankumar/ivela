@@ -22,6 +22,9 @@
 # 15-JUN-2009 - fantato (Instituto Eldorado)      - 000010 - broken icons                   #
 # 17-JUN-2009 - fantato (Instituto Eldorado)      - 000010 - multimidia link was wrong      #
 # 25-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - i18n support                   #
+# 20-AGO-2009 - mileine (Instituto Eldorado)      - 000015 - upload translation tip fixed   #
+# 28-AGO-2009 - lagoa   (Instituto Eldorado)      - 000016 - Set date field to readonly     #
+# 02-SEP-2009 - Rafael Lagôa (Instituto Eldorado) - 000016 - Fix showChat action            #
 #############################################################################################
 --%>
 
@@ -39,6 +42,7 @@
     <script type="text/javascript" src="../fckeditor/fckeditor.js"></script>
     <script type="text/javascript" src="../js/admin/tools.js"></script>
     <script type="text/javascript" src="../js/admin/utils.js"></script>
+    <script type="text/javascript" src="../js/util/util.js"></script>
     <script type="text/javascript" src="../js/admin/courses.js"></script>
     <script type="text/javascript" src="../js/admin/discipline.js"></script>
     <script type="text/javascript" src="../js/admin/unit.js"></script>
@@ -48,7 +52,6 @@
     <script type="text/javascript" src="../js/admin/exam.js"></script>
     <script type="text/javascript" src="../js/admin/question.js"></script>
     <script type="text/javascript" src="../js/admin/dictionary.js"></script>
-    <script type="text/javascript" src="../js/admin/webtoolkit.aim.js"></script>
     <script type="text/javascript" src="../js/lightbox.js"></script>
 
     <script type="text/javascript">
@@ -60,12 +63,10 @@
         var questoesCriadas = '<h2><s:text name="questoes.criadas"/></h2>';
         var questionText = '<h2><s:text name="question.input.text" /></h2>';
 
-        
         if (message != null && message != '') {
             //alert(message);
         }
-    </script>
-    <script>
+
 		function getRepository(value) {
 			return "repository!show.action?courseId="+value; 
 		}
@@ -77,9 +78,9 @@
             else 
                 countfield.value = maxlimit - field.value.length;
         }
-
     </script>
     <cal:head />
+    <script type="text/javascript" src="../js/util/calendar.js"></script>
 </head>
 <s:actionerror />
 
@@ -151,37 +152,7 @@
                                                                 <s:else>
                                                                     <h6 class="vertical_accordion_toggle3"><s:property value="title" /></h6>
                                                                 </s:else>                                    
-                                                                <div class="vertical_accordion_content3" id="<s:property value="id" />_<s:property value="id" />_<s:property value="id" />">
-                                                                    <div id="vertical_nested_container4">
-                                                                        
-                                                                        <h6 class="vertical_accordion_toggle4" id="exercises" ><s:text name="course.show.exercise"/></h6>
-                                                                        <div class="vertical_accordion_content4" id="<s:property value="id" />">
-                                                                            <ul id="ulExerciseAccordeon_<s:property value="id" />">
-                                                                                <s:if test="(exercises == null || exercises.size() == 0)">
-                                                                                    <h4 class="no_grades"><s:text name="admin.noexercises" /></h4>
-                                                                                </s:if>
-                                                                                <s:else>
-                                                                                    <s:iterator value="exercises">
-                                                                                        <li id="listExerciseAccordeon_<s:property value="id" />"><a href="javascript:showExercise('<s:property value="id" />',false)"><s:property value="title" /></a></li>
-                                                                                    </s:iterator>
-                                                                                </s:else>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <h6 class="vertical_accordion_toggle4" id="exams"><s:text name="course.show.exam"/></h6>
-                                                                        <div class="vertical_accordion_content4" id="<s:property value="id" />">
-                                                                            <ul id="ulExamAccordeon_<s:property value="id" />">
-                                                                                <s:if test="(exams == null || exams.size() == 0)">
-                                                                                    <h4 class="no_grades"><s:text name="admin.noexams" /></h4>
-                                                                                </s:if>
-                                                                                <s:else>
-                                                                                    <s:iterator value="exams">
-                                                                                        <li id="listExamAccordeon_<s:property value="id" />"><a href="javascript:showExam('<s:property value="id" />',false)"><s:property value="title" /></a></li>
-                                                                                    </s:iterator>
-                                                                                </s:else>                                                                        
-                                                                            </ul>
-                                                                        </div>
-                                                                        
-                                                                    </div>
+                                                                <div class="vertical_accordion_content3" id="<s:property value="id" />_<s:property value="id" />_<s:property value="id" />">                                                                    
                                                                 </div>
                                                             </s:iterator>                                                        
                                                         </s:else>
@@ -210,6 +181,8 @@
                 <h1><s:text name="home.course" /></h1><br/><br/><br/>
                 <label><s:text name="course.input.name" /></label><br/>
                 <input type="hidden" name="input.course.repository" id="input.course.repository" value=""/>
+                <input type="hidden" name="input.course.challengeCount" id="input.course.challengeCount" value=""/>
+                <input type="hidden" name="input.course.challengeWeight" id="input.course.challengeWeight" value=""/>
                 <input type="text" name="input.course.name" id="input.course.name" value="" size="61" maxlength="35" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.01"/>')"> </span><br/>
                 <label><s:text name="course.input.description" /></label><br/>
                 <textarea onKeyDown="textCounter(this,$('remLen'),250);" onKeyUp="textCounter(this,$('remLen'),250);" rows="4" name="input.course.description" id="input.course.description" cols="70" ></textarea><span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.02"/>')"></span><br/>
@@ -235,6 +208,13 @@
                 <label><s:text name="course.input.challengeItens" /></label>
                 <label class="label-boxfield"><input type="radio" name="input.course.challengeItens" id="input.course.challengeItens.yes" value="true"> &nbsp;<s:text name="course.input.yes" /></label>
                 <label class="label-boxfield"><input type="radio" name="input.course.challengeItens" id="input.course.challengeItens.no" value="false" checked="checked"> &nbsp;<s:text name="course.input.no" /></label> <span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.06" />')"></span><br/>
+
+                <label><s:text name="course.input.customToc" /></label>
+                <label class="label-boxfield"><input type="radio" name="input.course.customToc" id="input.course.customToc.yes" value="true"> &nbsp;<s:text name="course.input.yes" /></label>
+                <label class="label-boxfield"><input type="radio" name="input.course.customToc" id="input.course.customToc.no" value="false" checked="checked"> &nbsp;<s:text name="course.input.no" /></label> <span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.07" />')"></span><br/>
+
+                <label><s:text name="course.input.retries" /></label>
+                <input type="text" name="input.course.challengeRetries" id="input.course.challengeRetries" value="" size="2" maxlength="2" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.08" />')"></span><br/>
 
   				<label>&nbsp;</label>
                 <input type="button" name="input.course.submit" id="input.course.submit" value="<s:text name="systemUser.input.btnSave" />" onclick="submitCourse($('input.course.id').value)" />
@@ -286,6 +266,7 @@
                     <input type="hidden" name="unitContent.unitId" id="input.unitContent.unit.id" value="" />
                     <input type="hidden" name="unitContent.id" id="input.unitContent.id" value="" />
                     <input type="hidden" name="unitContent.description" id="input.unitContent.description" value="" />
+                    <input type="hidden" name="unitContent.tag" id="input.unitContent.tag" value="" />
                     <h1><s:text name="unitContent.input.add" /></h1><br />
                     <br />
                     <br />
@@ -483,8 +464,6 @@
                             <li><a class="icon-edit" href="javascript:showEditUnitContent();"><s:text name="unitContent.input.edit" /></a></li>                            
                             <li><a class="icon-delete" href="javascript:deleteUnitContent();"><s:text name="unitContent.input.remove" /></a></li>
                             <li id="unit.challenge"><a class="icon-message"href="javascript:showNewsChallenge();"><s:text name= "course.add.challenge" /></a></li>
-                            <li><a id="chatId" class="icon-chat" href="#" target="_blank" onmouseover="javascript:openChat();"><s:text name= "course.show.chat" /></a></li>
-                            
                             <br class="clear" />
                         </ul>
                     </div>
@@ -547,6 +526,7 @@
                     <s:hidden name="unitContent.type" value="2" />
                     <s:hidden name="unitContent.unitId" id="upload.unit.id" value="" />
                     <s:hidden name="unitContent.description" value="none" />
+                    <s:hidden name="unitContent.tag" id="upload.unitContent.tag" value=""/>
                     <br />
                     <br />
                     <label><s:text name="unitContent.input.title" /></label><br />
@@ -556,13 +536,13 @@
                     <select style="width: 80px;" name="unitContent.orderN" id="upload.unitContent.order_n"></select><span  class="tooltip"onmouseover="return escape('<s:text name="admin.unitContent.tip.01"/>')"></span><br />                                    
                     <br />
                     <label><s:text name="unitContent.input.package" /></label><br />
-                    <s:file name="upload" key="repository.input.file" theme="simple" /><span class="tooltip" onmouseover="return escape('Entre com o pacote da aula')"></span>
+                    <s:file name="upload" key="repository.input.file" theme="simple" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.unitContent.tip.04"/>')"></span>
                     <br />
                     <br />
                     <label><s:text name="unitContent.input.width" /></label><br />
                     <s:textfield name="unitContent.width" id="upload.unitContent.width" maxLength="4" size="8" /><span class="tooltip"  onmouseover="return escape('<s:text name="admin.unitContent.tip.03"/>')"></span><br />
                     <label><s:text name="unitContent.input.height" /></label><br />
-                    <s:textfield name="unitContent.height" id="upload.unitContent.height" maxLength="4" size="8" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.unitContent.tip.03"/>')"></span><br /><br />
+                    <s:textfield name="unitContent.height" id="upload.unitContent.height" maxLength="4" size="8" /><span class="tooltip" onmouseover="return escape('<s:text name="admin.unitContent.tip.03"/>')"></span><br /><br />                    
                     <s:submit key="systemUser.input.btnSave" />
                 </s:form>
             </div>
@@ -570,642 +550,12 @@
     </div>
 </div>
 
-<div id="showManagerExercises" style="display: none;">
-    <div id="col-2-home">
-        <div class="container-courses">
-            <div class="content-courses">
-                <h1><span><s:text name="course.show.exercise"/></span></h1>
-                <%--form action="" class="form-edit"><input type="button" value="<s:text name="course.show.editUnitContent" />" onclick="showEditUnitContent($('unitContent.id').value);" /></form--%>
-                <input type="hidden" id="unitContent.id" name="unitContent.id" value="" />
-                <br class="clear" />
-                <div class="actions-box">
-                    <h2><s:text name="course.show.newExercise" /></h2>
-                    <div class="edit-tools">
-                        <ul>
-                            <!--li><a class="icon-new" href="#" onclick="showEntryExam($('unitContent.id').value);"><s:text name = "course.show.newExam" /></a></li-->
-                            <li><a class="icon-new" href="javascript:showEntryExercise($('unitContent.id').value);"><s:text name="course.show.newExercise" /></a></li>
-                            <li><a class="icon-edit" href="javascript:showEditExercise(null,$('unitContent.id').value);"><s:text name="course.show.edit" /></a></li>                            
-                            <li><a class="icon-delete"href="javascript:deleteExercises()"><s:text name="course.show.remove" /></a></li>
-                            <br class="clear" />
-                        </ul>
-                        
-                    </div>
-                    <div class="edit-box" id="unitContent.buttons.exercise">
-                    </div>
-                    <div class="edit-box" id="unitContent.exercises">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>    
-</div>
-
-<div id="showManagerExams" style="display: none;">
-    <div id="col-2-home">
-        <div class="container-courses">
-            <div class="content-courses">
-                <h1><span><s:text name="course.show.exam" /></span></h1>
-                <%--form action="" class="form-edit"><input type="button" value="<s:text name="course.show.editUnitContent" />" onclick="showEditUnitContent($('unitContent.id').value);" /></form--%>
-                <input type="hidden" id="unitContent.id" name="unitContent.id" value="" />
-                <br class="clear" />
-                <div class="actions-box">
-                    <h2><s:text name="course.show.newExam" /></h2>
-                    <div class="edit-tools">
-                        <ul>
-                            <li><a class="icon-new" href="javascript:showEntryExam($('unitContent.id').value);"><s:text name = "course.show.newExam" /></a></li>
-                            <!--li><a class="icon-new" href="#" onclick="showEntryExercise($('unitContent.id').value);"><s:text name="course.show.newExercise" /></a></li-->
-                            <li><a class="icon-edit" href="javascript:showEditExam(null,$('unitContent.id').value);"><s:text name="course.show.edit" /></a></li>                            
-                            <li><a class="icon-delete"href="javascript:deleteExams();"><s:text name="course.show.remove" /></a></li>
-                            <br class="clear" />
-                        </ul>
-                        
-                    </div>
-                    <div class="edit-box" id="unitContent.buttons.exam">
-                    </div>
-                    <div class="edit-box" id="unitContent.exams">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>    
-</div>
-
-<%--div id="showEntryExercise" style="display: none;">
-    <div id="col-2-home">
-        <div class="container-courses">
-            <div class="content-courses">
-                <input type="hidden" name="input.exercise.id" id="input.exercise.id" value="" />
-                <form id="form_exercise_entry" action="#" class="cadastro-avaliacao">
-                    <h1><s:text name="course.show.newExercise"/></h1><br />
-                    <br />
-                    <br />
-                    <h2><s:text name="course.input.title"/>:</h2>
-                    <input type="text" name="input.exercise.title" id="input.exercise.title" value=""  class="titulo-avaliacao" /><a href="#" class="tooltip" onmouseover="return escape('Enter exercise title')"></a><br />
-                    <span id="errorExerciseTitle" class="validation"><s:text name="input.exercise.errorTitle" /></span>
-                    <h2><s:text name="exercise.input.description"/></h2>
-                    <textarea class="questao-texto" type="text" name="input.exercise.description" id="input.exercise.description" ></textarea> <a href="#" class="tooltip" onmouseover="return escape('Describe the exercise')"></a><br />
-                    <span id="errorExerciseDescription" class="validation"><s:text name="input.exercise.errorDescription" /></span>
-                    <h2><s:text name="exercise.input.navigable"/></h2><br />
-                    <s:radio list="#{'true':'Yes', 'false' :'No'}" value="%{'true'}" name="input.exercise.navigable" id="input.exercise.navigable"/><a href="#" class="tooltip" onmouseover="return escape('Set if this exercise has navigable questions.')"></a><br />
-                    <h2><s:text name="exercise.input.weight"/></h2> 
-                    <s:select cssClass="lista-peso"  name="input.exercise.weight" id="input.exercise.weight" value="1" list="#{'1':'1','2':'2','3':'3', '4':'4','5':'5','6':'6','7':'7','8':'8','9':'9'}"/>
-                    <a class="tooltip" href="#" onmouseover="return escape('Enter exercise weight')"></a><br/>
-                    <h2><s:text name="exercise.input.chances"/></h2>
-                    <s:select cssClass="lista-peso" name="input.exercise.chances" id="input.exercise.chances" value="1" list="#{'1':'1','2':'2','3':'3', '4':'4','5':'5','6':'6','7':'7','8':'8','9':'9','10':'Sem limites'}"/>
-                    <br/>
-                     
-                    <div class="actions-box">
-                        <div class="edit-box" id="exercise.list.unitContent">  
-                        </div>
-                    </div>
-                    <br/>
-                    <p class="navega-teste">
-                        <a  class="cancel" title="Cancelar criação do Exercicio" onclick="showManagerExercises($('input.unitContent.id').value)">Cancel</a>
-                        <!--a class="previous" title="Voltar para a etapa anterior">Previous</a-->
-                        <a id="nextExercise" class="next" title="Ir para a próxima etapa" onclick="submitExercise($('input.exercise.id').value);">Next</a>
-                        
-                        <br class="clear" />
-                    </p>
-                    
-                </form>
-            </div>
-        </div>
-    </div>
-</div --%>
-
-<div id="showEntryExercise" style="display: none;">
-    <div id="col-2-home">
-        <div class="container-courses">
-            <div class="content-courses">                
-                <h1><s:text name="course.show.newExercise"/></h1>
-                <br class="clear" />
-                <div class="steps-box">
-                    <div>
-                        <div>
-                            <span id="step"><s:text name="course.show.step" /></span>
-                            
-                            <span id="current" href="">1</span>
-                            <span>2</span>
-                            <span>3</span>
-                            
-                        </div>
-                    </div>
-                    <div class="tip-step"><s:text name="show.tip" /></div>
-                </div>
-                
-                
-                <input type="hidden" name="input.exercise.id" id="input.exercise.id" value="" />
-                <form id="form_exercise_entry" action="#" class="cadastro-avaliacao">
-                    <table border="0" class="show_hints">
-                        <tr>
-                            <td>
-                                <p><s:text name="course.input.title"/>:</p>
-                                <input type="text" id="input.exercise.title" onfocus="hint(this,text(this))" onblur="clearHint(this, text(this));" onkeyup="text(this);" value="" />
-                            </td>
-                            <td width="50">
-                                <span class="hint"><s:text name="show.tip.exercise" /></span>
-                                <span class="hint" name="hintVirgin">&nbsp;</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p><s:text name="exercise.input.description"/></p>
-                                <textarea id="input.exercise.description" cols="27" onfocus="hint(this,true)" onblur="clearHint(this, true);" ></textarea>
-                            </td>
-                            <td>
-                                <span class="hint"><s:text name="show.tip.description" /></span>
-                                <span class="hint">&nbsp;</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p><s:text name="exercise.input.navigable"/></p>
-                                <s:radio cssClass="input_radio" theme="simple" list="#{'true':'Yes', 'false' :'No'}" value="true" id="input.exercise.navigable" name="input.exercise.navigable" onfocus="hint(this,true)" onblur="clearHint(this, true);"/>
-                            </td>
-                            <td>
-                                <span class="hint"><s:text name="show.tip.description" /></span>
-                                <span class="hint">&nbsp;</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> 
-                                <p><s:text name="exercise.input.weight"/></p>
-                                <s:select theme="simple" name="input.exercise.weight" id="input.exercise.weight" value="1" list="#{'1':'1','2':'2','3':'3', '4':'4','5':'5','6':'6','7':'7','8':'8','9':'9'}" onfocus="hint(this,true)" onblur="clearHint(this, true);" />
-                            </td>
-                            <td>
-                                <span class="hint"><s:text name="show.tip.weight" /></span>
-                                <span class="hint">&nbsp;</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> 
-                                <p><s:text name="exercise.input.chances"/></p>
-                                <s:select theme="simple" name="input.exercise.chances" id="input.exercise.chances" value="1" list="#{'1':'1','2':'2','3':'3', '4':'4','5':'5','6':'6','7':'7','8':'8','9':'9','10':'Sem limites'}" onfocus="hint(this,true)" onblur="clearHint(this, true);" />
-                            </td>
-                            <td>
-                                <span class="hint"><s:text name="show.tip.trial"/></span>
-                                <span class="hint">&nbsp;</span>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="actions-box2">
-                        <div class="edit-box" id="exercise.list.unitContent">  
-                        </div>
-                    </div>
-                    <br/>
-                    <p class="navega-teste">
-                        <a  class="cancel" title="Cancelar criação do Exercicio" onclick="showManagerExercises($('input.unitContent.id').value)">Cancel</a>
-                        <!--a class="previous" title="Voltar para a etapa anterior">Previous</a-->
-                        <a id="nextExercise" class="next" title="Ir para a próxima etapa" onclick="submitExercise($('input.exercise.id').value);">Next</a>
-                        
-                        <br class="clear" />
-                    </p>
-                    
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="showEntryExam" style="display: none;">
-    <div id="col-2-home">
-        <div class="container-courses">
-            <div class="content-courses">
-                <h1><s:text name="course.show.addExam" /></h1>
-                <br class="clear" />
-                <div class="steps-box">
-                    <div>
-                        <div>
-                            <span id="step"><s:text name="course.show.step" /></span>
-                            <span id="current" href="">1</span>
-                            <span>2</span>
-                            <span>3</span>
-                        </div>
-                    </div>
-                    <div class="tip-step"><s:text name="show.tip.step" /></div>
-                </div>
-                <form id="form_exam_entry"  action="#" class="cadastro-avaliacao">
-                    <input type="hidden" name="input.exam.id" id="input.exam.id" value="" />
-                    <table border="0" class="show_hints">
-                        <tr>
-                            <td>
-                                <p><s:text name="course.input.title"/>:</p>
-                                <input type="text" id="input.exam.title" onfocus="hint(this,text(this))" onblur="clearHint(this, text(this));" onkeyup="text(this);" value="" />
-                            </td>
-                            <td width="50">
-                                <span class="hint"><s:text name="show.tip.exam" /></span>
-                                <span class="hint" name="hintVirgin">&nbsp;</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p><s:text name="exam.input.navigable"/></p>
-                                <s:radio list="#{'true':'Yes', 'false' :'No'}" value="%{'true'}" cssClass="input_radio" name="input.exam.navigable" id="input.exam.navigable" onfocus="hint(this,true)" onblur="clearHint(this, true);" theme="simple"/>
-                            </td>
-                            <td>
-                                <span class="hint"><s:text name="show.tip.navegable" /></span>
-                                <span class="hint">&nbsp;</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> 
-                                <p><s:text name="exercise.input.weight"/></p>
-                                <s:select theme="simple" id="input.exam.weight" name="input.exam.weight" value="1" list="#{'1':'1','2':'2','3':'3', '4':'4','5':'5','6':'6','7':'7','8':'8','9':9}" onfocus="hint(this,true)" onblur="clearHint(this, true);" />
-                            </td>
-                            <td>
-                                <span class="hint"><s:text name="show.tip.weightExam"/></span>
-                                <span class="hint">&nbsp;</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> 
-                                <p><s:text name="exam.input.duration"/></p>
-                                <s:select name="input.exam.duration" id="input.exam.duration" value="1" list="#{'1':'1','2':'2','3':'3', '4':'4','5':'5','6':'6'}" theme="simple" onfocus="hint(this,true)" onblur="clearHint(this, true);" />hs
-                            </td>
-                            <td>
-                                <span class="hint"><s:text name="show.tip.time2" /></span>
-                                <span class="hint">&nbsp;</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> 
-                                <p><s:text name="input.exam.startdatetime"/></p>
-                                <cal:jscalendar theme="simple" format="%m/%d/%Y %H:%M:00" name="input.exam.startdatetime" id="input.exam.startdatetime" showstime="true" onfocus="hintCalendar(this)" onchange="hint(this,true)" />
-                            </td>
-                            <td>
-                                <span class="hint"><s:text name="show.tip.startDate" /></span>
-                                <span class="hint" name="hintVirgin">&nbsp;</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> 
-                                <p><s:text name="input.exam.enddatetime"/></p>
-                                <cal:jscalendar theme="simple" format="%m/%d/%Y %H:%M:00" name="input.exam.enddatetime" id="input.exam.enddatetime" showstime="true" onfocus="hintCalendar(this)" onchange="hint(this,true)"/>
-                            </td>
-                            <td>
-                                <span class="hint"><s:text name="show.tip.endDate" /></span>
-                                <span class="hint" name="hintVirgin">&nbsp;</span>
-                            </td>
-                        </tr>
-                    </table>
-                    
-                    <div class="actions-box2">
-                        <div class="edit-box" id="exam.list.unitContent">  
-                        </div>
-                    </div>   
-                    <br/>
-                    <p class="navega-teste">
-                        <a  class="cancel" title="Cancelar criação da avaliação" onclick="showManagerExams($('input.unitContent.id').value);">Cancel</a>
-                        <!--a class="previous" title="Voltar para a etapa anterior">Previous</a-->
-                        <a id="nextExam" onclick="submitExam($('input.exam.id').value);"  class="next" title="Ir para a próxima etapa">Next</a>
-                        
-                        <br class="clear" />
-                    </p>
-                    
-                </form>
-            </div>
-            <%--input type="button" name="input.exam.submit" id="input.exam.submit" value="Submit" onclick="submitExam($('input.exam.id').value);"  /--%><br />        
-        </div>
-    </div>
-</div>
-
-<div id="showEntryQuestion" style="display: none;">
-    <div id="col-2-home">
-        <div class="container-courses">
-            <div class="content-courses">
-                <h1><div id="atividade.name"></div></h1>
-                <br class="clear" />
-                <div class="steps-box">
-                    <div>
-                        <div>
-                            <span id="step"><s:text name="course.show.step" /></span>
-                            <span id="" href="">1</span>
-                            <span id="current">2</span>
-                            <span class="next-step">3</span>
-                        </div>
-                    </div>
-                    <div class="tip-step"><s:text name="show.tip.step2"/></div>
-                </div>
-                <h1><s:text name="question.show.addQuestion"/></h1>
-                <br class="clear"/>
-                
-                <div id="form_question"  class="cadastro-avaliacao">
-                    <s:form name="formUpload" id="formUpload" action="question!add.action" method="post" enctype="multipart/form-data" target="iframeQuestion">
-                        <input type="hidden" name="input.question.id" id="input.question.id" value="" />
-                        <s:hidden name="unit.id" id="hidden.unit.id" value=""/>
-                        <s:hidden name="unitContent.id" id="hidden.unitContent.id" value=""/>
-                        <s:hidden name="atividade" id="hidden.atividade" value=""/>
-                        <s:hidden name="exercise.id" id="hidden.exercise.id" value=""/>
-                        <s:hidden name="exam.id" id="hidden.exam.id" value=""/>
-                        <table border="0" class="show_hints">
-                            <tr>
-                                <td>
-                                    <p><s:text name="question.input.questionType"/>:</p>
-                                    <s:select  id="question_question_type" theme="simple" name="question.type" onchange="selectTypeQuestion(this.value)" value ="selectedQuestionType" list="#{'1':'Subjective','2':'Objective'}" onfocus="hint(this,true)" onblur="clearHint(this, true);"/>
-                                </td>
-                                <td width="50">
-                                    <span class="hint"><s:text name="show.tip.type" /></span>
-                                    <span class="hint">&nbsp;</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p><s:text name="question.input.weight"/>:</p>
-                                    <s:select cssClass="lista-peso" name="questionWeight" value="1" list="#{'1':'1','2':'2','3':'3', '4':'4','5':'5','6':'6','7':'7','8':'8','9':'9'}" theme="simple" onfocus="hint(this,true)" onblur="clearHint(this, true);" />
-                                </td>
-                                <td width="50">
-                                    <span class="hint"><s:text name="show.tip.weight" /></span>
-                                    <span class="hint">&nbsp;</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p><s:text name="question.input.required"/>:</p>
-                                    <s:radio theme="simple" value="true" cssClass="input_radio" list="#{'true':'true', 'false' :'false'}" name="questionRequired" onfocus="hint(this,true)" onblur="clearHint(this, true);" />
-                                </td>
-                                <td width="50">
-                                    <span class="hint"><s:text name="show.tip.required" /></span>
-                                    <span class="hint">&nbsp;</span>
-                                </td>
-                            </tr>
-                        </table>
-                        
-                        <div id="questionSubjective">
-                            <table border="0" class="show_hints">
-                                <tr>
-                                    <td>
-                                        <p><s:text name="question.input.text" />:</p>
-                                        <s:textarea theme="simple" cols="27" id="textQuestion" name="questionText.text" onfocus="hint(this,true)" onblur="clearHint(this, true);" />
-                                    </td>
-                                    <td width="50">
-                                        <span class="hint"><s:text name="show.tip.text" /></span>
-                                        <span class="hint">&nbsp;</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p><s:text name="question.input.audioQuestion" />:</p>
-                                        <s:file id="id" name="fileQuestion" theme="simple" value="" onfocus="hint(this,true)" onblur="clearHint(this, true);" onchange="validateFile(this.value)"/>
-                                    </td>
-                                    <td width="50">
-                                        <span class="hint"><s:text name="show.tip.exercise" /></span>
-                                        <span class="hint">&nbsp;</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p><s:text name="question.input.typeQuestion" />:</p>
-                                        <s:textfield theme="simple" name="question.question" id="question.description" onfocus="hint(this,text(this))" onblur="clearHint(this, text(this));" onkeyup="text(this);"/>
-                                    </td>
-                                    <td width="50">
-                                        <span class="hint"><s:text name="show.tip.question" /></span>
-                                        <span class="hint" name="hintVirgin">&nbsp;</span>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>  
-                        <table id="questionObjective" border="0" style="display:none" class="show_hints">
-                            <tr>
-                                <td colspan="3"><h2><s:text name="question.input.option" /></h2></td>
-                            </tr>
-                            <tr bgcolor="#DDD">
-                                <td>
-                                    <p style="margin:3px 3px 3px 3px;"><s:text name="question.input.correctOption"/></p>
-                                </td>
-                                <td>
-                                    <p style="margin:3px 3px 3px 3px;"><s:text name="question.input.description"/></p>
-                                </td>
-                                <td bgcolor="#fff"></td>
-                            </tr>
-                            <tr>
-                                <td><input id="question_radio0" class="input_radio" type="radio" value="0" checked name="radioQuestObj"/></td>
-                                <td><s:textfield name="answerOption" theme="simple" id="" /></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td><input id="question_radio1" class="input_radio" type="radio" value="1" name="radioQuestObj"/></td>
-                                <td><s:textfield name="answerOption" theme="simple"/></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><input type="button" onclick="insertOptions()" value="Inserir mais uma opção" /></td>
-                            </tr>
-                        </table>
-                        
-                        <div id="questionAuditive" style="display:none">
-                            <h2><s:text name="question.input.selectTense" /></h2>
-                            <p class="question-tense"><s:radio value="0" list="#{'0':'present simple<br/>', '1' :'present continuous<br/>', '2':'present perfect<br/>', '3':'past simple<br/>', '4':'past continuous<br/>', '5':'past perfect<br/>', '6':'future simple<br/>', '7' : 'future continuous<br/>','8' :'future perfect<br/>'}" name="radioTense"/></p>
-                            <s:select  cssClass="lista-peso" label="question.input.chanceSentence" id="question.input.chanceSentence" name="question.input.chanceSentence" value="1" list="#{'1':'1','2':'2','3':'3', '4':'4'}"/>
-                            <h2><s:text name="question.input.sentence" /></h2>
-                            <%--form id="formFileQuestionAuditive" action="#" class="adiciona-audio">
-                            <table>    
-                                <tr>
-                                    <td><s:text name="question.input.frase"  /></td>
-                                    <td><s:text name="question.input.audiofile"/></td>
-                                </tr>
-                                <tr>
-                                <td><s:textfield name="sentence" theme="simple" cssClass="frase" /></td>
-                                <td><s:file name="upload" theme="simple" value=""/></td>
-                                <tr>
-                                    <td colspan="2"><input type="button" onclick="insertFile()" value="Inserir mais um arquivo"  class="acrescentar-arquivo"  /></td>
-                                </tr>
-                            </table>
-
-                            </form--%>
-                        </div>
-                        <div id="questionExternal" style="display:none">
-                            <table>    
-                                
-                                <tr>
-                                    <td colspan="2"><h2><s:text name="question.input.urlBinary"  /></h2></td>    
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><s:textfield name="urlBinary" theme="simple" cssClass="frase" /> </td>
-                                </tr>
-                                
-                                <tr>
-                                    <td colspan="2"><h2><s:text name="question.input.urlResult"  /></h2></td>
-                                </tr>
-                                <tr>
-                                    
-                                    <td colspan="2"><s:textfield name="urlResult" theme="simple" cssClass="frase" /></td>
-                                </tr>
-                                
-                                <tr>
-                                    <td><h2><s:text name="question.input.binType"  /></h2></td>
-                                    <td>
-                                        <s:select cssClass="lista-peso" name="binType" value="1" list="#{'1':'Applet Java','2':'Arquivo Flash','3':'JavaScript'}" theme="simple" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><h2><s:text name="question.input.insertParams" /></h2>  </td>
-                                </tr>
-                                <tr>
-                                    <td><h2><s:text name="question.input.paramKey"  /></h2></td>
-                                    <td><h2><s:text name="question.input.paramValue"  /></h2></td>
-                                </tr>
-                                <%--
-                            <tr>
-                                <td><s:textfield name="paramKey" theme="simple" cssClass="frase" /></td>
-                                <td><s:textfield name="paramValue" theme="simple" cssClass="frase" /> <a class="tooltip" href="#" onmouseover="return escape('For each parameter, enter key and value')"></a></td>
-                            </tr>
-
-                                --%>
-                                <tr>
-                                    <td colspan="2"><input type="button" onclick="insertParam()" value="<s:text name="question.input.insertParam"  />"  class="acrescentar-arquivo"  /></td>
-                                </tr>
-                            </table>
-                            
-                        </div>
-                        <br/>          
-                        <br/>
-                        
-                        <p class="navega-teste">
-                            <!--a href="javascript:showUnitContent($('input.unitContent.id').value);" class="cancel" title="Cancelar criação da avaliação">Cancelar</a>
-                        <a onclick="submitQuestion($('input.question.id').value);" class="create-question" title="Criar questão">Criar questão</a>
-                            <a onclick="submitQuestion('final'+$('input.question.id').value);" class="finish" title="Finalizar">Criar e Finalizar</a-->
-                            <input type="button" value="Criar Questão" cssClass="create-question" onclick="questionUpSubmit(false)"/>
-                            <input type="button" value="Criar e Finalizar" cssClass="finish" onclick="questionUpSubmit(true)"/>
-                            <br class="clear" />
-                        </p>
-                        
-                        <div  id="showEntryQuestion.questions" class="questoes">
-                            
-                        </div> 
-                    </s:form>
-                </div>
-                <iframe id="questionUp" name="iframeQuestion" src="" style="width:0;height:0;border:0px solid #fff;" >
-                </iframe>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div id="box1" style="display:none; text-align:center;">
     <iframe id="waitingFrame"  frameborder="0" src="../waiting.jsp" style="width:150px;height:100px;border:0px;background: #ddd;" scrolling="no" >
     </iframe><br/>
 </div>
 
-
-<div id="showExercise" style="display: none;">
-    <div id="col-2-home">
-        <div class="container-courses">
-            <div class="content-courses">
-                <h1><span><s:text name="course.show.exercise" /></span></h1>
-                <br class="clear" />
-                <div id="exerciseExp"></div>
-                <form action="#" class="form-edit">
-                    <input type="button" value="Edit Exercise" onclick="showEditExercise($('exercise.id').value,$('unitContent.id').value);" />
-                    <input type="hidden" id="exercise.id" name="exercise.id" value="" />
-                </form>
-                <br class="clear" />
-                <div class="actions-box">
-                    <h2><s:text name="course.show.title" /></h2><p id="exercise.title"></p>
-                    <h2><s:text name="course.show.navigable" /></h2><p id="exercise.navigable"></p>
-                    <h2><s:text name="course.show.createdAt" /></h2><p id="exercise.createdAt"></p>
-                    <h2><s:text name="course.show.weight" /></h2><p id="exercise.weight"></p>
-                    <h2><s:text name="course.show.chances" /></h2><p id="exercise.chances"></p>
-                    <h2><s:text name="course.show.description" /></h2><p id="exercise.description"></p>
-                    <h2><s:text name="course.show.question" /></h2><input type="button" value="add question" onclick="showEntryQuestion();" />
-                    <div class="list-box" id="exercise.questions">
-                    </div>
-                    <h2><s:text name="course.show.requisites" /></h2>
-                    <div class="list-box" id="exercise.requisites"></div>
-                </div>
-            </div>
-        </div>
-    </div>    
-</div>
-
-<div id="showExam" style="display: none;">
-    <div id="col-2-home">
-        <div class="container-courses">
-            <div class="content-courses">
-                <h1><span><s:text name="course.show.exam" /></span></h1>
-                <br class="clear" />
-                <div id="examExp"></div>
-                <form action="#" class="form-edit">
-                    <input type="button" value="Edit Exam" onclick="showEditExam($('exam.id').value,$('unitContent.id').value);" />
-                    <input type="hidden" id="exam.id" name="exam.id" value="" />
-                </form>
-                <br class="clear" />
-                <div class="actions-box">
-                    <h2><s:text name="course.show.title" /></h2><p id="exam.title"></p>
-                    <h2><s:text name="course.show.navigable" /></h2><p id="exam.navigable"></p>
-                    <h2><s:text name="course.show.createdAt" /></h2><p id="exam.createdAt"></p>
-                    <h2><s:text name="course.show.weight" /></h2><p id="exam.weight"></p>
-                    <h2><s:text name="course.show.startDateTime" /></h2><p id="exam.startDatetime"></p>
-                    <h2><s:text name="course.show.endDate" /></h2><p id="exam.endDatetime"></p>
-                    <h2><s:text name="course.show.duration" /></h2><p id="exam.duration"></p>
-                    <h2><s:text name="course.show.question" /></h2><input type="button" value="add question" onclick="showEntryQuestion();" />
-                    <div class="list-box" id="exam.questions">
-                    </div>
-                    <h2><s:text name="course.show.requisites" /></h2>
-                    <div class="list-box" id="exam.requisites"></div>
-                </div>
-            </div>
-        </div>
-    </div>    
-</div>
-
-<div id="showQuestion" style="display: none;">
-    <div id="col-2-home">
-        <div class="container-courses">
-            <div class="content-courses">
-                <h1><span id="show.atividade.name"></span></h1>
-                <br class="clear" />
-                <h2><s:text name="question.show.ShowQuestion"/></h2>
-                <br class="clear" />
-                <form action="#" class="form-edit">
-                    <input type="hidden" id="typeUnitContent" value="" />
-                    <input type="button" value="Back" onclick="showTypeUnitContent($('typeUnitContent').value);" /> 
-                    <input type="button" value="Remove Question" onclick="removeQuestion($('show.question.id').value);" />
-                    <input type="hidden" name="show.question.id" id="show.question.id" value="" />
-                </form>
-                <br class="clear" />
-                <div class="actions-box">
-                    <h2><s:text name="question.input.showType"/></h2>
-                    <p id="show.question.type"></p>
-                    <br/>
-                    <h2><s:text name="question.input.weight"/></h2>
-                    <p id="show.question.weight"></p>
-                    <br/>
-                    <h2><s:text name="question.input.required"/></h2>
-                    <p id="show.question.required"></p>
-                    <br/>
-                    
-                    <div id="showQuestionSubjective" style="display: none;">
-                        
-                        <div id="showQuestionText"></div>
-                        <h2><s:text name="question.input.description" /></h2>
-                        <p id="show.question.description"></p>
-                    </div>
-                    <table id="showQuestionObjective" style="display:none">
-                        <tr>
-                            <td colspan="2"><h2><s:text name="question.show.option" /></h2></td>
-                        </tr>
-                        <tr>
-                            <td><s:text name="question.input.correctOption"/></td>
-                            <td><s:text name="question.input.description"/></td>
-                        </tr>
-                    </table>
-                    <div id="showQuestionAuditive" style="display:none">
-                        <h2><s:text name="question.input.description" /></h2>
-                        <p id="show.question.description"></p>
-                        <h2><s:text name="question.input.sentence" /></h2>
-                        <table>    
-                            <tr>
-                                <td><s:text name="question.input.frase"  /></td>
-                                <td><s:text name="question.input.audiofile"/></td>
-                            </tr>
-                        </table>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>    
-    </div>
-</div>
 
 <div id="showChallenge" style="display:none">
     <div id="col-2-home">
@@ -1226,20 +576,27 @@
                 <h2><s:text name="show.challenge.add"/></h2>
                 <s:form id="formChallenge" action="">
                     <input type="hidden" id="challengeItens.id" name="challengeItens.id" />
-                    <input type="hidden" id="challengeItens.timestamp" name="challengeItens.timestamp" />
+                    <input type="hidden" id="challengeItens.timestamp" name="challengeItens.timestamp" />                    
                     <table>
                         <tr>
                             <td><s:text name="show.challenge.name"/></td>
                             <td><input type="text" id="challengeItens.name" name="challengeItens.name" /></td>
                         </tr>
                         <tr>
+                            <td><s:text name="show.challenge.weight"/></td>
+                            <td><input type="text" id="challengeItens.weight" name="challengeItens.weight" /> <span class="tooltip" onmouseover="return escape('<s:text name="admin.course.tip.09" />')"></span></td>                            
+                        </tr>
+                        
+                        <tr>
                             <td><s:text name="show.challenge.xml"/></td>
                             <td><textarea id="challengeItens.xml" name="challengeItens.xml" label="show.challenge.xml" cols="50" rows="25"></textarea></td>
-                        </tr>    
+                        </tr>
+                             
                         <tr>
                             <td><s:text name="show.challenge.dependency"/></td>
                             <td><select id="challengeItens.dependency" ></select></td>
                         </tr>
+                         
                         <tr>
                             <td></td>
                             <td><input id="submitChall" type="button" value="Add" onclick="submitChallenge()"/>

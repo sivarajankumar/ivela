@@ -9,18 +9,6 @@
         </param-value>
     </context-param>
     <filter>
-        <filter-name>CacheFilter</filter-name>
-        <filter-class>br.ufc.ivela.commons.filter.CacheFilter</filter-class>
-        <init-param>
-            <param-name>privacy</param-name>
-            <param-value>public</param-value>
-        </init-param>
-        <init-param>
-            <param-name>expirationTime</param-name>
-            <param-value>2592000</param-value>
-        </init-param>
-    </filter>    
-    <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
@@ -167,13 +155,7 @@
         <servlet-name>ServletAdaptor</servlet-name>
         <servlet-class>com.sun.jersey.impl.container.servlet.ServletAdaptor</servlet-class>
         <load-on-startup>1</load-on-startup>
-    </servlet>
-    
-    <servlet>
-        <servlet-name>I18nServlet</servlet-name>
-        <display-name>I18nServlet</display-name>
-        <servlet-class>br.ufc.ivela.servlets.I18nServlet</servlet-class>
-    </servlet>
+    </servlet>    
     
     <servlet-mapping>
         <servlet-name>dwr-invoker</servlet-name>
@@ -251,16 +233,11 @@
     <servlet-mapping>
         <servlet-name>RenderDynamicHtml</servlet-name>
         <url-pattern>/RenderDynamicHtml</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>I18nServlet</servlet-name>
-        <url-pattern>/I18nServlet</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>    
     
     <session-config>
         <session-timeout>
-            30
+            45
         </session-timeout>
     </session-config>
     <welcome-file-list>

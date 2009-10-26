@@ -1,37 +1,49 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*  
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: CourseAction.java                                                                   #
+# Document: Course User Action                                                              # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 07-JAN-2009 - Leonardo Oliveira (UFC)           - XXXXXX - Initial Version                #
+# 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
+# 08-OCT-2009 - Fabio Fantato (Instituto Eldorado)- 000017 - Table of Contents              #
+#############################################################################################
+*/
 package br.ufc.ivela.web.action;
 
-import br.ufc.ivela.commons.dao.Page;
-import br.ufc.ivela.commons.model.Course;
-import br.ufc.ivela.commons.model.Discipline;
-import br.ufc.ivela.commons.model.Grade;
-import br.ufc.ivela.commons.model.SystemUser;
-import br.ufc.ivela.ejb.interfaces.CourseRemote;
-import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
-import br.ufc.ivela.ejb.interfaces.GradeRemote;
-import br.ufc.ivela.ejb.interfaces.ProfessorRemote;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/**
- *
- * @author Maristella Myrian
- */
-public class CourseAction extends GenericAction {
+import br.ufc.ivela.commons.dao.Page;
+import br.ufc.ivela.commons.model.Course;
+import br.ufc.ivela.commons.model.Discipline;
+import br.ufc.ivela.commons.model.Grade;
+import br.ufc.ivela.commons.model.SystemUser;
+import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
+import br.ufc.ivela.ejb.interfaces.EnrollmentRemote;
+import br.ufc.ivela.ejb.interfaces.GradeRemote;
+import br.ufc.ivela.util.PropertiesUtil;
+import br.ufc.ivela.util.PropertiesUtil.IVELA_PROPERTIES;
 
-    private CourseRemote courseRemote;
-    private GradeRemote gradeRemote;
-    private ProfessorRemote professorRemote;
-    private DisciplineRemote disciplineRemote;
-    private Course course;
+public class CourseAction extends CourseAwareAction {
+        
+    private DisciplineRemote disciplineRemote;    
     private Discipline discipline;
-    private List<Course> courseList;
     private int pageCount;
     private int page;
     private int pageSize = 5;
@@ -39,8 +51,11 @@ public class CourseAction extends GenericAction {
     private InputStream inputStream;
     private String nick;
     private String chatRoomName;
-    private String teacherName;
-    private Grade grade;
+    private String teacherName; 
+    private String ircServer;
+    private String chatColor;
+    private String blackGet;
+    private String blackSave;
     private long courseId;
     private long disciplineId;
 
@@ -64,54 +79,6 @@ public class CourseAction extends GenericAction {
         setCount(p.getCount());
         setPageCount(p.getPageCount());
         return "list";
-    }
-
-    /**
-     * Sets a course
-     * @param course
-     */
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    /**
-     * Retrieves a course
-     * @return course
-     */
-    public Course getCourse() {
-        return course;
-    }
-
-    /**
-     * Retrieves the courseLocal
-     * @return courseLocal
-     */
-    public CourseRemote getCourseRemote() {
-        return courseRemote;
-    }
-
-    /**
-     *Sets the course Local
-     * @param courseRemote
-     */
-    public void setCourseRemote(CourseRemote courseRemote) {
-        this.courseRemote = courseRemote;
-    }
-
-    /**
-     * Retrieves a course List
-     * @return courseList
-     */
-    public List<Course> getCourseList() {
-        return courseList;
-    }
-
-    /**
-     *Sets the list of course
-     * @param courseList
-     */
-    public void setCourseList(List<Course> courseList) {
-        this.courseList = courseList;
     }
 
     /**
@@ -168,8 +135,7 @@ public class CourseAction extends GenericAction {
 
     public void setGrade(Grade grade) {
         this.grade = grade;
-    }
-    
+    }    
 
     /**
      * Retrieves the Page size
@@ -186,23 +152,51 @@ public class CourseAction extends GenericAction {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
-    
-    public String showChatStd(){        
+
+    public String showChatStd() {
         course = courseRemote.get(courseId);
-        discipline = disciplineRemote.get(disciplineId);
         this.nick = this.getAuthenticatedUser().getUsername();
-        //this.chatRoomName = "#course_"+this.course.getId();
-        this.chatRoomName = "#course_"+course.getId()+"_"+discipline.getId()+"_"+discipline.getName(); 
         this.grade = gradeRemote.getActiveByStudentByCourse(this.getAuthenticatedUser().getId(), course.getId());
+        this.chatRoomName = "#course_"+course.getName()+"_grade_"+grade.getName();
+        this.chatRoomName = this.chatRoomName.replace(' ', '_');
+        PropertiesUtil putil = PropertiesUtil.getPropertiesUtil();
+        this.ircServer = putil.getProperty(IVELA_PROPERTIES.IRC_SERVER);
+        this.chatColor = putil.getProperty(IVELA_PROPERTIES.CHAT_COLOR);
+        this.blackGet = putil.getProperty(IVELA_PROPERTIES.BLACKBOARD_SERVER_GET);
+        this.blackSave = putil.getProperty(IVELA_PROPERTIES.BLACKBOARD_SERVER_SAVE);
         Set<SystemUser> list = (Set<SystemUser>)grade.getProfessors();
         Iterator i = list.iterator();
         if(i.hasNext())
             this.teacherName =  ((SystemUser)i.next()).getUsername();
         else 
             this.teacherName = "admin";
-        
         return "showChatStd";
     }
+
+    /**
+     * Gathering information to verify if there are a custom Toc for this course.
+     * @return json: redirect -> true/false , params -> course.id and grade.id
+     */
+    public String getCustomTocJson() {
+        course = courseRemote.get(course.getId());
+        Long user = this.getAuthenticatedUser().getId();
+        List<Grade> gradeList = gradeRemote.getGradesInProgressAndEnrolled(user, course.getId());
+        //Get only the first element of grade. There are no multiple grades in progress for a given course.
+        Long gradeEnrolled = ((!gradeList.isEmpty())?gradeList.get(0).getId():0);        
+        Boolean customToc = course.getCustomToc();
+        String customTocParams = "course.id="+course.getId()+"&grade.id="+gradeEnrolled+"&goToIndex=yes&goToPage=index.html";
+        StringBuilder json = new StringBuilder();
+        json.append("{");
+            json.append("\"customToc\":{");
+                json.append("\"redirect\":\"" + customToc + "\",");
+                json.append("\"params\":\"" + customTocParams + "\"");                
+            json.append("}");
+        json.append("}");
+        setInputStream(new ByteArrayInputStream(json.toString().getBytes()));
+        return "json";
+    }
+    
+    
 
     public String getChatRoomName() {
         return chatRoomName;
@@ -212,28 +206,28 @@ public class CourseAction extends GenericAction {
         this.chatRoomName = chatRoomName;
     }
 
+    public String getIrcServer() {
+        return ircServer;
+    }
+    
+    public String getChatColor() {
+        return chatColor;
+    }
+    
+    public String getBlackboardServerGet() {
+        return blackGet;        
+    }
+    
+    public String getBlackboardServerSave() {
+        return blackSave;
+    }
+    
     public String getNick() {
         return nick;
     }
 
     public void setNick(String nick) {
         this.nick = nick;
-    }
-
-    public GradeRemote getGradeRemote() {
-        return gradeRemote;
-    }
-
-    public void setGradeRemote(GradeRemote gradeRemote) {
-        this.gradeRemote = gradeRemote;
-    }
-
-    public ProfessorRemote getProfessorRemote() {
-        return professorRemote;
-    }
-
-    public void setProfessorRemote(ProfessorRemote professorRemote) {
-        this.professorRemote = professorRemote;
     }
 
     public String getTeacherName() {

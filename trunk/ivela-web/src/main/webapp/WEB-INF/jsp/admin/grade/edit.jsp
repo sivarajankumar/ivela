@@ -18,6 +18,7 @@
 # Date        - Author(Company)                   - Issue# - Summary                        #
 # 07-AUG-2008 - Leonardo Oliveira Moreira         - XXXXXX - Initial Version                #
 # 26-JUN-2009 - otofuji (Instituto Eldorado)      - 000010 - i18n fix                       #
+# 28-AGO-2009 - lagoa   (Instituto Eldorado)      - 000016 - Set date field to readonly     #
 #############################################################################################
 --%>
 
@@ -31,6 +32,7 @@
         <title><s:text name="grade.pageTitle" /></title>
         <link href="../css/grade_admin.css" rel="stylesheet" type="text/css" />
         <cal:head/>
+        <script type="text/javascript" src="../js/util/calendar.js"></script>
         <s:head />
     </head>
     <div id="breadcrumb">
@@ -61,9 +63,11 @@
         <label><s:text name="grade.input.requiresEnrollmentValidation" /></label><br />
         <s:radio name="grade.requiresEnrollmentValidation" value="false" list="radioBooleanList" /><br />
         <label><s:text name="grade.input.startDatetime" /></label><br/>
-        <cal:jscalendar name="grade.startDatetime" title="grade.input.startDatetime" /><br />
+        <cal:jscalendar name="grade.startDatetime" title="grade.input.startDatetime" onfocus="this.readOnly=true;"/><br />
+        <script>document.getElementsByName('grade.startDatetime')[0].readOnly=true;</script>
         <label><s:text name="grade.input.endDatetime" /></label><br />
-        <cal:jscalendar name="grade.endDatetime" title="grade.input.endDatetime" /><br />
+        <cal:jscalendar name="grade.endDatetime" title="grade.input.endDatetime" onfocus="this.readOnly=true;"/><br />
+        <script>document.getElementsByName('grade.input.endDatetime')[0].readOnly=true;</script>
         <s:submit key="grade.edit.create" cssClass="btn-save" />
         <s:a href="grade!list.action" cssClass="btn-cancel"><s:text name="grade.input.cancel" /></s:a>
     </s:form>

@@ -99,6 +99,7 @@ public class DisciplineAction extends GenericAction {
         performValidateAdd();
         XStream xStream = new XStream(new JettisonMappedXmlDriver());
         if (!hasActionErrors()) {
+        	discipline.setTag(discipline.getName().replace(" ", "").toLowerCase());
             boolean result = disciplineRemote.update(discipline);
             discipline = disciplineRemote.get(discipline.getId());
             xStream.alias("discipline", Discipline.class);

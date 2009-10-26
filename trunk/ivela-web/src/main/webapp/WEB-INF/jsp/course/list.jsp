@@ -54,7 +54,7 @@
         </s:iterator>
     </table>
     
-    <p class="page-courses"><span class="courses-listed"><s:property value="%{courseList.size()}" />&nbsp;<s:text name="front.courses" /> <s:text name="front.of" /> <s:property value="count" /></span></p>
+    <p class="page-courses"><span class="courses-listed"><s:property value="%{page > 1? pageSize * (page - 1) : 1}" /> <s:text name="front.to" />   <s:property value="%{page > 1? (pageSize * (page - 1)) + courseList.size() : courseList.size()}" /> <s:text name="front.of" /> <s:property value="count" /> <s:text name="front.courses" /> </span></p>
     
     <jsp:include page="paginator.jsp"/>            
     

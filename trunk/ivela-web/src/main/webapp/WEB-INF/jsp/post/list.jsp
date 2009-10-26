@@ -50,12 +50,12 @@
     function validate(){
        var validate = true;
         if(document.getElementById('post.input.title').value==''){
-        	alert("Title is required");
-         	validate = false;
+            alert("Title is required");
+            validate = false;
         }
         
         if(document.getElementById('post.input.message').value==''){
-        	alert("Message is required");
+            alert("Message is required");
             validate = false;
         }
         if(validate){
@@ -91,12 +91,19 @@
 </script>
 
 <h1><s:property value="topic.forum.title" /></h1>
-<h4><s:property value="topic.title" /></h4>
+<div id="breadcrumb">    
+    <ul>        
+        <li><a href="forum!list.action" title="<s:property value="forum.pageTitle"/>"><s:text name="forum.pageTitle"/></a></li>
+        <li><a href="topic!listByForum.action?forum.id=<s:property value="forum.id"/>"><s:property value="topic.forum.title"/> </a></li>
+        <li class="current" title="<s:property value="topic.title" />"><s:property value="topic.title" /></li>
+    </ul>
+</div>
 <s:actionmessage />
 <s:actionerror />
+<br/>
 <div id="post">
     <s:iterator value="postList" status="pstat">
-        <table id="forum">
+        <table id="forum-table">
             <tr>
                 <th><s:text name="topic.list.postedBy" />: <span class="name-user"><a href=""><s:property value="createdBy.username"/></a></span></th>
                 <th><s:property value="title" /></th>
@@ -135,13 +142,10 @@
                                     <s:param name="post.topic.id" value="topic.id"/>
                                 </s:url>
                         <!-- <li><s:a cssClass="btn-answer" href="">Answer</s:a></li>-->
-                        <li><a class="btn-quote" href="javascript:addQuote(<s:property value="id" />, <s:property value="topic.id" />, '<s:property value="message" />');"><s:text name="post.list.quote"/></a></li>
-                        <s:if test="createdBy.username==#session.username">
+                        <li><a class="btn-quote" href="javascript:addQuote(<s:property value="id" />, <s:property value="topic.id" />, '<s:property value="message" />');"><s:text name="post.list.quote"/></a></li>                        
+                        <s:if test="createdBy.username==#session.username || hasAuthorization(authority)">
                             <li><s:a cssClass="btn-remove" href="%{urlRemove}"><s:text name="post.list.remove"/></s:a></li> 
-                        </s:if>
-                        <s:elseif test="#session.role=='admin'">
-                            <li><s:a cssClass="btn-remove" href="%{urlRemove}"><s:text name="post.list.remove"/></s:a></li> 
-                        </s:elseif>
+                        </s:if>                        
                     </ul>
               </td>
             </tr>
@@ -183,10 +187,10 @@
     
     function replaceAll(string, token, newtoken) 
     {
-	while (string.indexOf(token) != -1) 
+    while (string.indexOf(token) != -1) 
         {
-		string = string.replace(token, newtoken);
-	}
+        string = string.replace(token, newtoken);
+    }
 
         return string;
     }
