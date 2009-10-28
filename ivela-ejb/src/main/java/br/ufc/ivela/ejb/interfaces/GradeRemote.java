@@ -49,7 +49,7 @@ public interface GradeRemote {
     /**
      * Method which represents the recovery of all grades
      * 
-     * @return
+     * @return List instance with the grade objects, the list will be empty if no result if found
      */
     public List<Grade> getAll();
     
@@ -57,33 +57,52 @@ public interface GradeRemote {
      * Method which get the grades by coordinator
      * @param idUser
      * @param validation
-     * @return
+     * @return List instance with the grade objects, the list will be empty if no result if found
      */
     public List<Grade> getByCoordinator(Long idUser, boolean validation);
 
       /**
      * Method which get the grades by coordinator
      * @param idUser
-     * @return
+     * @return List instance with the grade objects, the list will be empty if no result if found
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.SystemUser
      */
     public List<Grade> getByCoordinator(Long idUser);
     /**
      * Method which represents the update of a grade
      * @param grade
      * @return
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.Grade
      */
     public boolean update(Grade grade);
     
     /**
-     * Method that get the list of grade by professor
-     * @param userId
-     * @return
+     * Method that get the list of grades by professor
+     * @param userId the System User Id of the Professor
+     * @return List instance with the grade objects, the list will be empty if no result if found
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.SystemUser
      */
-    public List getGradeByProfessors(Long gradeId);
+    public List getGradeByProfessors(Long userId);
+    
+    /**
+     * Method that get the list of grades by Tutors
+     * 
+     * @param systemUserId the System User Id of the Tutor
+     * @return List instance with the grade objects, the list will be empty if no result if found
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.SystemUser
+     */
+    public List<Grade> getGradeByTutors(Long systemUserId);
+    
     /**
      * retrieves a list of grades by status
      * @param status
-     * @return
+     * @return List instance with the grade objects, the list will be empty if no result if found
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.Grade
      */
     public List<Grade> getByStatus(int status);
 
@@ -91,6 +110,8 @@ public interface GradeRemote {
      * retrieves the grades of a student user
      * @param user
      * @return List<Grade>
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.SystemUser
      */
     List<Grade> getByStudent(SystemUser user);
     List<Grade> getGradesByStudent(SystemUser user);
@@ -98,14 +119,68 @@ public interface GradeRemote {
     
     public List<Course> getStructure();
     
+    public List<Course> getStructure(SystemUser systemUser);
+    
     public boolean remove(Grade grade);
     
     public List<SystemUser> getProfessors(Long gradeId);
     public List<SystemUser> getTutors(Long gradeId);
+    
+    /**
+     * Retrieves the List of grades by Student
+     * 
+     * @param userId the Id of the Student
+     * @return List instance with the grade objects, the list will be empty if no result if found
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.SystemUser
+     */
     public List<Grade> getGradesByStudent(Long userId) ;
+    
+    /**
+     * Retrieves the List of Active Grades by Student
+     *  
+     * @param userId the Id of the student
+     * @return List instance with the grade objects, the list will be empty if no result if found
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.SystemUser
+     */
     public List<Grade> getGradesActiveByStudent(Long userId);
+    
+    /**
+     * Retrieves the List of Active Grades by Student and a specific course
+     * 
+     * @param userId the Id of the student
+     * @param courseId the id of the course.
+     * @return List instance with the grade objects, the list will be empty if no result if found
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.SystemUser
+     * @see br.ufbr.ufc.ivela.commons.model.Course
+     */
     public Grade getActiveByStudentByCourse(Long userId,Long courseId);
     
+    /**
+     * Retrieves the list of Grades in Progress by Student and Course.
+     * 
+     * @param student the id of the student
+     * @param courseId the id of the course.
+     * @return List instance with the grade objects, the list will be empty if no result if found
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.SystemUser
+     * @see br.ufbr.ufc.ivela.commons.model.Course
+     */
     public List<Grade> getGradesInProgressAndEnrolled(Long student, Long courseId);
+    
+    /**
+     * Retrieves the list of Grades by Course and Status
+     * @param course the id of the course.
+     * @param status the status of the Grade
+     * @return List instance with the grade objects, the list will be empty if no result if found
+     * 
+     * @see br.ufbr.ufc.ivela.commons.model.Course
+     * @see br.ufbr.ufc.ivela.commons.model.Grade
+     */
     public List<Grade> getGradesByCourseAndStatus(Long course, int status);
+        
+    
 }
+

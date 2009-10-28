@@ -1,29 +1,47 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: ForumBean.java                                                                      #
+# Document: Forum EJB                                                                       # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - Leonardo Moreira (UFC)            - XXXXXX - Initial Version                #
+# 10-SEP-2009 - otofuji (Instituto Eldorado)      - 000016 - Review Forum                   #
+#############################################################################################
+*/
 package br.ufc.ivela.ejb.impl;
 
-import br.ufc.ivela.commons.dao.DaoFactory;
-import br.ufc.ivela.commons.dao.GenericDao;
-import br.ufc.ivela.commons.dao.Page;
-import br.ufc.ivela.ejb.interfaces.ForumRemote;
-import br.ufc.ivela.ejb.*;
-import br.ufc.ivela.commons.model.Forum;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.Stateless;
 
-/**
- *
- * @author Leonardo Oliveira Moreira
- * 
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+
+import br.ufc.ivela.commons.dao.DaoFactory;
+import br.ufc.ivela.commons.dao.Page;
+import br.ufc.ivela.commons.dao.interfaces.ForumDao;
+import br.ufc.ivela.commons.model.Forum;
+import br.ufc.ivela.ejb.interfaces.ForumRemote;
+
+/** 
  * Class of ejb which implements the interface ForumLocal
  */
 @Stateless(mappedName = "ForumBean")
 public class ForumBean implements ForumRemote {
 
-    private GenericDao<Forum> daoForum = DaoFactory.getInstance(Forum.class);
+    private ForumDao<Forum> daoForum = (ForumDao) DaoFactory.getInstance(Forum.class);
 
     public Forum get(Long id) {
         if (id == null) {
@@ -32,10 +50,12 @@ public class ForumBean implements ForumRemote {
         return daoForum.get(id);
     }
 
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Long add(Forum forum) {
         return (Long) daoForum.save(forum);
     }
 
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public boolean remove(Long id) {
         return daoForum.remove(id);
     }
@@ -44,9 +64,8 @@ public class ForumBean implements ForumRemote {
         return daoForum.getAll();
     }
 
-    public List<Forum> getForumListBySystemUser(Long systemUser) {
-        Object[] params = new Object[]{systemUser};
-        List list = daoForum.find("from Forum f where f.grade.id = (select g.id from Enrollment e, Grade g, SystemUser su where su.id = ? and e.systemUser.id = su.id and e.grade.id = g.id)", params);
+    public List<Forum> getForumListBySystemUser(Long systemUser) {        
+        List list = daoForum.getForumListBySystemUser(systemUser);
         if (list == null) {
             list = new ArrayList();
         }
@@ -62,30 +81,8 @@ public class ForumBean implements ForumRemote {
         return list;
     }
 
-    public List<Forum> getForumListBySystemUserGrade(Long systemUser, Long gradeId) {
-        Object[] params = new Object[]{systemUser, gradeId};
-        List list = daoForum.find("from Forum f where f.grade.id = (select g.id from Enrollment e, Grade g, SystemUser su where su.id = ? and e.systemUser.id = su.id and e.grade.id = g.id and g.id = ?)", params);
-        if (list == null) {
-            list = new ArrayList();
-        }
-        return list;
-    }
-
     public Page getForumListPageBySystemUser(Long systemUser, String title, int page, int pageSize) {
-        if (page == 0) {
-            page = 1;
-        }
-        if (title == null) {
-            title = "";
-        }
-        title = "%" + title + "%";
-        Object[] params = new Object[]{systemUser, title};
-        String countQuery = "select count(id) from Forum f where f.grade.id IN (select g.id from Enrollment e, Grade g, SystemUser su where su.id = ? and e.systemUser.id = su.id and e.grade.id = g.id) and f.title LIKE ?";
-        String query = "from Forum f where f.grade.id IN (select g.id from Enrollment e, Grade g, SystemUser su where su.id = ? and e.systemUser.id = su.id and e.grade.id = g.id) and f.title LIKE ?";
-
-        Page p = new Page(query, countQuery, params, params, page, pageSize);
-
-        return p;
+        return daoForum.getForumListPageBySystemUser(systemUser, title, page, pageSize);
     }
 
     public Page getPublicForumListPage(String title, int page, int pageSize) {
@@ -105,51 +102,33 @@ public class ForumBean implements ForumRemote {
         return p;
     }
 
-    public boolean update(Forum forum) {
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public boolean update(Forum forum) {                
         return daoForum.update(forum);
     }
 
-    public List<Forum> getForumListByGrade(Long gradeId) {
-        Object[] params = new Object[]{gradeId};
-        List list = daoForum.find("from Forum f where f.grade.id = (select g.id from Enrollment e, Grade g, SystemUser su where e.systemUser.id = su.id and e.grade.id = g.id and g.id = ?)", params);
+    public List<Forum> getForumListBySystemUserGrade(Long systemUser, Long gradeId) {
+        List list = daoForum.getForumListBySystemUserGrade(systemUser, gradeId);
         if (list == null) {
             list = new ArrayList();
-        }
+        }        
+        return list;
+    }
+   
+    public List<Forum> getForumListByGrade(Long gradeId) {
+        List list = daoForum.getForumListBySystemUserGrade(null, gradeId);
+        if (list == null) {
+            list = new ArrayList();
+        }        
         return list;
     }
 
-    public Page getForumListPageBySystemUserGrade(Long systemUser, Long grade, String title, int page, int pageSize) {
-        if (page == 0) {
-            page = 1;
-        }
-        if (title == null) {
-            title = "";
-        }
-        title = "%" + title + "%";
-        Object[] params = new Object[]{systemUser, grade, title};
-        String countQuery = "select count(id) from Forum f where f.grade.id = (select g.id from Enrollment e, Grade g, SystemUser su where su.id = ? and e.systemUser.id = su.id and e.grade.id = g.id and g.id = ?) and f.title LIKE ?";
-        String query = "from Forum f where f.grade.id = (select g.id from Enrollment e, Grade g, SystemUser su where su.id = ? and e.systemUser.id = su.id and e.grade.id = g.id and g.id = ?) and f.title LIKE ?";
-
-        Page p = new Page(query, countQuery, params, params, page, pageSize);
-
-        return p;
+    public Page getForumListPageBySystemUserGrade(Long systemUser, Long grade, String title, int page, int pageSize) {        
+        return daoForum.getForumListPageBySystemUserGrade(systemUser, grade, title, page, pageSize);
     }
 
     public Page getForumListPageByGrade(Long grade, String title, int page, int pageSize) {
-        if (page == 0) {
-            page = 1;
-        }
-        if (title == null) {
-            title = "";
-        }
-        title = "%" + title + "%";
-        Object[] params = new Object[]{grade, title};
-        String countQuery = "select count(id) from Forum f where f.grade.id = (select g.id from Enrollment e, Grade g, SystemUser su where e.systemUser.id = su.id and e.grade.id = g.id and g.id = ?) and f.title LIKE ?";
-        String query = "from Forum f where f.grade.id = (select g.id from Enrollment e, Grade g, SystemUser su where e.systemUser.id = su.id and e.grade.id = g.id and g.id = ?) and f.title LIKE ?";
-
-        Page p = new Page(query, countQuery, params, params, page, pageSize);
-
-        return p;
+        return daoForum.getForumListPageBySystemUserGrade(null, grade, title, page, pageSize);
     }
 
     public List<Forum> getLastRecords(String fieldToOrder, int orderType, int number) {
@@ -161,7 +140,7 @@ public class ForumBean implements ForumRemote {
                 "f.grade.id = e.grade.id and " +
                 "e.systemUser.id = ? and " +
                 "e.grade.id = g.id and " +
-                "g.courseId = ?";
+                "g.courseId = ?";        
         Object[] params = new Object[]{systemUser, course};
         List<Forum> forums = daoForum.find(query, params);
         return (forums != null && forums.size() > 0);
@@ -183,82 +162,23 @@ public class ForumBean implements ForumRemote {
 
         return p;
     }
-
+    
     public Page getForumList(Long systemUser, boolean isAdministrator, boolean isPublic, String title, int page, int pageSize) {
-        if (page == 0) {
-            page = 1;
-        }
-        if (title == null) {
-            title = "";
-        }
-        title = "%" + title + "%";
-        String countQuery = "";
-        countQuery = "select count(ff.id) from Forum ff where ff.id " +
-                "in (" +
-                "select distinct f.id from Forum f, Enrollment e, Grade g, Course c where ";
-        if (isPublic) {
-            countQuery += "(f.title LIKE '" + title + "' and f.public1 = " + isPublic + ") or ";
-        }
-        countQuery += "(" +
-                "f.grade.id = e.grade.id and " +
-                "e.systemUser.id = " + systemUser + " and " +
-                "e.grade.id = g.id and " +
-                "g.courseId = c.id and " +
-                "f.title LIKE '" + title + "' and f.public1 = false)" +
-                ")";
-        String query = "";
-        query = "select ff from Forum ff where ff.id " +
-                "in (" +
-                "select distinct f.id from Forum f, Enrollment e, Grade g, Course c where ";
-        if (isPublic) {
-            query += "(f.title LIKE '" + title + "' and f.public1 = " + isPublic + ") or ";
-        }
-        query += "(" +
-                "f.grade.id = e.grade.id and " +
-                "e.systemUser.id = " + systemUser + " and " +
-                "e.grade.id = g.id and " +
-                "g.courseId = c.id and " +
-                "f.title LIKE '" + title + "' and f.public1 = false)" +
-                ")";
-        if (isAdministrator) {
-            countQuery = "select count(f.id) from Forum f where f.title LIKE '" + title + "'";
-            query = "select f from Forum f where f.title LIKE '" + title + "'";
-        }
-
+        String countQuery = daoForum.getForumListCountQuery(systemUser, null, isAdministrator, isPublic, title);
+        String query = daoForum.getForumListQuery(systemUser, null, isAdministrator, isPublic, title);
+        
         Page p = new Page(query, countQuery, new Object[]{}, new Object[]{}, page, pageSize);
 
-        return p;
+        return p;                
     }
-
+        
     public List<Forum> getForumList(Long systemUser, boolean isAdministrator, boolean isPublic, String title) {
-        if (title == null) {
-            title = "";
-        }
-        title = "%" + title + "%";
-        String query = "";
-        query = "select ff from Forum ff where ff.id " +
-                "in (" +
-                "select distinct f.id from Forum f, Enrollment e, Grade g, Course c where ";
-        if (isPublic) {
-            query += "(f.title LIKE '" + title + "' and f.public1 = " + isPublic + ") or ";
-        }
-        query += "(" +
-                "f.grade.id = e.grade.id and " +
-                "e.systemUser.id = " + systemUser + " and " +
-                "e.grade.id = g.id and " +
-                "g.courseId = c.id and " +
-                "f.title LIKE '" + title + "' and f.public1 = false)" +
-                ")";
-        if (isAdministrator) {
-            query = "select f from Forum f where f.title LIKE '" + title + "'";
-        }
-        List<Forum> forums = daoForum.find(query, new Object[]{});
-        return forums;
+        return daoForum.getForumList(systemUser, null, isAdministrator, isPublic, title);
     }
 
-    public Forum getForum(Long systemUser, boolean isAdministrator, Long forum) {
-        Forum forumObj = daoForum.get(forum);
+    public Forum getForum(Long systemUser, boolean isAdministrator, Long forum) {        
         if (isAdministrator) {
+            Forum forumObj = daoForum.get(forum);
             return forumObj;
         } else {
             Object[] params = new Object[]{forum, systemUser};
@@ -269,79 +189,17 @@ public class ForumBean implements ForumRemote {
         }
         return null;
     }
-
+    
     public Page getForumList(Long systemUser, Long course, boolean isAdministrator, boolean isPublic, String title, int page, int pageSize) {
-        if (page == 0) {
-            page = 1;
-        }
-        if (title == null) {
-            title = "";
-        }
-        title = "%" + title + "%";
-        String countQuery = "";
-        countQuery = "select count(ff.id) from Forum ff where ff.id " +
-                "in (" +
-                "select distinct f.id from Forum f, Enrollment e, Grade g, Course c where ";
-        if (isPublic) {
-            countQuery += "(f.title LIKE '" + title + "' and f.public1 = " + isPublic + ") or ";
-        }
-        countQuery += "(" +
-                "f.grade.id = e.grade.id and " +
-                "e.systemUser.id = " + systemUser + " and " +
-                "e.grade.id = g.id and " +
-                "g.courseId = c.id and " +
-                "c.id = " + course + " and " +
-                "f.title LIKE '" + title + "' and f.public1 = false)" +
-                ")";
-        String query = "";
-        query = "select ff from Forum ff where ff.id " +
-                "in (" +
-                "select distinct f.id from Forum f, Enrollment e, Grade g, Course c where ";
-        if (isPublic) {
-            query += "(f.title LIKE '" + title + "' and f.public1 = " + isPublic + ") or ";
-        }
-        query += "(" +
-                "f.grade.id = e.grade.id and " +
-                "e.systemUser.id = " + systemUser + " and " +
-                "e.grade.id = g.id and " +
-                "g.courseId = c.id and " +
-                "c.id = " + course + " and " +
-                "f.title LIKE '" + title + "' and f.public1 = false)" +
-                ")";
-        if (isAdministrator) {
-            countQuery = "select count(f.id) from Forum f where f.title LIKE '" + title + "'";
-            query = "select f from Forum f where f.title LIKE '" + title + "'";
-        }
-
+        String countQuery = daoForum.getForumListCountQuery(systemUser, course, isAdministrator, isPublic, title);
+        String query = daoForum.getForumListQuery(systemUser, course, isAdministrator, isPublic, title);
+        
         Page p = new Page(query, countQuery, new Object[]{}, new Object[]{}, page, pageSize);
 
-        return p;
+        return p;        
     }
-
+        
     public List<Forum> getForumList(Long systemUser, Long course, boolean isAdministrator, boolean isPublic, String title) {
-        if (title == null) {
-            title = "";
-        }
-        title = "%" + title + "%";
-        String query = "";
-        query = "select ff from Forum ff where ff.id " +
-                "in (" +
-                "select distinct f.id from Forum f, Enrollment e, Grade g, Course c where ";
-        if (isPublic) {
-            query += "(f.title LIKE '" + title + "' and f.public1 = " + isPublic + ") or ";
-        }
-        query += "(" +
-                "f.grade.id = e.grade.id and " +
-                "e.systemUser.id = " + systemUser + " and " +
-                "e.grade.id = g.id and " +
-                "g.courseId = c.id and " +
-                "c.id = " + course + " and " +
-                "f.title LIKE '" + title + "' and f.public1 = false)" +
-                ")";
-        if (isAdministrator) {
-            query = "select f from Forum f where f.title LIKE '" + title + "'";
-        }
-        List<Forum> forums = daoForum.find(query, new Object[]{});
-        return forums;
+        return daoForum.getForumList(systemUser, course, isAdministrator, isPublic, title);
     }
 }
