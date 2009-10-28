@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* Tabela para exibir notas no boletim */
+
+body {background-color: transparent; background: url(../images/bg_standard2.jpg) #fff repeat-x 0 0;}
+
+.titulo-exercises-result {font: bold 20px Arial, Helvetica, sans-serif; color:#ff7202; margin-top:20px;}
+.legend-correct {font: bold 10px Arial, Helvetica, sans-serif; color:#ff7202; margin-top:20px;}
+
+.table-exercises-info {margin-bottom: 10px;}
+.table-exercises-info td{padding: 3px 0; border:none; font: bold 14px Arial, Helvetica, sans-serif; color:#033d7d; }
+.table-exercises-info td.titulo{font: bold 18px Arial, Helvetica, sans-serif; color:#ff7202;}
+.table-exercises-info td.info{color: #ccc; font-weight: bold;}
+
+.table-exercises-result, .table-exams-result{margin-bottom: 30px;}
+.table-exercises-result td {padding: 5px; border-bottom: 1px solid #e8e8e8;}
+.table-exercises-result td span.up-mark{color: #2c8016; font-weight: bold;}
+.table-exercises-result td span.bellow-mark{color: #CC0000; font-weight: bold;}
+.table-exercises-result td.titulo {font: bold 14px Arial, Helvetica, sans-serif; color:#003366; background:#efefef;}
+.table-exercises-result td.score, .table-exercises-result td.manual-mark {border-left: 1px solid #e8e8e8; text-align:center;}
+
+.table-exams-result td {padding: 5px; border-bottom: 1px solid #c4e3bc;}
+.table-exams-result td.titulo {font: bold 14px Arial, Helvetica, sans-serif; color:#2c8016; background:#dffad8;}
+.table-exams-result td.score, .table-exams-result td.manual-mark {border-left: 1px solid #c4e3bc; text-align: center;}
+/* CSS Document */
+
+
+
+

@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless requi"RED" by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Ivela - Upload de Pacote de Conteúdo</title>
+  </header>
+  <body>
+
+    <note label="Nota">Esta seção destina-se a usuários responsáveis pela criação e manutenção de cursos (professores e tutores).</note>
+
+
+    <section id="intro">
+      <title>O que é? </title>
+		<p>Um pacote de conteúdo de curso é um arquivo no formato .zip que contém arquivos com todas as informações necessárias para inserir uma nova lição num determinado curso. 
+	</p>	
+   </section>
+	  
+   <section id="steps">
+   		<title>Como criar um pacote de conteúdo?</title>
+		
+		<p>Entenda nessa seção como funciona e como criar um pacote de conteúdo para sua lição.</p>
+		
+		<section id="step1">
+			<title>Passo #1: Crie uma nova lição no Ivela.</title>
+			<p>Ao executar este passo, o sistema gerará um código para sua nova lição. Este código é necessário para a configuração dos arquivos que compõem seu pacote de conteúdo.</p>
+			<p>Para criar uma nova lição no Ivela:
+				<ol>
+					<li>Entre no sistema</li>
+					<li>Entre em "Cursos"</li>
+					<li>Selecione o Curso</li>
+					<li>Selecione a Disciplina</li>
+					<li>Selecione a Unidade</li>
+					<li>Entre em "Lições"</li> 
+					<li>Clique em "Adicionar"</li>
+				</ol>
+			</p>
+		</section>
+		
+		
+		<section id="step2">
+			<title>Passo #2: Verifique códigos de identificação do curso, disciplina, unidade e da lição.</title>
+			<p>Os códigos de identificação são necessários para organizar pastas e arquivos base dentro do pacote de conteúdo. Neste tutorial, os códigos de curso, disciplina, unidade e lição serão referenciados, respectivamente, como <b>id_curso</b>, <b>id_disciplina</b>, <b>id_unidade</b>, <b>id_licao</b>.</p>
+		<ol>
+			<li>Utilizando sua conta Google, acesse este <a href="http://groups.google.com/group/ivela/post?sendowner=1" target="_blank">link</a>.</li>
+			<li>Escreva uma mensagem solicitando os códigos correspondentes a seu curso, disciplina, unidade e lição.</li>
+		</ol>
+		</section>
+		
+		<section id="step3">	
+			<title>Passo #3: Entenda a organização de diretórios do Ivela</title>	
+
+			<p>Os diretórios relacionados a um curso são organizados no servidor de acordo com a estrutura abaixo:</p>
+
+	 		<source>
+			/<b>id_curso</b>
+			+--/<b>id_disciplina</b>
+			|   +--/<b>id_da_unidade</b> 
+			|       +--/<b>id_licao</b> 
+			|           +--/<b>css</b>     - CSS especifico das paginas da lição
+			|           +--/<b>js </b>     - Java script especifico das paginas da lição
+			|           +--/<b>julius</b>  - arquivos do Julius para a lição
+			|           +--/<b>xml</b>     - arquivos xml para contabilizar o score da lição
+			|           +--/<b>images</b>  - todas as imagens da lição
+			|           +--/<b>audio</b>   - todos os arquivos de audio (ogg,mp3,outros) da lição
+			|           +--/<b>video</b>   - todos os videos da lição
+			+-/<b>css</b>      ------------- CSS para todas as paginas do curso
+			+-/<b>js</b>       ------------- Java Script para todas as paginas do curso
+			+-/<b>images</b>   ------------- Imagens comuns para todas as paginas do curso
+			</source>	
+		
+			<p>Obs.: A criação da estrutura dos diretórios  id_curso, id_disciplina, id_unidade e id_licao é feita automaticamente pelo sistema durante a criação de cursos, disciplinas, unidade e lições (conforme explicado no <a href="#step2">Passo #2</a>). </p>
+        </section>
+
+	<section id="step4">
+		<title>Passo #4:  Crie um diretório de trabalho para seu pacote de conteúdo</title>
+		<p>
+			Foi criado no Ivela, no passo #1, um diretório cujo o nome é o código de identificação da nova lição. Para trabalhar com seu conteúdo, em seu computador, crie uma pasta que será seu diretório raiz.
+		</p>
+	</section>
+
+	<section id="step5">
+		<title>Passo #5: Crie o arquivo index.html</title>
+		<p>O arquivo index.html carrega os javascripts utilizados pela lição e sua página principal (HTML). </p>
+			<ol>
+				<li>No diretório raiz de sua lição, crie um arquivo index.html com o conteúdo descrito no código abaixo.</li>
+				<li>Substitua id_curso, id_disciplina, id_unidade e id_licao por seus valores reais nas linhas destacadas.</li>
+			</ol>
+			<h3>index.html</h3> 
+		 <source>
+<FONT COLOR="GREEN"><I>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;</I></FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="RED"><B>html</B></FONT><FONT COLOR="BLUE" >&gt;</FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="RED"><B>head</B></FONT><FONT COLOR="BLUE" >&gt;</FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="RED"><B>meta</B></FONT> http<FONT COLOR="BLUE" >-</FONT>equiv<FONT COLOR="BLUE" >=</FONT><FONT COLOR="PURPLE">"Content-Type"</FONT> content<FONT COLOR="BLUE" >=</FONT><FONT COLOR="PURPLE">"text/html;charset=utf-8"</FONT> <FONT COLOR="BLUE" >&gt;</FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="GREEN"><I>&lt;!-- Arquivos externos: Javascript e css: Substitua id_curso, id_disciplina, id_unidade, id_licao por seus respectivos valores -----&gt;</I></FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="RED"><B>script</B></FONT> type<FONT COLOR="BLUE" >=</FONT><FONT COLOR="PURPLE">"text/javascript"</FONT> src<FONT COLOR="BLUE" >=</FONT><FONT COLOR="PURPLE">"RenderServlet?file=id_curso/id_disciplina/id_unidade/id_licao/js/prototype.js"</FONT><FONT COLOR="BLUE" >&gt;</FONT><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="BLUE" >/</FONT><FONT COLOR="RED"><B>script</B></FONT><FONT COLOR="BLUE" >&gt;</FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="RED"><B>script</B></FONT> type<FONT COLOR="BLUE" >=</FONT><FONT COLOR="PURPLE">"text/javascript"</FONT> src<FONT COLOR="BLUE" >=</FONT><FONT COLOR="PURPLE">"RenderServlet?file=id_curso/id_disciplina/id_unidade/id_licao/js/deserialize.js"</FONT><FONT COLOR="BLUE" >&gt;</FONT><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="BLUE" >/</FONT><FONT COLOR="RED"><B>script</B></FONT><FONT COLOR="BLUE" >&gt;</FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="GREEN"><I>&lt;!----------------------------------------------------------------------------------------------------------------------------------&gt;</I></FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="RED"><B>script</B></FONT> type<FONT COLOR="BLUE" >=</FONT><FONT COLOR="PURPLE">"text/javascript"</FONT><FONT COLOR="BLUE" >&gt;</FONT>
+ 
+<pre><FONT COLOR="RED"><B>function</B></FONT> showPage<FONT COLOR="BLUE"><B>(</B></FONT>page<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT>
+
+	    <FONT COLOR="RED"><B>var</B></FONT> html <FONT COLOR="BLUE">=</FONT> getHtml<FONT COLOR="BLUE"><B>(</B></FONT>page<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	    document<FONT COLOR="BLUE"><B>.</B></FONT>body<FONT COLOR="BLUE"><B>.</B></FONT>innerHTML <FONT COLOR="BLUE">=</FONT> html<FONT COLOR="BLUE"><B>;</B></FONT>
+
+	<FONT COLOR="BLUE"><B>}</B></FONT>
+	<FONT COLOR="RED"><B>function</B></FONT> getHtml<FONT COLOR="BLUE"><B>(</B></FONT>strUrl<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>{</B></FONT>
+	    <FONT COLOR="RED"><B>var</B></FONT> html<FONT COLOR="BLUE"><B>;</B></FONT>
+
+	    <FONT COLOR="BLUE">new</FONT> Ajax<FONT COLOR="BLUE"><B>.</B></FONT>Request<FONT COLOR="BLUE"><B>(</B></FONT>strUrl<FONT COLOR="BLUE"><B>,</B></FONT>
+	    <FONT COLOR="BLUE"><B>{</B></FONT>
+		method<FONT COLOR="BLUE">:</FONT><FONT COLOR="PURPLE">'get'</FONT><FONT COLOR="BLUE"><B>,</B></FONT><FONT COLOR="GREEN"><I>// tipo de método
+
+</I></FONT>		requestHeaders<FONT COLOR="BLUE">:</FONT> <FONT COLOR="BLUE"><B>{</B></FONT>Accept<FONT COLOR="BLUE">:</FONT> <FONT COLOR="PURPLE">'text/plain'</FONT><FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>,</B></FONT> <FONT COLOR="GREEN"><I>// tipo de consumo
+</I></FONT>		asynchronous<FONT COLOR="BLUE">:</FONT> false<FONT COLOR="BLUE"><B>,</B></FONT> <FONT COLOR="GREEN"><I>// sincrono ou assincrono
+
+</I></FONT>		onSuccess<FONT COLOR="BLUE">:</FONT> <FONT COLOR="RED"><B>function</B></FONT><FONT COLOR="BLUE"><B>(</B></FONT>transport<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT> <FONT COLOR="GREEN"><I>// funcao de sucesso
+</I></FONT>		    html <FONT COLOR="BLUE">=</FONT> transport<FONT COLOR="BLUE"><B>.</B></FONT>responseText<FONT COLOR="BLUE"><B>;</B></FONT>
+
+		<FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>,</B></FONT>
+		onFailure<FONT COLOR="BLUE">:</FONT> <FONT COLOR="RED"><B>function</B></FONT><FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT> <FONT COLOR="GREEN"><I>// funcao para mostrar problemas
+</I></FONT>		    alert<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'Message: Something went wrong...'</FONT><FONT COLOR="BLUE"><B>)</B></FONT>
+
+		<FONT COLOR="BLUE"><B>}</B></FONT>
+	    <FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	    <FONT COLOR="RED"><B>return</B></FONT> html<FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
+
+	<FONT COLOR="RED"><B>function</B></FONT> getJsonFromUrlByGet<FONT COLOR="BLUE"><B>(</B></FONT>strUrl<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>{</B></FONT>
+	    <FONT COLOR="RED"><B>var</B></FONT> json<FONT COLOR="BLUE"><B>;</B></FONT>
+
+	    <FONT COLOR="BLUE">new</FONT> Ajax<FONT COLOR="BLUE"><B>.</B></FONT>Request<FONT COLOR="BLUE"><B>(</B></FONT>strUrl<FONT COLOR="BLUE"><B>,</B></FONT>
+	    <FONT COLOR="BLUE"><B>{</B></FONT>
+		method<FONT COLOR="BLUE">:</FONT><FONT COLOR="PURPLE">'get'</FONT><FONT COLOR="BLUE"><B>,</B></FONT><FONT COLOR="GREEN"><I>// tipo de método
+
+</I></FONT>		requestHeaders<FONT COLOR="BLUE">:</FONT> <FONT COLOR="BLUE"><B>{</B></FONT>Accept<FONT COLOR="BLUE">:</FONT> <FONT COLOR="PURPLE">'application/json'</FONT><FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>,</B></FONT> <FONT COLOR="GREEN"><I>// tipo de consumo
+</I></FONT>		asynchronous<FONT COLOR="BLUE">:</FONT> false<FONT COLOR="BLUE"><B>,</B></FONT> <FONT COLOR="GREEN"><I>// sincrono ou assincrono
+
+</I></FONT>		onSuccess<FONT COLOR="BLUE">:</FONT> <FONT COLOR="RED"><B>function</B></FONT><FONT COLOR="BLUE"><B>(</B></FONT>transport<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT> <FONT COLOR="GREEN"><I>// funcao de sucesso
+</I></FONT>		    json <FONT COLOR="BLUE">=</FONT> transport<FONT COLOR="BLUE"><B>.</B></FONT>responseText<FONT COLOR="BLUE"><B>.</B></FONT>evalJSON<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+
+		<FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>,</B></FONT>
+		onFailure<FONT COLOR="BLUE">:</FONT> <FONT COLOR="RED"><B>function</B></FONT><FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT> <FONT COLOR="GREEN"><I>// funcao para mostrar problemas
+</I></FONT>                    alert<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'Message: Something went wrong...'</FONT><FONT COLOR="BLUE"><B>)</B></FONT>
+
+                <FONT COLOR="BLUE"><B>}</B></FONT>
+	    <FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	    <FONT COLOR="RED"><B>return</B></FONT> json<FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
+
+        <FONT COLOR="GREEN"><I>/* Funcao para recuperar um Json atraves de uma URL */</I></FONT>
+	<FONT COLOR="RED"><B>function</B></FONT> getJsonFromUrlByPost<FONT COLOR="BLUE"><B>(</B></FONT>strUrl<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>{</B></FONT>
+	    <FONT COLOR="RED"><B>var</B></FONT> json<FONT COLOR="BLUE"><B>;</B></FONT>
+
+	    <FONT COLOR="BLUE">new</FONT> Ajax<FONT COLOR="BLUE"><B>.</B></FONT>Request<FONT COLOR="BLUE"><B>(</B></FONT>strUrl<FONT COLOR="BLUE"><B>,</B></FONT>
+	    <FONT COLOR="BLUE"><B>{</B></FONT>
+		method<FONT COLOR="BLUE">:</FONT><FONT COLOR="PURPLE">'post'</FONT><FONT COLOR="BLUE"><B>,</B></FONT><FONT COLOR="GREEN"><I>// tipo de método
+
+</I></FONT>		requestHeaders<FONT COLOR="BLUE">:</FONT> <FONT COLOR="BLUE"><B>{</B></FONT>Accept<FONT COLOR="BLUE">:</FONT> <FONT COLOR="PURPLE">'application/json'</FONT><FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>,</B></FONT> <FONT COLOR="GREEN"><I>// tipo de consumo
+</I></FONT>		asynchronous<FONT COLOR="BLUE">:</FONT> false<FONT COLOR="BLUE"><B>,</B></FONT> <FONT COLOR="GREEN"><I>// sincrono ou assincrono
+
+</I></FONT>		onSuccess<FONT COLOR="BLUE">:</FONT> <FONT COLOR="RED"><B>function</B></FONT><FONT COLOR="BLUE"><B>(</B></FONT>transport<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT> <FONT COLOR="GREEN"><I>// funcao de sucesso
+</I></FONT>		    json <FONT COLOR="BLUE">=</FONT> transport<FONT COLOR="BLUE"><B>.</B></FONT>responseText<FONT COLOR="BLUE"><B>.</B></FONT>evalJSON<FONT COLOR="BLUE"><B>(</B></FONT>true<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+
+		<FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>,</B></FONT>
+		onFailure<FONT COLOR="BLUE">:</FONT> <FONT COLOR="RED"><B>function</B></FONT><FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT> <FONT COLOR="GREEN"><I>// funcao para mostrar problemas
+</I></FONT>                    alert<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'Message: Something went wrong...'</FONT><FONT COLOR="BLUE"><B>)</B></FONT>
+
+                <FONT COLOR="BLUE"><B>}</B></FONT>
+	    <FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	    <FONT COLOR="RED"><B>return</B></FONT> json<FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
+
+        <FONT COLOR="GREEN"><I>/* Funcao ativada pela interface atraves de um evento onclick de um elemente input type="button" passando a url para o Json */</I></FONT>
+	<FONT COLOR="RED"><B>function</B></FONT> requestJson<FONT COLOR="BLUE"><B>(</B></FONT>value<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT>
+	    <FONT COLOR="RED"><B>var</B></FONT> url <FONT COLOR="BLUE">=</FONT> value<FONT COLOR="BLUE"><B>;</B></FONT>
+
+        <FONT COLOR="RED"><B>var</B></FONT> json <FONT COLOR="BLUE">=</FONT> getJsonFromUrlByGet<FONT COLOR="BLUE"><B>(</B></FONT>url<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	    <FONT COLOR="RED"><B>var</B></FONT> name <FONT COLOR="BLUE">=</FONT> json<FONT COLOR="BLUE"><B>.</B></FONT>name<FONT COLOR="BLUE"><B>;</B></FONT>
+
+		<FONT COLOR="RED"><B>var</B></FONT> status <FONT COLOR="BLUE">=</FONT> json<FONT COLOR="BLUE"><B>.</B></FONT>status<FONT COLOR="BLUE"><B>;</B></FONT>
+		<FONT COLOR="RED"><B>var</B></FONT> div <FONT COLOR="BLUE">=</FONT> $<FONT COLOR="BLUE"><B>(</B></FONT>name<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+
+		<FONT COLOR="RED"><B>var</B></FONT> divStyle <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">""</FONT>"RED"<FONT COLOR="PURPLE">""</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+
+		<FONT COLOR="RED"><B>if</B></FONT><FONT COLOR="BLUE"><B>(</B></FONT>status <FONT COLOR="BLUE">=</FONT><FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"ok"</FONT><FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT>divStyle <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">""</FONT>GREEN<FONT COLOR="PURPLE">""</FONT><FONT COLOR="BLUE"><B>;</B></FONT><FONT COLOR="BLUE"><B>}</B></FONT>
+
+		<FONT COLOR="RED"><B>var</B></FONT> html <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">'&lt;div id=\"innercontent\" style=\"background: '</FONT><FONT COLOR="BLUE">+</FONT>divStyle<FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">'; width: 100px; height: 20px; border: 1px solid #ffe79c; margin: 20px; padding: 10px; text-align: center; font:bold 12px Arial, Helvetica, sans-serif;\"&gt;'</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+        <FONT COLOR="RED"><B>var</B></FONT> i <FONT COLOR="BLUE">=</FONT> <FONT COLOR="BROWN">0</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+
+           <FONT COLOR="RED"><B>for</B></FONT> <FONT COLOR="BLUE"><B>(</B></FONT>i <FONT COLOR="BLUE">=</FONT> <FONT COLOR="BROWN">0</FONT><FONT COLOR="BLUE"><B>;</B></FONT> i <FONT COLOR="BLUE">&lt;</FONT> json<FONT COLOR="BLUE"><B>.</B></FONT>list<FONT COLOR="BLUE"><B>.</B></FONT>results<FONT COLOR="BLUE"><B>.</B></FONT>length<FONT COLOR="BLUE"><B>;</B></FONT> i<FONT COLOR="BLUE"><FONT COLOR="BLUE">+</FONT><FONT COLOR="BLUE">+</FONT></FONT><FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT>
+
+	        html <FONT COLOR="BLUE">+</FONT><FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">'&lt;td&gt;Score: '</FONT><FONT COLOR="BLUE">+</FONT>json<FONT COLOR="BLUE"><B>.</B></FONT>list<FONT COLOR="BLUE"><B>.</B></FONT>results<FONT COLOR="BLUE"><B>[</B></FONT>i<FONT COLOR="BLUE"><B>]</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>ret<FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">'%&lt;br&gt;'</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+
+	   		<FONT COLOR="BLUE"><B>}</B></FONT>
+            html <FONT COLOR="BLUE">+</FONT><FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">'&lt;/div&gt;'</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+            div<FONT COLOR="BLUE"><B>.</B></FONT>innerHTML <FONT COLOR="BLUE">=</FONT> html<FONT COLOR="BLUE"><B>;</B></FONT>
+
+	<FONT COLOR="BLUE"><B>}</B></FONT>
+
+	<FONT COLOR="RED"><B>function</B></FONT> doSubmitSerialize<FONT COLOR="BLUE"><B>(</B></FONT>form<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT>
+	   	<FONT COLOR="RED"><B>var</B></FONT> value <FONT COLOR="BLUE">=</FONT> Form<FONT COLOR="BLUE"><B>.</B></FONT>serialize<FONT COLOR="BLUE"><B>(</B></FONT>form<FONT COLOR="BLUE"><B>,</B></FONT> $<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'usejson'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>checked<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+
+	    requestJson<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'/ivela-web/ChallengeSolver?'</FONT><FONT COLOR="BLUE">+</FONT>value<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
+
+	<FONT COLOR="RED"><B>function</B></FONT> positionX<FONT COLOR="BLUE"><B>(</B></FONT>elem<FONT COLOR="BLUE"><B>)</B></FONT>
+
+	<FONT COLOR="BLUE"><B>{</B></FONT>
+		 x <FONT COLOR="BLUE">=</FONT> elem<FONT COLOR="BLUE"><B>.</B></FONT>offsetLeft<FONT COLOR="BLUE"><B>;</B></FONT>
+		 <FONT COLOR="RED"><B>return</B></FONT> x<FONT COLOR="BLUE"><B>;</B></FONT>
+
+	<FONT COLOR="BLUE"><B>}</B></FONT>
+
+	<FONT COLOR="RED"><B>function</B></FONT> positionY<FONT COLOR="BLUE"><B>(</B></FONT>elem<FONT COLOR="BLUE"><B>)</B></FONT>
+	<FONT COLOR="BLUE"><B>{</B></FONT>
+		y <FONT COLOR="BLUE">=</FONT> elem<FONT COLOR="BLUE"><B>.</B></FONT>offsetTop<FONT COLOR="BLUE"><B>;</B></FONT>
+
+    	<FONT COLOR="RED"><B>return</B></FONT> y<FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
+
+	<FONT COLOR="RED"><B>function</B></FONT> toolTip<FONT COLOR="BLUE"><B>(</B></FONT>obj<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>{</B></FONT>
+
+		text <FONT COLOR="BLUE">=</FONT> obj<FONT COLOR="BLUE"><B>.</B></FONT>innerHTML
+		url <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"/ivela-web/resources/dictionary/get/"</FONT><FONT COLOR="BLUE">+</FONT>text<FONT COLOR="BLUE"><B>;</B></FONT>
+		json <FONT COLOR="BLUE">=</FONT> getJsonFromUrlByGet<FONT COLOR="BLUE"><B>(</B></FONT>url<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>innerHTML <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"&lt;b&gt;"</FONT><FONT COLOR="BLUE">+</FONT>text<FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">"&lt;/b&gt;&lt;br&gt;"</FONT><FONT COLOR="BLUE">+</FONT>json<FONT COLOR="BLUE"><B>.</B></FONT>busca<FONT COLOR="BLUE"><B>;</B></FONT>
+
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>position <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">'absolute'</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>left <FONT COLOR="BLUE">=</FONT> <FONT COLOR="BLUE"><B>(</B></FONT>positionX<FONT COLOR="BLUE"><B>(</B></FONT>obj<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">+</FONT><FONT COLOR="BROWN">50</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">"px"</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>top <FONT COLOR="BLUE">=</FONT> <FONT COLOR="BLUE"><B>(</B></FONT>positionY<FONT COLOR="BLUE"><B>(</B></FONT>obj<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">-</FONT><FONT COLOR="BROWN">50</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">"px"</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>display <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"block"</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
+
+	<FONT COLOR="RED"><B>function</B></FONT> toolBasic<FONT COLOR="BLUE"><B>(</B></FONT>name<FONT COLOR="BLUE"><B>,</B></FONT> title<FONT COLOR="BLUE"><B>,</B></FONT> obj<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>{</B></FONT>
+		text <FONT COLOR="BLUE">=</FONT> name
+		url <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"/ivela-web/resources/dictionary/get/"</FONT><FONT COLOR="BLUE">+</FONT>text<FONT COLOR="BLUE"><B>;</B></FONT>
+
+		json <FONT COLOR="BLUE">=</FONT> getJsonFromUrlByGet<FONT COLOR="BLUE"><B>(</B></FONT>url<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>innerHTML <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"&lt;b&gt;"</FONT><FONT COLOR="BLUE">+</FONT>title<FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">"&lt;/b&gt;&lt;br&gt;"</FONT><FONT COLOR="BLUE">+</FONT>json<FONT COLOR="BLUE"><B>.</B></FONT>busca<FONT COLOR="BLUE"><B>;</B></FONT>
+
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>position <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">'absolute'</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>left <FONT COLOR="BLUE">=</FONT> <FONT COLOR="BLUE"><B>(</B></FONT>positionX<FONT COLOR="BLUE"><B>(</B></FONT>obj<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">+</FONT><FONT COLOR="BROWN">50</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">"px"</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>top <FONT COLOR="BLUE">=</FONT> <FONT COLOR="BLUE"><B>(</B></FONT>positionY<FONT COLOR="BLUE"><B>(</B></FONT>obj<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">-</FONT><FONT COLOR="BROWN">50</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">"px"</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>display <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"block"</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
+
+	<FONT COLOR="RED"><B>function</B></FONT> clearTip<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>{</B></FONT>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>innerHTML <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">""</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>display <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"none"</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">/</FONT>script<FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">/</FONT>head<FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">!</FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE">-</FONT> Página Principal<FONT COLOR="BLUE">:</FONT> <FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE">&gt;</FONT>
+
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">!</FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT>1. Insira no lugar <FONT COLOR="RED"><B>do</B></FONT> <FONT COLOR="PURPLE">'*'</FONT> o nome <FONT COLOR="RED"><B>do</B></FONT> arquivo HTML de sua página principal <FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">&gt;</FONT>
+
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">!</FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE">-</FONT> 2. Substitua id_curso<FONT COLOR="BLUE"><B>,</B></FONT> id_disciplina<FONT COLOR="BLUE"><B>,</B></FONT> id_unidade<FONT COLOR="BLUE"><B>,</B></FONT> id_licao por seus respectivos valores <FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE">&gt;</FONT>
+
+<FONT COLOR="BLUE">&lt;</FONT>body onLoad<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"showPage('RenderServlet?file=id_curso/id_disciplina/id_unidade/id_licao/*.html');"</FONT><FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">!</FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">/</FONT>body<FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">/</FONT>html<FONT COLOR="BLUE">&gt;</FONT>
+</pre>
+    </source>
+</section>			
+			
+							
+  
+	<section id="step6">
+      <title>Passo #6: Crie o arquivo contentpackage.ivela.xml  </title>
+   
+    	<p>O arquivo contentpackage.ivela.xml contém o mapeamento de arquivos e diretórios utilizados pela lição.</p>
+	<ol>
+	<li>Crie o arquivo contentpackage.ivela.xml no diretório raiz da lição.  </li>
+	<li>Utilize o código descrito abaixo, respeitando as seguintes condições: 
+	<ul>
+		<li>Todos os arquivos localizados no diretório raiz da lição (ex.: index.html) devem ser especificados na tag filesystem. 
+		<br>Exemplo: <b>&lt;filesystemvalue=&quot;/nome_do_arquivo&quot;/&gt;</b></br></li>
+		<li>Todos os subdiretórios devem ser listados na tag filesystem. 
+		<br>Exemplo:<b>&lt;filesystem value=&quot;/js/&quot;/&gt;</b></br></li>
+	</ul></li>
+	</ol>
+	<h3>contentpackage.ivela.xml</h3> 
+	<source>
+<pre><FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">?</FONT>xml version<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"1.0"</FONT> encoding<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"ISO-8859-1"</FONT><FONT COLOR="BLUE">?</FONT><FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT>ivela<FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT>header doctype<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"plugin"</FONT> docsubtype<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"contentpackage"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+    <FONT COLOR="BLUE">&lt;</FONT>payload<FONT COLOR="BLUE">&gt;</FONT>
+	<FONT COLOR="BLUE">&lt;</FONT>contentpackage course<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"id_curso"</FONT> discipline<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"id_disciplina"</FONT> unit<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"id_unidade"</FONT><FONT COLOR="BLUE">&gt;</FONT>
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/index.html"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/css/"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/js/"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/images/"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>			
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/julius/"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/xml/"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/audio/"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/video/"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+	<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">/</FONT>contentpackage<FONT COLOR="BLUE">&gt;</FONT>
+   <FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">/</FONT>payload<FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">/</FONT>ivela<FONT COLOR="BLUE">&gt;</FONT>
+</pre>
+	</source>
+</section>
+
+<section id="step7">
+		<title>Passo #7: Crie um diretório para arquivos Javascript</title>
+		<p>O diretório 'js' deve ser utilizado para armazenar todos os arquivos javascript utilizados por HTMLs que compõem a lição.</p>
+		<ol>
+			<li>Na pasta principal da lição, crie o diretório <b>js</b>.</li>
+			<li> Insira os seguintes arquivos (ambos necessários para o funcionamento do arquivo index.html): 
+				<ul>
+				 	<li>prototype.js</li>
+					<li>deserialize.js</li>
+				</ul>
+			</li>
+		</ol>
+		<p>Faça o download do arquivo .zip com os javascripts <a href="./contentpackage/js.zip">aqui</a>.</p>
+   </section>    
+   <section id="step8">
+		<title>Passo #8: Adicione os arquivos específicos da lição</title>	
+		<p>Insira no diretório da lição todos os arquivos específicos da lição (ex.: arquivos HTML, imagens, vídeos).</p>
+		<p>Para informações sobre construção de arquivos HTML, visite a seção: <a href="#html_tips">Dicas HTML</a>.</p>	
+    </section>
+  </section>    
+<section id="html_tips">
+      <title>Dicas HTML</title>
+ <ol>   
+     <li> O Ivela permite a utilização de qualquer componente WEB/HTML padrão. Elementos específicos de browsers não suportados pelo Ivela podem não ser visualizados corretamente se inseridos no HTML.</li>
+	
+
+	<li>Disponibilizamos neste tutorial um arquivo (seção <a href="#download">Exemplo para download</a>) que contém, além da estrutura básica de um pacote de conteúdo, um arquivo HTML que utiliza:
+	<ul>
+        		<li>Folhas de estilo</li>
+        		<li>DIVs</li>
+        		<li>Tabelas</li>
+        		<li>Listas</li>
+        		<li>Incorporação de imagens, vídeos, applets, arquivos flash</li>
+        	</ul>
+	</li>
+	
+	
+	<li>Para que arquivos da lição (imagens, applets, vídeos) sejam exibidos corretamente, utilize dentro das tags de seu no seu HTML: 			<code>RenderServlet?file=id_curso/id_disciplina/id_unidade/id_licao/nome_do_diretorio/nome_do_arquivo </code> 
+	
+	<p>Exemplo: Exibição de uma imagem em um arquivo HTML de lição.
+	<ul>
+		<li>Nome do arquivo a ser exibido: img.jpg</li>
+		<li>Diretório: images</li>	
+		<li>Código do curso: 1</li>
+		<li>Código da disciplina: 1</li>
+		<li>Código do unidade: 1</li>
+		<li>Código do lição: 1</li>
+		<li>Tag inserida no HTML: &lt;img src='RenderServlet?file=/1/1/1/1/images/img.jpg'&gt;  </li>
+	</ul></p>
+	</li>
+	</ol>
+	<note label="Importante!">Ao salvar seu arquivo HTML, certifique-se de que o formato de codificação escolhido seja Unicode (UTF-8) para garantir que caracteres especiais (acentuações, cedilha, etc.) sejam exibidos corretamente.</note>
+	
+    </section>	
+	
+	
+    <section id="download">
+	<title>Exemplo para download </title>	
+
+	<p>Nesta seção, está disponível, para ser utilizado como teste ou como base para criação de lições, um arquivo de pacote de conteúdo exemplo. Para utilizá-lo, siga as instruções abaixo:</p>
+
+	<ol>
+		<li>Faça o download do arquivo .zip <a href="./contentpackage/exemplo.zip">aqui</a>.</li> 
+		<li>Altere o arquivo index.html nas linhas indicadas, inserindo os valores reais para id_curso, id_disciplina, id_unidade, id_licao. </li>
+		<li>Altere no arquivo contentpackage.ivela.xml os valores de id_curso, id_disciplina, id_unidade. Observe que no arquivo já estão listados:
+			<ul>
+				<li>todos os arquivos presentes no diretório raiz da lição</li>
+				<li>todos os subdiretórios</li>
+			</ul>
+		</li>
+		<li>No Ivela:
+			<ol>
+				<li>Acesse o curso, disciplina e unidade que receberá a nova lição</li>
+				<li>Clique em "Upload"</li>
+				<li>Selecione o arquivo exemplo.zip</li>
+				<li>Após o carregamento do arquivo, a lição exemplo poderá ser acessada normalmente</li>
+			</ol>
+		</li>
+	</ol>
+	<p>O arquivo exemplo pode ser alterado para a criação de novas lições, desde que as regras descritas na seção <a href="#steps">Como criar um pacote de conteúdo?</a> sejam respeitadas.</p>
+    </section>
+    
+     
+  </body>
+</document>
