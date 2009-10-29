@@ -21,7 +21,11 @@ function goToPage(goToPage) {
 }
 
 function goToDiscipline(disciplineTag) {
-    document.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&disciplineTag='+disciplineTag+'&goToPage=table_contents.html';
+    postToURL('contentInfo!showContentCustom.action',
+              {'course.id': idCourse,
+               'grade.id': idGrade,
+               'disciplineTag': disciplineTag,
+               'goToPage': 'table_contents.html'});
 }
 
 function goToDisciplineHelp(disciplineTag, goToPage) {
@@ -285,6 +289,25 @@ function getJson(strUrl) {
         onFailure: function() { alert('Message: Something went wrong...') }
     });
     return json;
+}
+
+function postToURL(url, params) {
+    var form = document.createElement('form');
+    form.action = url;
+    form.method = 'POST';
+
+    for (var i in params) {
+        if (params.hasOwnProperty(i)) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = i;
+            input.value = params[i];
+            form.appendChild(input);
+        }
+    }
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
 }
 
 function addLoadEvent(func) {
