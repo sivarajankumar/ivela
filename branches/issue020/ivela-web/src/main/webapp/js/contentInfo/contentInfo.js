@@ -8,12 +8,11 @@ var progressArrowCont = 0;
 var accessed = "";
 
 function goToHome(goToPage) {
-    var url ="contentInfo!showContentCustom.action?course.id="+idCourse+"&grade.id="+idGrade+"&goToIndex=yes&goToPage=";
-    if (!goToPage)
-        url += "index.html";
-    else
-        url += goToPage;            
-    document.location = url;
+    var url = "index.html";
+    if (goToPage)
+        url = goToPage;            
+
+    postToURL('contentInfo!showContentCustom.action', {'course.id': idCourse, 'grade.id': idGrade, 'goToIndex': 'yes', 'goToPage': url});
 }
 
 function goToPage(goToPage) {
@@ -227,7 +226,7 @@ function labelUnitStatus(unitContentTag, goToPage) {
 }
 
 function finishLesson() {
-    window.location = 'contentInfo!finishLesson.action?course.id='+idCourse+'&discipline.id='+idDiscipline+'&unitContent.id='+idUnitContent+'&grade.id='+idGrade;
+    postToURL('contentInfo!finishLesson.action', {'course.id': idCourse, 'discipline.id': idDiscipline, 'unitContent.id': idUnitContent, 'grade.id': idGrade});
 }
 
 function displayChat() {
@@ -270,7 +269,7 @@ function computeExe(urlExe) {
 function getHtml(strUrl) {
     var html;
     new Ajax.Request(strUrl, {
-        method:'get',
+        method:'post',
         requestHeaders: { Accept: 'text/plain' },
         asynchronous: false,
         onSuccess: function(transport) { html = transport.responseText; },
