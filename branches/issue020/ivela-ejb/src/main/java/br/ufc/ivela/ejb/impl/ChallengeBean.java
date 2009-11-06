@@ -452,6 +452,7 @@ public class ChallengeBean implements ChallengeRemote {
             
             if (andAnswer.length > 1) {                
                 for (String andStr: andAnswer) {
+                    andStr = andStr.trim();
                     String cmpAnswer = userAnswer;
                     userAnswer = userAnswer.replace(andStr, "");
                     if (userAnswer.equals(cmpAnswer)) {                        
