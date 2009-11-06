@@ -42,6 +42,7 @@ public class RepositoryAction extends GenericAction {
     private InputStream inputStream;
     private String contentLength;
     private String contentDisposition;
+    private String contentType = "application/download";
 
 
 
@@ -100,12 +101,15 @@ public class RepositoryAction extends GenericAction {
         try {
             downloadStream = new FileInputStream(f);
         } catch (FileNotFoundException ex) {
-            logger.log(ex, "download error!");
-            ex.printStackTrace();
+            log.error("Repository download error!", ex);           
         }
 
+        String mime = dbfile.getMimetype();
+        if (mime != null && !mime.isEmpty()) {
+            setContentType(mime);
+        }
         setContentLength(new Long(f.length()).toString());
-        setContentDisposition("filename=\"" + dbfile.getFilename() + "\"");
+        setContentDisposition(dbfile.getFilename());
 
         return "download";
     }
@@ -246,5 +250,19 @@ public class RepositoryAction extends GenericAction {
 
     public void setCourseRemote(CourseRemote courseRemote) {
         this.courseRemote = courseRemote;
+    }
+
+    /**
+     * @param contentType the contentType to set
+     */
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    /**
+     * @return the contentType
+     */
+    public String getContentType() {
+        return contentType;
     }
 }
