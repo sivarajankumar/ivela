@@ -124,7 +124,7 @@
             </result>
             
             <result name="download" type="stream">  
-                <param name="contentType">application/download</param>  
+                <param name="contentType">${contentType}</param>  
                 <param name="contentLength">${contentLength}</param>  
                 <param name="contentDisposition">attachment; filename="${contentDisposition}"</param>  
                 <param name="inputName">downloadStream</param>  
