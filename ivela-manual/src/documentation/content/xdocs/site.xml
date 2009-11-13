@@ -60,7 +60,14 @@ See http://forrest.apache.org/docs/linking.html for more info
 	<index label="Visão Geral" href="/student/student.html" description="Ivela Manual - Alunos"/>	
 	<index label="Cursos" href="/student/course.html" description="Ivela Manual - Curso"/>	
 	<!--<index label="Ferramentas" href="/student/tools.html" description="Ivela Manual - Ferramentas"/>-->
-  </student>	
+  </student>
+  <developer tab="developer" href="/developer/developer.html" label="Desenvolvedor" description="Ivela Manual - Desenvolvedor">
+  	<index label="Visão Geral" href="/developer/developer.html" description="Ivela Manual - Desenvolvedor"/>
+  	<index label="Licões" href="/developer/lesson.html" description="Ivela Manual - Desenvolvedor"/>
+        <!--  <index label="Exercícios" href="/developer/exercise.html" description="Ivela Manual - Desenvolvedor"/>-->
+         <!-- <index label="Upload" href="/developer/upload.html" description="Ivela Manual - Desenvolvedor"/>
+          <index label="How To" href="/developer/howto.html" description="Ivela Manual - Desenvolvedor"/> -->
+  </developer>
   <help tab ="" label="Ajuda" href="" description="Ivela Manual - Ajuda">
     <index label="FAQ" href="/help/FAQ.html" description="FAQ"/>
     <index label="Soluções Alternativas" href="/help/troubleshooting.html" description="Ivela Manual - Soluções Alternativas"/>

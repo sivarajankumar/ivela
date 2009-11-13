@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Ivela - Exercícios</title>
+  </header>
+  <body>
+    <section id="visaoGeral">
+      <title>Visão Geral</title>
+      <p>
+        Os HTMLs das lições podem conter exercícios que serão realizados por alunos de um curso. Os exercícios de uma lição são avaliados pelo sistema Ivela através de configurações fornecidas pelo desenvolvedor.
+	 
+	Para a criação de um exercício, é necessário:
+	<ul>
+		<li>Arquivo HTML com o exercício.</li>
+		<li>Arquivo XML com o as respostas do exercício.</li>
+	</ul>
+      </p>
+    </section>
+    
+    <section id="html">
+      <title>Tags HTML</title>
+      <p>	html</p>
+    
+    	<section id="form">
+            <title>Form</title>
+            <p>	form</p>
+            
+    	</section>
+    	
+    	<section id="xml">
+	            <title>XML</title>
+	            <p></p>
+	            
+	            
+    	</section>
+    	<section id="radiobox">
+	            <title>Radiobox</title>
+	            <p>	Radiobox</p>
+	            
+    	</section>
+    	<section id="checkbox">
+	            <title>Checkbox</title>
+	            <p>	Checkbox</p>
+	            
+    	</section>
+    	
+    </section>
+   
+   
+   
+    </body>
+</document>
