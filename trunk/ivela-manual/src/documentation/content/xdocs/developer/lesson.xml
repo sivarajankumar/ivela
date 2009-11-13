@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Ivela - Lições</title>
+  </header>
+  <body>
+    <section id="visaoGeral">
+      <title>Pacote de Arquivos</title>
+      <p>
+        Uma lição criada para um curso do Ivela deve ter obrigatoriamente:
+	<ul>
+		<li>Arquivos HTML com conteúdo da lição.</li> 
+		<li>Uma pasta chamada "js" com os arquivos ivela.js e ivela_info.js</li>
+	</ul>
+	Itens opcionais do pacote:
+	<ul>	
+		<li>Uma pasta chamada "exercises", se houver exercícios no conteúdo da lição, contendo o arquivo: 
+		exercises.xml (arquivo que deve conter respostas para o exercício, configuradas conforme explicação da seção Exercícios>XML)</li>
+		<li>Uma pasta chamada "applets".</li>  
+	</ul>
+      </p>
+    </section>
+     
+     
+    <section id="html">
+	            <title>HTML - Links</title>
+	               <p>	Esta seção contém explicações sobre como inserir links em seu código HMTL que permitem ao usuário acessar seguintes funções do Ivela.
+			</p>
+	            
+    	<section id="header">
+		            <title>Header</title>
+		            <p>	Para utilizar as funções que acessam dados do ivela, insira no header de todos os seus arquivos HTML as linhas:</p>
+		            
+		           <pre>
+
+			    <FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="red"><B>script</B></FONT> type<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"text/javascript"</FONT> src<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"js/ivela.js"</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="red"><B>script</B></FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"></font><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="red"><B>script</B></FONT> type<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"text/javascript"</FONT> src<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"js/ivela_info.js"</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="red"><B>script</B></FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT>
+			   
+			   </pre>
+
+		            
+    	</section>
+    	<section id="home">
+		            <title>Home</title>
+		            <p>	Link usado para acessar o home (página inicial) do aluno logado no IVELA. Na página Home,  o aluno pode visualizar todos os módulos e também saber quais ele tem ou não permissão de acesso. Informações sobre andamento do curso, tempo restante e score também estão disponíveis em Home. 
+				Link implementado com a função javascript goToHome().
+				</p>
+
+		<p>Exemplo de código HMTL:</p>	
+		
+		<pre>
+<FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="red"><B>a</B></FONT> href<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"javascript:goToHome()"</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="red"><B>img</B></FONT> src<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"images/topo_home.gif"</FONT> <FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="red"><B>a</B></FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT></pre>
+	
+    	</section>
+    	
+    	<section id="forum">
+			            <title>Fórum</title>
+			            <p>Link implementado com a função javascript displayForum() para realizar o acesso ao fórum de discussões.</p>
+				    <p>Exemplo de código HMTL:</p>
+				   <pre>
+				    <FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="red"><B>a</B></FONT> href<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"javascript:displayForum()"</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="red"><B>img</B></FONT> src<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"images/topo_forum.gif"</FONT> <FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="red"><B>a</B></FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT>
+				    </pre>
+
+			            
+    	</section>
+    	
+    	<section id="chat">
+			            <title>Chat</title>
+			            <p>	Link implementado com a função javascript displayChat() para acessar o chat.</p>
+			             <p>Exemplo de código HMTL:</p>
+			             
+			             <pre>
+<FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="red"><B>a</B></FONT> href<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"javascript:displayChat()"</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="red"><B>img</B></FONT> src<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"images/topo_chat.gif"</FONT> <FONT COLOR="red"><B>title</B></FONT><FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">""</FONT> alt<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">""</FONT> <FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="red"><B>a</B></FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT></pre>
+			            
+    	</section>
+    	
+    	<section id="tutor">
+			            <title>Tutor</title>
+			            <p>	Link implementado com a função javascript displayChat(). Ao ser acionado, abre o outlook para o envio de email ao tutor. </p>
+			            <p>Exemplo de código HMTL:</p>
+			            
+			            <pre>
+<FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="red"><B>a</B></FONT> href<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"javascript:displayTutor()"</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="red"><B>img</B></FONT> src<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"images/topo_tutor.gif"</FONT> <FONT COLOR="red"><B>title</B></FONT><FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"Envie um e-mail para seu tutor"</FONT> 
+alt<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"Envie um e-mail para seu tutor"</FONT> <FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="red"><B>a</B></FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT></pre>
+    	</section>
+    	
+    	
+    	<section id="player">
+					     <title>Player</title>
+					     <p>Para reproduzir arquivos de áudio o Ivela disponibiliza um applet que toca arquivos no formato *. OGG.A função showPlayer("/audio.ogg") acessa o applet  onde o parâmetro é o áudio que deve ser reproduzido quando o aluno clicar no botão "Play".  
+	</p>
+					     <p>Exemplo de código HMTL:</p>
+					     
+					     <pre>
+<FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="red"><B>script</B></FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray">showPlayer(</font><FONT COLOR="purple">"audio/audio.ogg"</FONT><font color="gray">);</font><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="red"><B>script</B></FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT></pre>
+					     
+	    	</section>
+	    	
+	    	<section id="voiceEngine">
+						     <title>Voice-Engine</title>
+						     <p>Este aplicativo é um applet que grava sentenças faladas por um aluno para que o aplicativo possa comparar o que foi dito com os arquivos de configurações interno e assim validar se o que foi dito pelo aluno esta ou não correto. </p>
+						     <p>Exemplo de código HMTL:</p>
+						     
+						     <pre>
+						     <FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="red"><B>script</B></FONT> type<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"text/javascript"</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray">
+						     showRecorder(</font><FONT COLOR="purple">"Grave suas respostas"</FONT><font color="gray">, </font><FONT COLOR="purple">"What time is it?#What time is the meeting?#What time is your flight?#What time is check-in?#What time is it now?"</FONT><font color="gray">, </font><FONT COLOR="purple">"julian_u4_l3_act3.jconf"</FONT><font color="gray">, </font><FONT COLOR="purple">"5#5#5#5#5"</FONT><font color="gray">, </font><FONT COLOR="purple">"audio/mod1unit4les2audio92.ogg#audio/mod1unit4les2audio93.ogg#audio/mod1unit4les2audio94.ogg#audio/mod1unit4les2audio95.ogg#audio/mod1unit4les2audio96.ogg"</FONT><font color="gray">, </font><FONT COLOR="purple">""</FONT><font color="gray">);
+						     
+						     </font><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="red"><B>script</B></FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray">
+</font></pre>
+
+    	</section>
+    	
+    	
+    	<section id="user">
+				    <title>Dados de Perfil de Usuário</title>
+				    <p>Para exibir dados de perfil de usuário em seu HTML, utilize as seguintes funções JS:</p>
+				    <ul>
+				    <li>function displayUserName() - Para exibir o nome de usuário (login).</li>
+				    <li>function getScore() - Para exibir o acumulado do score do curso.</li>
+				    <li>function getTimeRemaining() - Para exibir o tempo restante para completar o curso.</li>
+				    </ul>
+
+				            
+    	</section>
+    	
+    	
+    </section> 
+    </body>
+</document>

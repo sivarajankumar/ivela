@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
+<document>
+  <header>
+    <title>Ivela </title>
+  </header>
+  <body>
+    <section id="intro">
+      <title>IVELA - Internet Voice E-Learning Application</title>
+      <p>
+        Ivela é uma aplicação de código-aberto (<a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">GPL v2</a>) para o Gerenciamento de Ensino à Distância (<a href="http://pt.wikipedia.org/wiki/Learning_Management_System" target="_blank">LMS – <i>Learning Management System</i></a>). O nome Ivela significa na língua inglesa <i>“Internet Voice E-learning Application”</i>. Em português Ivela pode ser traduzido por “Aplicação de Ensino Eletrônico baseado na Internet, com recursos de Voz”. Esta aplicação faz uso extenso de Web 2.0 e serviços <a href="http://pt.wikipedia.org/wiki/REST" target="_blank">REST - <i>Representational State Transfer</i></a> com o objetivo de prover aos usuários uma experiência cognitiva rica. O Ivela é desenvolvido em sua maior parte com a linguagem Java (OpenJDK 1.6). Sua arquitetura utiliza de diversos outros projetos de código-aberto. Além de todo o resultado da programação ser baseado em padrões abertos, as ferramentas de desenvolvimento também foram escolhidas com base no princípio da liberdade de uso, desenvolvimento e distribuição.
+      </p>
+    </section>
+     <section id="gcode">
+      <title>Página Oficial de Desenvolvimento do Projeto</title>
+      <p>
+      	As informações relacionadas ao desenvolvimento do Ivela ficam à disposição de todos que tenham interesse em conhecer melhor e até mesmo contribuir com o projeto. Por ser uma aplicação de código-aberto (GPL), todos são convidados a participar do desenvolvimento do Ivela. </p>
+      	<p>Visite o site oficial de desenvolvimento do projeto: <a href="http://code.google.com/p/ivela/" target="_blank">http://code.google.com/p/ivela/</a>. </p>
+    </section>
+   
+    </body>
+</document>
