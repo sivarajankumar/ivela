@@ -35,8 +35,10 @@ import br.ufc.ivela.commons.dao.Page;
 import br.ufc.ivela.commons.dao.interfaces.TopicDao;
 import br.ufc.ivela.commons.model.Enrollment;
 import br.ufc.ivela.commons.model.Forum;
+import br.ufc.ivela.commons.model.Post;
 import br.ufc.ivela.commons.model.Topic;
 import br.ufc.ivela.ejb.interfaces.ForumRemote;
+import br.ufc.ivela.ejb.interfaces.PostRemote;
 import br.ufc.ivela.ejb.interfaces.TopicRemote;
 
 /**
@@ -50,6 +52,9 @@ public class TopicBean implements TopicRemote {
     
     @EJB
     private ForumRemote forumRemote;
+    
+    @EJB
+    private PostRemote postRemote;
     
     public Topic get(Long id) {
         if (id == null) {
@@ -70,7 +75,6 @@ public class TopicBean implements TopicRemote {
         Forum forum = forumRemote.get(topic.getForum().getId());
         forum.incrementTopicsCount();
         forumRemote.update(forum);
-        
         return  (Long) daoTopic.save(topic);
     }
 
@@ -80,6 +84,11 @@ public class TopicBean implements TopicRemote {
         Forum forum = topic.getForum();
         forum.decrementTopicsCount();
         forumRemote.update(forum);
+        for (Post post: postRemote.getByTopic(topic.getId())) {
+            if (post.getAttachPosts() != null) {
+                postRemote.remove(post.getId());
+            }
+        }   
         return daoTopic.remove(id);
     }
 

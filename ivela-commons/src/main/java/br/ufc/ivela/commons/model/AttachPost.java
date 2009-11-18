@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 
 
 import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -35,10 +37,10 @@ public class AttachPost implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
     @JoinColumn(name = "file", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private File file;
     @JoinColumn(name = "post", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Post post;
 
     public AttachPost() {
