@@ -91,8 +91,12 @@ public class PostBean implements PostRemote {
         
         if (files != null && modelFile != null) {
             for (int i = 0; i < files.length; i++) {
-                modelFile[i].setCourseId(post.getTopic().getForum().getGrade()
-                        .getCourseId());
+                if (post.getTopic().getForum().getGrade() != null) {
+                    modelFile[i].setCourseId(post.getTopic().getForum().getGrade().getCourseId());
+                    modelFile[i].setGrade(post.getTopic().getForum().getGrade());
+                } else { 
+                    modelFile[i].setCourseId(post.getTopic().getForum().getCourse().getId());
+                }
                 modelFile[i].setSentBy(post.getCreatedBy());
                 Long idFile = addFile(files[i], modelFile[i]);
                 if (idFile != null) {

@@ -36,6 +36,7 @@
     var errorTitle = '<s:text name="forum.error.title"/>' ;
     var errorDescr = '<s:text name="forum.error.description"/>';
     var errorTopic  = '<s:text name="forum.error.topic.fail"/>';
+    var errorTopicD = '<s:text name="forum.error.topic.fail.delete"/>';
     var errorAjax = '<s:text name="forum.error.topic.ajax"/>';    
 </script>
 </head>
