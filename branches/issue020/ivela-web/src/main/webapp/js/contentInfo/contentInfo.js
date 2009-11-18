@@ -479,10 +479,28 @@ function submitExercise(form) {
         div.innerHTML = html;      
       }
     }
-
+              
     if (json.list.wrong.length > 0) {
       var errorPop = $('error_popup');
-      if(errorPop) errorPop.style.visibility = 'visible';
+      if(errorPop) {
+          var iframe_error = document.createElement('iframe'); 
+          
+          iframe_error.setAttribute('id', 'error_page_frame'); 
+          iframe_error.setAttribute('class', 'pop_erro_frame'); 
+          iframe_error.setAttribute('z-index', '1'); 
+          //iframe_error.style.visibility = "hidden"; 
+          iframe_error.style.position = 'absolute'; 
+          iframe_error.style.top = '41.5%'; 
+          iframe_error.style.left = '40.5%'; 
+          iframe_error.style.width = '273px'; 
+          iframe_error.style.height = '216px'; 
+          iframe_error.style.visibility = 'visible'; 
+          iframe_error.style.border = 'none'; 
+          errorPop.parentNode.appendChild(iframe_error);
+          
+          errorPop.style.visibility = 'visible';
+          
+      }
     }
 
     if (json.count) {
@@ -598,7 +616,15 @@ function redoExercise(form) {
 
 function closePopUpError() {
      var errorPop = $('error_popup');
-     if(errorPop) errorPop.style.visibility = 'hidden';
+     if(errorPop) {
+
+         var iframe_error = document.getElementById('error_page_frame'); 
+     
+         iframe_error.style.visibility = 'hidden'; 
+         errorPop.parentNode.removeChild(iframe_error); 
+         errorPop.style.visibility = 'hidden'; 
+
+     }
      retriesLeft = null;
 }
 
