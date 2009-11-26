@@ -465,7 +465,7 @@ public class ChallengeBean implements ChallengeRemote {
                     break;
                 }
             } else {
-                if (answer.trim().equalsIgnoreCase(userAnswer)) {
+                if (answer.trim().equals(userAnswer)) {
                     isCorrect = true;
                     break;
                 }       
