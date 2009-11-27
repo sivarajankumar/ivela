@@ -106,9 +106,9 @@ public interface CourseRemote {
     
     Integer getProgress(Long systemUserId, Long courseId);
 
-    public String getTimeLeft(Long systemUserId, Long courseId);
+    public String getTotalTimeLeft(Long systemUserId, Long courseId);
 
-    public String getTimeLeftByDiscipline(Long systemUserId, Long courseId, Long disciplineId);
+    public String getTimeLeft(Long systemUserId, Long courseId, Long disciplineId);
 
     public void savePhoto(Course p, java.io.File file);
     
