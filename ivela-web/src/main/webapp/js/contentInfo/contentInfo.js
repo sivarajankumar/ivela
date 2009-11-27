@@ -109,11 +109,11 @@ function ProgressCourseArrow() {
 }
 
 function getTimeRemaining() {
-    document.write(getHtml('contentInfo!getTimeLeft.action?course.id='+idCourse));
+    document.write(getHtml('contentInfo!getTimeLeft.action?course.id='+idCourse+'&discipline.id='+idDiscipline));
 }
 
-function getTimeRemainingByDiscipline() {
-    document.write(getHtml('contentInfo!getTimeLeftByDiscipline.action?course.id='+idCourse+'&discipline.id='+idDiscipline));
+function getTotalTimeRemaining() {
+    document.write(getHtml('contentInfo!getTotalTimeLeft.action?course.id='+idCourse));
 }
 
 function getScoreOnly() {

@@ -367,7 +367,7 @@ public class CourseBean implements CourseRemote {
         return (int) rate;
     }
 
-    public String getTimeLeft(Long systemUserId, Long courseId) {
+    public String getTotalTimeLeft(Long systemUserId, Long courseId) {
         List<UnitContent> allUnitContents = daoCourse.find("select uc from UnitContent uc, Unit u, " +
                 "Discipline d where uc.unitId = u.id and u.disciplineId = d.id " +
                 "and d.courseId = ?", new Object[]{courseId});
@@ -386,7 +386,7 @@ public class CourseBean implements CourseRemote {
         return (date.getHours()!=0 ? date.getHours() + " hora(s) e ":"") + date.getMinutes() + " minuto(s)";
     }
 
-    public String getTimeLeftByDiscipline(Long systemUserId, Long courseId, Long disciplineId) {
+    public String getTimeLeft(Long systemUserId, Long courseId, Long disciplineId) {
         List<UnitContent> allUnitContents = daoCourse.find("select uc from UnitContent uc, Unit u, " +
                 "Discipline d where uc.unitId = u.id and u.disciplineId = d.id " +
                 "and d.courseId = ? and u.disciplineId = ?", new Object[]{courseId, disciplineId});

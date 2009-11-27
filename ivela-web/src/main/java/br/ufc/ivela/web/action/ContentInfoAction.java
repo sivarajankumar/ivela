@@ -127,14 +127,14 @@ public class ContentInfoAction extends CourseAwareAction {
     	return unitContent.getUnitId() + "/" + unitContent.getId() + "/" + page;
     }
 
-    public String getTimeLeft() {
-        String timeLeft = courseRemote.getTimeLeft(getAuthenticatedUser().getId(), course.getId());
+    public String getTotalTimeLeft() {
+        String timeLeft = courseRemote.getTotalTimeLeft(getAuthenticatedUser().getId(), course.getId());
         setInputStream(new ByteArrayInputStream(timeLeft.toString().getBytes()));
         return "text";
     }
 
-    public String getTimeLeftByDiscipline() {
-        String timeLeft = courseRemote.getTimeLeftByDiscipline(getAuthenticatedUser().getId(), course.getId(), discipline.getId());
+    public String getTimeLeft() {
+        String timeLeft = courseRemote.getTimeLeft(getAuthenticatedUser().getId(), course.getId(), discipline.getId());
         setInputStream(new ByteArrayInputStream(timeLeft.toString().getBytes()));
         return "text";
     }
