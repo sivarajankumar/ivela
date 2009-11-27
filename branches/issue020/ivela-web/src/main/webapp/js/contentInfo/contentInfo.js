@@ -112,6 +112,10 @@ function getTimeRemaining() {
     document.write(getHtml('contentInfo!getTimeLeft.action?course.id='+idCourse));
 }
 
+function getTimeRemainingByDiscipline() {
+    document.write(getHtml('contentInfo!getTimeLeftByDiscipline.action?course.id='+idCourse+'&discipline.id='+idDiscipline));
+}
+
 function getScoreOnly() {
     document.write(getHtml('contentInfo!getScore.action?grade.id='+idGrade+"&ScoreType=only"));
 }
