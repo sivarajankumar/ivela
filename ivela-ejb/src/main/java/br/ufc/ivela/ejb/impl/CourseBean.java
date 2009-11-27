@@ -386,6 +386,25 @@ public class CourseBean implements CourseRemote {
         return (date.getHours()!=0 ? date.getHours() + " hora(s) e ":"") + date.getMinutes() + " minuto(s)";
     }
 
+    public String getTimeLeftByDiscipline(Long systemUserId, Long courseId, Long disciplineId) {
+        List<UnitContent> allUnitContents = daoCourse.find("select uc from UnitContent uc, Unit u, " +
+                "Discipline d where uc.unitId = u.id and u.disciplineId = d.id " +
+                "and d.courseId = ? and u.disciplineId = ?", new Object[]{courseId, disciplineId});
+
+        List<Long> finishedUnitContents = daoCourse.find("select f.unitContent from FinishedUnitContent f " +
+                "where f.course = ? and f.systemUser = ?", new Object[]{courseId, systemUserId});
+
+        Date date = new Date(70, 1, 1, 0, 0, 0);
+        for (UnitContent unitContent : allUnitContents) {
+            if (!finishedUnitContents.contains(unitContent.getId())) {
+            	date = DateUtils.addHours(date, unitContent.getDuration().getHours());
+            	date = DateUtils.addMinutes(date, unitContent.getDuration().getMinutes());
+            }
+        }
+
+        return (date.getHours()!=0 ? date.getHours() + " hora(s) e ":"") + date.getMinutes() + " minuto(s)";
+    }
+
     public void savePhoto(Course p, File file) {
         InputStream data = null;
         try {

@@ -108,6 +108,8 @@ public interface CourseRemote {
 
     public String getTimeLeft(Long systemUserId, Long courseId);
 
+    public String getTimeLeftByDiscipline(Long systemUserId, Long courseId, Long disciplineId);
+
     public void savePhoto(Course p, java.io.File file);
     
     public int isFinishedCourse(Long studentId, Long courseId, long gradeId);

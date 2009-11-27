@@ -133,6 +133,12 @@ public class ContentInfoAction extends CourseAwareAction {
         return "text";
     }
 
+    public String getTimeLeftByDiscipline() {
+        String timeLeft = courseRemote.getTimeLeftByDiscipline(getAuthenticatedUser().getId(), course.getId(), discipline.getId());
+        setInputStream(new ByteArrayInputStream(timeLeft.toString().getBytes()));
+        return "text";
+    }
+
     public String getTutorsEmail() {
         grade = gradeRemote.get(grade.getId());
         Set<SystemUser> tutors = grade.getTutors();         
