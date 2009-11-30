@@ -383,7 +383,7 @@ public class CourseBean implements CourseRemote {
             }
         }
 
-        return (date.getHours()!=0 ? date.getHours() + " hora(s) e ":"") + date.getMinutes() + " minuto(s)";
+        return ((((date.getDay())*24) + date.getHours())!=0 ? ((date.getDay())*24) + date.getHours() + " hora(s) e ":"") + date.getMinutes() + " minuto(s)";
     }
 
     public String getTimeLeft(Long systemUserId, Long courseId, Long disciplineId) {
@@ -402,7 +402,7 @@ public class CourseBean implements CourseRemote {
             }
         }
 
-        return (date.getHours()!=0 ? date.getHours() + " hora(s) e ":"") + date.getMinutes() + " minuto(s)";
+        return ((((date.getDay())*24) + date.getHours())!=0 ? ((date.getDay())*24) + date.getHours() + " hora(s) e ":"") + date.getMinutes() + " minuto(s)";
     }
 
     public void savePhoto(Course p, File file) {
