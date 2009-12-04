@@ -29,36 +29,130 @@
 	Para a criação de um exercício, é necessário:
 	<ul>
 		<li>Arquivo HTML com o exercício.</li>
-		<li>Arquivo XML com o as respostas do exercício.</li>
+		<li>Arquivo XML chamado exercises.xml, dentro pasta exercises. Esta pasta deve ser criada dentro da pasta da lição.</li>
 	</ul>
       </p>
+    	
+      <note>
+      	O sistema de correção de exercícios dos cursos do Ivela não é <i>case-sensitive</i>, ou seja, caracteres maiúsculos não se diferenciam de minúsculos. 	
+      </note>	
+    </section>
+    <section id="xml">
+    	            <title>XML</title>
+    	            <p>O arquivo exercises.xml armazena as configurações de resposta para um exercício.</p>
+    	            <p>A estrutura básica de um exercício segue o padrão do código abaixo:</p>
+    	            <pre> 
+		    <FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="blue" SIZE="+1">?</FONT>xml version<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"1.0"</FONT> encoding<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"ISO-8859-1"</FONT><FONT COLOR="blue" SIZE="+1">?</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"> 
+		    </font><FONT COLOR="blue" SIZE="+1">&lt;</FONT>ivela<FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"> 
+		    </font><FONT COLOR="blue" SIZE="+1">&lt;</FONT>header doctype<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"plugin"</FONT> docsubtype<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"challenge"</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"> 
+		    </font><FONT COLOR="blue" SIZE="+1">&lt;</FONT>payload<FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"> 
+		    </font><FONT COLOR="blue" SIZE="+1">&lt;</FONT>challenge name<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">" nome_do_exercicio "</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"> 
+		    </font><FONT COLOR="blue" SIZE="+1">&lt;</FONT>field name <FONT COLOR="blue" SIZE="+1">=</FONT> <FONT COLOR="purple">"id_field01"</FONT> value<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"value_field01"</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"> 
+		    </font><FONT COLOR="blue" SIZE="+1">&lt;</FONT>field name <FONT COLOR="blue" SIZE="+1">=</FONT> <FONT COLOR="purple">"id_field02"</FONT> value<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"value_field02"</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"> 
+		    </font><FONT COLOR="blue" SIZE="+1">&lt;</FONT>field name <FONT COLOR="blue" SIZE="+1">=</FONT> <FONT COLOR="purple">"id_field03"</FONT> value<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"value_field03"</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"> 
+		    </font><FONT COLOR="blue" SIZE="+1">&lt;</FONT>field name <FONT COLOR="blue" SIZE="+1">=</FONT> <FONT COLOR="purple">"id_field04"</FONT> value<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"value_field04"</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"> 
+		    </font><FONT COLOR="blue" SIZE="+1">&lt;</FONT>field name <FONT COLOR="blue" SIZE="+1">=</FONT> <FONT COLOR="purple">"id_field05"</FONT> value<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"value_field05"</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"> 
+		    </font><FONT COLOR="blue" SIZE="+1">&lt;</FONT>field name <FONT COLOR="blue" SIZE="+1">=</FONT> <FONT COLOR="purple">"id_field06"</FONT> value<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"value_field06"</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"> 
+		    </font><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="blue" SIZE="+1">/</FONT>challenge<FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"> 
+		    </font><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="blue" SIZE="+1">/</FONT>payload<FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"> 
+</font><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="blue" SIZE="+1">/</FONT>ivela<FONT COLOR="blue" SIZE="+1">&gt;</FONT></pre>
+
+
+O desenvolvedor deverá alterar os atributos name e value nas seguintes tags :
+<ul>
+	<li>challenge: O atributo name da tag challenge deve ter o mesmo valor do atributo name da tag form do html do exercício correspondente.</li>
+	<li>field name: O atributo name da tag field do xml deve ter o mesmo valor do atributo name da tag input do html do item de exercício correspondente.
+O atributo value da tag field do xml deve ter o mesmo valor do atribulo value da tag input do html do item de exercício correspondente.</li>
+</ul>
+    
+    <section id="specialCases">
+     <title>a. Configuração de respostas: Casos Especiais</title>
+     
+<ol>
+<li>Quando é necessário que mais de um valor seja inserido para que o exercício seja considerado correto, utiliza-se [and] entre as opções do atributo value no xml.<br></br>
+Exemplo: <pre><FONT COLOR="BLUE" SIZE="+1">&lt;</FONT>field name <FONT COLOR="BLUE" SIZE="+1">=</FONT> <FONT COLOR="PURPLE">"a"</FONT> value<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"are [and] car"</FONT><FONT COLOR="BLUE" SIZE="+1">/</FONT><FONT COLOR="BLUE" SIZE="+1">&gt;</FONT></pre></li>
+
+<li>Quando é necessário que um ou mais valores de um determinado grupo para que o exercício seja considerado correto, utiliza-se [or] entre as opções do atributo value no xml.<br></br>
+Exemplo: <pre><FONT COLOR="blue" SIZE="+1">&lt;</FONT>field name <FONT COLOR="blue" SIZE="+1">=</FONT> <FONT COLOR="PURPLE">"a"</FONT> value<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"are [or] car"</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT></pre> </li>
+
+<li> Quando resposta em branco pode ser considerada correta.<br></br>
+Exemplo: <pre><FONT COLOR="BLUE" SIZE="+1">&lt;</FONT>field name <FONT COLOR="BLUE" SIZE="+1">=</FONT> <FONT COLOR="PURPLE">"a"</FONT> value<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">""</FONT><FONT COLOR="BLUE" SIZE="+1">/</FONT><FONT COLOR="BLUE" SIZE="+1">&gt;</FONT><font color="gray"> </font></pre></li>
+</ol>
     </section>
     
+    <section id="tries">
+    <title>b. Configuração de número de tentativas para exercícios.</title>
+    <p>É possível configurar o número máximo de tentativas para exercícios de um curso. Para isso, siga os eguintes passos:</p>
+    
+    <ol>
+        <li>Entre no sistema (seu usuário deve ter permissão de Coordenador, Professor ou Tutor).</li>
+        <li>Acesse pelo menu principal: "Cursos".</li>
+      	<li>Escolha o curso.</li>
+    	<li>Clique no botão "Editar".</li>
+    	<li>No campo "Tentativas do Challenge", insira o número de tentativas permitidas para exercícios do curso.</li>
+    	<li>Clique no botão "Salvar"</li>
+    </ol>
+	
+    
+    </section>
+    
+    </section>
     <section id="html">
-      <title>Tags HTML</title>
-      <p>	html</p>
+      <title>HTML</title>
+      <p>Um exercício visualizado pelo aluno no navegador é construído dentro de uma página HTML, contendo, especialmente,  tags de formulário. Nesta seção, explicaremos algumas configurações específicas que devem estar nessas tags para que o exercício seja avaliado corretamente.</p>
     
     	<section id="form">
-            <title>Form</title>
-            <p>	form</p>
-            
+            <title>a. Form</title>
+
+            <p>Para que um exercício seja submetido no sistema, ele deve ser construído entre tags de formulário.</p>
+	    <p>Exemplo de código HMTL:</p>
+            <pre><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="red"><B>form</B></FONT> id<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"exercise"</FONT> name<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"nome_do_exercicio"</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"> 
+	    </font><FONT COLOR="green">&lt;!conteúdo do exercício --&gt;</FONT><font color="gray"> 
+</font><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="red"><B>form</B></FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT></pre>
     	</section>
     	
-    	<section id="xml">
-	            <title>XML</title>
-	            <p></p>
-	            
+    	<section id="input">
+	            <title>b. Input</title>
+	            <p>A tag default de input é utilizada em exercícios de escrita.</p>
+	
+		    <p>Exemplo de código HMTL:
+		    <pre><font color="gray">Where  </font><FONT COLOR="blue" SIZE="+1">&lt;</FONT><FONT COLOR="red"><B>input</B></FONT> name<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"a"</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT><font color="gray"> you from?</font> 
+	            </pre></p> 
+
+		    <p>Exemplos de tag de resposta no XML: 
+    		    <pre><FONT COLOR="blue" SIZE="+1">&lt;</FONT>field name <FONT COLOR="blue" SIZE="+1">=</FONT> <FONT COLOR="PURPLE">"a"</FONT> value<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"are"</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT>
+		    </pre></p>
+		    
+			
 	            
     	</section>
     	<section id="radiobox">
-	            <title>Radiobox</title>
-	            <p>	Radiobox</p>
+	            <title>c. Radiobox</title>
+	            <p>	A tag é utilizada em exercícios de teste com uma única opção de resposta correta.</p>
+
+		    <p>Exemplo de código HMTL: </p>
+		    <pre>
+		    <FONT COLOR="BLUE" SIZE="+1">&lt;</FONT><FONT COLOR="RED"><B>input</B></FONT> type<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"radio"</FONT> name<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"a"</FONT> value<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"TRUE"</FONT><FONT COLOR="BLUE" SIZE="+1">/</FONT><FONT COLOR="BLUE" SIZE="+1">&gt;</FONT>
+<FONT COLOR="BLUE" SIZE="+1">&lt;</FONT><FONT COLOR="RED"><B>input</B></FONT> type<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"radio"</FONT> name<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"a"</FONT> value<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"FALSE"</FONT><FONT COLOR="BLUE" SIZE="+1">/</FONT><FONT COLOR="BLUE" SIZE="+1">&gt;</FONT>
+<FONT COLOR="BLUE" SIZE="+1">&lt;</FONT><FONT COLOR="RED"><B>input</B></FONT> type<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"radio"</FONT> name<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"a"</FONT> value<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"I DON'T KNOW"</FONT><FONT COLOR="BLUE" SIZE="+1">/</FONT><FONT COLOR="BLUE" SIZE="+1">&gt;</FONT><font color="gray">    </font></pre> 
+		    
+		    <p>Exemplo de tag de resposta no XML:
+		    <pre><FONT COLOR="blue" SIZE="+1">&lt;</FONT>field name <FONT COLOR="blue" SIZE="+1">=</FONT> <FONT COLOR="PURPLE">"a"</FONT> value<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"I DON'T KNOW"</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT>
+		    </pre></p>
 	            
     	</section>
     	<section id="checkbox">
-	            <title>Checkbox</title>
-	            <p>	Checkbox</p>
+	            <title>d. Checkbox</title>
+	            <p>A tag é utilizada em exercícios de teste com uma ou mais opções de respostas corretas.</p>
+		   <p>Exemplo de código HMTL: 
+		   <pre><FONT COLOR="BLUE" SIZE="+1">&lt;</FONT><FONT COLOR="RED"><B>input</B></FONT> type<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"checkbox"</FONT> name<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"b"</FONT> <FONT COLOR="RED"><B>style</B></FONT><FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"border-bottom: none; "</FONT> value<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"far"</FONT> <FONT COLOR="BLUE" SIZE="+1">/</FONT><FONT COLOR="BLUE" SIZE="+1">&gt;</FONT><font color="gray">far
+</font><FONT COLOR="BLUE" SIZE="+1">&lt;</FONT><FONT COLOR="RED"><B>input</B></FONT> type<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"checkbox"</FONT> name<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"b"</FONT> <FONT COLOR="RED"><B>style</B></FONT><FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"border-bottom: none; "</FONT> value<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"are"</FONT> <FONT COLOR="BLUE" SIZE="+1">/</FONT><FONT COLOR="BLUE" SIZE="+1">&gt;</FONT><font color="gray">are
+</font><FONT COLOR="BLUE" SIZE="+1">&lt;</FONT><FONT COLOR="RED"><B>input</B></FONT> type<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"checkbox"</FONT> name<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"b"</FONT> <FONT COLOR="RED"><B>style</B></FONT><FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"border-bottom: none; "</FONT> value<FONT COLOR="BLUE" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"car"</FONT> <FONT COLOR="BLUE" SIZE="+1">/</FONT><FONT COLOR="BLUE" SIZE="+1">&gt;</FONT><font color="gray">car   </font></pre> 
+		   </p>
 	            
+	           <p>Exemplo de tag de resposta no XML:
+		    <pre><FONT COLOR="blue" SIZE="+1">&lt;</FONT>field name <FONT COLOR="blue" SIZE="+1">=</FONT> <FONT COLOR="PURPLE">"b"</FONT> value<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="PURPLE">"are"</FONT><FONT COLOR="blue" SIZE="+1">/</FONT><FONT COLOR="blue" SIZE="+1">&gt;</FONT>
+		    </pre></p> 
     	</section>
     	
     </section>

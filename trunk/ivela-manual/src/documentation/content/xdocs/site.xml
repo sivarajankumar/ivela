@@ -48,7 +48,7 @@ See http://forrest.apache.org/docs/linking.html for more info
   </quickstart>	
   <admin tab="admin" label="Administração" indexfile="/admin/admin.html" description="Ivela Manual - Administração" >
 	<index label="Visão Geral" href="/admin/admin.html" description="Ivela Manual - Administração"/>	
-	<index label="Pacote de Conteúdo" href="/course/content_package.html" description="Ivela Manual - Pacote de Conteúdo"/>	
+	<!--<index label="Pacote de Conteúdo" href="/course/content_package.html" description="Ivela Manual - Pacote de Conteúdo"/>-->	
 	<!--
 	<course label="Cursos" description="Ivela Manual - Visão Geral">
 	</course>
@@ -64,9 +64,9 @@ See http://forrest.apache.org/docs/linking.html for more info
   <developer tab="developer" href="/developer/developer.html" label="Desenvolvedor" description="Ivela Manual - Desenvolvedor">
   	<index label="Visão Geral" href="/developer/developer.html" description="Ivela Manual - Desenvolvedor"/>
   	<index label="Licões" href="/developer/lesson.html" description="Ivela Manual - Desenvolvedor"/>
-        <!--  <index label="Exercícios" href="/developer/exercise.html" description="Ivela Manual - Desenvolvedor"/>-->
-         <!-- <index label="Upload" href="/developer/upload.html" description="Ivela Manual - Desenvolvedor"/>
-          <index label="How To" href="/developer/howto.html" description="Ivela Manual - Desenvolvedor"/> -->
+        <index label="Exercícios" href="/developer/exercise.html" description="Ivela Manual - Desenvolvedor"/>
+        <index label="Upload" href="/developer/upload.html" description="Ivela Manual - Desenvolvedor"/>
+        <!-- <index label="How To" href="/developer/howto.html" description="Ivela Manual - Desenvolvedor"/> -->
   </developer>
   <help tab ="" label="Ajuda" href="" description="Ivela Manual - Ajuda">
     <index label="FAQ" href="/help/FAQ.html" description="FAQ"/>

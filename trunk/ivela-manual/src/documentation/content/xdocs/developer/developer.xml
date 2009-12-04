@@ -23,7 +23,7 @@
   <body>
    
    <section id="targert_users">
-         <title>Público-Alvo</title>
+         <title>Quem deve ler este manual?</title>
          <p>
            Esta seção destina-se às pessoas responsáveis pela criação de conteúdo em cursos do Ivela, que deverão manipular os arquivos que compõem as lições (html, imagens, áudio, applets). 
          </p>
@@ -33,7 +33,6 @@
     		<ul>
     			<li>Coordenador</li>
     			<li>Professor</li>
-    			<li>Tutor</li>
     		</ul>
     	</p>
     

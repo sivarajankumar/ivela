@@ -18,21 +18,47 @@
 <!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
 <document>
   <header>
-    <title>Ivela </title>
+    <title>Ivela - Upload </title>
   </header>
   <body>
-    <section id="intro">
-      <title>IVELA - Internet Voice E-Learning Application</title>
+    <section id="lesson">
+      <title>Upload de Lição</title>
       <p>
-        Ivela é uma aplicação de código-aberto (<a href="http://www.gnu.org/licenses/gpl-2.0.html" target="_blank">GPL v2</a>) para o Gerenciamento de Ensino à Distância (<a href="http://pt.wikipedia.org/wiki/Learning_Management_System" target="_blank">LMS – <i>Learning Management System</i></a>). O nome Ivela significa na língua inglesa <i>“Internet Voice E-learning Application”</i>. Em português Ivela pode ser traduzido por “Aplicação de Ensino Eletrônico baseado na Internet, com recursos de Voz”. Esta aplicação faz uso extenso de Web 2.0 e serviços <a href="http://pt.wikipedia.org/wiki/REST" target="_blank">REST - <i>Representational State Transfer</i></a> com o objetivo de prover aos usuários uma experiência cognitiva rica. O Ivela é desenvolvido em sua maior parte com a linguagem Java (OpenJDK 1.6). Sua arquitetura utiliza de diversos outros projetos de código-aberto. Além de todo o resultado da programação ser baseado em padrões abertos, as ferramentas de desenvolvimento também foram escolhidas com base no princípio da liberdade de uso, desenvolvimento e distribuição.
+        Para fazer upload de uma lição no Ivela, siga os seguintes passos:
       </p>
+      <ol>
+      	<li>Entre no sistema (seu usuário deve ter permissão de Coordenador, Professor ou Tutor).</li>
+      	<li>Acesse pelo menu principal: "Cursos".</li>
+      	<li>Escolha o curso, módulo e unidade que receberá a nova lição.</li>
+      	<li>Clique em "Upload".</li>
+      	<li>Preencha os campos:
+      		<ul>
+      			<li>Titulo: Título da lição. </li>
+      			<li>Upload de Pacotes: Entre com o pacote da lição. O pacote da lição é um arquivo .zip que contém todos os arquivos e subpastas da estrutura de lição criada.</li>
+      		</ul>
+      	</li>
+      </ol>
     </section>
-     <section id="gcode">
-      <title>Página Oficial de Desenvolvimento do Projeto</title>
+     <section id="exercise">
+      <title>Upload de Exercício</title>
       <p>
-      	As informações relacionadas ao desenvolvimento do Ivela ficam à disposição de todos que tenham interesse em conhecer melhor e até mesmo contribuir com o projeto. Por ser uma aplicação de código-aberto (GPL), todos são convidados a participar do desenvolvimento do Ivela. </p>
-      	<p>Visite o site oficial de desenvolvimento do projeto: <a href="http://code.google.com/p/ivela/" target="_blank">http://code.google.com/p/ivela/</a>. </p>
+      	Para fazer upload de um XML de exercício no Ivela, siga os seguintes passos:
+      </p>
+      <ol>
+      	<li>Entre no sistema (seu usuário deve ter permissão de Coordenador, Professor ou Tutor).</li>
+      	<li>Acesse pelo menu principal: "Cursos".</li>
+      	<li>Escolha o curso, módulo e unidade ao qual pertence o novo exercício.</li>
+      	<li>Selecione a lição que receberá o xml do novo exercício.</li>
+      	<li>Clique em "Adicionar Challenge" </li>
+      	<li>Preencha os campos:
+      		<ul>
+      		 	<li>Nome: Nome da challenge, o mesmo valor do campo "name" da tag "challenge" do xml.</li>
+      		 	<li>Peso: Defina o peso para a exercício (deve ser um número inteiro). <br></br>1(um) é o valor padrão do sistema. 0(zero) significa que ele não será contado na nota.</li>
+      		 	<li>XML: Insira neste campo o código xml referente exercício criado.</li>
+   		</ul>
+      	</li>
+      	
+      </ol>
     </section>
-   
-    </body>
+   </body>
 </document>
