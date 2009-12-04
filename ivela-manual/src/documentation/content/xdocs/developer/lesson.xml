@@ -27,13 +27,13 @@
         Uma lição criada para um curso do Ivela deve ter obrigatoriamente:
 	<ul>
 		<li>Arquivos HTML com conteúdo da lição.</li> 
-		<li>Uma pasta chamada "js" com os arquivos ivela.js e ivela_info.js</li>
+		<li>Uma pasta chamada "js" com os arquivos ivela.js e ivela_info.js. Para fazer o download clique <a href="./downloads/js.zip">aqui</a>.</li>
 	</ul>
 	Itens opcionais do pacote:
 	<ul>	
-		<li>Uma pasta chamada "exercises", se houver exercícios no conteúdo da lição, contendo o arquivo: 
+		<li>Uma pasta chamada "exercises", se houver exercícios no conteúdo da lição, contendo o arquivo  
 		exercises.xml (arquivo que deve conter respostas para o exercício, configuradas conforme explicação da seção Exercícios>XML)</li>
-		<li>Uma pasta chamada "applets".</li>  
+		<li>Pastas para armazenar aquivos de audio, imagens, etc.</li>
 	</ul>
       </p>
     </section>
@@ -45,7 +45,7 @@
 			</p>
 	            
     	<section id="header">
-		            <title>Header</title>
+		            <title>a. Header</title>
 		            <p>	Para utilizar as funções que acessam dados do ivela, insira no header de todos os seus arquivos HTML as linhas:</p>
 		            
 		           <pre>
@@ -57,7 +57,7 @@
 		            
     	</section>
     	<section id="home">
-		            <title>Home</title>
+		            <title>b. Home</title>
 		            <p>	Link usado para acessar o home (página inicial) do aluno logado no IVELA. Na página Home,  o aluno pode visualizar todos os módulos e também saber quais ele tem ou não permissão de acesso. Informações sobre andamento do curso, tempo restante e score também estão disponíveis em Home. 
 				Link implementado com a função javascript goToHome().
 				</p>
@@ -70,7 +70,7 @@
     	</section>
     	
     	<section id="forum">
-			            <title>Fórum</title>
+			            <title>c. Fórum</title>
 			            <p>Link implementado com a função javascript displayForum() para realizar o acesso ao fórum de discussões.</p>
 				    <p>Exemplo de código HMTL:</p>
 				   <pre>
@@ -81,7 +81,7 @@
     	</section>
     	
     	<section id="chat">
-			            <title>Chat</title>
+			            <title>d. Chat</title>
 			            <p>	Link implementado com a função javascript displayChat() para acessar o chat.</p>
 			             <p>Exemplo de código HMTL:</p>
 			             
@@ -91,7 +91,7 @@
     	</section>
     	
     	<section id="tutor">
-			            <title>Tutor</title>
+			            <title>e. Tutor</title>
 			            <p>	Link implementado com a função javascript displayChat(). Ao ser acionado, abre o outlook para o envio de email ao tutor. </p>
 			            <p>Exemplo de código HMTL:</p>
 			            
@@ -102,7 +102,7 @@ alt<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"Envie um e-mail pa
     	
     	
     	<section id="player">
-					     <title>Player</title>
+					     <title>f. Player</title>
 					     <p>Para reproduzir arquivos de áudio o Ivela disponibiliza um applet que toca arquivos no formato *. OGG.A função showPlayer("/audio.ogg") acessa o applet  onde o parâmetro é o áudio que deve ser reproduzido quando o aluno clicar no botão "Play".  
 	</p>
 					     <p>Exemplo de código HMTL:</p>
@@ -113,7 +113,7 @@ alt<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"Envie um e-mail pa
 	    	</section>
 	    	
 	    	<section id="voiceEngine">
-						     <title>Voice-Engine</title>
+						     <title>g. Voice-Engine</title>
 						     <p>Este aplicativo é um applet que grava sentenças faladas por um aluno para que o aplicativo possa comparar o que foi dito com os arquivos de configurações interno e assim validar se o que foi dito pelo aluno esta ou não correto. </p>
 						     <p>Exemplo de código HMTL:</p>
 						     
@@ -128,7 +128,7 @@ alt<FONT COLOR="blue" SIZE="+1">=</FONT><FONT COLOR="purple">"Envie um e-mail pa
     	
     	
     	<section id="user">
-				    <title>Dados de Perfil de Usuário</title>
+				    <title>h. Dados de Perfil de Usuário</title>
 				    <p>Para exibir dados de perfil de usuário em seu HTML, utilize as seguintes funções JS:</p>
 				    <ul>
 				    <li>function displayUserName() - Para exibir o nome de usuário (login).</li>
