@@ -1,0 +1,131 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {background-color: transparent; background: url(../images/bg_standard2.jpg) #fff repeat-x 0 0;}
+
+.general-input {height: 30px; padding: 4px 3px 3px 3px; border-left: 1px solid #000; border: 1px solid #bddbfc;}
+
+.login-container {
+    width: 774px; 
+    height: auto; 
+    margin: 0 auto; 
+    position:relative;}
+
+
+.register {
+    width: 600px;
+    height: auto;
+    margin: 0 auto;
+    color:#FF8402; 
+    
+}
+.register h2 {
+    color:red;
+    font: 17px Arial, Helvetica, sans-serif;
+    
+}
+.register form {
+   
+    font: 12px Arial, Helvetica, sans-serif;
+}
+
+
+.register form fieldset {
+    border: none;
+    border-top: 1px solid #FF9900;
+    border-bottom:0px solid #FF9900;
+    padding-left: 30px; 
+    margin-bottom: 20px;
+    margin-top:none;
+}
+
+.register form fieldset legend {
+    font-size: 18px; 
+    font-weight: bold;
+    padding: 0 10px; 
+    color: #ff8402;
+    border-top:none;
+}
+
+.register form fieldset label  {
+	display: block; 
+	float: left; 
+	width: 150px; 
+	text-align: right;  
+	margin-right: 10px; 
+	padding-top: 5px; 
+	color:#666;
+}
+
+.register form fieldset span input{
+	float: left; 
+}
+
+.register form fieldset span label{
+	width: 35px; 
+	text-align: left;  
+}
+
+.register form p {
+    margin: 1px 0; 
+    padding: 10px 0; 
+    color:#666666; 
+    font-size:12px;
+  
+}
+
+/*.register form input {
+    margin: 1px 0; 
+    padding: 10px;
+    color:#666666; 
+    font-size:13px; 
+    height: auto; 
+    padding: 4px 3px 0 3px; 
+    border-left: 1px solid #000; 
+    border: 1px solid #bddbfc;
+    
+}*/
+
+.register form fieldset input {
+	/*height: 20px;*/
+	height: auto; 
+	width: auto; 
+	min-width: 150px;
+	padding: 4px 3px 0 3px; 
+	border-left: 1px solid #000; 
+	border: 1px solid #bddbfc;
+}
+
+.register form span {
+    margin: 1px 0; 
+    padding: 10px;
+    color:#666666; 
+    font-size:13px; 
+    height: auto; 
+    padding: 4px 3px 0 3px; 
+    font-weight:normal;
+    
+}
+.register span .btn-save, .btn-cancel, .btn-back{
+    font:14px Arial, Helvetica, sans-serif; 
+    color:#454545; 
+    text-decoration:none; 
+    font-weight:bold; 
+    padding:0 0 0 20px;
+    border-bottom: 1px solid #666;
+    border-right: 1px solid #666;
+    border-top:1px solid #eee;
+    border-left:1px solid #eee;
+    
+    
+    
+}
+.register span .btn-save:hover, .btn-cancel:hover, .btn-back:hover{
+    cursor:pointer;
+    color:#ff7202;
+}
+.btn-save{background:url(../images/icon/icon-save.gif) no-repeat left;}
+.btn-cancel{background:url(../images/icon/icon-cancel.gif) no-repeat left;}
+.btn-back{background:url(../images/arrow-left.gif) no-repeat left;}
+
+

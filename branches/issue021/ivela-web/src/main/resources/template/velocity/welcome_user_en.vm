@@ -1,0 +1,22 @@
+<div style="border:solid #FECC59; border-width:1px; width:700px;">
+    <table background="${url}images/bg_standard2.jpg" border="0" cellpadding="10" width="100%">
+        <tr>
+            <td>
+                <a href='${url}'>
+                    <img style="border:0px;" src="${url}images/ivela-logo.gif" height="85" />
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>    
+                Dear <b> ${SystemUser.username} </b>, 
+                    <br />
+                    <br /> 
+                       &nbsp;&nbsp;&nbsp;&nbsp;You are now registered and may access the iVeLA system.
+                    <br />
+                    <br />
+                    <br />                    
+            </td>
+        </tr>
+    </table>
+</div>
