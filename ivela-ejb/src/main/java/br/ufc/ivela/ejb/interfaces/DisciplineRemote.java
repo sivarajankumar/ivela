@@ -55,9 +55,30 @@ public interface DisciplineRemote {
     
     public List<Discipline> getByCourse(Long courseId);
     
+    public Discipline getByCourseAndTag(Long courseId,String tag);
+    
     public String getByCourseTest(Long courseId);
     
     public boolean update(Discipline discipline);
     
     public String getByCourseOrderByName(Long courseId);
+
+    /**
+     * 
+     * @param studentId
+     * @param disciplineId
+     * @param courseId
+     * @param gradeId
+     * @return 0 for finished, > 0 for not finished, -1 for not started
+     */
+    public int isDisciplineFinished(Long studentId, String disciplineTag, long courseId, long gradeId);
+    
+    public int isDisciplineFinished(Long studentId, Long disciplineId, long courseId, long gradeId);
+    
+    
+    
+    
+    
+    
+    
 }

@@ -1383,7 +1383,6 @@ ALTER SEQUENCE sq_chat OWNED BY chat.id;
 --
 
 CREATE SEQUENCE sq_course
-	START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
     NO MINVALUE
@@ -1445,7 +1444,6 @@ ALTER SEQUENCE sq_dictionary OWNED BY dictionary.id;
 --
 
 CREATE SEQUENCE sq_discipline
-	START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
     NO MINVALUE
@@ -2736,7 +2734,6 @@ ALTER TABLE ivela.unit OWNER TO ivela;
 --
 
 CREATE SEQUENCE sq_unit
-	START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
     NO MINVALUE
@@ -2775,7 +2772,6 @@ ALTER TABLE ivela.unit_content OWNER TO ivela;
 --
 
 CREATE SEQUENCE sq_unit_content
-	START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
     NO MINVALUE

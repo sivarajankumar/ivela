@@ -67,7 +67,7 @@ public interface UnitRemote {
      * @param gradeId
      * @return
      */
-    public boolean isUnitFinished(Long studentId, Long unitId, long gradeId);
+    public int isUnitFinished(Long studentId, Long unitId, long courseId, long gradeId);
     
     public List<Unit> getByDisciplineOpen(Long disciplineId) ;
 }

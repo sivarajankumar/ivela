@@ -127,8 +127,14 @@ public class ContentInfoAction extends CourseAwareAction {
     	return unitContent.getUnitId() + "/" + unitContent.getId() + "/" + page;
     }
 
+    public String getTotalTimeLeft() {
+        String timeLeft = courseRemote.getTotalTimeLeft(getAuthenticatedUser().getId(), course.getId());
+        setInputStream(new ByteArrayInputStream(timeLeft.toString().getBytes()));
+        return "text";
+    }
+
     public String getTimeLeft() {
-        String timeLeft = courseRemote.getTimeLeft(getAuthenticatedUser().getId(), course.getId());
+        String timeLeft = courseRemote.getTimeLeft(getAuthenticatedUser().getId(), course.getId(), discipline.getId());
         setInputStream(new ByteArrayInputStream(timeLeft.toString().getBytes()));
         return "text";
     }
@@ -158,22 +164,35 @@ public class ContentInfoAction extends CourseAwareAction {
             builder.append(coord.getEmail());
             builder.append(',');
         }
-        
+                
         if (builder.length() > 7) {
             builder.deleteCharAt(builder.length() - 1);
-            builder.append("?subject=[iVela] ");
+            builder.append("&subject=[iVela] ");
             builder.append(getText("grade.contact.questions"));
-            builder.append(' ');
-            builder.append(grade.getName());            
+                   
+                       
             if (unitContent != null && unitContent.getId() != null) {
                 builder.append(' ');
                 builder.append('-');
                 builder.append(' ');
                 unitContent = unitContentRemote.get(unitContent.getId());
                 builder.append(unitContent.getTitle());                
-            }            
+            }
+           
+            builder.append("&body=");
+            builder.append(getText("grade.contact.message.sender"));
+            builder.append(": ");
+            Profile profile = profileRemote.getBySystemUserId(getAuthenticatedUser().getId());
+            String name = profile.getFirstName()+" "+profile.getLastName();
+            if (name == null || "".equals(name.trim())) {
+                name = getAuthenticatedUser().getUsername();
+            }
+            builder.append(name);
+            builder.append(" - ");
+            builder.append(grade.getName());
+            builder.append(".");
         }
-        
+                
         setInputStream(new ByteArrayInputStream(builder.toString().getBytes()));
         return "text";
     }

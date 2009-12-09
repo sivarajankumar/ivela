@@ -19,6 +19,8 @@ public interface UnitContentRemote {
     public List<UnitContent> getByUnit(Long idUnit);
 
     public List<UnitContent> getByUnitOrdered(Long idUnit);
+    
+    public UnitContent getByDisciplineAndTag(Long idDiscipline,String tag);    
 
     public Long add(UnitContent unitContent);
     

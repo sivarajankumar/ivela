@@ -1,30 +1,60 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*    
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #  
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #  
+#                                                                                           #
+#############################################################################################
+# File: TopicBean.java                                                                      #
+# Document: Topic EJB                                                                       # 
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# ??-???-2008 - Leonardo / Emanuelle Vieira (UFC) - XXXXXX - Initial Version                #
+# 10-SEP-2009 - otofuji (Instituto Eldorado)      - 000016 - Review Forum                   #
+#############################################################################################
+*/
 package br.ufc.ivela.ejb.impl;
 
-import br.ufc.ivela.commons.dao.DaoFactory;
-import br.ufc.ivela.commons.dao.GenericDao;
-import br.ufc.ivela.commons.dao.Page;
-import br.ufc.ivela.commons.model.Topic;
-import br.ufc.ivela.ejb.interfaces.TopicRemote;
-import br.ufc.ivela.ejb.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+
+import br.ufc.ivela.commons.dao.DaoFactory;
+import br.ufc.ivela.commons.dao.Page;
+import br.ufc.ivela.commons.dao.interfaces.TopicDao;
+import br.ufc.ivela.commons.model.Enrollment;
+import br.ufc.ivela.commons.model.Forum;
+import br.ufc.ivela.commons.model.Post;
+import br.ufc.ivela.commons.model.Topic;
+import br.ufc.ivela.ejb.interfaces.ForumRemote;
+import br.ufc.ivela.ejb.interfaces.PostRemote;
+import br.ufc.ivela.ejb.interfaces.TopicRemote;
 
 /**
  *
- * @author Leonardo Oliveira Moreira / Emanuelle Vieira
- * 
  * Class of ejb which implements the interface TopicLocal
  */
 @Stateless(mappedName="TopicBean")
 public class TopicBean implements TopicRemote {
 
-    private GenericDao<Topic> daoTopic = DaoFactory.getInstance(Topic.class);
+    private TopicDao<Topic> daoTopic = (TopicDao) DaoFactory.getInstance(Topic.class);
+    
+    @EJB
+    private ForumRemote forumRemote;
+    
+    @EJB
+    private PostRemote postRemote;
     
     public Topic get(Long id) {
         if (id == null) {
@@ -37,27 +67,33 @@ public class TopicBean implements TopicRemote {
         return daoTopic.getByFK("forum.id", forum);
     }
 
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Long add(Topic topic) {
         topic.setCreatedAt(new Date());
+        topic.setLastPostDate(new Date(1));
         
+        Forum forum = forumRemote.get(topic.getForum().getId());
+        forum.incrementTopicsCount();
+        forumRemote.update(forum);
         return  (Long) daoTopic.save(topic);
     }
 
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public boolean remove(Long id) {
+        Topic topic = get(id);
+        Forum forum = topic.getForum();
+        forum.decrementTopicsCount();
+        forumRemote.update(forum);
+        for (Post post: postRemote.getByTopic(topic.getId())) {
+            if (post.getAttachPosts() != null) {
+                postRemote.remove(post.getId());
+            }
+        }   
         return daoTopic.remove(id);
     }
 
     public Topic getLastTopicByForum(Long forumId) {
-        Object[] params = new Object[]{forumId};
-        
-         List list = daoTopic.find("from Topic t where t.id = " +
-                 "(select max(t.id) from Topic t where t.forum.id = ?)", params);
-         
-         if(list != null && list.size() > 0){
-             return (Topic) list.get(0);
-         } else {
-             return null;
-         }
+        return daoTopic.getLastTopicByForum(forumId);
     }
 
     public Page getByForumPage(Long forum, String title, int page, int pageSize) {
@@ -74,29 +110,18 @@ public class TopicBean implements TopicRemote {
                
         return p;
     }
-    
+     
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public boolean update(Topic topic) {
+        topic.setCreatedAt(new Date());
         return daoTopic.update(topic);
     }
     
     /**
-     * Return the (count) most recent topics from a given forum Id. 
-     * 
+     * Return the (count) most recent topics of Public forums and from a list of Courses. 
      */
-    public List<Topic> getRecentTopics(int count) {
-                
-        //List<Topic> results = daoTopic.find("select t from Post p, Topic t " +
-        //        "where p.topic.id = t.id and t.forum.public1 = true " +
-        //        "order by p.createdAt desc", new Object[]{});
-        List<Topic> results = daoTopic.find("select t from Topic t " +
-                "where t.forum.public1 = true " +
-                "order by t.createdAt desc", new Object[]{});
-        
-        if(results!=null && results.size() > count){
-            return new ArrayList<Topic>(results.subList(0, count));
-        } else {
-            return results;
-        }
+    public List<Topic> getRecentTopics(int count, List<Enrollment> gradeIds) {
+       return daoTopic.getRecentTopics(count, gradeIds);
     }
 
     public boolean isAccess(Long systemUser, Long course) {
@@ -111,10 +136,9 @@ public class TopicBean implements TopicRemote {
     }
 
 
-    public Topic getTopic(Long systemUser, boolean isAdministrator, Long topic) {
-        Topic topicObj = daoTopic.get(topic);
+    public Topic getTopic(Long systemUser, boolean isAdministrator, Long topic) {        
         if (isAdministrator)
-            return topicObj;
+            return daoTopic.get(topic);
         else {
             Object[] params = new Object[] { topic, systemUser };
             List<Topic> topics = daoTopic.find("select t from Forum f, Topic t, Enrollment e where f.id = t.forum.id and t.id = ? and f.grade.id = e.grade.id and e.systemUser.id = ?", params);
@@ -125,71 +149,15 @@ public class TopicBean implements TopicRemote {
     }
 
     public Page getTopicList(Long systemUser, boolean isAdministrator, boolean isPublic, Long forum, String title, int page, int pageSize) {
-        if (page == 0) {
-            page = 1;
-        }
-        if (title == null) {
-            title = "";
-        }
-        title = "%" + title + "%";
-        String countQuery = "";
-        countQuery = "select count(tt.id) from Topic tt where tt.id " +
-                "in (" +
-                "select distinct t.id from Forum f, Topic t, Enrollment e, Grade g, Course c where ";
-        if (isPublic)
-            countQuery +="(f.id = " + forum + " and t.forum.id = f.id and f.title LIKE '" + title + "' and f.public1 = " + isPublic + ") or ";
-        countQuery +="(f.id = " + forum + " and t.forum.id = f.id and " +
-                "f.grade.id = e.grade.id and " +
-                "e.systemUser.id = " + systemUser + " and " +
-                "e.grade.id = g.id and " +
-                "g.courseId = c.id and " +
-                "f.title LIKE '" + title + "' and f.public1 = false)" +
-                ")";
-        String query = "";
-        query = "select tt from Topic tt where tt.id " +
-                "in (" +
-                "select distinct t.id from Forum f, Topic t, Enrollment e, Grade g, Course c where ";
-        if (isPublic)
-            query +="(f.id = " + forum + " and t.forum.id = f.id and f.title LIKE '" + title + "' and f.public1 = " + isPublic + ") or ";
-        query +="(f.id = " + forum + " and t.forum.id = f.id and " +
-                "f.grade.id = e.grade.id and " +
-                "e.systemUser.id = " + systemUser + " and " +
-                "e.grade.id = g.id and " +
-                "g.courseId = c.id and " +
-                "f.title LIKE '" + title + "' and f.public1 = false)" +
-                ")";
-        if (isAdministrator) {
-            countQuery = "select count(t.id) from Forum f, Topic t where f.id = " + forum + " and t.forum.id = f.id and t.title LIKE '" + title + "'";
-            query = "select t from Forum f, Topic t where f.id = " + forum + " and t.forum.id = f.id and t.title LIKE '" + title + "'";            
-        }
+        String countQuery = daoTopic.getTopicListCountQuery(systemUser, isAdministrator, isPublic, forum, title);
+        String query = daoTopic.getTopicListQuery(systemUser, isAdministrator, isPublic, forum, title);
         
         Page p = new Page(query, countQuery, new Object[] { }, new Object[] { }, page, pageSize);
 
         return p;
     }
 
-    public List<Topic> getTopicList(Long systemUser, boolean isAdministrator, boolean isPublic, Long forum, String title) {
-        if (title == null) {
-            title = "";
-        }
-        title = "%" + title + "%";
-        String query = "";
-        query = "select tt from Topic tt where tt.id " +
-                "in (" +
-                "select distinct t.id from Forum f, Topic t, Enrollment e, Grade g, Course c where ";
-        if (isPublic)
-            query +="(f.id = " + forum + " and t.forum.id = f.id and f.title LIKE '" + title + "' and f.public1 = " + isPublic + ") or ";
-        query +="(f.id = " + forum + " and t.forum.id = f.id and " +
-                "f.grade.id = e.grade.id and " +
-                "e.systemUser.id = " + systemUser + " and " +
-                "e.grade.id = g.id and " +
-                "g.courseId = c.id and " +
-                "f.title LIKE '" + title + "' and f.public1 = false)" +
-                ")";
-        if (isAdministrator) {
-            query = "select t from Forum f, Topic t where f.id = " + forum + " and t.forum.id = f.id and t.title LIKE '" + title + "'";
-        }
-        List<Topic> topics = daoTopic.find(query, new Object[] { });
-        return topics;
+    public List<Topic> getTopicList(Long systemUser, boolean isAdministrator, boolean isPublic, Long forum, String title) {        
+        return daoTopic.getTopicList(systemUser, isAdministrator, isPublic, forum, title);
     }
 }

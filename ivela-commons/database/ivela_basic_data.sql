@@ -653,7 +653,10 @@ INSERT INTO language VALUES (2, 'Portuguese (Brazil)', 'pt_BR');
 INSERT INTO language VALUES (3, 'Spanish', 'es_SP');
 
 
-INSERT INTO profile VALUES (1, '', '', '', NULL, '', NULL, 1, false, NULL, NULL);
+
+INSERT INTO profile VALUES (1, 'werwerewrewwrew', 'e', 'tttttttttttt', NULL, '', '/uploads/profiles/1/jdamicopb.jpg', NULL, NULL, 1, 1);
+
+
 --
 -- Data for Name: student_exam; Type: TABLE DATA; Schema: ivela; Owner: ivela
 --
