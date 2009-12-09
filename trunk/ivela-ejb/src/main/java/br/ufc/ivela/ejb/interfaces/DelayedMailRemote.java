@@ -13,45 +13,34 @@
 # See the GNU General Public License for more details.                                      #  
 #                                                                                           #
 #############################################################################################
-# File: PostRemote.java                                                                     #
-# Document: Post Facade                                                                     # 
+# File: DelayedMailRemote.java                                                              #
+# Document: Delayed Mail Remote                                                             # 
 # Date        - Author(Company)                   - Issue# - Summary                        #
-# ??-???-2008 - nelson (UFC)                      - XXXXXX - Initial Version                #
-# 10-SEP-2009 - otofuji (Instituto Eldorado)      - 000016 - Review Forum                   #
+# 24-SEP-2009 - otofuji (Instituto Eldorado)      - 000016 - Review Mail                    #
 #############################################################################################
 */
 package br.ufc.ivela.ejb.interfaces;
 
-import java.io.File;
 import java.util.Collection;
-import java.util.List;
 
 import javax.ejb.Remote;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 
-import br.ufc.ivela.commons.dao.Page;
-import br.ufc.ivela.commons.model.AttachPost;
-import br.ufc.ivela.commons.model.Post;
+import br.ufc.ivela.commons.model.DelayedMail;
 
 @Remote
-public interface PostRemote {
+public interface DelayedMailRemote {
 
-    public Post get(Long postId);
-    public br.ufc.ivela.commons.model.File getFile(Long fileId);
-    public List<Post> getByTopic(Long topicId);
-    public Collection<AttachPost> getAttachsByPost(Long postId);
-    public Long add(Post post);    
-    public boolean remove(Long postId);
-    public Long addFile(File file, br.ufc.ivela.commons.model.File dbFile);
-    public Long addAttach(AttachPost attachPost);
-    public Post getLastPostByTopic(Long topicId);
-    public boolean isAccess(Long systemUser, Long course);
-    public Long add(Post post, File[] files, br.ufc.ivela.commons.model.File[] modelFile);
+    public Long add(DelayedMail delayedMail);
+
+    public void add(Collection<DelayedMail> delayedMails);
+     
+    public boolean update(DelayedMail delayedMail);
+
+    public Collection<DelayedMail> getAll();
     
-    public Page getPostList(Long systemUser, boolean isAdministrator, boolean isPublic, Long topic, int page, int pageSize);
-    
-    public List<Post> getPostList(Long systemUser, boolean isAdministrator, boolean isPublic, Long topic);
-    
-    public Post getPost(Long systemUser, boolean isAdministrator, Long post);
+    public DelayedMail get(Long delayedMailId);
+
+    public boolean remove(Long delayedMailId);
+
+    public boolean remove(Collection<DelayedMail> delayedMails);
 }

@@ -8,12 +8,11 @@ var progressArrowCont = 0;
 var accessed = "";
 
 function goToHome(goToPage) {
-    var url ="contentInfo!showContentCustom.action?course.id="+idCourse+"&grade.id="+idGrade+"&goToIndex=yes&goToPage=";
-    if (!goToPage)
-        url += "index.html";
-    else
-        url += goToPage;            
-    document.location = url;
+    var url = "index.html";
+    if (goToPage)
+        url = goToPage;            
+
+    postToURL('contentInfo!showContentCustom.action', {'course.id': idCourse, 'grade.id': idGrade, 'goToIndex': 'yes', 'goToPage': url});
 }
 
 function goToPage(goToPage) {
@@ -21,7 +20,11 @@ function goToPage(goToPage) {
 }
 
 function goToDiscipline(disciplineTag) {
-    document.location = 'contentInfo!showContentCustom.action?course.id='+idCourse+"&grade.id="+idGrade+'&disciplineTag='+disciplineTag+'&goToPage=table_contents.html';
+    postToURL('contentInfo!showContentCustom.action',
+              {'course.id': idCourse,
+               'grade.id': idGrade,
+               'disciplineTag': disciplineTag,
+               'goToPage': 'table_contents.html'});
 }
 
 function goToDisciplineHelp(disciplineTag, goToPage) {
@@ -106,7 +109,11 @@ function ProgressCourseArrow() {
 }
 
 function getTimeRemaining() {
-    document.write(getHtml('contentInfo!getTimeLeft.action?course.id='+idCourse));
+    document.write(getHtml('contentInfo!getTimeLeft.action?course.id='+idCourse+'&discipline.id='+idDiscipline));
+}
+
+function getTotalTimeRemaining() {
+    document.write(getHtml('contentInfo!getTotalTimeLeft.action?course.id='+idCourse));
 }
 
 function getScoreOnly() {
@@ -223,7 +230,7 @@ function labelUnitStatus(unitContentTag, goToPage) {
 }
 
 function finishLesson() {
-    window.location = 'contentInfo!finishLesson.action?course.id='+idCourse+'&discipline.id='+idDiscipline+'&unitContent.id='+idUnitContent+'&grade.id='+idGrade;
+    postToURL('contentInfo!finishLesson.action', {'course.id': idCourse, 'discipline.id': idDiscipline, 'unitContent.id': idUnitContent, 'grade.id': idGrade});
 }
 
 function displayChat() {
@@ -266,7 +273,7 @@ function computeExe(urlExe) {
 function getHtml(strUrl) {
     var html;
     new Ajax.Request(strUrl, {
-        method:'get',
+        method:'post',
         requestHeaders: { Accept: 'text/plain' },
         asynchronous: false,
         onSuccess: function(transport) { html = transport.responseText; },
@@ -285,6 +292,25 @@ function getJson(strUrl) {
         onFailure: function() { alert('Message: Something went wrong...') }
     });
     return json;
+}
+
+function postToURL(url, params) {
+    var form = document.createElement('form');
+    form.action = url;
+    form.method = 'POST';
+
+    for (var i in params) {
+        if (params.hasOwnProperty(i)) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = i;
+            input.value = params[i];
+            form.appendChild(input);
+        }
+    }
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
 }
 
 function addLoadEvent(func) {
@@ -457,10 +483,28 @@ function submitExercise(form) {
         div.innerHTML = html;      
       }
     }
-
+              
     if (json.list.wrong.length > 0) {
       var errorPop = $('error_popup');
-      if(errorPop) errorPop.style.visibility = 'visible';
+      if(errorPop) {
+          var iframe_error = document.createElement('iframe'); 
+          
+          iframe_error.setAttribute('id', 'error_page_frame'); 
+          iframe_error.setAttribute('class', 'pop_erro_frame'); 
+          iframe_error.setAttribute('z-index', '1'); 
+          //iframe_error.style.visibility = "hidden"; 
+          iframe_error.style.position = 'absolute'; 
+          iframe_error.style.top = '41.5%'; 
+          iframe_error.style.left = '40.5%'; 
+          iframe_error.style.width = '273px'; 
+          iframe_error.style.height = '216px'; 
+          iframe_error.style.visibility = 'visible'; 
+          iframe_error.style.border = 'none'; 
+          errorPop.parentNode.appendChild(iframe_error);
+          
+          errorPop.style.visibility = 'visible';
+          
+      }
     }
 
     if (json.count) {
@@ -576,7 +620,15 @@ function redoExercise(form) {
 
 function closePopUpError() {
      var errorPop = $('error_popup');
-     if(errorPop) errorPop.style.visibility = 'hidden';
+     if(errorPop) {
+
+         var iframe_error = document.getElementById('error_page_frame'); 
+     
+         iframe_error.style.visibility = 'hidden'; 
+         errorPop.parentNode.removeChild(iframe_error); 
+         errorPop.style.visibility = 'hidden'; 
+
+     }
      retriesLeft = null;
 }
 

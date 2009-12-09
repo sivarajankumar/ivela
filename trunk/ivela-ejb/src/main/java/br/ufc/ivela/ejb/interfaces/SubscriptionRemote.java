@@ -13,45 +13,41 @@
 # See the GNU General Public License for more details.                                      #  
 #                                                                                           #
 #############################################################################################
-# File: PostRemote.java                                                                     #
-# Document: Post Facade                                                                     # 
+# File: SubscriptionRemote.java                                                             #
+# Document: Subscription Remote                                                             # 
 # Date        - Author(Company)                   - Issue# - Summary                        #
-# ??-???-2008 - nelson (UFC)                      - XXXXXX - Initial Version                #
-# 10-SEP-2009 - otofuji (Instituto Eldorado)      - 000016 - Review Forum                   #
+# 24-SEP-2009 - otofuji (Instituto Eldorado)      - 000016 - Review Mail                    #
 #############################################################################################
 */
 package br.ufc.ivela.ejb.interfaces;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Remote;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 
-import br.ufc.ivela.commons.dao.Page;
-import br.ufc.ivela.commons.model.AttachPost;
-import br.ufc.ivela.commons.model.Post;
+import br.ufc.ivela.commons.model.Subscription;
+import br.ufc.ivela.commons.model.SystemUser;
 
 @Remote
-public interface PostRemote {
-
-    public Post get(Long postId);
-    public br.ufc.ivela.commons.model.File getFile(Long fileId);
-    public List<Post> getByTopic(Long topicId);
-    public Collection<AttachPost> getAttachsByPost(Long postId);
-    public Long add(Post post);    
-    public boolean remove(Long postId);
-    public Long addFile(File file, br.ufc.ivela.commons.model.File dbFile);
-    public Long addAttach(AttachPost attachPost);
-    public Post getLastPostByTopic(Long topicId);
-    public boolean isAccess(Long systemUser, Long course);
-    public Long add(Post post, File[] files, br.ufc.ivela.commons.model.File[] modelFile);
+public interface SubscriptionRemote {
+    public Long add(Subscription subscription);
+        
+    public boolean update(Subscription subscription);
     
-    public Page getPostList(Long systemUser, boolean isAdministrator, boolean isPublic, Long topic, int page, int pageSize);
+    public Collection<Subscription> getAll(Subscription subscription);
     
-    public List<Post> getPostList(Long systemUser, boolean isAdministrator, boolean isPublic, Long topic);
+    public Subscription get(Long subscriptionId);
     
-    public Post getPost(Long systemUser, boolean isAdministrator, Long post);
+    public boolean remove(Collection<Subscription>  subscriptions);
+    
+    public boolean remove(Long subscriptionId);
+    
+    public Subscription createSubscription(final Object to, final String type,
+            final SystemUser user, final String email);
+    
+    public List<Subscription> getSubscriptionByClassAndType(Object object,
+            String type);
+    
+    public List<Subscription> getSubscriptionByClass(Object object);
 }

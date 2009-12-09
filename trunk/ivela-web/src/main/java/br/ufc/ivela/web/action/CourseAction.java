@@ -157,7 +157,7 @@ public class CourseAction extends CourseAwareAction {
         course = courseRemote.get(courseId);
         this.nick = this.getAuthenticatedUser().getUsername();
         this.grade = gradeRemote.getActiveByStudentByCourse(this.getAuthenticatedUser().getId(), course.getId());
-        this.chatRoomName = "#course_"+course.getName()+"_grade_"+grade.getName();
+        this.chatRoomName = "#room_" + course.getId() + "_" + grade.getId();
         this.chatRoomName = this.chatRoomName.replace(' ', '_');
         PropertiesUtil putil = PropertiesUtil.getPropertiesUtil();
         this.ircServer = putil.getProperty(IVELA_PROPERTIES.IRC_SERVER);

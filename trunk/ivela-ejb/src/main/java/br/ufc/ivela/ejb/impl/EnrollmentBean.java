@@ -75,11 +75,10 @@ public class EnrollmentBean implements EnrollmentRemote {
         Object[] params = new Object[]{userId, gradeId};
 
         List<Enrollment> e = daoEnrollment.find("select e from Enrollment e, Grade g, Course c WHERE e.systemUser.id = ? and e.grade.id = ? and e.grade.id = g.id and g.courseId = c.id and c.active = true", params);
-        if (e.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+        if (e.isEmpty()) 
+            return false;        
+        
+        return false;        
     }
 
     public boolean remove(Long id) {

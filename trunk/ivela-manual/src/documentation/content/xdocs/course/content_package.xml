@@ -18,7 +18,7 @@
 <!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V2.0//EN" "http://forrest.apache.org/dtd/document-v20.dtd">
 <document>
   <header>
-    <title id="top">Ivela - Upload de Pacote de Conteúdo</title>
+    <title>Ivela - Upload de Pacote de Conteúdo</title>
   </header>
   <body>
 
@@ -37,8 +37,7 @@
 		<p>Entenda nessa seção como funciona e como criar um pacote de conteúdo para sua lição.</p>
 		
 		<section id="step1">
-			<title>Passo #1: Crie uma nova lição no Ivela. </title>
-
+			<title>Passo #1: Crie uma nova lição no Ivela.</title>
 			<p>Ao executar este passo, o sistema gerará um código para sua nova lição. Este código é necessário para a configuração dos arquivos que compõem seu pacote de conteúdo.</p>
 			<p>Para criar uma nova lição no Ivela:
 				<ol>
@@ -86,7 +85,7 @@
 			</source>	
 		
 			<p>Obs.: A criação da estrutura dos diretórios  id_curso, id_disciplina, id_unidade e id_licao é feita automaticamente pelo sistema durante a criação de cursos, disciplinas, unidade e lições (conforme explicado no <a href="#step2">Passo #2</a>). </p>
-	</section>
+        </section>
 
 	<section id="step4">
 		<title>Passo #4:  Crie um diretório de trabalho para seu pacote de conteúdo</title>
@@ -104,194 +103,185 @@
 			</ol>
 			<h3>index.html</h3> 
 		 <source>
-<font   COLOR="GREEN"><I>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;</I></font><span class="cch1"><font   color="gray">
-</font></span><font   COLOR="BLUE" >&lt;</font><font   COLOR="RED"><B>html</B></font><font   COLOR="BLUE" >&gt;</font><span class="cch1"><font   color="gray">
-</font></span><font   COLOR="BLUE" >&lt;</font><font   COLOR="RED"><B>head</B></font><font   COLOR="BLUE" >&gt;</font><span class="cch1"><font   color="gray">
-</font></span><font   COLOR="BLUE" >&lt;</font><font   COLOR="RED"><B>meta</B></font> http<font   COLOR="BLUE" >-</font>equiv<font   COLOR="BLUE" >=</font><font   COLOR="PURPLE">"Content-Type"</font> content<font   COLOR="BLUE" >=</font><font   COLOR="PURPLE">"text/html;charset=utf-8"</font> <font   COLOR="BLUE" >&gt;</font><span class="cch1"><font   color="gray">
-</font></span><font   COLOR="GREEN"><I>&lt;!-- Arquivos externos: Javascript e css: Substitua id_curso, id_disciplina, id_unidade, id_licao por seus respectivos valores -----&gt;</I></font><span class="cch1"><font   color="gray">
-</font></span><font   COLOR="BLUE" >&lt;</font><font   COLOR="RED"><B>script</B></font> type<font   COLOR="BLUE" >=</font><font   COLOR="PURPLE">"text/javascript"</font> src<font   COLOR="BLUE" >=</font><font   COLOR="PURPLE">"RenderServlet?file=id_curso/id_disciplina/id_unidade/id_licao/js/prototype.js"</font><font   COLOR="BLUE" >&gt;</font><font   COLOR="BLUE" >&lt;</font><font   COLOR="BLUE" >/</font><font   COLOR="RED"><B>script</B></font><font   COLOR="BLUE" >&gt;</font><span class="cch1"><font   color="gray">
-</font></span><font   COLOR="BLUE" >&lt;</font><font   COLOR="RED"><B>script</B></font> type<font   COLOR="BLUE" >=</font><font   COLOR="PURPLE">"text/javascript"</font> src<font   COLOR="BLUE" >=</font><font   COLOR="PURPLE">"RenderServlet?file=id_curso/id_disciplina/id_unidade/id_licao/js/deserialize.js"</font><font   COLOR="BLUE" >&gt;</font><font   COLOR="BLUE" >&lt;</font><font   COLOR="BLUE" >/</font><font   COLOR="RED"><B>script</B></font><font   COLOR="BLUE" >&gt;</font><span class="cch1"><font   color="gray">
-</font></span><font   COLOR="GREEN"><I>&lt;!----------------------------------------------------------------------------------------------------------------------------------&gt;</I></font><span class="cch1"><font   color="gray">
-</font></span><font   COLOR="BLUE" >&lt;</font><font   COLOR="RED"><B>script</B></font> type<font   COLOR="BLUE" >=</font><font   COLOR="PURPLE">"text/javascript"</font><font   COLOR="BLUE" >&gt;</font>
+<FONT COLOR="GREEN"><I>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;</I></FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="RED"><B>html</B></FONT><FONT COLOR="BLUE" >&gt;</FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="RED"><B>head</B></FONT><FONT COLOR="BLUE" >&gt;</FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="RED"><B>meta</B></FONT> http<FONT COLOR="BLUE" >-</FONT>equiv<FONT COLOR="BLUE" >=</FONT><FONT COLOR="PURPLE">"Content-Type"</FONT> content<FONT COLOR="BLUE" >=</FONT><FONT COLOR="PURPLE">"text/html;charset=utf-8"</FONT> <FONT COLOR="BLUE" >&gt;</FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="GREEN"><I>&lt;!-- Arquivos externos: Javascript e css: Substitua id_curso, id_disciplina, id_unidade, id_licao por seus respectivos valores -----&gt;</I></FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="RED"><B>script</B></FONT> type<FONT COLOR="BLUE" >=</FONT><FONT COLOR="PURPLE">"text/javascript"</FONT> src<FONT COLOR="BLUE" >=</FONT><FONT COLOR="PURPLE">"RenderServlet?file=id_curso/id_disciplina/id_unidade/id_licao/js/prototype.js"</FONT><FONT COLOR="BLUE" >&gt;</FONT><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="BLUE" >/</FONT><FONT COLOR="RED"><B>script</B></FONT><FONT COLOR="BLUE" >&gt;</FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="RED"><B>script</B></FONT> type<FONT COLOR="BLUE" >=</FONT><FONT COLOR="PURPLE">"text/javascript"</FONT> src<FONT COLOR="BLUE" >=</FONT><FONT COLOR="PURPLE">"RenderServlet?file=id_curso/id_disciplina/id_unidade/id_licao/js/deserialize.js"</FONT><FONT COLOR="BLUE" >&gt;</FONT><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="BLUE" >/</FONT><FONT COLOR="RED"><B>script</B></FONT><FONT COLOR="BLUE" >&gt;</FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="GREEN"><I>&lt;!----------------------------------------------------------------------------------------------------------------------------------&gt;</I></FONT><span class="cch1"><font color="gray">
+</font></span><FONT COLOR="BLUE" >&lt;</FONT><FONT COLOR="RED"><B>script</B></FONT> type<FONT COLOR="BLUE" >=</FONT><FONT COLOR="PURPLE">"text/javascript"</FONT><FONT COLOR="BLUE" >&gt;</FONT>
  
-<pre><font   COLOR="RED"><B>function</B></font> showPage<font   COLOR="BLUE"><B>(</B></font>page<font   COLOR="BLUE"><B>)</B></font> <font   COLOR="BLUE"><B>{</B></font>
+<pre><FONT COLOR="RED"><B>function</B></FONT> showPage<FONT COLOR="BLUE"><B>(</B></FONT>page<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT>
 
-	    <font   COLOR="RED"><B>var</B></font> html <font   COLOR="BLUE">=</font> getHtml<font   COLOR="BLUE"><B>(</B></font>page<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>;</B></font>
-	    document<font   COLOR="BLUE"><B>.</B></font>body<font   COLOR="BLUE"><B>.</B></font>innerHTML <font   COLOR="BLUE">=</font> html<font   COLOR="BLUE"><B>;</B></font>
+	    <FONT COLOR="RED"><B>var</B></FONT> html <FONT COLOR="BLUE">=</FONT> getHtml<FONT COLOR="BLUE"><B>(</B></FONT>page<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	    document<FONT COLOR="BLUE"><B>.</B></FONT>body<FONT COLOR="BLUE"><B>.</B></FONT>innerHTML <FONT COLOR="BLUE">=</FONT> html<FONT COLOR="BLUE"><B>;</B></FONT>
 
-	<font   COLOR="BLUE"><B>}</B></font>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
+	<FONT COLOR="RED"><B>function</B></FONT> getHtml<FONT COLOR="BLUE"><B>(</B></FONT>strUrl<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>{</B></FONT>
+	    <FONT COLOR="RED"><B>var</B></FONT> html<FONT COLOR="BLUE"><B>;</B></FONT>
 
-<FONT COLOR="RED"><B>function</B></FONT> computeUrl<FONT COLOR="BLUE"><B>(</B></FONT>urlId<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT>
+	    <FONT COLOR="BLUE">new</FONT> Ajax<FONT COLOR="BLUE"><B>.</B></FONT>Request<FONT COLOR="BLUE"><B>(</B></FONT>strUrl<FONT COLOR="BLUE"><B>,</B></FONT>
+	    <FONT COLOR="BLUE"><B>{</B></FONT>
+		method<FONT COLOR="BLUE">:</FONT><FONT COLOR="PURPLE">'get'</FONT><FONT COLOR="BLUE"><B>,</B></FONT><FONT COLOR="GREEN"><I>// tipo de método
 
-<FONT COLOR="BLUE"><B>}</B></FONT>
+</I></FONT>		requestHeaders<FONT COLOR="BLUE">:</FONT> <FONT COLOR="BLUE"><B>{</B></FONT>Accept<FONT COLOR="BLUE">:</FONT> <FONT COLOR="PURPLE">'text/plain'</FONT><FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>,</B></FONT> <FONT COLOR="GREEN"><I>// tipo de consumo
+</I></FONT>		asynchronous<FONT COLOR="BLUE">:</FONT> false<FONT COLOR="BLUE"><B>,</B></FONT> <FONT COLOR="GREEN"><I>// sincrono ou assincrono
 
-<FONT COLOR="RED"><B>function</B></FONT> computeExe<FONT COLOR="BLUE"><B>(</B></FONT>urlExe<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT>
+</I></FONT>		onSuccess<FONT COLOR="BLUE">:</FONT> <FONT COLOR="RED"><B>function</B></FONT><FONT COLOR="BLUE"><B>(</B></FONT>transport<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT> <FONT COLOR="GREEN"><I>// funcao de sucesso
+</I></FONT>		    html <FONT COLOR="BLUE">=</FONT> transport<FONT COLOR="BLUE"><B>.</B></FONT>responseText<FONT COLOR="BLUE"><B>;</B></FONT>
 
-<FONT COLOR="BLUE"><B>}</B></FONT>
-	
-	<font   COLOR="RED"><B>function</B></font> getHtml<font   COLOR="BLUE"><B>(</B></font>strUrl<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>{</B></font>
-	    <font   COLOR="RED"><B>var</B></font> html<font   COLOR="BLUE"><B>;</B></font>
+		<FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>,</B></FONT>
+		onFailure<FONT COLOR="BLUE">:</FONT> <FONT COLOR="RED"><B>function</B></FONT><FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT> <FONT COLOR="GREEN"><I>// funcao para mostrar problemas
+</I></FONT>		    alert<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'Message: Something went wrong...'</FONT><FONT COLOR="BLUE"><B>)</B></FONT>
 
-	    <font   COLOR="BLUE">new</font> Ajax<font   COLOR="BLUE"><B>.</B></font>Request<font   COLOR="BLUE"><B>(</B></font>strUrl<font   COLOR="BLUE"><B>,</B></font>
-	    <font   COLOR="BLUE"><B>{</B></font>
-		method<font   COLOR="BLUE">:</font><font   COLOR="PURPLE">'get'</font><font   COLOR="BLUE"><B>,</B></font><font   COLOR="GREEN"><I>// tipo de método
+		<FONT COLOR="BLUE"><B>}</B></FONT>
+	    <FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	    <FONT COLOR="RED"><B>return</B></FONT> html<FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
 
-</I></font>		requestHeaders<font   COLOR="BLUE">:</font> <font   COLOR="BLUE"><B>{</B></font>Accept<font   COLOR="BLUE">:</font> <font   COLOR="PURPLE">'text/plain'</font><font   COLOR="BLUE"><B>}</B></font><font   COLOR="BLUE"><B>,</B></font> <font   COLOR="GREEN"><I>// tipo de consumo
-</I></font>		asynchronous<font   COLOR="BLUE">:</font> false<font   COLOR="BLUE"><B>,</B></font> <font   COLOR="GREEN"><I>// sincrono ou assincrono
+	<FONT COLOR="RED"><B>function</B></FONT> getJsonFromUrlByGet<FONT COLOR="BLUE"><B>(</B></FONT>strUrl<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>{</B></FONT>
+	    <FONT COLOR="RED"><B>var</B></FONT> json<FONT COLOR="BLUE"><B>;</B></FONT>
 
-</I></font>		onSuccess<font   COLOR="BLUE">:</font> <font   COLOR="RED"><B>function</B></font><font   COLOR="BLUE"><B>(</B></font>transport<font   COLOR="BLUE"><B>)</B></font> <font   COLOR="BLUE"><B>{</B></font> <font   COLOR="GREEN"><I>// funcao de sucesso
-</I></font>		    html <font   COLOR="BLUE">=</font> transport<font   COLOR="BLUE"><B>.</B></font>responseText<font   COLOR="BLUE"><B>;</B></font>
+	    <FONT COLOR="BLUE">new</FONT> Ajax<FONT COLOR="BLUE"><B>.</B></FONT>Request<FONT COLOR="BLUE"><B>(</B></FONT>strUrl<FONT COLOR="BLUE"><B>,</B></FONT>
+	    <FONT COLOR="BLUE"><B>{</B></FONT>
+		method<FONT COLOR="BLUE">:</FONT><FONT COLOR="PURPLE">'get'</FONT><FONT COLOR="BLUE"><B>,</B></FONT><FONT COLOR="GREEN"><I>// tipo de método
 
-		<font   COLOR="BLUE"><B>}</B></font><font   COLOR="BLUE"><B>,</B></font>
-		onFailure<font   COLOR="BLUE">:</font> <font   COLOR="RED"><B>function</B></font><font   COLOR="BLUE"><B>(</B></font><font   COLOR="BLUE"><B>)</B></font> <font   COLOR="BLUE"><B>{</B></font> <font   COLOR="GREEN"><I>// funcao para mostrar problemas
-</I></font>		    alert<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'Message: Something went wrong...'</font><font   COLOR="BLUE"><B>)</B></font>
+</I></FONT>		requestHeaders<FONT COLOR="BLUE">:</FONT> <FONT COLOR="BLUE"><B>{</B></FONT>Accept<FONT COLOR="BLUE">:</FONT> <FONT COLOR="PURPLE">'application/json'</FONT><FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>,</B></FONT> <FONT COLOR="GREEN"><I>// tipo de consumo
+</I></FONT>		asynchronous<FONT COLOR="BLUE">:</FONT> false<FONT COLOR="BLUE"><B>,</B></FONT> <FONT COLOR="GREEN"><I>// sincrono ou assincrono
 
-		<font   COLOR="BLUE"><B>}</B></font>
-	    <font   COLOR="BLUE"><B>}</B></font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>;</B></font>
-	    <font   COLOR="RED"><B>return</B></font> html<font   COLOR="BLUE"><B>;</B></font>
-	<font   COLOR="BLUE"><B>}</B></font>
+</I></FONT>		onSuccess<FONT COLOR="BLUE">:</FONT> <FONT COLOR="RED"><B>function</B></FONT><FONT COLOR="BLUE"><B>(</B></FONT>transport<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT> <FONT COLOR="GREEN"><I>// funcao de sucesso
+</I></FONT>		    json <FONT COLOR="BLUE">=</FONT> transport<FONT COLOR="BLUE"><B>.</B></FONT>responseText<FONT COLOR="BLUE"><B>.</B></FONT>evalJSON<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
 
-	<font   COLOR="RED"><B>function</B></font> getJsonFromUrlByGet<font   COLOR="BLUE"><B>(</B></font>strUrl<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>{</B></font>
-	    <font   COLOR="RED"><B>var</B></font> json<font   COLOR="BLUE"><B>;</B></font>
+		<FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>,</B></FONT>
+		onFailure<FONT COLOR="BLUE">:</FONT> <FONT COLOR="RED"><B>function</B></FONT><FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT> <FONT COLOR="GREEN"><I>// funcao para mostrar problemas
+</I></FONT>                    alert<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'Message: Something went wrong...'</FONT><FONT COLOR="BLUE"><B>)</B></FONT>
 
-	    <font   COLOR="BLUE">new</font> Ajax<font   COLOR="BLUE"><B>.</B></font>Request<font   COLOR="BLUE"><B>(</B></font>strUrl<font   COLOR="BLUE"><B>,</B></font>
-	    <font   COLOR="BLUE"><B>{</B></font>
-		method<font   COLOR="BLUE">:</font><font   COLOR="PURPLE">'get'</font><font   COLOR="BLUE"><B>,</B></font><font   COLOR="GREEN"><I>// tipo de método
+                <FONT COLOR="BLUE"><B>}</B></FONT>
+	    <FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	    <FONT COLOR="RED"><B>return</B></FONT> json<FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
 
-</I></font>		requestHeaders<font   COLOR="BLUE">:</font> <font   COLOR="BLUE"><B>{</B></font>Accept<font   COLOR="BLUE">:</font> <font   COLOR="PURPLE">'application/json'</font><font   COLOR="BLUE"><B>}</B></font><font   COLOR="BLUE"><B>,</B></font> <font   COLOR="GREEN"><I>// tipo de consumo
-</I></font>		asynchronous<font   COLOR="BLUE">:</font> false<font   COLOR="BLUE"><B>,</B></font> <font   COLOR="GREEN"><I>// sincrono ou assincrono
+        <FONT COLOR="GREEN"><I>/* Funcao para recuperar um Json atraves de uma URL */</I></FONT>
+	<FONT COLOR="RED"><B>function</B></FONT> getJsonFromUrlByPost<FONT COLOR="BLUE"><B>(</B></FONT>strUrl<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>{</B></FONT>
+	    <FONT COLOR="RED"><B>var</B></FONT> json<FONT COLOR="BLUE"><B>;</B></FONT>
 
-</I></font>		onSuccess<font   COLOR="BLUE">:</font> <font   COLOR="RED"><B>function</B></font><font   COLOR="BLUE"><B>(</B></font>transport<font   COLOR="BLUE"><B>)</B></font> <font   COLOR="BLUE"><B>{</B></font> <font   COLOR="GREEN"><I>// funcao de sucesso
-</I></font>		    json <font   COLOR="BLUE">=</font> transport<font   COLOR="BLUE"><B>.</B></font>responseText<font   COLOR="BLUE"><B>.</B></font>evalJSON<font   COLOR="BLUE"><B>(</B></font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>;</B></font>
+	    <FONT COLOR="BLUE">new</FONT> Ajax<FONT COLOR="BLUE"><B>.</B></FONT>Request<FONT COLOR="BLUE"><B>(</B></FONT>strUrl<FONT COLOR="BLUE"><B>,</B></FONT>
+	    <FONT COLOR="BLUE"><B>{</B></FONT>
+		method<FONT COLOR="BLUE">:</FONT><FONT COLOR="PURPLE">'post'</FONT><FONT COLOR="BLUE"><B>,</B></FONT><FONT COLOR="GREEN"><I>// tipo de método
 
-		<font   COLOR="BLUE"><B>}</B></font><font   COLOR="BLUE"><B>,</B></font>
-		onFailure<font   COLOR="BLUE">:</font> <font   COLOR="RED"><B>function</B></font><font   COLOR="BLUE"><B>(</B></font><font   COLOR="BLUE"><B>)</B></font> <font   COLOR="BLUE"><B>{</B></font> <font   COLOR="GREEN"><I>// funcao para mostrar problemas
-</I></font>                    alert<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'Message: Something went wrong...'</font><font   COLOR="BLUE"><B>)</B></font>
+</I></FONT>		requestHeaders<FONT COLOR="BLUE">:</FONT> <FONT COLOR="BLUE"><B>{</B></FONT>Accept<FONT COLOR="BLUE">:</FONT> <FONT COLOR="PURPLE">'application/json'</FONT><FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>,</B></FONT> <FONT COLOR="GREEN"><I>// tipo de consumo
+</I></FONT>		asynchronous<FONT COLOR="BLUE">:</FONT> false<FONT COLOR="BLUE"><B>,</B></FONT> <FONT COLOR="GREEN"><I>// sincrono ou assincrono
 
-                <font   COLOR="BLUE"><B>}</B></font>
-	    <font   COLOR="BLUE"><B>}</B></font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>;</B></font>
-	    <font   COLOR="RED"><B>return</B></font> json<font   COLOR="BLUE"><B>;</B></font>
-	<font   COLOR="BLUE"><B>}</B></font>
+</I></FONT>		onSuccess<FONT COLOR="BLUE">:</FONT> <FONT COLOR="RED"><B>function</B></FONT><FONT COLOR="BLUE"><B>(</B></FONT>transport<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT> <FONT COLOR="GREEN"><I>// funcao de sucesso
+</I></FONT>		    json <FONT COLOR="BLUE">=</FONT> transport<FONT COLOR="BLUE"><B>.</B></FONT>responseText<FONT COLOR="BLUE"><B>.</B></FONT>evalJSON<FONT COLOR="BLUE"><B>(</B></FONT>true<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
 
-        <font   COLOR="GREEN"><I>/* Funcao para recuperar um Json atraves de uma URL */</I></font>
-	<font   COLOR="RED"><B>function</B></font> getJsonFromUrlByPost<font   COLOR="BLUE"><B>(</B></font>strUrl<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>{</B></font>
-	    <font   COLOR="RED"><B>var</B></font> json<font   COLOR="BLUE"><B>;</B></font>
+		<FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>,</B></FONT>
+		onFailure<FONT COLOR="BLUE">:</FONT> <FONT COLOR="RED"><B>function</B></FONT><FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT> <FONT COLOR="GREEN"><I>// funcao para mostrar problemas
+</I></FONT>                    alert<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'Message: Something went wrong...'</FONT><FONT COLOR="BLUE"><B>)</B></FONT>
 
-	    <font   COLOR="BLUE">new</font> Ajax<font   COLOR="BLUE"><B>.</B></font>Request<font   COLOR="BLUE"><B>(</B></font>strUrl<font   COLOR="BLUE"><B>,</B></font>
-	    <font   COLOR="BLUE"><B>{</B></font>
-		method<font   COLOR="BLUE">:</font><font   COLOR="PURPLE">'post'</font><font   COLOR="BLUE"><B>,</B></font><font   COLOR="GREEN"><I>// tipo de método
+                <FONT COLOR="BLUE"><B>}</B></FONT>
+	    <FONT COLOR="BLUE"><B>}</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	    <FONT COLOR="RED"><B>return</B></FONT> json<FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
 
-</I></font>		requestHeaders<font   COLOR="BLUE">:</font> <font   COLOR="BLUE"><B>{</B></font>Accept<font   COLOR="BLUE">:</font> <font   COLOR="PURPLE">'application/json'</font><font   COLOR="BLUE"><B>}</B></font><font   COLOR="BLUE"><B>,</B></font> <font   COLOR="GREEN"><I>// tipo de consumo
-</I></font>		asynchronous<font   COLOR="BLUE">:</font> false<font   COLOR="BLUE"><B>,</B></font> <font   COLOR="GREEN"><I>// sincrono ou assincrono
+        <FONT COLOR="GREEN"><I>/* Funcao ativada pela interface atraves de um evento onclick de um elemente input type="button" passando a url para o Json */</I></FONT>
+	<FONT COLOR="RED"><B>function</B></FONT> requestJson<FONT COLOR="BLUE"><B>(</B></FONT>value<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT>
+	    <FONT COLOR="RED"><B>var</B></FONT> url <FONT COLOR="BLUE">=</FONT> value<FONT COLOR="BLUE"><B>;</B></FONT>
 
-</I></font>		onSuccess<font   COLOR="BLUE">:</font> <font   COLOR="RED"><B>function</B></font><font   COLOR="BLUE"><B>(</B></font>transport<font   COLOR="BLUE"><B>)</B></font> <font   COLOR="BLUE"><B>{</B></font> <font   COLOR="GREEN"><I>// funcao de sucesso
-</I></font>		    json <font   COLOR="BLUE">=</font> transport<font   COLOR="BLUE"><B>.</B></font>responseText<font   COLOR="BLUE"><B>.</B></font>evalJSON<font   COLOR="BLUE"><B>(</B></font>true<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>;</B></font>
+        <FONT COLOR="RED"><B>var</B></FONT> json <FONT COLOR="BLUE">=</FONT> getJsonFromUrlByGet<FONT COLOR="BLUE"><B>(</B></FONT>url<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	    <FONT COLOR="RED"><B>var</B></FONT> name <FONT COLOR="BLUE">=</FONT> json<FONT COLOR="BLUE"><B>.</B></FONT>name<FONT COLOR="BLUE"><B>;</B></FONT>
 
-		<font   COLOR="BLUE"><B>}</B></font><font   COLOR="BLUE"><B>,</B></font>
-		onFailure<font   COLOR="BLUE">:</font> <font   COLOR="RED"><B>function</B></font><font   COLOR="BLUE"><B>(</B></font><font   COLOR="BLUE"><B>)</B></font> <font   COLOR="BLUE"><B>{</B></font> <font   COLOR="GREEN"><I>// funcao para mostrar problemas
-</I></font>                    alert<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'Message: Something went wrong...'</font><font   COLOR="BLUE"><B>)</B></font>
+		<FONT COLOR="RED"><B>var</B></FONT> status <FONT COLOR="BLUE">=</FONT> json<FONT COLOR="BLUE"><B>.</B></FONT>status<FONT COLOR="BLUE"><B>;</B></FONT>
+		<FONT COLOR="RED"><B>var</B></FONT> div <FONT COLOR="BLUE">=</FONT> $<FONT COLOR="BLUE"><B>(</B></FONT>name<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
 
-                <font   COLOR="BLUE"><B>}</B></font>
-	    <font   COLOR="BLUE"><B>}</B></font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>;</B></font>
-	    <font   COLOR="RED"><B>return</B></font> json<font   COLOR="BLUE"><B>;</B></font>
-	<font   COLOR="BLUE"><B>}</B></font>
+		<FONT COLOR="RED"><B>var</B></FONT> divStyle <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">""</FONT>"RED"<FONT COLOR="PURPLE">""</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
 
-        <font   COLOR="GREEN"><I>/* Funcao ativada pela interface atraves de um evento onclick de um elemente input type="button" passando a url para o Json */</I></font>
-	<font   COLOR="RED"><B>function</B></font> requestJson<font   COLOR="BLUE"><B>(</B></font>value<font   COLOR="BLUE"><B>)</B></font> <font   COLOR="BLUE"><B>{</B></font>
-	    <font   COLOR="RED"><B>var</B></font> url <font   COLOR="BLUE">=</font> value<font   COLOR="BLUE"><B>;</B></font>
+		<FONT COLOR="RED"><B>if</B></FONT><FONT COLOR="BLUE"><B>(</B></FONT>status <FONT COLOR="BLUE">=</FONT><FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"ok"</FONT><FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT>divStyle <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">""</FONT>GREEN<FONT COLOR="PURPLE">""</FONT><FONT COLOR="BLUE"><B>;</B></FONT><FONT COLOR="BLUE"><B>}</B></FONT>
 
-        <font   COLOR="RED"><B>var</B></font> json <font   COLOR="BLUE">=</font> getJsonFromUrlByGet<font   COLOR="BLUE"><B>(</B></font>url<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>;</B></font>
-	    <font   COLOR="RED"><B>var</B></font> name <font   COLOR="BLUE">=</font> json<font   COLOR="BLUE"><B>.</B></font>name<font   COLOR="BLUE"><B>;</B></font>
+		<FONT COLOR="RED"><B>var</B></FONT> html <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">'&lt;div id=\"innercontent\" style=\"background: '</FONT><FONT COLOR="BLUE">+</FONT>divStyle<FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">'; width: 100px; height: 20px; border: 1px solid #ffe79c; margin: 20px; padding: 10px; text-align: center; font:bold 12px Arial, Helvetica, sans-serif;\"&gt;'</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+        <FONT COLOR="RED"><B>var</B></FONT> i <FONT COLOR="BLUE">=</FONT> <FONT COLOR="BROWN">0</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
 
-		<font   COLOR="RED"><B>var</B></font> status <font   COLOR="BLUE">=</font> json<font   COLOR="BLUE"><B>.</B></font>status<font   COLOR="BLUE"><B>;</B></font>
-		<font   COLOR="RED"><B>var</B></font> div <font   COLOR="BLUE">=</font> $<font   COLOR="BLUE"><B>(</B></font>name<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>;</B></font>
+           <FONT COLOR="RED"><B>for</B></FONT> <FONT COLOR="BLUE"><B>(</B></FONT>i <FONT COLOR="BLUE">=</FONT> <FONT COLOR="BROWN">0</FONT><FONT COLOR="BLUE"><B>;</B></FONT> i <FONT COLOR="BLUE">&lt;</FONT> json<FONT COLOR="BLUE"><B>.</B></FONT>list<FONT COLOR="BLUE"><B>.</B></FONT>results<FONT COLOR="BLUE"><B>.</B></FONT>length<FONT COLOR="BLUE"><B>;</B></FONT> i<FONT COLOR="BLUE"><FONT COLOR="BLUE">+</FONT><FONT COLOR="BLUE">+</FONT></FONT><FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT>
 
-		<font   COLOR="RED"><B>var</B></font> divStyle <font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">""</font>"RED"<font   COLOR="PURPLE">""</font><font   COLOR="BLUE"><B>;</B></font>
+	        html <FONT COLOR="BLUE">+</FONT><FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">'&lt;td&gt;Score: '</FONT><FONT COLOR="BLUE">+</FONT>json<FONT COLOR="BLUE"><B>.</B></FONT>list<FONT COLOR="BLUE"><B>.</B></FONT>results<FONT COLOR="BLUE"><B>[</B></FONT>i<FONT COLOR="BLUE"><B>]</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>ret<FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">'%&lt;br&gt;'</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
 
-		<font   COLOR="RED"><B>if</B></font><font   COLOR="BLUE"><B>(</B></font>status <font   COLOR="BLUE">=</font><font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">"ok"</font><font   COLOR="BLUE"><B>)</B></font> <font   COLOR="BLUE"><B>{</B></font>divStyle <font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">""</font>GREEN<font   COLOR="PURPLE">""</font><font   COLOR="BLUE"><B>;</B></font><font   COLOR="BLUE"><B>}</B></font>
+	   		<FONT COLOR="BLUE"><B>}</B></FONT>
+            html <FONT COLOR="BLUE">+</FONT><FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">'&lt;/div&gt;'</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+            div<FONT COLOR="BLUE"><B>.</B></FONT>innerHTML <FONT COLOR="BLUE">=</FONT> html<FONT COLOR="BLUE"><B>;</B></FONT>
 
-		<font   COLOR="RED"><B>var</B></font> html <font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">'&lt;div id=\"innercontent\" style=\"background: '</font><font   COLOR="BLUE">+</font>divStyle<font   COLOR="BLUE">+</font><font   COLOR="PURPLE">'; width: 100px; height: 20px; border: 1px solid #ffe79c; margin: 20px; padding: 10px; text-align: center; font   :bold 12px Arial, Helvetica, sans-serif;\"&gt;'</font><font   COLOR="BLUE"><B>;</B></font>
-        <font   COLOR="RED"><B>var</B></font> i <font   COLOR="BLUE">=</font> <font   COLOR="BROWN">0</font><font   COLOR="BLUE"><B>;</B></font>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
 
-           <font   COLOR="RED"><B>for</B></font> <font   COLOR="BLUE"><B>(</B></font>i <font   COLOR="BLUE">=</font> <font   COLOR="BROWN">0</font><font   COLOR="BLUE"><B>;</B></font> i <font   COLOR="BLUE">&lt;</font> json<font   COLOR="BLUE"><B>.</B></font>list<font   COLOR="BLUE"><B>.</B></font>results<font   COLOR="BLUE"><B>.</B></font>length<font   COLOR="BLUE"><B>;</B></font> i<font   COLOR="BLUE"><font   COLOR="BLUE">+</font><font   COLOR="BLUE">+</font></font><font   COLOR="BLUE"><B>)</B></font> <font   COLOR="BLUE"><B>{</B></font>
+	<FONT COLOR="RED"><B>function</B></FONT> doSubmitSerialize<FONT COLOR="BLUE"><B>(</B></FONT>form<FONT COLOR="BLUE"><B>)</B></FONT> <FONT COLOR="BLUE"><B>{</B></FONT>
+	   	<FONT COLOR="RED"><B>var</B></FONT> value <FONT COLOR="BLUE">=</FONT> Form<FONT COLOR="BLUE"><B>.</B></FONT>serialize<FONT COLOR="BLUE"><B>(</B></FONT>form<FONT COLOR="BLUE"><B>,</B></FONT> $<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'usejson'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>checked<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
 
-	        html <font   COLOR="BLUE">+</font><font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">'&lt;td&gt;Score: '</font><font   COLOR="BLUE">+</font>json<font   COLOR="BLUE"><B>.</B></font>list<font   COLOR="BLUE"><B>.</B></font>results<font   COLOR="BLUE"><B>[</B></font>i<font   COLOR="BLUE"><B>]</B></font><font   COLOR="BLUE"><B>.</B></font>ret<font   COLOR="BLUE">+</font><font   COLOR="PURPLE">'%&lt;br&gt;'</font><font   COLOR="BLUE"><B>;</B></font>
+	    requestJson<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'/ivela-web/ChallengeSolver?'</FONT><FONT COLOR="BLUE">+</FONT>value<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
 
-	   		<font   COLOR="BLUE"><B>}</B></font>
-            html <font   COLOR="BLUE">+</font><font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">'&lt;/div&gt;'</font><font   COLOR="BLUE"><B>;</B></font>
-            div<font   COLOR="BLUE"><B>.</B></font>innerHTML <font   COLOR="BLUE">=</font> html<font   COLOR="BLUE"><B>;</B></font>
+	<FONT COLOR="RED"><B>function</B></FONT> positionX<FONT COLOR="BLUE"><B>(</B></FONT>elem<FONT COLOR="BLUE"><B>)</B></FONT>
 
-	<font   COLOR="BLUE"><B>}</B></font>
+	<FONT COLOR="BLUE"><B>{</B></FONT>
+		 x <FONT COLOR="BLUE">=</FONT> elem<FONT COLOR="BLUE"><B>.</B></FONT>offsetLeft<FONT COLOR="BLUE"><B>;</B></FONT>
+		 <FONT COLOR="RED"><B>return</B></FONT> x<FONT COLOR="BLUE"><B>;</B></FONT>
 
-	<font   COLOR="RED"><B>function</B></font> doSubmitSerialize<font   COLOR="BLUE"><B>(</B></font>form<font   COLOR="BLUE"><B>)</B></font> <font   COLOR="BLUE"><B>{</B></font>
-	   	<font   COLOR="RED"><B>var</B></font> value <font   COLOR="BLUE">=</font> Form<font   COLOR="BLUE"><B>.</B></font>serialize<font   COLOR="BLUE"><B>(</B></font>form<font   COLOR="BLUE"><B>,</B></font> $<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'usejson'</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>.</B></font>checked<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>;</B></font>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
 
-	    requestJson<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'/ivela-web/ChallengeSolver?'</font><font   COLOR="BLUE">+</font>value<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>;</B></font>
-	<font   COLOR="BLUE"><B>}</B></font>
+	<FONT COLOR="RED"><B>function</B></FONT> positionY<FONT COLOR="BLUE"><B>(</B></FONT>elem<FONT COLOR="BLUE"><B>)</B></FONT>
+	<FONT COLOR="BLUE"><B>{</B></FONT>
+		y <FONT COLOR="BLUE">=</FONT> elem<FONT COLOR="BLUE"><B>.</B></FONT>offsetTop<FONT COLOR="BLUE"><B>;</B></FONT>
 
-	<font   COLOR="RED"><B>function</B></font> positionX<font   COLOR="BLUE"><B>(</B></font>elem<font   COLOR="BLUE"><B>)</B></font>
+    	<FONT COLOR="RED"><B>return</B></FONT> y<FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
 
-	<font   COLOR="BLUE"><B>{</B></font>
-		 x <font   COLOR="BLUE">=</font> elem<font   COLOR="BLUE"><B>.</B></font>offsetLeft<font   COLOR="BLUE"><B>;</B></font>
-		 <font   COLOR="RED"><B>return</B></font> x<font   COLOR="BLUE"><B>;</B></font>
+	<FONT COLOR="RED"><B>function</B></FONT> toolTip<FONT COLOR="BLUE"><B>(</B></FONT>obj<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>{</B></FONT>
 
-	<font   COLOR="BLUE"><B>}</B></font>
+		text <FONT COLOR="BLUE">=</FONT> obj<FONT COLOR="BLUE"><B>.</B></FONT>innerHTML
+		url <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"/ivela-web/resources/dictionary/get/"</FONT><FONT COLOR="BLUE">+</FONT>text<FONT COLOR="BLUE"><B>;</B></FONT>
+		json <FONT COLOR="BLUE">=</FONT> getJsonFromUrlByGet<FONT COLOR="BLUE"><B>(</B></FONT>url<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
 
-	<font   COLOR="RED"><B>function</B></font> positionY<font   COLOR="BLUE"><B>(</B></font>elem<font   COLOR="BLUE"><B>)</B></font>
-	<font   COLOR="BLUE"><B>{</B></font>
-		y <font   COLOR="BLUE">=</font> elem<font   COLOR="BLUE"><B>.</B></font>offsetTop<font   COLOR="BLUE"><B>;</B></font>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>innerHTML <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"&lt;b&gt;"</FONT><FONT COLOR="BLUE">+</FONT>text<FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">"&lt;/b&gt;&lt;br&gt;"</FONT><FONT COLOR="BLUE">+</FONT>json<FONT COLOR="BLUE"><B>.</B></FONT>busca<FONT COLOR="BLUE"><B>;</B></FONT>
 
-    	<font   COLOR="RED"><B>return</B></font> y<font   COLOR="BLUE"><B>;</B></font>
-	<font   COLOR="BLUE"><B>}</B></font>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>position <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">'absolute'</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>left <FONT COLOR="BLUE">=</FONT> <FONT COLOR="BLUE"><B>(</B></FONT>positionX<FONT COLOR="BLUE"><B>(</B></FONT>obj<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">+</FONT><FONT COLOR="BROWN">50</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">"px"</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
 
-	<font   COLOR="RED"><B>function</B></font> toolTip<font   COLOR="BLUE"><B>(</B></font>obj<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>{</B></font>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>top <FONT COLOR="BLUE">=</FONT> <FONT COLOR="BLUE"><B>(</B></FONT>positionY<FONT COLOR="BLUE"><B>(</B></FONT>obj<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">-</FONT><FONT COLOR="BROWN">50</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">"px"</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
 
-		text <font   COLOR="BLUE">=</font> obj<font   COLOR="BLUE"><B>.</B></font>innerHTML
-		url <font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">"/ivela-web/resources/dictionary/get/"</font><font   COLOR="BLUE">+</font>text<font   COLOR="BLUE"><B>;</B></font>
-		json <font   COLOR="BLUE">=</font> getJsonFromUrlByGet<font   COLOR="BLUE"><B>(</B></font>url<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>;</B></font>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>display <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"block"</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
 
-		$<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'tip'</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>.</B></font>innerHTML <font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">"&lt;b&gt;"</font><font   COLOR="BLUE">+</font>text<font   COLOR="BLUE">+</font><font   COLOR="PURPLE">"&lt;/b&gt;&lt;br&gt;"</font><font   COLOR="BLUE">+</font>json<font   COLOR="BLUE"><B>.</B></font>busca<font   COLOR="BLUE"><B>;</B></font>
+	<FONT COLOR="RED"><B>function</B></FONT> toolBasic<FONT COLOR="BLUE"><B>(</B></FONT>name<FONT COLOR="BLUE"><B>,</B></FONT> title<FONT COLOR="BLUE"><B>,</B></FONT> obj<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>{</B></FONT>
+		text <FONT COLOR="BLUE">=</FONT> name
+		url <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"/ivela-web/resources/dictionary/get/"</FONT><FONT COLOR="BLUE">+</FONT>text<FONT COLOR="BLUE"><B>;</B></FONT>
 
-		$<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'tip'</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>.</B></font>style<font   COLOR="BLUE"><B>.</B></font>position <font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">'absolute'</font><font   COLOR="BLUE"><B>;</B></font>
-		$<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'tip'</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>.</B></font>style<font   COLOR="BLUE"><B>.</B></font>left <font   COLOR="BLUE">=</font> <font   COLOR="BLUE"><B>(</B></font>positionX<font   COLOR="BLUE"><B>(</B></font>obj<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE">+</font><font   COLOR="BROWN">50</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE">+</font><font   COLOR="PURPLE">"px"</font><font   COLOR="BLUE"><B>;</B></font>
+		json <FONT COLOR="BLUE">=</FONT> getJsonFromUrlByGet<FONT COLOR="BLUE"><B>(</B></FONT>url<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>innerHTML <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"&lt;b&gt;"</FONT><FONT COLOR="BLUE">+</FONT>title<FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">"&lt;/b&gt;&lt;br&gt;"</FONT><FONT COLOR="BLUE">+</FONT>json<FONT COLOR="BLUE"><B>.</B></FONT>busca<FONT COLOR="BLUE"><B>;</B></FONT>
 
-		$<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'tip'</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>.</B></font>style<font   COLOR="BLUE"><B>.</B></font>top <font   COLOR="BLUE">=</font> <font   COLOR="BLUE"><B>(</B></font>positionY<font   COLOR="BLUE"><B>(</B></font>obj<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE">-</font><font   COLOR="BROWN">50</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE">+</font><font   COLOR="PURPLE">"px"</font><font   COLOR="BLUE"><B>;</B></font>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>position <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">'absolute'</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>left <FONT COLOR="BLUE">=</FONT> <FONT COLOR="BLUE"><B>(</B></FONT>positionX<FONT COLOR="BLUE"><B>(</B></FONT>obj<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">+</FONT><FONT COLOR="BROWN">50</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">"px"</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
 
-		$<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'tip'</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>.</B></font>style<font   COLOR="BLUE"><B>.</B></font>display <font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">"block"</font><font   COLOR="BLUE"><B>;</B></font>
-	<font   COLOR="BLUE"><B>}</B></font>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>top <FONT COLOR="BLUE">=</FONT> <FONT COLOR="BLUE"><B>(</B></FONT>positionY<FONT COLOR="BLUE"><B>(</B></FONT>obj<FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">-</FONT><FONT COLOR="BROWN">50</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE">+</FONT><FONT COLOR="PURPLE">"px"</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
 
-	<font   COLOR="RED"><B>function</B></font> toolBasic<font   COLOR="BLUE"><B>(</B></font>name<font   COLOR="BLUE"><B>,</B></font> title<font   COLOR="BLUE"><B>,</B></font> obj<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>{</B></font>
-		text <font   COLOR="BLUE">=</font> name
-		url <font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">"/ivela-web/resources/dictionary/get/"</font><font   COLOR="BLUE">+</font>text<font   COLOR="BLUE"><B>;</B></font>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>display <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"block"</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
 
-		json <font   COLOR="BLUE">=</font> getJsonFromUrlByGet<font   COLOR="BLUE"><B>(</B></font>url<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>;</B></font>
-		$<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'tip'</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>.</B></font>innerHTML <font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">"&lt;b&gt;"</font><font   COLOR="BLUE">+</font>title<font   COLOR="BLUE">+</font><font   COLOR="PURPLE">"&lt;/b&gt;&lt;br&gt;"</font><font   COLOR="BLUE">+</font>json<font   COLOR="BLUE"><B>.</B></font>busca<font   COLOR="BLUE"><B>;</B></font>
+	<FONT COLOR="RED"><B>function</B></FONT> clearTip<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>{</B></FONT>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>innerHTML <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">""</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
 
-		$<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'tip'</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>.</B></font>style<font   COLOR="BLUE"><B>.</B></font>position <font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">'absolute'</font><font   COLOR="BLUE"><B>;</B></font>
-		$<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'tip'</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>.</B></font>style<font   COLOR="BLUE"><B>.</B></font>left <font   COLOR="BLUE">=</font> <font   COLOR="BLUE"><B>(</B></font>positionX<font   COLOR="BLUE"><B>(</B></font>obj<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE">+</font><font   COLOR="BROWN">50</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE">+</font><font   COLOR="PURPLE">"px"</font><font   COLOR="BLUE"><B>;</B></font>
+		$<FONT COLOR="BLUE"><B>(</B></FONT><FONT COLOR="PURPLE">'tip'</FONT><FONT COLOR="BLUE"><B>)</B></FONT><FONT COLOR="BLUE"><B>.</B></FONT>style<FONT COLOR="BLUE"><B>.</B></FONT>display <FONT COLOR="BLUE">=</FONT> <FONT COLOR="PURPLE">"none"</FONT><FONT COLOR="BLUE"><B>;</B></FONT>
+	<FONT COLOR="BLUE"><B>}</B></FONT>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">/</FONT>script<FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">/</FONT>head<FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">!</FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE">-</FONT> Página Principal<FONT COLOR="BLUE">:</FONT> <FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE">&gt;</FONT>
 
-		$<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'tip'</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>.</B></font>style<font   COLOR="BLUE"><B>.</B></font>top <font   COLOR="BLUE">=</font> <font   COLOR="BLUE"><B>(</B></font>positionY<font   COLOR="BLUE"><B>(</B></font>obj<font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE">-</font><font   COLOR="BROWN">50</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE">+</font><font   COLOR="PURPLE">"px"</font><font   COLOR="BLUE"><B>;</B></font>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">!</FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT>1. Insira no lugar <FONT COLOR="RED"><B>do</B></FONT> <FONT COLOR="PURPLE">'*'</FONT> o nome <FONT COLOR="RED"><B>do</B></FONT> arquivo HTML de sua página principal <FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">&gt;</FONT>
 
-		$<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'tip'</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>.</B></font>style<font   COLOR="BLUE"><B>.</B></font>display <font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">"block"</font><font   COLOR="BLUE"><B>;</B></font>
-	<font   COLOR="BLUE"><B>}</B></font>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">!</FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE">-</FONT> 2. Substitua id_curso<FONT COLOR="BLUE"><B>,</B></FONT> id_disciplina<FONT COLOR="BLUE"><B>,</B></FONT> id_unidade<FONT COLOR="BLUE"><B>,</B></FONT> id_licao por seus respectivos valores <FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE">&gt;</FONT>
 
-	<font   COLOR="RED"><B>function</B></font> clearTip<font   COLOR="BLUE"><B>(</B></font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>{</B></font>
-		$<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'tip'</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>.</B></font>innerHTML <font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">""</font><font   COLOR="BLUE"><B>;</B></font>
-
-		$<font   COLOR="BLUE"><B>(</B></font><font   COLOR="PURPLE">'tip'</font><font   COLOR="BLUE"><B>)</B></font><font   COLOR="BLUE"><B>.</B></font>style<font   COLOR="BLUE"><B>.</B></font>display <font   COLOR="BLUE">=</font> <font   COLOR="PURPLE">"none"</font><font   COLOR="BLUE"><B>;</B></font>
-	<font   COLOR="BLUE"><B>}</B></font>
-<font   COLOR="BLUE">&lt;</font><font   COLOR="BLUE">/</font>script<font   COLOR="BLUE">&gt;</font>
-<font   COLOR="BLUE">&lt;</font><font   COLOR="BLUE">/</font>head<font   COLOR="BLUE">&gt;</font>
-<font   COLOR="BLUE">&lt;</font><font   COLOR="BLUE">!</font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE">-</font> Página Principal<font   COLOR="BLUE">:</font> <font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE">&gt;</font>
-
-<font   COLOR="BLUE">&lt;</font><font   COLOR="BLUE">!</font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font>1. Insira no lugar <font   COLOR="RED"><B>do</B></font> <font   COLOR="PURPLE">'*'</font> o nome <font   COLOR="RED"><B>do</B></font> arquivo HTML de sua página principal <font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE">-</font><font   COLOR="BLUE">&gt;</font>
-
-<font   COLOR="BLUE">&lt;</font><font   COLOR="BLUE">!</font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE">-</font> 2. Substitua id_curso<font   COLOR="BLUE"><B>,</B></font> id_disciplina<font   COLOR="BLUE"><B>,</B></font> id_unidade<font   COLOR="BLUE"><B>,</B></font> id_licao por seus respectivos valores <font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE">&gt;</font>
-
-<font   COLOR="BLUE">&lt;</font>body onLoad<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"showPage('RenderServlet?file=id_curso/id_disciplina/id_unidade/id_licao/*.html');"</font><font   COLOR="BLUE">&gt;</font>
-<font   COLOR="BLUE">&lt;</font><font   COLOR="BLUE">!</font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE"><font   COLOR="BLUE">-</font><font   COLOR="BLUE">-</font></font><font   COLOR="BLUE">&gt;</font>
-<font   COLOR="BLUE">&lt;</font><font   COLOR="BLUE">/</font>body<font   COLOR="BLUE">&gt;</font>
-<font   COLOR="BLUE">&lt;</font><font   COLOR="BLUE">/</font>html<font   COLOR="BLUE">&gt;</font>
+<FONT COLOR="BLUE">&lt;</FONT>body onLoad<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"showPage('RenderServlet?file=id_curso/id_disciplina/id_unidade/id_licao/*.html');"</FONT><FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">!</FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE"><FONT COLOR="BLUE">-</FONT><FONT COLOR="BLUE">-</FONT></FONT><FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">/</FONT>body<FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">/</FONT>html<FONT COLOR="BLUE">&gt;</FONT>
 </pre>
     </source>
 </section>			
@@ -314,22 +304,22 @@
 	</ol>
 	<h3>contentpackage.ivela.xml</h3> 
 	<source>
-<pre><font   COLOR="BLUE">&lt;</font><font   COLOR="BLUE">?</font>xml version<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"1.0"</font> encoding<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"ISO-8859-1"</font><font   COLOR="BLUE">?</font><font   COLOR="BLUE">&gt;</font>
-<font   COLOR="BLUE">&lt;</font>ivela<font   COLOR="BLUE">&gt;</font>
-<font   COLOR="BLUE">&lt;</font>header doctype<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"plugin"</font> docsubtype<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"contentpackage"</font><font   COLOR="BLUE">/</font><font   COLOR="BLUE">&gt;</font>
-    <font   COLOR="BLUE">&lt;</font>payload<font   COLOR="BLUE">&gt;</font>
-	<font   COLOR="BLUE">&lt;</font>contentpackage course<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"id_curso"</font> discipline<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"id_disciplina"</font> unit<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"id_unidade"</font><font   COLOR="BLUE">&gt;</font>
-		<font   COLOR="BLUE">&lt;</font>filesystem value<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"/index.html"</font><font   COLOR="BLUE">/</font><font   COLOR="BLUE">&gt;</font>
-		<font   COLOR="BLUE">&lt;</font>filesystem value<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"/css/"</font><font   COLOR="BLUE">/</font><font   COLOR="BLUE">&gt;</font>
-		<font   COLOR="BLUE">&lt;</font>filesystem value<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"/js/"</font><font   COLOR="BLUE">/</font><font   COLOR="BLUE">&gt;</font>
-		<font   COLOR="BLUE">&lt;</font>filesystem value<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"/images/"</font><font   COLOR="BLUE">/</font><font   COLOR="BLUE">&gt;</font>			
-		<font   COLOR="BLUE">&lt;</font>filesystem value<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"/julius/"</font><font   COLOR="BLUE">/</font><font   COLOR="BLUE">&gt;</font>
-		<font   COLOR="BLUE">&lt;</font>filesystem value<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"/xml/"</font><font   COLOR="BLUE">/</font><font   COLOR="BLUE">&gt;</font>
-		<font   COLOR="BLUE">&lt;</font>filesystem value<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"/audio/"</font><font   COLOR="BLUE">/</font><font   COLOR="BLUE">&gt;</font>
-		<font   COLOR="BLUE">&lt;</font>filesystem value<font   COLOR="BLUE">=</font><font   COLOR="PURPLE">"/video/"</font><font   COLOR="BLUE">/</font><font   COLOR="BLUE">&gt;</font>
-	<font   COLOR="BLUE">&lt;</font><font   COLOR="BLUE">/</font>contentpackage<font   COLOR="BLUE">&gt;</font>
-   <font   COLOR="BLUE">&lt;</font><font   COLOR="BLUE">/</font>payload<font   COLOR="BLUE">&gt;</font>
-<font   COLOR="BLUE">&lt;</font><font   COLOR="BLUE">/</font>ivela<font   COLOR="BLUE">&gt;</font>
+<pre><FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">?</FONT>xml version<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"1.0"</FONT> encoding<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"ISO-8859-1"</FONT><FONT COLOR="BLUE">?</FONT><FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT>ivela<FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT>header doctype<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"plugin"</FONT> docsubtype<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"contentpackage"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+    <FONT COLOR="BLUE">&lt;</FONT>payload<FONT COLOR="BLUE">&gt;</FONT>
+	<FONT COLOR="BLUE">&lt;</FONT>contentpackage course<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"id_curso"</FONT> discipline<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"id_disciplina"</FONT> unit<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"id_unidade"</FONT><FONT COLOR="BLUE">&gt;</FONT>
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/index.html"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/css/"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/js/"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/images/"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>			
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/julius/"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/xml/"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/audio/"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+		<FONT COLOR="BLUE">&lt;</FONT>filesystem value<FONT COLOR="BLUE">=</FONT><FONT COLOR="PURPLE">"/video/"</FONT><FONT COLOR="BLUE">/</FONT><FONT COLOR="BLUE">&gt;</FONT>
+	<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">/</FONT>contentpackage<FONT COLOR="BLUE">&gt;</FONT>
+   <FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">/</FONT>payload<FONT COLOR="BLUE">&gt;</FONT>
+<FONT COLOR="BLUE">&lt;</FONT><FONT COLOR="BLUE">/</FONT>ivela<FONT COLOR="BLUE">&gt;</FONT>
 </pre>
 	</source>
 </section>
@@ -352,26 +342,6 @@
 		<title>Passo #8: Adicione os arquivos específicos da lição</title>	
 		<p>Insira no diretório da lição todos os arquivos específicos da lição (ex.: arquivos HTML, imagens, vídeos).</p>
 		<p>Para informações sobre construção de arquivos HTML, visite a seção: <a href="#html_tips">Dicas HTML</a>.</p>	
-    </section>
-   
-  <section id="step9">
-		<title>Passo #9: Converta seu conteúdo para o formato .zip</title>	
-		<ol>
-			<li>Certifique-se de que todos os arquivos que compõem seu conteúdo estão foram inseridos no diretório da lição.</li>
-			<li>Selecione todos os arquivos e diretórios de seu conteúdo e adicione-os para um arquivo no formato .zip</li>
-		</ol>	
-    </section>
-    
-  <section id="step10">
-		<title>Passo #10: Envie seu conteúdo para o Ivela</title>	
-		<p>Após ter preparado seu pacote de conteúdo é hora de enviá-lo para o Ivela. Siga as instruções abaixo: </p>
-		<ol>
-			<li>Entre no Ivela.</li>
-			<li>Selecione o curso, disciplina, unidade correspondente ao seu conteúdo.</li>
-			<li>Clique em "Upload".</li>
-			<li>Selecione seu arquivo .zip de conteúdo e clique em "Salvar".</li>
-			<li>Selecione o curso, disciplina, unidade e lição para verificar o conteúdo inserido.</li>
-		</ol>
     </section>
   </section>    
 <section id="html_tips">
@@ -435,104 +405,7 @@
 	</ol>
 	<p>O arquivo exemplo pode ser alterado para a criação de novas lições, desde que as regras descritas na seção <a href="#steps">Como criar um pacote de conteúdo?</a> sejam respeitadas.</p>
     </section>
-  	
-  	<section>
-  	<title>Anexo 1: Configuração de arquivos de score</title>
-  	
-  	<p>Assim como lições, a seção de score pode ser inserida no Ivela através do carregamento de pacotes de conteúdo.</p> 
-  	<p>Para a configuração de seu score, siga as recomendações abaixo:</p>
-  	<ol>
-  		<li>No diretório principal de seu score, crie um diretório chamado 'xml'.</li>
-  		<li>Insira o arquivo score.xml no diretório 'xml'.</li>
-  		<li>Para utilizar applets em seu score, utilize em seu HTML: <b>RenderServlet?file=/globals/applets/nome_do_applet</b></li>
-  	</ol>
-  	<p>Veja um exemplo de xml para seu score:</p>
-	<source>
- 	<pre><font   color="blue">&lt;</font><font   color="blue">?</font>xml version<font   color="blue">=</font><font   color="purple">"1.0"</font> encoding<font   color="blue">=</font><font   color="purple">"ISO-8859-1"</font><font   color="blue">?</font><font   color="blue">&gt;</font><span></span><font   color="blue">&lt;</font>ivela<font   color="blue">&gt;</font><span><font   color="gray">
-	</font></span><font   color="blue">&lt;</font>header doctype<font   color="blue">=</font><font   color="purple">"plugin"</font> docsubtype<font   color="blue">=</font><font   color="purple">"score"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-	</font></span><font   color="blue">&lt;</font>payload<font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les1exe1"</font> score <font   color="blue">=</font> <font   color="purple">"reading"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les1exe2"</font> score <font   color="blue">=</font> <font   color="purple">"listening"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les2exe1"</font> score <font   color="blue">=</font> <font   color="purple">"listening"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les2exe2"</font> score <font   color="blue">=</font> <font   color="purple">"listening"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les3exe1"</font> score <font   color="blue">=</font> <font   color="purple">"reading"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les3exe2"</font> score <font   color="blue">=</font> <font   color="purple">"listening"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les3sp1"</font>  score <font   color="blue">=</font> <font   color="purple">"speaking"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les3exe4"</font> score <font   color="blue">=</font> <font   color="purple">"listening"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les4exe1"</font> score <font   color="blue">=</font> <font   color="purple">"writing"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les4exe3"</font> score <font   color="blue">=</font> <font   color="purple">"writing"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les5exe1"</font> score <font   color="blue">=</font> <font   color="purple">"reading"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les5exe3"</font> score <font   color="blue">=</font> <font   color="purple">"writing"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les6exe1"</font> score <font   color="blue">=</font> <font   color="purple">"writing"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les6exe2"</font> score <font   color="blue">=</font> <font   color="purple">"writing"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les6sp1"</font>  score <font   color="blue">=</font> <font    color="purple">"speaking"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les6exe4"</font> score <font   color="blue">=</font> <font   color="purple">"writing"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les6exe5"</font> score <font   color="blue">=</font> <font   color="purple">"reading"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les6sp2"</font>  score <font   color="blue">=</font> <font   color="purple">"speaking"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les7exe1"</font> score <font   color="blue">=</font> <font   color="purple">"writing"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les7exe2"</font> score <font   color="blue">=</font> <font   color="purple">"reading"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les7sp1"</font>  score <font   color="blue">=</font> <font   color="purple">"speaking"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les7exe4"</font> score <font   color="blue">=</font> <font   color="purple">"writing"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-		</font></span><font   color="blue">&lt;</font>challenge name <font   color="blue">=</font> <font   color="purple">"mod1uni2les7sp2"</font>  score <font   color="blue">=</font> <font   color="purple">"speaking"</font><font   color="blue">/</font><font   color="blue">&gt;</font><span><font   color="gray">
-	</font></span><font   color="blue">&lt;</font><font   color="blue">/</font>payload<font   color="blue">&gt;</font><span><font   color="gray">
-</font></span><font   color="blue">&lt;</font><font   color="blue">/</font>ivela<font   color="blue">&gt;</font><span><font   color="gray">
-</font></span></pre>
-</source>
-  	<p>Este código está disponível para download <a href="./course/contentpackage/score/unit2.zip">aqui</a></p>
-  	</section>
- 	
-  	<section>
-  		<title>Anexo 2: Configuração de arquivos de áudio</title>
-  		
-  		<p>Para utilizar recursos de áudio em suas lições, siga as recomendações descritas abaixo:</p>
-  		<ol>
-  			<li>Crie a estrutura de diretórios de sua lição. Em caso de dúvida, releia o <a href="#step3">Passo #3</a>.</li>
-  			<li>Insira no diretório <b>audio</b> todos os arquivos de áudio utilizados em sua lição.</li>
-  			<li>Em seu HTML:
-  				<ul>
-  					<li>Para que sua página utilize os recursos de reconhecimento de voz, utilize:
-					<source>
-  &lt;applet code=" br.ufc.ivela.voice.BlackBoardApplet.class"
-  archive="RenderServlet?file=/globals/applets/ivela_voice_new.jar, 
-  RenderServlet?file=/globals/applets/jogg-0.0.7.jar, 
-  RenderServlet?file=/globals/applets/jorbis-0.0.15.jar, 
-  RenderServlet?file=/globals/applets/tritonus_share.jar, 
-  RenderServlet?file=/globals/applets/vorbisspi1.0.3.jar" 
-  width="692" height="346"&gt;
-  					</source>		
-  					</li>
-  					<li>Para que sua página acesse os arquivos de áudio, utilize: <b>RenderServlet?file=/id_curso/id_disciplina/id_unidade/id_licao/audio/nome_arquivo</b></li>
-
-  				</ul>
-  			</li>
-  		</ol>
-		<p>Exemplo de código HTML com áudio em seu conteúdo:</p>
-  		<source>
-  		<font   color="blue">&lt;</font><font    color="red"><B>applet</B></font> <font    color="red"><B>code</B></font><font   color="blue">=</font><font   color="purple">" br.ufc.ivela.voice.BlackBoardApplet.class"</font>
-  archive<font   color="blue">=</font><font   color="purple">"RenderServlet?file=/globals/applets/ivela_voice_new.jar, RenderServlet?file=/globals/applets/jogg-0.0.7.jar, 
-  RenderServlet?file=/globals/applets/jorbis-0.0.15.jar, RenderServlet?file=/globals/applets/tritonus_share.jar, 
-  RenderServlet?file=/globals/applets/vorbisspi1.0.3.jar"</font> width<font   color="blue">=</font><font    color="brown">692</font> height<font   color="blue">=</font><font    color="brown">346</font><font   color="blue">&gt;</font><span ><font  color="gray">
-
-</font></span><font   color="blue">&lt;</font><font    color="red"><B>param</B></font> name<font   color="blue">=</font><font   color="purple">"question"</font> value<font   color="blue">=</font><font   color="purple">"Repita cada frase abaixo."</font> <font   color="blue">&gt;</font><span ><font  color="gray">
-
-</font></span><font   color="blue">&lt;</font><font    color="red"><B>param</B></font> name<font   color="blue">=</font><font   color="purple">"exe"</font> value<font   color="blue">=</font><font   color="purple">"When's it arriving here?#We're very sorry about this late delivery.
-#Can I call you tomorrow to check the situation?#Are you sending it by express mail?
-#We always use the express mail service.
-#By the way,#are you taking care of it yourself?#Don't worry.#"</font> <font   color="blue">&gt;</font><span ><font  color="gray">
-
-</font></span><font   color="blue">&lt;</font><font    color="red"><B>param</B></font> name<font   color="blue">=</font><font   color="purple">"conf"</font> value<font   color="blue">=</font><font   color="purple">"RenderServlet?file=/id_curso/id_disciplina/id_unidade/id_licao/conf/julian_m2_u1_l3_act2.jconf"</font><font   color="blue">&gt;</font><span ><font  color="gray">
-
-</font></span><font   color="blue">&lt;</font><font    color="red"><B>param</B></font> name<font   color="blue">=</font><font   color="purple">"audio"</font> value<font   color="blue">=</font><font   color="purple">"RenderServlet?file=/id_curso/id_disciplina/id_unidade/id_licao/audio/whenshere.ogg
-#RenderServlet?file=/id_curso/id_disciplina/id_unidade/id_licao/audio/weredelivery.ogg
-#RenderServlet?file=/id_curso/id_disciplina/id_unidade/id_licao/audio/3cansituation.ogg
-#RenderServlet?file=/id_curso/id_disciplina/id_unidade/id_licao/audio/4aremail.ogg
-#RenderServlet?file=/id_curso/id_disciplina/id_unidade/id_licao/audio/5weservice.ogg
-#RenderServlet?file=/id_curso/id_disciplina/id_unidade/id_licao/audio/6byyourself.ogg
-#RenderServlet?file=/id_curso/id_disciplina/id_unidade/id_licao/audio/7dontworry.ogg#"</font><font   color="blue">&gt;</font>
-  		</source>
-		<p>Este código está disponível para download <a href="./course/contentpackage/exemplo_audio.zip">aqui</a></p>  		
-  		
-  		<note label="Importante!">Substitua id_curso, id_disciplina, id_unidade e id_licao por seus valores corretos, verificados no <a href="#step2">Passo #2.</a></note>
-   	</section>
+    
+     
   </body>
 </document>

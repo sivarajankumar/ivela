@@ -1,14 +1,46 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+#############################################################################################
+# Copyright(c) 2009 by IBM Brasil Ltda and others                                           #
+# This file is part of ivela project, an open-source                                        #
+# Program URL   : http://code.google.com/p/ivela/                                           #
+#                                                                                           #
+# This program is free software; you can redistribute it and/or modify it under the terms   #
+# of the GNU General Public License as published by the Free Software Foundation; either    #
+# version 3 of the License, or (at your option) any later version.                          #
+#                                                                                           #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. #
+# See the GNU General Public License for more details.                                      #
+#                                                                                           #
+#############################################################################################
+# File: CourseBean.java                                                                     #
+# Document: Course Stateless Bean                                                           #
+# Date        - Author(Company)                   - Issue# - Summary                        #
+# 07-JAN-2009 - Maristella Myrian (UFC)           - XXXXXX - Initial Version                #
+# 16-SEP-2009 - Otofuji (Instituto Eldorado)      - 000016 - General Fixes                  #
+# 06-OCT-2009 - Fabio Fantato (Instituto Eldorado)- 000017 - Table of Contents              #
+# 09-OCT-2009 - Rafael Lagoa (Instituto Eldorado) - 000017 - Time Left method               #
+#############################################################################################
+*/
 package br.ufc.ivela.ejb.impl;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.ejb.Stateless;
+
+import org.apache.commons.lang.time.DateUtils;
+import org.springframework.security.GrantedAuthority;
 
 import br.ufc.ivela.commons.dao.DaoFactory;
 import br.ufc.ivela.commons.dao.GenericDao;
 import br.ufc.ivela.commons.dao.Page;
-import br.ufc.ivela.ejb.interfaces.CourseRemote;
-import br.ufc.ivela.ejb.*;
 import br.ufc.ivela.commons.model.Course;
 import br.ufc.ivela.commons.model.Discipline;
 import br.ufc.ivela.commons.model.Exam;
@@ -17,20 +49,10 @@ import br.ufc.ivela.commons.model.Grade;
 import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.model.Unit;
 import br.ufc.ivela.commons.model.UnitContent;
+import br.ufc.ivela.commons.model.SystemUser.AUTHORITY;
 import br.ufc.ivela.commons.util.Thumbnail2;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import javax.ejb.Stateless;
+import br.ufc.ivela.ejb.interfaces.CourseRemote;
 
-/**
- *
- * @author Maristella Myrian
- */
 @Stateless(mappedName="CourseBean")
 public class CourseBean implements CourseRemote {
 
@@ -121,13 +143,6 @@ public class CourseBean implements CourseRemote {
     }
 
     public String getJsonStructure() {
-        //var json = {"id":"1",  "name":"Computacao",  "children":[
-        //	{"id":"2", "name":"Teste", "children":[
-        //          {"id":"3", "name":"xxx", "children":[]}
-        //      ]},
-        //	{"id":"4", "name":"Giggity", "children":[]} ]
-        // };
-
         List<Course> list = getStructure();
         StringBuffer jsonBuffer = new StringBuffer();
         String json = null;
@@ -190,13 +205,7 @@ public class CourseBean implements CourseRemote {
     }
 
     public String getCourseJsonStructure(Long courseId) {
-        //var json = {"id":"1",  "name":"Computacao",  "children":[
-        //	{"id":"2", "name":"Teste", "children":[
-        //          {"id":"3", "name":"xxx", "children":[]}
-        //      ]},
-        //	{"id":"4", "name":"Giggity", "children":[]} ]
-        // };
-
+       
         Course course = getCourseStructure(courseId);
         StringBuffer jsonBuffer = new StringBuffer();
         String json = null;
@@ -248,32 +257,7 @@ public class CourseBean implements CourseRemote {
 
     public List<Course> getStructure() {
         List<Course> list = getAll();
-
-        for (Course course : list) {
-            course.setDisciplines(daoDisc.getByFK("courseId", course.getId()));
-
-            if (course.getDisciplines() != null) {
-                for (Discipline discipline : course.getDisciplines()) {
-                    discipline.setUnits(daoUnit.getByFK("disciplineId", discipline.getId()));
-
-                    if (discipline.getUnits() != null) {
-                        for (Unit unit : discipline.getUnits()) {
-                            unit.setUnitContents(daoUContent.getByFK("unitId", unit.getId()));
-
-                            if (unit.getUnitContents() != null) {
-                                for (UnitContent unitContent : unit.getUnitContents()) {
-                                    //unitContent.setExercises(daoExercise.getByFK("unitContentId", unitContent.getId()));
-                                    unitContent.setExercises(daoExercise.find("from Exercise e where e.unitContentId = ? and e.active = ? order by e.order", new Object[]{unitContent.getId(), true}));
-                                    //unitContent.setExams(daoExam.getByFK("unitContentId", unitContent.getId()));
-                                    unitContent.setExams(daoExam.find("from Exam e where e.unitContentId = ? and e.active = ? order by e.order", new Object[]{unitContent.getId(), true}));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
+        buildCourseListContent(list);
         return list;
     }
 
@@ -320,6 +304,10 @@ public class CourseBean implements CourseRemote {
         return ((Long) result.get(0)).intValue();
     }
 
+    public List<SystemUser> getCoordinators(Long courseId) {
+        return daoGrade.find("select g.coordinator from Grade g where g.courseId = ? ", new Object[]{courseId});
+    }
+    
     public List<SystemUser> getProfessors(Long courseId) {
         return daoGrade.find("select g.professors from Grade g where g.courseId = ? ", new Object[]{courseId});
     }
@@ -364,54 +352,59 @@ public class CourseBean implements CourseRemote {
                 "Discipline d where uc.unitId = u.id and u.disciplineId = d.id " +
                 "and d.courseId = ?", new Object[]{courseId});
         
-        List allExercises = daoCourse.find("" +
-                "select e " +
-                "from Exercise e, UnitContent uc, Unit u, Discipline d " +
-                "where e.unitContentId = uc.id " +
-                "and uc.unitId = u.id " +
-                "and u.disciplineId = d.id " +
-                "and d.courseId = ?", new Object[]{courseId});
-
-        List allExams = daoCourse.find("" +
-                "select e " +
-                "from Exam e, UnitContent uc, Unit u, Discipline d " +
-                "where e.unitContentId = uc.id " +
-                "and uc.unitId = u.id " +
-                "and u.disciplineId = d.id " +
-                "and d.courseId = ?", new Object[]{courseId});
-
-        
         List finishedUnitContents = daoCourse.find("select f.unitContent from FinishedUnitContent f " +
                 "where f.course = ? and f.systemUser = ?", new Object[]{courseId, systemUserId});
 
-        List finishedExercises = daoCourse.find("select f.exercise from FinishedExercise f, UnitContent uc, Unit u, Discipline d " +
-                "where f.unitContent = uc.id " +
-                "and uc.unitId = u.id " +
-                "and u.disciplineId = d.id " +
-                "and d.courseId = ? and f.systemUser = ?", new Object[]{courseId, systemUserId});
-
-        List finishedExams = daoCourse.find("select f.exam from FinishedExam f, UnitContent uc, Unit u, Discipline d " +
-                "where f.unitContent = uc.id " +
-                "and uc.unitId = u.id " +
-                "and u.disciplineId = d.id " +
-                "and d.courseId = ? and f.systemUser = ?", new Object[]{courseId, systemUserId});
-
         int cUnitContents = (allUnitContents != null) ? allUnitContents.size() : 0;
-        int cExercises = (allExercises != null) ? allExercises.size() : 0;
-        int cExams = (allExams != null) ? allExams.size() : 0;
-        
+       
         int cFinishedUnitContents = (finishedUnitContents != null) ? finishedUnitContents.size() : 0;
-        int cFinishedExercises = (finishedExercises != null) ? finishedExercises.size() : 0;
-        int cFinishedExams = (finishedExams != null) ? finishedExams.size() : 0;
 
-        int all =  cUnitContents + cExercises + cExams;
-        int done = cFinishedUnitContents + cFinishedExercises + cFinishedExams;
+        int all =  cUnitContents;
+        int done = cFinishedUnitContents;
         
         double rate = (double) ((double) done / (double) all) * 100;
         
         return (int) rate;
     }
-    
+
+    public String getTotalTimeLeft(Long systemUserId, Long courseId) {
+        List<UnitContent> allUnitContents = daoCourse.find("select uc from UnitContent uc, Unit u, " +
+                "Discipline d where uc.unitId = u.id and u.disciplineId = d.id " +
+                "and d.courseId = ?", new Object[]{courseId});
+
+        List<Long> finishedUnitContents = daoCourse.find("select f.unitContent from FinishedUnitContent f " +
+                "where f.course = ? and f.systemUser = ?", new Object[]{courseId, systemUserId});
+
+        Date date = new Date(70, 1, 1, 0, 0, 0);
+        for (UnitContent unitContent : allUnitContents) {
+            if (!finishedUnitContents.contains(unitContent.getId())) {
+            	date = DateUtils.addHours(date, unitContent.getDuration().getHours());
+            	date = DateUtils.addMinutes(date, unitContent.getDuration().getMinutes());
+            }
+        }
+
+        return ((((date.getDay())*24) + date.getHours())!=0 ? ((date.getDay())*24) + date.getHours() + " hora(s) e ":"") + date.getMinutes() + " minuto(s)";
+    }
+
+    public String getTimeLeft(Long systemUserId, Long courseId, Long disciplineId) {
+        List<UnitContent> allUnitContents = daoCourse.find("select uc from UnitContent uc, Unit u, " +
+                "Discipline d where uc.unitId = u.id and u.disciplineId = d.id " +
+                "and d.courseId = ? and u.disciplineId = ?", new Object[]{courseId, disciplineId});
+
+        List<Long> finishedUnitContents = daoCourse.find("select f.unitContent from FinishedUnitContent f " +
+                "where f.course = ? and f.systemUser = ?", new Object[]{courseId, systemUserId});
+
+        Date date = new Date(70, 1, 1, 0, 0, 0);
+        for (UnitContent unitContent : allUnitContents) {
+            if (!finishedUnitContents.contains(unitContent.getId())) {
+            	date = DateUtils.addHours(date, unitContent.getDuration().getHours());
+            	date = DateUtils.addMinutes(date, unitContent.getDuration().getMinutes());
+            }
+        }
+
+        return ((((date.getDay())*24) + date.getHours())!=0 ? ((date.getDay())*24) + date.getHours() + " hora(s) e ":"") + date.getMinutes() + " minuto(s)";
+    }
+
     public void savePhoto(Course p, File file) {
         InputStream data = null;
         try {
@@ -441,7 +434,7 @@ public class CourseBean implements CourseRemote {
         int total = disciplines.size();
         int finished = 0;
         for(Long disciplineId : disciplines){
-            if(disciplineBean.isDisciplineFinished(studentId, disciplineId, gradeId))
+            if(disciplineBean.isDisciplineFinished(studentId, disciplineId, courseId, gradeId) == 0)
                finished++; 
         }
         
@@ -464,5 +457,74 @@ public class CourseBean implements CourseRemote {
         if (results == null)
             results = new ArrayList<Course>();
         return results;
+    }
+
+    public List<Course> getCoursesByCoordinator(Long userId) {
+        Object[] params = new Object[]{userId};          
+        return daoCourse.find("select c from Grade g, Course c WHERE g.courseId = c.id and g.coordinatorId = ?", params);
+    }
+
+    public List<Course> getCoursesByProfessor(Long userId) {
+        Object[] params = new Object[]{userId};
+        
+        return daoCourse.find("select c from Professor p, Course c WHERE c.id = p.grade.courseId and p.systemUser.id = ?", params);
+    }
+
+    public List<Course> getCoursesByTutor(Long userId) {
+        Object[] params = new Object[]{userId};
+        
+        return daoCourse.find("select c from Tutor t, Course c WHERE c.id = t.grade.courseId and t.systemUser.id = ?", params);
+    }
+
+    public List<Course> getStructure(SystemUser systemUser) {        
+        List<Course> list = new ArrayList<Course>(0);
+        
+        if (systemUser == null || systemUser.getId() == null) {
+            return list;
+        }
+        
+        GrantedAuthority[] authorities = systemUser.getAuthorities();
+        String authority_ = authorities != null && authorities.length > 0 ? authorities[0].getAuthority() : null;
+
+        if (AUTHORITY.ROLE_ADMIN.hasAuthority(authority_)) {
+            list = getAll();
+        } else if (AUTHORITY.ROLE_PROFESSOR.hasAuthority(authority_)) {
+            list = getCoursesByProfessor(systemUser.getId());            
+        } else if (AUTHORITY.ROLE_TUTOR.hasAuthority(authority_)) {
+            list = getCoursesByTutor(systemUser.getId());
+        } else if (AUTHORITY.ROLE_COORD.hasAuthority(authority_)) {
+            list = getCoursesByCoordinator(systemUser.getId());
+        }
+        
+        buildCourseListContent(list);
+        
+        return list;
+    }
+    
+    private void buildCourseListContent(List<Course> courseList) {
+        for (Course course : courseList) {
+            course.setDisciplines(daoDisc.getByFK("courseId", course.getId()));
+
+            if (course.getDisciplines() != null) {
+                for (Discipline discipline : course.getDisciplines()) {
+                    discipline.setUnits(daoUnit.getByFK("disciplineId", discipline.getId()));
+
+                    if (discipline.getUnits() != null) {
+                        for (Unit unit : discipline.getUnits()) {
+                            unit.setUnitContents(daoUContent.getByFK("unitId", unit.getId()));
+
+                            if (unit.getUnitContents() != null) {
+                                for (UnitContent unitContent : unit.getUnitContents()) {
+                                    //unitContent.setExercises(daoExercise.getByFK("unitContentId", unitContent.getId()));
+                                    unitContent.setExercises(daoExercise.find("from Exercise e where e.unitContentId = ? and e.active = ? order by e.order", new Object[]{unitContent.getId(), true}));
+                                    //unitContent.setExams(daoExam.getByFK("unitContentId", unitContent.getId()));
+                                    unitContent.setExams(daoExam.find("from Exam e where e.unitContentId = ? and e.active = ? order by e.order", new Object[]{unitContent.getId(), true}));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

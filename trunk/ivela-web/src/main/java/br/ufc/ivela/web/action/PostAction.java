@@ -51,6 +51,7 @@ public class PostAction extends CourseAwareAction {
     private InputStream downloadStream;
     private String contentLength;
     private String contentDisposition;
+    private String contentType = "application/download";
     private AttachPost attachPost;
     private final String path = Constants.FILE_UPLOAD_PATH;
     private Forum forum;
@@ -252,9 +253,13 @@ public class PostAction extends CourseAwareAction {
         try {
             downloadStream = new FileInputStream(f);
         } catch (FileNotFoundException ex) {
-            log.error("download error!", ex);            
+            log.error("Post download error!", ex);            
         }
 
+        String mime = dbfile.getMimetype();
+        if (mime != null && !mime.isEmpty()) {
+            setContentType(mime);
+        }
         setContentLength(new Long(f.length()).toString());
         setContentDisposition(dbfile.getFilename());
 
@@ -451,5 +456,19 @@ public class PostAction extends CourseAwareAction {
      */
     public void setUploadFileName(String[] uploadFileName) {
         this.uploadFileName = uploadFileName;
+    }
+
+    /**
+     * @param contentType the contentType to set
+     */
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    /**
+     * @return the contentType
+     */
+    public String getContentType() {
+        return contentType;
     }
 }

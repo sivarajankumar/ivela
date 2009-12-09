@@ -30,17 +30,15 @@
    Tabs can be embedded to a depth of two. The second level of tabs will only 
     be displayed when their parent tab is selected.    
   -->
+<!--  <tab id="" label="Início" dir="" indexfile="/aboutus.html"/>-->
   <tab id="" label="Início" dir="" href="index.html"/>
-  <tab id="admin" label="Administração" href="/admin/admin.html"/>
-  <tab id="student" label="Alunos" href="/student/student.html"/>
-  <tab id="developer" label="Desenvolvedor" href="/developer/developer.html"/>
-
-
- <!--<tab label="Lembrar_I18N+FeedbackEmail+Footer+FontSizeAlign" href="http://ivela.org/5"/>-->
-
-
-
-
+  <tab id="cursos" label="Cursos" href="/course/content_package.html"/>
+ <!-- <tab id="admin" label="Administrador" href="/course/content_package.html"/>
+  <tab id="coord" label="Coordenador" href="/users/coord/course/content_package.html"/>
+  <tab id="prof" label="Professor" href="/users/prof/course/content_package.html"/>
+  <tab id="tutor" label="Tutor" href="/users/tutor/course/content_package.html"/>
+  <tab id="student" label="Estudante" href="/users/student/student.html"/>-->
+<!--  <tab label="Lembrar_I18N+FeedbackEmail+Footer+FontSizeAlign" href="http://ivela.org/5"/>-->
   <!--tab id="samples" label="Samples" dir="samples" indexfile="sample.html">
     <tab id="samples-index" label="Index" dir="samples" indexfile="index.html"/>
     <tab id="samples-sample2" label="Sample2" dir="samples" indexfile="static.html"/>
