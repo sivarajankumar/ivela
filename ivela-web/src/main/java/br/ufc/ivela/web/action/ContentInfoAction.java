@@ -24,7 +24,6 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -48,11 +47,9 @@ import br.ufc.ivela.commons.model.SystemUser;
 import br.ufc.ivela.commons.model.Transcript;
 import br.ufc.ivela.commons.model.Unit;
 import br.ufc.ivela.commons.model.UnitContent;
-import br.ufc.ivela.ejb.interfaces.CourseRemote;
 import br.ufc.ivela.ejb.interfaces.DisciplineRemote;
 import br.ufc.ivela.ejb.interfaces.FinishedUnitContentRemote;
 import br.ufc.ivela.ejb.interfaces.GradeUnitContentRemote;
-import br.ufc.ivela.ejb.interfaces.HistoryRemote;
 import br.ufc.ivela.ejb.interfaces.ProfileRemote;
 import br.ufc.ivela.ejb.interfaces.SystemUserRemote;
 import br.ufc.ivela.ejb.interfaces.UnitContentRemote;
@@ -95,8 +92,11 @@ public class ContentInfoAction extends CourseAwareAction {
     
     public String getSystemUser() {
         Profile profile = profileRemote.getBySystemUserId(getAuthenticatedUser().getId());
-        String name = profile.getFirstName()+" "+profile.getLastName();
-        if (name == null || "".equals(name.trim())) {
+        String name = "";
+        if (profile.getFirstName() != null) {
+            name = profile.getFirstName()+((profile.getLastName() != null)? " " + profile.getLastName() : "");
+        }
+        if ("".equals(name.trim())) {
             name = getAuthenticatedUser().getUsername();
         }
         setInputStream(new ByteArrayInputStream(name.getBytes()));

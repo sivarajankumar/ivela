@@ -1,7 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+/*##################################################################################################
+# Copyright(c) 2008-2009 by IBM Brasil Ltda and others                                             #
+# This file is part of ivela project, an open-source                                               #
+# Program URL   : http://code.google.com/p/ivela/                                                  #   
+#                                                                                                  #
+# This program is free software; you can redistribute it and/or modify it under the terms          #
+# of the GNU General Public License as published by the Free Software Foundation; either           #
+# version 3 of the License, or (at your option) any later version.                                 #
+#                                                                                                  #
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;        #
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.        #
+# See the GNU General Public License for more details.                                             #  
+#                                                                                                  #
+####################################################################################################
+# File: EnrollmentBean.java                                                                        #
+# Document: Bean Implementation for Enrollment Remote                                              #
+# Date        - Author(Company)                   - Issue# - Summary                               #
+# XX-XXX-XXX -  Emanuelle                         - XXXXXX - Initial Version                       #
+# 02-DEC-2009 - Otofuji (Eldorado)                - 000021 - Add remove by grade and user          #
+##################################################################################################*/
 package br.ufc.ivela.ejb.impl;
 
 import br.ufc.ivela.commons.Constants;
@@ -81,6 +97,16 @@ public class EnrollmentBean implements EnrollmentRemote {
         return false;        
     }
 
+    public boolean remove(Long userId, Long gradeId) {
+        Object[] params = new Object[]{userId, gradeId};
+
+        List<Enrollment> e = daoEnrollment.find("select e from Enrollment e, Grade g, Course c WHERE e.systemUser.id = ? and e.grade.id = ? and e.grade.id = g.id and g.courseId = c.id and c.active = true", params);
+        if (e.isEmpty()) 
+            return false;        
+        
+        return remove(e.get(0).getId());        
+    }
+    
     public boolean remove(Long id) {
         return daoEnrollment.remove(id);
     }
