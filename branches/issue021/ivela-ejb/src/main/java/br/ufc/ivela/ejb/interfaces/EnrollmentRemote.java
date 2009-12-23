@@ -24,5 +24,6 @@ public interface EnrollmentRemote {
     public List<Enrollment> getByStatus(int status);
     public boolean remove(Long id);
     public boolean getByUserGrade(Long userId, Long gradeId);
+    public boolean remove(Long userId, Long gradeId);
 
 }

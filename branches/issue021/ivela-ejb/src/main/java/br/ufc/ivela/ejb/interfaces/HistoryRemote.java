@@ -72,7 +72,7 @@ public interface HistoryRemote {
     
     public Boolean updateTranscript(Transcript transcript);
     
-    public void calcAverageCourse(Long gradeId, Long studentId);
+    public Transcript calcAverageCourse(Long gradeId, Long studentId);
     
     public Transcript getTranscript(Long transcriptId);
     

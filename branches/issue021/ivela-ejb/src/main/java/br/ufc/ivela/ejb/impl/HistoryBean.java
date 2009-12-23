@@ -121,7 +121,8 @@ public class HistoryBean implements HistoryRemote {
        return daoTranscript.get(transcriptId);
    } 
     
-   public void calcAverageCourse(Long gradeId, Long studentId){
+   @TransactionAttribute(TransactionAttributeType.SUPPORTS)
+   public Transcript calcAverageCourse(Long gradeId, Long studentId){
        Transcript transcript;
        List list = daoTranscript.find("from Transcript t where t.grade.id = ? and t.systemUser.id = ?", new Object[]{gradeId, studentId});
        if(list==null || list.size()==0){
@@ -151,6 +152,7 @@ public class HistoryBean implements HistoryRemote {
        }
        this.updateTranscript(transcript);
        
+       return transcript;
    }
    
    @TransactionAttribute(TransactionAttributeType.REQUIRED)
