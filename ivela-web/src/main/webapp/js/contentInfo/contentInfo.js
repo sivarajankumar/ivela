@@ -214,6 +214,23 @@ function labelDisciplineStatus(disciplineTag) {
     }
 }
 
+function labelDependantDisciplineStatus(dependantDisciplineTag, disciplineTag) {
+    var dependantStatus = getHtml('contentInfo!isDisciplineCompleted.action?grade.id='+idGrade+'&course.id='+idCourse+'&discipline.tag='+dependantDisciplineTag);
+    if ("0"==dependantStatus) {
+        var status = getHtml('contentInfo!isDisciplineCompleted.action?grade.id='+idGrade+'&course.id='+idCourse+'&discipline.tag='+disciplineTag);
+        var onClickFunc = "javascript:goToDiscipline('"+disciplineTag+"');";
+        if ("0"==status) {
+            document.write('<a href="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_concluido.png"></a>');
+        } else if ("-1"==status){
+            document.write('<a href="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_acesse.png"></a>');
+        } else {
+            document.write('<a href="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_continuar.png"></a>');
+        }
+    } else {
+        document.write('<img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_bloqueado.png">');
+    }
+}
+
 function labelUnitStatus(unitContentTag, goToPage) {
     var onClickFunc = "javascript:goToUnit('"+unitContentTag+"', '"+goToPage+"');";
     if ("true"==getHtml('contentInfo!isUnitCompleted.action?unitContent.tag='+unitContentTag)) {
