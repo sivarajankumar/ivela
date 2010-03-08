@@ -283,7 +283,7 @@ public class ContentInfoAction extends CourseAwareAction {
 
     public String isUnitCompleted() {
         setInputStream(new ByteArrayInputStream("false".getBytes()));
-        List<FinishedUnitContent> finishedUnitContentlist = finishedUnitContentRemote.getByUnitContentTagAndSystemUser(unitContent.getTag(), getAuthenticatedUser().getId());
+        List<FinishedUnitContent> finishedUnitContentlist = finishedUnitContentRemote.getByUnitContentTagAndSystemUser(discipline.getTag(), unitContent.getTag(), getAuthenticatedUser().getId());
         if (!finishedUnitContentlist.isEmpty()) {
             setInputStream(new ByteArrayInputStream("true".getBytes()));
         }
