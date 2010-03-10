@@ -62,9 +62,9 @@ public class FinishedUnitContentBean implements FinishedUnitContentRemote {
     public List<FinishedUnitContent> getByUnitContentTagAndSystemUser(String disciplineTag, String unitContentTag, Long systemUserId) {
         Object[] params = new Object[] { disciplineTag, unitContentTag, systemUserId };
         List<FinishedUnitContent> list = (List<FinishedUnitContent>) daoFinishedUnitContent.find(
-                "select fuc from FinishedUnitContent fuc, UnitContent uc, Unit u, Discipline d" +
-                "where fuc.unitContent=uc.id and uc.unit=u.id and u.discipline=d.id" +
-                "and d.tag=? and uc.tag=? and fuc.systemUser=?", params);
+                " select fuc from FinishedUnitContent fuc, UnitContent uc, Unit u, Discipline d" +
+                " where fuc.unitContent=uc.id and uc.unitId=u.id and u.disciplineId=d.id" +
+                " and d.tag=? and uc.tag=? and fuc.systemUser=?", params);
         if (list == null)
             list = new ArrayList<FinishedUnitContent>();
         return list;
