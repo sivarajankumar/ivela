@@ -231,9 +231,9 @@ function labelDependantDisciplineStatus(dependantDisciplineTag, disciplineTag) {
     }
 }
 
-function labelUnitStatus(unitContentTag, goToPage) {
+function labelUnitStatus(disciplineTag, unitContentTag, goToPage) {
     var onClickFunc = "javascript:goToUnit('"+unitContentTag+"', '"+goToPage+"');";
-    if ("true"==getHtml('contentInfo!isUnitCompleted.action?unitContent.tag='+unitContentTag)) {
+    if ("true"==getHtml('contentInfo!isUnitCompleted.action?discipline.tag='+disciplineTag+'&unitContent.tag='+unitContentTag)) {
         document.write('<a href="'+onClickFunc+'"><img src="RenderServlet?file=/'+idCourse+'/images/modulo_selo_concluido_menor.png"></a>');
     } else {
         if (("true"==getHtml('contentInfo!isUnitUnlocked.action?grade.id='+idGrade+'&unitContent.tag='+unitContentTag)) && (accessed == "")) {
