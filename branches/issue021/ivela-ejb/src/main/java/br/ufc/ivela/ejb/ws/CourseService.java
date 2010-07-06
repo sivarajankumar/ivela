@@ -192,7 +192,7 @@ public class CourseService extends AbstractService {
                     Enrollment enrollment = new Enrollment();
                     enrollment.setGrade(g);
                     enrollment.setSystemUser(user);
-
+                    enrollment.setStartDatetime(new Date());
                     List<Enrollment> count = enrollmentRemote.getByGrade(g.getId());
 
                     if (count.size() < g.getMaxStudents()) {
