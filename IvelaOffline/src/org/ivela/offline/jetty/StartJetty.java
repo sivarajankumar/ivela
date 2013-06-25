@@ -1,4 +1,4 @@
-package com.tix11.jetty;
+package org.ivela.offline.jetty;
 
 import java.io.IOException;
 
@@ -14,8 +14,8 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.ivela.offline.servlets.JsHelper;
 
-import com.tix11.servlets.JsHelper;
 /**
  *  Classe principal que configura e inicia o Jetty
  *  
