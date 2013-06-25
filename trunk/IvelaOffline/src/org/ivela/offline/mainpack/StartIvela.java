@@ -14,7 +14,10 @@ public class StartIvela {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// startar o banco
+		// Banco de dados
+		// - se for primeira execucao, tem que criar o banco
+		// - senao so starta
+		// o mesmo deverá ser verificado em c:\\users.......\English4Smart
 		
 		// Inicia o jetty
 		Thread tJetty = new Thread(new StartJetty());
