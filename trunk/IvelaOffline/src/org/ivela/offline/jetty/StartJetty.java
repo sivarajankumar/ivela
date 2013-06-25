@@ -54,7 +54,7 @@ public class StartJetty extends AbstractHandler implements Runnable {
 			HandlerList handlers = new HandlerList();
 			handlers.setHandlers(new Handler[] { resource_handler, context });
 
-			context.addServlet(new ServletHolder(new JsHelper("JsHelper")),
+			context.addServlet(new ServletHolder(new JsHelper()),
 					"/jshelper/*");
 
 			server.setHandler(handlers);
