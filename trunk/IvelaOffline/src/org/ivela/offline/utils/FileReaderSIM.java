@@ -1,4 +1,4 @@
-package com.tix11.utils;
+package org.ivela.offline.utils;
 
 import java.io.File;
 import java.io.FileInputStream;

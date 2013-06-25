@@ -1,4 +1,4 @@
-package com.tix11.servlets;
+package org.ivela.offline.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
