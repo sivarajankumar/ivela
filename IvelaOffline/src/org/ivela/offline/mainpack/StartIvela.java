@@ -9,7 +9,7 @@ import org.ivela.offline.utils.CheckDB;
 /**
  * Classe principal que inicia BANCO, JETTY e Navegador
  * 
- * @author pdamico
+ * @author julianom
  * 
  */
 public class StartIvela {
@@ -33,8 +33,7 @@ public class StartIvela {
 			Thread tBrowser = new Thread(new BrowserStart());
 			tBrowser.start();
 		} else {
-			JOptionPane.showMessageDialog(null,
-					"Problema com o banco de dados, verifique o Log.");
+			JOptionPane.showMessageDialog(null, "Problema com o banco de dados, verifique o Log.");
 		}
 
 	}
