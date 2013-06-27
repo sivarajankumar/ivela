@@ -13,34 +13,19 @@
 package org.ivela.offline.commons;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
-import br.org.eldorado.offline.gui.Main;
+import org.ivela.offline.utils.Utils;
 
-public class Constants {
+
+
+public interface Constants {
 	
-    private static LogWrapper logger = new LogWrapper(Constants.class);
+
 
     public static String PROPERTIES_PORTAL_URL = null;
     public static String PROPERTIES_SERVICE_URL = null;
     public static String PROPERTIES_SERVICE_NAMESPACE = null;
     public static String PROPERTIES_SERVICE_SYNC = null;
-
-    static {
-		InputStream is = Main.class.getClassLoader().getResourceAsStream("configuration.properties");
-        Properties prop = new Properties();
-        try {
-			prop.load(is);
-		} catch (IOException e) {
-			logger.error(e);
-		}
-		PROPERTIES_PORTAL_URL = prop.getProperty("itcorner.portal.url");
-        PROPERTIES_SERVICE_URL = prop.getProperty("itcorner.service.url");
-        PROPERTIES_SERVICE_NAMESPACE = prop.getProperty("itcorner.service.namespace");
-        PROPERTIES_SERVICE_SYNC = prop.getProperty("itcorner.service.synchronizeCourse");
-	}
 
     public static String INSTALL_PATH = "file:///" + new File("").getAbsolutePath().replace("\\", "/") + "/content/";
     public static String LOG_PATH = System.getProperty("user.dir") + "/offline.log";
@@ -54,4 +39,11 @@ public class Constants {
     public static final int ID_DISCIPLINE = 1;
     public static final int ID_UNIT = 2;
     public static final int ID_LESSON = 3;
+    
+    public static final String USER_DATA_FOLDER = Utils.getInstance().getLocalAppData()+"iveladata/";
+    public static final String LOG_NAME = "ivela-offline.log";
+    public static final String SEVERE_LOGLEVEL = " S ";
+    public static final String NORMAL_LOGLEVEL = " N ";
+    public static final int FIXED_LOGLIMIT = 5000000;
+    public static final String DEFAULT_DATETIME_FORMAT = "dd/mm/yyyy H:m:s";
 }
