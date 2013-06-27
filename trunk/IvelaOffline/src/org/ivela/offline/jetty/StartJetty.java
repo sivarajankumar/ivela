@@ -15,6 +15,7 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.ivela.offline.servlets.JsHelper;
+import org.ivela.offline.utils.LoggerManager;
 
 /**
  * Classe principal que configura e inicia o Jetty
@@ -30,11 +31,6 @@ public class StartJetty extends AbstractHandler implements Runnable {
 		response.setContentType("text/html;charset=utf-8");
 		response.setStatus(HttpServletResponse.SC_OK);
 		baseRequest.setHandled(true);
-		response.getWriter().println("<h1>Hello World</h1>");
-	}
-
-	public static void main(String[] args) throws Exception {
-
 	}
 
 	@Override
@@ -54,15 +50,14 @@ public class StartJetty extends AbstractHandler implements Runnable {
 			HandlerList handlers = new HandlerList();
 			handlers.setHandlers(new Handler[] { resource_handler, context });
 
-			context.addServlet(new ServletHolder(new JsHelper()),
-					"/jshelper/*");
+			context.addServlet(new ServletHolder(new JsHelper()), "/jshelper/*");
 
 			server.setHandler(handlers);
 			
 			server.start();
 			server.join();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LoggerManager.getInstance().logAtExceptionTime(this.getClass().getName(), "run() "+e.getMessage());
 		}
 	}
 
