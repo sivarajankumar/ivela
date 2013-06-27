@@ -4,13 +4,13 @@
  * Eldorado Confidential and Proprietary Information
  * Copyright (C)2010 Eldorado, All Rights Reserved
  *
- * Histórico de Modificações
+ * Histï¿½rico de Modificaï¿½ï¿½es
  *
- * Data           Quem              Descrição
+ * Data           Quem              Descriï¿½ï¿½o
  * ------------------------------------------------------------------------------------------------
  * 07 May 2010    Rafael Lagoa      (4115)Reajuste arquitetural.  
  */
-package br.org.eldorado.offline.browser.function;
+package org.ivela.offline.functions;
 
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
