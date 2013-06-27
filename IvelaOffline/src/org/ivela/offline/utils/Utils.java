@@ -9,6 +9,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 
@@ -96,4 +99,65 @@ public class Utils {
 		fos.write(bytes);
 		fos.close();
 	}
+	
+	public String getLocalAppData(){
+		String localappdata = System.getenv("LOCALAPPDATA");
+		localappdata = localappdata.replace('\\', '/');
+		String ret = localappdata+"/";
+		return ret;
+	}
+	
+	public String getCurrentDateTimeFormated(String format){
+		Date date = new Date();
+		Format formatter = new SimpleDateFormat(format);
+		String stime = formatter.format(date);
+		return stime;
+	}
+	
+	public String getCleanPfiles(){
+		String pFiles = System.getenv("ProgramFiles");
+		pFiles = pFiles.replace('\\', '/');
+		return pFiles;
+	}
+	
+	public String getOtherArchPFile(String pFiles){
+		String pattern = " (x86)";
+		String pFilesOtherArch = null;
+		if(!pFiles.contains(pattern)){
+			pFilesOtherArch = pFiles + pattern;
+		}else{
+			pFilesOtherArch = pFiles.replace(pattern, "");
+		}
+		return pFilesOtherArch;
+	}
+	
+	
+	public String getProcessorArch(){
+		String arch = System.getenv("PROCESSOR_ARCHITECTURE");
+		return arch;
+	}
+	
+	public String getRealExecPath(String executablePath){
+
+		String pFiles = getCleanPfiles();
+
+		String pFilesOtherArch = getOtherArchPFile(pFiles);
+
+		pFiles = pFiles+executablePath;
+		pFilesOtherArch = pFilesOtherArch+executablePath;
+		
+		
+		File fa = new File(pFiles);
+		File fb = new File(pFilesOtherArch);
+
+		String ret = null;
+
+		if(fa.exists()) ret = pFiles;
+		else if(fb.exists()) ret = pFilesOtherArch;
+
+		return ret;
+	}
+	
+	
+	
 }
