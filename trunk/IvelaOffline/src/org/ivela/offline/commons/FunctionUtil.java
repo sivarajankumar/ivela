@@ -5,10 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ivela.offline.dao.DisciplineDAO;
+import org.ivela.offline.dao.DisciplineDAOImpl;
 import org.ivela.offline.dao.FinishedUnitContentDAO;
+import org.ivela.offline.dao.FinishedUnitContentDAOImpl;
 import org.ivela.offline.dao.SystemUserDAO;
+import org.ivela.offline.dao.SystemUserDAOImpl;
 import org.ivela.offline.dao.UnitContentDAO;
+import org.ivela.offline.dao.UnitContentDAOImpl;
 import org.ivela.offline.dao.UnitDAO;
+import org.ivela.offline.dao.UnitDAOImpl;
 import org.ivela.offline.domain.Discipline;
 import org.ivela.offline.domain.DisciplineExample;
 import org.ivela.offline.domain.FinishedUnitContent;
@@ -22,11 +27,11 @@ import org.ivela.offline.domain.UnitExample;
 
 public class FunctionUtil {
 
-	private static DisciplineDAO disciplineDao = new DisciplineDAOImpl(ConnectionUtil.getSqlMapClient());
-    private static UnitDAO unitDao = new UnitDAOImpl(ConnectionUtil.getSqlMapClient());
-    private static UnitContentDAO unitContentDao = new UnitContentDAOImpl(ConnectionUtil.getSqlMapClient());
-    private static FinishedUnitContentDAO finishedUnitContentDao = new FinishedUnitContentDAOImpl(ConnectionUtil.getSqlMapClient());
-    private static SystemUserDAO systemUserDao = new SystemUserDAOImpl(ConnectionUtil.getSqlMapClient());
+	private static DisciplineDAO disciplineDao = new DisciplineDAOImpl();
+    private static UnitDAO unitDao = new UnitDAOImpl();
+    private static UnitContentDAO unitContentDao = new UnitContentDAOImpl();
+    private static FinishedUnitContentDAO finishedUnitContentDao = new FinishedUnitContentDAOImpl();
+    private static SystemUserDAO systemUserDao = new SystemUserDAOImpl();
 
 	public static Long[] getLocation(String currentLocation) {
         Long[] location = new Long[4];
