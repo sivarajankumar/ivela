@@ -1,5 +1,6 @@
 package org.ivela.offline.dao;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -7,6 +8,10 @@ import org.ivela.offline.domain.SystemUser;
 import org.ivela.offline.domain.SystemUserExample;
 
 public class SystemUserDAOImpl extends DbCommonTasks implements SystemUserDAO {
+	
+	private Connection getConnetion(){
+		return null;
+	}
 
 	@Override
 	public int countByExample(SystemUserExample example) throws SQLException {
