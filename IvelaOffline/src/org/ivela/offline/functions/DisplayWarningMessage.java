@@ -10,7 +10,7 @@
  * ------------------------------------------------------------------------------------------------
  * 25 May 2010    Rafael Lagoa      (3646)SWT Browser interface para windows e linux.
  */
-package br.org.eldorado.offline.browser.function;
+package org.ivela.offline.functions;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
