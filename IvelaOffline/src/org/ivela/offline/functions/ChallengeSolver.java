@@ -26,9 +26,13 @@ import org.ivela.offline.challenger.XMLObject;
 import org.ivela.offline.commons.ConnectionUtil;
 import org.ivela.offline.commons.LogWrapper;
 import org.ivela.offline.dao.ChallengeDAO;
+import org.ivela.offline.dao.ChallengeDAOImpl;
 import org.ivela.offline.dao.ChallengeItemsDAO;
+import org.ivela.offline.dao.ChallengeItemsDAOImpl;
 import org.ivela.offline.dao.CourseDAO;
+import org.ivela.offline.dao.CourseDAOImpl;
 import org.ivela.offline.dao.TranscriptDAO;
+import org.ivela.offline.dao.TranscriptDAOImpl;
 import org.ivela.offline.domain.Challenge;
 import org.ivela.offline.domain.ChallengeExample;
 import org.ivela.offline.domain.ChallengeItems;
@@ -40,10 +44,10 @@ import org.ivela.offline.domain.TranscriptExample;
 public class ChallengeSolver extends BrowserFunction {
 
     private static LogWrapper logger = new LogWrapper(ChallengeSolver.class);
-    private static CourseDAO courseDao = new CourseDAOImpl(ConnectionUtil.getSqlMapClient());
-    private static TranscriptDAO transcriptDao = new TranscriptDAOImpl(ConnectionUtil.getSqlMapClient());
-    private static ChallengeDAO challengeDao = new ChallengeDAOImpl(ConnectionUtil.getSqlMapClient());
-    private static ChallengeItemsDAO challengeItemsDAO = new ChallengeItemsDAOImpl(ConnectionUtil.getSqlMapClient());
+    private static CourseDAO courseDao = new CourseDAOImpl();
+    private static TranscriptDAO transcriptDao = new TranscriptDAOImpl();
+    private static ChallengeDAO challengeDao = new ChallengeDAOImpl();
+    private static ChallengeItemsDAO challengeItemsDAO = new ChallengeItemsDAOImpl();
 
     public ChallengeSolver (Browser browser, String name) {
         super (browser, name);
