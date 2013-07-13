@@ -10,7 +10,7 @@
  * ------------------------------------------------------------------------------------------------
  * 07 May 2010    Rafael Lagoa      (4115)Reajuste arquitetural.  
  */
-package br.org.eldorado.offline.browser.function;
+package org.ivela.offline.functions;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -19,20 +19,18 @@ import java.util.List;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 
-import br.org.eldorado.offline.common.ConnectionUtil;
-import br.org.eldorado.offline.common.LogWrapper;
-import br.org.eldorado.offline.dao.CourseDAO;
-import br.org.eldorado.offline.dao.TranscriptDAO;
-import br.org.eldorado.offline.dao.ibatis.CourseDAOImpl;
-import br.org.eldorado.offline.dao.ibatis.TranscriptDAOImpl;
-import br.org.eldorado.offline.domain.Course;
-import br.org.eldorado.offline.domain.Transcript;
-import br.org.eldorado.offline.domain.TranscriptExample;
+import org.ivela.offline.commons.ConnectionUtil;
+import org.ivela.offline.commons.LogWrapper;
+import org.ivela.offline.dao.CourseDAO;
+import org.ivela.offline.dao.TranscriptDAO;
+import org.ivela.offline.domain.Course;
+import org.ivela.offline.domain.Transcript;
+import org.ivela.offline.domain.TranscriptExample;
 
 public class GetScore extends BrowserFunction {
 
     private static LogWrapper logger = new LogWrapper(GetScore.class);
-    private static CourseDAO courseDao = new CourseDAOImpl(ConnectionUtil.getSqlMapClient());
+    private static CourseDAO courseDao = new org.ivela.offline.dao.CourseDAOImpl();
     private static TranscriptDAO transcriptDao = new TranscriptDAOImpl(ConnectionUtil.getSqlMapClient());
 
     public GetScore (Browser browser, String name) {

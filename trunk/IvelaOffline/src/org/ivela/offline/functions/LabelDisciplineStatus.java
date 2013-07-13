@@ -10,7 +10,7 @@
  * ------------------------------------------------------------------------------------------------
  * 07 May 2010    Rafael Lagoa      (4115)Reajuste arquitetural.  
  */
-package br.org.eldorado.offline.browser.function;
+package org.ivela.offline.functions;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -18,18 +18,18 @@ import java.util.List;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 
-import br.org.eldorado.offline.common.ConnectionUtil;
-import br.org.eldorado.offline.common.FunctionUtil;
-import br.org.eldorado.offline.common.LogWrapper;
-import br.org.eldorado.offline.dao.DisciplineDAO;
-import br.org.eldorado.offline.dao.ibatis.DisciplineDAOImpl;
-import br.org.eldorado.offline.domain.Discipline;
-import br.org.eldorado.offline.domain.DisciplineExample;
+import org.ivela.offline.commons.ConnectionUtil;
+import org.ivela.offline.commons.FunctionUtil;
+import org.ivela.offline.commons.LogWrapper;
+import org.ivela.offline.dao.DisciplineDAO;
+import org.ivela.offline.dao.DisciplineDAOImpl;
+import org.ivela.offline.domain.Discipline;
+import org.ivela.offline.domain.DisciplineExample;
 
 public class LabelDisciplineStatus extends BrowserFunction {
 
     private static LogWrapper logger = new LogWrapper(LabelDisciplineStatus.class);
-    private static DisciplineDAO disciplineDao = new DisciplineDAOImpl(ConnectionUtil.getSqlMapClient());
+    private static DisciplineDAO disciplineDao = new DisciplineDAOImpl();
 
     public LabelDisciplineStatus (Browser browser, String name) {
         super (browser, name);

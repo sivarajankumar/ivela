@@ -15,8 +15,8 @@ package org.ivela.offline.functions;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.BrowserFunction;
 
-import br.org.eldorado.offline.common.Constants;
-import br.org.eldorado.offline.common.FunctionUtil;
+import org.ivela.offline.commons.Constants;
+import org.ivela.offline.commons.FunctionUtil;
 
 public class GoToHome extends BrowserFunction {
 

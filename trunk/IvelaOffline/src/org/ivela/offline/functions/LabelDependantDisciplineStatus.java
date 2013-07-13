@@ -1,8 +1,18 @@
 package org.ivela.offline.functions;
 
+import java.sql.SQLException;
+import java.util.List;
+
+import org.ivela.offline.commons.FunctionUtil;
+import org.ivela.offline.dao.DisciplineDAO;
+import org.ivela.offline.dao.DisciplineDAOImpl;
+import org.ivela.offline.domain.Discipline;
+import org.ivela.offline.domain.DisciplineExample;
+import org.ivela.offline.utils.LoggerManager;
+
 public class LabelDependantDisciplineStatus {
 	
-	private static DisciplineDAO disciplineDao = new DisciplineDAOImpl(ConnectionUtil.getSqlMapClient());
+	private static DisciplineDAO disciplineDao = new DisciplineDAOImpl();
 	
 	public Object function (Object[] arguments) {
         DisciplineExample disciplineExample = new DisciplineExample();
@@ -26,7 +36,7 @@ public class LabelDependantDisciplineStatus {
 	            disciplineStatus = "<img src='./images/modulo_selo_bloqueado.png'>";
 	        }
         } catch (SQLException e) {
-        	logger.error(e);
+        	LoggerManager.getInstance().logAtExceptionTime("LabelDependantDisciplineStatus.class", e.getMessage());
         }
         return disciplineStatus;
     }
