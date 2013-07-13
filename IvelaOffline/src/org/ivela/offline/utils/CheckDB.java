@@ -125,6 +125,7 @@ public class CheckDB {
 	private static boolean createStructure(Connection conn){
 		FileInputStream fileStream = null;
 		try {
+			// TODO  No instalador tem que criar a pasta scripts e colocar as sql
 			fileStream = new FileInputStream(Constants.USER_DATA_FOLDER+"scripts/create.sql");
 			int result = ij.runScript(conn, fileStream, "UTF-8",System.out, "UTF-8");
 			LoggerManager.getInstance().logAtDebugTime("CheckDB.class", "createStructure() Result code is: " + result);
