@@ -36,7 +36,7 @@ public class CheckDB {
 		Statement s = null;
 		ResultSet rs = null;
 		try {
-			String dbName = Constants.USER_DATA_FOLDER+"IVELA_DB"; // the name of the database
+			String dbName = Constants.USER_DATA_FOLDER+"ivela"; // the name of the database
 			conn = DriverManager.getConnection(protocol + dbName + ";create=true");
 			
 			LoggerManager.getInstance().logAtDebugTime("CheckDB.class", "Connected to and created database " + dbName);
