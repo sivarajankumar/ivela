@@ -107,8 +107,27 @@ public class Utils {
 		return ret;
 	}
 	
+	public String getDbScripts(){
+		//English4Smart\database
+		return getCleanPfiles()+"/English4Smart/database";
+	}
+	
 	public String getHomeUserFolder(){
 		String userHome = System.getenv("user.home");
+		
+		if(userHome == null) {
+			String appData = System.getenv("APPDATA");
+			String pattern = "/AppData/Roaming";
+			
+			appData = appData.replace('\\', '/');
+			
+			if(appData.contains(pattern)){
+				pattern = pattern.replace('\\', '/');
+				userHome = appData.replaceAll(pattern, "");
+			}
+			
+		}
+		
 		userHome = userHome.replace('\\', '/');
 		String ret = userHome+"/";
 		return ret;

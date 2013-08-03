@@ -126,7 +126,7 @@ public class CheckDB {
 		FileInputStream fileStream = null;
 		try {
 			// TODO  No instalador tem que criar a pasta scripts e colocar as sql
-			fileStream = new FileInputStream(Constants.USER_DATA_FOLDER+"scripts/create.sql");
+			fileStream = new FileInputStream(Utils.getInstance().getDbScripts()+"/create.sql");
 			int result = ij.runScript(conn, fileStream, "UTF-8",System.out, "UTF-8");
 			LoggerManager.getInstance().logAtDebugTime("CheckDB.class", "createStructure() Result code is: " + result);
 			if (result == 0){
@@ -154,7 +154,7 @@ public class CheckDB {
 	private static boolean populateDB(Connection conn){
 		FileInputStream fileStream = null;
 		try {
-			fileStream = new FileInputStream(Constants.USER_DATA_FOLDER+"scripts/populate.sql");
+			fileStream = new FileInputStream(Utils.getInstance().getDbScripts()+"/populate.sql");
 			int result = ij.runScript(conn, fileStream, "UTF-8",System.out, "UTF-8");
 			LoggerManager.getInstance().logAtDebugTime("CheckDB.class", "Result code is: " + result);
 			if (result == 1){
