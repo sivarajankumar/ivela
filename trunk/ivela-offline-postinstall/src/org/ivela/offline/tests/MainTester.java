@@ -12,7 +12,7 @@ public class MainTester {
 
 	@Test
 	public void test() throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		System.out.println(getHash("jd.comment@gmail.com", "laika2004"));
+		System.out.println(getHash("ivela@googlecode.com", "test"));
 	}
 
 	

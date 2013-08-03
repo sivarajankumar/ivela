@@ -19,20 +19,9 @@ public class StartIvela {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
-		
 		File f = new File(Constants.USER_DATA_FOLDER);
 		if(!f.exists()) f.mkdir(); 
-
-		// Banco de dados
-		if (CheckDB.checkDB()) {
-			
-			
-			
-		} else {
-			JOptionPane.showMessageDialog(null, "Problema com o banco de dados, verifique o Log.");
-		}
-
+		if (!CheckDB.checkDB()) JOptionPane.showMessageDialog(null, "Problema com o banco de dados, verifique o Log.");		
 	}
 
 }
