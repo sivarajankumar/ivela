@@ -107,6 +107,13 @@ public class Utils {
 		return ret;
 	}
 	
+	public String getHomeUserFolder(){
+		String userHome = System.getenv("user.home");
+		userHome = userHome.replace('\\', '/');
+		String ret = userHome+"/";
+		return ret;
+	}
+	
 	public String getCurrentDateTimeFormated(String format){
 		Date date = new Date();
 		Format formatter = new SimpleDateFormat(format);
