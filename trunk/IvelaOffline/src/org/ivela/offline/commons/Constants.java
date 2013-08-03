@@ -35,6 +35,7 @@ public interface Constants {
     public static String WINDOW_ICON_INVALID = "img/iconInvalid.png";
     public static String WINDOW_ICON_VALID = "img/iconValid.png";
     public static String WINDOW_ICON_SYNC = "img/iconSync.gif";
+	public static String PROPERTIES_FILE_NAME = "ivela-offline.properties";
     public static final int ID_COURSE = 0;
     public static final int ID_DISCIPLINE = 1;
     public static final int ID_UNIT = 2;
